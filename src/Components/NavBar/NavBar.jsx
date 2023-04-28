@@ -79,7 +79,7 @@ const NavBar = (props) => {
         console.log(error.response.data.message);
       }
     };
-    getUserInfo();//
+    getUserInfo();
   }, [props]);
   return (
     <Fragment>
