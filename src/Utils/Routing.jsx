@@ -13,6 +13,9 @@ import Trash from '../Staff/SuperAdmin/Trash/Trash';
 import StaffDetailsTrashView from '../Staff/SuperAdmin/Trash/StaffDetails/StaffDetailsTrashView';
 import ResetPassword from '../Components/ResetPassword/ResetPassword';
 import NewStaff from '../Staff/NewStaff/NewStaff';
+import Request from '../Components/Request/Request';
+import Complaint from '../Components/Complaint/Complaint';
+import Services from '../Components/Services/Services';
 
 const Routing = () => {
     return (
@@ -27,6 +30,9 @@ const Routing = () => {
                 <Route exact path='/admin/:staffId' element={<StaffDetailsAdminView />} />
                 <Route exact path='/trash' element={<Trash />} />
                 <Route exact path='/trash/:staffId' element={<StaffDetailsTrashView />} />
+                <Route exact path='/request' element={<Request />} />
+                <Route exact path='/complaint' element={<Complaint />} />
+                <Route exact path='/services' element={<Services />} />
             </Routes>
         </Router>
     );

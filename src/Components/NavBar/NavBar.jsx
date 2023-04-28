@@ -8,6 +8,9 @@ const NavBar = (props) => {
   const [showTabs, setShowTabs] = useState(false);
   const [isCreateActive, setIsCreateActive] = useState(false);
   const [isTrashActive, setIsTrashActive] = useState(false);
+  const [isRequestActive, setIsRequestActive] = useState(false);
+  const [isComplaintActive, setIsComplaintActive] = useState(false);
+  const [isServicesActive, setIsServicesActive] = useState(false);
   const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' })
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
@@ -59,18 +62,55 @@ const NavBar = (props) => {
     if (id === '1') {
       setShowTabs(true);
     }
-    if (props.tab === 'create') {
-      setIsCreateActive(true);
-      setIsTrashActive(false);
-    }
-    if (props.tab === 'trash') {
-      setIsCreateActive(false);
-      setIsTrashActive(true);
-    }
-    if (props.tab === 'none') {
-      setIsCreateActive(false);
-      setIsTrashActive(false);
-    }
+    switch (props.tab) {
+      case 'create':
+        setIsCreateActive(true);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+
+      case 'trash':
+        setIsCreateActive(false);
+        setIsTrashActive(true);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+
+      case 'request':
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(true);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+
+      case 'complaint':
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(true);
+        setIsServicesActive(false);
+        break;
+
+      case 'services':
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(true);
+        break;
+
+      default:
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+    };
     const getUserInfo = async () => {
       try {
         const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${id}`);
@@ -94,8 +134,17 @@ const NavBar = (props) => {
               <Link className="nav-link" to="/superadmin/createstaff">Create Staff</Link>
             </li>}
             {showTabs && <li className={`nav-item ${isTrashActive && 'active'}`}>
-              <Link className="nav-link" to="/trash">Trash</Link>
+              <Link className="nav-link" to="/trash">Archive</Link>
             </li>}
+            <li className={`nav-item ${isRequestActive && 'active'}`}>
+              <Link className="nav-link" to="/request">Request</Link>
+            </li>
+            <li className={`nav-item ${isComplaintActive && 'active'}`}>
+              <Link className="nav-link" to="/complaint">Complaint</Link>
+            </li>
+            <li className={`nav-item ${isServicesActive && 'active'}`}>
+              <Link className="nav-link" to="/services">Services</Link>
+            </li>
           </ul>
           <form className="d-flex" onSubmit={(e) => handleLogoutClick(e)}>
             <p className='text-light my-auto' style={{ marginRight: '10px' }}><b>{staffInfo.role}</b>: {staffInfo.firstname + ' ' + staffInfo.lastname}</p>
