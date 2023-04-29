@@ -45,6 +45,7 @@
     .createSmallStaffInput {
         width: 190px;
     }
+
     .createStaffInput {
         width: 400px;
     }
@@ -86,4 +87,39 @@
     box-shadow: 1px 1px 1px 1px gray;
     transition-duration: 0.2s;
     transform: translateX(0px) translateY(2px);
+}
+
+.departmentMargins {
+    margin-bottom: -1rem;
+}
+
+.tagItem {
+    background-color: black;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 30px;
+    height: 30px;
+    padding: 0 4px 0 1rem;
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0.3rem 0.3rem 0;
+    color: white;
+    font-weight: 500;
+}
+
+.tagItem>.tag {
+    background-color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    margin-left: 10px;
+    font-weight: bold;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

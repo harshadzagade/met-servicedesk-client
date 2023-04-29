@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../../Components/NavBar/NavBar';
 import Swal from 'sweetalert2';
@@ -10,10 +10,47 @@ const CreateStaff = () => {
     const lastnameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
-    const departmentRef = useRef();
     const phoneRef = useRef();
     const extensionRef = useRef();
     const navigate = useNavigate();
+
+    const [departmentItems, setDepartmentItems] = useState([]);
+    const [departmentValue, setDepartmentValue] = useState('');
+
+    const handleKeyDown = evt => {
+        if (["Enter", "Tab", ","].includes(evt.key)) {
+            evt.preventDefault();
+            const value = departmentValue.trim().match(/^[a-z0-9]+$/i)
+            try {
+                let toBeAdded = value.filter(department => !departmentItems.includes(department));
+                setDepartmentItems([...departmentItems, ...toBeAdded]);
+            } catch (error) {
+                console.log('Please enter valid department name');
+            }
+            setDepartmentValue('');
+        }
+    };
+
+    const handleChange = evt => {
+        setDepartmentValue(evt.target.value);
+    };
+
+    const handleDelete = item => {
+        setDepartmentItems(departmentItems.filter(i => i !== item));
+    };
+
+    const handlePaste = evt => {
+        evt.preventDefault();
+        let paste = evt.clipboardData.getData("text");
+        var departments = paste.match(/^[a-z0-9]+$/i);
+        try {
+            let toBeAdded = departments.filter(department => !departmentItems.includes(department));
+            setDepartmentItems([...departmentItems, ...toBeAdded]);
+        } catch (error) {
+            console.log('Please enter valid department name');
+        }
+    };
+
     const handleSubmitClick = async (e) => {
         e.preventDefault();
         const data = {
@@ -21,7 +58,7 @@ const CreateStaff = () => {
             lastname: lastnameRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            department: [departmentRef.current.value],
+            department: departmentItems,
             phoneNumber: +phoneRef.current.value,
             contactExtension: +extensionRef.current.value
         };
@@ -52,7 +89,14 @@ const CreateStaff = () => {
                 </div><br /><br />
                 <input className={`${classes.createStaffInput} form-control`} type="email" name="email" placeholder="Email" autoComplete='true' required ref={emailRef} /><br />
                 <input className={`${classes.createStaffInput} form-control`} type="password" name="password" placeholder="Password" autoComplete='true' required ref={passwordRef} /><br />
-                <input className={`${classes.createStaffInput} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' required ref={departmentRef} /><br />
+                <input className={`${classes.createStaffInput} ${classes.departmentMargins} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' required={departmentItems.length === 0} value={departmentValue} onKeyDown={handleKeyDown} onChange={handleChange} onPaste={handlePaste} /><br />
+                {departmentItems.map(item => (
+                    <div className={`${classes.tagItem}`} key={item}>
+                        {item}
+                        <button type='button' className={`${classes.tag}`} onClick={() => handleDelete(item)}>&times;</button>
+                    </div>
+                ))}
+                {departmentItems.length === 0 && <br />}
                 <input className={`${classes.createStaffInput} form-control`} type="text" name="phone" placeholder="Phone Number" autoComplete='true' ref={phoneRef} /><br />
                 <input className={`${classes.createStaffInput} form-control`} type="text" name="extension" placeholder="Contact Extension" autoComplete='true' ref={extensionRef} /><br />
                 <button className={`btn ${classes.createButton}`} type="submit">Create</button>
