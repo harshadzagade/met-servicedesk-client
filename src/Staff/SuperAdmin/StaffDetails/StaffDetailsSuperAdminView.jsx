@@ -13,13 +13,15 @@ const StaffDetailsSuperAdminView = () => {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [department, setDepartment] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [contactExtension, setContactExtension] = useState(null);
   const [openUpdate, setOpenUpdate] = useState(false);
   const [refresh, setRefresh] = useState(false);
   let departments = "";
   if (department.length > 1) {
     for (let i = 0; i < department.length; i++) {
       const singleDepartment = department[i];
-      if (i !== department.length-1) {
+      if (i !== department.length - 1) {
         departments = departments.concat(singleDepartment) + ', ';
       } else {
         departments = departments.concat(singleDepartment);
@@ -35,6 +37,8 @@ const StaffDetailsSuperAdminView = () => {
       setEmail(staff.data.staff.email);
       setRole(staff.data.staff.role);
       setDepartment(staff.data.staff.department);
+      setPhoneNumber(staff.data.staff.phoneNumber);
+      setContactExtension(staff.data.staff.contactExtension);
     };
     getStaff();
     setRefresh(false);
@@ -80,9 +84,14 @@ const StaffDetailsSuperAdminView = () => {
       <div className={`${classes.staffDetailsHeading}`}>Staff Details</div>
       <div className={`d-inline-block ${classes.detailsView}`}>
         <div className={`${classes.detailsName}`}>{name}</div>
-        <div className={`${classes.detailsEmail} mt-2`}>{email}</div>
         <div className={`${classes.detailsRole} mt-2`}>{role}</div>
         <div className={`${classes.detailsDepartment} badge badge-dark mt-3`}>{departments}</div><br />
+        <div className={`${classes.contactDetails}`}>
+          Contact Details
+          <div className={`${classes.detailsContact} mt-2`}>E-Mail: {email}</div>
+          <div className={`${classes.detailsContact} mt-2`}>Phone: {phoneNumber}</div>
+          <div className={`${classes.detailsContact} mt-2`}>Extension: {contactExtension}</div>
+        </div>
         <button className={`btn mt-3 ${classes.updateButton}`} onClick={() => setOpenUpdate(true)}>Update</button>
         <button className={`btn mt-3 ${classes.deleteButton}`} onClick={handleDeleteClick}>Delete</button>
       </div>

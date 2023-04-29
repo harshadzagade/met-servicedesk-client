@@ -13,7 +13,7 @@
     box-shadow: 0px 1px 8px gray;
 }
 
-.detailsName, .detailsEmail, .detailsRole, .detailsDepartment {
+.contactDetails .detailsName, .detailsEmail, .detailsRole, .detailsDepartment {
     font-family: "Bahnschrift", Times, serif;
 }
 
@@ -22,9 +22,20 @@
     font-weight: 400;
 }
 
-.detailsEmail {
-    font-size: 1.5rem;
-    color: #4b4b4b;
+.contactDetails {
+    font-size: 2rem;
+    color: white;
+    font-weight: 500;
+    background-color: #242444;
+    border-radius: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.detailsContact {
+    font-size: 1.3rem;
+    color: #cccccc;
 }
 
 .detailsRole {
