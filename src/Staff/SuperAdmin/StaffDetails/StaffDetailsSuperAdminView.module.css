@@ -23,6 +23,7 @@
 }
 
 .contactDetails {
+    box-shadow: inset 1px 1px 8px black;
     font-size: 2rem;
     color: white;
     font-weight: 500;
