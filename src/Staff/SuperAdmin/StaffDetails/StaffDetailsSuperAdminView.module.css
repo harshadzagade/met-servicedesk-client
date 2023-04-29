@@ -23,15 +23,14 @@
 }
 
 .contactDetails {
-    box-shadow: inset 1px 1px 8px black;
+    box-shadow: inset 1px 1px 8px #1f1f1f;
     font-size: 2rem;
     color: white;
     font-weight: 500;
     background-color: #242444;
     border-radius: 1.5rem;
     margin-top: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 1rem;
 }
 
 .detailsContact {

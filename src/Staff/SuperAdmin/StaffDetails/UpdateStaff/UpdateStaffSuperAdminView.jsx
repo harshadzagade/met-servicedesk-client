@@ -57,7 +57,7 @@ const UpdateStaffSuperAdminView = props => {
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="firstname" placeholder="Firstname" autoComplete='true' defaultValue={staff.firstname} required onChange={handleChange} />
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="lastname" placeholder="Lastname" autoComplete='true' defaultValue={staff.lastname} required onChange={handleChange} />
                 <input className={`${classes.updateStaffInput} form-control`} type="email" name="email" placeholder="Email" autoComplete='true' defaultValue={staff.email} required onChange={handleChange} />
-                <select className={`${classes.roleSelect}`} name="role" required onChange={handleChange}>
+                <select className={`${classes.roleSelect} form-control`} name="role" required onChange={handleChange}>
                     {
                         roles.map((role, key) =>
                             staff.role === role ?

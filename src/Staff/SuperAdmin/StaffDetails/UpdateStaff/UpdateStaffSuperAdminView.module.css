@@ -113,4 +113,14 @@
     padding: auto;
     height: 40px;
     margin: 8px;
+    border-width: 1px;
+    border-color: transparent;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .3s ease-in-out;
+}
+
+.roleSelect:focus {
+    border-color: lightskyblue;
+    box-shadow: 1px 1px 2px gray;
 }
