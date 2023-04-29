@@ -59,17 +59,17 @@ const UpdateStaffSuperAdminView = props => {
                 <input className={`${classes.updateStaffInput} form-control`} type="email" name="email" placeholder="Email" autoComplete='true' defaultValue={staff.email} required onChange={handleChange} />
                 <select className={`${classes.roleSelect}`} name="role" required onChange={handleChange}>
                     {
-                        roles.map((role) =>
+                        roles.map((role, key) =>
                             staff.role === role ?
-                                <option className={`${classes.roleOption}`} selected value={role}>{role}</option>
+                                <option key={key} className={`${classes.roleOption}`} selected value={role}>{role}</option>
                                 :
-                                <option className={`${classes.roleOption}`} value={role}>{role}</option>
+                                <option key={key} className={`${classes.roleOption}`} value={role}>{role}</option>
                         )
                     }
                 </select>
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' defaultValue={staff.department} required onChange={handleChange} />
                 {
-                    departments.map((department) => <div className={`badge badge-dark`}>{department}</div>)
+                    departments.map((department, key) => <div key={key} className={`badge badge-dark`}>{department}</div>)
                 }
                 <div className={`${classes.updateLayoutButtons}`}>
                     <button className={`btn ${classes.updateButton}`} type="submit">Update</button>
