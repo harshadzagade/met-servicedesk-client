@@ -12,9 +12,22 @@ const StaffDetailsSuperAdminView = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
-  const [department, setDepartment] = useState('');
+  const [department, setDepartment] = useState([]);
   const [openUpdate, setOpenUpdate] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  let departments = "";
+  if (department.length > 1) {
+    for (let i = 0; i < department.length; i++) {
+      const singleDepartment = department[i];
+      if (i !== department.length-1) {
+        departments = departments.concat(singleDepartment) + ', ';
+      } else {
+        departments = departments.concat(singleDepartment);
+      }
+    }
+  } else {
+    departments = department[0];
+  }
   useEffect(() => {
     const getStaff = async () => {
       const staff = await axios.get(`http://localhost:8001/staff/superadmin/staffdetails/${id.staffId}`);
@@ -69,7 +82,7 @@ const StaffDetailsSuperAdminView = () => {
         <div className={`${classes.detailsName}`}>{name}</div>
         <div className={`${classes.detailsEmail} mt-2`}>{email}</div>
         <div className={`${classes.detailsRole} mt-2`}>{role}</div>
-        <div className={`${classes.detailsDepartment} badge badge-dark mt-3`}>{department}</div><br />
+        <div className={`${classes.detailsDepartment} badge badge-dark mt-3`}>{departments}</div><br />
         <button className={`btn mt-3 ${classes.updateButton}`} onClick={() => setOpenUpdate(true)}>Update</button>
         <button className={`btn mt-3 ${classes.deleteButton}`} onClick={handleDeleteClick}>Delete</button>
       </div>
