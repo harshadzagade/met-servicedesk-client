@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import SingleStaff from './SingleStaff/SingleStaff';
 import classes from './AllStaffList.module.css';
 import SmallSingleStaff from './SmallSingleStaff/SmallSingleStaff';
 
 const AllStaffList = () => {
-    const id = useParams();
+    const id = localStorage.getItem('id');
     const windowWidth = window.innerWidth;
     const [staffList, setStaffList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
@@ -21,11 +20,11 @@ const AllStaffList = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/staff/superadmin/allstaff/${id.staffId}`);
+            const list = await axios.get(`http://localhost:8001/staff/superadmin/allstaff/${id}`);
             setStaffList(list.data.totalStaff);
         };
         getList();
-    }, [id.staffId]);
+    }, [id]);
     return (
         <Fragment>
             {staffList.length > 0 ?

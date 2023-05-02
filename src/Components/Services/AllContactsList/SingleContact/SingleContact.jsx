@@ -5,7 +5,7 @@ const SingleContact = (props) => {
     return (
         <tr className={`${classes.singleTableRow}`}>
             <th scope="row">{props.name}</th>
-            <td>{props.phone}</td>
+            {props.showPhone && <td>{props.phone}</td>}
             <td>{props.extension}</td>
         </tr>
     );

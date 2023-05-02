@@ -9,9 +9,12 @@ const SmallSingleContact = (props) => {
                 <div className={`${classes.name}`}>{props.name}</div>
                 <div className={`${classes.extension} badge badge-dark`}>{props.extension}</div>
             </div>
-            <div className={`${classes.rightElements}`}>
-                <div className={`text-secondary ${classes.phone}`}>{props.phone}</div>
-            </div>
+            {
+                props.showPhone &&
+                <div className={`${classes.rightElements}`}>
+                    <div className={`text-secondary ${classes.phone}`}>{props.phone}</div>
+                </div>
+            }
         </Card>
     );
 };
