@@ -11,20 +11,44 @@ const UpdateStaffSuperAdminView = props => {
 
     const [staff, setStaff] = useState({});
     const [departments, setDepartments] = useState([]);
+    const [departmentValue, setDepartmentValue] = useState('');
     const [updateStaff, setUpdateStaff] = useState({ firstname: staff.firstname, lastname: staff.lastname, email: staff.email, role: staff.role, department: staff.department });
 
-    useEffect(() => {
-        const getAllDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/staff/departments`);
-            setDepartments(departments.data.departments)
-        };
-        getAllDepartments();
-    }, []);
+    const handleKeyDown = evt => {
+        if (["Enter", "Tab", ","].includes(evt.key)) {
+            evt.preventDefault();
+            const value = departmentValue.trim().match(/^[a-z0-9]+$/i)
+            try {
+                let toBeAdded = value.filter(department => !departments.includes(department));
+                setDepartments([...departments, ...toBeAdded]);
+            } catch (error) {
+                console.log('Please enter valid department name');
+            }
+            setDepartmentValue('');
+        }
+    };
+
+    const handleDelete = item => {
+        setDepartments(departments.filter(i => i !== item));
+    };
+
+    const handlePaste = evt => {
+        evt.preventDefault();
+        let paste = evt.clipboardData.getData("text");
+        var departments = paste.match(/^[a-z0-9]+$/i);
+        try {
+            let toBeAdded = departments.filter(department => !departments.includes(department));
+            setDepartments([...departments, ...toBeAdded]);
+        } catch (error) {
+            console.log('Please enter valid department name');
+        }
+    };
 
     useEffect(() => {
         const fetchStaff = async () => {
             const staff = await axios.get(`http://localhost:8001/staff/superadmin/staffdetails/${id.staffId}`);
             setStaff(staff.data.staff);
+            setDepartments(staff.data.staff.department);
         };
         fetchStaff();
     }, [id.staffId]);
@@ -50,9 +74,14 @@ const UpdateStaffSuperAdminView = props => {
         let value = e.target.value;
         setUpdateStaff({ ...updateStaff, [name]: value });
     }
+
+    const handleDepartmentChange = evt => {
+        setDepartmentValue(evt.target.value);
+    };
+
     return (
         <Modal>
-            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, lastname: updateStaff.lastname, email: updateStaff.email, role: updateStaff.role, department: updateStaff.department })}>
+            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, lastname: updateStaff.lastname, email: updateStaff.email, role: updateStaff.role, department: departments })}>
                 <div className={`${classes.updateStaffHeading}`}>Edit Staff</div>
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="firstname" placeholder="Firstname" autoComplete='true' defaultValue={staff.firstname} required onChange={handleChange} />
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="lastname" placeholder="Lastname" autoComplete='true' defaultValue={staff.lastname} required onChange={handleChange} />
@@ -67,9 +96,14 @@ const UpdateStaffSuperAdminView = props => {
                         )
                     }
                 </select>
-                <input className={`${classes.updateStaffInput} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' defaultValue={staff.department} required onChange={handleChange} />
+                <input className={`${classes.updateStaffInput} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' required={departments.length === 0} value={departmentValue} onKeyDown={handleKeyDown} onChange={handleDepartmentChange} onPaste={handlePaste} />
                 {
-                    departments.map((department, key) => <div key={key} className={`badge badge-dark`}>{department}</div>)
+                    departments.map((item) => (
+                        <div className={`${classes.tagItem}`} key={item}>
+                            {item}
+                            <button type='button' className={`${classes.tag}`} onClick={() => handleDelete(item)}>&times;</button>
+                        </div>
+                    ))
                 }
                 <div className={`${classes.updateLayoutButtons}`}>
                     <button className={`btn ${classes.updateButton}`} type="submit">Update</button>
