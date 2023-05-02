@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SingleStaff from './SingleStaff/SingleStaff';
 import SmallSingleStaff from './SmallSingleStaff/SmallSingleStaff';
 import Swal from 'sweetalert2';
@@ -8,7 +8,6 @@ import classes from './AllStaffList.module.css';
 
 const AllStaffList = () => {
     const navigate = useNavigate();
-    const id = useParams();
     const windowWidth = window.innerWidth;
     const [staffList, setStaffList] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -29,7 +28,7 @@ const AllStaffList = () => {
         };
         getList();
         setRefresh(false);
-    }, [refresh, id.staffId]);
+    }, [refresh]);
 
     const handleRestoreAllClick = () => {
         Swal.fire({
