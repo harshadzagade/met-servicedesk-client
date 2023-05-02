@@ -47,7 +47,7 @@ const StaffDetailsSuperAdminView = () => {
   const handleDeleteClick = () => {
     Swal.fire({
       title: 'Delete Staff?',
-      text: "Your staff will be moved to trash",
+      text: "Your staff will be moved to archive",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
