@@ -8,7 +8,6 @@ const AllContactsList = () => {
     const id = localStorage.getItem('id');
     const windowWidth = window.innerWidth;
     const [contactsList, setContactsList] = useState([]);
-    console.log(contactsList);
     const [showPhone, setShowPhone] = useState(false);
     const [smallDevice, setSmallDevice] = useState(false);
 
