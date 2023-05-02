@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './AllContactsList.module.css';
 import axios from 'axios';
-import SingleContact from './SingleContact/SingleContact';
-import SmallSingleContact from './SmallSingleContact/SmallSingleContact';
+import SingleContact from '../SingleContact/SingleContact';
+import SmallSingleContact from '../SmallSingleContact/SmallSingleContact';
 
 const AllContactsList = () => {
     const id = localStorage.getItem('id');

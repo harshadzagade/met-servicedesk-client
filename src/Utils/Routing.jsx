@@ -13,9 +13,9 @@ import Trash from '../Staff/SuperAdmin/Trash/Trash';
 import StaffDetailsTrashView from '../Staff/SuperAdmin/Trash/StaffDetails/StaffDetailsTrashView';
 import ResetPassword from '../Components/ResetPassword/ResetPassword';
 import NewStaff from '../Staff/NewStaff/NewStaff';
-import Request from '../Components/Request/Request';
-import Complaint from '../Components/Complaint/Complaint';
-import Services from '../Components/Services/Services';
+import Request from '../Pages/Request/Request';
+import Complaint from '../Pages/Complaint/Complaint';
+import Services from '../Pages/Services/Services';
 
 const Routing = () => {
     return (
