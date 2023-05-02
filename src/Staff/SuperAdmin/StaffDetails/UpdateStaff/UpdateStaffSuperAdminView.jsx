@@ -13,7 +13,7 @@ const UpdateStaffSuperAdminView = props => {
     const [staff, setStaff] = useState({});
     const [departments, setDepartments] = useState([]);
     const [departmentValue, setDepartmentValue] = useState('');
-    const [updateStaff, setUpdateStaff] = useState({ firstname: staff.firstname, lastname: staff.lastname, email: staff.email, role: staff.role, department: staff.department });
+    const [updateStaff, setUpdateStaff] = useState({ firstname: staff.firstname, lastname: staff.lastname, email: staff.email, role: staff.role, department: staff.department, phoneNumber: staff.phoneNumber, contactExtension: staff.contactExtension });
 
     const handleKeyDown = evt => {
         if (["Enter", "Tab", ","].includes(evt.key)) {
@@ -60,7 +60,9 @@ const UpdateStaffSuperAdminView = props => {
             lastname: staff.lastname,
             email: staff.email,
             role: staff.role,
-            department: staff.department
+            department: staff.department,
+            phoneNumber: staff.phoneNumber,
+            contactExtension: staff.contactExtension
         });
     }, [staff]);
 
@@ -90,7 +92,7 @@ const UpdateStaffSuperAdminView = props => {
 
     return (
         <Modal>
-            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, lastname: updateStaff.lastname, email: updateStaff.email, role: updateStaff.role, department: departments })}>
+            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, lastname: updateStaff.lastname, email: updateStaff.email, role: updateStaff.role, department: departments, phoneNumber: +updateStaff.phoneNumber, contactExtension: +updateStaff.contactExtension })}>
                 <div className={`${classes.updateStaffHeading}`}>Edit Staff</div>
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="firstname" placeholder="Firstname" autoComplete='true' defaultValue={staff.firstname} required onChange={handleChange} />
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="lastname" placeholder="Lastname" autoComplete='true' defaultValue={staff.lastname} required onChange={handleChange} />
@@ -114,6 +116,8 @@ const UpdateStaffSuperAdminView = props => {
                         </div>
                     ))
                 }
+                <input className={`${classes.updateStaffInput} form-control`} type="number" name="phoneNumber" placeholder="Phone Number" autoComplete='true' defaultValue={staff.phoneNumber} required onChange={handleChange} />
+                <input className={`${classes.updateStaffInput} form-control`} type="number" name="contactExtension" placeholder="Contact Extension" autoComplete='true' defaultValue={staff.contactExtension} required onChange={handleChange} />
                 <div className={`${classes.updateLayoutButtons}`}>
                     <button className={`btn ${classes.updateButton}`} type="submit">Update</button>
                     <button className={`btn ${classes.cancelButton}`} onClick={props.onConfirm}>Cancel</button>
