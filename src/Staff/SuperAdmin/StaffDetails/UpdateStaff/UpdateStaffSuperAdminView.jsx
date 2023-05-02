@@ -11,7 +11,7 @@ const UpdateStaffSuperAdminView = props => {
     const roles = ['admin', 'technician', 'user']
 
     const [staff, setStaff] = useState({});
-    const [departments, setDepartments] = useState([]);
+    const [departmentList, setDepartmentList] = useState([]);
     const [departmentValue, setDepartmentValue] = useState('');
     const [updateStaff, setUpdateStaff] = useState({ firstname: staff.firstname, lastname: staff.lastname, email: staff.email, role: staff.role, department: staff.department, phoneNumber: staff.phoneNumber, contactExtension: staff.contactExtension });
 
@@ -20,8 +20,8 @@ const UpdateStaffSuperAdminView = props => {
             evt.preventDefault();
             const value = departmentValue.trim().match(/^[a-z0-9]+$/i)
             try {
-                let toBeAdded = value.filter(department => !departments.includes(department));
-                setDepartments([...departments, ...toBeAdded]);
+                let toBeAdded = value.filter(department => !departmentList.includes(department));
+                setDepartmentList([...departmentList, ...toBeAdded]);
             } catch (error) {
                 console.log('Please enter valid department name');
             }
@@ -30,7 +30,7 @@ const UpdateStaffSuperAdminView = props => {
     };
 
     const handleDelete = item => {
-        setDepartments(departments.filter(i => i !== item));
+        setDepartmentList(departmentList.filter(i => i !== item));
     };
 
     const handlePaste = evt => {
@@ -38,8 +38,8 @@ const UpdateStaffSuperAdminView = props => {
         let paste = evt.clipboardData.getData("text");
         var departments = paste.match(/^[a-z0-9]+$/i);
         try {
-            let toBeAdded = departments.filter(department => !departments.includes(department));
-            setDepartments([...departments, ...toBeAdded]);
+            let toBeAdded = departments.filter(department => !departmentList.includes(department));
+            setDepartmentList([...departmentList, ...toBeAdded]);
         } catch (error) {
             console.log('Please enter valid department name');
         }
@@ -49,7 +49,7 @@ const UpdateStaffSuperAdminView = props => {
         const fetchStaff = async () => {
             const staff = await axios.get(`http://localhost:8001/staff/superadmin/staffdetails/${id.staffId}`);
             setStaff(staff.data.staff);
-            setDepartments(staff.data.staff.department);
+            setDepartmentList(staff.data.staff.department);
         };
         fetchStaff();
     }, [id.staffId]);
@@ -68,7 +68,7 @@ const UpdateStaffSuperAdminView = props => {
 
     const handleSubmitClick = async (e, id, updates) => {
         e.preventDefault();
-        if (updates.role !== 'admin' && departments.length > 1) {
+        if (updates.role !== 'admin' && departmentList.length > 1) {
             Swal.fire({
                 icon: 'error',
                 title: 'Only admins can have multiple departments',
@@ -92,7 +92,7 @@ const UpdateStaffSuperAdminView = props => {
 
     return (
         <Modal>
-            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, lastname: updateStaff.lastname, email: updateStaff.email, role: updateStaff.role, department: departments, phoneNumber: +updateStaff.phoneNumber, contactExtension: +updateStaff.contactExtension })}>
+            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, lastname: updateStaff.lastname, email: updateStaff.email, role: updateStaff.role, department: departmentList, phoneNumber: +updateStaff.phoneNumber, contactExtension: +updateStaff.contactExtension })}>
                 <div className={`${classes.updateStaffHeading}`}>Edit Staff</div>
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="firstname" placeholder="Firstname" autoComplete='true' defaultValue={staff.firstname} required onChange={handleChange} />
                 <input className={`${classes.updateStaffInput} form-control`} type="text" name="lastname" placeholder="Lastname" autoComplete='true' defaultValue={staff.lastname} required onChange={handleChange} />
@@ -107,9 +107,9 @@ const UpdateStaffSuperAdminView = props => {
                         )
                     }
                 </select>
-                <input className={`${classes.updateStaffInput} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' required={departments.length === 0} value={departmentValue} onKeyDown={handleKeyDown} onChange={handleDepartmentChange} onPaste={handlePaste} />
+                <input className={`${classes.updateStaffInput} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' required={departmentList.length === 0} value={departmentValue} onKeyDown={handleKeyDown} onChange={handleDepartmentChange} onPaste={handlePaste} />
                 {
-                    departments.map((item) => (
+                    departmentList.map((item) => (
                         <div className={`${classes.tagItem}`} key={item}>
                             {item}
                             <button type='button' className={`${classes.tag}`} onClick={() => handleDelete(item)}>&times;</button>
