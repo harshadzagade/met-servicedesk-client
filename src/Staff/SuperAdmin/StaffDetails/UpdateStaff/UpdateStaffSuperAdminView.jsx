@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classes from './UpdateStaffSuperAdminView.module.css';
 import Modal from '../../../../UI/Modal/Modal';
+import Swal from 'sweetalert2';
 
 const UpdateStaffSuperAdminView = props => {
     const id = useParams();
@@ -65,8 +66,16 @@ const UpdateStaffSuperAdminView = props => {
 
     const handleSubmitClick = async (e, id, updates) => {
         e.preventDefault();
-        await axios.put(`http://localhost:8001/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
-        props.onConfirm();
+        if (updates.role !== 'admin' && departments.length > 1) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Only admins can have multiple departments',
+                text: 'Please change the role first'
+            });
+        } else {
+            await axios.put(`http://localhost:8001/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
+            props.onConfirm();
+        }
     };
 
     const handleChange = (e) => {
