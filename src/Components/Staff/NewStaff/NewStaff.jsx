@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../../Components/NavBar/NavBar';
+import NavBar from '../../NavBar/NavBar';
 import Swal from 'sweetalert2';
 import classes from './NewStaff.module.css';
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from '../../../Context/AuthContext';
 
 const NewStaff = () => {
     const ctx = useContext(AuthContext);
@@ -12,15 +12,6 @@ const NewStaff = () => {
     const passwordRef = useRef();
     const confirmPasswordRef = useRef();
     const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
-
-    // const checkLogin = async () => {
-    //     if (localStorage.getItem('id')) {
-    //         const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${localStorage.getItem('id')}`);
-    //         ctx.onLogin(staff.data.staff.email);
-    //         navigate('/');
-    //     }
-    // }
-    // checkLogin();
 
     const email = ctx.email;
 

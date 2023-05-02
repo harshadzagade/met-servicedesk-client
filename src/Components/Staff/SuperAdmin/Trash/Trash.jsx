@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../../Components/NavBar/NavBar';
+import NavBar from '../../../NavBar/NavBar';
 import AllStaffList from './AllStaffList/AllStaffList';
 import { useLocation } from 'react-router-dom';
 

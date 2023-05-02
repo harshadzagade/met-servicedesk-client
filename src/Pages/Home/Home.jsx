@@ -2,10 +2,10 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SuperAdmin from '../../Staff/SuperAdmin/SuperAdmin';
-import Admin from '../../Staff/Admin/Admin';
-import Technician from '../../Staff/Technician/Technician';
-import User from '../../Staff/User/User';
+import SuperAdmin from '../../Components/Staff/SuperAdmin/SuperAdmin';
+import Admin from '../../Components/Staff/Admin/Admin';
+import Technician from '../../Components/Staff/Technician/Technician';
+import User from '../../Components/Staff/User/User';
 
 const Home = () => {
     const navigate = useNavigate();

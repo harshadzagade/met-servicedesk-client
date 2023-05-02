@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../../../Components/NavBar/NavBar';
+import NavBar from '../../../NavBar/NavBar';
 import Swal from 'sweetalert2';
 import classes from './CreateStaff.module.css';
 

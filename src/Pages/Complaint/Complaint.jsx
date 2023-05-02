@@ -2,10 +2,10 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SuperAdminComplaint from '../../ComplaintPage/SuperAdminComplaint/SuperAdminComplaint';
-import AdminComplaint from '../../ComplaintPage/AdminComplaint/AdminComplaint';
-import TechnicianComplaint from '../../ComplaintPage/TechnicianComplaint/TechnicianComplaint';
-import UserComplaint from '../../ComplaintPage/UserComplaint/UserComplaint';
+import SuperAdminComplaint from '../../Components/ComplaintPage/SuperAdminComplaint/SuperAdminComplaint';
+import AdminComplaint from '../../Components/ComplaintPage/AdminComplaint/AdminComplaint';
+import TechnicianComplaint from '../../Components/ComplaintPage/TechnicianComplaint/TechnicianComplaint';
+import UserComplaint from '../../Components/ComplaintPage/UserComplaint/UserComplaint';
 
 const Complaint = () => {
     const navigate = useNavigate();
