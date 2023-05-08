@@ -14,7 +14,7 @@ const ComplaintDetails = (props) => {
       setComplaintData(complaint.data.complaint);
     };
     getRequestDetails();
-  }, [complaintData, props.id])
+  }, [props.id])
 
   return (
     <Modal>

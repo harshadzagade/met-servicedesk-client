@@ -14,7 +14,7 @@ const RequestDetails = (props) => {
       setRequestData(request.data.request);
     };
     getRequestDetails();
-  }, [requestData, props.id])
+  }, [props.id])
 
   return (
     <Modal>

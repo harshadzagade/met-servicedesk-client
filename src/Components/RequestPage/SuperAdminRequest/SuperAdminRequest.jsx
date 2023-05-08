@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import classes from './SuperAdminRequest.module.css';
+// import classes from './SuperAdminRequest.module.css';
 import AllStaffRequest from './AllStaffRequest/AllStaffRequest';
 
 const SuperAdminRequest = () => {
