@@ -33,7 +33,7 @@ const AllStaffList = () => {
                         <Fragment>
                             {
                                 staffList.map((staff) =>
-                                    <SmallSingleStaff key={staff.id} id={staff.id} name={staff.name} email={staff.email} role={staff.role} department={staff.department} />
+                                    <SmallSingleStaff key={staff.id} id={staff.id} name={staff.firstname + ' ' + staff.lastname} email={staff.email} role={staff.role} department={staff.department} />
                                 )
                             }
                         </Fragment>
@@ -52,7 +52,7 @@ const AllStaffList = () => {
                                 <tbody>
                                     {
                                         staffList.map((staff) =>
-                                            <SingleStaff key={staff.id} id={staff.id} name={staff.name} email={staff.email} role={staff.role} department={staff.department} />
+                                            <SingleStaff key={staff.id} id={staff.id} name={staff.firstname + ' ' + staff.lastname} email={staff.email} role={staff.role} department={staff.department} />
                                         )
                                     }
                                 </tbody>
