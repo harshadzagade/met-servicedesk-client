@@ -1,12 +1,10 @@
 import React from 'react';
 import Card from '../../../../UI/Card/Card';
-import { useNavigate } from 'react-router-dom';
 import classes from './SmallSingleStaffRequest.module.css';
 
 const SmallSingleStaffRequest = (props) => {
-    const navigate = useNavigate();
     return (
-        <Card className={`${classes.smallSingleComponent} mt-2 mx-3 py-2 px-2`} onClick={() => { /* navigate(`/superadmin/${props.id}`) */ }}>
+        <Card className={`${classes.smallSingleComponent} mt-2 mx-3 py-2 px-2`} onClick={() => props.setOpenDetails(true, props.id)}>
             <div className={`${classes.leftElements}`}>
                 <div className={`${classes.name}`}>{props.subject}</div>
                 <div className={`${classes.role}`}>{props.category}</div>

@@ -1,14 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import classes from './SingleStaffRequest.module.css';
 
 const SingleStaffRequest = (props) => {
-    const navigate = useNavigate();
-    const handleClick = () => {
-        // navigate(`/superadmin/${props.id}`);
-    };
     return (
-        <tr className={`${classes.singleTableRow}`} onClick={handleClick}>
+        <tr className={`${classes.singleTableRow}`} onClick={() => props.setOpenDetails(true, props.id)}>
             <th scope="row">{props.subject}</th>
             <td>{props.name}</td>
             <td>{props.department}</td>
