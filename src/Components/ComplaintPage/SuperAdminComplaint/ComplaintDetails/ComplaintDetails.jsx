@@ -6,7 +6,6 @@ import classes from './ComplaintDetails.module.css';
 const ComplaintDetails = (props) => {
 
   const [complaintData, setComplaintData] = useState({});
-  console.log(complaintData);
 
   useEffect(() => {
     const getRequestDetails = async () => {

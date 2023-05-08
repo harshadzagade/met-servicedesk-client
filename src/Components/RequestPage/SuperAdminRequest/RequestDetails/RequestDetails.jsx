@@ -6,7 +6,6 @@ import classes from './RequestDetails.module.css';
 const RequestDetails = (props) => {
 
   const [requestData, setRequestData] = useState({});
-  console.log(requestData);
 
   useEffect(() => {
     const getRequestDetails = async () => {
