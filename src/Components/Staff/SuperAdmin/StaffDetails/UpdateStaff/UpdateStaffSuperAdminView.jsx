@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const UpdateStaffSuperAdminView = props => {
     const id = useParams();
 
-    const roles = ['admin', 'technician', 'user']
+    const roles = ['admin', 'technician', 'user'];
 
     const [staff, setStaff] = useState({});
     const [departmentList, setDepartmentList] = useState([]);
