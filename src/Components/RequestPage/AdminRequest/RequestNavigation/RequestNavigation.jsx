@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import classes from './RequestNavigation.module.css';
 
 const RequestNavigation = (props) => {
-    const [viewLayout, setViewLayout] = useState('ownDepartmentRequests');
-    const handleOwnDepartmentRequests = () => {
-        setViewLayout('ownDepartmentRequests');
-        props.viewLayout('ownDepartmentRequests')
+    const [viewLayout, setViewLayout] = useState('outgoingDepartmentRequests');
+    const handleOutgoingDepartmentRequests = () => {
+        setViewLayout('outgoingDepartmentRequests');
+        props.viewLayout('outgoingDepartmentRequests')
     };
     const handleIncomingRequests = () => {
         setViewLayout('incomingRequests');
@@ -17,7 +17,7 @@ const RequestNavigation = (props) => {
     };
     return (
         <div className={`${classes.requestNavigation}`}>
-            <div className={`btn ${viewLayout === 'ownDepartmentRequests'? 'btn-secondary' : 'btn-primary'} mr-3 mt-2 ${classes.ownDepartmentRequests}`} onClick={handleOwnDepartmentRequests}>View Own Department List</div>
+            <div className={`btn ${viewLayout === 'outgoingDepartmentRequests'? 'btn-secondary' : 'btn-primary'} mr-3 mt-2 ${classes.ownDepartmentRequests}`} onClick={handleOutgoingDepartmentRequests}>Outgoing Department Requests</div>
             <div className={`btn ${viewLayout === 'incomingRequests'? 'btn-secondary' : 'btn-warning'} mr-3 mt-2 ${classes.incomingRequests}`} onClick={handleIncomingRequests}>Incoming Requests</div>
             <div className={`btn ${viewLayout === 'sendRequests'? 'btn-secondary' : 'btn-success'} mt-2 ${classes.sendRequests}`} onClick={handleSendRequests}>Send Request</div>
         </div>
