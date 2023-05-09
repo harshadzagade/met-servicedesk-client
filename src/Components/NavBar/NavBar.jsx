@@ -11,9 +11,20 @@ const NavBar = (props) => {
   const [isRequestActive, setIsRequestActive] = useState(false);
   const [isComplaintActive, setIsComplaintActive] = useState(false);
   const [isServicesActive, setIsServicesActive] = useState(false);
-  const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' })
+  const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' });
+  const [departments, setDepartments] = useState([]);
+  const [currentDepartment, setCurrentDepartment] = useState('');
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
+
+  useEffect(() => {
+    const getDepartments = async () => {
+      const departments = await axios.get(`http://localhost:8001/staff/departments`);
+      setDepartments(departments.data.departments);
+    };
+    getDepartments();
+  }, [])
+
   const handleLogoutClick = (e) => {
     e.preventDefault()
     Swal.fire({
@@ -121,6 +132,12 @@ const NavBar = (props) => {
     };
     getUserInfo();
   }, [props]);
+
+  const handleDepartmentClick = (department) => {
+    setCurrentDepartment(department);
+    props.getAppDepartment(department);
+  };
+
   return (
     <Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -147,6 +164,16 @@ const NavBar = (props) => {
             </li>
           </ul>
           <form className="d-flex" onSubmit={(e) => handleLogoutClick(e)}>
+            <div className="btn-group dropleft mr-3">
+              <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {currentDepartment === '' ? 'Department' : currentDepartment}
+              </button>
+              <div className="dropdown-menu">
+                {
+                  departments.map((department, key) => <button key={key} className="dropdown-item" type="button" onClick={() => handleDepartmentClick(department)}>{department}</button>)
+                }
+              </div>
+            </div>
             <p className='text-light my-auto' style={{ marginRight: '10px' }}><b>{staffInfo.role}</b>: {staffInfo.firstname + ' ' + staffInfo.lastname}</p>
             <button className="btn btn-danger" type="submit">Logout</button>
           </form>

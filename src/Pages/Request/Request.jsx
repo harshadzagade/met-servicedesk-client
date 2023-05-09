@@ -16,6 +16,7 @@ const Request = () => {
     const [isTechnician, setIsTechnician] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [adminAppDepartment, setAdminAppDepartment] = useState('');
 
     const id = localStorage.getItem('id');
 
@@ -77,11 +78,15 @@ const Request = () => {
         checkAuth();
     }, [id, navigate, refresh]);
 
+    const appDepartment = (value) => {
+        setAdminAppDepartment(value);
+    }
+
     return (
         <Fragment>
-            <NavBar tab={'request'} />
+            <NavBar tab={'request'} getAppDepartment={appDepartment} />
             {isSuperAdmin && <SuperAdminRequest />}
-            {isAdmin && <AdminRequest />}
+            {isAdmin && <AdminRequest appDepartment={adminAppDepartment} />}
             {isTechnician && <TechnicianRequest />}
             {isUser && <UserRequest />}
         </Fragment>

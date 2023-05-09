@@ -5,7 +5,7 @@ import OwnDepartmentRequests from './OwnDepartmentRequests/OwnDepartmentRequests
 import IncomingRequests from './IncomingRequests/IncomingRequests';
 import SendRequest from './SendRequest/SendRequest';
 
-const AdminRequest = () => {
+const AdminRequest = (props) => {
     const [openLayout, setOpenLayout] = useState('ownDepartmentRequests');
     const checkLayout = (value) => {
         setOpenLayout(value);
@@ -14,7 +14,7 @@ const AdminRequest = () => {
         <Fragment>
             <RequestNavigation viewLayout={checkLayout} />
             {openLayout === 'ownDepartmentRequests' && <OwnDepartmentRequests />}
-            {openLayout === 'incomingRequests' && <IncomingRequests />}
+            {openLayout === 'incomingRequests' && <IncomingRequests department={props.appDepartment} />}
             {openLayout === 'sendRequests' && <SendRequest />}
         </Fragment>
     );
