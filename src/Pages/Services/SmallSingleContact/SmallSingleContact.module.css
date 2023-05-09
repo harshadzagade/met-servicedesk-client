@@ -30,5 +30,11 @@
 
 .extension {
     margin-left: auto;
-    padding-top: 0.4rem;
+    margin-top: -10px;
+    color: #5f005f;
+    align-self: center;
+}
+
+.department {
+    margin-left: auto;
 }

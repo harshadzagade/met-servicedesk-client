@@ -45,7 +45,7 @@ const AllContactsList = () => {
                         <Fragment>
                             {
                                 contactsList.map((contact, key) =>
-                                    <SmallSingleContact key={key} name={contact.firstname + ' ' + contact.lastname} phone={contact.phoneNumber} extension={contact.contactExtension} showPhone={showPhone} />
+                                    <SmallSingleContact key={key} name={contact.firstname + ' ' + contact.lastname} department={contact.department} phone={contact.phoneNumber} extension={contact.contactExtension} showPhone={showPhone} />
                                 )
                             }
                         </Fragment>
@@ -56,6 +56,7 @@ const AllContactsList = () => {
                                 <thead className={`thead-light`}>
                                     <tr>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Department</th>
                                         {showPhone && <th scope="col">Phone Number</th>}
                                         <th scope="col">Contact Extension</th>
                                     </tr>
@@ -63,7 +64,7 @@ const AllContactsList = () => {
                                 <tbody>
                                     {
                                         contactsList.map((contact, key) =>
-                                            <SingleContact key={key} name={contact.firstname + ' ' + contact.lastname} phone={contact.phoneNumber} extension={contact.contactExtension} showPhone={showPhone} />
+                                            <SingleContact key={key} name={contact.firstname + ' ' + contact.lastname} department={contact.department} phone={contact.phoneNumber} extension={contact.contactExtension} showPhone={showPhone} />
                                         )
                                     }
                                 </tbody>
