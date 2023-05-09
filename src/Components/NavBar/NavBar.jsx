@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const NavBar = (props) => {
+  const id = localStorage.getItem('id');
   const [showTabs, setShowTabs] = useState(false);
   const [isCreateActive, setIsCreateActive] = useState(false);
   const [isTrashActive, setIsTrashActive] = useState(false);
@@ -19,7 +20,7 @@ const NavBar = (props) => {
 
   useEffect(() => {
     const getDepartments = async () => {
-      const departments = await axios.get(`http://localhost:8001/staff/departments`);
+      const departments = await axios.get(`http://localhost:8001/staff/admin/admindepartments/${id}`);
       setDepartments(departments.data.departments);
     };
     getDepartments();
@@ -69,7 +70,6 @@ const NavBar = (props) => {
   }, [navigate])
 
   useEffect(() => {
-    const id = localStorage.getItem('id');
     if (id === '1') {
       setShowTabs(true);
     }
