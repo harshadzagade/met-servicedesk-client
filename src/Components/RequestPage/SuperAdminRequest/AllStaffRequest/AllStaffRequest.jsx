@@ -35,7 +35,7 @@ const AllStaffRequest = () => {
 
     const handleUpdateCancel = () => {
         setOpenDetails(false);
-      };
+    };
 
     return (
         <Fragment>

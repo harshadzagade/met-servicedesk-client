@@ -24,7 +24,7 @@ const NavBar = (props) => {
       setDepartments(departments.data.departments);
     };
     getDepartments();
-  }, [])
+  }, [id])
 
   const handleLogoutClick = (e) => {
     e.preventDefault()
@@ -131,7 +131,7 @@ const NavBar = (props) => {
       }
     };
     getUserInfo();
-  }, [props]);
+  }, [props, id]);
 
   const handleDepartmentClick = (department) => {
     setCurrentDepartment(department);
