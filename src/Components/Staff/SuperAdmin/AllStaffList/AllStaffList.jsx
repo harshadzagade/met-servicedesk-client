@@ -14,8 +14,16 @@ const AllStaffList = () => {
     const navigate = useNavigate();
     const [staffList, setStaffList] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
     const [refresh, setRefresh] = useState(false);
-    console.log(selectedRows);
+
+    useEffect(() => {
+        if (selectedRows.length === 0) {
+            setShowAlert(false);
+        } else {
+            setShowAlert(true);
+        }
+    }, [selectedRows])
 
     useEffect(() => {
         const getList = async () => {
@@ -60,13 +68,13 @@ const AllStaffList = () => {
             text: "Name",
             dataField: `firstname`,
             sort: true,
-            formatter: dataFormatter
+            formatter: dataFormatter,
+            filter: textFilter()
         },
         {
             text: "Email",
             dataField: "email",
-            formatter: dataFormatter,
-            filter: textFilter()
+            formatter: dataFormatter
         },
         {
             text: "Role",
@@ -97,7 +105,7 @@ const AllStaffList = () => {
 
     return (
         <Fragment>
-            <button className='btn btn-danger' onClick={handleMultipleDelete}>Delete Rows</button>
+            {showAlert && <div class="alert alert-danger" role="alert">Want to delete elements?&nbsp;<button className='btn btn-danger' onClick={handleMultipleDelete}>Delete</button></div>}
             <BootstrapTable
                 keyField='id'
                 data={staffList}
@@ -105,7 +113,7 @@ const AllStaffList = () => {
                 striped
                 hover
                 condensed
-                pagination={paginationFactory()}
+                pagination={paginationFactory({ sizePerPageList: [10, 20, 30, 40, 50] })}
                 selectRow={selectRow}
                 filter={filterFactory()}
             />
