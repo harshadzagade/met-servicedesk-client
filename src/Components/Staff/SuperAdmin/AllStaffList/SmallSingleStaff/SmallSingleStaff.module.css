@@ -1,0 +1,40 @@
+.smallSingleComponent {
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.smallSingleComponent:hover {
+    background-color: #e4e4e4;
+}
+
+.leftElements {
+    display: flex;
+    flex-direction: row;
+}
+
+.rightElements {
+    display: flex;
+    flex-direction: row;
+}
+
+.name {
+    align-self: start;
+}
+
+.email {
+    align-self: start;
+    font-size: x-small;
+}
+
+.role {
+    margin-left: auto;
+    margin-top: -10px;
+    color: #5f005f;
+    align-self: center;
+}
+
+.department {
+    margin-left: auto;
+}

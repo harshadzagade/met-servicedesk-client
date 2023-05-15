@@ -6,13 +6,16 @@ import {
 } from 'react-router-dom';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
-import StaffDetailsAdminView from '../Staff/Admin/StaffDetails/StaffDetailsAdminView';
-import CreateStaff from '../Staff/SuperAdmin/CreateStaff/CreateStaff';
-import StaffDetailsSuperAdminView from '../Staff/SuperAdmin/StaffDetails/StaffDetailsSuperAdminView';
-import Trash from '../Staff/SuperAdmin/Trash/Trash';
-import StaffDetailsTrashView from '../Staff/SuperAdmin/Trash/StaffDetails/StaffDetailsTrashView';
+import StaffDetailsAdminView from '../Components/Staff/Admin/StaffDetails/StaffDetailsAdminView';
+import CreateStaff from '../Components/Staff/SuperAdmin/CreateStaff/CreateStaff';
+import StaffDetailsSuperAdminView from '../Components/Staff/SuperAdmin/StaffDetails/StaffDetailsSuperAdminView';
+import Trash from '../Components/Staff/SuperAdmin/Trash/Trash';
+import StaffDetailsTrashView from '../Components/Staff/SuperAdmin/Trash/StaffDetails/StaffDetailsTrashView';
 import ResetPassword from '../Components/ResetPassword/ResetPassword';
-import NewStaff from '../Staff/NewStaff/NewStaff';
+import NewStaff from '../Components/Staff/NewStaff/NewStaff';
+import Complaint from '../Pages/Complaint/Complaint';
+import Services from '../Pages/Services/Services';
+import Request from '../Pages/Request/Request';
 
 const Routing = () => {
     return (
@@ -27,6 +30,9 @@ const Routing = () => {
                 <Route exact path='/admin/:staffId' element={<StaffDetailsAdminView />} />
                 <Route exact path='/trash' element={<Trash />} />
                 <Route exact path='/trash/:staffId' element={<StaffDetailsTrashView />} />
+                <Route exact path='/request' element={<Request />} />
+                <Route exact path='/complaint' element={<Complaint />} />
+                <Route exact path='/services' element={<Services />} />
             </Routes>
         </Router>
     );

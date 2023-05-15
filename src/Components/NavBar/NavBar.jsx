@@ -5,12 +5,27 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const NavBar = (props) => {
+  const id = localStorage.getItem('id');
   const [showTabs, setShowTabs] = useState(false);
   const [isCreateActive, setIsCreateActive] = useState(false);
   const [isTrashActive, setIsTrashActive] = useState(false);
-  const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' })
+  const [isRequestActive, setIsRequestActive] = useState(false);
+  const [isComplaintActive, setIsComplaintActive] = useState(false);
+  const [isServicesActive, setIsServicesActive] = useState(false);
+  const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' });
+  const [departments, setDepartments] = useState([]);
+  const [currentDepartment, setCurrentDepartment] = useState('');
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
+
+  useEffect(() => {
+    const getDepartments = async () => {
+      const departments = await axios.get(`http://localhost:8001/staff/admin/admindepartments/${id}`);
+      setDepartments(departments.data.departments);
+    };
+    getDepartments();
+  }, [id])
+
   const handleLogoutClick = (e) => {
     e.preventDefault()
     Swal.fire({
@@ -55,22 +70,58 @@ const NavBar = (props) => {
   }, [navigate])
 
   useEffect(() => {
-    const id = localStorage.getItem('id');
     if (id === '1') {
       setShowTabs(true);
     }
-    if (props.tab === 'create') {
-      setIsCreateActive(true);
-      setIsTrashActive(false);
-    }
-    if (props.tab === 'trash') {
-      setIsCreateActive(false);
-      setIsTrashActive(true);
-    }
-    if (props.tab === 'none') {
-      setIsCreateActive(false);
-      setIsTrashActive(false);
-    }
+    switch (props.tab) {
+      case 'create':
+        setIsCreateActive(true);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+
+      case 'trash':
+        setIsCreateActive(false);
+        setIsTrashActive(true);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+
+      case 'request':
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(true);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+
+      case 'complaint':
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(true);
+        setIsServicesActive(false);
+        break;
+
+      case 'services':
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(true);
+        break;
+
+      default:
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        break;
+    };
     const getUserInfo = async () => {
       try {
         const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${id}`);
@@ -80,7 +131,13 @@ const NavBar = (props) => {
       }
     };
     getUserInfo();
-  }, [props]);
+  }, [props, id]);
+
+  const handleDepartmentClick = (department) => {
+    setCurrentDepartment(department);
+    props.getAppDepartment(department);
+  };
+
   return (
     <Fragment>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -94,10 +151,29 @@ const NavBar = (props) => {
               <Link className="nav-link" to="/superadmin/createstaff">Create Staff</Link>
             </li>}
             {showTabs && <li className={`nav-item ${isTrashActive && 'active'}`}>
-              <Link className="nav-link" to="/trash">Trash</Link>
+              <Link className="nav-link" to="/trash">Archive</Link>
             </li>}
+            <li className={`nav-item ${isRequestActive && 'active'}`}>
+              <Link className="nav-link" to="/request">Request</Link>
+            </li>
+            <li className={`nav-item ${isComplaintActive && 'active'}`}>
+              <Link className="nav-link" to="/complaint">Complaint</Link>
+            </li>
+            <li className={`nav-item ${isServicesActive && 'active'}`}>
+              <Link className="nav-link" to="/services">Services</Link>
+            </li>
           </ul>
           <form className="d-flex" onSubmit={(e) => handleLogoutClick(e)}>
+            <div className="btn-group dropleft mr-3">
+              <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {currentDepartment === '' ? 'Department' : currentDepartment}
+              </button>
+              <div className="dropdown-menu">
+                {
+                  departments.map((department, key) => <button key={key} className="dropdown-item" type="button" onClick={() => handleDepartmentClick(department)}>{department}</button>)
+                }
+              </div>
+            </div>
             <p className='text-light my-auto' style={{ marginRight: '10px' }}><b>{staffInfo.role}</b>: {staffInfo.firstname + ' ' + staffInfo.lastname}</p>
             <button className="btn btn-danger" type="submit">Logout</button>
           </form>

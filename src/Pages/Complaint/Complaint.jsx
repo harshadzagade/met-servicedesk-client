@@ -2,12 +2,12 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SuperAdmin from '../../Components/Staff/SuperAdmin/SuperAdmin';
-import Admin from '../../Components/Staff/Admin/Admin';
-import Technician from '../../Components/Staff/Technician/Technician';
-import User from '../../Components/Staff/User/User';
+import SuperAdminComplaint from '../../Components/ComplaintPage/SuperAdminComplaint/SuperAdminComplaint';
+import AdminComplaint from '../../Components/ComplaintPage/AdminComplaint/AdminComplaint';
+import TechnicianComplaint from '../../Components/ComplaintPage/TechnicianComplaint/TechnicianComplaint';
+import UserComplaint from '../../Components/ComplaintPage/UserComplaint/UserComplaint';
 
-const Home = () => {
+const Complaint = () => {
     const navigate = useNavigate();
     const location = useLocation() || null;
 
@@ -81,16 +81,16 @@ const Home = () => {
         }
         checkAuth();
     }, [id, navigate, refresh]);
-
+    
     return (
         <Fragment>
-            <NavBar tab={'none'} />
-            {isSuperAdmin && <SuperAdmin />}
-            {isAdmin && <Admin />}
-            {isTechnician && <Technician />}
-            {isUser && <User />}
+            <NavBar tab={'complaint'} />
+            {isSuperAdmin && <SuperAdminComplaint />}
+            {isAdmin && <AdminComplaint />}
+            {isTechnician && <TechnicianComplaint />}
+            {isUser && <UserComplaint />}
         </Fragment>
     );
 };
 
-export default Home;
+export default Complaint;

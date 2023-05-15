@@ -1,0 +1,8 @@
+.requestNavigation {
+    display: flex;
+    justify-content: center;
+}
+
+.ownDepartmentRequests,  .incomingRequests,  .sendRequests {
+    font-weight: 700;
+}
