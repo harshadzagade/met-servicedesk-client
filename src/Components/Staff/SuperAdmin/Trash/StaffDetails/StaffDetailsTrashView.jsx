@@ -14,7 +14,7 @@ const StaffDetailsSuperAdminView = () => {
   const [department, setDepartment] = useState('');
   useEffect(() => {
     const getStaff = async () => {
-      const staff = await axios.get(`http://localhost:8001/trash/staffdetails/${id.staffId}`);
+      const staff = await axios.get(`http://localhost:8001/api/trash/staffdetails/${id.staffId}`);
       setName(staff.data.staff.firstname + ' ' + staff.data.staff.lastname);
       setEmail(staff.data.staff.email);
       setRole(staff.data.staff.role);
@@ -34,7 +34,7 @@ const StaffDetailsSuperAdminView = () => {
       confirmButtonText: 'Yes, restore it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:8001/trash/staffdetails/restore/${id.staffId}`);
+        axios.delete(`http://localhost:8001/api/trash/staffdetails/restore/${id.staffId}`);
         navigate('/trash', { state: { refreshTrash: true } });
         Swal.fire(
           'Restored Staff!',
@@ -62,7 +62,7 @@ const StaffDetailsSuperAdminView = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:8001/trash//staffdetails/remove/${id.staffId}`);
+        axios.delete(`http://localhost:8001/api/trash//staffdetails/remove/${id.staffId}`);
         navigate('/trash', { state: { refreshTrash: true } });
         Swal.fire(
           'Deleted Staff!',

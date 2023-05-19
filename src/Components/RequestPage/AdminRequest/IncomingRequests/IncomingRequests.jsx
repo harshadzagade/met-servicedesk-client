@@ -22,7 +22,7 @@ const IncomingRequests = (props) => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/staff/admin/requests/incoming/${props.department}`);
+            const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${props.department}`);
             setRequestList(list.data.requests);
         };
         getList();

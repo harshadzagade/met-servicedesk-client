@@ -8,7 +8,7 @@ const VerifyOTP = (props) => {
     const [isOTPValid, setIsOTPValid] = useState(true)
     const handleOTPVerification = async () => {
         try {
-            await axios.post('http://localhost:8001/staff/verifyOTP', { otp: enteredOTP.current.value });
+            await axios.post('http://localhost:8001/api/staff/verifyOTP', { otp: enteredOTP.current.value });
             props.goToResetPassword();
         } catch (error) {
             setIsOTPValid(false);

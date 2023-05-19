@@ -19,7 +19,7 @@ const SetNewPassword = (props) => {
       });
     } else {
       try {
-        await axios.put('http://localhost:8001/staff/resetpassword', { email: props.getEmail, password: passwordRef.current.value });
+        await axios.put('http://localhost:8001/api/staff/resetpassword', { email: props.getEmail, password: passwordRef.current.value });
         Swal.fire({
           position: 'top-end',
           icon: 'success',

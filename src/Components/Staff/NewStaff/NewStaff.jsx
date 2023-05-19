@@ -26,7 +26,7 @@ const NewStaff = () => {
             });
         } else {
             try {
-                await axios.put('http://localhost:8001/staff/newuserlogin/', { email: email, password: passwordRef.current.value });
+                await axios.put('http://localhost:8001/api/staff/newuserlogin/', { email: email, password: passwordRef.current.value });
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

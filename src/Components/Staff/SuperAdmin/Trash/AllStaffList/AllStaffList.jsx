@@ -23,7 +23,7 @@ const AllStaffList = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/trash/`);
+            const list = await axios.get(`http://localhost:8001/api/trash/`);
             setStaffList(list.data.allStaff);
         };
         getList();
@@ -41,7 +41,7 @@ const AllStaffList = () => {
             confirmButtonText: 'Yes, restore it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete('http://localhost:8001/trash/restoreall/');
+                axios.delete('http://localhost:8001/api/trash/restoreall/');
                 navigate('/', { state: { refreshSuperHome: true } });
                 Swal.fire(
                     'Restored All Staff!',
@@ -69,7 +69,7 @@ const AllStaffList = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete('http://localhost:8001/trash/removeall/');
+                axios.delete('http://localhost:8001/api/trash/removeall/');
                 setRefresh(true);
                 Swal.fire(
                     'Deleted All Staff!',

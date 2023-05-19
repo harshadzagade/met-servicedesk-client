@@ -9,7 +9,7 @@ const ComplaintDetails = (props) => {
 
   useEffect(() => {
     const getRequestDetails = async () => {
-      const complaint = await axios.get(`http://localhost:8001/complaint/getcomplaintdetails/${props.id}`);
+      const complaint = await axios.get(`http://localhost:8001/api/complaint/getcomplaintdetails/${props.id}`);
       setComplaintData(complaint.data.complaint);
     };
     getRequestDetails();

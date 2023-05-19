@@ -22,7 +22,7 @@ const AllStaffComplaint = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/complaint/allcomplaints`);
+            const list = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
             setStaffRequestList(list.data.complaints);
         };
         getList();

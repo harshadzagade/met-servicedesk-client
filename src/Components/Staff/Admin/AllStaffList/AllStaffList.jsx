@@ -20,7 +20,7 @@ const AllStaffList = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/staff/admin/allstaff/${id}`);
+            const list = await axios.get(`http://localhost:8001/api/staff/admin/allstaff/${id}`);
             setStaffList(list.data.totalStaff);
         };
         getList();

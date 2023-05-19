@@ -20,7 +20,7 @@ const NavBar = (props) => {
 
   useEffect(() => {
     const getDepartments = async () => {
-      const departments = await axios.get(`http://localhost:8001/staff/admin/admindepartments/${id}`);
+      const departments = await axios.get(`http://localhost:8001/api/staff/admin/admindepartments/${id}`);
       setDepartments(departments.data.departments);
     };
     getDepartments();
@@ -124,7 +124,7 @@ const NavBar = (props) => {
     };
     const getUserInfo = async () => {
       try {
-        const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${id}`);
+        const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
         setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role });
       } catch (error) {
         console.log(error.response.data.message);

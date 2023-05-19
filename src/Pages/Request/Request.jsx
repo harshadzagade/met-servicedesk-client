@@ -38,7 +38,7 @@ const Request = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`http://localhost:8001/staff/check/${id}`);
+                const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
                 switch (res.data.role) {
                     case 'superadmin':
                         setIsSuperAdmin(true);

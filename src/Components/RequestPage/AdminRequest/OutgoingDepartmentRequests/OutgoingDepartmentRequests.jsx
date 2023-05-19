@@ -23,7 +23,7 @@ const OutgoingDepartmentRequests = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/request/ownrequests/${id}`);
+            const list = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
             setRequestList(list.data.requests);
         };
         getList();

@@ -14,7 +14,7 @@ const UpdateStaffAdminView = (props) => {
 
     useEffect(() => {
         const fetchStaff = async () => {
-            const staff = await axios.get(`http://localhost:8001/staff/superadmin/staffdetails/${id.staffId}`);
+            const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${id.staffId}`);
             setStaff(staff.data.staff);
         };
         fetchStaff();
@@ -26,7 +26,7 @@ const UpdateStaffAdminView = (props) => {
 
     const handleSubmitClick = async (e, id, role) => {
         e.preventDefault();
-        await axios.put(`http://localhost:8001/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
+        await axios.put(`http://localhost:8001/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
         props.onConfirm();
     };
 

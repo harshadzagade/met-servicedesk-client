@@ -17,7 +17,7 @@ const ResetPassword = () => {
 
     const checkLogin = async () => {
         if (localStorage.getItem('id')) {
-            const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${localStorage.getItem('id')}`);
+            const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${localStorage.getItem('id')}`);
             ctx.onLogin(staff.data.staff.email);
             navigate('/');
         }

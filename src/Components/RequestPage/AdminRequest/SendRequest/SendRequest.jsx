@@ -79,7 +79,7 @@ const SendRequest = () => {
             // attachment: dataFile
         };
         try {
-            await axios.post('http://localhost:8001/request/', data);
+            await axios.post('http://localhost:8001/api/request/', data);
             Swal.fire(
                 'Request Created!',
                 'You have created request successfully',
