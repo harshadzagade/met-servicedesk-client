@@ -60,7 +60,8 @@ const AllStaffList = () => {
             } else {
                 setSelectedRows([])
             }
-        }
+        },
+        bgColor: '#bbbbbb'
     }
 
     const columns = [
@@ -69,22 +70,26 @@ const AllStaffList = () => {
             dataField: `firstname`,
             sort: true,
             formatter: dataFormatter,
-            filter: textFilter()
+            filter: textFilter(),
+            headerClasses: classes.headerStyle
         },
         {
             text: "Email",
             dataField: "email",
-            formatter: dataFormatter
+            formatter: dataFormatter,
+            headerClasses: classes.headerStyle
         },
         {
             text: "Role",
             dataField: "role",
-            formatter: dataFormatter
+            formatter: dataFormatter,
+            headerClasses: classes.headerStyle
         },
         {
             text: "Department",
             dataField: "department",
-            formatter: dataFormatter
+            formatter: dataFormatter,
+            headerClasses: classes.headerStyle
         }
     ];
 

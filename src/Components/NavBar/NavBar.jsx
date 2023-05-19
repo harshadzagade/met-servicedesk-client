@@ -27,7 +27,7 @@ const NavBar = (props) => {
   }, [id])
 
   const handleLogoutClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     Swal.fire({
       title: 'Log Out?',
       text: "You will be signed out from your current login",
