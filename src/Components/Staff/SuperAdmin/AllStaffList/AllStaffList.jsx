@@ -45,18 +45,6 @@ const AllStaffList = () => {
                             <li onClick={() => setNumberOfPages(30)}>30</li>
                         </ul>
                     </label>
-                    {/* <div className={`${classes.paginationNumber} btn-group`}>
-                        Show
-                        <button className="btn btn-secondary btn-sm dropdown-toggle ml-1" type="button" data-toggle="dropdown" aria-expanded="false">
-                            {numberOfPages}
-                        </button>
-                        Rows
-                        <div className={`${classes.selectNumberOfPages} dropdown-menu`}>
-                            <div onClick={() => setNumberOfPages(10)}>10</div>
-                            <div onClick={() => setNumberOfPages(20)}>20</div>
-                            <div onClick={() => setNumberOfPages(50)}>50</div>
-                        </div>
-                    </div> */}
                     <table>
                         <thead>
                             <tr className={`bg-secondary`}>
