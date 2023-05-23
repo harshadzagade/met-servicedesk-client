@@ -53,11 +53,15 @@ th:nth-child(5) {
     height: 3rem;
 }
 
-/* .childCheckbox {
-    display: none;
+.parentCheckbox {
+    cursor: pointer;
 }
 
-.childCheckboxStyling {
+.childCheckbox {
+    cursor: pointer;
+}
+
+/* .childCheckboxStyling {
     padding: 0 6px;
     border: 1px solid #eee
 }
