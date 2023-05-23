@@ -5,67 +5,81 @@
     font-family: "Bahnschrift", Times, serif;
 }
 
-.tableParent {
-    margin-right: 3rem;
-    margin-left: 3rem;
-}
-
 table {
-    border-radius: 1.5rem;
     border: 1px solid #ccc;
-    border-collapse: separate;
+    border-collapse: collapse;
+    margin: 0;
     padding: 0;
     width: 100%;
     table-layout: fixed;
 }
 
-th:nth-child(1) {
-    width: 100px;
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
 }
 
-/* the second */
-th:nth-child(2) {
-    width: 300px;
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
 }
 
-/* the third */
-th:nth-child(3) {
-    width: 300px;
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
 }
 
-/* the third */
-th:nth-child(4) {
-    width: 300px;
-}
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
 
-/* the third */
-th:nth-child(5) {
-    width: 300px;
-}
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
 
-.tableHeadingRow {
-    height: 3rem;
-    color: purple;
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    table td::before {
+        /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
 }
 
 .tableField {
     cursor: pointer;
-    height: 3rem;
 }
-
-/* .childCheckbox {
-    display: none;
-}
-
-.childCheckboxStyling {
-    padding: 0 6px;
-    border: 1px solid #eee
-}
-
-.childCheckbox:checked+.childCheckboxStyling {
-    background: #000;
-    color: #fff
-} */
 
 .dropdown {
     float: left;

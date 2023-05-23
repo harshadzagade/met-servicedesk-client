@@ -38,28 +38,32 @@ const AllStaffList = () => {
                             <li onClick={() => setNumberOfPages(30)}>30</li>
                         </ul>
                     </label>
-                    <table>
-                        <thead>
-                            <tr className={`bg-secondary`}>
-                                <th scope="col">Name</th>
-                                <th scope="col">E-Mail</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Department</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                currentPageData.length > 0 && currentPageData.map((field) => (
-                                    <tr className={`${classes.tableField}`} key={field.id} onClick={() => navigate(`/superadmin/${field.id}`)}>
-                                        <td data-label="name">{field.firstname + ' ' + field.lastname}</td>
-                                        <td data-label="email">{field.email}</td>
-                                        <td data-label="role">{field.role}</td>
-                                        <td data-label="department">{field.department}</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
+                    <div className={`${classes.tableParent}`}>
+                        <table>
+                            <thead>
+                                <tr className={`${classes.tableHeadingRow}`}>
+                                    <th scope="col"><input type="checkbox" /></th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">E-Mail</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Department</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    currentPageData.length > 0 && currentPageData.map((field) => (
+                                        <tr className={`${classes.tableField}`} key={field.id}>
+                                            <td data-label="checkbox"><input type="checkbox" className={`${classes.childCheckbox}`} id='childCheckbox' />{/* <label htmlFor='childCheckbox' className={`${classes.childCheckboxStyling}`}>-</label> */}</td>
+                                            <td data-label="name" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.firstname + ' ' + field.lastname}</td>
+                                            <td data-label="email" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.email}</td>
+                                            <td data-label="role" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.role}</td>
+                                            <td data-label="department" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.department}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
                     <SweetPagination
                         currentPageData={setCurrentPageData}
