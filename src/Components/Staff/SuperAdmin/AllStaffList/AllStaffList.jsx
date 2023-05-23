@@ -11,15 +11,8 @@ const AllStaffList = () => {
     const navigate = useNavigate();
     const [staffList, setStaffList] = useState([]);
 
-    console.log(staffList);
-
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [numberOfPages, setNumberOfPages] = useState(10);
-    console.log(currentPageData);
-
-    // useEffect(() => {
-    //     set
-    // }, [staffList])
 
     useEffect(() => {
         const getList = async () => {
