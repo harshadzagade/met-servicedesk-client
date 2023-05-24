@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './IncomingRequests.module.css';
 import SmallSingleRequest from './SmallSingleRequest/SmallSingleRequest';
 import SingleRequest from './SingleRequest/SingleRequest';
 import RequestDetails from '../RequestDetails/RequestDetails';
+import DepartmentContext from '../../../../Context/DepartmentContext';
 
 const IncomingRequests = () => {
-    const department = sessionStorage.getItem('department');
+    const departmentCtx = useContext(DepartmentContext);
     const windowWidth = window.innerWidth;
     const [requestList, setRequestList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
@@ -23,11 +24,11 @@ const IncomingRequests = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${department}`);
+            const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${departmentCtx.department}`);
             setRequestList(list.data.requests);
         };
         getList();
-    }, [department]);
+    }, [departmentCtx.department]);
 
     const checkOpenDetails = (value, id) => {
         setOpenDetails(value);

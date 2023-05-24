@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from '../../Context/AuthContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import DepartmentContext from '../../Context/DepartmentContext';
 
 const NavBar = (props) => {
   const id = localStorage.getItem('id');
-  const sessionDepartment = sessionStorage.getItem('department')
   const [showTabs, setShowTabs] = useState(false);
   const [isCreateActive, setIsCreateActive] = useState(false);
   const [isTrashActive, setIsTrashActive] = useState(false);
@@ -15,9 +15,9 @@ const NavBar = (props) => {
   const [isServicesActive, setIsServicesActive] = useState(false);
   const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' });
   const [departments, setDepartments] = useState([]);
-  const [currentDepartment, setCurrentDepartment] = useState(sessionDepartment);
   const navigate = useNavigate();
-  const ctx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
+  const departmentCtx = useContext(DepartmentContext);
 
   useEffect(() => {
     const getDepartments = async () => {
@@ -39,7 +39,7 @@ const NavBar = (props) => {
       confirmButtonText: 'Yes, logout!'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        ctx.onLogout();
+        authCtx.onLogout();
         if (sessionStorage.getItem('department')) {
           sessionStorage.removeItem('department');
         }
@@ -138,8 +138,7 @@ const NavBar = (props) => {
   }, [props, id]);
 
   const handleDepartmentClick = (department) => {
-    sessionStorage.setItem('department', department);
-    setCurrentDepartment(department);
+    departmentCtx.setDepartment(department);
   };
 
   return (
@@ -172,7 +171,7 @@ const NavBar = (props) => {
               staffInfo.role === 'admin' &&
               <div className="btn-group dropleft mr-3">
                 <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {currentDepartment === null ? 'Department' : currentDepartment}
+                  {departmentCtx.department === '' ? 'Department' : departmentCtx.department}
                 </button>
                 <div className="dropdown-menu">
                   {
