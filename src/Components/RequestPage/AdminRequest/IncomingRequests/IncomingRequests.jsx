@@ -5,7 +5,8 @@ import SmallSingleRequest from './SmallSingleRequest/SmallSingleRequest';
 import SingleRequest from './SingleRequest/SingleRequest';
 import RequestDetails from '../RequestDetails/RequestDetails';
 
-const IncomingRequests = (props) => {
+const IncomingRequests = () => {
+    const department = sessionStorage.getItem('department');
     const windowWidth = window.innerWidth;
     const [requestList, setRequestList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
@@ -22,11 +23,11 @@ const IncomingRequests = (props) => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${props.department}`);
+            const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${department}`);
             setRequestList(list.data.requests);
         };
         getList();
-    }, [props.department]);
+    }, [department]);
 
     const checkOpenDetails = (value, id) => {
         setOpenDetails(value);
