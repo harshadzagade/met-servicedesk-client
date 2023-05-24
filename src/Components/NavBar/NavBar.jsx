@@ -164,16 +164,19 @@ const NavBar = (props) => {
             </li>
           </ul>
           <form className="d-flex" onSubmit={(e) => handleLogoutClick(e)}>
-            <div className="btn-group dropleft mr-3">
-              <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {currentDepartment === '' ? 'Department' : currentDepartment}
-              </button>
-              <div className="dropdown-menu">
-                {
-                  departments.map((department, key) => <button key={key} className="dropdown-item" type="button" onClick={() => handleDepartmentClick(department)}>{department}</button>)
-                }
+            {
+              staffInfo.role === 'admin' &&
+              <div className="btn-group dropleft mr-3">
+                <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {currentDepartment === '' ? 'Department' : currentDepartment}
+                </button>
+                <div className="dropdown-menu">
+                  {
+                    departments.map((department, key) => <button key={key} className="dropdown-item" type="button" onClick={() => handleDepartmentClick(department)}>{department}</button>)
+                  }
+                </div>
               </div>
-            </div>
+            }
             <p className='text-light my-auto' style={{ marginRight: '10px' }}><b>{staffInfo.role}</b>: {staffInfo.firstname + ' ' + staffInfo.lastname}</p>
             <button className="btn btn-danger" type="submit">Logout</button>
           </form>
