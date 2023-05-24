@@ -13,6 +13,7 @@ const IncomingRequests = () => {
     const [smallDevice, setSmallDevice] = useState(false);
     const [openDetails, setOpenDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if (windowWidth < 768) {
@@ -24,8 +25,16 @@ const IncomingRequests = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${departmentCtx.department}`);
-            setRequestList(list.data.requests);
+            if (departmentCtx.department) {
+                try {
+                    const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${departmentCtx.department}`);
+                    setRequestList(list.data.requests);
+                } catch (error) {
+                    setErrorMessage(`${error.response.data.message}`);
+                }
+            } else {
+                setErrorMessage('Please select department')
+            }
         };
         getList();
     }, [departmentCtx.department]);
@@ -80,7 +89,7 @@ const IncomingRequests = () => {
                     }
                 </Fragment>
                 :
-                <div className={`${classes.homeNoData}`}>No requests available</div>
+                <div className={`${classes.homeNoData}`}>{errorMessage}</div>
             }
         </Fragment>
     );
