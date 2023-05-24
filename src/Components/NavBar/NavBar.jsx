@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const NavBar = (props) => {
   const id = localStorage.getItem('id');
+  const sessionDepartment = sessionStorage.getItem('department')
   const [showTabs, setShowTabs] = useState(false);
   const [isCreateActive, setIsCreateActive] = useState(false);
   const [isTrashActive, setIsTrashActive] = useState(false);
@@ -14,7 +15,7 @@ const NavBar = (props) => {
   const [isServicesActive, setIsServicesActive] = useState(false);
   const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' });
   const [departments, setDepartments] = useState([]);
-  const [currentDepartment, setCurrentDepartment] = useState('');
+  const [currentDepartment, setCurrentDepartment] = useState(sessionDepartment);
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
 
@@ -24,7 +25,7 @@ const NavBar = (props) => {
       setDepartments(departments.data.departments);
     };
     getDepartments();
-  }, [id])
+  }, [id]);
 
   const handleLogoutClick = (e) => {
     e.preventDefault();
@@ -39,6 +40,9 @@ const NavBar = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         ctx.onLogout();
+        if (sessionStorage.getItem('department')) {
+          sessionStorage.removeItem('department');
+        }
         navigate('/login');
         const Toast = Swal.mixin({
           toast: true,
@@ -134,8 +138,8 @@ const NavBar = (props) => {
   }, [props, id]);
 
   const handleDepartmentClick = (department) => {
+    sessionStorage.setItem('department', department);
     setCurrentDepartment(department);
-    props.getAppDepartment(department);
   };
 
   return (
@@ -168,7 +172,7 @@ const NavBar = (props) => {
               staffInfo.role === 'admin' &&
               <div className="btn-group dropleft mr-3">
                 <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {currentDepartment === '' ? 'Department' : currentDepartment}
+                  {currentDepartment === null ? 'Department' : currentDepartment}
                 </button>
                 <div className="dropdown-menu">
                   {
