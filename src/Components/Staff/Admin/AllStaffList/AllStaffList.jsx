@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import SingleStaff from './SingleStaff/SingleStaff';
 import classes from './AllStaffList.module.css';
 import SmallSingleStaff from './SmallSingleStaff/SmallSingleStaff';
+import DepartmentContext from '../../../../Context/DepartmentContext';
 
 const AllStaffList = () => {
     const id = localStorage.getItem('id');
+    const departmentCtx = useContext(DepartmentContext);
     const windowWidth = window.innerWidth;
     const [staffList, setStaffList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
@@ -20,11 +22,11 @@ const AllStaffList = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/staff/admin/allstaff/${id}`);
+            const list = await axios.get(`http://localhost:8001/api/staff/admin/allstaff/${id}/${departmentCtx.department}`);
             setStaffList(list.data.totalStaff);
         };
         getList();
-    }, [id]);
+    }, [id, departmentCtx.department]);
     return (
         <Fragment>
             {staffList.length > 0 ?
