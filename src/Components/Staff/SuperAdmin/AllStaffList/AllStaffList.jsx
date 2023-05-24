@@ -4,6 +4,7 @@ import classes from './AllStaffList.module.css';
 import { useNavigate } from 'react-router-dom';
 import SweetPagination from 'sweetpagination';
 import Swal from 'sweetalert2';
+import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 
 const AllStaffList = () => {
     const id = localStorage.getItem('id');
@@ -34,44 +35,31 @@ const AllStaffList = () => {
     return (
         <Fragment>
             {
-                staffList.length > 2 &&
+                staffList.length > 2 ?
                 <Fragment>
-                    <label className={`${classes.dropdown}`}>
-                        Show Rows
-                        <div className={`${classes.ddButton}`}>
-                            {numberOfPages}
-                        </div>
-                        <input type="checkbox" className={`${classes.ddInput}`} id="test" />
-                        <ul className={`${classes.ddMenu}`}>
-                            <li onClick={() => setNumberOfPages(10)}>10</li>
-                            <li onClick={() => setNumberOfPages(20)}>20</li>
-                            <li onClick={() => setNumberOfPages(30)}>30</li>
-                        </ul>
-                    </label>
-                    <div className={`${classes.tableParent}`}>
-                        <table>
-                            <thead>
-                                <tr className={`${classes.tableHeadingRow}`}>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">E-Mail</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Department</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    currentPageData.length > 0 && currentPageData.map((field) => (
-                                        <tr className={`${classes.tableField}`} key={field.id}>
-                                            <td data-label="name" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.firstname + ' ' + field.lastname}</td>
-                                            <td data-label="email" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.email}</td>
-                                            <td data-label="role" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.role}</td>
-                                            <td data-label="department" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.department}</td>
-                                        </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                    <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+                    <table className={`${classes.tableParent}`}>
+                        <thead className={`${classes.tableHeader}`}>
+                            <tr className={`${classes.tableRow}`}>
+                                <th className={`${classes.tableHead}`} scope="col">Name</th>
+                                <th className={`${classes.tableHead}`} scope="col">E-Mail</th>
+                                <th className={`${classes.tableHead}`} scope="col">Role</th>
+                                <th className={`${classes.tableHead}`} scope="col">Department</th>
+                            </tr>
+                        </thead>
+                        <tbody className={`${classes.tableBody}`}>
+                            {
+                                currentPageData.length > 0 && currentPageData.map((field) => (
+                                    <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id}>
+                                        <td className={`${classes.tableData}`} data-label="name" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.firstname + ' ' + field.lastname}</td>
+                                        <td className={`${classes.tableData}`} data-label="email" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.email}</td>
+                                        <td className={`${classes.tableData}`} data-label="role" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.role}</td>
+                                        <td className={`${classes.tableData}`} data-label="department" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.department}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
 
                     <SweetPagination
                         currentPageData={setCurrentPageData}
@@ -80,6 +68,8 @@ const AllStaffList = () => {
                         navigation={true}
                     />
                 </Fragment>
+                :
+                <div className={`${classes.homeNoData}`}>No staff added</div>
             }
         </Fragment>
     );
