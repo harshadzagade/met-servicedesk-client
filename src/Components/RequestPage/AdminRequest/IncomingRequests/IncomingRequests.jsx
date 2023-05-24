@@ -25,18 +25,18 @@ const IncomingRequests = () => {
 
     useEffect(() => {
         const getList = async () => {
-            if (departmentCtx.department) {
-                try {
-                    const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${departmentCtx.department}`);
-                    setRequestList(list.data.requests);
-                } catch (error) {
-                    setErrorMessage(`${error.response.data.message}`);
-                }
-            } else {
-                setErrorMessage('Please select department')
+            try {
+                const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${departmentCtx.department}`);
+                setRequestList(list.data.requests);
+            } catch (error) {
+                setErrorMessage(`${error.response.data.message}`);
             }
         };
-        getList();
+        if (departmentCtx.department) {
+            getList();
+        } else {
+            setErrorMessage('Please select department')
+        }
     }, [departmentCtx.department]);
 
     const checkOpenDetails = (value, id) => {

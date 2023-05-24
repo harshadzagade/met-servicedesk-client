@@ -1,17 +1,19 @@
 import axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './OutgoingDepartmentRequests.module.css';
 import SmallSingleRequest from './SmallSingleRequest/SmallSingleRequest';
 import SingleRequest from './SingleRequest/SingleRequest';
 import RequestDetails from '../RequestDetails/RequestDetails';
+import DepartmentContext from '../../../../Context/DepartmentContext';
 
 const OutgoingDepartmentRequests = () => {
-    const id = localStorage.getItem('id');
+    const departmentCtx = useContext(DepartmentContext);
     const windowWidth = window.innerWidth;
     const [requestList, setRequestList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
     const [openDetails, setOpenDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if (windowWidth < 768) {
@@ -23,11 +25,19 @@ const OutgoingDepartmentRequests = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
-            setRequestList(list.data.requests);
+            try {
+                const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoing/${departmentCtx.department}`);
+                setRequestList(list.data.requests);
+            } catch (error) {
+                setErrorMessage(`${error.response.data.message}`);
+            }
         };
-        getList();
-    }, [id]);
+        if (departmentCtx.department) {
+            getList();
+        } else {
+            setErrorMessage('Please select department')
+        }
+    }, [departmentCtx.department]);
 
     const checkOpenDetails = (value, id) => {
         setOpenDetails(value);
@@ -79,7 +89,7 @@ const OutgoingDepartmentRequests = () => {
                     }
                 </Fragment>
                 :
-                <div className={`${classes.homeNoData}`}>No requests available</div>
+                <div className={`${classes.homeNoData}`}>{errorMessage}</div>
             }
         </Fragment>
     );
