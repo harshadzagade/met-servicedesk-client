@@ -11,6 +11,7 @@ const AllStaffList = () => {
     const windowWidth = window.innerWidth;
     const [staffList, setStaffList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if (windowWidth < 768) {
@@ -22,10 +23,21 @@ const AllStaffList = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/staff/admin/allstaff/${id}/${departmentCtx.department}`);
-            setStaffList(list.data.totalStaff);
+            try {
+                const list = await axios.get(`http://localhost:8001/api/staff/admin/allstaff/${id}/${departmentCtx.department}`);
+                if (list.data.totalStaff.length === 0) {
+                    setErrorMessage('No staff available')
+                }
+                setStaffList(list.data.totalStaff);
+            } catch (error) {
+                setErrorMessage(`${error.response.data.message}`);
+            }
         };
-        getList();
+        if (departmentCtx.department) {
+            getList();
+        } else {
+            setErrorMessage('Please select department')
+        }
     }, [id, departmentCtx.department]);
     return (
         <Fragment>
@@ -63,7 +75,7 @@ const AllStaffList = () => {
                     }
                 </Fragment>
                 :
-                <div className={`${classes.homeNoData}`}>No staff added</div>
+                <div className={`${classes.homeNoData}`}>{errorMessage}</div>
             }
         </Fragment>
     );
