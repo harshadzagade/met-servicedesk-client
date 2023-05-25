@@ -27,6 +27,9 @@ const OutgoingDepartmentRequests = () => {
         const getList = async () => {
             try {
                 const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoing/${departmentCtx.department}`);
+                if (list.data.requests.length === 0) {
+                    setErrorMessage('No requests available')
+                }
                 setRequestList(list.data.requests);
             } catch (error) {
                 setErrorMessage(`${error.response.data.message}`);

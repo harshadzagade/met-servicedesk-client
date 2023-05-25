@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
-import classes from './IncomingRequests.module.css';
-import SmallSingleRequest from './SmallSingleRequest/SmallSingleRequest';
-import SingleRequest from './SingleRequest/SingleRequest';
-import RequestDetails from '../RequestDetails/RequestDetails';
+import classes from './IncomingComplaint.module.css';
 import DepartmentContext from '../../../../Context/DepartmentContext';
+import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
+import SmallSingleComplaint from './SmallSingleComplaint/SmallSingleComplaint';
+import SingleComplaint from './SingleComplaint/SingleComplaint';
 
-const IncomingRequests = () => {
+const IncomingComplaint = () => {
     const departmentCtx = useContext(DepartmentContext);
     const windowWidth = window.innerWidth;
     const [requestList, setRequestList] = useState([]);
@@ -26,11 +26,11 @@ const IncomingRequests = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${departmentCtx.department}`);
-                if (list.data.requests.length === 0) {
-                    setErrorMessage('No requests available')
+                const list = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${departmentCtx.department}`);
+                if (list.data.complaints.length === 0) {
+                    setErrorMessage('No complaints available')
                 }
-                setRequestList(list.data.requests);
+                setRequestList(list.data.complaints);
             } catch (error) {
                 setErrorMessage(`${error.response.data.message}`);
             }
@@ -53,14 +53,14 @@ const IncomingRequests = () => {
 
     return (
         <Fragment>
-            {openDetails && <RequestDetails onConfirm={handleUpdateCancel} id={detailsId} />}
+            {openDetails && <ComplaintDetails onConfirm={handleUpdateCancel} id={detailsId} />}
             {requestList.length > 0 ?
                 <Fragment>
                     {smallDevice &&
                         <Fragment>
                             {
                                 requestList.map((request) =>
-                                    <SmallSingleRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
+                                    <SmallSingleComplaint setOpenDetails={checkOpenDetails} key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
                                 )
                             }
                         </Fragment>
@@ -76,14 +76,12 @@ const IncomingRequests = () => {
                                         <th scope="col">Category</th>
                                         <th scope="col">Priority</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">HOD Approval</th>
-                                        <th scope="col">Admin Approval</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
                                         requestList.map((request) =>
-                                            <SingleRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} subject={request.subject} name={request.name} department={request.department} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
+                                            <SingleComplaint setOpenDetails={checkOpenDetails} key={request.id} id={request.id} subject={request.subject} name={request.name} department={request.department} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
                                         )
                                     }
                                 </tbody>
@@ -98,4 +96,4 @@ const IncomingRequests = () => {
     );
 };
 
-export default IncomingRequests;
+export default IncomingComplaint;

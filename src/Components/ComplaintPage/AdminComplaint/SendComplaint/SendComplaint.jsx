@@ -2,10 +2,10 @@ import axios from 'axios';
 import React, { Fragment, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import classes from './SendRequest.module.css';
+import classes from './SendComplaint.module.css';
 import ToggleSwitch from '../../../UI/ToggleSwitch/ToggleSwitch';
 
-const SendRequest = () => {
+const SendComplaint = () => {
     const id = localStorage.getItem('id');
     const behalfEmailRef = useRef();
     const subjectRef = useRef();
@@ -79,7 +79,7 @@ const SendRequest = () => {
             // attachment: dataFile
         };
         try {
-            await axios.post('http://localhost:8001/api/request/', data);
+            await axios.post('http://localhost:8001/api/complaint/', data);
             Swal.fire(
                 'Request Created!',
                 'You have created request successfully',
@@ -96,14 +96,14 @@ const SendRequest = () => {
     };
     return (
         <Fragment>
-            <form className={`d-inline-block ${classes.sendRequestForm}`} method="POST" onSubmit={handleSubmitClick}>
+            <form className={`d-inline-block ${classes.sendComplaintForm}`} method="POST" onSubmit={handleSubmitClick}>
                 <div className='d-flex ml-2'>
                     <h4 className='mt-1 mr-3'>Behalf?</h4><ToggleSwitch label='Behalf' toggled={isToggled} onClick={() => { setIsToggled(!isToggled) }} />
                     {isToggled && <input className={`${classes.behalfField} form-control`} type="text" name="behalf" placeholder="Behalf email" autoComplete='true' required ref={behalfEmailRef} />}
                 </div>
-                <input className={`${classes.sendRequestInput} form-control`} type="text" name="subject" placeholder="Subject" autoComplete='true' required ref={subjectRef} /><br />
-                <textarea className={`${classes.sendRequestInput} form-control`} name="description" placeholder="Description" autoComplete='true' required ref={descriptionRef} /><br />
-                <input className={`${classes.sendRequestInput} ${classes.departmentMargins} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' required={departmentItems.length === 0} value={departmentValue} onKeyDown={handleKeyDown} onChange={handleChange} onPaste={handlePaste} /><br />
+                <input className={`${classes.sendComplaintInput} form-control`} type="text" name="subject" placeholder="Subject" autoComplete='true' required ref={subjectRef} /><br />
+                <textarea className={`${classes.sendComplaintInput} form-control`} name="description" placeholder="Description" autoComplete='true' required ref={descriptionRef} /><br />
+                <input className={`${classes.sendComplaintInput} ${classes.departmentMargins} form-control`} type="text" name="department" placeholder="Department" autoComplete='true' required={departmentItems.length === 0} value={departmentValue} onKeyDown={handleKeyDown} onChange={handleChange} onPaste={handlePaste} /><br />
                 {departmentItems.map(item => (
                     <div className={`${classes.tagItem}`} key={item}>
                         {item}
@@ -112,16 +112,16 @@ const SendRequest = () => {
                 ))}
                 {departmentItems.length === 0 && <br />}
                 <div className={`d-inline-flex`}>
-                    <select className={`${classes.sendSmallRequestInput} form-control`} name="priority" required onChange={(e) => setPriority(e.target.value)}>
+                    <select className={`${classes.sendSmallComplaintInput} form-control`} name="priority" required onChange={(e) => setPriority(e.target.value)}>
                         <option hidden>Select Your Priority</option>
                         <option value='high'>High</option>
                         <option value='moderate'>Moderate</option>
                         <option value='low'>Low</option>
                     </select>
-                    <input className={`${classes.sendSmallRequestInput} form-control`} type="text" name="category" placeholder="Category" autoComplete='true' required ref={categoryRef} />
+                    <input className={`${classes.sendSmallComplaintInput} form-control`} type="text" name="category" placeholder="Category" autoComplete='true' required ref={categoryRef} />
                 </div><br /><br />
                 <div className='d-flex ml-2 mb-4'>
-                    <div className={`${classes.isRepeated} mt-1 mr-3`}>Repeated request?</div><ToggleSwitch toggled={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} />
+                    <div className={`${classes.isRepeated} mt-1 mr-3`}>Repeated complaint?</div><ToggleSwitch toggled={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} />
                 </div>
                 {/* <input type="file" onChange={(e) => setFile(e.target.files)} /> */}
                 <button className={`btn ${classes.sendButton}`} type="submit">Create</button>
@@ -130,4 +130,4 @@ const SendRequest = () => {
     );
 };
 
-export default SendRequest;
+export default SendComplaint;

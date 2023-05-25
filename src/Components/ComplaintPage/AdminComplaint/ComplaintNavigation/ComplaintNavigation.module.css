@@ -1,0 +1,8 @@
+.complaintNavigation {
+    display: flex;
+    justify-content: center;
+}
+
+.ownDepartmentComplaints,  .incomingComplaints,  .sendComplaints {
+    font-weight: 700;
+}
