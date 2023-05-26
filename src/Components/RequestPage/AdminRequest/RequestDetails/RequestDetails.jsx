@@ -1,13 +1,17 @@
 import axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './RequestDetails.module.css';
 import NavBar from '../../../NavBar/NavBar';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import RequestApproval from './RequestApproval/RequestApproval';
+import DepartmentContext from '../../../../Context/DepartmentContext';
 
 const RequestDetails = () => {
+  const departmentCtx = useContext(DepartmentContext);
   const paramsId = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const id = paramsId.requestId;
+  const { state } = useLocation();
   const [requestData, setRequestData] = useState({});
   const [openApproval, setOpenApproval] = useState(false);
   const [refresh, setRefresh] = useState(false);
@@ -24,6 +28,20 @@ const RequestDetails = () => {
   const handleUpdateCancel = () => {
     setRefresh(true);
     setOpenApproval(false);
+    if (searchParams !== null) {
+      setSearchParams('');
+    }
+  };
+
+  const handleApprovalClick = () => {
+    setOpenApproval(true);
+    if (departmentCtx.department.length !== 0) {
+      if (state.approval === 1) {
+        setSearchParams(`?${new URLSearchParams({ approval: '1' })}`)
+      } else if (state.approval === 2) {
+        setSearchParams(`?${new URLSearchParams({ approval: '2' })}`)
+      }
+    }
   };
 
   return (
@@ -43,7 +61,7 @@ const RequestDetails = () => {
           <div className={`${classes.detailsContact} mt-2`}>HOD Approval: {requestData.approval1 === 1 ? 'approved' : 'not approved'}</div>
           <div className={`${classes.detailsContact} mt-2`}>Admin Approval: {requestData.approval2 === 1 ? 'approved' : 'not approved'}</div>
         </div>
-        <button className={`btn mt-3 ${classes.updateButton}`} onClick={() => setOpenApproval(true)}>Approve/Disapprove Request</button>
+        <button className={`btn mt-3 ${classes.updateButton}`} onClick={handleApprovalClick}>Approve/Disapprove Request</button>
       </div>
     </Fragment>
   );

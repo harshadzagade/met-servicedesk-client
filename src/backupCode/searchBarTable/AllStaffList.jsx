@@ -11,8 +11,7 @@ const AllStaffList = () => {
     const navigate = useNavigate();
     const [staffList, setStaffList] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [searchType, setSearchType] = useState('firstname')
-    console.log(staffList);
+    const [searchType, setSearchType] = useState('firstname');
 
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [numberOfPages, setNumberOfPages] = useState(10);

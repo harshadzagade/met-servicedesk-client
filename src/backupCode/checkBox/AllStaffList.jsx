@@ -12,9 +12,8 @@ const AllStaffList = () => {
     const navigate = useNavigate();
     const [staffList, setStaffList] = useState([]);
     const [selectedData, setSelectedData] = useState([]);
-    const [parentCheck, setParentCheck] = useState('')
-    const [childCheck, setChildCheck] = useState('')
-    console.log(selectedData);
+    const [parentCheck, setParentCheck] = useState('');
+    const [childCheck, setChildCheck] = useState('');
 
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [numberOfPages, setNumberOfPages] = useState(10);
