@@ -75,8 +75,16 @@ const UpdateStaffSuperAdminView = props => {
                 text: 'Please change the role first'
             });
         } else {
-            await axios.put(`http://localhost:8001/api/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
-            props.onConfirm();
+            try {
+                await axios.put(`http://localhost:8001/api/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
+                props.onConfirm();
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid fields'
+                });
+            }
         }
     };
 

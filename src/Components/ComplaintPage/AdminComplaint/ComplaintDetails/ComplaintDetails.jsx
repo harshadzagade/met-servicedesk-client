@@ -17,7 +17,7 @@ const ComplaintDetails = (props) => {
 
   return (
     <Modal>
-      <div className={`${classes.staffDetailsHeading}`}>Complaint Details</div>
+      <div className={`${classes.complaintDetailsHeading}`}>Complaint Details</div>
         <div className={`${classes.detailsSubject}`}>{complaintData.subject}</div>
         <div className={`${classes.detailsRole} mt-2`}>Description: {complaintData.description}</div>
         <div className={`${classes.detailsName} mt-2`}>Name: {complaintData.name}</div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classes from './UpdateStaffAdminView.module.css';
 import Modal from '../../../../UI/Modal/Modal';
+import Swal from 'sweetalert2';
 
 const UpdateStaffAdminView = (props) => {
     const id = useParams();
@@ -14,8 +15,16 @@ const UpdateStaffAdminView = (props) => {
 
     useEffect(() => {
         const fetchStaff = async () => {
-            const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${id.staffId}`);
-            setStaff(staff.data.staff);
+            try {
+                const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${id.staffId}`);
+                setStaff(staff.data.staff);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid fields'
+                });
+            }
         };
         fetchStaff();
     }, [id.staffId]);

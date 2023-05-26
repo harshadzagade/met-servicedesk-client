@@ -3,7 +3,6 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './IncomingRequests.module.css';
 import SmallSingleRequest from './SmallSingleRequest/SmallSingleRequest';
 import SingleRequest from './SingleRequest/SingleRequest';
-import RequestDetails from '../RequestDetails/RequestDetails';
 import DepartmentContext from '../../../../Context/DepartmentContext';
 
 const IncomingRequests = () => {
@@ -11,8 +10,6 @@ const IncomingRequests = () => {
     const windowWidth = window.innerWidth;
     const [requestList, setRequestList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
-    const [openDetails, setOpenDetails] = useState(false);
-    const [detailsId, setDetailsId] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -42,25 +39,15 @@ const IncomingRequests = () => {
         }
     }, [departmentCtx.department]);
 
-    const checkOpenDetails = (value, id) => {
-        setOpenDetails(value);
-        setDetailsId(id);
-    };
-
-    const handleUpdateCancel = () => {
-        setOpenDetails(false);
-    };
-
     return (
         <Fragment>
-            {openDetails && <RequestDetails onConfirm={handleUpdateCancel} id={detailsId} />}
             {requestList.length > 0 ?
                 <Fragment>
                     {smallDevice &&
                         <Fragment>
                             {
                                 requestList.map((request) =>
-                                    <SmallSingleRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
+                                    <SmallSingleRequest key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
                                 )
                             }
                         </Fragment>
@@ -83,7 +70,7 @@ const IncomingRequests = () => {
                                 <tbody>
                                     {
                                         requestList.map((request) =>
-                                            <SingleRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} subject={request.subject} name={request.name} department={request.department} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
+                                            <SingleRequest key={request.id} id={request.id} subject={request.subject} name={request.name} department={request.department} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
                                         )
                                     }
                                 </tbody>

@@ -9,7 +9,7 @@ import SingleComplaint from './SingleComplaint/SingleComplaint';
 const IncomingComplaint = () => {
     const departmentCtx = useContext(DepartmentContext);
     const windowWidth = window.innerWidth;
-    const [requestList, setRequestList] = useState([]);
+    const [complaintList, setComplaintList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
     const [openDetails, setOpenDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null);
@@ -30,7 +30,7 @@ const IncomingComplaint = () => {
                 if (list.data.complaints.length === 0) {
                     setErrorMessage('No complaints available')
                 }
-                setRequestList(list.data.complaints);
+                setComplaintList(list.data.complaints);
             } catch (error) {
                 setErrorMessage(`${error.response.data.message}`);
             }
@@ -54,13 +54,13 @@ const IncomingComplaint = () => {
     return (
         <Fragment>
             {openDetails && <ComplaintDetails onConfirm={handleUpdateCancel} id={detailsId} />}
-            {requestList.length > 0 ?
+            {complaintList.length > 0 ?
                 <Fragment>
                     {smallDevice &&
                         <Fragment>
                             {
-                                requestList.map((request) =>
-                                    <SmallSingleComplaint setOpenDetails={checkOpenDetails} key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
+                                complaintList.map((complaint) =>
+                                    <SmallSingleComplaint setOpenDetails={checkOpenDetails} key={complaint.id} id={complaint.id} name={complaint.name} department={complaint.department} subject={complaint.subject} category={complaint.category} priority={complaint.priority} status={complaint.status} approval1={complaint.approval1} approval2={complaint.approval2} />
                                 )
                             }
                         </Fragment>
@@ -80,8 +80,8 @@ const IncomingComplaint = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        requestList.map((request) =>
-                                            <SingleComplaint setOpenDetails={checkOpenDetails} key={request.id} id={request.id} subject={request.subject} name={request.name} department={request.department} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
+                                        complaintList.map((complaint) =>
+                                            <SingleComplaint setOpenDetails={checkOpenDetails} key={complaint.id} id={complaint.id} subject={complaint.subject} name={complaint.name} department={complaint.department} category={complaint.category} priority={complaint.priority} status={complaint.status} approval1={complaint.approval1} approval2={complaint.approval2} />
                                         )
                                     }
                                 </tbody>

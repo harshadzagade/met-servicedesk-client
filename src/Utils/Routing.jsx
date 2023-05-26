@@ -16,6 +16,7 @@ import NewStaff from '../Components/Staff/NewStaff/NewStaff';
 import Complaint from '../Pages/Complaint/Complaint';
 import Services from '../Pages/Services/Services';
 import Request from '../Pages/Request/Request';
+import RequestDetails from '../Components/RequestPage/AdminRequest/RequestDetails/RequestDetails';
 
 const Routing = () => {
     return (
@@ -31,6 +32,7 @@ const Routing = () => {
                 <Route exact path='/trash' element={<Trash />} />
                 <Route exact path='/trash/:staffId' element={<StaffDetailsTrashView />} />
                 <Route exact path='/request' element={<Request />} />
+                <Route exact path='/requestdetails/:requestId' element={<RequestDetails />} />
                 <Route exact path='/complaint' element={<Complaint />} />
                 <Route exact path='/services' element={<Services />} />
             </Routes>

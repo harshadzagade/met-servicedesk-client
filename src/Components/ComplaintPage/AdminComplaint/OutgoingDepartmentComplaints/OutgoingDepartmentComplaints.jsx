@@ -59,8 +59,8 @@ const OutgoingDepartmentComplaints = () => {
                     {smallDevice &&
                         <Fragment>
                             {
-                                complaintList.map((request) =>
-                                    <SmallSingleComplaint setOpenDetails={checkOpenDetails} key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
+                                complaintList.map((complaint) =>
+                                    <SmallSingleComplaint setOpenDetails={checkOpenDetails} key={complaint.id} id={complaint.id} name={complaint.name} department={complaint.department} subject={complaint.subject} category={complaint.category} priority={complaint.priority} status={complaint.status} approval1={complaint.approval1} approval2={complaint.approval2} />
                                 )
                             }
                         </Fragment>
