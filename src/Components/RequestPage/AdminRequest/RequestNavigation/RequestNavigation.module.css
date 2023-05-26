@@ -3,6 +3,6 @@
     justify-content: center;
 }
 
-.ownDepartmentRequests,  .incomingRequests,  .sendRequests {
+.ownDepartmentRequests,  .incomingRequests, .ownRequests,  .sendRequests {
     font-weight: 700;
 }

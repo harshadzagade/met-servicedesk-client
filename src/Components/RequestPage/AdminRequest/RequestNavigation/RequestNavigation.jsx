@@ -11,6 +11,10 @@ const RequestNavigation = (props) => {
         setViewLayout('incomingRequests');
         props.viewLayout('incomingRequests')
     };
+    const handleOwnRequests = () => {
+        setViewLayout('ownRequests');
+        props.viewLayout('ownRequests')
+    };
     const handleSendRequests = () => {
         setViewLayout('sendRequests');
         props.viewLayout('sendRequests')
@@ -19,6 +23,7 @@ const RequestNavigation = (props) => {
         <div className={`${classes.requestNavigation}`}>
             <div className={`btn ${viewLayout === 'outgoingDepartmentRequests'? 'btn-secondary' : 'btn-primary'} mr-3 mt-2 ${classes.ownDepartmentRequests}`} onClick={handleOutgoingDepartmentRequests}>Outgoing Department Requests</div>
             <div className={`btn ${viewLayout === 'incomingRequests'? 'btn-secondary' : 'btn-warning'} mr-3 mt-2 ${classes.incomingRequests}`} onClick={handleIncomingRequests}>Incoming Requests</div>
+            <div className={`btn ${viewLayout === 'ownRequests'? 'btn-secondary' : 'btn-info'} mr-3 mt-2 ${classes.ownRequests}`} onClick={handleOwnRequests}>Own Requests</div>
             <div className={`btn ${viewLayout === 'sendRequests'? 'btn-secondary' : 'btn-success'} mt-2 ${classes.sendRequests}`} onClick={handleSendRequests}>Send Request</div>
         </div>
     );
