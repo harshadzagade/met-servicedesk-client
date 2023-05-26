@@ -14,7 +14,7 @@ const SendRequest = () => {
     const navigate = useNavigate();
 
     const [departmentItems, setDepartmentItems] = useState([]);
-    const [departmentValue, setDepartmentValue] = useState(null);
+    const [departmentValue, setDepartmentValue] = useState('');
     const [isToggled, setIsToggled] = useState(false);
     const [isRepeated, setIsRepeated] = useState(false);
     const [priority, setPriority] = useState('');
