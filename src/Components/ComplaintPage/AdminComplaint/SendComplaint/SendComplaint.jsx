@@ -81,8 +81,8 @@ const SendComplaint = () => {
         try {
             await axios.post('http://localhost:8001/api/complaint/', data);
             Swal.fire(
-                'Request Created!',
-                'You have created request successfully',
+                'Complaint Created!',
+                'You have created complaint successfully',
                 'success'
             );
             navigate('/', { state: { refreshSuperHome: true } });

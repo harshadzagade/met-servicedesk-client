@@ -7,6 +7,7 @@ import SmallSingleComplaint from './SmallSingleComplaint/SmallSingleComplaint';
 import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
 
 const OutgoingDepartmentComplaints = () => {
+    const id = localStorage.getItem('id');
     const adminCtx = useContext(AdminContext);
     const windowWidth = window.innerWidth;
     const [complaintList, setComplaintList] = useState([]);
@@ -26,7 +27,7 @@ const OutgoingDepartmentComplaints = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/staff/admin/complaints/outgoing/${adminCtx.department}`);
+                const list = await axios.get(`http://localhost:8001/api/staff/admin/complaints/outgoing/${id}/${adminCtx.department}`);
                 if (list.data.complaints.length === 0) {
                     setErrorMessage('No complaints available')
                 }
@@ -40,7 +41,7 @@ const OutgoingDepartmentComplaints = () => {
         } else {
             setErrorMessage('Please select department')
         }
-    }, [adminCtx.department]);
+    }, [id, adminCtx.department]);
 
     const checkOpenDetails = (value, id) => {
         setOpenDetails(value);
