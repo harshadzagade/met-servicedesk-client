@@ -5,7 +5,7 @@ import SingleRequest from './SingleComplaint/SingleComplaint';
 import axios from 'axios';
 
 const DepartmentComplaints = () => {
-    const id = localStorage.getItem('id');
+    const department = localStorage.getItem('department');
     const windowWidth = window.innerWidth;
     const [complaintList, setComplaintList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
@@ -22,17 +22,17 @@ const DepartmentComplaints = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/staff/technician/getassignedrequests/${id}`);
-                if (list.data.requests.length === 0) {
+                const list = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${department}`);
+                if (list.data.complaints.length === 0) {
                     setErrorMessage('No requests available')
                 }
-                setComplaintList(list.data.requests);
+                setComplaintList(list.data.complaints);
             } catch (error) {
                 setErrorMessage(`${error.response.data.message}`);
             }
         };
         getList();
-    }, [id]);
+    }, [department]);
 
     return (
         <Fragment>

@@ -58,6 +58,7 @@ const Home = () => {
                             break;
 
                         case 'technician':
+                            localStorage.setItem('department', staff.data.staff.department[0]);
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
                             setIsTechnician(true);
