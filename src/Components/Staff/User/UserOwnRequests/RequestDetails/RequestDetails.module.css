@@ -1,0 +1,84 @@
+.requestDetailsHeading {
+    font-family: "Bahnschrift", Times, serif;
+    margin-left: 6rem;
+    font-weight: 700;
+    font-size: 3rem;
+    text-shadow: 1px 1px 1px gray;
+}
+
+.detailsView {
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.contactDetails .detailsSubject .detailsName, .detailsCategory, .detailsPriority, .detailsRole, .detailsDepartment {
+    font-family: "Bahnschrift", Times, serif;
+}
+
+.detailsSubject {
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.detailsApproval {
+    font-size: 1.3rem;
+    color: #cccccc;
+}
+
+.detailsRole {
+    font-size: 1.25rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.detailsName {
+    font-size: 1.25rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.detailsCategory {
+    font-size: 1.25rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.detailsPriority {
+    font-size: 1.25rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.detailsDepartment {
+    font-size: 1.5rem;
+}
+
+.cancelButton {
+    margin-top: 2rem;
+    margin-left: 14rem;
+    background-color: #ffacac;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .5s ease-in-out;
+}
+
+.cancelButton:hover {
+    background-color: #ff6868;
+}
+
+.cancelButton:focus {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 0 0 0 #007bff00;
+}
+
+.cancelButton:active {
+    background-color: red;
+    color: black;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition-duration: 0.2s;
+    transform: translateX(0px) translateY(2px);
+}

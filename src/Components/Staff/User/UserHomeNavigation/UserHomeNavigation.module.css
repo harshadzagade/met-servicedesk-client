@@ -1,0 +1,8 @@
+.userHomeNavigation {
+    display: flex;
+    justify-content: center;
+}
+
+.ownRequests, .ownComplaints {
+    font-weight: 700;
+}
