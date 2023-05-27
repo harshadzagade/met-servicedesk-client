@@ -1,0 +1,8 @@
+.userHomeNavigation {
+    display: flex;
+    justify-content: center;
+}
+
+.assignedRequests, .departmentComplaints {
+    font-weight: 700;
+}

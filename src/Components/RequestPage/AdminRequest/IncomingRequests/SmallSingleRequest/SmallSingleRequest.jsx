@@ -9,7 +9,7 @@ const SmallSingleRequest = (props) => {
     const adminCtx = useContext(AdminContext);
     const handleRequestClick = () => {
         adminCtx.setApproval('2');
-        navigate(`/requestdetails/${props.id}`);
+        navigate(`/admin/requestdetails/${props.id}`);
     };
     return (
         <Card className={`${classes.smallSingleComponent} mt-2 mx-3 py-2 px-2`} onClick={handleRequestClick}>

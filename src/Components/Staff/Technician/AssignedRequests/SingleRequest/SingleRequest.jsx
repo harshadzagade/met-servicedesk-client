@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const SingleRequest = (props) => {
     const navigate = useNavigate();
     return (
-        <tr className={`${classes.singleTableRow}`} onClick={() => navigate(`/admin/requestdetails/${props.id}`)}>
+        <tr className={`${classes.singleTableRow}`} onClick={() => navigate(`/technician/requestdetails/${props.id}`)}>
             <th scope="row">{props.subject}</th>
             <td>{props.name}</td>
             <td>{props.department}</td>

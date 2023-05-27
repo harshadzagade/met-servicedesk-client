@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const SmallSingleRequest = (props) => {
     const navigate = useNavigate();
     return (
-        <Card className={`${classes.smallSingleComponent} mt-2 mx-3 py-2 px-2`} onClick={() => navigate(`/requestdetails/${props.id}`)}>
+        <Card className={`${classes.smallSingleComponent} mt-2 mx-3 py-2 px-2`} onClick={() => navigate(`/admin/requestdetails/${props.id}`)}>
             <div className={`${classes.leftElements}`}>
                 <div className={`${classes.name}`}>{props.subject}</div>
                 <div className={`${classes.role}`}>{props.category}</div>

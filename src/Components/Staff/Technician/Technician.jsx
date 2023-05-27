@@ -1,8 +1,19 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import AssignedRequests from './AssignedRequests/AssignedRequests';
+import DepartmentComplaints from './DepartmentComplaints/DepartmentComplaints';
+import TechnicianHomeNavigation from './TechnicianHomeNavigation/TechnicianHomeNavigation';
 
 const Technician = () => {
+  const [openLayout, setOpenLayout] = useState('assignedRequests');
+  const checkLayout = (value) => {
+    setOpenLayout(value);
+  };
   return (
-    <Fragment><div>Technician</div></Fragment>
+    <Fragment>
+      <TechnicianHomeNavigation viewLayout={checkLayout} />
+      {openLayout === 'assignedRequests' && <AssignedRequests />}
+      {openLayout === 'departmentComplaints' && <DepartmentComplaints />}
+    </Fragment>
   );
 };
 

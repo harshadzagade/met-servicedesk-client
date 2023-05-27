@@ -8,7 +8,7 @@ const SingleRequest = (props) => {
     const adminCtx = useContext(AdminContext);
     const handleRequestClick = () => {
         adminCtx.setApproval('2');
-        navigate(`/requestdetails/${props.id}`);
+        navigate(`/admin/requestdetails/${props.id}`);
     };
     return (
         <tr className={`${classes.singleTableRow}`} onClick={handleRequestClick}>
