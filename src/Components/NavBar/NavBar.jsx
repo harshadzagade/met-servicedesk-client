@@ -1,9 +1,9 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from '../../Context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import DepartmentContext from '../../Context/DepartmentContext';
+import DepartmentContext from '../../Context/DepartmentContext/DepartmentContext';
 
 const NavBar = (props) => {
   const id = localStorage.getItem('id');

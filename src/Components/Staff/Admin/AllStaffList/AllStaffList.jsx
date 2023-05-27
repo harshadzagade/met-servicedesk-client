@@ -3,7 +3,7 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import SingleStaff from './SingleStaff/SingleStaff';
 import classes from './AllStaffList.module.css';
 import SmallSingleStaff from './SmallSingleStaff/SmallSingleStaff';
-import DepartmentContext from '../../../../Context/DepartmentContext';
+import DepartmentContext from '../../../../Context/DepartmentContext/DepartmentContext';
 
 const AllStaffList = () => {
     const id = localStorage.getItem('id');

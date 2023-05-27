@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './IncomingComplaint.module.css';
-import DepartmentContext from '../../../../Context/DepartmentContext';
+import DepartmentContext from '../../../../Context/DepartmentContext/DepartmentContext';
 import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
 import SmallSingleComplaint from './SmallSingleComplaint/SmallSingleComplaint';
 import SingleComplaint from './SingleComplaint/SingleComplaint';

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import classes from './SingleRequest.module.css';
 import { useNavigate } from 'react-router-dom';
-import DepartmentContext from '../../../../../Context/DepartmentContext';
+import DepartmentContext from '../../../../../Context/DepartmentContext/DepartmentContext';
 
 const SingleRequest = (props) => {
     const navigate = useNavigate();

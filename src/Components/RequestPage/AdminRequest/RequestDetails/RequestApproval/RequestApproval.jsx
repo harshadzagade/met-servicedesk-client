@@ -4,7 +4,7 @@ import classes from './RequestApproval.module.css'
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import DepartmentContext from '../../../../../Context/DepartmentContext';
+import DepartmentContext from '../../../../../Context/DepartmentContext/DepartmentContext';
 
 const RequestApproval = (props) => {
     const loginId = localStorage.getItem('id');

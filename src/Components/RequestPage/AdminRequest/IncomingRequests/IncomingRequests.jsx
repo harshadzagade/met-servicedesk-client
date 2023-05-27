@@ -3,7 +3,7 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './IncomingRequests.module.css';
 import SmallSingleRequest from './SmallSingleRequest/SmallSingleRequest';
 import SingleRequest from './SingleRequest/SingleRequest';
-import DepartmentContext from '../../../../Context/DepartmentContext';
+import DepartmentContext from '../../../../Context/DepartmentContext/DepartmentContext';
 
 const IncomingRequests = () => {
     const departmentCtx = useContext(DepartmentContext);

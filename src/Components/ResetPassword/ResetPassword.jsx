@@ -5,7 +5,7 @@ import SetNewPassword from './SetNewPassword/SetNewPassword';
 import VerifyOTP from './VerifyOTP/VerifyOTP';
 import classes from './ResetPassword.module.css';
 import axios from 'axios';
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from '../../Context/AuthContext/AuthContext';
 
 const ResetPassword = () => {
     const ctx = useContext(AuthContext);

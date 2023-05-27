@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../../NavBar/NavBar';
 import Swal from 'sweetalert2';
 import classes from './NewStaff.module.css';
-import AuthContext from '../../../Context/AuthContext';
+import AuthContext from '../../../Context/AuthContext/AuthContext';
 
 const NewStaff = () => {
     const ctx = useContext(AuthContext);

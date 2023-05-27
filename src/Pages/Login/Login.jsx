@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from '../../Context/AuthContext/AuthContext';
 import classes from './Login.module.css';
 import Swal from 'sweetalert2';
 import METLogo from '../../Images/met-logo.png';

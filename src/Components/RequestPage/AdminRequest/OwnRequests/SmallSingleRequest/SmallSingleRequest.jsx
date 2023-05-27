@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Card from '../../../../UI/Card/Card';
 import classes from './SmallSingleRequest.module.css';
 import { useNavigate } from 'react-router-dom';
-import DepartmentContext from '../../../../../Context/DepartmentContext';
+import DepartmentContext from '../../../../../Context/DepartmentContext/DepartmentContext';
 
 const SmallSingleRequest = (props) => {
     const navigate = useNavigate();
