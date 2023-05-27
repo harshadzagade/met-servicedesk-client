@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './SingleRequest.module.css';
 import { useNavigate } from 'react-router-dom';
+import AdminContext from '../../../../../Context/AdminContext/AdminContext';
 
 const SingleRequest = (props) => {
     const navigate = useNavigate();
+    const adminCtx = useContext(AdminContext);
+    const handleRequestClick = () => {
+        adminCtx.setApproval('1');
+        navigate(`/requestdetails/${props.id}`);
+    };
     return (
-        <tr className={`${classes.singleTableRow}`} onClick={() => navigate(`/requestdetails/${props.id}`, { state: { approval: 1 } })}>
+        <tr className={`${classes.singleTableRow}`} onClick={handleRequestClick}>
             <th scope="row">{props.subject}</th>
             <td>{props.name}</td>
             <td>{props.department}</td>

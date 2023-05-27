@@ -17,7 +17,7 @@ const AdminProvider = props => {
 
     const adminContext = {
         department: department || sessionStorage.getItem('department'),
-        approval: approval,
+        approval: approval || sessionStorage.getItem('approval'),
         setDepartment: setDepartmentHandler,
         setApproval: setApprovalHandler
     };
