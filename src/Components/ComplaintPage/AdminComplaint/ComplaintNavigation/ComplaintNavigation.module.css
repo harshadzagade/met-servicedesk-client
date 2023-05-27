@@ -3,6 +3,6 @@
     justify-content: center;
 }
 
-.ownDepartmentComplaints,  .incomingComplaints,  .sendComplaints {
+.ownDepartmentComplaints, .ownComplaints, .incomingComplaints, .sendComplaints {
     font-weight: 700;
 }
