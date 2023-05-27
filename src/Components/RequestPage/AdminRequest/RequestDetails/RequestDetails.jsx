@@ -5,6 +5,7 @@ import NavBar from '../../../NavBar/NavBar';
 import { useParams, useSearchParams } from 'react-router-dom';
 import RequestApproval from './RequestApproval/RequestApproval';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
+import Swal from 'sweetalert2';
 
 const RequestDetails = () => {
   const adminCtx = useContext(AdminContext);
@@ -41,13 +42,19 @@ const RequestDetails = () => {
   };
 
   const handleApprovalClick = () => {
-    setOpenApproval(true);
     if (adminCtx.department.length !== 0) {
+      setOpenApproval(true);
       if (adminCtx.approval === '1') {
         setSearchParams(`?${new URLSearchParams({ approval: '1' })}`)
       } else if (adminCtx.approval === '2') {
         setSearchParams(`?${new URLSearchParams({ approval: '2' })}`)
       }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Please select department',
+        text: 'Please enter valid fields'
+      });
     }
   };
 

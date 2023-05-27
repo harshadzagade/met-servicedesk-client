@@ -43,6 +43,9 @@ const NavBar = (props) => {
         if (sessionStorage.getItem('department')) {
           sessionStorage.removeItem('department');
         }
+        if (sessionStorage.getItem('approval')) {
+          sessionStorage.removeItem('approval');
+        }
         navigate('/login');
         const Toast = Swal.mixin({
           toast: true,
