@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react';
 import AssignedRequests from './AssignedRequests/AssignedRequests';
 import DepartmentComplaints from './DepartmentComplaints/DepartmentComplaints';
 import TechnicianHomeNavigation from './TechnicianHomeNavigation/TechnicianHomeNavigation';
+import TechnicianOwnComplaints from './TechnicianOwnComplaints/TechnicianOwnComplaints';
+import TechnicianOwnRequests from './TechnicianOwnRequests/TechnicianOwnRequests';
 
 const Technician = () => {
   const [openLayout, setOpenLayout] = useState('assignedRequests');
@@ -13,6 +15,8 @@ const Technician = () => {
       <TechnicianHomeNavigation viewLayout={checkLayout} />
       {openLayout === 'assignedRequests' && <AssignedRequests />}
       {openLayout === 'departmentComplaints' && <DepartmentComplaints />}
+      {openLayout === 'ownRequests' && <TechnicianOwnComplaints />}
+      {openLayout === 'ownComplaints' && <TechnicianOwnRequests />}
     </Fragment>
   );
 };
