@@ -1,8 +1,8 @@
 import React from "react";
 
-const DepartmentContext = React.createContext({
+const AdminContext = React.createContext({
     department: '',
     setDepartment: (department) => { }
 });
 
-export default DepartmentContext;
+export default AdminContext;

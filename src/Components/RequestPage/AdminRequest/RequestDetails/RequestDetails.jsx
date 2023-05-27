@@ -4,10 +4,10 @@ import classes from './RequestDetails.module.css';
 import NavBar from '../../../NavBar/NavBar';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import RequestApproval from './RequestApproval/RequestApproval';
-import DepartmentContext from '../../../../Context/DepartmentContext/DepartmentContext';
+import AdminContext from '../../../../Context/AdminContext/AdminContext';
 
 const RequestDetails = () => {
-  const departmentCtx = useContext(DepartmentContext);
+  const departmentCtx = useContext(AdminContext);
   const paramsId = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const id = paramsId.requestId;

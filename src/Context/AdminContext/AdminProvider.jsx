@@ -1,7 +1,7 @@
 import { useState } from "react";
-import DepartmentContext from "./DepartmentContext";
+import AdminContext from "./AdminContext";
 
-const DepartmentProvider = props => {
+const AdminProvider = props => {
     const [department, setDepartment] = useState('');
 
     const setDepartmentHandler = department => {
@@ -9,13 +9,13 @@ const DepartmentProvider = props => {
         setDepartment(department);
     }
 
-    const departmentContext = {
+    const adminContext = {
         department: department,
         setDepartment: setDepartmentHandler
     };
     return (
-        <DepartmentContext.Provider value={departmentContext}>{props.children}</DepartmentContext.Provider>
+        <AdminContext.Provider value={adminContext}>{props.children}</AdminContext.Provider>
     );
 };
 
-export default DepartmentProvider;
+export default AdminProvider;

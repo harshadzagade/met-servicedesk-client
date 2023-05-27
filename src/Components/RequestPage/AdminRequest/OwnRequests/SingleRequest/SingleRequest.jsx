@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import classes from './SingleRequest.module.css';
 import { useNavigate } from 'react-router-dom';
-import DepartmentContext from '../../../../../Context/DepartmentContext/DepartmentContext';
+import AdminContext from '../../../../../Context/AdminContext/AdminContext';
 
 const SingleRequest = (props) => {
     const navigate = useNavigate();
-    const departmentCtx = useContext(DepartmentContext);
+    const departmentCtx = useContext(AdminContext);
     const [approvalNumber, setApprovalNumber] = useState(1);
     useEffect(() => {
         if (departmentCtx.department === props.department) {

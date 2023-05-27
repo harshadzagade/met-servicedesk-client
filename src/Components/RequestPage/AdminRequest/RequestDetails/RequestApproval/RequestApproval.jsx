@@ -4,12 +4,12 @@ import classes from './RequestApproval.module.css'
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import DepartmentContext from '../../../../../Context/DepartmentContext/DepartmentContext';
+import AdminContext from '../../../../../Context/AdminContext/AdminContext';
 
 const RequestApproval = (props) => {
     const loginId = localStorage.getItem('id');
     const navigate = useNavigate();
-    const departmentCtx = useContext(DepartmentContext);
+    const departmentCtx = useContext(AdminContext);
     const { search } = useLocation();
     const id = useParams();
     const approvalCommentRef = useRef();

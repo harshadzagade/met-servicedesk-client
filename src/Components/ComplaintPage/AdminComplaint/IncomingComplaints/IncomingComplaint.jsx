@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './IncomingComplaint.module.css';
-import DepartmentContext from '../../../../Context/DepartmentContext/DepartmentContext';
+import AdminContext from '../../../../Context/AdminContext/AdminContext';
 import ComplaintDetails from '../ComplaintDetails/ComplaintDetails';
 import SmallSingleComplaint from './SmallSingleComplaint/SmallSingleComplaint';
 import SingleComplaint from './SingleComplaint/SingleComplaint';
 
 const IncomingComplaint = () => {
-    const departmentCtx = useContext(DepartmentContext);
+    const departmentCtx = useContext(AdminContext);
     const windowWidth = window.innerWidth;
     const [complaintList, setComplaintList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);

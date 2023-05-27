@@ -3,11 +3,11 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './OutgoingDepartmentRequests.module.css';
 import SmallSingleRequest from './SmallSingleRequest/SmallSingleRequest';
 import SingleRequest from './SingleRequest/SingleRequest';
-import DepartmentContext from '../../../../Context/DepartmentContext/DepartmentContext';
+import AdminContext from '../../../../Context/AdminContext/AdminContext';
 
 const OutgoingDepartmentRequests = () => {
     const id = localStorage.getItem('id');
-    const departmentCtx = useContext(DepartmentContext);
+    const departmentCtx = useContext(AdminContext);
     const windowWidth = window.innerWidth;
     const [requestList, setRequestList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);

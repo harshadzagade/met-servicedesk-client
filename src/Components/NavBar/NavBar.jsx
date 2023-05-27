@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from '../../Context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import DepartmentContext from '../../Context/DepartmentContext/DepartmentContext';
+import AdminContext from '../../Context/AdminContext/AdminContext';
 
 const NavBar = (props) => {
   const id = localStorage.getItem('id');
@@ -17,7 +17,7 @@ const NavBar = (props) => {
   const [departments, setDepartments] = useState([]);
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  const departmentCtx = useContext(DepartmentContext);
+  const departmentCtx = useContext(AdminContext);
 
   useEffect(() => {
     const getDepartments = async () => {

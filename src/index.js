@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import AuthProvider from './Context/AuthContext/AuthProvider';
-import DepartmentProvider from './Context/DepartmentContext/DepartmentProvider';
+import AdminProvider from './Context/AdminContext/AdminProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider><DepartmentProvider><App /></DepartmentProvider></AuthProvider>
+    <AuthProvider><AdminProvider><App /></AdminProvider></AuthProvider>
   </React.StrictMode>
 );
