@@ -7,7 +7,7 @@ import RequestApproval from './RequestApproval/RequestApproval';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
 
 const RequestDetails = () => {
-  const departmentCtx = useContext(AdminContext);
+  const adminCtx = useContext(AdminContext);
   const paramsId = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const id = paramsId.requestId;
@@ -35,7 +35,7 @@ const RequestDetails = () => {
 
   const handleApprovalClick = () => {
     setOpenApproval(true);
-    if (departmentCtx.department.length !== 0) {
+    if (adminCtx.department.length !== 0) {
       if (state.approval === 1) {
         setSearchParams(`?${new URLSearchParams({ approval: '1' })}`)
       } else if (state.approval === 2) {

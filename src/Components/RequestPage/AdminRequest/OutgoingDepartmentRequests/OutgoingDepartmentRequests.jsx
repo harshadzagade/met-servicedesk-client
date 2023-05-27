@@ -7,7 +7,7 @@ import AdminContext from '../../../../Context/AdminContext/AdminContext';
 
 const OutgoingDepartmentRequests = () => {
     const id = localStorage.getItem('id');
-    const departmentCtx = useContext(AdminContext);
+    const adminCtx = useContext(AdminContext);
     const windowWidth = window.innerWidth;
     const [requestList, setRequestList] = useState([]);
     const [smallDevice, setSmallDevice] = useState(false);
@@ -24,7 +24,7 @@ const OutgoingDepartmentRequests = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoing/${id}/${departmentCtx.department}`);
+                const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoing/${id}/${adminCtx.department}`);
                 if (list.data.requests.length === 0) {
                     setErrorMessage('No requests available')
                 }
@@ -33,12 +33,12 @@ const OutgoingDepartmentRequests = () => {
                 setErrorMessage(`${error.response.data.message}`);
             }
         };
-        if (departmentCtx.department) {
+        if (adminCtx.department) {
             getList();
         } else {
             setErrorMessage('Please select department')
         }
-    }, [id, departmentCtx.department]);
+    }, [id, adminCtx.department]);
 
     return (
         <Fragment>

@@ -2,7 +2,9 @@ import React from "react";
 
 const AdminContext = React.createContext({
     department: '',
-    setDepartment: (department) => { }
+    approval: '',
+    setDepartment: (department) => { },
+    setApproval: (approval) => { }
 });
 
 export default AdminContext;

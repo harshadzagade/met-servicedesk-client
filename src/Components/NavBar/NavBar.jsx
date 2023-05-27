@@ -17,7 +17,7 @@ const NavBar = (props) => {
   const [departments, setDepartments] = useState([]);
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  const departmentCtx = useContext(AdminContext);
+  const adminCtx = useContext(AdminContext);
 
   useEffect(() => {
     const getDepartments = async () => {
@@ -138,7 +138,7 @@ const NavBar = (props) => {
   }, [props, id]);
 
   const handleDepartmentClick = (department) => {
-    departmentCtx.setDepartment(department);
+    adminCtx.setDepartment(department);
   };
 
   return (
@@ -171,7 +171,7 @@ const NavBar = (props) => {
               staffInfo.role === 'admin' &&
               <div className="btn-group dropleft mr-3">
                 <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {departmentCtx.department === '' ? 'Department' : departmentCtx.department}
+                  {adminCtx.department === '' ? 'Department' : adminCtx.department}
                 </button>
                 <div className="dropdown-menu">
                   {

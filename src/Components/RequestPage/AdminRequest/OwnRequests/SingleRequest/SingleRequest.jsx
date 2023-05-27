@@ -5,15 +5,15 @@ import AdminContext from '../../../../../Context/AdminContext/AdminContext';
 
 const SingleRequest = (props) => {
     const navigate = useNavigate();
-    const departmentCtx = useContext(AdminContext);
+    const adminCtx = useContext(AdminContext);
     const [approvalNumber, setApprovalNumber] = useState(1);
     useEffect(() => {
-        if (departmentCtx.department === props.department) {
+        if (adminCtx.department === props.department) {
             setApprovalNumber(2);
         } else {
             setApprovalNumber(1);
         }
-    }, [approvalNumber, departmentCtx.department, props.department]);
+    }, [approvalNumber, adminCtx.department, props.department]);
     return (
         <tr className={`${classes.singleTableRow}`} onClick={() => navigate(`/requestdetails/${props.id}`, { state: { approval: approvalNumber } })}>
             <th scope="row">{props.subject}</th>

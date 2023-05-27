@@ -9,7 +9,7 @@ import AdminContext from '../../../../../Context/AdminContext/AdminContext';
 const RequestApproval = (props) => {
     const loginId = localStorage.getItem('id');
     const navigate = useNavigate();
-    const departmentCtx = useContext(AdminContext);
+    const adminCtx = useContext(AdminContext);
     const { search } = useLocation();
     const id = useParams();
     const approvalCommentRef = useRef();
@@ -39,7 +39,7 @@ const RequestApproval = (props) => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technicians = await axios.get(`http://localhost:8001/api/staff/admin/admindepartmenttechnicians/${loginId}/${departmentCtx.department}`);
+                const technicians = await axios.get(`http://localhost:8001/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 navigate('/request');
@@ -51,7 +51,7 @@ const RequestApproval = (props) => {
             }
         };
         getTechnicians();
-    }, [loginId, departmentCtx.department, navigate]);
+    }, [loginId, adminCtx.department, navigate]);
 
     const handleSubmitClick = async (e, id) => {
         e.preventDefault();
