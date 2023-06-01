@@ -35,7 +35,7 @@ const AllStaffList = () => {
     return (
         <Fragment>
             {
-                staffList.length > 2 ?
+                staffList.length > 0 ?
                 <Fragment>
                     <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                     <table className={`${classes.tableParent}`}>
