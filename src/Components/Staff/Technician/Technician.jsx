@@ -15,8 +15,8 @@ const Technician = () => {
       <TechnicianHomeNavigation viewLayout={checkLayout} />
       {openLayout === 'assignedRequests' && <AssignedRequests />}
       {openLayout === 'departmentComplaints' && <DepartmentComplaints />}
-      {openLayout === 'ownRequests' && <TechnicianOwnComplaints />}
-      {openLayout === 'ownComplaints' && <TechnicianOwnRequests />}
+      {openLayout === 'ownRequests' && <TechnicianOwnRequests />}
+      {openLayout === 'ownComplaints' && <TechnicianOwnComplaints />}
     </Fragment>
   );
 };
