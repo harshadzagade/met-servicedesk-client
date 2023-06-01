@@ -111,7 +111,7 @@ const RequestApproval = (props) => {
                         <option key='0' value='' hidden defaultValue='' className={`${classes.approvalOption}`}>Assign to technician</option>
                         {
                             technicians.map((technician) =>
-                                <option key={technician.id} className={`${classes.roleOption}`} value={technician.id}>{technician.firstname}</option>
+                                <option key={technician.id} className={`${classes.roleOption}`} value={technician.id}>{technician.firstname + ' ' + technician.lastname}</option>
                             )
                         }
                     </select>

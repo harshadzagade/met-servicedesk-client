@@ -47,7 +47,7 @@ const RequestDetails = () => {
           <div className={`${classes.detailsContact} mt-2`}>HOD Approval: {requestData.approval1 === 1 ? 'approved' : 'not approved'}</div>
           <div className={`${classes.detailsContact} mt-2`}>Admin Approval: {requestData.approval2 === 1 ? 'approved' : 'not approved'}</div>
         </div>
-        <button className={`btn mt-3 ${classes.updateButton}`} onClick={handleUpdateClick}>Approve/Disapprove Request</button>
+        <button className={`btn mt-3 ${classes.updateButton}`} onClick={handleUpdateClick}>Change Request Status</button>
       </div>
     </Fragment>
   );
