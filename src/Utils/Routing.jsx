@@ -36,7 +36,7 @@ const Routing = () => {
                 <Route exact path='/request' element={<Request />} />
                 <Route exact path='admin/requestdetails/:requestId' element={<AdminRequestDetails />} />
                 <Route exact path='technician/requestdetails/:requestId' element={<TechnicianRequestDetails />} />
-                <Route exact path='technician/complaintdetails/:requestId' element={<ComplaintDetails />} />
+                <Route exact path='technician/complaintdetails/:complaintId' element={<ComplaintDetails />} />
                 <Route exact path='/complaint' element={<Complaint />} />
                 <Route exact path='/services' element={<Services />} />
             </Routes>

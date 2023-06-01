@@ -81,7 +81,7 @@ const ComplaintUpdate = (props) => {
 
     return (
         <Modal>
-            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
+            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.complaintId)}>
                 <div className={`${classes.updateStatusHeading}`}>Status Change</div>
                 <select className={`${classes.statusSelect} form-control`} name="role" required onChange={(e) => setStatus(e.target.value)}>
                     <option key='0' value='' hidden defaultValue='' className={`${classes.statusOption}`}>Set Approval Status</option>

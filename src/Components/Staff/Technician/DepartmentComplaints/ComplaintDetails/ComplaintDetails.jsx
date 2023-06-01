@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 const ComplaintDetails = () => {
   const ownId = localStorage.getItem('id');
   const paramsId = useParams();
-  const id = paramsId.requestId;
+  const id = paramsId.complaintId;
   const [complaintData, setComplaintData] = useState({});
   const [openComplaintUpdate, setOpenComplaintUpdate] = useState(false);
   const [refresh, setRefresh] = useState(false);
