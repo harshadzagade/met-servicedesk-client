@@ -1,4 +1,4 @@
-.updateApprovalHeading {
+.updateStatusHeading {
     font-family: "Bahnschrift", Times, serif;
     margin-left: 2.5rem;
     font-weight: 700;
@@ -6,7 +6,7 @@
     text-shadow: 1px 1px 1px gray;
 }
 
-.approvalSelect {
+.statusSelect {
     align-self: center;
     width: 265px;
     border-width: 1px;
@@ -17,7 +17,7 @@
     transition: all .3s ease-in-out;
 }
 
-.updateApprovalInput {
+.updateStatusInput {
     align-self: center;
     width: 265px;
     border-width: 1px;
@@ -32,20 +32,20 @@
     .updateStaffHeading {
         margin-left: 6.5rem;
     }
-    .approvalSelect {
+    .statusSelect {
         width: 400px;
     }
-    .updateApprovalInput {
+    .updateStatusInput {
         width: 400px;
     }
 }
 
-.updateApprovalInput:focus {
+.updateStatusInput:focus {
     border-color: lightskyblue;
     box-shadow: 1px 1px 2px gray;
 }
 
-.approvalSelect:focus {
+.statusSelect:focus {
     border-color: lightskyblue;
     box-shadow: 1px 1px 2px gray;
 }

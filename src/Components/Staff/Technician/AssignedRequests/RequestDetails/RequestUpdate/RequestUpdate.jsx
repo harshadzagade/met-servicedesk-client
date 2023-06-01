@@ -13,7 +13,6 @@ const RequestUpdate = (props) => {
     const navigate = useNavigate();
     const id = useParams();
     const [technicians, setTechnicians] = useState([]);
-    console.log(technicians);
     const [technicianId, setTechnicianId] = useState(null);
     const [isClosed, setIsClosed] = useState(false);
     const [isForwarded, setIsForwarded] = useState(false);
