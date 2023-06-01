@@ -36,8 +36,8 @@ const ComplaintUpdate = (props) => {
 
     return (
         <Modal>
-            <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
-                {/* <div className={`${classes.updateApprovalHeading}`}>Approval</div>
+            {/* <form method="GET" onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
+                <div className={`${classes.updateApprovalHeading}`}>Change Status</div>
                 <select className={`${classes.approvalSelect} form-control`} name="role" required onChange={handleChange}>
                     <option key='0' value='' hidden defaultValue='' className={`${classes.approvalOption}`}>Set Approval Status</option>
                     <option key='1' value='approve' className={`${classes.approvalOption}`}>Approve</option>
@@ -58,8 +58,8 @@ const ComplaintUpdate = (props) => {
                 <div className={`${classes.updateLayoutButtons}`}>
                     <button type="submit" className={`btn ${classes.updateButton}`}>Submit</button>
                     <button className={`btn ${classes.cancelButton}`} onClick={props.onConfirm}>Cancel</button>
-                </div> */}
-            </form>
+                </div>
+            </form> */}
         </Modal>
     );
 };

@@ -1,4 +1,4 @@
-.staffDetailsHeading {
+.complaintDetailsHeading {
     font-family: "Bahnschrift", Times, serif;
     font-weight: 700;
     font-size: 3rem;
@@ -13,24 +13,13 @@
     box-shadow: 0px 1px 8px gray;
 }
 
-.requestDetails .detailsName, .detailsEmail, .detailsRole, .detailsDepartment {
+.detailsName, .detailsEmail, .detailsRole, .detailsDepartment {
     font-family: "Bahnschrift", Times, serif;
 }
 
 .detailsName {
     font-size: 3rem;
     font-weight: 400;
-}
-
-.requestDetails {
-    box-shadow: inset 1px 1px 8px #1f1f1f;
-    font-size: 2rem;
-    color: white;
-    font-weight: 500;
-    background-color: #242444;
-    border-radius: 1.5rem;
-    margin-top: 1rem;
-    padding: 1rem;
 }
 
 .detailsContact {
@@ -77,30 +66,37 @@
     transform: translateX(0px) translateY(2px);
 }
 
-.deleteButton {
-    background-color: #ffacac;
+.selfAssignButton {
+    background-color: lightgreen;
     font-size: 18px;
     font-weight: 600;
     box-shadow: 1px 1px 1px 1px gray;
     transition: all .5s ease-in-out;
+    margin-right: 10px;
 }
 
-.deleteButton:hover {
-    background-color: #ff6868;
+.selfAssignButton:hover {
+    background-color: #3dff3d;
 }
 
-.deleteButton:focus {
+.selfAssignButton:focus {
     outline: 0;
     outline-color: transparent;
     outline-width: 0;
     outline-style: none;
-    box-shadow: 0 0 0 0 #007bff00;
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
 }
 
-.deleteButton:active {
-    background-color: red;
+.selfAssignButton:active {
+    background-color: #00ff00;
     color: black;
     box-shadow: 1px 1px 1px 1px gray;
     transition-duration: 0.2s;
     transform: translateX(0px) translateY(2px);
+}
+
+.alreadyAssignedText {
+    font-size: large;
+    font-weight: 500;
+    margin-top: 1rem;
 }
