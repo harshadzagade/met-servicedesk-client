@@ -90,3 +90,22 @@
 .childCheckbox {
     cursor: pointer;
 }
+
+.searchInput {
+    margin-left: -5rem;
+    border-radius: 5px;
+    background: rgb(249, 250, 250);
+    border: 1px solid rgb(181, 189, 196);
+    font-size: 16px;
+    height: 35px;
+    width: 20rem;
+    line-height: 24px;
+    padding: 7px 8px;
+    color: #08090a;
+    box-shadow: none;
+    :focus{
+        background-color: #fff;
+        border-color: #3b49df;
+        box-shadow: 1px 1px 0 #3b49df;
+    }
+}
