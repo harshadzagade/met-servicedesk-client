@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import SweetPagination from 'sweetpagination';
 import Swal from 'sweetalert2';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import CustomCheckbox from '../../../UI/Checkbox/CustomCheckbox';
 
 const AllStaffList = () => {
     const id = localStorage.getItem('id');
@@ -16,6 +17,42 @@ const AllStaffList = () => {
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [refresh, setRefresh] = useState(false);
+    const [selectedStaff, setSelectedStaff] = useState([]);
+    const [showDeleteButton, setShowDeleteButton] = useState(false);
+
+    useEffect(() => {
+        if (selectedStaff.length !== 0) {
+            setShowDeleteButton(true);
+        } else {
+            setShowDeleteButton(false);
+        }
+    }, [selectedStaff]);
+
+    const handleCheckboxChange = (event, staff) => {
+        const isChecked = event.target.checked;
+        setSelectedStaff(prevSelectedItems => {
+            if (isChecked) {
+                return [...prevSelectedItems, staff];
+            } else {
+                return prevSelectedItems.filter(id => id !== staff);
+            }
+        });
+    };
+
+    const handleMultipleDelete = async () => {
+        try {
+            if (selectedStaff.length !== 0) {
+                await axios.delete('http://localhost:8001/api/staff/superadmin/deletemultiple', { data: selectedStaff });
+                setRefresh(true);
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: `${error.response.data.message}`,
+                text: 'Please enter valid credentials'
+            });
+        }
+    };
 
     useEffect(() => {
         const getList = async () => {
@@ -94,6 +131,7 @@ const AllStaffList = () => {
                         <table className={`${classes.tableParent}`}>
                             <thead className={`${classes.tableHeader}`}>
                                 <tr className={`${classes.tableRow}`}>
+                                    <th className={`${classes.tableHead}`} scope="col">Select Staff</th>
                                     <th className={`${classes.tableHead}`} scope="col">Name</th>
                                     <th className={`${classes.tableHead}`} scope="col">E-Mail</th>
                                     <th className={`${classes.tableHead}`} scope="col">Role</th>
@@ -104,6 +142,12 @@ const AllStaffList = () => {
                                 {
                                     currentPageData.length > 0 && currentPageData.map((field) => (
                                         <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id}>
+                                            <td>
+                                                <CustomCheckbox
+                                                    checked={selectedStaff.includes(field)}
+                                                    onChange={event => handleCheckboxChange(event, field)}
+                                                />
+                                            </td>
                                             <td className={`${classes.tableData}`} data-label="name" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.firstname + ' ' + field.lastname}</td>
                                             <td className={`${classes.tableData}`} data-label="email" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.email}</td>
                                             <td className={`${classes.tableData}`} data-label="role" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.role}</td>
@@ -114,12 +158,15 @@ const AllStaffList = () => {
                             </tbody>
                         </table>
 
+                        {showDeleteButton && <button className={`btn btn-danger ${classes.multiDeleteButton}`} onClick={handleMultipleDelete}>Delete Rows</button>}
+
                         <SweetPagination
                             currentPageData={setCurrentPageData}
                             dataPerPage={numberOfPages}
                             getData={allStaffList}
                             navigation={true}
                         />
+
                     </Fragment>
                     :
                     <div className={`${classes.homeNoData}`}>No staff added</div>

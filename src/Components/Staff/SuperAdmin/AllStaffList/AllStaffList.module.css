@@ -103,9 +103,16 @@
     padding: 7px 8px;
     color: #08090a;
     box-shadow: none;
-    :focus{
+    :focus {
         background-color: #fff;
         border-color: #3b49df;
         box-shadow: 1px 1px 0 #3b49df;
     }
+}
+
+.multiDeleteButton {
+    display: flex;
+    position: absolute;
+    margin-top: 0.6rem;
+    margin-left: 1rem;
 }
