@@ -14,11 +14,9 @@ const SmallSingleStaffComplaint = (props) => {
                 <div className={`${classes.department} badge badge-dark`}>{props.department}</div>
             </div>
             <div className={`${classes.rightElements}`}>
-                <div className={`text-secondary ${classes.email}`}>HOD Approval: {props.approval1 === 1? 'approved' : 'not approved'}</div>
                 <div className={`${classes.department} badge badge-danger`}>{props.status}</div>
             </div>
             <div className={`${classes.rightElements}`}>
-                <div className={`text-secondary ${classes.email}`}>Admin Approval: {props.approval2 === 1? 'approved' : 'not approved'}</div>
                 <div className={`${classes.department} badge badge-primary`}>{props.priority}</div>
             </div>
         </Card>

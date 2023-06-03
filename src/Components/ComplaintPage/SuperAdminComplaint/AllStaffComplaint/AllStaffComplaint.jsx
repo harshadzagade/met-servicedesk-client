@@ -62,8 +62,6 @@ const AllStaffComplaint = () => {
                                         <th scope="col">Category</th>
                                         <th scope="col">Priority</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">HOD Approval</th>
-                                        <th scope="col">Admin Approval</th>
                                     </tr>
                                 </thead>
                                 <tbody>

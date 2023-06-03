@@ -10,8 +10,6 @@ const SingleStaffComplaint = (props) => {
             <td>{props.category}</td>
             <td>{props.priority}</td>
             <td>{props.status}</td>
-            <td>{props.approval1 === 1? 'approved' : 'not approved'}</td>
-            <td>{props.approval2 === 1? 'approved' : 'not approved'}</td>
         </tr>
     );
 };
