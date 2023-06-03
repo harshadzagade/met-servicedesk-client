@@ -19,6 +19,7 @@ const AllStaffList = () => {
     const [refresh, setRefresh] = useState(false);
     const [selectedStaff, setSelectedStaff] = useState([]);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
+    console.log(selectedStaff);
 
     useEffect(() => {
         if (selectedStaff.length !== 0) {
@@ -40,18 +41,33 @@ const AllStaffList = () => {
     };
 
     const handleMultipleDelete = async () => {
-        try {
-            if (selectedStaff.length !== 0) {
-                await axios.delete('http://localhost:8001/api/staff/superadmin/deletemultiple', { data: selectedStaff });
-                setRefresh(true);
+        Swal.fire({
+            title: 'Delete Staff?',
+            text: "Your staff will be moved to archive",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (selectedStaff.length !== 0) {
+                    axios.delete('http://localhost:8001/api/staff/superadmin/deletemultiple', { data: selectedStaff });
+                    setRefresh(true);
+                }
+                Swal.fire(
+                    'Staff Deleted!',
+                    'You have deleted staff successfully',
+                    'success'
+                )
             }
-        } catch (error) {
+        }).catch((error) => {
             Swal.fire({
                 icon: 'error',
                 title: `${error.response.data.message}`,
-                text: 'Please enter valid credentials'
+                text: 'Unable to delete staff'
             });
-        }
+        });
     };
 
     useEffect(() => {
