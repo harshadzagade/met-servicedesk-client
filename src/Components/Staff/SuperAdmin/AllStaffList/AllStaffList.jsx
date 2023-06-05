@@ -19,7 +19,6 @@ const AllStaffList = () => {
     const [refresh, setRefresh] = useState(false);
     const [selectedStaff, setSelectedStaff] = useState([]);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
-    console.log(selectedStaff);
 
     useEffect(() => {
         if (selectedStaff.length !== 0) {
@@ -126,7 +125,6 @@ const AllStaffList = () => {
 
     return (
         <Fragment>
-
             <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
             <div className='mt-3'>
                 <input type="text" className={`${classes.searchInput}`} onChange={(e) => setSearchText(e.target.value)} />
