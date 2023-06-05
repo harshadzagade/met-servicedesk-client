@@ -32,7 +32,6 @@
 .row {
     cursor: pointer;
     flex-grow: 1;
-    background-color: #6767c7;
     padding: 10px;
     text-align: left;
     color: white;
@@ -43,6 +42,14 @@
     margin-inline: 0.3rem;
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
     display: flex;
+}
+
+.rowColorDefault {
+    background-color: #6767c7;
+}
+
+.rowColorActive {
+    background-color: #131350;
 }
 
 .row:hover {
