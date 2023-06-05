@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import classes from './Sidebar.module.css';
+import AllStaffList from '../../Staff/SuperAdmin/AllStaffList/AllStaffList';
 
 const Sidebar = ({children}) => {
     const [showDepartments, setShowDepartments] = useState(false);
@@ -111,7 +112,7 @@ const Sidebar = ({children}) => {
                     </div>
                 </div>
             </div>
-            <div>{children}</div>
+            <main className={`${classes.mainData}`}>{children}</main>
         </div>
     );
 };

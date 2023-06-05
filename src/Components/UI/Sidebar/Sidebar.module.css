@@ -1,6 +1,7 @@
 .fullScreen {
     background-color: #ececec;
     height: 100vh;
+    display: flex;
 }
 
 .sidebar {
@@ -115,4 +116,8 @@
 
 .singleDepartment:hover {
     background-color: #5757e9;
+}
+
+.mainData {
+    width: 160vh;
 }
