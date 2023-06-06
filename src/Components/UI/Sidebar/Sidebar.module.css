@@ -5,7 +5,7 @@
 }
 
 .sidebar {
-    background-color: #434396;
+    background-color: #b4b4b4;
     z-index: 10;
     width: 35vh;
     height: 100vh;
@@ -15,7 +15,7 @@
 }
 
 .heading {
-    color: white;
+    color: black;
     font-size: x-large;
     font-weight: 500;
     font-family: "Bahnschrift", Times, serif;
@@ -34,7 +34,6 @@
     flex-grow: 1;
     padding: 10px;
     text-align: left;
-    color: white;
     font-size: large;
     font-weight: 500;
     padding-top: 1.35rem;
@@ -46,15 +45,17 @@
 }
 
 .rowColorDefault {
-    background-color: #6767c7;
+    background-color: #a0a0a0;
+    color: black;
 }
 
 .rowColorActive {
-    background-color: #131350;
+    background-color: #dfdfdf;
+    color: black;
 }
 
 .row:hover {
-    background-color: #2c2c79;
+    background-color: #7c7c7c;
 }
 
 .icon {

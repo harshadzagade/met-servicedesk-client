@@ -127,9 +127,9 @@ const AllStaffList = () => {
         <Fragment>
             <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
             <div className='mt-3'>
-                <input type="text" className={`${classes.searchInput}`} onChange={(e) => setSearchText(e.target.value)} />
+                <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />
                 <div className="btn-group mb-1">
-                    <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {searchType}
                     </button>
                     <div className="dropdown-menu">
