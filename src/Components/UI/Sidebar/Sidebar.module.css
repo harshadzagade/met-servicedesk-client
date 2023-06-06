@@ -25,7 +25,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    height: 50vh;
+    height: fit-content;
     margin-top: 1rem;
 }
 
@@ -38,6 +38,7 @@
     font-size: large;
     font-weight: 500;
     padding-top: 1.35rem;
+    padding-bottom: 1.35rem;
     margin-top: 0.2rem;
     margin-inline: 0.3rem;
     border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
