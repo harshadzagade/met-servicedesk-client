@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
+// import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SuperAdminRequest from '../../Components/RequestPage/SuperAdminRequest/SuperAdminRequest';
 import AdminRequest from '../../Components/RequestPage/AdminRequest/AdminRequest';
@@ -79,7 +79,7 @@ const Request = () => {
 
     return (
         <Fragment>
-            <NavBar tab={'request'} />
+            {/* <NavBar tab={'request'} /> */}
             {isSuperAdmin && <SuperAdminRequest />}
             {isAdmin && <AdminRequest />}
             {isTechnician && <TechnicianRequest />}

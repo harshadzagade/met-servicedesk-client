@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
+// import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SuperAdmin from '../../Components/Staff/SuperAdmin/SuperAdmin';
 import Admin from '../../Components/Staff/Admin/Admin';
@@ -85,7 +85,7 @@ const Home = () => {
 
     return (
         <Fragment>
-            <NavBar tab={'none'} />
+            {/* <NavBar tab={'none'} /> */}
             {isSuperAdmin && <SuperAdmin />}
             {isAdmin && <Admin />}
             {isTechnician && <Technician />}

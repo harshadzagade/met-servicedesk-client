@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../../../NavBar/NavBar';
+// import NavBar from '../../../NavBar/NavBar';
 import Swal from 'sweetalert2';
 import classes from './CreateStaff.module.css';
 
@@ -80,7 +80,7 @@ const CreateStaff = () => {
     };
     return (
         <Fragment>
-            <NavBar tab={'create'} />
+            {/* <NavBar tab={'create'} /> */}
             <div className={`${classes.createStaffHeading}`}>Create Staff</div>
             <form className={`d-inline-block ${classes.createStaffForm}`} method="POST" onSubmit={handleSubmitClick}>
                 <div className={`d-inline-flex`}>

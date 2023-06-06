@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../../NavBar/NavBar';
+// import NavBar from '../../../NavBar/NavBar';
 import AllStaffList from './AllStaffList/AllStaffList';
 import { useLocation } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ const Trash = () => {
     }, [refresh, location]);
     return (
         <Fragment>
-            <NavBar tab={'trash'} />
+            {/* <NavBar tab={'trash'} /> */}
             <AllStaffList />
         </Fragment>
     );

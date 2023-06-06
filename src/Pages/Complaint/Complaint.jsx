@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
+// import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SuperAdminComplaint from '../../Components/ComplaintPage/SuperAdminComplaint/SuperAdminComplaint';
 import AdminComplaint from '../../Components/ComplaintPage/AdminComplaint/AdminComplaint';
@@ -84,7 +84,7 @@ const Complaint = () => {
     
     return (
         <Fragment>
-            <NavBar tab={'complaint'} />
+            {/* <NavBar tab={'complaint'} /> */}
             {isSuperAdmin && <SuperAdminComplaint />}
             {isAdmin && <AdminComplaint />}
             {isTechnician && <TechnicianComplaint />}

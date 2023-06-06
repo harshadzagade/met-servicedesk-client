@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
+// import NavBar from '../../Components/NavBar/NavBar';
 import AllContactsList from './AllContactsList/AllContactsList';
 
 const Services = () => {
     return (
         <Fragment>
-            <NavBar tab={'services'} />
+            {/* <NavBar tab={'services'} /> */}
             <AllContactsList />
         </Fragment>
     );
