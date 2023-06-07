@@ -5,6 +5,7 @@ import OutgoingDepartmentRequests from './OutgoingDepartmentRequests/OutgoingDep
 import IncomingRequests from './IncomingRequests/IncomingRequests';
 import SendRequest from './SendRequest/SendRequest';
 import OwnRequests from './OwnRequests/OwnRequests';
+import classes from './AdminRequest.module.css';
 
 const AdminRequest = () => {
     const [openLayout, setOpenLayout] = useState('outgoingDepartmentRequests');
@@ -14,10 +15,12 @@ const AdminRequest = () => {
     return (
         <Fragment>
             <RequestNavigation viewLayout={checkLayout} />
-            {openLayout === 'outgoingDepartmentRequests' && <OutgoingDepartmentRequests />}
-            {openLayout === 'incomingRequests' && <IncomingRequests />}
-            {openLayout === 'ownRequests' && <OwnRequests />}
-            {openLayout === 'sendRequests' && <SendRequest />}
+            <div className={`${classes.container}`}>
+                {openLayout === 'outgoingDepartmentRequests' && <OutgoingDepartmentRequests />}
+                {openLayout === 'incomingRequests' && <IncomingRequests />}
+                {openLayout === 'ownRequests' && <OwnRequests />}
+                {openLayout === 'sendRequests' && <SendRequest />}
+            </div>
         </Fragment>
     );
 };

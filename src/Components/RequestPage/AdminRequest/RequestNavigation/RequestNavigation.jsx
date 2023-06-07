@@ -21,10 +21,10 @@ const RequestNavigation = (props) => {
     };
     return (
         <div className={`${classes.requestNavigation}`}>
-            <div className={`btn ${viewLayout === 'outgoingDepartmentRequests'? 'btn-secondary' : 'btn-primary'} mr-3 mt-2 ${classes.ownDepartmentRequests}`} onClick={handleOutgoingDepartmentRequests}>Outgoing Department Requests</div>
-            <div className={`btn ${viewLayout === 'incomingRequests'? 'btn-secondary' : 'btn-warning'} mr-3 mt-2 ${classes.incomingRequests}`} onClick={handleIncomingRequests}>Incoming Requests</div>
-            <div className={`btn ${viewLayout === 'ownRequests'? 'btn-secondary' : 'btn-info'} mr-3 mt-2 ${classes.ownRequests}`} onClick={handleOwnRequests}>Own Requests</div>
-            <div className={`btn ${viewLayout === 'sendRequests'? 'btn-secondary' : 'btn-success'} mt-2 ${classes.sendRequests}`} onClick={handleSendRequests}>Send Request</div>
+            <div className={`${viewLayout === 'outgoingDepartmentRequests'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleOutgoingDepartmentRequests}>Outgoing Department Requests</div>
+            <div className={`${viewLayout === 'incomingRequests'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleIncomingRequests}>Incoming Requests</div>
+            <div className={`${viewLayout === 'ownRequests'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleOwnRequests}>Own Requests</div>
+            <div className={`${viewLayout === 'sendRequests'? classes.active : classes.default} mt-2 ${classes.fixedBase}`} onClick={handleSendRequests}>Send Request</div>
         </div>
     );
 };

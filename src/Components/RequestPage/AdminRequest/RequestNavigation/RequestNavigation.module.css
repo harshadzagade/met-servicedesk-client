@@ -3,6 +3,33 @@
     justify-content: center;
 }
 
-.ownDepartmentRequests,  .incomingRequests, .ownRequests,  .sendRequests {
+.fixedBase {
+    cursor: pointer;
+    font-weight: 700;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-inline: 1rem;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+}
+
+.default {
+    background-color: gray;
+    color: white;
+}
+
+.active {
+    box-shadow: 0rem -0.2rem 0.2rem gray;
+    background-color: white;
+    -webkit-transition: background-color 0.3s ease-out;
+    -moz-transition: background-color 0.3s ease-out;
+    -o-transition: background-color 0.3s ease-out;
+    -ms-transition: background-color 0.3s ease-out;
+    transition: background-color 0.3s ease-out;
+}
+
+.ownDepartmentRequests:focus,
+.incomingRequests:focus,
+.ownRequests:focus,
+.sendRequests:focus {
     font-weight: 700;
 }
