@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../../NavBar/NavBar';
+// import NavBar from '../../NavBar/NavBar';
 import Swal from 'sweetalert2';
 import classes from './NewStaff.module.css';
 import AuthContext from '../../../Context/AuthContext/AuthContext';
@@ -46,7 +46,7 @@ const NewStaff = () => {
     };
     return (
         <Fragment>
-            <NavBar tab={'none'} />
+            {/* <NavBar tab={'none'} /> */}
             <div className={`${classes.newStaffHeading}`}>Reset Password</div>
             <div className={`${classes.setPasswordFormDiv}`}>
                 <div className={`py-5 px-4 mx-auto ${classes.setPasswordForm} align-items-center my-auto`}>

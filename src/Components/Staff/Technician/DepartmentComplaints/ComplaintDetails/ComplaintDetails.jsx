@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './ComplaintDetails.module.css';
-import NavBar from '../../../../NavBar/NavBar';
+// import NavBar from '../../../../NavBar/NavBar';
 import { useParams } from 'react-router-dom';
 import ComplaintUpdate from './ComplaintUpdate/ComplaintUpdate';
 import Swal from 'sweetalert2';
@@ -47,7 +47,7 @@ const ComplaintDetails = () => {
 
   return (
     <Fragment>
-      <NavBar tab={'none'} />
+      {/* <NavBar tab={'none'} /> */}
       {openComplaintUpdate && <ComplaintUpdate onConfirm={handleUpdateCancel} />}
       <div className={`${classes.complaintDetailsHeading}`}>Complaint Details</div>
       <div className={`d-inline-block ${classes.detailsView}`}>

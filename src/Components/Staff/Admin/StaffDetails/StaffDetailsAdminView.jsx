@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import NavBar from '../../../NavBar/NavBar';
+// import NavBar from '../../../NavBar/NavBar';
 import classes from './StaffDetailsAdminView.module.css';
 import UpdateStaffAdminView from './UpdateStaff/UpdateStaffAdminView';
 
@@ -36,7 +36,7 @@ const StaffDetailsAdminView = () => {
 
   return (
     <Fragment>
-      <NavBar tab={'none'} />
+      {/* <NavBar tab={'none'} /> */}
       {openUpdate && <UpdateStaffAdminView onConfirm={handleUpdateCancel} />}
       <div className={`${classes.staffDetailsHeading}`}>Staff Details</div>
       <div className={`d-inline-block ${classes.detailsView}`}>

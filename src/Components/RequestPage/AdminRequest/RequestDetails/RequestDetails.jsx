@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './RequestDetails.module.css';
-import NavBar from '../../../NavBar/NavBar';
+// import NavBar from '../../../NavBar/NavBar';
 import { useParams, useSearchParams } from 'react-router-dom';
 import RequestApproval from './RequestApproval/RequestApproval';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
@@ -60,7 +60,7 @@ const RequestDetails = () => {
 
   return (
     <Fragment>
-      <NavBar tab={'none'} />
+      {/* <NavBar tab={'none'} /> */}
       {openApproval && <RequestApproval onConfirm={handleUpdateCancel} />}
       <div className={`${classes.staffDetailsHeading}`}>Request Details</div>
       <div className={`d-inline-block ${classes.detailsView}`}>
