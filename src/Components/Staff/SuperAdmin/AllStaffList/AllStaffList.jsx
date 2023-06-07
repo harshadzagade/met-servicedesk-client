@@ -19,6 +19,17 @@ const AllStaffList = () => {
     const [refresh, setRefresh] = useState(false);
     const [selectedStaff, setSelectedStaff] = useState([]);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
+    const [department, setDepartment] = useState('');
+    const [departments, setDepartments] = useState([]);
+    const [openDepartmentList, setOpenDepartmentList] = useState(false);
+
+    useEffect(() => {
+        const getDepartments = async () => {
+            const departments = await axios.get(`http://localhost:8001/api/staff/departments`);
+            setDepartments(departments.data.departments);
+        };
+        getDepartments();
+    }, [openDepartmentList]);
 
     useEffect(() => {
         if (selectedStaff.length !== 0) {
@@ -87,9 +98,32 @@ const AllStaffList = () => {
     }, [id, refresh]);
 
     useEffect(() => {
+        const getStaffByDepartment = async () => {
+            try {
+                if (openDepartmentList && department.length === 0) {
+                    setAllStaffList(staffList);
+                } else {
+                    const staff = await axios.get(`http://localhost:8001/api/staff/staffbydepartment/${department}`);
+                    setAllStaffList(staff.data.staff);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openDepartmentList) {
+            getStaffByDepartment();
+        }
+    }, [department, openDepartmentList, staffList])
+
+    useEffect(() => {
         let arr = [];
         switch (searchType) {
             case 'Firstname':
+                setOpenDepartmentList(false);
                 staffList.filter((a) => a.firstname.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
@@ -98,6 +132,7 @@ const AllStaffList = () => {
                 break;
 
             case 'Lastname':
+                setOpenDepartmentList(false);
                 staffList.filter((a) => a.lastname.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
@@ -106,6 +141,7 @@ const AllStaffList = () => {
                 break;
 
             case 'E-Mail':
+                setOpenDepartmentList(false);
                 staffList.filter((a) => a.email.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
@@ -113,7 +149,21 @@ const AllStaffList = () => {
                 });
                 break;
 
+            case 'Role':
+                setOpenDepartmentList(false);
+                staffList.filter((a) => a.role.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Department':
+                setOpenDepartmentList(true);
+                break;
+
             default:
+                setOpenDepartmentList(false);
                 break;
         }
         if (searchText.length !== 0) {
@@ -127,7 +177,15 @@ const AllStaffList = () => {
         <Fragment>
             <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
             <div className='mt-3'>
-                <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />
+                {!openDepartmentList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                {openDepartmentList && <select className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                    <option hidden>Select Your Department</option>
+                    {
+                        departments.map((department, key) => (
+                            <option key={key} value={department}>{department}</option>
+                        ))
+                    }
+                </select>}
                 <div className="btn-group mb-1">
                     <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {searchType}
@@ -136,6 +194,8 @@ const AllStaffList = () => {
                         <div className="dropdown-item" onClick={() => setSearchType('Firstname')}>Firstname</div>
                         <div className="dropdown-item" onClick={() => setSearchType('Lastname')}>Lastname</div>
                         <div className="dropdown-item" onClick={() => setSearchType('E-Mail')}>E-Mail</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Role')}>Role</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
                     </div>
                 </div>
             </div>
