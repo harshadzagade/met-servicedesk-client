@@ -74,6 +74,26 @@
     font-family: "Bahnschrift", Times, serif;
 }
 
+.staffInfo {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 4rem;
+}
+
+.staffRole {
+    font-size: large;
+    font-weight: 500;
+    font-family: "Bahnschrift", Times, serif;
+}
+
+.staffName {
+    font-size: medium;
+    font-weight: 300;
+    font-family: "Bahnschrift", Times, serif;
+}
+
 .logoutIcon {
     margin-top: 0.2rem;
 }
