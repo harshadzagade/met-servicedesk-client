@@ -13,7 +13,7 @@
     box-shadow: 0px 1px 8px gray;
 }
 
-.contactDetails .detailsName, .detailsEmail, .detailsRole, .detailsDepartment {
+.contactDetails, .detailsName, .detailsEmail, .detailsRole, .detailsDepartment {
     font-family: "Bahnschrift", Times, serif;
 }
 
