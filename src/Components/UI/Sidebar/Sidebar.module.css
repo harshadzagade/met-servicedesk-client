@@ -65,9 +65,9 @@
 .logoutButton {
     display: flex;
     position: absolute;
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
     bottom: 0;
     left: 0;
-    margin-left: 4rem;
     margin-bottom: 1rem;
     font-size: large;
     font-weight: 500;
