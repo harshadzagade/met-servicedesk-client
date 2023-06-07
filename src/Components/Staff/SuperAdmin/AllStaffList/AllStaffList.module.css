@@ -83,6 +83,15 @@
     cursor: pointer;
 }
 
+.tableField:hover {
+    background-color: #cccccc;
+}
+
+.tableField:active {
+    background-color: #919191;
+    color: white;
+}
+
 .parentCheckbox {
     cursor: pointer;
 }

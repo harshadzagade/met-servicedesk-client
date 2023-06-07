@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import NavBar from '../../../../NavBar/NavBar';
+// import NavBar from '../../../../NavBar/NavBar';
 import Swal from 'sweetalert2';
 import classes from './StaffDetailsSuperAdminView.module.css';
 
@@ -80,7 +80,7 @@ const StaffDetailsSuperAdminView = () => {
   };
   return (
     <Fragment>
-      <NavBar tab={'trash'} />
+      {/* <NavBar tab={'trash'} /> */}
       <div className={`${classes.staffDetailsHeading}`}>Staff Details</div>
       <div className={`d-inline-block ${classes.detailsView}`}>
         <div className={`${classes.detailsName}`}>{name}</div>
