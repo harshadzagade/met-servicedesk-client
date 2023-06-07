@@ -100,7 +100,7 @@ const AllStaffList = () => {
     useEffect(() => {
         const getStaffByDepartment = async () => {
             try {
-                if (openDepartmentList && department.length === 0) {
+                if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
                     setAllStaffList(staffList);
                 } else {
                     const staff = await axios.get(`http://localhost:8001/api/staff/staffbydepartment/${department}`);
@@ -178,8 +178,9 @@ const AllStaffList = () => {
             <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
             <div className='mt-3'>
                 {!openDepartmentList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-                {openDepartmentList && <select className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
-                    <option hidden>Select Your Department</option>
+                {openDepartmentList && <select value={department} className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                    <option value='' hidden>Select Your Department</option>
+                    <option value={'allDepartments'}>All Departments</option>
                     {
                         departments.map((department, key) => (
                             <option key={key} value={department}>{department}</option>
