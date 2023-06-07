@@ -83,12 +83,19 @@ const Sidebar = ({children}) => {
             }
             checkLogin();
         }
-    }, [navigate])
+    }, [navigate]);
 
     useEffect(() => {
-        if (id === '1') {
-            setShowTabs(true);
+        if (authCtx.isLoggedIn) {
+            if (id === '1') {
+                setShowTabs(true);
+            } else {
+                setShowTabs(false);
+            }
         }
+    }, [authCtx, id]);
+
+    useEffect(() => {
         const getStaffInfo = async () => {
             try {
                 if (id) {
