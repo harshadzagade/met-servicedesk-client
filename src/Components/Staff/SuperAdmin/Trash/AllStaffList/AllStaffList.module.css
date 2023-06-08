@@ -3,16 +3,24 @@
 }
 
 .trashButtons {
-    margin-top: 5px;
+    border-radius: 0rem 0rem 0.7rem 0.7rem;
+    background-color: gray;
+    width: fit-content;
+    margin: auto;
+    box-shadow: 0rem 0.1rem 0.1rem gray;
 }
 
 .restoreAllButton {
-    background-color: lightgoldenrodyellow;
-    font-size: 18px;
+    margin-right: 0.2rem;
+    background-color: white;
+    border-radius: 0rem 0rem 0rem 0.7rem;
+    padding-inline: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    box-shadow: 1px 1px 1px 1px gray;
+    border: none;
     transition: all .5s ease-in-out;
-    margin-right: 10px;
 }
 
 .restoreAllButton:hover {
@@ -24,7 +32,7 @@
     outline-color: transparent;
     outline-width: 0;
     outline-style: none;
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    box-shadow: 0 0 0 0 #007bff00;
 }
 
 .restoreAllButton:active {
@@ -36,10 +44,14 @@
 }
 
 .deleteAllButton {
-    background-color: #ffacac;
-    font-size: 18px;
+    background-color: white;
+    border-radius: 0rem 0rem 0.7rem 0rem;
+    padding-inline: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: none;
+    font-size: 1.2rem;
     font-weight: 600;
-    box-shadow: 1px 1px 1px 1px gray;
     transition: all .5s ease-in-out;
 }
 

@@ -89,9 +89,11 @@ const AllStaffList = () => {
     return (
         <Fragment>
             {staffList.length > 0 ?
-                <div className={`${classes.trashButtons}`}>
-                    <button className={`btn ${classes.restoreAllButton}`} onClick={handleRestoreAllClick}>Restore All Staff</button>
-                    <button className={`btn ${classes.deleteAllButton}`} onClick={handleDeleteAllClick}>Delete All Staff</button>
+                <div>
+                    <div className={`${classes.trashButtons}`}>
+                        <button className={`${classes.restoreAllButton}`} onClick={handleRestoreAllClick}>Restore All Staff</button>
+                        <button className={`${classes.deleteAllButton}`} onClick={handleDeleteAllClick}>Delete All Staff</button>
+                    </div>
                 </div>
                 :
                 <div className={`${classes.trashNoData}`}>No staff deleted</div>
