@@ -6,7 +6,7 @@ import axios from 'axios';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import classes from './Sidebar.module.css';
 
-const Sidebar = ({children}) => {
+const Sidebar = ({ children }) => {
     const [showDepartments, setShowDepartments] = useState(false);
     const id = localStorage.getItem('id');
     const [showTabs, setShowTabs] = useState(false);
@@ -86,14 +86,12 @@ const Sidebar = ({children}) => {
     }, [navigate]);
 
     useEffect(() => {
-        if (authCtx.isLoggedIn) {
-            if (id === '1') {
-                setShowTabs(true);
-            } else {
-                setShowTabs(false);
-            }
+        if (id === '1') {
+            setShowTabs(true);
+        } else {
+            setShowTabs(false);
         }
-    }, [authCtx, id]);
+    }, [id]);
 
     useEffect(() => {
         const getStaffInfo = async () => {
