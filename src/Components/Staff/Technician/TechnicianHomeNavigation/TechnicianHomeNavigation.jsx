@@ -21,10 +21,10 @@ const TechnicianHomeNavigation = (props) => {
     };
     return (
         <div className={`${classes.technicianHomeNavigation}`}>
-            <div className={`btn ${viewLayout === 'assignedRequests'? 'btn-secondary' : 'btn-primary'} mr-3 mt-2 ${classes.assignedRequests}`} onClick={handleAssignedRequests}>Assigned Requests</div>
-            <div className={`btn ${viewLayout === 'departmentComplaints'? 'btn-secondary' : 'btn-warning'} mr-3 mt-2 ${classes.departmentComplaints}`} onClick={handleDepartmentComplaints}>Department Complaints</div>
-            <div className={`btn ${viewLayout === 'ownRequests'? 'btn-secondary' : 'btn-info'} mr-3 mt-2 ${classes.ownRequests}`} onClick={handleOwnRequests}>Own Requests</div>
-            <div className={`btn ${viewLayout === 'ownComplaints'? 'btn-secondary' : 'btn-success'} mr-3 mt-2 ${classes.ownComplaints}`} onClick={handleOwnComplaints}>Own Complaints</div>
+            <div className={`btn ${viewLayout === 'assignedRequests'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleAssignedRequests}>Assigned Requests</div>
+            <div className={`btn ${viewLayout === 'departmentComplaints'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleDepartmentComplaints}>Department Complaints</div>
+            <div className={`btn ${viewLayout === 'ownRequests'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleOwnRequests}>Own Requests</div>
+            <div className={`btn ${viewLayout === 'ownComplaints'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleOwnComplaints}>Own Complaints</div>
         </div>
     );
 };

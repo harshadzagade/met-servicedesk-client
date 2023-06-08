@@ -4,6 +4,7 @@ import DepartmentComplaints from './DepartmentComplaints/DepartmentComplaints';
 import TechnicianHomeNavigation from './TechnicianHomeNavigation/TechnicianHomeNavigation';
 import TechnicianOwnComplaints from './TechnicianOwnComplaints/TechnicianOwnComplaints';
 import TechnicianOwnRequests from './TechnicianOwnRequests/TechnicianOwnRequests';
+import classes from './Technician.module.css';
 
 const Technician = () => {
   const [openLayout, setOpenLayout] = useState('assignedRequests');
@@ -13,10 +14,12 @@ const Technician = () => {
   return (
     <Fragment>
       <TechnicianHomeNavigation viewLayout={checkLayout} />
-      {openLayout === 'assignedRequests' && <AssignedRequests />}
-      {openLayout === 'departmentComplaints' && <DepartmentComplaints />}
-      {openLayout === 'ownRequests' && <TechnicianOwnRequests />}
-      {openLayout === 'ownComplaints' && <TechnicianOwnComplaints />}
+      <div className={`${classes.container}`}>
+        {openLayout === 'assignedRequests' && <AssignedRequests />}
+        {openLayout === 'departmentComplaints' && <DepartmentComplaints />}
+        {openLayout === 'ownRequests' && <TechnicianOwnRequests />}
+        {openLayout === 'ownComplaints' && <TechnicianOwnComplaints />}
+      </div>
     </Fragment>
   );
 };

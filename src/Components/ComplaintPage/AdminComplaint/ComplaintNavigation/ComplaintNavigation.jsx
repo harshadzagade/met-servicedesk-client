@@ -21,10 +21,10 @@ const ComplaintNavigation = (props) => {
     };
     return (
         <div className={`${classes.complaintNavigation}`}>
-            <div className={`btn ${viewLayout === 'outgoingDepartmentComplaints'? 'btn-secondary' : 'btn-primary'} mr-3 mt-2 ${classes.ownDepartmentComplaints}`} onClick={handleOutgoingDepartmentComplaints}>Outgoing Department Complaints</div>
-            <div className={`btn ${viewLayout === 'incomingComplaints'? 'btn-secondary' : 'btn-warning'} mr-3 mt-2 ${classes.incomingComplaints}`} onClick={handleIncomingComplaints}>Incoming Complaints</div>
-            <div className={`btn ${viewLayout === 'ownComplaints'? 'btn-secondary' : 'btn-info'} mr-3 mt-2 ${classes.ownComplaints}`} onClick={handleOwnComplaints}>Own Complaints</div>
-            <div className={`btn ${viewLayout === 'sendComplaints'? 'btn-secondary' : 'btn-success'} mt-2 ${classes.sendComplaints}`} onClick={handleSendComplaints}>Send Complaint</div>
+            <div className={`btn ${viewLayout === 'outgoingDepartmentComplaints'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleOutgoingDepartmentComplaints}>Outgoing Department Complaints</div>
+            <div className={`btn ${viewLayout === 'incomingComplaints'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleIncomingComplaints}>Incoming Complaints</div>
+            <div className={`btn ${viewLayout === 'ownComplaints'? classes.active : classes.default} mr-3 mt-2 ${classes.fixedBase}`} onClick={handleOwnComplaints}>Own Complaints</div>
+            <div className={`btn ${viewLayout === 'sendComplaints'? classes.active : classes.default} mt-2 ${classes.fixedBase}`} onClick={handleSendComplaints}>Send Complaint</div>
         </div>
     );
 };

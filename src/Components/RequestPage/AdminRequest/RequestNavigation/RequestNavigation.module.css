@@ -22,10 +22,3 @@
     background-color: white;
     transition: background-color 0.3s ease-in-out;
 }
-
-.ownDepartmentRequests:focus,
-.incomingRequests:focus,
-.ownRequests:focus,
-.sendRequests:focus {
-    font-weight: 700;
-}

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-// import classes from './AdminComplaint.module.css';
+import classes from './AdminComplaint.module.css';
 import SendComplaint from './SendComplaint/SendComplaint';
 import IncomingComplaint from './IncomingComplaints/IncomingComplaint';
 import OutgoingDepartmentComplaints from './OutgoingDepartmentComplaints/OutgoingDepartmentComplaints';
@@ -14,10 +14,12 @@ const AdminComplaint = () => {
     return (
         <Fragment>
             <ComplaintNavigation viewLayout={checkLayout} />
-            {openLayout === 'outgoingDepartmentComplaints' && <OutgoingDepartmentComplaints />}
-            {openLayout === 'incomingComplaints' && <IncomingComplaint />}
-            {openLayout === 'ownComplaints' && <OwnComplaints />}
-            {openLayout === 'sendComplaints' && <SendComplaint />}
+            <div className={`${classes.container}`}>
+                {openLayout === 'outgoingDepartmentComplaints' && <OutgoingDepartmentComplaints />}
+                {openLayout === 'incomingComplaints' && <IncomingComplaint />}
+                {openLayout === 'ownComplaints' && <OwnComplaints />}
+                {openLayout === 'sendComplaints' && <SendComplaint />}
+            </div>
         </Fragment>
     );
 };
