@@ -87,17 +87,44 @@ const StaffDetailsSuperAdminView = () => {
       {/* <NavBar tab={'trash'} /> */}
       <div className={`${classes.staffDetailsHeading}`}>Staff Details</div>
       <div className={`d-inline-block ${classes.detailsView}`}>
-        <div className={`${classes.detailsName}`}>{name}</div>
-        <div className={`${classes.detailsRole} mt-2`}>{role}</div>
-        <div className={`${classes.detailsDepartment} badge badge-dark mt-3`}>{department}</div><br />
-        <div className={`${classes.contactDetails}`}>
-          Contact Details
-          <div className={`${classes.detailsContact} mt-2`}>E-Mail: {email}</div>
-          <div className={`${classes.detailsContact} mt-2`}>Phone: {phoneNumber}</div>
-          <div className={`${classes.detailsContact} mt-2`}>Extension: {contactExtension}</div>
+      <div className='d-flex'>
+          <div className={`${classes.detailsTag}`}>Name:&nbsp;</div>
+          <div className={`${classes.detailsField}`}>{name}</div>
         </div>
-        <button className={`btn mt-3 ${classes.updateButton}`} onClick={handleRestoreClick}>Restore</button>
-        <button className={`btn mt-3 ${classes.deleteButton}`} onClick={handleDeleteClick}>Delete</button>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag} mt-2`}>Role:&nbsp;</div>
+          <div className={`${classes.detailsField} mt-2`}>{role}</div>
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag} mt-2`}>Department(s):&nbsp;</div>
+          <div className={`${classes.detailsField} mt-2`}>{department}</div>
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className={`${classes.boxDetails}`}>
+          <div className='d-flex'>
+            <div className={`${classes.boxHeading}`}>Contact Details</div>
+          </div>
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>E-Mail:&nbsp;</div>
+            <div className={`${classes.detailsField} mt-2`}>{email}</div>
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Phone:&nbsp;</div>
+            <div className={`${classes.detailsField} mt-2`}>{phoneNumber}</div>
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Extension:&nbsp;</div>
+            <div className={`${classes.detailsField} mt-2`}>{contactExtension}</div>
+          </div>
+        </div>
+        <div className={`${classes.buttons}`}>
+          <button className={`${classes.restoreButton}`} onClick={handleRestoreClick}>Restore</button>
+          <button className={`${classes.deleteButton}`} onClick={handleDeleteClick}>Delete</button>
+        </div>
       </div>
     </Fragment>
   );
