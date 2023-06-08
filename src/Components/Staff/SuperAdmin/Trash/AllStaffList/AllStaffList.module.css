@@ -12,7 +12,7 @@
 
 .restoreAllButton {
     margin-right: 0.2rem;
-    background-color: white;
+    background-color: #dbdbdb;
     border-radius: 0rem 0rem 0rem 0.7rem;
     padding-inline: 1rem;
     padding-top: 0.5rem;
@@ -44,7 +44,7 @@
 }
 
 .deleteAllButton {
-    background-color: white;
+    background-color: #dbdbdb;
     border-radius: 0rem 0rem 0.7rem 0rem;
     padding-inline: 1rem;
     padding-top: 0.5rem;
