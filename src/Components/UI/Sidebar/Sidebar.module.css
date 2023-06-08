@@ -107,6 +107,7 @@
 }
 
 .departmentSelect {
+    min-width: 15rem;
     cursor: pointer;
     display: flex;
     background-color: #7c7c7c;
