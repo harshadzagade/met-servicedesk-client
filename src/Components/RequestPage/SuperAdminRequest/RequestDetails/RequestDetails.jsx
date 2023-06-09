@@ -17,19 +17,61 @@ const RequestDetails = (props) => {
 
   return (
     <Modal>
-      <div className={`${classes.staffDetailsHeading}`}>Request Details</div>
-        <div className={`${classes.detailsSubject}`}>{requestData.subject}</div>
-        <div className={`${classes.detailsRole} mt-2`}>Description: {requestData.description}</div>
-        <div className={`${classes.detailsName} mt-2`}>Name: {requestData.name}</div>
-        <div className={`${classes.detailsCategory} mt-2`}>Category: {requestData.category}</div>
-        <div className={`${classes.detailsPriority} mt-2`}>Priority: {requestData.priority}</div>
-        <div className={`${classes.detailsDepartment} badge badge-dark mt-3`}>{requestData.department}</div><br />
-        <div className={`${classes.requestDetails}`}>
-          Approvals
-          <div className={`${classes.detailsApproval} mt-2`}>HOD Approval: {requestData.approval1 === 1? 'approved' : 'not approved'}</div>
-          <div className={`${classes.detailsApproval} mt-2`}>Admin Approval: {requestData.approval2 === 1? 'approved' : 'not approved'}</div>
+      <div className={`${classes.requestDetailsHeading}`}>Request Details</div>
+      <div className={`d-inline-block ${classes.detailsView}`}>
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag}`}>ID:&nbsp;</div>
+          <div className={`${classes.detailsField}`}>#{requestData.id}</div>
         </div>
-        <button className={`btn ${classes.cancelButton}`} onClick={props.onConfirm}>Cancel</button>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag}`}>Subject:&nbsp;</div>
+          <div className={`${classes.detailsField} ${classes.wrapData}`}>{requestData.subject}</div>
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag} mt-2`}>Description:&nbsp;</div>
+          <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.description}</div>
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag} mt-2`}>Requester:&nbsp;</div>
+          <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.name}</div>
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag} mt-2`}>Category:&nbsp;</div>
+          <div className={`${classes.detailsField} mt-2`}>{requestData.category}</div>
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag} mt-2`}>Priority:&nbsp;</div>
+          <div className={`${classes.detailsField} mt-2`}>{requestData.priority}</div>
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className='d-flex'>
+          <div className={`${classes.detailsTag} mt-2`}>Department:&nbsp;</div>
+          <div className={`${classes.detailsField} mt-2`}>{requestData.department}</div><br />
+        </div>
+        <hr className={`${classes.hrTag}`} />
+        <div className={`${classes.boxDetails}`}>
+          <div className='d-flex'>
+            <div className={`${classes.boxHeading}`}>Approvals</div>
+          </div>
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>HOD Approval:&nbsp;</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.approval1 === 1 ? 'approved' : 'not approved'}</div>
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Admin Approval:&nbsp;</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.approval2 === 1 ? 'approved' : 'not approved'}</div>
+          </div>
+        </div>
+        <div className={`btn ${classes.cancelLayout}`}>
+          <button className={`btn ${classes.cancelButton}`} onClick={props.onConfirm}>Cancel</button>
+        </div>
+      </div>
     </Modal>
   );
 };

@@ -84,17 +84,17 @@ const StaffDetailsSuperAdminView = () => {
       <div className={`${classes.staffDetailsHeading}`}>Staff Details</div>
       <div className={`d-inline-block ${classes.detailsView}`}>
         <div className='d-flex'>
-          <div className={`${classes.detailsTag}`}>Name:&nbsp;</div>
+          <div className={`${classes.detailsTag}`}>Name:</div>
           <div className={`${classes.detailsField}`}>{name}</div>
         </div>
         <hr className={`${classes.hrTag}`} />
         <div className='d-flex'>
-          <div className={`${classes.detailsTag} mt-2`}>Role:&nbsp;</div>
+          <div className={`${classes.detailsTag} mt-2`}>Role:</div>
           <div className={`${classes.detailsField} mt-2`}>{role}</div>
         </div>
         <hr className={`${classes.hrTag}`} />
         <div className='d-flex'>
-          <div className={`${classes.detailsTag} mt-2`}>Department(s):&nbsp;</div>
+          <div className={`${classes.detailsTag} mt-2`}>Department(s):</div>
           <div className={`${classes.detailsField} mt-2`}>{departments}</div>
         </div>
         <hr className={`${classes.hrTag}`} />
@@ -103,17 +103,17 @@ const StaffDetailsSuperAdminView = () => {
             <div className={`${classes.boxHeading}`}>Contact Details</div>
           </div>
           <div className='d-flex'>
-            <div className={`${classes.detailsTag} mt-2`}>E-Mail:&nbsp;</div>
+            <div className={`${classes.detailsTag} mt-2`}>E-Mail:</div>
             <div className={`${classes.detailsField} mt-2`}>{email}</div>
           </div>
           <hr className={`${classes.hrTag}`} />
           <div className='d-flex'>
-            <div className={`${classes.detailsTag} mt-2`}>Phone:&nbsp;</div>
+            <div className={`${classes.detailsTag} mt-2`}>Phone:</div>
             <div className={`${classes.detailsField} mt-2`}>{phoneNumber}</div>
           </div>
           <hr className={`${classes.hrTag}`} />
           <div className='d-flex'>
-            <div className={`${classes.detailsTag} mt-2`}>Extension:&nbsp;</div>
+            <div className={`${classes.detailsTag} mt-2`}>Extension:</div>
             <div className={`${classes.detailsField} mt-2`}>{contactExtension}</div>
           </div>
         </div>
