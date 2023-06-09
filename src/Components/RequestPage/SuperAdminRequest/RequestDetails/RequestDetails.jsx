@@ -17,59 +17,99 @@ const RequestDetails = (props) => {
 
   return (
     <Modal>
-      <div className={`${classes.requestDetailsHeading}`}>Request Details</div>
-      <div className={`d-inline-block ${classes.detailsView}`}>
-        <div className='d-flex'>
-          <div className={`${classes.detailsTag}`}>ID:&nbsp;</div>
-          <div className={`${classes.detailsField}`}>#{requestData.id}</div>
-        </div>
-        <hr className={`${classes.hrTag}`} />
-        <div className='d-flex'>
-          <div className={`${classes.detailsTag}`}>Subject:&nbsp;</div>
-          <div className={`${classes.detailsField} ${classes.wrapData}`}>{requestData.subject}</div>
-        </div>
-        <hr className={`${classes.hrTag}`} />
-        <div className='d-flex'>
-          <div className={`${classes.detailsTag} mt-2`}>Description:&nbsp;</div>
-          <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.description}</div>
-        </div>
-        <hr className={`${classes.hrTag}`} />
-        <div className='d-flex'>
-          <div className={`${classes.detailsTag} mt-2`}>Requester:&nbsp;</div>
-          <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.name}</div>
-        </div>
-        <hr className={`${classes.hrTag}`} />
-        <div className='d-flex'>
-          <div className={`${classes.detailsTag} mt-2`}>Category:&nbsp;</div>
-          <div className={`${classes.detailsField} mt-2`}>{requestData.category}</div>
-        </div>
-        <hr className={`${classes.hrTag}`} />
-        <div className='d-flex'>
-          <div className={`${classes.detailsTag} mt-2`}>Priority:&nbsp;</div>
-          <div className={`${classes.detailsField} mt-2`}>{requestData.priority}</div>
-        </div>
-        <hr className={`${classes.hrTag}`} />
-        <div className='d-flex'>
-          <div className={`${classes.detailsTag} mt-2`}>Department:&nbsp;</div>
-          <div className={`${classes.detailsField} mt-2`}>{requestData.department}</div><br />
-        </div>
-        <hr className={`${classes.hrTag}`} />
-        <div className={`${classes.boxDetails}`}>
+      <div className={`${classes.layout}`}>
+        <div className={`${classes.requestDetailsHeading}`}>Request Details</div>
+        <div className={`${classes.detailsView}`}>
           <div className='d-flex'>
-            <div className={`${classes.boxHeading}`}>Approvals</div>
-          </div>
-          <div className='d-flex'>
-            <div className={`${classes.detailsTag} mt-2`}>HOD Approval:&nbsp;</div>
-            <div className={`${classes.detailsField} mt-2`}>{requestData.approval1 === 1 ? 'approved' : 'not approved'}</div>
+            <div className={`${classes.detailsTag}`}>ID:</div>
+            <div className={`${classes.detailsField}`}>#{requestData.id}</div>
           </div>
           <hr className={`${classes.hrTag}`} />
           <div className='d-flex'>
-            <div className={`${classes.detailsTag} mt-2`}>Admin Approval:&nbsp;</div>
-            <div className={`${classes.detailsField} mt-2`}>{requestData.approval2 === 1 ? 'approved' : 'not approved'}</div>
+            <div className={`${classes.detailsTag}`}>Subject:</div>
+            <div className={`${classes.detailsField} ${classes.wrapData}`}>{requestData.subject}</div>
           </div>
-        </div>
-        <div className={`btn ${classes.cancelLayout}`}>
-          <button className={`btn ${classes.cancelButton}`} onClick={props.onConfirm}>Cancel</button>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Description:</div>
+            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.description}</div>
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Requester:</div>
+            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.name}</div>
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Status:</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.status}</div>
+          </div>
+          {requestData.assign && <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Assigned to:</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.assignedName}</div>
+          </div>}
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Category:</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.category}</div>
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Priority:</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.priority}</div>
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Department:</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.department}</div><br />
+          </div>
+          <hr className={`${classes.hrTag}`} />
+          <div className={`${classes.boxDetails}`}>
+            <div className='d-flex'>
+              <div className={`${classes.boxHeading}`}>Approvals</div>
+            </div>
+            <div className='d-flex'>
+              <div className={`${classes.detailsTag} mt-2`}>HOD Approval:</div>
+              <div className={`${classes.detailsField} mt-2`}>{requestData.approval1 === 1 ? 'approved' : 'not approved'}</div>
+            </div>
+            {requestData.approval1 && <hr className={`${classes.hrTag}`} />}
+            {requestData.approval1 && <div className='d-flex'>
+              <div className={`${classes.detailsTag} mt-2`}>HOD Comment:</div>
+              <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.approval1Comment}</div>
+            </div>}
+            <hr className={`${classes.hrTag}`} />
+            <div className='d-flex'>
+              <div className={`${classes.detailsTag} mt-2`}>Admin Approval:</div>
+              <div className={`${classes.detailsField} mt-2`}>{requestData.approval2 === 1 ? 'approved' : 'not approved'}</div>
+            </div>
+            {requestData.approval2 && <hr className={`${classes.hrTag}`} />}
+            {requestData.approval2 && <div className='d-flex'>
+              <div className={`${classes.detailsTag} mt-2`}>Admin Comment:</div>
+              <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.approval2Comment}</div>
+            </div>}
+          </div>
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Repeated:</div>
+            <div className={`${classes.detailsField} mt-2`}>{requestData.isRepeated ? 'Yes' : 'No'}</div>
+          </div>
+          {requestData.forwardComment && <hr className={`${classes.hrTag}`} />}
+          {requestData.forwardComment && <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Forward Comment:</div>
+            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.forwardComment}</div>
+          </div>}
+          {requestData.status === 'closed' && <hr className={`${classes.hrTag}`} />}
+          {requestData.status === 'closed' && <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Problem Description:</div>
+            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.description}</div>
+          </div>}
+          {requestData.status === 'closed' && <hr className={`${classes.hrTag}`} />}
+          {requestData.status === 'closed' && <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Action Taken:</div>
+            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.description}</div>
+          </div>}
+          <div className={`btn ${classes.cancelLayout}`}>
+            <button className={`btn ${classes.cancelButton}`} onClick={props.onConfirm}>Cancel</button>
+          </div>
         </div>
       </div>
     </Modal>
