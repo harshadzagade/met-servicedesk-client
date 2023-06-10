@@ -16,6 +16,7 @@ import NewStaff from '../Components/Staff/NewStaff/NewStaff';
 import Complaint from '../Pages/Complaint/Complaint';
 import Services from '../Pages/Services/Services';
 import Request from '../Pages/Request/Request';
+import Report from '../Pages/Report/Report';
 import AdminRequestDetails from '../Components/RequestPage/AdminRequest/RequestDetails/RequestDetails';
 import TechnicianRequestDetails from '../Components/Staff/Technician/AssignedRequests/RequestDetails/RequestDetails';
 import ComplaintDetails from '../Components/Staff/Technician/DepartmentComplaints/ComplaintDetails/ComplaintDetails';
@@ -41,6 +42,7 @@ const Routing = () => {
                     <Route exact path='technician/complaintdetails/:complaintId' element={<ComplaintDetails />} />
                     <Route exact path='/complaint' element={<Complaint />} />
                     <Route exact path='/services' element={<Services />} />
+                    <Route exact path='/report' element={<Report />} />
                 </Routes>
             </Sidebar>
         </Router>
