@@ -3,7 +3,7 @@ import classes from './Table.module.css';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../DataPerPage/DataPerPage';
 
-const Table = ({data, onClick, columns, rows, noDataMessage}) => {
+const Table = ({data, onClick, columns, noDataMessage}) => {
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [numberOfPages, setNumberOfPages] = useState(10);
 

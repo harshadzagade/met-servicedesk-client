@@ -89,7 +89,7 @@ const AllStaffList = () => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Please enter valid credentials'
+                    text: 'Unable to fetch staff'
                 });
             }
         };
@@ -117,7 +117,7 @@ const AllStaffList = () => {
         if (openDepartmentList) {
             getStaffByDepartment();
         }
-    }, [department, openDepartmentList, staffList])
+    }, [department, openDepartmentList, staffList]);
 
     useEffect(() => {
         let arr = [];
