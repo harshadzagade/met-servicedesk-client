@@ -13,6 +13,7 @@ const Report = () => {
     const [departments, setDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState('');
     const [departmentStaff, setDepartmentStaff] = useState([]);
+    const [reportType, setReportType] = useState('full');
     const [selectedStaff, setSelectedStaff] = useState(null);
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [refresh, setRefresh] = useState(false);
@@ -29,8 +30,29 @@ const Report = () => {
         const getList = async () => {
             if (selectedStaff) {
                 try {
-                    const list = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
-                    setReportList(list.data.report);
+                    if (selectedDepartment.length !== 0) {
+                        switch (reportType) {
+                            case 'full':
+                                const full = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
+                                setReportList(full.data.report);
+                                break;
+
+                            case 'requests':
+                                const requests = await axios.get(`http://localhost:8001/api/report/request/${selectedStaff}`);
+                                setReportList(requests.data.report);
+                                break;
+
+                            case 'complaints':
+                                const complaints = await axios.get(`http://localhost:8001/api/report/complaint/${selectedStaff}`);
+                                setReportList(complaints.data.report);
+                                break;
+
+                            default:
+                                const defaultValue = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
+                                setReportList(defaultValue.data.report);
+                                break;
+                        }
+                    }
                 } catch (error) {
                     Swal.fire({
                         icon: 'error',
@@ -42,7 +64,7 @@ const Report = () => {
         };
         getList();
         setRefresh(false);
-    }, [selectedStaff, refresh]);
+    }, [selectedStaff, refresh, reportType, selectedDepartment]);
 
     useEffect(() => {
         const getStaffByDepartment = async () => {
@@ -64,10 +86,10 @@ const Report = () => {
 
     return (
         <Fragment>
-            <div>
-                <div>
-                    <div>Select Department:&nbsp;</div>
-                    <select onChange={(e) => setSelectedDepartment(e.target.value)}>
+            <div className={`${classes.basicSelection}`}>
+                <div className={`${classes.departmentSelection}`}>
+                    <div>Department:&nbsp;</div>
+                    <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedDepartment(e.target.value)}>
                         <option value='' hidden>Select department</option>
                         {
                             departments.map((department, key) => (
@@ -78,15 +100,27 @@ const Report = () => {
                 </div>
                 {
                     departmentStaff.length !== 0 &&
-                    <div>
-                        <div>Select Staff:&nbsp;</div>
-                        <select onChange={(e) => setSelectedStaff(e.target.value)}>
+                    <div className={`${classes.staffSelection}`}>
+                        <div>Staff:&nbsp;</div>
+                        <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>
                             <option value='' hidden>Select staff</option>
                             {
                                 departmentStaff.map((staff, key) => (
                                     <option key={key} value={staff.id}>{staff.firstname + ' ' + staff.lastname}</option>
                                 ))
                             }
+                        </select>
+                    </div>
+                }
+                {
+                    selectedStaff &&
+                    <div className={`${classes.staffSelection}`}>
+                        <div>Report Type:&nbsp;</div>
+                        <select className={`${classes.dropdownSelect}`} onChange={(e) => setReportType(e.target.value)}>
+                            <option value='' hidden>Select report type</option>
+                            <option value='full'>Full</option>
+                            <option value='requests'>Requests</option>
+                            <option value='complaints'>Complaints</option>
                         </select>
                     </div>
                 }
@@ -98,7 +132,7 @@ const Report = () => {
                         <table className={`${classes.tableParent}`}>
                             <thead className={`${classes.tableHeader}`}>
                                 <tr className={`${classes.tableRow}`}>
-                                    <th className={`${classes.tableHead}`} scope="col">Ticket Type</th>
+                                    {reportType === 'full' && <th className={`${classes.tableHead}`} scope="col">Ticket Type</th>}
                                     <th className={`${classes.tableHead}`} scope="col">Subject</th>
                                     <th className={`${classes.tableHead}`} scope="col">Staff Name</th>
                                     <th className={`${classes.tableHead}`} scope="col">Category</th>
@@ -110,7 +144,7 @@ const Report = () => {
                                 {
                                     currentPageData.length > 0 && currentPageData.map((field) => (
                                         <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id}>
-                                            <td className={`${classes.tableData}`} onClick={() => navigate('')}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>
+                                            {reportType === 'full' && <td className={`${classes.tableData}`} onClick={() => navigate('')}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>}
                                             <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.subject}</td>
                                             <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.staffName}</td>
                                             <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.category}</td>
