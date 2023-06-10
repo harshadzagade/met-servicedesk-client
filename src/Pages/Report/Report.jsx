@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import Sweetpagination from 'sweetpagination';
+import ReportDetails from './ReportDetails/ReportDetails';
 
 const Report = () => {
     const navigate = useNavigate();
@@ -15,6 +16,8 @@ const Report = () => {
     const [departmentStaff, setDepartmentStaff] = useState([]);
     const [reportType, setReportType] = useState('full');
     const [selectedStaff, setSelectedStaff] = useState(null);
+    const [openDetails, setOpenDetails] = useState(false);
+    const [detailsId, setDetailsId] = useState(null);
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [refresh, setRefresh] = useState(false);
 
@@ -82,10 +85,20 @@ const Report = () => {
             }
         };
         getStaffByDepartment();
-    }, [selectedDepartment, departments])
+    }, [selectedDepartment, departments]);
+
+    const checkOpenDetails = (value, id) => {
+        setOpenDetails(value);
+        setDetailsId(id);
+    };
+
+    const handleDetailsCancel = () => {
+        setOpenDetails(false);
+    };
 
     return (
         <Fragment>
+            {openDetails && <ReportDetails onConfirm={handleDetailsCancel} id={detailsId} />}
             <div className={`${classes.basicSelection}`}>
                 <div className={`${classes.departmentSelection}`}>
                     <div>Department:&nbsp;</div>
@@ -144,12 +157,12 @@ const Report = () => {
                                 {
                                     currentPageData.length > 0 && currentPageData.map((field) => (
                                         <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id}>
-                                            {reportType === 'full' && <td className={`${classes.tableData}`} onClick={() => navigate('')}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>}
-                                            <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.subject}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.staffName}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.category}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.priority}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => navigate('')}>{field.department}</td>
+                                            {reportType === 'full' && <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>}
+                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.subject}</td>
+                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.staffName}</td>
+                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.category}</td>
+                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.priority}</td>
+                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.department}</td>
                                         </tr>
                                     ))
                                 }

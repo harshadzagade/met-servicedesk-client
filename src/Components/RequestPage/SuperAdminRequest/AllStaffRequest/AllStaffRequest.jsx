@@ -33,13 +33,13 @@ const AllStaffRequest = () => {
         setDetailsId(id);
     };
 
-    const handleUpdateCancel = () => {
+    const handleDetailsCancel = () => {
         setOpenDetails(false);
     };
 
     return (
         <Fragment>
-            {openDetails && <RequestDetails onConfirm={handleUpdateCancel} id={detailsId} />}
+            {openDetails && <RequestDetails onConfirm={handleDetailsCancel} id={detailsId} />}
             {staffRequestList.length > 0 ?
                 <Fragment>
                     {smallDevice &&

@@ -100,12 +100,12 @@ const RequestDetails = (props) => {
           {requestData.status === 'closed' && <hr className={`${classes.hrTag}`} />}
           {requestData.status === 'closed' && <div className='d-flex'>
             <div className={`${classes.detailsTag} mt-2`}>Problem Description:</div>
-            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.description}</div>
+            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.problemDescription}</div>
           </div>}
           {requestData.status === 'closed' && <hr className={`${classes.hrTag}`} />}
           {requestData.status === 'closed' && <div className='d-flex'>
             <div className={`${classes.detailsTag} mt-2`}>Action Taken:</div>
-            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.description}</div>
+            <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{requestData.actionTaken}</div>
           </div>}
           <div className={`btn ${classes.cancelLayout}`}>
             <button className={`btn ${classes.cancelButton}`} onClick={props.onConfirm}>Cancel</button>
