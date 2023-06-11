@@ -8,7 +8,6 @@ import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import CustomCheckbox from '../../../UI/Checkbox/CustomCheckbox';
 
 const AllStaffList = () => {
-    const id = localStorage.getItem('id');
     const navigate = useNavigate();
     const [staffList, setStaffList] = useState([]);
     const [allStaffList, setAllStaffList] = useState(staffList);
@@ -83,7 +82,7 @@ const AllStaffList = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/staff/superadmin/allstaff/${id}`);
+                const list = await axios.get('http://localhost:8001/api/staff/superadmin/allstafflist/fullstaff');
                 setStaffList(list.data.totalStaff);
             } catch (error) {
                 Swal.fire({
@@ -95,7 +94,7 @@ const AllStaffList = () => {
         };
         getList();
         setRefresh(false);
-    }, [id, refresh]);
+    }, [refresh]);
 
     useEffect(() => {
         const getStaffByDepartment = async () => {
