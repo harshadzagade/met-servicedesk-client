@@ -1,14 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import DataPerPage from '../../Components/UI/DataPerPage/DataPerPage';
 import classes from './Report.module.css';
-import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import Sweetpagination from 'sweetpagination';
 import ReportDetails from './ReportDetails/ReportDetails';
 
 const Report = () => {
-    const navigate = useNavigate();
     const [reportList, setReportList] = useState([]);
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [departments, setDepartments] = useState([]);

@@ -76,7 +76,7 @@ const AllStaffComplaint = () => {
                     }
                 </Fragment>
                 :
-                <div className={`${classes.homeNoData}`}>No staff added</div>
+                <div className={`${classes.homeNoData}`}>No complaint initiated</div>
             }
         </Fragment>
     );

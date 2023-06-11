@@ -73,7 +73,7 @@ const AllContactsList = () => {
                     }
                 </Fragment>
                 :
-                <div className={`${classes.contactsNoData}`}>No staff added</div>
+                <div className={`${classes.contactsNoData}`}>No contacts added</div>
             }
         </Fragment>
     );

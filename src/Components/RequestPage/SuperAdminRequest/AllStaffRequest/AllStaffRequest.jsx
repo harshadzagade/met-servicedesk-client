@@ -78,7 +78,7 @@ const AllStaffRequest = () => {
                     }
                 </Fragment>
                 :
-                <div className={`${classes.homeNoData}`}>No staff added</div>
+                <div className={`${classes.homeNoData}`}>No request initiated</div>
             }
         </Fragment>
     );
