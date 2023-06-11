@@ -1,29 +1,24 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './AllStaffComplaint.module.css';
-import SingleStaffRequest from './SingleStaffComplaint/SingleStaffComplaint';
-import SmallSingleStaffRequest from './SmallSingleStaffComplaint/SmallSingleStaffComplaint';
 import RequestDetails from '../ComplaintDetails/ComplaintDetails';
+import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import Sweetpagination from 'sweetpagination';
 
 const AllStaffComplaint = () => {
-    const windowWidth = window.innerWidth;
-    const [staffRequestList, setStaffRequestList] = useState([]);
-    const [smallDevice, setSmallDevice] = useState(false);
+    const [staffComplaintList, setStaffComplaintList] = useState([]);
+    const [numberOfPages, setNumberOfPages] = useState(10);
+    const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
+    const [searchType, setSearchType] = useState('Subject');
+    const [searchText, setSearchText] = useState('');
+    const [allStaffComplaintList, setAllStaffComplaintList] = useState(staffComplaintList);
     const [openDetails, setOpenDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null);
 
     useEffect(() => {
-        if (windowWidth < 768) {
-            setSmallDevice(true);
-        } else {
-            setSmallDevice(false);
-        }
-    }, [windowWidth]);
-
-    useEffect(() => {
         const getList = async () => {
             const list = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
-            setStaffRequestList(list.data.complaints);
+            setStaffComplaintList(list.data.complaints);
         };
         getList();
     }, []);
@@ -35,48 +30,127 @@ const AllStaffComplaint = () => {
 
     const handleUpdateCancel = () => {
         setOpenDetails(false);
-      };
+    };
+
+    useEffect(() => {
+        let arr = [];
+        switch (searchType) {
+            case 'Subject':
+                staffComplaintList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Name':
+                staffComplaintList.filter((a) => a.name.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Department':
+                staffComplaintList.filter((a) => a.department.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Category':
+                staffComplaintList.filter((a) => a.category.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Priority':
+                staffComplaintList.filter((a) => a.priority.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Status':
+                staffComplaintList.filter((a) => a.status.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            default:
+                break;
+        }
+        if (searchText.length !== 0) {
+            setAllStaffComplaintList(arr);
+        } else {
+            setAllStaffComplaintList(staffComplaintList)
+        }
+    }, [searchText, staffComplaintList, searchType]);
 
     return (
         <Fragment>
             {openDetails && <RequestDetails onConfirm={handleUpdateCancel} id={detailsId} />}
-            {staffRequestList.length > 0 ?
-                <Fragment>
-                    {smallDevice &&
-                        <Fragment>
-                            {
-                                staffRequestList.map((request) =>
-                                    <SmallSingleStaffRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} />
-                                )
-                            }
-                        </Fragment>
-                    }
-                    {!smallDevice &&
-                        <div className={`mx-3 mt-3`}>
-                            <table className={`table ${classes.largeTable} overflow-hidden`}>
-                                <thead className={`thead-light`}>
-                                    <tr>
-                                        <th scope="col">Subject</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Department</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Priority</th>
-                                        <th scope="col">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        staffRequestList.map((request) =>
-                                            <SingleStaffRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} subject={request.subject} name={request.name} department={request.department} category={request.category} priority={request.priority} status={request.status} />
-                                        )
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                </Fragment>
-                :
-                <div className={`${classes.noData}`}>No complaint initiated</div>
+            <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+            <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />
+            <div className="btn-group mb-1">
+                <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {searchType}
+                </button>
+                <div className="dropdown-menu">
+                    <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
+                    <div className="dropdown-item" onClick={() => setSearchType('Name')}>Name</div>
+                    <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
+                    <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
+                    <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                    <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
+                </div>
+            </div>
+            {
+                allStaffComplaintList.length > 0 ?
+                    <Fragment>
+                        <table className={`${classes.tableParent}`}>
+                            <thead className={`${classes.tableHeader}`}>
+                                <tr className={`${classes.tableRow}`}>
+                                    <th className={`${classes.tableHead}`} scope="col">Subject</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Name</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Department</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Category</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Priority</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody className={`${classes.tableBody}`}>
+                                {
+                                    currentPageData.length > 0 && currentPageData.map((field) => (
+                                        <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id} onClick={() => checkOpenDetails(true, field.id)}>
+                                            <td className={`${classes.tableData}`} data-label="subject">{field.subject}</td>
+                                            <td className={`${classes.tableData}`} data-label="name">{field.name}</td>
+                                            <td className={`${classes.tableData}`} data-label="department">{field.department}</td>
+                                            <td className={`${classes.tableData}`} data-label="category">{field.category}</td>
+                                            <td className={`${classes.tableData}`} data-label="priority">{field.priority}</td>
+                                            <td className={`${classes.tableData}`} data-label="status">{field.status}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+
+                        <Sweetpagination
+                            currentPageData={setCurrentPageData}
+                            dataPerPage={numberOfPages}
+                            getData={allStaffComplaintList}
+                            navigation={true}
+                        />
+
+                    </Fragment>
+                    :
+                    <div className={`${classes.noData}`}>No complaint initiated</div>
             }
         </Fragment>
     );

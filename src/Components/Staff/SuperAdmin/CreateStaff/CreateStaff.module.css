@@ -1,7 +1,7 @@
 .createStaffHeading {
     font-family: "Bahnschrift", Times, serif;
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2rem;
     text-shadow: 1px 1px 1px gray;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .createButton {
-    background-color: lightgreen;
+    background-color: #dbdbdb;
     font-size: 18px;
     font-weight: 600;
     box-shadow: 1px 1px 1px 1px gray;
