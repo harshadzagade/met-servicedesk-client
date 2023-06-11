@@ -1,34 +1,124 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SingleStaff from './SingleStaff/SingleStaff';
-import SmallSingleStaff from './SmallSingleStaff/SmallSingleStaff';
 import Swal from 'sweetalert2';
 import classes from './AllStaffList.module.css';
+import Sweetpagination from 'sweetpagination';
+import DataPerPage from '../../../../UI/DataPerPage/DataPerPage';
 
 const AllStaffList = () => {
     const navigate = useNavigate();
-    const windowWidth = window.innerWidth;
     const [staffList, setStaffList] = useState([]);
+    const [allStaffList, setAllStaffList] = useState(staffList);
+    const [searchText, setSearchText] = useState('');
+    const [searchType, setSearchType] = useState('Firstname');
+    const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
+    const [numberOfPages, setNumberOfPages] = useState(10);
     const [refresh, setRefresh] = useState(false);
-    const [smallDevice, setSmallDevice] = useState(false);
+    const [department, setDepartment] = useState('');
+    const [departments, setDepartments] = useState([]);
+    const [openDepartmentList, setOpenDepartmentList] = useState(false);
 
     useEffect(() => {
-        if (windowWidth < 768) {
-            setSmallDevice(true);
-        } else {
-            setSmallDevice(false);
-        }
-    }, [windowWidth]);
+        const getDepartments = async () => {
+            const departments = await axios.get(`http://localhost:8001/api/staff/trashdepartments`);
+            setDepartments(departments.data.departments);
+        };
+        getDepartments();
+    }, [openDepartmentList]);
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/trash/`);
-            setStaffList(list.data.allStaff);
+            try {
+                const list = await axios.get(`http://localhost:8001/api/trash/`);
+                setStaffList(list.data.allStaff);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch staff'
+                });
+            }
         };
         getList();
         setRefresh(false);
     }, [refresh]);
+
+    useEffect(() => {
+        const getStaffByDepartment = async () => {
+            try {
+                if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
+                    setAllStaffList(staffList);
+                } else {
+                    const staff = await axios.get(`http://localhost:8001/api/staff/trashstaffbydepartment/${department}`);
+                    setAllStaffList(staff.data.staff);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openDepartmentList) {
+            getStaffByDepartment();
+        }
+    }, [department, openDepartmentList, staffList]);
+
+    useEffect(() => {
+        let arr = [];
+        switch (searchType) {
+            case 'Firstname':
+                setOpenDepartmentList(false);
+                staffList.filter((a) => a.firstname.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Lastname':
+                setOpenDepartmentList(false);
+                staffList.filter((a) => a.lastname.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'E-Mail':
+                setOpenDepartmentList(false);
+                staffList.filter((a) => a.email.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Role':
+                setOpenDepartmentList(false);
+                staffList.filter((a) => a.role.startsWith(searchText)).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Department':
+                setOpenDepartmentList(true);
+                break;
+
+            default:
+                setOpenDepartmentList(false);
+                break;
+        }
+        if (searchText.length !== 0) {
+            setAllStaffList(arr);
+        } else {
+            setAllStaffList(staffList)
+        }
+    }, [searchText, staffList, searchType]);
 
     const handleRestoreAllClick = () => {
         Swal.fire({
@@ -88,49 +178,84 @@ const AllStaffList = () => {
 
     return (
         <Fragment>
-            {staffList.length > 0 ?
-                <div>
-                    <div className={`${classes.trashButtons}`}>
-                        <button className={`${classes.restoreAllButton}`} onClick={handleRestoreAllClick}>Restore All Staff</button>
-                        <button className={`${classes.deleteAllButton}`} onClick={handleDeleteAllClick}>Delete All Staff</button>
+            {
+                staffList.length > 0 ?
+                    <div>
+                        <div className={`${classes.trashButtons}`}>
+                            <button className={`${classes.restoreAllButton}`} onClick={handleRestoreAllClick}>Restore All Staff</button>
+                            <button className={`${classes.deleteAllButton}`} onClick={handleDeleteAllClick}>Delete All Staff</button>
+                        </div>
+                    </div>
+                    :
+                    <div className={`${classes.trashNoData}`}>No staff deleted</div>
+            }
+            <Fragment>
+                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+                <div className='mt-3'>
+                    {!openDepartmentList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                    {
+                        openDepartmentList &&
+                        <select value={department} className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                            <option value='' hidden>Select Your Department</option>
+                            <option value={'allDepartments'}>All Departments</option>
+                            {
+                                departments.map((department, key) => (
+                                    <option key={key} value={department}>{department}</option>
+                                ))
+                            }
+                        </select>
+                    }
+                    <div className="btn-group mb-1">
+                        <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {searchType}
+                        </button>
+                        <div className="dropdown-menu">
+                            <div className="dropdown-item" onClick={() => setSearchType('Firstname')}>Firstname</div>
+                            <div className="dropdown-item" onClick={() => setSearchType('Lastname')}>Lastname</div>
+                            <div className="dropdown-item" onClick={() => setSearchType('E-Mail')}>E-Mail</div>
+                            <div className="dropdown-item" onClick={() => setSearchType('Role')}>Role</div>
+                            <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
+                        </div>
                     </div>
                 </div>
-                :
-                <div className={`${classes.trashNoData}`}>No staff deleted</div>
-            }
-            {staffList.length > 0 &&
-                <Fragment>
-                    {smallDevice &&
+                {
+                    allStaffList.length > 0 ?
                         <Fragment>
-                            {
-                                staffList.map((staff) =>
-                                    <SmallSingleStaff key={staff.id} id={staff.id} name={staff.firstname + ' ' + staff.lastname} email={staff.email} role={staff.role} department={staff.department} />
-                                )
-                            }
-                        </Fragment>
-                    }
-                    {!smallDevice &&
-                        <div className={`mx-3 mt-3`}>
-                            <table className={`table overflow-hidden ${classes.largeTable}`}>
-                                <thead className={`thead-light`}>
-                                    <tr>
-                                        <th scope={`col`}>Name</th>
-                                        <th scope={`col`}>E-Mail</th>
-                                        <th scope={`col`}>Role</th>
-                                        <th scope={`col`}>Department</th>
+                            <table className={`${classes.tableParent}`}>
+                                <thead className={`${classes.tableHeader}`}>
+                                    <tr className={`${classes.tableRow}`}>
+                                        <th className={`${classes.tableHead}`} scope="col">Name</th>
+                                        <th className={`${classes.tableHead}`} scope="col">E-Mail</th>
+                                        <th className={`${classes.tableHead}`} scope="col">Role</th>
+                                        <th className={`${classes.tableHead}`} scope="col">Department</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className={`${classes.tableBody}`}>
                                     {
-                                        staffList.map((staff) =>
-                                            <SingleStaff key={staff.id} id={staff.id} name={staff.firstname + ' ' + staff.lastname} email={staff.email} role={staff.role} department={staff.department} />
-                                        )
+                                        currentPageData.length > 0 && currentPageData.map((field) => (
+                                            <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id}>
+                                                <td className={`${classes.tableData}`} data-label="name" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.firstname + ' ' + field.lastname}</td>
+                                                <td className={`${classes.tableData}`} data-label="email" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.email}</td>
+                                                <td className={`${classes.tableData}`} data-label="role" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.role}</td>
+                                                <td className={`${classes.tableData}`} data-label="department" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.department.toString()}</td>
+                                            </tr>
+                                        ))
                                     }
                                 </tbody>
                             </table>
-                        </div>
-                    }
-                </Fragment>}
+
+                            <Sweetpagination
+                                currentPageData={setCurrentPageData}
+                                dataPerPage={numberOfPages}
+                                getData={allStaffList}
+                                navigation={true}
+                            />
+
+                        </Fragment>
+                        :
+                        <div className={`${classes.noData}`}>No staff deleted</div>
+                }
+            </Fragment>
         </Fragment>
     );
 };
