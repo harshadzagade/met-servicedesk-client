@@ -178,15 +178,18 @@ const AllStaffList = () => {
             <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
             <div className='mt-3'>
                 {!openDepartmentList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-                {openDepartmentList && <select value={department} className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
-                    <option value='' hidden>Select Your Department</option>
-                    <option value={'allDepartments'}>All Departments</option>
-                    {
-                        departments.map((department, key) => (
-                            <option key={key} value={department}>{department}</option>
-                        ))
-                    }
-                </select>}
+                {
+                    openDepartmentList &&
+                    <select value={department} className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                        <option value='' hidden>Select Your Department</option>
+                        <option value={'allDepartments'}>All Departments</option>
+                        {
+                            departments.map((department, key) => (
+                                <option key={key} value={department}>{department}</option>
+                            ))
+                        }
+                    </select>
+                }
                 <div className="btn-group mb-1">
                     <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {searchType}
