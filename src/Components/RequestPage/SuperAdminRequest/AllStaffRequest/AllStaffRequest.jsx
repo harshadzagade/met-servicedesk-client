@@ -1,24 +1,16 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './AllStaffRequest.module.css';
-import SingleStaffRequest from './SingleStaffRequest/SingleStaffRequest';
-import SmallSingleStaffRequest from './SmallSingleStaffRequest/SmallSingleStaffRequest';
 import RequestDetails from '../RequestDetails/RequestDetails';
+import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import Sweetpagination from 'sweetpagination';
 
 const AllStaffRequest = () => {
-    const windowWidth = window.innerWidth;
     const [staffRequestList, setStaffRequestList] = useState([]);
-    const [smallDevice, setSmallDevice] = useState(false);
+    const [numberOfPages, setNumberOfPages] = useState(10);
+    const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [openDetails, setOpenDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null);
-
-    useEffect(() => {
-        if (windowWidth < 768) {
-            setSmallDevice(true);
-        } else {
-            setSmallDevice(false);
-        }
-    }, [windowWidth]);
 
     useEffect(() => {
         const getList = async () => {
@@ -40,45 +32,51 @@ const AllStaffRequest = () => {
     return (
         <Fragment>
             {openDetails && <RequestDetails onConfirm={handleDetailsCancel} id={detailsId} />}
-            {staffRequestList.length > 0 ?
-                <Fragment>
-                    {smallDevice &&
-                        <Fragment>
-                            {
-                                staffRequestList.map((request) =>
-                                    <SmallSingleStaffRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} name={request.name} department={request.department} subject={request.subject} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
-                                )
-                            }
-                        </Fragment>
-                    }
-                    {!smallDevice &&
-                        <div className={`mx-3 mt-3`}>
-                            <table className={`table ${classes.largeTable} overflow-hidden`}>
-                                <thead className={`thead-light`}>
-                                    <tr>
-                                        <th scope="col">Subject</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Department</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Priority</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">HOD Approval</th>
-                                        <th scope="col">Admin Approval</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        staffRequestList.map((request) =>
-                                            <SingleStaffRequest setOpenDetails={checkOpenDetails} key={request.id} id={request.id} subject={request.subject} name={request.name} department={request.department} category={request.category} priority={request.priority} status={request.status} approval1={request.approval1} approval2={request.approval2} />
-                                        )
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                </Fragment>
-                :
-                <div className={`${classes.homeNoData}`}>No request initiated</div>
+            <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+            {
+                staffRequestList.length > 0 ?
+                    <Fragment>
+                        <table className={`${classes.tableParent}`}>
+                            <thead className={`${classes.tableHeader}`}>
+                                <tr className={`${classes.tableRow}`}>
+                                    <th className={`${classes.tableHead}`} scope="col">Subject</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Name</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Department</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Category</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Priority</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Status</th>
+                                    <th className={`${classes.tableHead}`} scope="col">HOD Approval</th>
+                                    <th className={`${classes.tableHead}`} scope="col">Admin Approval</th>
+                                </tr>
+                            </thead>
+                            <tbody className={`${classes.tableBody}`}>
+                                {
+                                    currentPageData.length > 0 && currentPageData.map((field) => (
+                                        <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id} onClick={() => checkOpenDetails(true, field.id)}>
+                                            <td className={`${classes.tableData}`} data-label="subject">{field.subject}</td>
+                                            <td className={`${classes.tableData}`} data-label="name">{field.name}</td>
+                                            <td className={`${classes.tableData}`} data-label="department">{field.department}</td>
+                                            <td className={`${classes.tableData}`} data-label="category">{field.category}</td>
+                                            <td className={`${classes.tableData}`} data-label="priority">{field.priority}</td>
+                                            <td className={`${classes.tableData}`} data-label="status">{field.status}</td>
+                                            <td className={`${classes.tableData}`} data-label="approval1">{field.approval1 === 1? 'approved' : 'not approved'}</td>
+                                            <td className={`${classes.tableData}`} data-label="approval2">{field.approval2 === 1? 'approved' : 'not approved'}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+
+                        <Sweetpagination
+                            currentPageData={setCurrentPageData}
+                            dataPerPage={numberOfPages}
+                            getData={staffRequestList}
+                            navigation={true}
+                        />
+
+                    </Fragment>
+                    :
+                    <div className={`${classes.noData}`}>No request initiated</div>
             }
         </Fragment>
     );

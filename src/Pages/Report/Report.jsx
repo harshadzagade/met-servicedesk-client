@@ -154,13 +154,13 @@ const Report = () => {
                             <tbody className={`${classes.tableBody}`}>
                                 {
                                     currentPageData.length > 0 && currentPageData.map((field) => (
-                                        <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id}>
-                                            {reportType === 'full' && <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>}
-                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.subject}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.staffName}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.category}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.priority}</td>
-                                            <td className={`${classes.tableData}`} onClick={() => checkOpenDetails(true, field.id)}>{field.department}</td>
+                                        <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id} onClick={() => checkOpenDetails(true, field.id)}>
+                                            {reportType === 'full' && <td className={`${classes.tableData}`}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>}
+                                            <td className={`${classes.tableData}`}>{field.subject}</td>
+                                            <td className={`${classes.tableData}`}>{field.staffName}</td>
+                                            <td className={`${classes.tableData}`}>{field.category}</td>
+                                            <td className={`${classes.tableData}`}>{field.priority}</td>
+                                            <td className={`${classes.tableData}`}>{field.department}</td>
                                         </tr>
                                     ))
                                 }

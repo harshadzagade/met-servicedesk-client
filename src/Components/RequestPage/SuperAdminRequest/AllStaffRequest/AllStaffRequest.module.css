@@ -1,6 +1,93 @@
-.homeNoData {
+.noData {
     font-weight: 700;
     font-size: xx-large;
     text-shadow: .5px .5px .5px gray;
     font-family: "Bahnschrift", Times, serif;
+}
+
+.tableParent {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tableParent .tableRow {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+.tableParent .tableHead,
+.tableParent .tableData {
+    padding: .625em;
+    text-align: center;
+}
+
+.tableParent .tableHead {
+    color: white;
+    background-color: #2e2e2e;
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+    .tableParent {
+        border: 0;
+    }
+
+    .tableParent .tableHeader {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .tableParent .tableRow {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .tableParent .tableData {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    .tableParent .tableData::before {
+        /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .tableParent .tableData:last-child {
+        border-bottom: 0;
+    }
+}
+
+.tableField {
+    cursor: pointer;
+}
+
+.tableField:hover {
+    background-color: #cccccc;
+}
+
+.tableField:active {
+    background-color: #919191;
+    color: white;
 }

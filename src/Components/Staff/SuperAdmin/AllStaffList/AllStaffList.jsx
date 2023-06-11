@@ -244,7 +244,7 @@ const AllStaffList = () => {
 
                     </Fragment>
                     :
-                    <div className={`${classes.homeNoData}`}>No staff added</div>
+                    <div className={`${classes.noData}`}>No staff added</div>
             }
         </Fragment>
     );

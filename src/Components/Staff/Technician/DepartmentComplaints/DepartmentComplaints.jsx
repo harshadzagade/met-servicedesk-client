@@ -72,7 +72,7 @@ const DepartmentComplaints = () => {
                     }
                 </Fragment>
                 :
-                <div className={`${classes.homeNoData}`}>{errorMessage}</div>
+                <div className={`${classes.noData}`}>{errorMessage}</div>
             }
         </Fragment>
     );

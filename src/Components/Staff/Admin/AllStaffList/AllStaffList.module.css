@@ -2,7 +2,7 @@
     border-radius: 0.5rem;
 }
 
-.homeNoData {
+.noData {
     font-weight: 700;
     font-size: xx-large;
     text-shadow: .5px .5px .5px gray;
