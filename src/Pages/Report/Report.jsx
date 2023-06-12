@@ -13,7 +13,6 @@ const Report = () => {
     const [staffDepartments, setStaffDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState('');
     const [departmentStaff, setDepartmentStaff] = useState([]);
-    const [reportType, setReportType] = useState('full');
     const [searchType, setSearchType] = useState('Subject');
     const [searchText, setSearchText] = useState('');
     const [selectedStaff, setSelectedStaff] = useState(null);
@@ -22,7 +21,7 @@ const Report = () => {
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [refresh, setRefresh] = useState(false);
     const [isNormalSearch, setIsNormalSearch] = useState(true);
-    const [ticketType, setTicketType] = useState('');
+    const [ticketType, setTicketType] = useState('allTicketTypes');
     const [openTicketTypeList, setOpenTicketTypeList] = useState(false);
     const [department, setDepartment] = useState('');
     const [departments, setDepartments] = useState([]);
@@ -62,8 +61,8 @@ const Report = () => {
             if (selectedStaff) {
                 try {
                     if (selectedDepartment.length !== 0) {
-                        switch (reportType) {
-                            case 'full':
+                        switch (ticketType) {
+                            case 'allTicketTypes':
                                 const full = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
                                 setReportList(full.data.report);
                                 break;
@@ -95,7 +94,7 @@ const Report = () => {
         };
         getList();
         setRefresh(false);
-    }, [selectedStaff, refresh, reportType, selectedDepartment]);
+    }, [selectedStaff, refresh, ticketType, selectedDepartment]);
 
     useEffect(() => {
         const getStaffByDepartment = async () => {
@@ -193,6 +192,14 @@ const Report = () => {
     useEffect(() => {
         let arr = [];
         switch (searchType) {
+            case 'Ticket Type':
+                setOpenTicketTypeList(true);
+                setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setOpenDepartmentList(false);
+                setIsNormalSearch(false);
+                break;
+
             case 'Subject':
                 setOpenTicketTypeList(false);
                 setOpenCategoryList(false);
@@ -269,18 +276,6 @@ const Report = () => {
                         </select>
                     </div>
                 }
-                {
-                    selectedStaff &&
-                    <div className={`${classes.staffSelection}`}>
-                        <div>Report Type:&nbsp;</div>
-                        <select className={`${classes.dropdownSelect}`} onChange={(e) => setReportType(e.target.value)}>
-                            <option value='' hidden>Select report type</option>
-                            <option value='full'>Full</option>
-                            <option value='requests'>Requests</option>
-                            <option value='complaints'>Complaints</option>
-                        </select>
-                    </div>
-                }
             </div>
             {
                 selectedStaff &&
@@ -289,10 +284,10 @@ const Report = () => {
                     {
                         openTicketTypeList &&
                         <select value={ticketType} className={`${classes.optionSearchBox}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
-                            <option value='' hidden>Select Your Ticket</option>
-                            <option value='allTickets'>All Tickets</option>
-                            <option value='Request'>Request</option>
-                            <option value='Complaint'>Complaint</option>
+                            <option value='' hidden>Select Your Ticket Type</option>
+                            <option value='allTicketTypes'>All Ticket Types</option>
+                            <option value='requests'>Requests</option>
+                            <option value='complaints'>Complaints</option>
                         </select>
                     }
                     {
@@ -334,6 +329,7 @@ const Report = () => {
                             {searchType}
                         </button>
                         <div className="dropdown-menu">
+                            <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
@@ -349,7 +345,7 @@ const Report = () => {
                         <table className={`${classes.tableParent}`}>
                             <thead className={`${classes.tableHeader}`}>
                                 <tr className={`${classes.tableRow}`}>
-                                    {reportType === 'full' && <th className={`${classes.tableHead}`} scope="col">Ticket Type</th>}
+                                    {ticketType === 'allTicketTypes' && <th className={`${classes.tableHead}`} scope="col">Ticket Type</th>}
                                     <th className={`${classes.tableHead}`} scope="col">Subject</th>
                                     <th className={`${classes.tableHead}`} scope="col">Category</th>
                                     <th className={`${classes.tableHead}`} scope="col">Priority</th>
@@ -360,7 +356,7 @@ const Report = () => {
                                 {
                                     currentPageData.length > 0 && currentPageData.map((field) => (
                                         <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id} onClick={() => checkOpenDetails(true, field.id)}>
-                                            {reportType === 'full' && <td className={`${classes.tableData}`}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>}
+                                            {ticketType === 'allTicketTypes' && <td className={`${classes.tableData}`}>{(field.isRequest && 'Request') || (field.isComplaint && 'Complaint')}</td>}
                                             <td className={`${classes.tableData}`}>{field.subject}</td>
                                             <td className={`${classes.tableData}`}>{field.category}</td>
                                             <td className={`${classes.tableData}`}>{field.priority}</td>
