@@ -69,7 +69,7 @@ const AllStaffRequest = () => {
     };
 
     useEffect(() => {
-        const getStaffByDepartment = async () => {
+        const getRequestByDepartment = async () => {
             try {
                 if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
                     setAllRequestList(requestList);
@@ -86,12 +86,12 @@ const AllStaffRequest = () => {
             }
         };
         if (openDepartmentList) {
-            getStaffByDepartment();
+            getRequestByDepartment();
         }
     }, [department, openDepartmentList, requestList]);
 
     useEffect(() => {
-        const getStaffByCategory = async () => {
+        const getRequestByCategory = async () => {
             try {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllRequestList(requestList);
@@ -108,9 +108,53 @@ const AllStaffRequest = () => {
             }
         };
         if (openCategoryList) {
-            getStaffByCategory();
+            getRequestByCategory();
         }
     }, [category, openCategoryList, requestList]);
+
+    useEffect(() => {
+        const getRequestByPriority = async () => {
+            try {
+                if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
+                    setAllRequestList(requestList);
+                } else {
+                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbypriority/${priority}`);
+                    setAllRequestList(requests.data.requests);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openPriorityList) {
+            getRequestByPriority();
+        }
+    }, [priority, openPriorityList, requestList]);
+
+    useEffect(() => {
+        const getRequestByStatus = async () => {
+            try {
+                if ((openStatusList && status.length === 0) || (openStatusList && status === 'allStatus')) {
+                    setAllRequestList(requestList);
+                } else {
+                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbystatus/${status}`);
+                    setAllRequestList(requests.data.requests);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openStatusList) {
+            getRequestByStatus();
+        }
+    }, [status, openStatusList, requestList]);
 
     useEffect(() => {
         let arr = [];
@@ -118,6 +162,8 @@ const AllStaffRequest = () => {
             case 'Subject':
                 setOpenDepartmentList(false);
                 setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setOpenStatusList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
                     return (
@@ -129,6 +175,8 @@ const AllStaffRequest = () => {
             case 'Name':
                 setOpenDepartmentList(false);
                 setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setOpenStatusList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.name.startsWith(searchText)).map((data) => {
                     return (
@@ -140,30 +188,33 @@ const AllStaffRequest = () => {
             case 'Department':
                 setOpenDepartmentList(true);
                 setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setOpenStatusList(false);
                 setIsNormalSearch(false);
                 break;
 
             case 'Category':
                 setOpenDepartmentList(false);
                 setOpenCategoryList(true);
+                setOpenPriorityList(false);
+                setOpenStatusList(false);
                 setIsNormalSearch(false);
                 break;
 
             case 'Priority':
                 setOpenDepartmentList(false);
                 setOpenCategoryList(false);
-                setIsNormalSearch(true);
-                requestList.filter((a) => a.priority.startsWith(searchText)).map((data) => {
-                    return (
-                        arr.push(data)
-                    );
-                });
+                setOpenPriorityList(true);
+                setOpenStatusList(false);
+                setIsNormalSearch(false);
                 break;
 
             case 'Status':
                 setOpenDepartmentList(false);
                 setOpenCategoryList(false);
-                setIsNormalSearch(true);
+                setOpenPriorityList(false);
+                setOpenStatusList(true);
+                setIsNormalSearch(false);
                 requestList.filter((a) => a.status.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
@@ -208,7 +259,7 @@ const AllStaffRequest = () => {
             }
             {
                 openCategoryList &&
-                <select value={department} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
                     <option value='' hidden>Select Your Category</option>
                     <option value={'allCategories'}>All Categories</option>
                     {
@@ -216,6 +267,29 @@ const AllStaffRequest = () => {
                             <option key={key} value={category}>{category}</option>
                         ))
                     }
+                </select>
+            }
+            {
+                openPriorityList &&
+                <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                    <option value='' hidden>Select Your Priority</option>
+                    <option value='allPriorities'>All Priorities</option>
+                    <option value='high'>High</option>
+                    <option value='medium'>Medium</option>
+                    <option value='low'>Low</option>
+                </select>
+            }
+            {
+                openStatusList &&
+                <select value={status} className={`${classes.optionSearchBox}`} name="status" required onChange={(e) => setStatus(e.target.value)}>
+                    <option value='' hidden>Select Your Status</option>
+                    <option value='allStatus'>All Status</option>
+                    <option value='pending'>Pending</option>
+                    <option value='assigned'>Assigned</option>
+                    <option value='attending'>Attending</option>
+                    <option value='forwarded'>Forwarded</option>
+                    <option value='closed'>Closed</option>
+                    <option value='disapproved'>Disapproved</option>
                 </select>
             }
             <div className="btn-group mb-1">
