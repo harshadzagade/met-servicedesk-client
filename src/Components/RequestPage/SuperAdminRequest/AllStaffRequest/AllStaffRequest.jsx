@@ -36,6 +36,14 @@ const AllStaffRequest = () => {
     }, [openDepartmentList]);
 
     useEffect(() => {
+        const getCategories = async () => {
+            const categories = await axios.get(`http://localhost:8001/api/request/requestcategories`);
+            setCategories(categories.data.categories);
+        };
+        getCategories();
+    }, [openCategoryList]);
+
+    useEffect(() => {
         const getList = async () => {
             try {
                 const list = await axios.get(`http://localhost:8001/api/request/allrequests`);
@@ -83,10 +91,33 @@ const AllStaffRequest = () => {
     }, [department, openDepartmentList, requestList]);
 
     useEffect(() => {
+        const getStaffByCategory = async () => {
+            try {
+                if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
+                    setAllRequestList(requestList);
+                } else {
+                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbycategory/${category}`);
+                    setAllRequestList(requests.data.requests);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openCategoryList) {
+            getStaffByCategory();
+        }
+    }, [category, openCategoryList, requestList]);
+
+    useEffect(() => {
         let arr = [];
         switch (searchType) {
             case 'Subject':
                 setOpenDepartmentList(false);
+                setOpenCategoryList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
                     return (
@@ -97,6 +128,7 @@ const AllStaffRequest = () => {
 
             case 'Name':
                 setOpenDepartmentList(false);
+                setOpenCategoryList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.name.startsWith(searchText)).map((data) => {
                     return (
@@ -107,21 +139,19 @@ const AllStaffRequest = () => {
 
             case 'Department':
                 setOpenDepartmentList(true);
+                setOpenCategoryList(false);
                 setIsNormalSearch(false);
                 break;
 
             case 'Category':
                 setOpenDepartmentList(false);
-                setIsNormalSearch(true);
-                requestList.filter((a) => a.category.startsWith(searchText)).map((data) => {
-                    return (
-                        arr.push(data)
-                    );
-                });
+                setOpenCategoryList(true);
+                setIsNormalSearch(false);
                 break;
 
             case 'Priority':
                 setOpenDepartmentList(false);
+                setOpenCategoryList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.priority.startsWith(searchText)).map((data) => {
                     return (
@@ -132,6 +162,7 @@ const AllStaffRequest = () => {
 
             case 'Status':
                 setOpenDepartmentList(false);
+                setOpenCategoryList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.status.startsWith(searchText)).map((data) => {
                     return (
@@ -171,6 +202,18 @@ const AllStaffRequest = () => {
                     {
                         departments.map((department, key) => (
                             <option key={key} value={department}>{department}</option>
+                        ))
+                    }
+                </select>
+            }
+            {
+                openCategoryList &&
+                <select value={department} className={`${classes.departmentSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                    <option value='' hidden>Select Your Category</option>
+                    <option value={'allCategories'}>All Categories</option>
+                    {
+                        categories.map((category, key) => (
+                            <option key={key} value={category}>{category}</option>
                         ))
                     }
                 </select>
