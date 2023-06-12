@@ -21,7 +21,7 @@ const AllStaffList = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/staff/trashdepartments`);
+            const departments = await axios.get(`http://localhost:8001/api/trash/trashdepartments`);
             setDepartments(departments.data.departments);
         };
         getDepartments();
@@ -50,7 +50,7 @@ const AllStaffList = () => {
                 if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
                     setAllStaffList(staffList);
                 } else {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/trashstaffbydepartment/${department}`);
+                    const staff = await axios.get(`http://localhost:8001/api/trash/trashstaffbydepartment/${department}`);
                     setAllStaffList(staff.data.staff);
                 }
             } catch (error) {

@@ -4,21 +4,49 @@ import classes from './AllStaffRequest.module.css';
 import RequestDetails from '../RequestDetails/RequestDetails';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import Sweetpagination from 'sweetpagination';
+import Swal from 'sweetalert2';
 
 const AllStaffRequest = () => {
-    const [staffRequestList, setStaffRequestList] = useState([]);
-    const [allStaffRequestList, setAllStaffRequestList] = useState(staffRequestList);
+    const [requestList, setRequestList] = useState([]);
+    const [allRequestList, setAllRequestList] = useState(requestList);
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [searchType, setSearchType] = useState('Subject');
     const [searchText, setSearchText] = useState('');
     const [openDetails, setOpenDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null);
+    const [isNormalSearch, setIsNormalSearch] = useState(true);
+    const [department, setDepartment] = useState('');
+    const [departments, setDepartments] = useState([]);
+    const [openDepartmentList, setOpenDepartmentList] = useState(false);
+    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [openCategoryList, setOpenCategoryList] = useState(false);
+    const [priority, setPriority] = useState('');
+    const [openPriorityList, setOpenPriorityList] = useState(false);
+    const [status, setStatus] = useState('');
+    const [openStatusList, setOpenStatusList] = useState(false);
+
+    useEffect(() => {
+        const getDepartments = async () => {
+            const departments = await axios.get(`http://localhost:8001/api/request/requestdepartments`);
+            setDepartments(departments.data.departments);
+        };
+        getDepartments();
+    }, [openDepartmentList]);
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/request/allrequests`);
-            setStaffRequestList(list.data.requests);
+            try {
+                const list = await axios.get(`http://localhost:8001/api/request/allrequests`);
+                setRequestList(list.data.requests);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch requests'
+                });
+            }
         };
         getList();
     }, []);
@@ -33,10 +61,34 @@ const AllStaffRequest = () => {
     };
 
     useEffect(() => {
+        const getStaffByDepartment = async () => {
+            try {
+                if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
+                    setAllRequestList(requestList);
+                } else {
+                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbydepartment/${department}`);
+                    setAllRequestList(requests.data.requests);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openDepartmentList) {
+            getStaffByDepartment();
+        }
+    }, [department, openDepartmentList, requestList]);
+
+    useEffect(() => {
         let arr = [];
         switch (searchType) {
             case 'Subject':
-                staffRequestList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
+                setOpenDepartmentList(false);
+                setIsNormalSearch(true);
+                requestList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -44,7 +96,9 @@ const AllStaffRequest = () => {
                 break;
 
             case 'Name':
-                staffRequestList.filter((a) => a.name.startsWith(searchText)).map((data) => {
+                setOpenDepartmentList(false);
+                setIsNormalSearch(true);
+                requestList.filter((a) => a.name.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -52,15 +106,14 @@ const AllStaffRequest = () => {
                 break;
 
             case 'Department':
-                staffRequestList.filter((a) => a.department.startsWith(searchText)).map((data) => {
-                    return (
-                        arr.push(data)
-                    );
-                });
+                setOpenDepartmentList(true);
+                setIsNormalSearch(false);
                 break;
 
             case 'Category':
-                staffRequestList.filter((a) => a.category.startsWith(searchText)).map((data) => {
+                setOpenDepartmentList(false);
+                setIsNormalSearch(true);
+                requestList.filter((a) => a.category.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -68,7 +121,9 @@ const AllStaffRequest = () => {
                 break;
 
             case 'Priority':
-                staffRequestList.filter((a) => a.priority.startsWith(searchText)).map((data) => {
+                setOpenDepartmentList(false);
+                setIsNormalSearch(true);
+                requestList.filter((a) => a.priority.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -76,7 +131,9 @@ const AllStaffRequest = () => {
                 break;
 
             case 'Status':
-                staffRequestList.filter((a) => a.status.startsWith(searchText)).map((data) => {
+                setOpenDepartmentList(false);
+                setIsNormalSearch(true);
+                requestList.filter((a) => a.status.startsWith(searchText)).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -95,17 +152,29 @@ const AllStaffRequest = () => {
                 break;
         }
         if (searchText.length !== 0) {
-            setAllStaffRequestList(arr);
+            setAllRequestList(arr);
         } else {
-            setAllStaffRequestList(staffRequestList)
+            setAllRequestList(requestList)
         }
-    }, [searchText, staffRequestList, searchType]);
+    }, [searchText, requestList, searchType]);
 
     return (
         <Fragment>
             {openDetails && <RequestDetails onConfirm={handleDetailsCancel} id={detailsId} />}
             <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-            <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />
+            {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+            {
+                openDepartmentList &&
+                <select value={department} className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                    <option value='' hidden>Select Your Department</option>
+                    <option value={'allDepartments'}>All Departments</option>
+                    {
+                        departments.map((department, key) => (
+                            <option key={key} value={department}>{department}</option>
+                        ))
+                    }
+                </select>
+            }
             <div className="btn-group mb-1">
                 <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {searchType}
@@ -122,7 +191,7 @@ const AllStaffRequest = () => {
                 </div>
             </div>
             {
-                allStaffRequestList.length > 0 ?
+                allRequestList.length > 0 ?
                     <Fragment>
                         <table className={`${classes.tableParent}`}>
                             <thead className={`${classes.tableHeader}`}>
@@ -158,7 +227,7 @@ const AllStaffRequest = () => {
                         <Sweetpagination
                             currentPageData={setCurrentPageData}
                             dataPerPage={numberOfPages}
-                            getData={allStaffRequestList}
+                            getData={allRequestList}
                             navigation={true}
                         />
 
