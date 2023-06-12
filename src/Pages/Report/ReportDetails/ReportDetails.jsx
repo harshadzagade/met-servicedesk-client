@@ -21,7 +21,7 @@ const ReportDetails = (props) => {
         <div className={`${classes.reportDetailsHeading}`}>Report Details</div>
         <div className={`${classes.detailsView}`}>
           <div className='d-flex'>
-            <div className={`${classes.detailsTag}`}>Report Type:</div>
+            <div className={`${classes.detailsTag}`}>Ticket Type:</div>
             <div className={`${classes.detailsField}`}>{(reportData.isRequest && 'Request') || (reportData.isComplaint && 'Complaint')}</div>
           </div>
           <hr className={`${classes.hrTag}`} />
