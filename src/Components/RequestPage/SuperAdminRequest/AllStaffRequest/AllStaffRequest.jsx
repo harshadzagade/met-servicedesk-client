@@ -196,7 +196,7 @@ const AllStaffRequest = () => {
             {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
             {
                 openDepartmentList &&
-                <select value={department} className={`${classes.departmentSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
                     <option value='' hidden>Select Your Department</option>
                     <option value={'allDepartments'}>All Departments</option>
                     {
@@ -208,7 +208,7 @@ const AllStaffRequest = () => {
             }
             {
                 openCategoryList &&
-                <select value={department} className={`${classes.departmentSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                <select value={department} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
                     <option value='' hidden>Select Your Category</option>
                     <option value={'allCategories'}>All Categories</option>
                     {
