@@ -290,7 +290,6 @@ const AllStaffRequest = () => {
                 setOpenHodApprovalList(true);
                 setOpenAdminApprovalList(false);
                 setIsNormalSearch(false);
-                console.log('Not made it yet');
                 break;
 
             case 'Admin Approval':
@@ -301,7 +300,6 @@ const AllStaffRequest = () => {
                 setOpenHodApprovalList(false);
                 setOpenAdminApprovalList(true);
                 setIsNormalSearch(false);
-                console.log('Not made it yet');
                 break;
 
             default:
@@ -349,7 +347,7 @@ const AllStaffRequest = () => {
                     <option value='' hidden>Select Your Priority</option>
                     <option value='allPriorities'>All Priorities</option>
                     <option value='high'>High</option>
-                    <option value='medium'>Medium</option>
+                    <option value='moderate'>Moderate</option>
                     <option value='low'>Low</option>
                 </select>
             }
