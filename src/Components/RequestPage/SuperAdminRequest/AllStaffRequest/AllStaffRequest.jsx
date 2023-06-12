@@ -26,6 +26,10 @@ const AllStaffRequest = () => {
     const [openPriorityList, setOpenPriorityList] = useState(false);
     const [status, setStatus] = useState('');
     const [openStatusList, setOpenStatusList] = useState(false);
+    const [hodApproval, setHodApproval] = useState('');
+    const [openHodApprovalList, setOpenHodApprovalList] = useState(false);
+    const [adminApproval, setAdminApproval] = useState('');
+    const [openAdminApprovalList, setOpenAdminApprovalList] = useState(false);
 
     useEffect(() => {
         const getDepartments = async () => {
@@ -157,6 +161,50 @@ const AllStaffRequest = () => {
     }, [status, openStatusList, requestList]);
 
     useEffect(() => {
+        const getRequestByHodApproval = async () => {
+            try {
+                if ((openHodApprovalList && hodApproval.length === 0) || (openHodApprovalList && hodApproval === 'allHodApprovals')) {
+                    setAllRequestList(requestList);
+                } else {
+                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbyapproval1/${hodApproval}`);
+                    setAllRequestList(requests.data.requests);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openHodApprovalList) {
+            getRequestByHodApproval();
+        }
+    }, [hodApproval, openHodApprovalList, requestList]);
+
+    useEffect(() => {
+        const getRequestByAdminApproval = async () => {
+            try {
+                if ((openAdminApprovalList && adminApproval.length === 0) || (openAdminApprovalList && adminApproval === 'allAdminApprovals')) {
+                    setAllRequestList(requestList);
+                } else {
+                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbyapproval2/${adminApproval}`);
+                    setAllRequestList(requests.data.requests);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid credentials'
+                });
+            }
+        };
+        if (openAdminApprovalList) {
+            getRequestByAdminApproval();
+        }
+    }, [adminApproval, openAdminApprovalList, requestList]);
+
+    useEffect(() => {
         let arr = [];
         switch (searchType) {
             case 'Subject':
@@ -164,6 +212,8 @@ const AllStaffRequest = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
                 setOpenStatusList(false);
+                setOpenHodApprovalList(false);
+                setOpenAdminApprovalList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
                     return (
@@ -177,6 +227,8 @@ const AllStaffRequest = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
                 setOpenStatusList(false);
+                setOpenHodApprovalList(false);
+                setOpenAdminApprovalList(false);
                 setIsNormalSearch(true);
                 requestList.filter((a) => a.name.startsWith(searchText)).map((data) => {
                     return (
@@ -190,6 +242,8 @@ const AllStaffRequest = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
                 setOpenStatusList(false);
+                setOpenHodApprovalList(false);
+                setOpenAdminApprovalList(false);
                 setIsNormalSearch(false);
                 break;
 
@@ -198,6 +252,8 @@ const AllStaffRequest = () => {
                 setOpenCategoryList(true);
                 setOpenPriorityList(false);
                 setOpenStatusList(false);
+                setOpenHodApprovalList(false);
+                setOpenAdminApprovalList(false);
                 setIsNormalSearch(false);
                 break;
 
@@ -206,6 +262,8 @@ const AllStaffRequest = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(true);
                 setOpenStatusList(false);
+                setOpenHodApprovalList(false);
+                setOpenAdminApprovalList(false);
                 setIsNormalSearch(false);
                 break;
 
@@ -214,6 +272,8 @@ const AllStaffRequest = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
                 setOpenStatusList(true);
+                setOpenHodApprovalList(false);
+                setOpenAdminApprovalList(false);
                 setIsNormalSearch(false);
                 requestList.filter((a) => a.status.startsWith(searchText)).map((data) => {
                     return (
@@ -223,10 +283,24 @@ const AllStaffRequest = () => {
                 break;
 
             case 'HOD Approval':
+                setOpenDepartmentList(false);
+                setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setOpenStatusList(false);
+                setOpenHodApprovalList(true);
+                setOpenAdminApprovalList(false);
+                setIsNormalSearch(false);
                 console.log('Not made it yet');
                 break;
 
             case 'Admin Approval':
+                setOpenDepartmentList(false);
+                setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setOpenStatusList(false);
+                setOpenHodApprovalList(false);
+                setOpenAdminApprovalList(true);
+                setIsNormalSearch(false);
                 console.log('Not made it yet');
                 break;
 
@@ -292,6 +366,26 @@ const AllStaffRequest = () => {
                     <option value='disapproved'>Disapproved</option>
                 </select>
             }
+            {
+                openHodApprovalList &&
+                <select value={hodApproval} className={`${classes.optionSearchBox}`} name="hod" required onChange={(e) => setHodApproval(e.target.value)}>
+                    <option value='' hidden>Select Your Approval</option>
+                    <option value='allHodApprovals'>All HOD Approvals</option>
+                    <option value={0}>Not Updated</option>
+                    <option value={1}>Approved</option>
+                    <option value={2}>Disapproved</option>
+                </select>
+            }
+            {
+                openAdminApprovalList &&
+                <select value={adminApproval} className={`${classes.optionSearchBox}`} name="admin" required onChange={(e) => setAdminApproval(e.target.value)}>
+                    <option value='' hidden>Select Your Approval</option>
+                    <option value='allAdminApprovals'>All Admin Approvals</option>
+                    <option value={0}>Not Updated</option>
+                    <option value={1}>Approved</option>
+                    <option value={2}>Disapproved</option>
+                </select>
+            }
             <div className="btn-group mb-1">
                 <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {searchType}
@@ -333,8 +427,8 @@ const AllStaffRequest = () => {
                                             <td className={`${classes.tableData}`} data-label="category">{field.category}</td>
                                             <td className={`${classes.tableData}`} data-label="priority">{field.priority}</td>
                                             <td className={`${classes.tableData}`} data-label="status">{field.status}</td>
-                                            <td className={`${classes.tableData}`} data-label="approval1">{field.approval1 === 1 ? 'approved' : 'not approved'}</td>
-                                            <td className={`${classes.tableData}`} data-label="approval2">{field.approval2 === 1 ? 'approved' : 'not approved'}</td>
+                                            <td className={`${classes.tableData}`} data-label="approval1">{(field.approval1 === 1 && 'approved') || (field.approval1 === 2 && 'disapproved') || (field.approval1 === null && 'not updated')}</td>
+                                            <td className={`${classes.tableData}`} data-label="approval2">{(field.approval2 === 1 && 'approved') || (field.approval2 === 2 && 'disapproved') || (field.approval2 === null && 'not updated')}</td>
                                         </tr>
                                     ))
                                 }
