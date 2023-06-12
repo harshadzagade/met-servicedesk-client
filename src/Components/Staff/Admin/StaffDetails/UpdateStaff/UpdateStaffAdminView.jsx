@@ -22,7 +22,7 @@ const UpdateStaffAdminView = (props) => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Please enter valid fields'
+                    text: 'Unable to fetch staff information'
                 });
             }
         };

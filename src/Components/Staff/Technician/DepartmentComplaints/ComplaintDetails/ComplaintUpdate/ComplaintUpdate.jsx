@@ -28,7 +28,7 @@ const ComplaintUpdate = (props) => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Please enter valid fields'
+                    text: 'Unable to fetch technicians'
                 });
             }
         };
@@ -70,7 +70,7 @@ const ComplaintUpdate = (props) => {
             Swal.fire({
                 icon: 'error',
                 title: `${error.response.data.message}`,
-                text: 'Please enter valid fields'
+                text: 'Unable to change status'
             });
         }
     };

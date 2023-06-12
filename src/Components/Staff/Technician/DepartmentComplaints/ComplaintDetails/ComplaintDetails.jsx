@@ -39,8 +39,8 @@ const ComplaintDetails = () => {
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        title: 'Error occured',
-        text: `${error.response.data.message}`
+        title: `${error.response.data.message}`,
+        text: `Unable to assign complaint`
       });
     }
   };

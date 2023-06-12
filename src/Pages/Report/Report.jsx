@@ -87,7 +87,7 @@ const Report = () => {
                     Swal.fire({
                         icon: 'error',
                         title: `${error.response.data.message}`,
-                        text: 'Unable to fetch requests'
+                        text: 'Unable to fetch report'
                     });
                 }
             }
@@ -107,7 +107,7 @@ const Report = () => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Please enter valid credentials'
+                    text: 'Unable to fetch staff'
                 });
             }
         };
@@ -127,7 +127,7 @@ const Report = () => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Please enter valid credentials'
+                    text: 'Unable to fetch report'
                 });
             }
         };
@@ -149,7 +149,7 @@ const Report = () => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Please enter valid credentials'
+                    text: 'Unable to fetch report'
                 });
             }
         };
@@ -171,7 +171,7 @@ const Report = () => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Please enter valid credentials'
+                    text: 'Unable to fetch report'
                 });
             }
         };

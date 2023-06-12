@@ -46,7 +46,7 @@ const RequestApproval = (props) => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Please select department',
-                    text: 'Please enter valid fields'
+                    text: 'Select your department from Menubar'
                 });
             }
         };
@@ -83,7 +83,7 @@ const RequestApproval = (props) => {
             Swal.fire({
                 icon: 'error',
                 title: `${error.response.data.message}`,
-                text: 'Please enter valid fields'
+                text: 'Unable to approve request'
             });
         }
     };

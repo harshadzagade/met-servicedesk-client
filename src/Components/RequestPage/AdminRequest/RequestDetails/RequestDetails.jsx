@@ -53,7 +53,7 @@ const RequestDetails = () => {
       Swal.fire({
         icon: 'error',
         title: 'Please select department',
-        text: 'Please enter valid fields'
+        text: 'Select your department from Menubar'
       });
     }
   };

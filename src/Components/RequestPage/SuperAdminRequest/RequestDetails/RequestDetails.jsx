@@ -44,6 +44,7 @@ const RequestDetails = (props) => {
             <div className={`${classes.detailsTag} mt-2`}>Status:</div>
             <div className={`${classes.detailsField} mt-2`}>{requestData.status}</div>
           </div>
+          {requestData.assign && <hr className={`${classes.hrTag}`} />}
           {requestData.assign && <div className='d-flex'>
             <div className={`${classes.detailsTag} mt-2`}>Assigned to:</div>
             <div className={`${classes.detailsField} mt-2`}>{requestData.assignedName}</div>

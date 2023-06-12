@@ -60,7 +60,7 @@ const Login = () => {
             Swal.fire({
                 icon: 'error',
                 title: `${error.response.data.message}`,
-                text: 'Please enter valid credentials'
+                text: 'Unable to login'
             });
         }
         navigate('/');
