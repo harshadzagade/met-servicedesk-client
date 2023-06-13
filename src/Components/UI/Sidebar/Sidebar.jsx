@@ -10,7 +10,7 @@ const Sidebar = ({ children }) => {
     const [showDepartments, setShowDepartments] = useState(false);
     const id = localStorage.getItem('id');
     const [showTabs, setShowTabs] = useState(false);
-    const [isHomeActive, setIsHomeActive] = useState(true);
+    const [isHomeActive, setIsHomeActive] = useState(false);
     const [isCreateActive, setIsCreateActive] = useState(false);
     const [isTrashActive, setIsTrashActive] = useState(false);
     const [isRequestActive, setIsRequestActive] = useState(false);
@@ -112,7 +112,92 @@ const Sidebar = ({ children }) => {
         adminCtx.setDepartment(department);
     };
 
+    useEffect(() => {
+        switch (sessionStorage.getItem('tab')) {
+            case 'home':
+                setIsHomeActive(true);
+                setIsCreateActive(false);
+                setIsTrashActive(false);
+                setIsRequestActive(false);
+                setIsComplaintActive(false);
+                setIsServicesActive(false);
+                setIsReportActive(false);
+                navigate('/');
+                break;
+
+            case 'create':
+                setIsHomeActive(false);
+                setIsCreateActive(true);
+                setIsTrashActive(false);
+                setIsRequestActive(false);
+                setIsComplaintActive(false);
+                setIsServicesActive(false);
+                setIsReportActive(false);
+                navigate('/superadmin/createstaff');
+                break;
+
+            case 'archive':
+                setIsHomeActive(false);
+                setIsCreateActive(false);
+                setIsTrashActive(true);
+                setIsRequestActive(false);
+                setIsComplaintActive(false);
+                setIsServicesActive(false);
+                setIsReportActive(false);
+                navigate('/trash');
+                break;
+
+            case 'request':
+                setIsHomeActive(false);
+                setIsCreateActive(false);
+                setIsTrashActive(false);
+                setIsRequestActive(true);
+                setIsComplaintActive(false);
+                setIsServicesActive(false);
+                setIsReportActive(false);
+                navigate('/request');
+                break;
+
+            case 'complaint':
+                setIsHomeActive(false);
+                setIsCreateActive(false);
+                setIsTrashActive(false);
+                setIsRequestActive(false);
+                setIsComplaintActive(true);
+                setIsServicesActive(false);
+                setIsReportActive(false);
+                navigate('/complaint');
+                break;
+
+            case 'services':
+                setIsHomeActive(false);
+                setIsCreateActive(false);
+                setIsTrashActive(false);
+                setIsRequestActive(false);
+                setIsComplaintActive(false);
+                setIsServicesActive(true);
+                setIsReportActive(false);
+                navigate('/services');
+                break;
+                
+            case 'report':
+                setIsHomeActive(false);
+                setIsCreateActive(false);
+                setIsTrashActive(false);
+                setIsRequestActive(false);
+                setIsComplaintActive(false);
+                setIsServicesActive(false);
+                setIsReportActive(true);
+                navigate('/report');
+                break;
+
+            default:
+                break;
+        }
+    }, [navigate])
+
     const handleHomeClick = () => {
+        sessionStorage.setItem('tab', 'home');
         setIsHomeActive(true);
         setIsCreateActive(false);
         setIsTrashActive(false);
@@ -124,6 +209,7 @@ const Sidebar = ({ children }) => {
     };
 
     const handleCreateStaffClick = () => {
+        sessionStorage.setItem('tab', 'create');
         setIsHomeActive(false);
         setIsCreateActive(true);
         setIsTrashActive(false);
@@ -135,6 +221,7 @@ const Sidebar = ({ children }) => {
     };
 
     const handleArchiveClick = () => {
+        sessionStorage.setItem('tab', 'archive');
         setIsHomeActive(false);
         setIsCreateActive(false);
         setIsTrashActive(true);
@@ -146,6 +233,7 @@ const Sidebar = ({ children }) => {
     };
 
     const handleRequestClick = () => {
+        sessionStorage.setItem('tab', 'request');
         setIsHomeActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
@@ -157,6 +245,7 @@ const Sidebar = ({ children }) => {
     };
 
     const handleComplaintClick = () => {
+        sessionStorage.setItem('tab', 'complaint');
         setIsHomeActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
@@ -168,6 +257,7 @@ const Sidebar = ({ children }) => {
     };
 
     const handleServicesClick = () => {
+        sessionStorage.setItem('tab', 'services');
         setIsHomeActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
@@ -179,6 +269,7 @@ const Sidebar = ({ children }) => {
     };
 
     const handleReportClick = () => {
+        sessionStorage.setItem('tab', 'report');
         setIsHomeActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
