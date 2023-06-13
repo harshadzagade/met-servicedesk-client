@@ -41,6 +41,7 @@ const Home = () => {
                 if (staff.data.staff.isNew === true) {
                     navigate('/passwordreset');
                 } else {
+                    localStorage.removeItem('email');
                     const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
                     switch (res.data.role) {
                         case 'superadmin':

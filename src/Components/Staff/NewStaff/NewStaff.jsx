@@ -27,6 +27,7 @@ const NewStaff = () => {
         } else {
             try {
                 await axios.put('http://localhost:8001/api/staff/newuserlogin/', { email: email, password: passwordRef.current.value });
+                localStorage.removeItem('email');
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

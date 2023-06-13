@@ -4,7 +4,7 @@ import AuthContext from './AuthContext';
 
 const defaultAuthState = {
     isLoggedIn: false,
-    email: ''
+    email: localStorage.getItem('email') || ''
 };
 
 const authReducer = (state, action) => {
@@ -45,6 +45,7 @@ const AuthProvider = props => {
     const loginHandler = email => {
         dispatchAuthAction({ type: "LOGIN", val: true });
         dispatchAuthAction({ type: "EMAIL", val: email });
+        localStorage.setItem('email', email);
     };
 
     const authContext = {
