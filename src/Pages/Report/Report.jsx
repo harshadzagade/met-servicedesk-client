@@ -23,9 +23,6 @@ const Report = () => {
     const [isNormalSearch, setIsNormalSearch] = useState(true);
     const [ticketType, setTicketType] = useState('allTicketTypes');
     const [openTicketTypeList, setOpenTicketTypeList] = useState(false);
-    const [department, setDepartment] = useState('');
-    const [departments, setDepartments] = useState([]);
-    const [openDepartmentList, setOpenDepartmentList] = useState(false);
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
     const [openCategoryList, setOpenCategoryList] = useState(false);
@@ -39,14 +36,6 @@ const Report = () => {
         };
         getDepartments();
     }, []);
-
-    useEffect(() => {
-        const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/report/reportdepartments/departments`);
-            setDepartments(departments.data.departments);
-        };
-        getDepartments();
-    }, [openDepartmentList]);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -115,28 +104,6 @@ const Report = () => {
     }, [selectedDepartment, staffDepartments]);
 
     useEffect(() => {
-        const getRequestByDepartment = async () => {
-            try {
-                if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
-                    setAllReportList(reportList);
-                } else {
-                    const report = await axios.get(`http://localhost:8001/api/report/reportbydepartment/${department}`);
-                    setAllReportList(report.data.report);
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch report'
-                });
-            }
-        };
-        if (openDepartmentList) {
-            getRequestByDepartment();
-        }
-    }, [department, openDepartmentList, reportList]);
-
-    useEffect(() => {
         const getRequestByCategory = async () => {
             try {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
@@ -196,7 +163,6 @@ const Report = () => {
                 setOpenTicketTypeList(true);
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
-                setOpenDepartmentList(false);
                 setIsNormalSearch(false);
                 break;
 
@@ -204,7 +170,6 @@ const Report = () => {
                 setOpenTicketTypeList(false);
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
-                setOpenDepartmentList(false);
                 setIsNormalSearch(true);
                 reportList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
                     return (
@@ -217,7 +182,6 @@ const Report = () => {
                 setOpenTicketTypeList(false);
                 setOpenCategoryList(true);
                 setOpenPriorityList(false);
-                setOpenDepartmentList(false);
                 setIsNormalSearch(false);
                 break;
 
@@ -225,15 +189,6 @@ const Report = () => {
                 setOpenTicketTypeList(false);
                 setOpenCategoryList(false);
                 setOpenPriorityList(true);
-                setOpenDepartmentList(false);
-                setIsNormalSearch(false);
-                break;
-
-            case 'Department':
-                setOpenTicketTypeList(false);
-                setOpenCategoryList(false);
-                setOpenPriorityList(false);
-                setOpenDepartmentList(true);
                 setIsNormalSearch(false);
                 break;
 
@@ -291,18 +246,6 @@ const Report = () => {
                         </select>
                     }
                     {
-                        openDepartmentList &&
-                        <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
-                            <option value='' hidden>Select Your Department</option>
-                            <option value={'allDepartments'}>All Departments</option>
-                            {
-                                departments.map((department, key) => (
-                                    <option key={key} value={department}>{department}</option>
-                                ))
-                            }
-                        </select>
-                    }
-                    {
                         openCategoryList &&
                         <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
                             <option value='' hidden>Select Your Category</option>
@@ -333,7 +276,6 @@ const Report = () => {
                             <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
                         </div>
                     </div>
                 </Fragment>
@@ -349,7 +291,6 @@ const Report = () => {
                                     <th className={`${classes.tableHead}`} scope="col">Subject</th>
                                     <th className={`${classes.tableHead}`} scope="col">Category</th>
                                     <th className={`${classes.tableHead}`} scope="col">Priority</th>
-                                    <th className={`${classes.tableHead}`} scope="col">Department</th>
                                 </tr>
                             </thead>
                             <tbody className={`${classes.tableBody}`}>
@@ -360,7 +301,6 @@ const Report = () => {
                                             <td className={`${classes.tableData}`}>{field.subject}</td>
                                             <td className={`${classes.tableData}`}>{field.category}</td>
                                             <td className={`${classes.tableData}`}>{field.priority}</td>
-                                            <td className={`${classes.tableData}`}>{field.department}</td>
                                         </tr>
                                     ))
                                 }

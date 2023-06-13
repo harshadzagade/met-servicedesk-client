@@ -275,7 +275,7 @@ const Sidebar = ({ children }) => {
 
     return (
         <div className={`${classes.fullScreen}`}>
-            <div className={`${classes.sidebar}`} hidden={window.location.pathname === '/login' || window.location.pathname === '/resetpassword' ? true : false}>
+            <div className={`${classes.sidebar}`} hidden={window.location.pathname === '/login' || window.location.pathname === '/resetpassword' || window.location.pathname === '/passwordreset' ? true : false}>
                 <div className={`${classes.heading}`}>MET Service Desk</div>
                 <div className={`${classes.container}`}>
                     <div className={`${classes.row} ${isHomeActive ? classes.rowColorActive : classes.rowColorDefault}`} onClick={handleHomeClick}>

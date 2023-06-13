@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Fragment, useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import NavBar from '../../NavBar/NavBar';
 import Swal from 'sweetalert2';
@@ -46,7 +46,7 @@ const NewStaff = () => {
         }
     };
     return (
-        <Fragment>
+        <div className={`${classes.parent}`}>
             {/* <NavBar tab={'none'} /> */}
             <div className={`${classes.newStaffHeading}`}>Reset Password</div>
             <div className={`${classes.setPasswordFormDiv}`}>
@@ -59,7 +59,7 @@ const NewStaff = () => {
                     </form>
                 </div>
             </div>
-        </Fragment>
+        </div>
     );
 };
 
