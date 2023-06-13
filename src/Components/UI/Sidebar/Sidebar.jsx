@@ -122,7 +122,6 @@ const Sidebar = ({ children }) => {
                 setIsComplaintActive(false);
                 setIsServicesActive(false);
                 setIsReportActive(false);
-                navigate('/');
                 break;
 
             case 'create':
@@ -133,7 +132,6 @@ const Sidebar = ({ children }) => {
                 setIsComplaintActive(false);
                 setIsServicesActive(false);
                 setIsReportActive(false);
-                navigate('/superadmin/createstaff');
                 break;
 
             case 'archive':
@@ -144,7 +142,6 @@ const Sidebar = ({ children }) => {
                 setIsComplaintActive(false);
                 setIsServicesActive(false);
                 setIsReportActive(false);
-                navigate('/trash');
                 break;
 
             case 'request':
@@ -155,7 +152,6 @@ const Sidebar = ({ children }) => {
                 setIsComplaintActive(false);
                 setIsServicesActive(false);
                 setIsReportActive(false);
-                navigate('/request');
                 break;
 
             case 'complaint':
@@ -166,7 +162,6 @@ const Sidebar = ({ children }) => {
                 setIsComplaintActive(true);
                 setIsServicesActive(false);
                 setIsReportActive(false);
-                navigate('/complaint');
                 break;
 
             case 'services':
@@ -177,7 +172,6 @@ const Sidebar = ({ children }) => {
                 setIsComplaintActive(false);
                 setIsServicesActive(true);
                 setIsReportActive(false);
-                navigate('/services');
                 break;
                 
             case 'report':
@@ -188,7 +182,6 @@ const Sidebar = ({ children }) => {
                 setIsComplaintActive(false);
                 setIsServicesActive(false);
                 setIsReportActive(true);
-                navigate('/report');
                 break;
 
             default:
