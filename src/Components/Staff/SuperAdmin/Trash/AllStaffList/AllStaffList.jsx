@@ -233,11 +233,11 @@ const AllStaffList = () => {
                                 <tbody className={`${classes.tableBody}`}>
                                     {
                                         currentPageData.length > 0 && currentPageData.map((field) => (
-                                            <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id}>
-                                                <td className={`${classes.tableData}`} data-label="name" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.firstname + ' ' + field.lastname}</td>
-                                                <td className={`${classes.tableData}`} data-label="email" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.email}</td>
-                                                <td className={`${classes.tableData}`} data-label="role" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.role}</td>
-                                                <td className={`${classes.tableData}`} data-label="department" onClick={() => navigate(`/superadmin/${field.id}`)}>{field.department.toString()}</td>
+                                            <tr className={`${classes.tableField} ${classes.tableRow}`} key={field.id} onClick={() => navigate(`/trash/${field.id}`)}>
+                                                <td className={`${classes.tableData}`} data-label="name">{field.firstname + ' ' + field.lastname}</td>
+                                                <td className={`${classes.tableData}`} data-label="email">{field.email}</td>
+                                                <td className={`${classes.tableData}`} data-label="role">{field.role}</td>
+                                                <td className={`${classes.tableData}`} data-label="department">{field.department.toString()}</td>
                                             </tr>
                                         ))
                                     }

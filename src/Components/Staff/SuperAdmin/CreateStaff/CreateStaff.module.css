@@ -16,6 +16,11 @@
     box-shadow: 0px 1px 8px gray;
 }
 
+.createStaffForm:hover {
+    box-shadow: 0px 1px 8px black;
+    transition: box-shadow .5s ease-in-out;
+}
+
 .namingBlock {
     text-align: center;
 }
