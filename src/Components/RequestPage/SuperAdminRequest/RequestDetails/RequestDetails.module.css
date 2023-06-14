@@ -1,5 +1,6 @@
 .layout {
     width: 90vh;
+    max-height: 95vh;
     overflow: auto;
 }
 

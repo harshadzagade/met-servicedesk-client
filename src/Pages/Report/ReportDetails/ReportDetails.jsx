@@ -64,6 +64,11 @@ const ReportDetails = (props) => {
             <div className={`${classes.detailsField} mt-2`}>{reportData.department}</div><br />
           </div>
           <hr className={`${classes.hrTag}`} />
+          <div className='d-flex'>
+            <div className={`${classes.detailsTag} mt-2`}>Status:</div>
+            <div className={`${classes.detailsField} mt-2`}>{reportData.status}</div><br />
+          </div>
+          <hr className={`${classes.hrTag}`} />
           <div className={`${classes.boxDetails}`}>
             <div className='d-flex'>
               <div className={`${classes.boxHeading}`}>Durations</div>
@@ -74,23 +79,33 @@ const ReportDetails = (props) => {
             </div>
             <hr className={`${classes.hrTag}`} />
             <div className='d-flex'>
+              <div className={`${classes.detailsTag} mt-2`}>Assigned Time:</div>
+              <div className={`${classes.detailsField} mt-2`}>{reportData.assignedTime}</div>
+            </div>
+            {(reportData.loggedTime && reportData.assignedTime) && <hr className={`${classes.hrTag}`} />}
+            {(reportData.loggedTime && reportData.assignedTime) && <div className='d-flex'>
+              <div className={`${classes.detailsTag} mt-2`}>Assign Duration:</div>
+              <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{reportData.assignDuration}</div>
+            </div>}
+            <hr className={`${classes.hrTag}`} />
+            <div className='d-flex'>
               <div className={`${classes.detailsTag} mt-2`}>Attended Time:</div>
               <div className={`${classes.detailsField} mt-2`}>{reportData.attendedTime}</div>
             </div>
-            {(reportData.loggedTime && reportData.attendedTime) && <hr className={`${classes.hrTag}`} />}
-            {(reportData.loggedTime && reportData.attendedTime) && <div className='d-flex'>
+            {(reportData.assignedTime && reportData.attendedTime) && <hr className={`${classes.hrTag}`} />}
+            {(reportData.assignedTime && reportData.attendedTime) && <div className='d-flex'>
               <div className={`${classes.detailsTag} mt-2`}>Attend Duration:</div>
               <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{reportData.attendDuration}</div>
             </div>}
             <hr className={`${classes.hrTag}`} />
             <div className='d-flex'>
-              <div className={`${classes.detailsTag} mt-2`}>Solved Time:</div>
-              <div className={`${classes.detailsField} mt-2`}>{reportData.solvedTime}</div>
+              <div className={`${classes.detailsTag} mt-2`}>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Time:</div>
+              <div className={`${classes.detailsField} mt-2`}>{reportData.lastUpdatedTime}</div>
             </div>
-            {reportData.solvedTime && <hr className={`${classes.hrTag}`} />}
-            {reportData.solvedTime && <div className='d-flex'>
-              <div className={`${classes.detailsTag} mt-2`}>Solved Duration:</div>
-              <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{reportData.solveDuration}</div>
+            {reportData.lastUpdatedTime && <hr className={`${classes.hrTag}`} />}
+            {reportData.lastUpdatedTime && <div className='d-flex'>
+              <div className={`${classes.detailsTag} mt-2`}>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Duration:</div>
+              <div className={`${classes.detailsField} ${classes.wrapData} mt-2`}>{reportData.lastUpdateDuration}</div>
             </div>}
           </div>
           <hr className={`${classes.hrTag}`} />
