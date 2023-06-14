@@ -147,7 +147,7 @@
     border: 0.1rem solid #292929;
 }
 
-.departmentSearchBox {
+.optionSearchBox {
     margin-left: -5rem;
     width: 20rem;
     padding: 0.287rem 0.5rem;
@@ -159,7 +159,7 @@
     border: 0.1rem solid gray;
 }
 
-.departmentSearchBox:focus {
+.optionSearchBox:focus {
     outline: none;
     border: 0.1rem solid #292929;
 }

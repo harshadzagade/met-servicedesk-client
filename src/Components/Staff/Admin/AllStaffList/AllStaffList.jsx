@@ -20,7 +20,6 @@ const AllStaffList = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [role, setRole] = useState('');
     const [openRoleList, setOpenRoleList] = useState(false);
-    console.log(allStaffList);
 
     useEffect(() => {
         const getList = async () => {
