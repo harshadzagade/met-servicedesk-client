@@ -2,7 +2,7 @@
     font-family: "Bahnschrift", Times, serif;
     margin-left: 2.5rem;
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2rem;
     text-shadow: 1px 1px 1px gray;
 }
 
@@ -19,7 +19,7 @@
 
 @media (min-width: 768px) {
     .updateStaffHeading {
-        margin-left: 6.5rem;
+        margin-left: 8rem;
     }
     .roleSelect {
         width: 400px;
@@ -37,7 +37,7 @@
 }
 
 .updateButton {
-    background-color: lightgoldenrodyellow;
+    background-color: #dbdbdb;
     width: 40%;
     margin-top: 1rem;
     font-size: 18px;
@@ -67,7 +67,7 @@
 }
 
 .cancelButton {
-    background-color: #ffacac;
+    background-color: #dbdbdb;
     width: 40%;
     margin-left: 10%;
     margin-top: 1rem;

@@ -1,11 +1,12 @@
 .staffDetailsHeading {
     font-family: "Bahnschrift", Times, serif;
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2rem;
     text-shadow: 1px 1px 1px gray;
 }
 
 .detailsView {
+    min-width: 120vh;
     border: 1px solid #e2e2e2;
     padding: 4rem;
     border-radius: 2rem;
@@ -13,53 +14,56 @@
     box-shadow: 0px 1px 8px gray;
 }
 
-.contactDetails .detailsName, .detailsEmail, .detailsRole, .detailsDepartment {
+.detailsView:hover {
+    box-shadow: 0px 1px 8px black;
+    transition: box-shadow .5s ease-in-out;
+    border: 0.1rem solid gray;
+}
+
+.detailsTag,
+.detailsField {
     font-family: "Bahnschrift", Times, serif;
 }
 
-.contactDetails {
+.detailsTag {
+    font-size: larger;
+}
+
+.detailsField {
+    margin-left: auto;
+}
+
+.hrTag {
+    margin: 0rem;
+}
+
+.boxDetails {
     box-shadow: inset 1px 1px 8px #1f1f1f;
-    font-size: 2rem;
-    color: white;
-    font-weight: 500;
-    background-color: #242444;
+    background-color: #c7c7c7;
     border-radius: 1.5rem;
     margin-top: 1rem;
-    padding: 1rem;
+    padding-inline: 1rem;
+    padding-bottom: 0.5rem;
 }
 
-.detailsContact {
-    font-size: 1.3rem;
-    color: #cccccc;
-}
-
-.detailsName {
-    font-size: 3rem;
-    font-weight: 400;
-}
-
-.detailsEmail {
-    font-size: 1.5rem;
-    color: #4b4b4b;
-}
-
-.detailsRole {
-    font-size: 1.25rem;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.detailsDepartment {
-    font-size: 1.5rem;
+.boxHeading {
+    font-size: 2rem;
+    font-weight: 500;
 }
 
 .updateButton {
-    background-color: lightgoldenrodyellow;
+    border: none;
+    margin-top: 2rem;
+    background-color: #dbdbdb;
     font-size: 18px;
     font-weight: 600;
-    box-shadow: 1px 1px 1px 1px gray;
+    border-radius: 0.7rem;
     transition: all .5s ease-in-out;
-    margin-right: 10px;
+    padding-inline: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-right: 0.2rem;
+    box-shadow: 0rem 0.1rem 0.1rem gray
 }
 
 .updateButton:hover {
@@ -71,39 +75,10 @@
     outline-color: transparent;
     outline-width: 0;
     outline-style: none;
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
 }
 
 .updateButton:active {
     background-color: yellow;
-    color: black;
-    box-shadow: 1px 1px 1px 1px gray;
-    transition-duration: 0.2s;
-    transform: translateX(0px) translateY(2px);
-}
-
-.deleteButton {
-    background-color: #ffacac;
-    font-size: 18px;
-    font-weight: 600;
-    box-shadow: 1px 1px 1px 1px gray;
-    transition: all .5s ease-in-out;
-}
-
-.deleteButton:hover {
-    background-color: #ff6868;
-}
-
-.deleteButton:focus {
-    outline: 0;
-    outline-color: transparent;
-    outline-width: 0;
-    outline-style: none;
-    box-shadow: 0 0 0 0 #007bff00;
-}
-
-.deleteButton:active {
-    background-color: red;
     color: black;
     box-shadow: 1px 1px 1px 1px gray;
     transition-duration: 0.2s;
