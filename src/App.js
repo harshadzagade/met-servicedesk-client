@@ -1,12 +1,12 @@
-import classes from './App.module.css';
-import Routing from './Utils/Routing';
+import React from 'react';
+import '../src/css/style.css';
+import Routing from './Routing/Routing';
 
 const App = () => {
   return (
-    <div className={`${classes.App} ${classes.noSelect}`}>
-      <Routing />
-    </div>
-  );
-};
+    <div ><Routing /></div>
+  
+  )
+}
 
-export default App;
+export default App

@@ -1,0 +1,32 @@
+
+/* START REQUESTS Section */
+main .mainTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 5.4rem;
+  }
+
+   
+  main .tikReqbtn {
+    display: flex;
+    gap: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    -webkit-appearance: none;
+    border-radius: 1rem;
+    font-family: inherit;
+    appearance: none;
+    background: none;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid var(--color-primary);
+    color: var(--color-dark);
+  }
+  
+  main .btnName {
+    margin-top: 0.2rem;
+  }
+  
+  
+  

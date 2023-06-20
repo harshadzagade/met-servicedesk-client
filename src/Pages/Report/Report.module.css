@@ -1,0 +1,93 @@
+
+.basicSelection {
+    margin-top: 1vh;
+    justify-content: center;
+    display: flex;
+}
+
+.departmentSelection {
+    align-items: center;
+    display: flex;
+}
+
+.staffSelection {
+    align-items: center;
+    margin-left: 1vh;
+    display: flex;  
+}
+
+.dropdownSelect {
+    width: 35vh;
+    padding: 0.3rem 0.5rem;
+    border-width: 1px;
+    border-color: transparent;
+    background-color: white;
+    border-radius: 0.5rem;
+    outline-color: transparent;
+    border: 0.1rem solid gray;
+}
+
+.dropdownSelect:hover {
+    outline: none;
+    border: 0.1rem solid #292929;
+}
+
+.searchInput {
+    margin-top: 0.85rem;
+    margin-left: 35vh;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    background: #f9fafa;
+    border: 1px solid #b5bdc4;
+    font-size: 16px;
+    height: 35px;
+    width: 20rem;
+    line-height: 24px;
+    padding: 7px 8px;
+    color: #08090a;
+    box-shadow: none;
+    outline-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.searchInput:focus {
+    border-color: #3b49df;
+    box-shadow: 1px 1px 0 #3b49df;
+}
+
+.searchButton {
+    cursor: pointer;
+    margin-top: -0.1rem;
+    background-color: #b4b4b4;
+    color: black;
+    font-weight: 500;
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border: 0.1rem solid gray;
+}
+
+.searchButton:focus {
+    background-color: #d8d8d8;
+}
+
+.searchButton:active {
+    border: 0.1rem solid #292929;
+}
+
+.optionSearchBox {
+    margin-left: 35vh;
+    margin-top: 0.85rem;
+    width: 20rem;
+    padding: 0.287rem 0.5rem;
+    border-width: 1px;
+    border-color: transparent;
+    background-color: #f9fafa;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    outline-color: transparent;
+    border: 0.1rem solid gray;
+}
+
+.optionSearchBox:focus {
+    outline: none;
+    border: 0.1rem solid #292929;
+}

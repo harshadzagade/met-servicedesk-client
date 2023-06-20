@@ -1,0 +1,149 @@
+.complaintdetils{
+    margin-top: 5.4rem;
+}
+.detail{
+    background: var(--color-white);
+      width: 100%;
+      border-radius: var(--card-border-radius);
+      padding: 1rem;
+      box-shadow: var(--box-shadow);
+      transition: all 300ms ease;
+      overflow: auto;
+    max-height: 80vh;
+   }
+
+   .myform label{
+    font-size: medium;
+    margin-top: 0.5rem;
+}   
+
+.myform p{
+    font-size:small;
+}
+
+
+ .idlab{
+    margin-left: 10rem;
+}
+
+/* details */
+ .idDetails{
+    display: grid;
+    grid-template-columns: 200px 100px;
+}
+
+
+
+
+.name{ display: grid;
+    grid-template-columns: 200px 400px;
+}
+/* end details */
+
+.deptper{
+    display: grid;
+    grid-template-columns: 400px 100px;
+}
+
+.department{
+    display: grid;
+    grid-template-columns: 200px 100px;
+}
+
+
+
+.priorityDetails{
+    display: grid;
+    grid-template-columns: 200px 100px;
+}
+
+/* request type and status */
+.reqsta{
+    display: grid;
+    grid-template-columns: 400px 100px;
+
+}
+
+.ComplaintType{
+    display: grid;
+    grid-template-columns: 200px 100px;
+}
+
+.status{display: grid;
+    grid-template-columns: 200px 100px;
+}
+
+/* end  request type and status */
+
+/* approval */
+
+.approval{
+    display: grid;
+    grid-template-columns: 30vh 70vh;
+}
+/* end approval */
+.techName{
+    display: grid;
+    grid-template-columns: 200px 300px;
+}
+
+.subjectDetails {
+    display: grid;
+    grid-template-columns: 30vh 70vh;
+  }
+
+
+
+  .description {
+    display: grid;
+    grid-template-columns: 30vh 70vh;
+  }
+ 
+  .date{
+    display: grid;
+    grid-template-columns: 200px 400px;
+  }
+
+
+
+
+.id-details p{
+    background: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-right: 39rem;
+    font-size: medium;
+    margin-top: -0.5rem;
+    border: 1px solid black;
+   
+}
+
+.complaintAssingBtn{
+    flex: 1;
+    gap: 2rem;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.complaintDetailsp{
+background: white;
+padding: 10px;
+border: none;
+font-size: 1em;
+align-items: center;
+
+
+}
+
+
+ 
+
+
+
+
+

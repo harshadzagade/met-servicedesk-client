@@ -1,13 +1,24 @@
-import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SuperAdmin from '../../Staff/SuperAdmin/SuperAdmin';
-import Admin from '../../Staff/Admin/Admin';
-import Technician from '../../Staff/Technician/Technician';
-import User from '../../Staff/User/User';
+import axios from 'axios';
+import SuperAdmin from '../../Components/Staff/Superadmin/SuperAdmin';
+import Admin from '../../Components/Staff/Admin/Admin';
+import Complaint from '../Complaint/Complaint';
 
 const Home = () => {
+    // const [refresh, setRefresh] = useState(false);
+    // const location = useLocation() || null;
+
+    // useEffect(() => {
+    //     setRefresh(false);
+    //     if (location.state) {
+    //         if (location.state.refreshSuperHome) {
+    //             setRefresh(true);
+    //         }
+    //     }
+    //     setRefresh(false);
+    // }, [refresh, location]);
+    
     const navigate = useNavigate();
     const location = useLocation() || null;
 
@@ -37,11 +48,11 @@ const Home = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${id}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 if (staff.data.staff.isNew === true) {
                     navigate('/passwordreset');
                 } else {
-                    const res = await axios.get(`http://localhost:8001/staff/check/${id}`);
+                    const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
                     switch (res.data.role) {
                         case 'superadmin':
                             setIsSuperAdmin(true);
@@ -58,6 +69,8 @@ const Home = () => {
                             break;
 
                         case 'technician':
+                            localStorage.setItem('department', staff.data.staff.department[0]);
+                            navigate('/complaint')
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
                             setIsTechnician(true);
@@ -81,16 +94,13 @@ const Home = () => {
         }
         checkAuth();
     }, [id, navigate, refresh]);
-
     return (
         <Fragment>
-            <NavBar tab={'none'} />
             {isSuperAdmin && <SuperAdmin />}
             {isAdmin && <Admin />}
-            {isTechnician && <Technician />}
-            {isUser && <User />}
+            {(isTechnician || isUser) && <Complaint />}
         </Fragment>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

@@ -1,0 +1,38 @@
+main .filterButtons {
+  display: flex;
+  padding: 15px 0 10px;
+}
+
+.button {
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  border-radius: 100px;
+  font-family: inherit;
+  appearance: none;
+  background: none;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px;
+  outline: none;
+  opacity: 0.4;
+  border: none;
+  color: var(--color-dark);
+}
+
+.button:hover,
+.button.active {
+  opacity: 1;
+}
+
+.datapage {
+  margin-left: 7rem;
+}
+
+main .filter {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  background: var(--color-background);
+}

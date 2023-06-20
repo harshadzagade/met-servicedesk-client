@@ -1,62 +1,68 @@
-.sendOtpFormDiv {
-    display: flex;
-    height: 60vh;
-    align-items: center;
-    justify-content: center;
-}
 
-.sendOtpForm {
-    border: 1px solid whitesmoke;
-    background-color: #e2e2e2;
-    border-radius: 20px;
-    box-shadow: 0 1px 8px #b6b6b6;
-}
-
-.sendOtpInfo {
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.sendOtpInput {
+.sendOtp {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+    margin-left: 35rem;
+    margin-top: 5rem;
+  }
+  .loginform h2{
+      margin-bottom: 1rem;
+      font-size: larger;
+  }
+  .OTPform {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
     text-align: center;
-    border-width: 1px;
-    border-color: transparent;
-    border-radius: 8px;
-    margin: 8px;
-    box-shadow: 1px 1px 1px 1px gray;
-    transition: all .3s ease-in-out;
-}
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 1rem;
 
-.sendOtpInput:focus {
-    border-color: lightskyblue;
-    box-shadow: 1px 1px 2px gray;
-}
+  }
+  
+  .OTPform {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 1rem;
 
-.sendOtpButton {
-    background-color: lightblue;
-    font-size: 18px;
-    font-weight: 600;
-    box-shadow: 1px 1px 1px 1px gray;
-    transition: all .5s ease-in-out;
-    margin-right: 10px;
-}
-
-.sendOtpButton:hover {
-    background-color: #54c7ee;
-}
-
-.sendOtpButton:focus {
+  }
+  .OTPform input {
+    font-family: "Roboto", sans-serif;
     outline: 0;
-    outline-color: transparent;
-    outline-width: 0;
-    outline-style: none;
-    box-shadow: 0 0 0 0 #007bff00;
-}
-
-.sendOtpButton:active {
-    background-color: #0ab9f3;
-    color: black;
-    box-shadow: 1px 1px 1px 1px gray;
-    transition-duration: 0.2s;
-    transform: translateX(0px) translateY(2px);
-}
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-radius: 0.5rem;
+  }
+  .OTPform button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #7380ec;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 0.5rem;
+  }
+  .OTPform button:hover,.OTPform button:active,.OTPform button:focus {
+    background: #43A047;
+  }
+  
