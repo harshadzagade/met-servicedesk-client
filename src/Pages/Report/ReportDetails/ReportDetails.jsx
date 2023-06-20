@@ -13,7 +13,12 @@ const ReportDetails = (props) => {
       setReportData(report.data.report);
     };
     getReportDetails();
-  }, [props.id])
+  }, [props.id]);
+
+  const assignDuration = reportData.lastUpdateDuration;
+  let diffHrs = Math.floor((assignDuration % 86400000) / 3600000);
+  let diffMins = Math.round(((assignDuration % 86400000) % 3600000) / 60000);
+  console.log(diffHrs, diffMins);
 
   return (
     <Modal>
