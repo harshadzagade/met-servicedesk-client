@@ -25,9 +25,7 @@ const ComplaintNavigation = (props) => {
       <button className={`${classes.button} ${activeTab === 'AllStaffOutGoingComplaint' && classes.active} filter-button list`} data-filter="assigned" onClick={handleOutGoing}>OutGoing</button>
       <button className={`${classes.button} ${activeTab === 'AllStaffOwnComplaint' && classes.active} filter-button list`} onClick={handleOwn}>Own</button>
 
-      <div className={classes.datapage} >
-        <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-      </div>
+    
     </div>
   )
 }

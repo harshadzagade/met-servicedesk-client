@@ -23,6 +23,7 @@ import SingleStaffDetails from '../Components/Staff/Admin/SingleStaffDetails/Sin
 import Sidebar from '../Components/Sidebar/Sidebar';
 import TechnicianRequestAttendingForm from '../Components/RequestPage/TechnicianRequest/TechnicianRequestAttendingForm/TechnicianRequestAttendingForm';
 import Report from '../Pages/Report/Report';
+import ReportDetails from '../Components/UI/Details/ReportDetails/ReportDetails';
 const Routing = () => {
 
   return (
@@ -35,6 +36,7 @@ const Routing = () => {
           <Route exact path='/createstaff' element={<CreateStaff />} />
           <Route exact path='/complaint' element={<Complaint />} />
           <Route exact path='/report' element={<Report />} />
+          <Route exact path='/reportdetails/:reportId' element={<ReportDetails />} />
           <Route exact path='/newcomplaint' element={<NewCompaint />} />
           <Route exact path='/complaintdetails/:complaintId' element={<ComplaintDetails />} />
           <Route exact path='/Techcomplaintdetails/:complaintId' element={<TechComplaintDetails />} />

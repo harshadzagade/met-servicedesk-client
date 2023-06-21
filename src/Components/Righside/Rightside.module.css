@@ -1,14 +1,10 @@
 .right{
-  margin-top: 1.4rem;
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
 
 .profile{
-    display: grid;
-    grid-template-columns: 5vh  15vh  ;
-   gap: 1rem;
-   margin-left: 25vh;
+  display: flex;
     
 }
 .profile span{

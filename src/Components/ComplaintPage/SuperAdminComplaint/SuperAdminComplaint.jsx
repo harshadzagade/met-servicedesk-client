@@ -244,78 +244,79 @@ const SuperAdminComplaint = () => {
 
     return (
         <main>
-            {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-            {
-                openDepartmentList &&
-                <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
-                    <option value='' hidden>Select Your Department</option>
-                    <option value={'allDepartments'}>All Departments</option>
-                    {
-                        departments.map((department, key) => (
-                            <option key={key} value={department}>{department}</option>
-                        ))
-                    }
-                </select>
-            }
-            {
-                openCategoryList &&
-                <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
-                    <option value='' hidden>Select Your Category</option>
-                    <option value={'allCategories'}>All Categories</option>
-                    {
-                        categories.map((category, key) => (
-                            <option key={key} value={category}>{category}</option>
-                        ))
-                    }
-                </select>
-            }
-            {
-                openPriorityList &&
-                <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
-                    <option value='' hidden>Select Your Priority</option>
-                    <option value='allPriorities'>All Priorities</option>
-                    <option value='high'>High</option>
-                    <option value='moderate'>Moderate</option>
-                    <option value='low'>Low</option>
-                </select>
-            }
-            {
-                openStatusList &&
-                <select value={status} className={`${classes.optionSearchBox}`} name="status" required onChange={(e) => setStatus(e.target.value)}>
-                    <option value='' hidden>Select Your Status</option>
-                    <option value='allStatus'>All Status</option>
-                    <option value='pending'>Pending</option>
-                    <option value='assigned'>Assigned</option>
-                    <option value='attending'>Attending</option>
-                    <option value='forwarded'>Forwarded</option>
-                    <option value='closed'>Closed</option>
-                    <option value='disapproved'>Disapproved</option>
-                </select>
-            }
-            <div className="btn-group mb-1">
-                <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {searchType}
-                </button>
-                <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
-                    <div className="dropdown-item" onClick={() => setSearchType('Name')}>Name</div>
-                    <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
-                    <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
-                    <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
-                    <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
-                </div>
-            </div>
             <div className={classes.superadmincomplaint}>
-                <div className={`${classes.mainTitle}`}>
+            <div className={`${classes.mainTitle}`}>
                     <h1 className="tik-type-title">Complaint</h1>
                 </div>
-
-                <div className={`${classes.filterButtons}`}>
-                    <button className={`${classes.button}`} data-filter="all" >All</button>
+                {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                {
+                    openDepartmentList &&
+                    <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                        <option value='' hidden>Select Your Department</option>
+                        <option value={'allDepartments'}>All Departments</option>
+                        {
+                            departments.map((department, key) => (
+                                <option key={key} value={department}>{department}</option>
+                            ))
+                        }
+                    </select>
+                }
+                {
+                    openCategoryList &&
+                    <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                        <option value='' hidden>Select Your Category</option>
+                        <option value={'allCategories'}>All Categories</option>
+                        {
+                            categories.map((category, key) => (
+                                <option key={key} value={category}>{category}</option>
+                            ))
+                        }
+                    </select>
+                }
+                {
+                    openPriorityList &&
+                    <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                        <option value='' hidden>Select Your Priority</option>
+                        <option value='allPriorities'>All Priorities</option>
+                        <option value='high'>High</option>
+                        <option value='moderate'>Moderate</option>
+                        <option value='low'>Low</option>
+                    </select>
+                }
+                {
+                    openStatusList &&
+                    <select value={status} className={`${classes.optionSearchBox}`} name="status" required onChange={(e) => setStatus(e.target.value)}>
+                        <option value='' hidden>Select Your Status</option>
+                        <option value='allStatus'>All Status</option>
+                        <option value='pending'>Pending</option>
+                        <option value='assigned'>Assigned</option>
+                        <option value='attending'>Attending</option>
+                        <option value='forwarded'>Forwarded</option>
+                        <option value='closed'>Closed</option>
+                        <option value='disapproved'>Disapproved</option>
+                    </select>
+                }
+                <div className="btn-group mb-1">
+                    <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {searchType}
+                    </button>
+                    <div className="dropdown-menu">
+                        <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Name')}>Name</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
+                    </div>
                     <div className={classes.datapage} >
                         <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                     </div>
+                </div>
 
+           
+
+                <div className={`${classes.filterButtons}`}>
+                    <button className={`${classes.button}`} data-filter="all" >All</button>
                 </div>
 
                 <div className={`${classes.complaint} `}>

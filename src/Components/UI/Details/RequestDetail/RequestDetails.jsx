@@ -46,7 +46,6 @@ const RequestDetails = () => {
                     <div className={`${classes.detail}`}>
                         <div >
                             <form className={classes.myform}>
-
                                 <div className={classes.idDetails}>
                                     <label>Request Id:</label>
                                     <p className={classes.complaintDetailsp}>#{requestData.id}</p>
@@ -161,7 +160,6 @@ const RequestDetails = () => {
                                 <div className={classes.date}>
                                     <label>Date:</label>
                                     <p className={classes.complaintDetailsp}>{getCreatedRequestDate(requestData.createdAt)}</p>
-
                                 </div>
                                 {/* <div>
                                     <button className={classes.complaintAssingBtn}>Self Assign </button>

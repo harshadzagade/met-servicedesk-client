@@ -55,7 +55,7 @@ const AllStaffExt = () => {
                 sortable: true,
             },
             {
-                name: "Extention",
+                name: "Extension",
                 selector: (row) => row.contactExtension,
                 sortable: true,
             },
@@ -84,7 +84,7 @@ const AllStaffExt = () => {
                 sortable: true,
             },
             {
-                name: "Extention",
+                name: "Extension",
                 selector: (row) => row.contactExtension,
                 sortable: true,
             }

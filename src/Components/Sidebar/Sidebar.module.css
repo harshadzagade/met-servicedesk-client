@@ -1,14 +1,26 @@
-/* START ASIDE */
+
+
+/*UI sections */
 .helpdesk{
   display: grid;
   width: 100%;
   margin: 0 auto;
-  gap: 1.8rem;
-  grid-template-columns: 15rem auto 23rem;
-  margin-right: 26rem;
+  gap: 1rem;
+  grid-template-columns: 15% auto;
 } 
+.main{
+  display: grid;
+  grid-template-rows: 13vh;
+}
 
+.mainsection{
+  display: grid;
+  grid-template-columns: 126vh auto ;
+  gap: 1rem;
+}
+/* End UI sections */
 
+/* logo */
 aside {
     height: 100vh;
     padding-left: 1rem;
@@ -28,10 +40,10 @@ aside {
   .logo img {
     width: 9rem;
     height: 5rem;
-    /* align-items: center; */
     margin-left: auto;
     margin-right: auto;
   }
+  /* End logo */
   
  
   

@@ -5,7 +5,6 @@ import OutgoingComplaint from '../AdminComplaint/OutgoingComplaint/OutgoingCompl
 import OwnComplaint from '../AdminComplaint/OwnComplaint/OwnComplaint';
 import ComplaintNavigation from './ComplaintNavigation/ComplaintNavigation';
 import { useNavigate } from 'react-router-dom';
-import AdminDeptDrop from '../../UI/AdminDepartmentDropDowm/AdminDeptDrop';
 import AdminContext from '../../Context/AdminContext/AdminContext';
 
 
@@ -24,7 +23,7 @@ const AdminComplaint = () => {
 
         <div className={`${classes.mainTitle}`}>
           <h1 className="tik-type-title">Complaint</h1>
-          <AdminDeptDrop />
+         
 
           <button className={`${classes.tikReqBtn}`} onClick={() => navigate('/newcomplaint')}>
             <span className="material-icons-sharp btn-icon">

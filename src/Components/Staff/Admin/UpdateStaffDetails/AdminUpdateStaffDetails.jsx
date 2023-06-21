@@ -51,7 +51,6 @@ const roles = ['technician', 'user'];
                         <div className={classes.department}>
                             <label className="ld">Role:</label>
                             <select className="dept-select" defaultValue={staff.role} name='role' onChange={handleChange} >
-                                <option value="" hidden>Select role</option>
                                 <option value="technician">Technician</option>
                                 <option value="user">User</option>
                             </select>
@@ -59,7 +58,7 @@ const roles = ['technician', 'user'];
 
                         <div className={classes.detailsBtns}>
                             <button className={classes.updateBtn} onClick={() => handleSubmitClick( id.staffId, updateRole)}>Update</button>
-                            <button className={classes.deleteBtn} >Cancel</button>
+                            <button className={classes.deleteBtn} onClick={() => props.onConfirm()}>Cancel</button>
                         </div>
                     </div>
                 </div>

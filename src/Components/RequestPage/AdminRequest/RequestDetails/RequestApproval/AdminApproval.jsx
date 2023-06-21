@@ -4,7 +4,6 @@ import { useLocation, useNavigate, useParams, useSearchParams } from 'react-rout
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
-import AdminDeptDrop from '../../../../UI/AdminDepartmentDropDowm/AdminDeptDrop';
 import { Fragment } from 'react';
 
 const AdminApproval = (props) => {
@@ -111,7 +110,6 @@ const AdminApproval = (props) => {
             <div className={classes.approvalform}>
                 <h1 >Approval</h1>
                 <div hidden>
-                    <AdminDeptDrop />
                 </div>
                 <div className={classes.RequestApproval} >
                     <div className={classes.form}>

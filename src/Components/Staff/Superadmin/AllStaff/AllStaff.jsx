@@ -12,11 +12,7 @@ const AllStaff = () => {
     const [allStaffList, setAllStaffList] = useState(staffList);
     const [searchText, setSearchText] = useState('');
     const [searchType, setSearchType] = useState('Firstname');
-    const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
-    const [numberOfPages, setNumberOfPages] = useState(10);
     const [refresh, setRefresh] = useState(false);
-    const [selectedStaff, setSelectedStaff] = useState([]);
-    const [showDeleteButton, setShowDeleteButton] = useState(false);
     const [openNormalList, setOpenNormalList] = useState(false);
     const [department, setDepartment] = useState('');
     const [departments, setDepartments] = useState([]);
@@ -32,13 +28,6 @@ const AllStaff = () => {
         getDepartments();
     }, [openDepartmentList]);
 
-    useEffect(() => {
-        if (selectedStaff.length !== 0) {
-            setShowDeleteButton(true);
-        } else {
-            setShowDeleteButton(false);
-        }
-    }, [selectedStaff]);
 
     const columns = [
         {
@@ -48,7 +37,7 @@ const AllStaff = () => {
         },
         {
             name: "Name",
-            selector: (row) => row.firstname,
+            selector: (row) => row.firstname + ' ' + row.lastname,
             sortable: true,
         },
         {
@@ -196,75 +185,64 @@ const AllStaff = () => {
         }
     }, [searchText, staffList, searchType]);
 
-    // useEffect(() => {
-    //     const result = staff.filter(singleStaff => {
-    //         return singleStaff.firstname.toLowerCase().match(search.toLowerCase())
-    //     });
-    //     setFilterStaff(result);
-    // }, [search, staff]);
+    
 
     const handleRowClick = row => {
         navigate(`/singlestaff/${row.id}`);
     }
 
     return (
-        <div className={classes.allstaff}>
-            <div>
-                <div className='mt-3'>
-                    {openNormalList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-                    {
-                        openDepartmentList &&
-                        <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
-                            <option value='' hidden>Select Your Department</option>
-                            <option value={'allDepartments'}>All Departments</option>
-                            {
-                                departments.map((department, key) => (
-                                    <option key={key} value={department}>{department}</option>
-                                ))
-                            }
-                        </select>
-                    }
-                    {
-                        openRoleList &&
-                        <select value={role} className={`${classes.optionSearchBox}`} name="roles" required onChange={(e) => setRole(e.target.value)}>
-                            <option value='' hidden>Select Role</option>
-                            <option value='allRoles'>All Roles</option>
-                            <option value='admin'>Admin</option>
-                            <option value='technician'>Technician</option>
-                            <option value='user'>User</option>
-                        </select>
-                    }
-                    <div className="btn-group mb-1">
-                        <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {searchType}
-                        </button>
-                        <div className="dropdown-menu">
-                            <div className="dropdown-item" onClick={() => setSearchType('Firstname')}>Firstname</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Lastname')}>Lastname</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('E-Mail')}>E-Mail</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Role')}>Role</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
-                        </div>
+        <div >
+            <div className={classes.allstaff}>
+                <h2>Staff List</h2>
+                {openNormalList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                {
+                    openDepartmentList &&
+                    <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                        <option value='' hidden>Select Your Department</option>
+                        <option value={'allDepartments'}>All Departments</option>
+                        {
+                            departments.map((department, key) => (
+                                <option key={key} value={department}>{department}</option>
+                            ))
+                        }
+                    </select>
+                }
+                {
+                    openRoleList &&
+                    <select value={role} className={`${classes.optionSearchBox}`} name="roles" required onChange={(e) => setRole(e.target.value)}>
+                        <option value='' hidden>Select Role</option>
+                        <option value='allRoles'>All Roles</option>
+                        <option value='admin'>Admin</option>
+                        <option value='technician'>Technician</option>
+                        <option value='user'>User</option>
+                    </select>
+                }
+                <div className="btn-group mb-1">
+                    <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {searchType}
+                    </button>
+                    <div className="dropdown-menu">
+                        <div className="dropdown-item" onClick={() => setSearchType('Firstname')}>Firstname</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Lastname')}>Lastname</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('E-Mail')}>E-Mail</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Role')}>Role</div>
+                        <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
                     </div>
                 </div>
-                <DataTable
-                    columns={columns}
-                    data={allStaffList}
-                    pagination
-                    fixedHeader
-                    fixedHeaderScrollHeight='400px'
-                    highlightOnHover
-                    subHeader
-                    onRowClicked={handleRowClick}
-                // subHeaderComponent={
-                //     <input type='text'
-                //         placeholder='Search here'
-                //         value={search}
-                //         onChange={(e) => setSearch(e.target.value)}
-                //     />
-                // }
-                />
             </div>
+            <DataTable
+                columns={columns}
+                data={allStaffList}
+                pagination
+                fixedHeader
+                fixedHeaderScrollHeight='400px'
+                highlightOnHover
+                subHeader
+                onRowClicked={handleRowClick}
+
+            />
+
         </div>
     )
 

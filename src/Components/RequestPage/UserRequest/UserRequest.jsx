@@ -29,9 +29,9 @@ const UserRequest = () => {
   const getCreatedRequestDate = (createdAt) => {
     const date = new Date(createdAt);
     return (date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + formatAMPM(date));
-};
+  };
 
-const formatAMPM = (date) => {
+  const formatAMPM = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
@@ -41,7 +41,7 @@ const formatAMPM = (date) => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime;
-}
+  }
 
   return (
 
@@ -85,7 +85,7 @@ const formatAMPM = (date) => {
                   <p className={`${classes.tikId}`}>
                     #{request.id}
                   </p>
-                  <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['High', () => 'red'], ['Medium', () => '#F78D1E'], ['Low', () => 'green']) }}>
+                  <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => 'red'], ['moderate', () => '#F78D1E'], ['low', () => 'green']) }}>
                     {request.priority}
                   </p>
                   <p className={`${classes.tikId}`}>

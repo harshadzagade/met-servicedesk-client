@@ -1,0 +1,23 @@
+.nav{
+    display: flex;
+    background-color: white;
+    height: 10vh;
+    margin-top: 0.5rem;
+    justify-content: end;
+    width: 172vh;
+    border-radius: 1rem;
+}
+
+.profile{
+    display: flex;
+      gap: 1rem;
+      
+    margin-right: 1.5rem;
+  }
+  .profile svg{
+    margin-top: 1.2rem;
+  }
+  .role{
+    margin-top: 0.3rem;
+  }
+  

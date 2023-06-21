@@ -1,6 +1,4 @@
-.staffform{
-  margin-top: 5.4rem;
-}
+
 
 .tikTypeTitle{
   display: flex;
@@ -31,12 +29,16 @@
 .names{
   display: grid;
   grid-template-columns: 50vh 50vh;
+  gap: 1rem;
 }
 .emailpass{
   display: grid;
   grid-template-columns: 50vh 50vh;
+  gap: 1rem;
 }
 .deptik {
+  display: grid;
+  grid-template-columns: 50vh;
     margin-bottom: 1rem;
 }
 
@@ -58,8 +60,8 @@
 
 .departmentParent {
   display: flex;
-  gap: 0.5rem;
   margin-top: 0.2rem;
+  width: 50vh;
 }
 
 .createButton {
@@ -73,6 +75,8 @@
   font-size: 1em;
   background-color: var(--color-primary);
   color: white;
+  margin-left: auto;
+  margin-right: auto;
 }
 .createstaffInput{
   background: white;
@@ -80,7 +84,12 @@
   border: none;
   border-radius: 5px;
   font-size: 1em;
-  margin-right: 29rem;
   border: 1px solid black;
   
+}
+
+.phone{
+  display: grid;
+  grid-template-columns: 50vh 50vh;
+  gap: 1rem;
 }

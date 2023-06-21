@@ -169,23 +169,25 @@ const CreateStaff = () => {
                                             {departmentList.map((tag, index) => (
                                                 <div className={classes.tag}>
                                                     {tag} &nbsp;
-                                                    <button className={classes.tag} onClick={() => deleteTag(index)}>x</button> 
-                                                </div> 
+                                                    <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
 
                                 </div>
 
-
-                                <div className={`${classes.createForm}`}>
+                                <div className={classes.phone}>
+                                     <div className={`${classes.createForm}`}>
                                     <span>Phone No.</span>
                                     <input type="text" className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef} />
                                 </div>
-                                <div className={`${classes.createForm}`}>
-                                    <span>Extension</span>
-                                    <input type="text" className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} />
+                                    <div className={`${classes.createForm}`}>
+                                        <span>Extension</span>
+                                        <input type="text" className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} />
+                                    </div>
                                 </div>
+
 
                                 <button type="submit" className={`${classes.createButton}`} >Submit</button>
                             </form>

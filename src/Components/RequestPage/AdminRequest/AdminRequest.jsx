@@ -6,23 +6,23 @@ import { Fragment } from 'react';
 import RequestNavigation from './RequestNavigation/RequestNavigation';
 import IncomingRequest from './IncomingRequest/IncomingRequest';
 import OwnRequest from './OwnRequest/OwnRequest';
-import AdminDeptDrop from '../../UI/AdminDepartmentDropDowm/AdminDeptDrop';
 import OutgoingDepartmentRequest from './OutgoingDepartmentRequest/OutgoingDepartmentRequest';
+import { useEffect } from 'react';
+import axios from 'axios';
 const AdminRequest = () => {
+  const navigate = useNavigate();
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingRequest');
   const [numberOfPages, setNumberOfPages] = useState(10);
+
   const checkLayout = (value, numberOfPages) => {
     setOpenLayout(value);
     setNumberOfPages(numberOfPages);
   };
 
-  const navigate = useNavigate();
   return (
     <Fragment>
-
       <div className={`${classes.mainTitle}`}>
         <h1 className="tik-type-title">Request</h1>
-        <AdminDeptDrop />
         <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newrequest')}>
           <span className="material-icons-sharp btn-icon">
             add

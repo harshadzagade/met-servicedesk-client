@@ -9,14 +9,12 @@ import Technician from '../../Components/RequestPage/TechnicianRequest/Technicia
 
 const Request = () => {const navigate = useNavigate();
   const location = useLocation() || null;
-
+  const id = localStorage.getItem('id');
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isTechnician, setIsTechnician] = useState(false);
   const [isUser, setIsUser] = useState(false);
   const [refresh, setRefresh] = useState(false);
-
-  const id = localStorage.getItem('id');
 
   useEffect(() => {
       setRefresh(false);
@@ -86,6 +84,4 @@ const Request = () => {const navigate = useNavigate();
   );
 };
 
-
-
-export default Request
+export default Request;

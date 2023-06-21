@@ -1,5 +1,10 @@
 .allstaff{
-    margin-top: 5.6rem;
+  display: grid;
+  grid-template-columns: 52% 30% 20%;
+ margin-bottom: 0.5rem;
+}
+.allstaff h2{
+margin-top: 0.3rem;
 }
 
 .searchInput{
@@ -28,6 +33,7 @@
       cursor: pointer;
       white-space: nowrap;
       color: white;
+      width: 10rem;
   }
   
   .staffrequestform{

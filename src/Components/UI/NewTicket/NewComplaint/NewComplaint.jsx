@@ -5,6 +5,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
 
 const NewCompaint = () => {
@@ -17,9 +18,15 @@ const NewCompaint = () => {
     const [requestType, setRequestType] = useState('');
     const [editorData, setEditorData] = useState('');
     const [isToggled, setIsToggled] = useState(false);
+    const [departments, setDepartments] = useState([]);
 
-
-
+    useEffect(() => {
+        const getDepartments = async () => {
+            const departments = await axios.get(`http://localhost:8001/api/staff/departments`);
+            setDepartments(departments.data.departments);
+        };
+        getDepartments();
+    }, []);
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
@@ -77,20 +84,22 @@ const NewCompaint = () => {
                         <form >
                             <div className={classes.behalf}>
                                 <span>Behalf Email</span>
-                                    <div className={classes.behalftoogle}>
-                                        <input type="checkbox" defaultChecked={isToggled} onClick={() => { setIsToggled(!isToggled) }} id="toggle-btn" />
-                                        <label for="toggle-btn"></label>
-                                        {isToggled && <input className={`${classes.behalfField} `} type="text" name="behalf" placeholder="Behalf email" autoComplete='true' required ref={behalfEmailRef} />}
-                                    </div>
+                                <div className={classes.behalftoogle}>
+                                    <input type="checkbox" defaultChecked={isToggled} onClick={() => { setIsToggled(!isToggled) }} id="toggle-btn" />
+                                    <label for="toggle-btn"></label>
+                                    {isToggled && <input className={`${classes.behalfField} `} type="text" name="behalf" placeholder="Behalf email" autoComplete='true' required ref={behalfEmailRef} />}
                                 </div>
+                            </div>
 
                             <div className={classes.deptTik}>
                                 <span>Department</span>
                                 <select className={classes.deptSelect} onChange={(e) => setDepartment(e.target.value)}>
                                     <option value="" hidden>----- Select Categories -----</option>
-                                    <option value="ERP">Erp</option>
-                                    <option value="Management">Management</option>
-                                    <option value="Network">Network</option>
+                                    {
+                                        departments.map((department, key) => (
+                                            <option key={key} value={department}>{department}</option>
+                                        ))
+                                    }
                                 </select>
                             </div>
 

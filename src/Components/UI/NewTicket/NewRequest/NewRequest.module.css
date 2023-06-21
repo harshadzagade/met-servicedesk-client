@@ -1,6 +1,4 @@
-.newrequest{
-    margin-top: 5.4rem;
-}
+
 .createStaffform {
     background: var(--color-white);
     width: 100%;
@@ -12,20 +10,23 @@
     align-items: center;
 }
 
+
 .behalfField {
     background: white;
     padding: 10px;
     border: none;
     border-radius: 5px;
     font-size: 1em;
-    margin-right: 29rem;
     border: 1px solid black;
+    margin-left: 20vh;
 }
-
+.behalftoogle{
+    display: flex;
+}
 
 .behalf {
     display: grid;
-    grid-template-columns: 100px 50px;
+    grid-template-columns: 100px 600px;
     margin-bottom: 1rem;
 } 
 

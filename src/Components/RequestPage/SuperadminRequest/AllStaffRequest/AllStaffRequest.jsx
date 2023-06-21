@@ -17,8 +17,6 @@ const AllStaffRequest = () => {
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [searchType, setSearchType] = useState('Subject');
     const [searchText, setSearchText] = useState('');
-    const [openDetails, setOpenDetails] = useState(false);
-    const [detailsId, setDetailsId] = useState(null);
     const [isNormalSearch, setIsNormalSearch] = useState(true);
     const [department, setDepartment] = useState('');
     const [departments, setDepartments] = useState([]);
