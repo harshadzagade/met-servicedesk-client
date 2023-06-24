@@ -12,8 +12,8 @@ const ComplaintedDetails = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        if (ticketCtx.id) {
-          const list = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${ticketCtx.id}`);
+        if (ticketCtx.staffId) {
+          const list = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${ticketCtx.staffId}`);
           setComplaintDetails(list.data.staff);
         }
       } catch (error) {
@@ -21,7 +21,7 @@ const ComplaintedDetails = () => {
       }
     };
     getList();
-  }, [ticketCtx.id]);
+  }, [ticketCtx.staffId]);
   return (
     <div className={classes.compdetails}>
       <h2>Complaint Details</h2>

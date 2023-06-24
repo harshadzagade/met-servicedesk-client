@@ -2,8 +2,9 @@ import React from "react";
 
 const TicketDetailsContext = React.createContext({
     ticketType: '',
-    id: null,
-    onClickHandler: (ticketType, id) => { },
+    staffId: null,
+    ticketId: null,
+    onClickHandler: (ticketType, staffId, ticketId) => { },
 });
 
 export default TicketDetailsContext;

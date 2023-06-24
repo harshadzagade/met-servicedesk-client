@@ -1,6 +1,36 @@
 
-.usercomplaint{
-  margin-top: 5.4rem;
+.searchInput{
+  background: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 1px solid black;
+}
+.optionSearchBox{
+  background: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 1px solid black;
+}
+.searchButton{
+  display: inline-block;
+    margin-left: 0.5rem;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
+    background-color: #7380ec;
+    cursor: pointer;
+    white-space: nowrap;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.datapage{
+  margin-left: 23vh;
 }
 /* START REQUESTS Section */
 .mainTitle {
@@ -37,25 +67,11 @@
   }
   
   .button {
-    transition: all 0.2s ease-in-out;
-    -webkit-appearance: none;
-    border-radius: 100px;
-    font-family: inherit;
-    appearance: none;
     background: none;
+    font-family: inherit;
     font-weight: 700;
     font-size: 18px;
-    cursor: pointer;
-    padding: 10px;
-    outline: none;
-    opacity: 0.4;
-    border: none;
     color: var(--color-dark);
-  }
-  
-  .button:hover,
-  .button.active {
-    opacity: 1;
   }
 
   
@@ -111,9 +127,7 @@
     font-size: small;
   }
   
-  .datapage{
-  margin-left: 30vh;
-  }
+  
 
  .tikMsg p {
     width: 35rem;

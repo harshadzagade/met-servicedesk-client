@@ -1,4 +1,4 @@
-.searchInput{
+.searchInput {
   background: white;
   padding: 10px;
   border: none;
@@ -6,7 +6,8 @@
   font-size: 1em;
   border: 1px solid black;
 }
-.optionSearchBox{
+
+.optionSearchBox {
   background: white;
   padding: 10px;
   border: none;
@@ -14,17 +15,25 @@
   font-size: 1em;
   border: 1px solid black;
 }
-.searchButton{
+
+.searchButton {
   display: inline-block;
-    margin-left: 0.5rem;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 30px 10px 20px;
-    background-color: #7380ec;
-    cursor: pointer;
-    white-space: nowrap;
-    color: white;
+  margin-left: 0.5rem;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 10px 10px 10px;
+  background-color: #7380ec;
+  cursor: pointer;
+  white-space: nowrap;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
+
+.datapage {
+  margin-left: 23vh;
+}
+
 /* START REQUESTS Section */
 main .mainTitle {
   display: flex;
@@ -33,81 +42,82 @@ main .mainTitle {
   margin-top: 3.5rem;
 }
 
-   /* drop down */
+/* drop down */
 .dropdown {
-display: inline-block;
-position: relative;
-margin-right: 28rem;
+  display: inline-block;
+  position: relative;
+  margin-right: 28rem;
 }
 
 .ddButton {
-display: inline-block;
-border: 1px solid gray;
-border-radius: 4px;
-padding: 10px 30px 10px 20px;
-background-color: #7380ec;
-color: #ffffff;
-cursor: pointer;
-white-space: nowrap;
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 30px 10px 20px;
+  background-color: #7380ec;
+  color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .ddButton:after {
-content: '';
-position: absolute;
-top: 50%;
-right: 15px;
-transform: translateY(-50%);
-width: 0; 
-height: 0; 
-border-left: 5px solid transparent;
-border-right: 5px solid transparent;
-border-top: 5px solid black;
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
 }
 
 .ddButton:hover {
-background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 
 
 .ddInput {
-display: none;
+  display: none;
 }
 
 .ddMenu {
-position: absolute;
-top: 100%;
-border: 1px solid rgba(132, 139, 200, 0.18);
-border-radius: 4px;
-padding: 0;
-margin: 2px 0 0 0;
-box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
-background-color: #ffffff;
-list-style-type: none;
+  position: absolute;
+  top: 100%;
+  border: 1px solid rgba(132, 139, 200, 0.18);
+  border-radius: 4px;
+  padding: 0;
+  margin: 2px 0 0 0;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  list-style-type: none;
 }
 
-.ddInput + .ddMenu {  
-display: none;
-} 
+.ddInput+.ddMenu {
+  display: none;
+}
 
-.ddInput:checked + .ddMenu {
-display: block;
-} 
+.ddInput:checked+.ddMenu {
+  display: block;
+}
 
 .ddMenu li {
-padding: 10px 20px;
-cursor: pointer;
-white-space: nowrap;
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .ddMenu li:hover {
-background-color: #7380ec;
+  background-color: #7380ec;
 }
 
 .ddMenu li a {
-display: block;
-margin: -10px -20px;
-padding: 10px 20px;
+  display: block;
+  margin: -10px -20px;
+  padding: 10px 20px;
 }
+
 /* end dropdown */
 
 main .tikReqbtn {
@@ -160,16 +170,12 @@ main .filterButtons {
 }
 
 
-.datapage{
-margin-left: auto;
-}
-
 main .filter {
-display: flex;
-gap: 1rem;
-align-items: flex-start;
-margin-top: 1.5rem;
-background: var(--color-background);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  background: var(--color-background);
 }
 
 
@@ -205,14 +211,14 @@ main .tikHead {
   display: flex;
   align-items: flex-start;
   position: relative;
-  gap:2rem;
+  gap: 2rem;
 }
 
 main .tikTitle {
   font-size: medium;
 }
 
-main .date{
+main .date {
   margin-left: auto;
   font-size: small;
 }
@@ -243,7 +249,7 @@ main .tikId {
 }
 
 main .tikPri {
- border: 1px solid;
+  border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;

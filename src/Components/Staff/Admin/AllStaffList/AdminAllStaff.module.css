@@ -3,9 +3,11 @@
     display: grid;
     grid-template-columns: 52% 30% 20%;
    margin-bottom: 0.5rem;
+   margin-top: 2.5rem;
   }
   .allstaff h2{
   margin-top: 0.3rem;
+  font-weight: 600;
   }
   
   .searchInput{

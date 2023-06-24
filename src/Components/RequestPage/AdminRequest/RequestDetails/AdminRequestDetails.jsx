@@ -17,7 +17,7 @@ const AdminRequestDetails = () => {
     const id = paramsId.requestId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [requestData, setRequestData] = useState({});
-    ticketCtx.onClickHandler('request', requestData.staffId);
+    ticketCtx.onClickHandler('request', requestData.staffId, requestData.id);
 
     useEffect(() => {
         if (adminCtx.department === requestData.department) {

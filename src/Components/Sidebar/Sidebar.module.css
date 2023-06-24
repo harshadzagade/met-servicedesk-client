@@ -25,6 +25,7 @@ aside {
     height: 100vh;
     padding-left: 1rem;
     border-right: 0.1px solid #dce1eb;
+    background: #fff;
   }
   
   aside .top {

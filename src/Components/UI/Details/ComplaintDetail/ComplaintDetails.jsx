@@ -7,7 +7,7 @@ const ComplaintDetails = () => {
     const id = useParams().complaintId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [complaintData, setComplaintData] = useState({});
-    ticketCtx.onClickHandler('complaint', complaintData.staffId);
+    ticketCtx.onClickHandler('complaint', complaintData.staffId, complaintData.id);
 
     useEffect(() => {
         const getComplaintDetails = async () => {

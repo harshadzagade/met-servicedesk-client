@@ -23,15 +23,24 @@ const AdminDeptDrop = (props) => {
     getDepartments();
   }, [id,props]);
   return (
-    <label className={classes.dropdown}>
-      <div className={classes.ddButton}>
-        {adminCtx.department === '' ? 'Department' : adminCtx.department}
-      </div>
-      <input type="checkbox" className={classes.ddInput} id="test" />
-      <ul className={classes.ddMenu}>
-        {departments.map((department) => (<li value={department} onClick={() => handleDepartmentClick(department)}>{department}</li>))}
-      </ul>
-    </label>
+    // <label className={classes.dropdown} dropdown-toggle>
+    //   <div className={classes.ddButton}>
+    //     {adminCtx.department === '' ? 'Department' : adminCtx.department}
+    //   </div>
+    //   <input type="checkbox" className={classes.ddInput} id="test" />
+    //   <ul className={classes.ddMenu}>
+    //     {departments.map((department) => (<li value={department} onClick={() => handleDepartmentClick(department)}>{department}</li>))}
+    //   </ul>
+    // </label>
+    <div className="btn-group ">
+    <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {adminCtx.department === '' ? 'Department' : adminCtx.department}
+    </button>
+    <div className="dropdown-menu">
+    {departments.map((department) => (<li value={department} onClick={() => handleDepartmentClick(department)}>{department}</li>))}
+    </div>
+   
+</div>
   )
 }
 

@@ -14,7 +14,7 @@ const TechnicianRequestDetails = () => {
     const [requestData, setRequestData] = useState({});
     const navigate = useNavigate();
     const ticketCtx = useContext(TicketDetailsContext);
-    ticketCtx.onClickHandler('request', requestData.staffId);
+    ticketCtx.onClickHandler('request', requestData.staffId, requestData.id);
 
     useEffect(() => {
         const getRequestDetails = async () => {

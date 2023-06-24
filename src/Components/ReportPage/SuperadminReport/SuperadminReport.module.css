@@ -2,6 +2,12 @@
     margin-top: 1vh;
     justify-content: center;
     display: flex;
+    margin-top: 2.5rem;
+}
+
+.h2 {
+    font-weight: 600;
+    margin-right: auto;
 }
 
 .departmentSelection {
@@ -12,7 +18,7 @@
 .staffSelection {
     align-items: center;
     margin-left: 1vh;
-    display: flex;  
+    display: flex;
 }
 
 .dropdownSelect {
@@ -33,7 +39,7 @@
 
 .searchInput {
     margin-top: 0.85rem;
-    margin-left: 35vh;
+    margin-left: 23.5rem;
     border-radius: 0.5rem 0rem 0rem 0.5rem;
     background: #f9fafa;
     border: 1px solid #b5bdc4;
@@ -53,16 +59,20 @@
     box-shadow: 1px 1px 0 #3b49df;
 }
 
+
 .searchButton {
     cursor: pointer;
     margin-top: -0.1rem;
-    background-color: #b4b4b4;
-    color: black;
     font-weight: 500;
     border-radius: 0rem 0.5rem 0.5rem 0rem;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
-    border: 0.1rem solid gray;
+    background-color: #7380ec;
+    color: white;
+    max-width: 7rem;
+    gap: 1rem;
+
+
 }
 
 .searchButton:focus {

@@ -101,10 +101,10 @@ const Sidebar = ({ children }) => {
   };
 
   useEffect(() => {
-    if ((window.location.pathname !== '/requestdetails/:requestId') || (window.location.pathname !== '/complaintdetails/:complaintId')) {
-      ticketCtx.onClickHandler('', null)
+    if ((window.location.pathname !== `/requestdetails/${ticketCtx.ticketId}`) || (window.location.pathname !== `/complaintdetails/${ticketCtx.ticketId}`) || (window.location.pathname !== `/adminrequestdetails/${ticketCtx.ticketId}`) || (window.location.pathname !== `/Techcomplaintdetails/${ticketCtx.ticketId}`) || (window.location.pathname !== `/technicianRequestDetails/${ticketCtx.ticketId}`)) {
+      ticketCtx.onClickHandler('', null, null)
     }
-  }, [ticketCtx]);
+  }, [window.location.pathname]);
 
   useEffect(() => {
     if (id === '1') {
@@ -272,12 +272,14 @@ const Sidebar = ({ children }) => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
-        setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role });
-        if (staff.data.staff.role === 'technician' || staff.data.staff.role === 'user') {
-          setIsHomeAvailable(false);
-        } else {
-          setIsHomeAvailable(true);
+        if (id) {
+          const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+          setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role });
+          if (staff.data.staff.role === 'technician' || staff.data.staff.role === 'user') {
+            setIsHomeAvailable(false);
+          } else {
+            setIsHomeAvailable(true);
+          }
         }
       } catch (error) {
         console.log(error.response.data.message);

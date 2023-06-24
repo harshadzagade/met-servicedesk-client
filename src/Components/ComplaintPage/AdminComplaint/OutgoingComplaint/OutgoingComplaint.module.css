@@ -1,4 +1,16 @@
-.searchInput{
+/* search filtes */
+.searchInput {
+  background: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 1px solid black;
+  height: 3rem;
+  margin-top: 1rem;
+}
+
+.optionSearchBox {
   background: white;
   padding: 10px;
   border: none;
@@ -6,24 +18,31 @@
   font-size: 1em;
   border: 1px solid black;
 }
-.optionSearchBox{
-  background: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  border: 1px solid black;
-}
-.searchButton{
+
+.searchButton {
   display: inline-block;
-    margin-left: 0.5rem;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 30px 10px 20px;
-    background-color: #7380ec;
-    cursor: pointer;
-    white-space: nowrap;
-    color: white;
+  margin-left: 0.5rem;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 10px 10px 10px;
+  background-color: #7380ec;
+  cursor: pointer;
+  white-space: nowrap;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+}
+.search{
+  display: flex;
+}
+.searchfiltering{
+  display: flex;
+  margin-right: auto;
+}
+
+.datapage {
+  margin-top: 0.5rem;
 }
 /* START complaint Section */
 main .mainTitle {
@@ -97,7 +116,7 @@ main .filter {
 main .complaint {
   margin-top: 0.5rem;
   overflow: auto;
-  max-height: 60vh;
+  max-height: 23rem;
 }
 
 main .requests h2 {

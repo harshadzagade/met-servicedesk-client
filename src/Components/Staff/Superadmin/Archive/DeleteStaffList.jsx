@@ -13,7 +13,7 @@ const DeleteStaffList = () => {
   const [allStaffList, setAllStaffList] = useState(staffList);
   const [searchText, setSearchText] = useState('');
   const [refresh, setRefresh] = useState(false);
-  
+
   useEffect(() => {
     const getList = async () => {
       const list = await axios.get(`http://localhost:8001/api/trash/`);
@@ -36,8 +36,7 @@ const DeleteStaffList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios.delete(`http://localhost:8001/api/trash/staffdetails/restore/${id}`);
-        navigate('/archive', { state: { refreshTrash: true } });
-        console.log('delete');
+        setRefresh(true);
         Swal.fire(
           'Restored Staff!',
           'You have successfully restored a staff',
@@ -65,7 +64,7 @@ const DeleteStaffList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios.delete(`http://localhost:8001/api/trash/staffdetails/remove/${id}`);
-        navigate('/archive', { state: { refreshTrash: true } });
+        setRefresh(true);
         Swal.fire(
           'Deleted Staff!',
           'You have successfully deleted a staff',
@@ -139,22 +138,22 @@ const DeleteStaffList = () => {
   }
 
   return (
-    <div className={classes.allstaff}>
-      <div>
-        <div className='mt-3'>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Please search E-mail`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
-        <DataTable
-          columns={columns}
-          data={allStaffList}
-          pagination
-          fixedHeader
-          fixedHeaderScrollHeight='400px'
-          highlightOnHover
-          subHeader
-          onRowClicked={handleRowClick}
-        />
+
+    <div>
+      <div className={classes.allStaff}>
+        <h2>Delete Staff</h2>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Please search E-mail`} onChange={(e) => setSearchText(e.target.value)} />
       </div>
+      <DataTable
+        columns={columns}
+        data={allStaffList}
+        pagination
+        fixedHeader
+        fixedHeaderScrollHeight='380px'
+        highlightOnHover
+        subHeader
+        onRowClicked={handleRowClick}
+      />
     </div>
   )
 

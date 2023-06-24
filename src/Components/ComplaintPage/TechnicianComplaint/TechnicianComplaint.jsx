@@ -19,20 +19,20 @@ const TechnicianComplaint = () => {
   const navigate = useNavigate();
   return (
     <Fragment>
-      <div className={classes.techcomplaint}>
-        <div className={`${classes.mainTitle}`}>
+
+      <div className={`${classes.mainTitle}`}>
         <h1 >Complaint</h1>
-          <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newcomplaint')}>
-            <span className="material-icons-sharp btn-icon">
-              add
-            </span>
-            <span className={`${classes.btnName}`}> New Ticket</span>
-          </button>
-        </div>
-        <TechnicianComplaintNavigation viewLayout={checkLayout} />
-        {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint numberOfPages={numberOfPages}/>}
-        {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint numberOfPages={numberOfPages}/>}
+        <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newcomplaint')}>
+          <span className="material-icons-sharp btn-icon">
+            add
+          </span>
+          <span className={`${classes.btnName}`}> New Ticket</span>
+        </button>
       </div>
+      <TechnicianComplaintNavigation viewLayout={checkLayout} />
+      {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint numberOfPages={numberOfPages} />}
+      {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint numberOfPages={numberOfPages} />}
+    
     </Fragment>
   )
 }

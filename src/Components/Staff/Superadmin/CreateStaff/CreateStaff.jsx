@@ -129,7 +129,7 @@ const CreateStaff = () => {
         <div >
             <main>
                 <div className={classes.staffform}>
-                    <h1>Create staff</h1>
+                    <h2>Create staff</h2>
                     <div className={`${classes.createStaffform}`}>
                         <div className={`${classes.formStaff}`}>
                             <form method='POST' onSubmit={handleSubmitClick}>

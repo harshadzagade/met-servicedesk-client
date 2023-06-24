@@ -235,6 +235,7 @@ const SuperadminReport = () => {
     return (
         <div>
             <div className={`${classes.basicSelection}`}>
+                <h2 className={classes.h2}>Report</h2>
                 <div className={`${classes.departmentSelection}`}>
                     <div>Department:&nbsp;</div>
                     <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedDepartment(e.target.value)}>
@@ -267,7 +268,7 @@ const SuperadminReport = () => {
                     {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                     {
                         openTicketTypeList &&
-                        <select value={ticketType} className={`${classes.optionSearchBox}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
+                        <select value={ticketType} className={`${classes.searchInput}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
                             <option value='' hidden>Select Your Ticket Type</option>
                             <option value='allTicketTypes'>All Ticket Types</option>
                             <option value='requests'>Requests</option>
@@ -276,7 +277,7 @@ const SuperadminReport = () => {
                     }
                     {
                         openCategoryList &&
-                        <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                        <select value={category} className={`${classes.searchInput}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
                             <option value='' hidden>Select Your Category</option>
                             <option value={'allCategories'}>All Categories</option>
                             {
@@ -288,7 +289,7 @@ const SuperadminReport = () => {
                     }
                     {
                         openPriorityList &&
-                        <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                        <select value={priority} className={`${classes.searchInput}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
                             <option value='' hidden>Select Your Priority</option>
                             <option value='allPriorities'>All Priorities</option>
                             <option value='high'>High</option>

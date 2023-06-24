@@ -12,7 +12,7 @@ const TechComplaintDetails = () => {
     const id = paramsId.complaintId;
     const ownId = localStorage.getItem('id');
     const ticketCtx = useContext(TicketDetailsContext);
-    ticketCtx.onClickHandler('complaint', complaintData.staffId);
+    ticketCtx.onClickHandler('complaint', complaintData.staffId, complaintData.id);
  
 
     useEffect(() => {

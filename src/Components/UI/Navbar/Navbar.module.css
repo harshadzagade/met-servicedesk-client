@@ -1,23 +1,38 @@
-.nav{
-    display: flex;
-    background-color: white;
-    height: 10vh;
-    margin-top: 0.5rem;
-    justify-content: end;
-    width: 172vh;
-    border-radius: 1rem;
+.nav {
+  display: flex;
+  background-color: white;
+  height: 6.5rem;
+  flex-direction: row;
+  justify-content: end;
+  width: 99%;
+  border-radius: 1rem;
+}
+.adminDept{
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+}
+.adminDept h3{
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+.departmentSelection {
+  margin-right: auto;
 }
 
-.profile{
-    display: flex;
-      gap: 1rem;
-      
-    margin-right: 1.5rem;
-  }
-  .profile svg{
-    margin-top: 1.2rem;
-  }
-  .role{
-    margin-top: 0.3rem;
-  }
-  
+.profile {
+  display: flex;
+  gap: 1rem;
+  margin-right: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile svg {
+  margin-top: 1.2rem;
+}
+
+.role {
+  margin-top: 0.3rem;
+}

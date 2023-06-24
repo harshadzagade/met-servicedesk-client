@@ -1,30 +1,30 @@
-
-.detail{
+.detail {
     background: var(--color-white);
-      width: 100%;
-      border-radius: var(--card-border-radius);
-      padding: 1rem;
-      box-shadow: var(--box-shadow);
-      transition: all 300ms ease;
-      overflow: auto;
-      max-height: 80vh;
-   }
-.myform label{
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    overflow: auto;
+    max-height: 80vh;
+}
+
+.myform label {
     font-size: medium;
     margin-top: 0.5rem;
-}   
+}
 
-.myform p{
-    font-size:small;
+.myform p {
+    font-size: small;
 }
 
 
- .idlab{
+.idlab {
     margin-left: 10rem;
 }
 
 /* details */
- .idDetails{
+.idDetails {
     display: grid;
     grid-template-columns: 200px 100px;
 }
@@ -32,42 +32,44 @@
 
 
 
-.name{
-     display: grid;
+.name {
+    display: grid;
     grid-template-columns: 200px 150px;
 }
+
 /* end details */
 
-.deptper{
+.deptper {
     display: grid;
     grid-template-columns: 400px 100px;
 }
 
-.department{
+.department {
     display: grid;
     grid-template-columns: 200px 100px;
 }
 
 
 
-.priorityDetails{
+.priorityDetails {
     display: grid;
     grid-template-columns: 200px 100px;
 }
 
 /* request type and status */
-.reqsta{
+.reqsta {
     display: grid;
     grid-template-columns: 400px 100px;
 
 }
 
-.ComplaintType{
+.ComplaintType {
     display: grid;
     grid-template-columns: 200px 100px;
 }
 
-.status{display: grid;
+.status {
+    display: grid;
     grid-template-columns: 200px 100px;
 }
 
@@ -75,12 +77,13 @@
 
 /* approval */
 
-.approval{
+.approval {
     display: grid;
     grid-template-columns: 30vh 70vh;
 }
+
 /* end approval */
-.techName{
+.techName {
     display: grid;
     grid-template-columns: 200px 100px;
 }
@@ -88,24 +91,24 @@
 .subjectDetails {
     display: grid;
     grid-template-columns: 30vh 70vh;
-  }
+}
 
 
 
-  .description {
+.description {
     display: grid;
     grid-template-columns: 30vh 70vh;
-  }
- 
-  .date{
+}
+
+.date {
     display: grid;
     grid-template-columns: 200px 200px;
-  }
+}
 
 
 
 
-.id-details p{
+.id-details p {
     background: white;
     padding: 10px;
     border: none;
@@ -115,10 +118,10 @@
     font-size: medium;
     margin-top: -0.5rem;
     border: 1px solid black;
-   
+
 }
 
-.complaintAssingBtn{
+.complaintAssingBtn {
     flex: 1;
     gap: 2rem;
     padding: 10px;
@@ -128,12 +131,12 @@
     color: white;
 }
 
-.complaintDetailsp{
-background: white;
-padding: 10px;
-border: none;
-font-size: 1em;
-align-items: center;
+.complaintDetailsp {
+    background: white;
+    padding: 10px;
+    border: none;
+    font-size: 1em;
+    align-items: center;
 
 
 }
@@ -146,5 +149,4 @@ align-items: center;
     margin: 0px;
     color: white;
     font-size: 1rem;
-  }
-
+}

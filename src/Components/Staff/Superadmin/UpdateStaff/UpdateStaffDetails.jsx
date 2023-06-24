@@ -125,27 +125,29 @@ const UpdateStaffDetails = (props) => {
                             <input type="text" className={classes.input} placeholder='LastName' name='lastname' autoComplete='true' defaultValue={staff.lastname} onChange={handleChange} />
                         </div>
 
-                        <div className={classes.updateDetails}>
-                            <label>Department</label>
-                            <div className={classes.tags}>
-                                <input
-                                    value={input}
-                                    placeholder="Enter a tag"
-                                    onKeyDown={onKeyDown}
-                                    onKeyUp={onKeyUp}
-                                    onChange={onChange}
+                        <div className={classes.deptik}>
+                                    <label>Department</label>
+                                    <div className={`${classes.createForm}`}>
+                                        <input
+                                            value={input}
+                                            placeholder="Enter a department"
+                                            className={classes.createstaffInput}
+                                            onKeyDown={onKeyDown}
+                                            onKeyUp={onKeyUp}
+                                            onChange={onChange}
 
-                                />
-
-                                {departmentList.map((tag, index) => (
-                                    <div className="tag">
-                                        {tag}
-                                        <button onClick={() => deleteTag(index)}>x</button>
+                                        />
+                                        <div className={classes.departmentParent}>
+                                            {departmentList.map((tag, index) => (
+                                                <div className={classes.tag}>
+                                                    {tag} &nbsp;
+                                                    <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                ))}
-                            </div>
 
-                        </div>
+                                </div>
 
                       
 

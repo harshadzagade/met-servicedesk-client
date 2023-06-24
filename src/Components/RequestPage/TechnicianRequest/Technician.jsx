@@ -9,16 +9,14 @@ import TechnicianOwnRequest from '../TechnicianRequest/TechnicianOwnRequest/Tech
 
 const Technician = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffAssignRequest');
-  const [numberOfPages, setNumberOfPages] = useState(10);
-  const checkLayout = (value, numberOfPages) => {
+  const checkLayout = (value, ) => {
     setOpenLayout(value);
-    setNumberOfPages(numberOfPages);
   }
 
   const navigate = useNavigate();
   return (
     <Fragment>
-      <div className={classes.tecreq}>
+      
        <div className={`${classes.mainTitle}`}>
        <h1 className="tik-type-title">Request</h1>
           <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newrequest')}>
@@ -29,9 +27,9 @@ const Technician = () => {
           </button>
         </div>
         <RequestNavigation viewLayout={checkLayout} />
-        {openLayout === 'AllStaffAssignRequest' && <TechnicianAssignRequest  numberOfPages={numberOfPages}/>}
-        {openLayout === 'AllStaffOwnRequest' && <TechnicianOwnRequest numberOfPages={numberOfPages} />}
-      </div>
+        {openLayout === 'AllStaffAssignRequest' && <TechnicianAssignRequest  />}
+        {openLayout === 'AllStaffOwnRequest' && <TechnicianOwnRequest  />}
+      
     </Fragment>
 
   )

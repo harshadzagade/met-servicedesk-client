@@ -25,14 +25,31 @@ main .filterButtons {
   opacity: 1;
 }
 
-.datapage {
-  margin-left: 7rem;
-}
-
 main .filter {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  margin-top: 1.5rem;
   background: var(--color-background);
+}
+
+ 
+.tikReqBtn {
+  display: flex;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  border-radius: 1rem;
+  font-family: inherit;
+  appearance: none;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-dark);
+  margin-left: 46%;
+}
+
+.btnName {
+  margin-top: 0.2rem;
 }

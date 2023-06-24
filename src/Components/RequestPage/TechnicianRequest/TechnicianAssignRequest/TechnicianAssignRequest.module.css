@@ -1,76 +1,113 @@
-  
-.requests {  
-  overflow: auto;
-  max-height: 60vh;
-}
+  /* searchfiletr */
+  .searchInput {
+    background: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px solid black;
+  }
 
-.requests h2 {
-  margin-bottom: 0.8rem;
-}
+  .optionSearchBox {
+    background: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px solid black;
+  }
 
-.tikInfo {
-  background: var(--color-white);
-  width: 100%;
-  border-radius: var(--card-border-radius);
-  padding: var(--card-padding);
-  box-shadow: var(--box-shadow);
-  transition: all 300ms ease;
-  margin-bottom: 0.3rem;
-  align-items: center;
-}
+  .searchButton {
+    display: inline-block;
+    margin-left: 0.5rem;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
+    background-color: #7380ec;
+    cursor: pointer;
+    white-space: nowrap;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 
-main .tikInfo:hover {
-  cursor: pointer;
-  box-shadow: none;
-}
+  .datapage {
+    margin-left: 23vh;
+  }
 
-main .tikHead {
-  display: flex;
-  align-items: flex-start;
-  position: relative;
-  gap:2rem;
-}
+  /* START REQUESTS Section */
+  .requests {
+    overflow: auto;
+    max-height: 60vh;
+  }
 
-main .tikTitle {
-  font-size: medium;
-}
+  .requests h2 {
+    margin-bottom: 0.8rem;
+  }
 
-main .date{
-  margin-left: auto;
-  font-size: small;
-}
+  .tikInfo {
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    margin-bottom: 0.3rem;
+    align-items: center;
+  }
 
-main .tikMsg p {
-  width: 35rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 0.5rem;
-}
+  main .tikInfo:hover {
+    cursor: pointer;
+    box-shadow: none;
+  }
 
-main .tikOther {
-  display: flex;
-  gap: 3rem;
-  align-items: flex-start;
-  margin-top: 1.2rem;
-}
+  main .tikHead {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    gap: 2rem;
+  }
 
-main .tikId {
-  border: 1px solid;
-  border-radius: var(--border-radius-2);
-  padding: 0 2%;
-  cursor: pointer;
-  margin: 0px;
-  font-size: 1rem;
-  color: var(--color-dark);
-}
+  main .tikTitle {
+    font-size: medium;
+  }
 
-main .tikPri {
- border: 1px solid;
-  border-radius: var(--border-radius-2);
-  padding: 0 2%;
-  cursor: pointer;
-  margin: 0px;
-  color: white;
-  font-size: 1rem;
-}
+  main .date {
+    margin-left: auto;
+    font-size: small;
+  }
+
+  main .tikMsg p {
+    width: 35rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0.5rem;
+  }
+
+  main .tikOther {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    margin-top: 1.2rem;
+  }
+
+  main .tikId {
+    border: 1px solid;
+    border-radius: var(--border-radius-2);
+    padding: 0 2%;
+    cursor: pointer;
+    margin: 0px;
+    font-size: 1rem;
+    color: var(--color-dark);
+  }
+
+  main .tikPri {
+    border: 1px solid;
+    border-radius: var(--border-radius-2);
+    padding: 0 2%;
+    cursor: pointer;
+    margin: 0px;
+    color: white;
+    font-size: 1rem;
+  }

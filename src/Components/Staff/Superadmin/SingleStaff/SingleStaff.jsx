@@ -72,7 +72,7 @@ const SingleStaff = () => {
   return (
     <main>
       <div className={classes.staffdetails}>
-        <h1>staff Details</h1>
+        <h1>Staff Details</h1>
         {openUpdate && <UpdateStaffDetails onConfirm={handleUpdateCancel} />}
         <div className={classes.detail}>
           <div className={classes.staffDetails}>

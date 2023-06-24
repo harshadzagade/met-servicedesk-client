@@ -110,7 +110,7 @@ const NewRequest = () => {
                                     <select className={classes.priSelect} onChange={(e) => setPriority(e.target.value)}>
                                         <option value="" hidden>----- Select Categories -----</option>
                                         <option value="high">High</option>
-                                        <option value="modrate">Modrate</option>
+                                        <option value="moderate">Moderate</option>
                                         <option value="low">Low</option>
                                     </select>
                                 </div>

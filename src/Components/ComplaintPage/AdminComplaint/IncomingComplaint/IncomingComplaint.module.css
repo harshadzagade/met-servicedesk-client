@@ -1,4 +1,16 @@
-.searchInput{
+/* search filtes */
+.searchInput {
+  background: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 1px solid black;
+  height: 3rem;
+  margin-top: 1rem;
+}
+
+.optionSearchBox {
   background: white;
   padding: 10px;
   border: none;
@@ -6,34 +18,46 @@
   font-size: 1em;
   border: 1px solid black;
 }
-.optionSearchBox{
-  background: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  border: 1px solid black;
-}
-.searchButton{
+
+.searchButton {
   display: inline-block;
-    margin-left: 0.5rem;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 30px 10px 20px;
-    background-color: #7380ec;
-    cursor: pointer;
-    white-space: nowrap;
-    color: white;
+  margin-left: 0.5rem;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 10px 10px 10px;
+  background-color: #7380ec;
+  cursor: pointer;
+  white-space: nowrap;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
 }
-/* START complaint Section */
-main .mainTitle {
+.search{
+  display: flex;
+}
+.searchfiltering{
+  display: flex;
+  margin-right: auto;
+}
+
+.datapage {
+  margin-top: 0.5rem;
+}
+/* superadmin complaint */
+.mainTitle {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  
+  margin-top: 2.5rem;
+
 }
 
-main .tikReqBtn {
+.mainTitle h2 {
+  font-weight: 600;
+}
+
+.tikReqBtn {
   display: flex;
   gap: 0.5rem;
   transition: all 0.2s ease-in-out;
@@ -49,42 +73,58 @@ main .tikReqBtn {
   color: var(--color-dark);
 }
 
-main .btnName {
+.btnName {
   margin-top: 0.2rem;
 }
 
 
 
-main .filterButtons {
+/* START REQUESTS Section */
+.mainTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tikReqBtn {
+  display: flex;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  border-radius: 1rem;
+  font-family: inherit;
+  appearance: none;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-dark);
+}
+
+
+
+
+
+.filterButtons {
   display: flex;
   padding: 15px 0 10px;
 }
 
 .button {
-  transition: all 0.2s ease-in-out;
-  -webkit-appearance: none;
-  border-radius: 100px;
-  font-family: inherit;
-  appearance: none;
   background: none;
+  font-family: inherit;
   font-weight: 700;
   font-size: 18px;
-  cursor: pointer;
-  padding: 10px;
-  outline: none;
-  opacity: 0.4;
-  border: none;
   color: var(--color-dark);
-}
 
-.button:hover,
-.button.active {
-  opacity: 1;
 }
 
 
 
-main .filter {
+
+
+.filter {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
@@ -94,17 +134,16 @@ main .filter {
 
 
 
-main .complaint {
-  margin-top: 0.5rem;
+.complaint {
   overflow: auto;
-  max-height: 60vh;
+  max-height: 23rem;
 }
 
-main .requests h2 {
+.requests h2 {
   margin-bottom: 0.8rem;
 }
 
-main .tikInfo {
+.tikInfo {
   background: var(--color-white);
   width: 100%;
   border-radius: var(--card-border-radius);
@@ -115,28 +154,28 @@ main .tikInfo {
   align-items: center;
 }
 
-main .tikInfo:hover {
+.tikInfo:hover {
   cursor: pointer;
   box-shadow: none;
 }
 
-main .tikHead {
+.tikHead {
   display: flex;
   align-items: flex-start;
   position: relative;
-  gap:2rem;
+  gap: 2rem;
 }
 
-main .tikTitle {
+.tikTitle {
   font-size: medium;
 }
 
-main .date{
+.date {
   margin-left: auto;
   font-size: small;
 }
 
-main .tikMsg p {
+.tikMsg p {
   width: 35rem;
   white-space: nowrap;
   overflow: hidden;
@@ -144,14 +183,13 @@ main .tikMsg p {
   margin-top: 0.5rem;
 }
 
-main .tikOther {
+.tikOther {
   display: flex;
   gap: 3rem;
   align-items: flex-start;
-  margin-top: 1.2rem;
 }
 
-main .tikId {
+.tikId {
   border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
@@ -161,7 +199,7 @@ main .tikId {
   color: var(--color-dark);
 }
 
-main .tikPri {
+.tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
@@ -170,4 +208,3 @@ main .tikPri {
   color: white;
   font-size: 1rem;
 }
-

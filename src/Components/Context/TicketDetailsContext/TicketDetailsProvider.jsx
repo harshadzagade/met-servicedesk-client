@@ -4,23 +4,21 @@ import TicketDetailsContext from './TicketDetailsContext';
 const TicketDetailsProvider = props => {
 
     const [ticketType, setTicketType] = useState('');
-    const [id, setId] = useState(null);
+    const [staffId, setStaffId] = useState(null);
+    const [ticketId, setTicketId] = useState(null);
 
-    useEffect(() => {
-        if (window.location.pathname !== '/requestdetails/:requestId' || window.location.pathname !== '/complaintdetails/:complaintId') {
-            setTicketType('');
-            setId(null);
-        }
-    }, [window.location.href])
+    console.log(ticketType, staffId, ticketId);
 
-    const ticketClickHandler = (type, id) => {
+    const ticketClickHandler = (type, staffId, ticketId) => {
         setTicketType(type);
-        setId(id);
+        setStaffId(staffId);
+        setTicketId(ticketId);
     };
 
     const ticketDetailsContext = {
         ticketType: ticketType,
-        id: id,
+        staffId: staffId,
+        ticketId: ticketId,
         onClickHandler: ticketClickHandler
     };
     return (

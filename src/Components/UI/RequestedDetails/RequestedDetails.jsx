@@ -10,8 +10,8 @@ const RequestedDetails = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        if (ticketCtx.id) {
-          const list = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${ticketCtx.id}`);
+        if (ticketCtx.staffId) {
+          const list = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${ticketCtx.staffId}`);
           setRequesterDetails(list.data.staff);
         }
       } catch (error) {
@@ -19,7 +19,7 @@ const RequestedDetails = () => {
       }
     };
     getList();
-  }, [ticketCtx.id]);
+  }, [ticketCtx.staffId]);
   return (
     <div className={classes.requesterdetails}>
       <h2>Requester Details</h2>
