@@ -32,7 +32,7 @@ const SuperAdminComplaint = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/complaint/complaintdepartments`);
+            const departments = await axios.get(`/api/complaint/complaintdepartments`);
             setDepartments(departments.data.departments);
         };
         getDepartments();
@@ -40,7 +40,7 @@ const SuperAdminComplaint = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`http://localhost:8001/api/complaint/complaintcategories`);
+            const categories = await axios.get(`/api/complaint/complaintcategories`);
             setCategories(categories.data.categories);
         };
         getCategories();
@@ -49,7 +49,7 @@ const SuperAdminComplaint = () => {
 
     useEffect(() => {
         const getList = async () => {
-            const list = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
+            const list = await axios.get(`/api/complaint/allcomplaints`);
             setComplaintList(list.data.complaints);
             console.log(list.data.complaints);
         };
@@ -64,7 +64,7 @@ const SuperAdminComplaint = () => {
                 if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
                     setAllComplaintList(complaintList);
                 } else {
-                    const complaints = await axios.get(`http://localhost:8001/api/complaint/complaintsbydepartment/${department}`);
+                    const complaints = await axios.get(`/api/complaint/complaintsbydepartment/${department}`);
                     setAllComplaintList(complaints.data.complaints);
                 }
             } catch (error) {
@@ -86,7 +86,7 @@ const SuperAdminComplaint = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllComplaintList(complaintList);
                 } else {
-                    const complaints = await axios.get(`http://localhost:8001/api/complaint/complaintsbycategory/${category}`);
+                    const complaints = await axios.get(`/api/complaint/complaintsbycategory/${category}`);
                     setAllComplaintList(complaints.data.complaints);
                 }
             } catch (error) {
@@ -108,7 +108,7 @@ const SuperAdminComplaint = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllComplaintList(complaintList);
                 } else {
-                    const complaints = await axios.get(`http://localhost:8001/api/complaint/complaintsbypriority/${priority}`);
+                    const complaints = await axios.get(`/api/complaint/complaintsbypriority/${priority}`);
                     setAllComplaintList(complaints.data.complaints);
                 }
             } catch (error) {
@@ -130,7 +130,7 @@ const SuperAdminComplaint = () => {
                 if ((openStatusList && status.length === 0) || (openStatusList && status === 'allStatus')) {
                     setAllComplaintList(complaintList);
                 } else {
-                    const complaints = await axios.get(`http://localhost:8001/api/complaint/complaintsbystatus/${status}`);
+                    const complaints = await axios.get(`/api/complaint/complaintsbystatus/${status}`);
                     setAllComplaintList(complaints.data.complaints);
                 }
             } catch (error) {

@@ -17,7 +17,7 @@ const TechComplaintDetails = () => {
 
     useEffect(() => {
         const getComplaintDetails = async () => {
-            const complaint = await axios.get(`http://localhost:8001/api/complaint/getcomplaintdetails/${id}`);
+            const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
             setComplaintData(complaint.data.complaint);
         };
         getComplaintDetails();
@@ -25,7 +25,7 @@ const TechComplaintDetails = () => {
 
     const handleSelfAssign = async () => {
         try {
-            await axios.put(`http://localhost:8001/api/staff/technician/selfassigncomplaint/${id}/${ownId}`);
+            await axios.put(`/api/staff/technician/selfassigncomplaint/${id}/${ownId}`);
         } catch (error) {
             Swal.fire({
                 icon: 'error',

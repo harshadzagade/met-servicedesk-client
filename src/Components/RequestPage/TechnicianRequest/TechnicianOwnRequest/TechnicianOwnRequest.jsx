@@ -28,7 +28,7 @@ const TechnicianOwnRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
+        const list = await axios.get(`/api/request/ownrequests/${id}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }

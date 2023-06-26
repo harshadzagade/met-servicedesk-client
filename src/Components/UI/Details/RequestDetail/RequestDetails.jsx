@@ -12,7 +12,7 @@ const RequestDetails = () => {
     useEffect(() => {
         const getRequestDetails = async () => {
             try {
-                const request = await axios.get(`http://localhost:8001/api/request/getrequestdetails/${id}`);
+                const request = await axios.get(`/api/request/getrequestdetails/${id}`);
                 setRequestData(request.data.request);
             } catch (error) {
                 console.log(error.response.data.message);

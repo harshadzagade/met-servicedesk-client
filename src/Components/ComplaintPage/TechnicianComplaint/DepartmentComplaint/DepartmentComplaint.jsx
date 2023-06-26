@@ -27,7 +27,7 @@ const DepartmentComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${department}`);
+        const list = await axios.get(`/api/complaint/complaints/incoming/${department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No requests available')
         }

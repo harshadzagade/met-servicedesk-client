@@ -22,7 +22,7 @@ const AllStaff = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/staff/departments`);
+            const departments = await axios.get(`/api/staff/departments`);
             setDepartments(departments.data.departments);
         };
         getDepartments();
@@ -66,7 +66,7 @@ const AllStaff = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get('http://localhost:8001/api/staff/superadmin/allstafflist/fullstaff');
+                const list = await axios.get('/api/staff/superadmin/allstafflist/fullstaff');
                 setStaffList(list.data.totalStaff);
             } catch (error) {
                 Swal.fire({
@@ -86,7 +86,7 @@ const AllStaff = () => {
                 if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
                     setAllStaffList(staffList);
                 } else {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/staffbydepartment/${department}`);
+                    const staff = await axios.get(`/api/staff/staffbydepartment/${department}`);
                     setAllStaffList(staff.data.staff);
                 }
             } catch (error) {
@@ -108,7 +108,7 @@ const AllStaff = () => {
                 if ((openRoleList && role.length === 0) || (openRoleList && role === 'allRoles')) {
                     setAllStaffList(staffList);
                 } else {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/staffbyrole/${role}`);
+                    const staff = await axios.get(`/api/staff/superadmin/staffbyrole/${role}`);
                     setAllStaffList(staff.data.staff);
                 }
             } catch (error) {

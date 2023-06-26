@@ -10,7 +10,7 @@ const TechnicianReport = () => {
     useEffect(() => {
         const getReportDetails = async () => {
             try {
-                const report = await axios.get(`http://localhost:8001/api/report/reportbystaff/${id}`);
+                const report = await axios.get(`/api/report/reportbystaff/${id}`);
                 setReportData(report.data.report);
             } catch (error) {
                 setErrorMessage(`You haven't assigned with any task yet`)

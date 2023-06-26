@@ -9,7 +9,7 @@ const SendOTP = (props) => {
     const handleOTPVerification = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:8001/api/staff/verifyOTP', { otp: enteredOTP.current.value });
+            await axios.post('/api/staff/verifyOTP', { otp: enteredOTP.current.value });
             props.goToResetPassword();
         } catch (error) {
             setIsOTPValid(false);

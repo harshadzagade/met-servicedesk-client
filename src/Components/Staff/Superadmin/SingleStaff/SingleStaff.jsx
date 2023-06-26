@@ -22,7 +22,7 @@ const SingleStaff = () => {
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     const getStaff = async () => {
-      const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${id.staffId}`);
+      const staff = await axios.get(`/api/staff/superadmin/staffdetails/${id.staffId}`);
       setName(staff.data.staff.firstname);
       setLName(staff.data.staff.lastname);
       setEmail(staff.data.staff.email);
@@ -48,7 +48,7 @@ const SingleStaff = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:8001/api/staff/superadmin/staffdetails/${id.staffId}`);
+        axios.delete(`/api/staff/superadmin/staffdetails/${id.staffId}`);
         navigate('/', { state: { refreshSuperHome: true } });
         Swal.fire(
           'Staff Deleted!',

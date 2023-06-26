@@ -21,7 +21,7 @@ const Login = () => {
 
   const checkLogin = async () => {
     if (localStorage.getItem('id')) {
-      const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${localStorage.getItem('id')}`);
+      const staff = await axios.get(`/api/staff/staffdetails/${localStorage.getItem('id')}`);
       ctx.onLogin(staff.data.staff.email);
     }
   }
@@ -37,7 +37,7 @@ const Login = () => {
     }
     let loginStaff;
     try {
-      loginStaff = await axios.post('http://localhost:8001/api/', staffInfo);
+      loginStaff = await axios.post('/api/', staffInfo);
       localStorage.setItem('token', loginStaff.data.token);
       localStorage.setItem('id', loginStaff.data.staffId);
       ctx.onLogin(staffInfo.email);

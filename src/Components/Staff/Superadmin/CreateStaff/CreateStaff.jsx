@@ -69,7 +69,7 @@ const CreateStaff = () => {
             contactExtension: +extensionRef.current.value
         };
         try {
-            await axios.post('http://localhost:8001/api/staff/superadmin/createStaff', data);
+            await axios.post('/api/staff/superadmin/createStaff', data);
             Swal.fire(
                 'Staff Created!',
                 'You have created staff successfully',

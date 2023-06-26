@@ -27,9 +27,9 @@ const TechnicianRequestAttendingForm = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technician = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${loginId}`);
+                const technician = await axios.get(`/api/staff/superadmin/staffdetails/${loginId}`);
 
-                const technicians = await axios.get(`http://localhost:8001/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department[0]}`);
+                const technicians = await axios.get(`/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department[0]}`);
 
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
@@ -77,7 +77,7 @@ const TechnicianRequestAttendingForm = () => {
             actionTaken: actionTakenRef.current ? actionTakenRef.current.value : null
         }
         try {
-            await axios.put(`http://localhost:8001/api/staff/technician/changerequeststatus/${id}`, data);
+            await axios.put(`/api/staff/technician/changerequeststatus/${id}`, data);
             navigate('/request');
         } catch (error) {
             Swal.fire({

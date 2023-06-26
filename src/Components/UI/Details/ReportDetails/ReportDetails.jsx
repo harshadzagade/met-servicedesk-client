@@ -11,7 +11,7 @@ const ReportDetails = () => {
 
     useEffect(() => {
         const getReportDetails = async () => {
-            const report = await axios.get(`http://localhost:8001/api/report/reportdetails/${id}`);
+            const report = await axios.get(`/api/report/reportdetails/${id}`);
             setReportData(report.data.report);
         };
         getReportDetails();

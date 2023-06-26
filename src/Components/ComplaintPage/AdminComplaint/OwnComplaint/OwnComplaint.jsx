@@ -28,7 +28,7 @@ const OwnComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
+        const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No complaints available')
         }

@@ -35,7 +35,7 @@ const AllStaffRequest = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/request/requestdepartments`);
+            const departments = await axios.get(`/api/request/requestdepartments`);
             setDepartments(departments.data.departments);
         };
         getDepartments();
@@ -43,7 +43,7 @@ const AllStaffRequest = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`http://localhost:8001/api/request/requestcategories`);
+            const categories = await axios.get(`/api/request/requestcategories`);
             setCategories(categories.data.categories);
         };
         getCategories();
@@ -52,7 +52,7 @@ const AllStaffRequest = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/request/allrequests`);
+                const list = await axios.get(`/api/request/allrequests`);
                 setRequestList(list.data.requests);
             } catch (error) {
                 Swal.fire({
@@ -72,7 +72,7 @@ const AllStaffRequest = () => {
                 if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
                     setAllRequestList(requestList);
                 } else {
-                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbydepartment/${department}`);
+                    const requests = await axios.get(`/api/request/requestsbydepartment/${department}`);
                     setAllRequestList(requests.data.requests);
                 }
             } catch (error) {
@@ -94,7 +94,7 @@ const AllStaffRequest = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllRequestList(requestList);
                 } else {
-                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbycategory/${category}`);
+                    const requests = await axios.get(`/api/request/requestsbycategory/${category}`);
                     setAllRequestList(requests.data.requests);
                 }
             } catch (error) {
@@ -116,7 +116,7 @@ const AllStaffRequest = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllRequestList(requestList);
                 } else {
-                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbypriority/${priority}`);
+                    const requests = await axios.get(`/api/request/requestsbypriority/${priority}`);
                     setAllRequestList(requests.data.requests);
                 }
             } catch (error) {
@@ -138,7 +138,7 @@ const AllStaffRequest = () => {
                 if ((openStatusList && status.length === 0) || (openStatusList && status === 'allStatus')) {
                     setAllRequestList(requestList);
                 } else {
-                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbystatus/${status}`);
+                    const requests = await axios.get(`/api/request/requestsbystatus/${status}`);
                     setAllRequestList(requests.data.requests);
                 }
             } catch (error) {
@@ -160,7 +160,7 @@ const AllStaffRequest = () => {
                 if ((openHodApprovalList && hodApproval.length === 0) || (openHodApprovalList && hodApproval === 'allHodApprovals')) {
                     setAllRequestList(requestList);
                 } else {
-                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbyapproval1/${hodApproval}`);
+                    const requests = await axios.get(`/api/request/requestsbyapproval1/${hodApproval}`);
                     setAllRequestList(requests.data.requests);
                 }
             } catch (error) {
@@ -182,7 +182,7 @@ const AllStaffRequest = () => {
                 if ((openAdminApprovalList && adminApproval.length === 0) || (openAdminApprovalList && adminApproval === 'allAdminApprovals')) {
                     setAllRequestList(requestList);
                 } else {
-                    const requests = await axios.get(`http://localhost:8001/api/request/requestsbyapproval2/${adminApproval}`);
+                    const requests = await axios.get(`/api/request/requestsbyapproval2/${adminApproval}`);
                     setAllRequestList(requests.data.requests);
                 }
             } catch (error) {

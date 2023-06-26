@@ -22,7 +22,7 @@ const NewCompaint = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/staff/departments`);
+            const departments = await axios.get(`/api/staff/departments`);
             setDepartments(departments.data.departments);
         };
         getDepartments();
@@ -51,7 +51,7 @@ const NewCompaint = () => {
             // attachment: dataFile
         };
         try {
-            await axios.post('http://localhost:8001/api/complaint/', data);
+            await axios.post('/api/complaint/', data);
             Swal.fire(
                 'Complaint Created!',
                 'You have created Complaint successfully',

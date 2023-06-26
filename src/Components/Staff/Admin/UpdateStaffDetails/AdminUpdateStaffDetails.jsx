@@ -16,7 +16,7 @@ const roles = ['technician', 'user'];
     useEffect(() => {
         const fetchStaff = async () => {
             try {
-                const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`/api/staff/superadmin/staffdetails/${id.staffId}`);
                 setStaff(staff.data.staff);
             } catch (error) {
                 Swal.fire({
@@ -34,7 +34,7 @@ const roles = ['technician', 'user'];
     }, [staff]);
 
     const handleSubmitClick = async ( id, role) => {
-        await axios.put(`http://localhost:8001/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
+        await axios.put(`/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
         props.onConfirm();
     };
 

@@ -32,7 +32,7 @@ const IncomingRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${adminCtx.department}`);
+        const list = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }

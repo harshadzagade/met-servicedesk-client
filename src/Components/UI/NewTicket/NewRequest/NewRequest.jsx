@@ -23,7 +23,7 @@ const NewRequest = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/staff/departments`);
+            const departments = await axios.get(`/api/staff/departments`);
             setDepartments(departments.data.departments);
         };
         getDepartments();
@@ -52,7 +52,7 @@ const NewRequest = () => {
             // attachment: dataFile
         };
         try {
-            await axios.post('http://localhost:8001/api/request/', data);
+            await axios.post('/api/request/', data);
             Swal.fire(
                 'Request Created!',
                 'You have created request successfully',

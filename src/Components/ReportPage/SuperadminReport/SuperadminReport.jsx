@@ -27,7 +27,7 @@ const SuperadminReport = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/staff/departments`);
+            const departments = await axios.get(`/api/staff/departments`);
             setStaffDepartments(departments.data.departments);
         };
         getDepartments();
@@ -35,7 +35,7 @@ const SuperadminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`http://localhost:8001/api/report/reportcategories/categories`);
+            const categories = await axios.get(`/api/report/reportcategories/categories`);
             setCategories(categories.data.categories);
         };
         getCategories();
@@ -48,22 +48,22 @@ const SuperadminReport = () => {
                     if (selectedDepartment.length !== 0) {
                         switch (ticketType) {
                             case 'allTicketTypes':
-                                const full = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
+                                const full = await axios.get(`/api/report/${selectedStaff}`);
                                 setReportList(full.data.report);
                                 break;
 
                             case 'requests':
-                                const requests = await axios.get(`http://localhost:8001/api/report/request/${selectedStaff}`);
+                                const requests = await axios.get(`/api/report/request/${selectedStaff}`);
                                 setReportList(requests.data.report);
                                 break;
 
                             case 'complaints':
-                                const complaints = await axios.get(`http://localhost:8001/api/report/complaint/${selectedStaff}`);
+                                const complaints = await axios.get(`/api/report/complaint/${selectedStaff}`);
                                 setReportList(complaints.data.report);
                                 break;
 
                             default:
-                                const defaultValue = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
+                                const defaultValue = await axios.get(`/api/report/${selectedStaff}`);
                                 setReportList(defaultValue.data.report);
                                 break;
                         }
@@ -85,7 +85,7 @@ const SuperadminReport = () => {
         const getStaffByDepartment = async () => {
             try {
                 if (selectedDepartment.length !== 0) {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/staffbydepartment/${selectedDepartment}`);
+                    const staff = await axios.get(`/api/staff/staffbydepartment/${selectedDepartment}`);
                     setDepartmentStaff(staff.data.staff);
                 }
             } catch (error) {
@@ -105,7 +105,7 @@ const SuperadminReport = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(reportList);
                 } else {
-                    const report = await axios.get(`http://localhost:8001/api/report/reportbycategory/${category}`);
+                    const report = await axios.get(`/api/report/reportbycategory/${category}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
@@ -127,7 +127,7 @@ const SuperadminReport = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllReportList(reportList);
                 } else {
-                    const report = await axios.get(`http://localhost:8001/api/report/reportbypriority/${priority}`);
+                    const report = await axios.get(`/api/report/reportbypriority/${priority}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {

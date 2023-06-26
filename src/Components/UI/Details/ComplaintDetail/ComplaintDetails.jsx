@@ -11,7 +11,7 @@ const ComplaintDetails = () => {
 
     useEffect(() => {
         const getComplaintDetails = async () => {
-            const complaint = await axios.get(`http://localhost:8001/api/complaint/getcomplaintdetails/${id}`);
+            const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
             setComplaintData(complaint.data.complaint);
         };
         getComplaintDetails();

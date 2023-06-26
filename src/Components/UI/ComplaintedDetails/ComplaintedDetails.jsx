@@ -13,7 +13,7 @@ const ComplaintedDetails = () => {
     const getList = async () => {
       try {
         if (ticketCtx.staffId) {
-          const list = await axios.get(`http://localhost:8001/api/staff/superadmin/staffdetails/${ticketCtx.staffId}`);
+          const list = await axios.get(`/api/staff/superadmin/staffdetails/${ticketCtx.staffId}`);
           setComplaintDetails(list.data.staff);
         }
       } catch (error) {

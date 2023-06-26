@@ -30,7 +30,7 @@ const AllStaffExt = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`http://localhost:8001/api/staff/departments`);
+            const departments = await axios.get(`/api/staff/departments`);
             setDepartments(departments.data.departments);
         };
         getDepartments();
@@ -81,7 +81,7 @@ const AllStaffExt = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/staff/contacts/${id}`);
+                const response = await axios.get(`/api/staff/contacts/${id}`);
                 setStaffList(response.data.contacts);
             } catch (error) {
                 console.log(error.response.data.message);
@@ -96,7 +96,7 @@ const AllStaffExt = () => {
                 if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
                     setAllStaffList(staffList);
                 } else {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/staffbydepartment/${department}`);
+                    const staff = await axios.get(`/api/staff/staffbydepartment/${department}`);
                     setAllStaffList(staff.data.staff);
                 }
             } catch (error) {
@@ -118,7 +118,7 @@ const AllStaffExt = () => {
                 if ((openRoleList && role.length === 0) || (openRoleList && role === 'allRoles')) {
                     setAllStaffList(staffList);
                 } else {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/staffbyrole/${role}`);
+                    const staff = await axios.get(`/api/staff/superadmin/staffbyrole/${role}`);
                     setAllStaffList(staff.data.staff);
                 }
             } catch (error) {

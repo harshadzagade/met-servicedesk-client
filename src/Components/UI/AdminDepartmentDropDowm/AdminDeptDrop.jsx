@@ -17,7 +17,7 @@ const AdminDeptDrop = (props) => {
 
   useEffect(() => {
     const getDepartments = async () => {
-      const departments = await axios.get(`http://localhost:8001/api/staff/admin/admindepartments/${id}`);
+      const departments = await axios.get(`/api/staff/admin/admindepartments/${id}`);
       setDepartments(departments.data.departments);
     };
     getDepartments();
