@@ -195,7 +195,7 @@ main .filter {
 
 main .requests {
   overflow: auto;
-  max-height: 60vh;
+  max-height: 24rem;
 
 }
 

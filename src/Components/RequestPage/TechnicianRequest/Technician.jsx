@@ -18,13 +18,7 @@ const Technician = () => {
     <Fragment>
       
        <div className={`${classes.mainTitle}`}>
-       <h1 className="tik-type-title">Request</h1>
-          <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newrequest')}>
-            <span className="material-icons-sharp btn-icon">
-              add
-            </span>
-            <span className={`${classes.btnName}`}> New Ticket</span>
-          </button>
+       <h2 className="tik-type-title">Request</h2>
         </div>
         <RequestNavigation viewLayout={checkLayout} />
         {openLayout === 'AllStaffAssignRequest' && <TechnicianAssignRequest  />}

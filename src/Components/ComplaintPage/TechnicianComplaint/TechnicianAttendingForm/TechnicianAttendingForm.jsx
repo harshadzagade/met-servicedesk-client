@@ -93,7 +93,7 @@ const TechnicianAttendingForm = (props) => {
         <Fragment >
 
             <div className={classes.statusform}>
-                <h1 >Status chnage</h1>
+                <h2>Status chnage</h2>
 
                 <div className={classes.createStaffform}>
                     <div className={classes.formStaff}>

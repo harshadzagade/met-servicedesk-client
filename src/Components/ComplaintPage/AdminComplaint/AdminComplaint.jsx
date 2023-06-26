@@ -1,11 +1,9 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment,  useState } from 'react';
 import classes from './AdminComplaint.module.css';
 import IncomingComplaint from '../AdminComplaint/IncomingComplaint/IncomingComplaint';
 import OutgoingComplaint from '../AdminComplaint/OutgoingComplaint/OutgoingComplaint';
 import OwnComplaint from '../AdminComplaint/OwnComplaint/OwnComplaint';
 import ComplaintNavigation from './ComplaintNavigation/ComplaintNavigation';
-import { useNavigate } from 'react-router-dom';
-import AdminContext from '../../Context/AdminContext/AdminContext';
 
 
 const AdminComplaint = () => {
@@ -16,7 +14,7 @@ const AdminComplaint = () => {
     setOpenLayout(value);
   };
 
-  const navigate = useNavigate();
+  
   return (
     <Fragment>
       <div className={`${classes.mainTitle}`}>

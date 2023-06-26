@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './TechnicianReport.module.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const TechnicianReport = () => {
     const [reportData, setReportData] = useState({});
@@ -13,7 +14,11 @@ const TechnicianReport = () => {
                 const report = await axios.get(`/api/report/reportbystaff/${id}`);
                 setReportData(report.data.report);
             } catch (error) {
-                setErrorMessage(`You haven't assigned with any task yet`)
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: `You haven't assigned with any task yet`
+                });
             }
         };
         getReportDetails();

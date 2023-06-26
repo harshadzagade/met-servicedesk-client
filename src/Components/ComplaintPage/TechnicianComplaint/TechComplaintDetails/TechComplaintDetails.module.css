@@ -1,5 +1,8 @@
 .techcomdetails{
-    margin-top: 5.4rem;
+    margin-top: 2.5rem;
+}
+.techcomdetails h2{
+    font-weight: 600;
 }
 .detail{
     background: var(--color-white);

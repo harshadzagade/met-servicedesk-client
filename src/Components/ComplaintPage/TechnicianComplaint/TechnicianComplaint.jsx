@@ -9,10 +9,8 @@ import { Fragment } from 'react';
 
 const TechnicianComplaint = () => {
   const [openLayout, setOpenLayout] = useState('AllDepartmentComplaint');
-  const [numberOfPages, setNumberOfPages] = useState(10);
-  const checkLayout = (value, numberOfPages) => {
+  const checkLayout = (value) => {
     setOpenLayout(value);
-    setNumberOfPages(numberOfPages);
   };
 
 
@@ -21,17 +19,11 @@ const TechnicianComplaint = () => {
     <Fragment>
 
       <div className={`${classes.mainTitle}`}>
-        <h1 >Complaint</h1>
-        <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newcomplaint')}>
-          <span className="material-icons-sharp btn-icon">
-            add
-          </span>
-          <span className={`${classes.btnName}`}> New Ticket</span>
-        </button>
+        <h2 >Complaint</h2>
       </div>
       <TechnicianComplaintNavigation viewLayout={checkLayout} />
-      {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint numberOfPages={numberOfPages} />}
-      {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint numberOfPages={numberOfPages} />}
+      {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint  />}
+      {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint  />}
     
     </Fragment>
   )

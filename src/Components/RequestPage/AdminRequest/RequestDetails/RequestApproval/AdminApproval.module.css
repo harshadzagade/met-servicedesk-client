@@ -1,5 +1,8 @@
 .approvalform{
-    margin-top: 5.4rem;
+    margin-top: 2.5rem;
+}
+.approvalform h2{
+    font-weight: 600;
 }
 .RequestApproval {
     background: var(--color-white);

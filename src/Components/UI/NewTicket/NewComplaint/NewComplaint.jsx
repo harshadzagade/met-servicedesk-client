@@ -19,6 +19,16 @@ const NewCompaint = () => {
     const [editorData, setEditorData] = useState('');
     const [isToggled, setIsToggled] = useState(false);
     const [departments, setDepartments] = useState([]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+
+    const handleFileChange = (event) => {
+        const files = event.target.files;
+        const selectedFilesArray = [...selectedFiles];
+        for (let i = 0; i < files.length; i++) {
+            selectedFilesArray.push(files[i]);
+        }
+        setSelectedFiles(selectedFilesArray);
+    };
 
     useEffect(() => {
         const getDepartments = async () => {
@@ -30,6 +40,19 @@ const NewCompaint = () => {
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        selectedFiles.forEach((file) => {
+            formData.append('file', file);
+        });
+        formData.append('staffId', id);
+        formData.append('behalf', isToggled);
+        formData.append('behalfEmailId', isToggled ? behalfEmailRef.current.value : null);
+        formData.append('subject', subjectRef.current.value);
+        formData.append('description', editorData);
+        formData.append('department', department);
+        formData.append('priority', priority);
+        formData.append('category', requestType);
+        formData.append('isRepeated', false);
         /* const config = {
             headers: {
                 "content-type": "multipart/form-data"
@@ -38,20 +61,20 @@ const NewCompaint = () => {
         // const dataFile = new FormData();
         // dataFile.append('file', file);
         // dataFile.append('fileName', file.name);
-        const data = {
-            staffId: id,
-            behalf: isToggled,
-            behalfEmailId: isToggled ? behalfEmailRef.current.value : null,
-            subject: subjectRef.current.value,
-            description: editorData,
-            department: department,
-            priority: priority,
-            category: requestType,
-            isRepeated: false
-            // attachment: dataFile
-        };
+        // const data = {
+        //     staffId: id,
+        //     behalf: isToggled,
+        //     behalfEmailId: isToggled ? behalfEmailRef.current.value : null,
+        //     subject: subjectRef.current.value,
+        //     description: editorData,
+        //     department: department,
+        //     priority: priority,
+        //     category: requestType,
+        //     isRepeated: false
+        //     // attachment: dataFile
+        // };
         try {
-            await axios.post('/api/complaint/', data);
+            await axios.post('/api/complaint/', formData);
             Swal.fire(
                 'Complaint Created!',
                 'You have created Complaint successfully',
@@ -141,7 +164,7 @@ const NewCompaint = () => {
 
                             <div className={classes.attachment}>
                                 <span>Attachment</span>
-                                <input type="file" className={classes.attachInput} placeholder="choose file" />
+                                <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
                                 <button className={classes.buttonForm} onClick={handleSubmitClick}>Submit</button>
                             </div>
 

@@ -1,6 +1,10 @@
+.buttonsSection{
+  display: flex;
+}
 main .filterButtons {
   display: flex;
   padding: 15px 0 10px;
+  margin-right: auto;
 }
 
 .button {
@@ -25,14 +29,33 @@ main .filterButtons {
   opacity: 1;
 }
 
-.datapage {
-  margin-left: 7rem;
-}
-
-main .filter {
+ .filter {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
   margin-top: 1.5rem;
   background: var(--color-background);
+}
+
+  
+ .tikReqbtn {
+  display: flex;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  border-radius: 1rem;
+  font-family: inherit;
+  appearance: none;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-dark);
+  height: 3.5rem;
+  margin-top: 0.6rem;
+}
+
+main .btnName {
+  margin-top: 0.2rem;
 }

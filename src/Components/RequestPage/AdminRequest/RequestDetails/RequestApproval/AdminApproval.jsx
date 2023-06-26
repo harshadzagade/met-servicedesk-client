@@ -108,7 +108,7 @@ const AdminApproval = (props) => {
     return (
         <Fragment>
             <div className={classes.approvalform}>
-                <h1 >Approval</h1>
+                <h2>Approval</h2>
                 <div hidden>
                 </div>
                 <div className={classes.RequestApproval} >

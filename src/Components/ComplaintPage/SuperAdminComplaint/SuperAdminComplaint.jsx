@@ -249,7 +249,7 @@ const SuperAdminComplaint = () => {
                     <h2 >Complaint</h2>
                 </div>
                 <div className={classes.search}>
-                    <div className={classes.searchFilter}>
+                    <div className={classes.searchfiltering}>
                         {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                         {
                             openDepartmentList &&

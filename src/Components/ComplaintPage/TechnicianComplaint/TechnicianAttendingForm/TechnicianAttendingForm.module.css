@@ -1,5 +1,8 @@
 .statusform{
-    margin-top: 5.4rem;
+    margin-top: 2.5rem;
+ }
+ .statusform h2{
+    font-weight: 600;
  }
  .createStaffform {
      background: var(--color-white);

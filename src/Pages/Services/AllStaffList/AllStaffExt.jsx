@@ -49,6 +49,11 @@ const AllStaffExt = () => {
                 sortable: true,
             },
             {
+                name: "E-Mail",
+                selector: (row) => row.email,
+                sortable: true,
+            },
+            {
                 name: "Extension",
                 selector: (row) => row.contactExtension,
                 sortable: true,
@@ -69,6 +74,11 @@ const AllStaffExt = () => {
             {
                 name: "Department",
                 selector: (row) => row.department,
+                sortable: true,
+            },
+            {
+                name: "E-Mail",
+                selector: (row) => row.email,
                 sortable: true,
             },
             {

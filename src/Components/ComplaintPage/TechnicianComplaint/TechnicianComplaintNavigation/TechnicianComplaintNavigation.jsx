@@ -1,10 +1,12 @@
 import React from 'react';
 import classes from './TechnicianComplaintNavigation.module.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const TechnicianComplaintNavigation = (props) => {
   const [activeTab, setActiveTab] = useState('AllDepartmentComplaint');
+  const navigate = useNavigate();
 
   const handleDepartmentComplaint = () => {
     setActiveTab('AllDepartmentComplaint');
@@ -17,9 +19,17 @@ const TechnicianComplaintNavigation = (props) => {
 
 
   return (
+    <div className={classes.buttonsSection}>
     <div className={`${classes.filterButtons}`}>
       <button className={`${classes.button} ${activeTab === 'AllDepartmentComplaint' && classes.active} filter-button list`} data-filter="assigned" onClick={handleDepartmentComplaint}>Assign</button>
       <button className={`${classes.button} ${activeTab === 'AllStaffOwnComplaint' && classes.active} filter-button list`} onClick={handleOwnComplaint}>Own</button>
+    </div>
+    <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newcomplaint')}>
+          <span className="material-icons-sharp btn-icon">
+            add
+          </span>
+          <span className={`${classes.btnName}`}> New Ticket</span>
+        </button>
     </div>
   )
 }
