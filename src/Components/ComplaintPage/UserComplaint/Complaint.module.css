@@ -1,5 +1,15 @@
+.searchInput {
+  background: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 1px solid black;
+  height: 3rem;
+  margin-top: 1rem;
+}
 
-.searchInput{
+.optionSearchBox {
   background: white;
   padding: 10px;
   border: none;
@@ -7,36 +17,44 @@
   font-size: 1em;
   border: 1px solid black;
 }
-.optionSearchBox{
-  background: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  border: 1px solid black;
-}
-.searchButton{
+
+.searchButton {
   display: inline-block;
-    margin-left: 0.5rem;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 10px 10px 10px;
-    background-color: #7380ec;
-    cursor: pointer;
-    white-space: nowrap;
-    color: white;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 10px 10px 10px;
+  background-color: #7380ec;
+  cursor: pointer;
+  white-space: nowrap;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+}
+.search{
+  display: flex;
+}
+.searchfiltering{
+  display: flex;
+  margin-right: auto;
 }
 
-.datapage{
-  margin-left: 23vh;
+.datapage {
+  margin-top: 0.5rem;
 }
 /* START REQUESTS Section */
+.buttonsSection{
+  display: flex;
+}
 .mainTitle {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-top: 2.5rem;
+  }
+  .mainTitle h2{
+    font-weight: 600;
   }
   
   .tikReqBtn {
@@ -64,6 +82,7 @@
 .filterButtons {
     display: flex;
     padding: 15px 0 10px;
+    margin-right: auto;
   }
   
   .button {

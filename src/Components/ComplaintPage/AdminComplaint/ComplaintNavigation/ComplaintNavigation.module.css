@@ -1,6 +1,10 @@
+.buttonsSection{
+  display: flex;
+}
 main .filterButtons {
   display: flex;
   padding: 15px 0 10px;
+  margin-right: auto;
 }
 
 .button {
@@ -25,15 +29,16 @@ main .filterButtons {
   opacity: 1;
 }
 
-main .filter {
+ .filter {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
+  margin-top: 1.5rem;
   background: var(--color-background);
 }
 
- 
-.tikReqBtn {
+  
+ .tikReqbtn {
   display: flex;
   gap: 0.5rem;
   transition: all 0.2s ease-in-out;
@@ -47,9 +52,10 @@ main .filter {
   padding: 10px;
   border: 2px solid var(--color-primary);
   color: var(--color-dark);
-  margin-left: 46%;
+  height: 3.5rem;
+  margin-top: 0.6rem;
 }
 
-.btnName {
+main .btnName {
   margin-top: 0.2rem;
 }

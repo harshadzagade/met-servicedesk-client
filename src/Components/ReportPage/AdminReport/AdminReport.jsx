@@ -179,42 +179,42 @@ const AdminReport = () => {
     }, [searchText, reportList, searchType]);
 
     const columns = ticketType === 'allTicketTypes' ?
-    [
-        {
-            name: "Ticket Type",
-            selector: (row) => (row.isRequest && 'Request') || (row.isComplaint && 'Complaint'),
-            sortable: true,
-        },
-        {
-            name: "Subject",
-            selector: (row) => row.subject,
-            sortable: true,
-        },
-        {
-            name: "Category",
-            selector: (row) => row.category,
-        },
-        {
-            name: "Priority",
-            selector: (row) => row.priority,
-        }
-    ]
-    :
-    [
-        {
-            name: "Subject",
-            selector: (row) => row.subject,
-            sortable: true,
-        },
-        {
-            name: "Category",
-            selector: (row) => row.category,
-        },
-        {
-            name: "Priority",
-            selector: (row) => row.priority,
-        }
-    ]
+        [
+            {
+                name: "Ticket Type",
+                selector: (row) => (row.isRequest && 'Request') || (row.isComplaint && 'Complaint'),
+                sortable: true,
+            },
+            {
+                name: "Subject",
+                selector: (row) => row.subject,
+                sortable: true,
+            },
+            {
+                name: "Category",
+                selector: (row) => row.category,
+            },
+            {
+                name: "Priority",
+                selector: (row) => row.priority,
+            }
+        ]
+        :
+        [
+            {
+                name: "Subject",
+                selector: (row) => row.subject,
+                sortable: true,
+            },
+            {
+                name: "Category",
+                selector: (row) => row.category,
+            },
+            {
+                name: "Priority",
+                selector: (row) => row.priority,
+            }
+        ]
 
     const handleRowClick = row => {
         navigate(`/reportdetails/${row.id}`);
@@ -223,6 +223,7 @@ const AdminReport = () => {
     return (
         <div>
             <div className={`${classes.basicSelection}`}>
+                <h2 className={classes.h2}>Report</h2>
                 <div className={`${classes.staffSelection}`}>
                     <div>Staff:&nbsp;</div>
                     <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>
@@ -238,47 +239,49 @@ const AdminReport = () => {
             {
                 selectedStaff &&
                 <Fragment>
-                    {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-                    {
-                        openTicketTypeList &&
-                        <select value={ticketType} className={`${classes.optionSearchBox}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
-                            <option value='' hidden>Select Your Ticket Type</option>
-                            <option value='allTicketTypes'>All Ticket Types</option>
-                            <option value='requests'>Requests</option>
-                            <option value='complaints'>Complaints</option>
-                        </select>
-                    }
-                    {
-                        openCategoryList &&
-                        <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
-                            <option value='' hidden>Select Your Category</option>
-                            <option value={'allCategories'}>All Categories</option>
-                            {
-                                categories.map((category, key) => (
-                                    <option key={key} value={category}>{category}</option>
-                                ))
-                            }
-                        </select>
-                    }
-                    {
-                        openPriorityList &&
-                        <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
-                            <option value='' hidden>Select Your Priority</option>
-                            <option value='allPriorities'>All Priorities</option>
-                            <option value='high'>High</option>
-                            <option value='moderate'>Moderate</option>
-                            <option value='low'>Low</option>
-                        </select>
-                    }
-                    <div className="btn-group mb-1">
-                        <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {searchType}
-                        </button>
-                        <div className="dropdown-menu">
-                            <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                    <div className={classes.searching}>
+                        {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                        {
+                            openTicketTypeList &&
+                            <select value={ticketType} className={`${classes.optionSearchBox}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
+                                <option value='' hidden>Select Your Ticket Type</option>
+                                <option value='allTicketTypes'>All Ticket Types</option>
+                                <option value='requests'>Requests</option>
+                                <option value='complaints'>Complaints</option>
+                            </select>
+                        }
+                        {
+                            openCategoryList &&
+                            <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                                <option value='' hidden>Select Your Category</option>
+                                <option value={'allCategories'}>All Categories</option>
+                                {
+                                    categories.map((category, key) => (
+                                        <option key={key} value={category}>{category}</option>
+                                    ))
+                                }
+                            </select>
+                        }
+                        {
+                            openPriorityList &&
+                            <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                                <option value='' hidden>Select Your Priority</option>
+                                <option value='allPriorities'>All Priorities</option>
+                                <option value='high'>High</option>
+                                <option value='moderate'>Moderate</option>
+                                <option value='low'>Low</option>
+                            </select>
+                        }
+                        <div className="btn-group mb-1">
+                            <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {searchType}
+                            </button>
+                            <div className="dropdown-menu">
+                                <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
+                                <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
+                                <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
+                                <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                            </div>
                         </div>
                     </div>
                 </Fragment>

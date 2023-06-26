@@ -265,6 +265,7 @@ const SuperadminReport = () => {
             {
                 selectedStaff &&
                 <Fragment>
+                    <div className={classes.searching}>
                     {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                     {
                         openTicketTypeList &&
@@ -307,6 +308,7 @@ const SuperadminReport = () => {
                             <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
                         </div>
+                    </div>
                     </div>
                 </Fragment>
             }

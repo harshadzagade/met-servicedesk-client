@@ -1,5 +1,8 @@
 .reqdetails{
-  margin-top: 5.4rem;
+  margin-top: 2.4rem;
+}
+.reqdetails h2{
+  font-weight: 600;
 }
 .detail{
   background: var(--color-white);
@@ -9,7 +12,7 @@
   box-shadow: var(--box-shadow);
   transition: all 300ms ease;
   overflow: auto;
-  max-height: 80vh;
+  max-height: 33rem;
 }
 .myform label{
   font-size: medium;

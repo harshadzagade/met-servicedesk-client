@@ -122,7 +122,13 @@ const UserRequest = () => {
     <main>
       <div className={classes.userreq}>
         <div className={`${classes.mainTitle}`}>
-          <h1 className="tik-type-title">Request</h1>
+          <h2 className="tik-type-title">Request</h2>
+
+        </div>
+        <div className={classes.buttonsSection}>
+          <div className={`${classes.filterButtons}`}>
+            <button className={`${classes.button}`} data-filter="all" >Own Request</button>
+          </div>
           <button className={`${classes.tikReqBtn}`} onClick={() => navigate('/newrequest')}>
             <span className="material-icons-sharp btn-icon">
               add
@@ -130,50 +136,49 @@ const UserRequest = () => {
             <span className={`${classes.btnName}`}> New Ticket</span>
           </button>
         </div>
-        <div className={`${classes.filterButtons}`}>
-          <button className={`${classes.button}`} data-filter="all" >Own request</button>
-        </div>
 
-<div>
-{isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-      {
-        openPriorityList &&
-        <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
-          <option value='' hidden>Select Your Priority</option>
-          <option value='allPriorities'>All Priorities</option>
-          <option value='high'>High</option>
-          <option value='moderate'>Moderate</option>
-          <option value='low'>Low</option>
-        </select>
-      }
-      {
-        openStatusList &&
-        <select value={status} className={`${classes.optionSearchBox}`} name="status" required onChange={(e) => setStatus(e.target.value)}>
-          <option value='' hidden>Select Your Status</option>
-          <option value='allStatus'>All Status</option>
-          <option value='pending'>Pending</option>
-          <option value='assigned'>Assigned</option>
-          <option value='attending'>Attending</option>
-          <option value='forwarded'>Forwarded</option>
-          <option value='closed'>Closed</option>
-          <option value='disapproved'>Disapproved</option>
-        </select>
-      }
-      <div className="btn-group mb-1">
-        <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {searchType}
-        </button>
-        <div className="dropdown-menu">
-          <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
-          <div className="dropdown-item" onClick={() => setSearchType('Name')}>Name</div>
-          <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
-          <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
+        <div className={classes.search}>
+          <div className={classes.searchfiltering}>
+            {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+            {
+              openPriorityList &&
+              <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                <option value='' hidden>Select Your Priority</option>
+                <option value='allPriorities'>All Priorities</option>
+                <option value='high'>High</option>
+                <option value='moderate'>Moderate</option>
+                <option value='low'>Low</option>
+              </select>
+            }
+            {
+              openStatusList &&
+              <select value={status} className={`${classes.optionSearchBox}`} name="status" required onChange={(e) => setStatus(e.target.value)}>
+                <option value='' hidden>Select Your Status</option>
+                <option value='allStatus'>All Status</option>
+                <option value='pending'>Pending</option>
+                <option value='assigned'>Assigned</option>
+                <option value='attending'>Attending</option>
+                <option value='forwarded'>Forwarded</option>
+                <option value='closed'>Closed</option>
+                <option value='disapproved'>Disapproved</option>
+              </select>
+            }
+            <div className="btn-group mb-1">
+              <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {searchType}
+              </button>
+              <div className="dropdown-menu">
+                <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
+                <div className="dropdown-item" onClick={() => setSearchType('Name')}>Name</div>
+                <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
+              </div>
+            </div>
+          </div>
+          <div className={classes.datapage}>
+            <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+          </div>
         </div>
-        <div className={classes.datapage}>
-          <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-        </div>
-      </div>
-</div>
         <div className={`${classes.requests} `}>
           {
             currentPageData.map((request) => (
