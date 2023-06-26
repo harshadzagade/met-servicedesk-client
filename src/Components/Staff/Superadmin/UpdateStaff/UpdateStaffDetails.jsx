@@ -57,9 +57,13 @@ const UpdateStaffDetails = (props) => {
 
     useEffect(() => {
         const fetchStaff = async () => {
-            const staff = await axios.get(`/api/staff/superadmin/staffdetails/${id.staffId}`);
-            setStaff(staff.data.staff);
-            setDepartmentList(staff.data.staff.department);
+            try {
+                const staff = await axios.get(`/api/staff/superadmin/staffdetails/${id.staffId}`);
+                setStaff(staff.data.staff);
+                setDepartmentList(staff.data.staff.department);
+            } catch (error) {
+                console.log(error.response.data.message);
+            }
         };
         fetchStaff();
     }, [id.staffId]);
@@ -87,7 +91,7 @@ const UpdateStaffDetails = (props) => {
         } else {
             try {
                 await axios.put(`/api/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
-            props.onConfirm();
+                props.onConfirm();
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
@@ -110,13 +114,13 @@ const UpdateStaffDetails = (props) => {
                 <div >
                     <form className={classes.myform} method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, lastname: updateStaff.lastname, email: updateStaff.email.toLowerCase(), role: updateStaff.role, department: departmentList, phoneNumber: +updateStaff.phoneNumber, contactExtension: +updateStaff.contactExtension, createdAt: staff.createdAt })}>
                         <div className={classes.updateDetails}>
-                            <label className="la">staffid:</label>
+                            <label className="la">Staff ID:</label>
                             <p>#{staff.id}</p>
                         </div>
 
 
                         <div className={classes.updateDetails}>
-                            <label className="lb">first Name:</label>
+                            <label className="lb">First Name:</label>
                             <input type="text" className={classes.input} placeholder='FirstName' name='firstname' autoComplete='true' defaultValue={staff.firstname} onChange={handleChange} />
 
                         </div>
@@ -126,34 +130,34 @@ const UpdateStaffDetails = (props) => {
                         </div>
 
                         <div className={classes.deptik}>
-                                    <label>Department</label>
-                                    <div className={`${classes.createForm}`}>
-                                        <input
-                                            value={input}
-                                            placeholder="Enter a department"
-                                            className={classes.createstaffInput}
-                                            onKeyDown={onKeyDown}
-                                            onKeyUp={onKeyUp}
-                                            onChange={onChange}
+                            <label>Department</label>
+                            <div className={`${classes.createForm}`}>
+                                <input
+                                    value={input}
+                                    placeholder="Enter a department"
+                                    className={classes.createstaffInput}
+                                    onKeyDown={onKeyDown}
+                                    onKeyUp={onKeyUp}
+                                    onChange={onChange}
 
-                                        />
-                                        <div className={classes.departmentParent}>
-                                            {departmentList.map((tag, index) => (
-                                                <div className={classes.tag}>
-                                                    {tag} &nbsp;
-                                                    <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
-                                                </div>
-                                            ))}
+                                />
+                                <div className={classes.departmentParent}>
+                                    {departmentList.map((tag, index) => (
+                                        <div className={classes.tag}>
+                                            {tag} &nbsp;
+                                            <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
                                         </div>
-                                    </div>
-
+                                    ))}
                                 </div>
+                            </div>
 
-                      
+                        </div>
+
+
 
                         <div className={classes.updateDetails}>
                             <label className="ld">Role:</label>
-                            <select defaultValue={staff.role}  className={`${classes.input} dropdown-toggle`} name='role' onChange={handleChange}>
+                            <select defaultValue={staff.role} className={`${classes.input} dropdown-toggle`} name='role' onChange={handleChange}>
                                 {
                                     roles.map((role, key) =>
                                         staff.role === role ?
@@ -178,7 +182,7 @@ const UpdateStaffDetails = (props) => {
 
                         <div className={classes.updateDetails}>
                             <label className="lh">ContactEXT:</label>
-                            <input type="text" className={classes.input}     placeholder='ContactEXT' name='contactExtension' autoComplete='true' defaultValue={staff.contactExtension} onChange={handleChange} />
+                            <input type="text" className={classes.input} placeholder='ContactEXT' name='contactExtension' autoComplete='true' defaultValue={staff.contactExtension} onChange={handleChange} />
                         </div>
 
 

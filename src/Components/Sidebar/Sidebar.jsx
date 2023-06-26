@@ -61,8 +61,10 @@ const Sidebar = ({ children }) => {
   ]
 
   useEffect(() => {
-    if (!id) {
-      navigate('/login')
+    if (window.location.pathname !== '/forgotpassword') {
+      if (!id) {
+        navigate('/login')
+      }
     }
   }, [id, navigate]);
 
