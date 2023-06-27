@@ -101,7 +101,7 @@ const NewRequest = () => {
         <Fragment >
 
             <div className={classes.newrequest} >
-                <h1 >Create new Request</h1>
+                <h2>Create new Request</h2>
 
                 <div className={classes.createStaffform}>
                     <div className={classes.formStaff}>

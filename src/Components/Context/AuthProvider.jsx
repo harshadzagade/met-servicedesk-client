@@ -38,6 +38,10 @@ const AuthProvider = props => {
     const logoutHandler = () => {
         localStorage.removeItem('id');
         localStorage.removeItem('token');
+        localStorage.removeItem('department');
+        sessionStorage.removeItem('department');
+        sessionStorage.removeItem('approval');
+        sessionStorage.removeItem('tab');
         dispatchAuthAction({ type: "LOGIN", val: false });
         dispatchAuthAction({ type: "EMAIL", val: '' });
     };

@@ -21,7 +21,7 @@ const Sidebar = ({ children }) => {
   const [isComplaintActive, setIsComplaintActive] = useState(false);
   const [isServicesActive, setIsServicesActive] = useState(false);
   const [isReportActive, setIsReportActive] = useState(false);
-  const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '' });
+  const [staffInfo, setStaffInfo] = useState({});
   const [departments, setDepartments] = useState([]);
   const [currentDepartment, setCurrentDepartment] = useState('');
   const navigate = useNavigate();
@@ -117,6 +117,18 @@ const Sidebar = ({ children }) => {
   }, [id]);
 
   useEffect(() => {
+    if (staffInfo !== {}) {
+      if (staffInfo.role === 'technician' || staffInfo.role === 'user') {
+        navigate('/complaint');
+        sessionStorage.setItem('tab', 'complaint');
+      } else {
+        navigate('/');
+        sessionStorage.setItem('tab', 'home');
+      }
+    }
+  }, [staffInfo]);
+
+  useEffect(() => {
     switch (sessionStorage.getItem('tab')) {
       case 'home':
         setIsHomeActive(true);
@@ -202,7 +214,6 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
-    navigate('/');
   };
 
   const handleCreateStaffClick = () => {
@@ -276,7 +287,7 @@ const Sidebar = ({ children }) => {
       try {
         if (id) {
           const staff = await axios.get(`/api/staff/staffdetails/${id}`);
-          setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role });
+          setStaffInfo(staff.data.staff);
           if (staff.data.staff.role === 'technician' || staff.data.staff.role === 'user') {
             setIsHomeAvailable(false);
           } else {

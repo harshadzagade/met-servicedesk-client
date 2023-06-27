@@ -100,7 +100,7 @@ const NewCompaint = () => {
         <Fragment >
 
             <div className={classes.newcomplaint} >
-                <h1 >Create new complaint</h1>
+                <h2>Create new complaint</h2>
 
                 <div className={classes.createStaffform}>
                     <div className={classes.formStaff}>
