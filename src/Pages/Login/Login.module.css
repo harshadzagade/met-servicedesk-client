@@ -1,127 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
 .login {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: whitesmoke;
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+  margin-left: 35rem;
+  margin-top: 5rem;
 }
+.formPage {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 1rem;
 
-.topBar {
-  width: 100%;
-  height: 10%;
-  background-color: lightblue;
 }
-
-.loginLogo {
-  margin-top: 20px;
-}
-
-.loginLogoImg {
-  height: 80px;
-}
-
-@media (min-width: 450px) {
-  .loginLogoImg {
-    height: auto;
-  }
-}
-
-.loginFormDiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80%;
-  width: 100%;
-}
-
-.loginForm {
-  border: 1px solid whitesmoke;
-  background-color: #e2e2e2;
-  border-radius: 20px;
-  box-shadow: 0 1px 8px #b6b6b6;
-}
-
-@media (max-width: 350px) {
-  .loginForm {
-    margin-top: 9rem;
-  }
-}
-
-.loginHeading {
-  font-size: xx-large;
-  text-shadow: 2px 2px 3px #000000;
-  font-weight: 500;
-  background: -webkit-linear-gradient(#313131, #777777);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.loginInput {
-  width: 300px;
-  border-width: 1px;
-  border-color: transparent;
-  border-radius: 8px;
-  margin: 8px;
-  box-shadow: 1px 1px 1px 1px gray;
-  transition: all .3s ease-in-out;
-}
-
-@media (min-width: 768px) {
-  .loginInput {
-    width: 400px;
-  }
-}
-
-.loginInput:focus {
-  border-color: lightskyblue;
-  box-shadow: 1px 1px 2px gray;
-}
-
-.loginInputError {
-  border-color: red;
-}
-
-.loginButton {
-  background-color: lightblue;
-  width: 80%;
-  font-size: 18px;
-  font-weight: 600;
-  box-shadow: 1px 1px 1px 1px gray;
-  transition: all .5s ease-in-out;
-}
-
-.loginButton:hover {
-  background-color: #54c7ee;
-}
-
-.loginButton:focus {
+.formPage input {
+  font-family: "Roboto", sans-serif;
   outline: 0;
-  outline-color: transparent;
-  outline-width: 0;
-  outline-style: none;
-  box-shadow: 0 0 0 0 #007bff00;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 0.5rem;
 }
-
-.loginButton:active {
-  background-color: #0ab9f3;
-  color: white;
-  box-shadow: 1px 1px 1px 1px gray;
-  transition-duration: 0.2s;
-  transform: translateX(0px) translateY(2px);
-  box-shadow: none;
-}
-
-.forgotPassword {
+.formPage button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #7380ec;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
   cursor: pointer;
-  color: #4040da;
-  font-weight: 600;
-  text-decoration: underline;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
-
-.forgotPassword:hover {
-  color: blue;
-}
-
-.forgotPassword:active {
-  color: #4040da;
-  transform: translateX(0px) translateY(.5px);
+.formPage button:hover,.formPage button:active,.formPage button:focus {
+  background: #43A047;
 }
