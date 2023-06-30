@@ -135,7 +135,7 @@ const AdminApproval = (props) => {
 
                                         {
                                             technicians.map((technician) =>
-                                                <option key={technician.id} value={technician.id}>{technician.firstname}</option>
+                                                <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>
                                             )
                                         }
                                     </select>

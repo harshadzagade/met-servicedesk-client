@@ -1,3 +1,4 @@
+
 /* search filtes */
 .searchInput {
   background: white;
@@ -68,12 +69,6 @@ main .filter {
   align-items: flex-start;
   margin-top: 1.5rem;
   background: var(--color-background);
-}
-
-.requests {
-  overflow: auto;
-  max-height: 30rem;
-
 }
 
 main .requests h2 {

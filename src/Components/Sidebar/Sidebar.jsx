@@ -22,8 +22,6 @@ const Sidebar = ({ children }) => {
   const [isServicesActive, setIsServicesActive] = useState(false);
   const [isReportActive, setIsReportActive] = useState(false);
   const [staffInfo, setStaffInfo] = useState({});
-  const [departments, setDepartments] = useState([]);
-  const [currentDepartment, setCurrentDepartment] = useState('');
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -115,18 +113,6 @@ const Sidebar = ({ children }) => {
       setShowTabs(false);
     }
   }, [id]);
-
-  useEffect(() => {
-    if (staffInfo !== {}) {
-      if (staffInfo.role === 'technician' || staffInfo.role === 'user') {
-        navigate('/complaint');
-        sessionStorage.setItem('tab', 'complaint');
-      } else {
-        navigate('/');
-        sessionStorage.setItem('tab', 'home');
-      }
-    }
-  }, [staffInfo]);
 
   useEffect(() => {
     switch (sessionStorage.getItem('tab')) {
@@ -301,19 +287,30 @@ const Sidebar = ({ children }) => {
     getUserInfo();
   }, [id]);
 
+  useEffect(() => {
+    if (staffInfo !== {}) {
+      if (staffInfo.role === 'technician' || staffInfo.role === 'user') {
+        navigate('/complaint');
+        sessionStorage.setItem('tab', 'complaint');
+      } else {
+        navigate('/');
+        sessionStorage.setItem('tab', 'home');
+      }
+    }
+  }, [staffInfo]);
+
   return (
     <Fragment>
-      <div className={classes.helpdesk}  >
+      <div className={classes.wrapper}  >
         {
           id &&
-          <aside hidden={window.location.pathname === '/login' || window.location.pathname === '/forgotpassword' || window.location.pathname === '/passwordreset' ? true : false}>
-            <div className={`${classes.top}`}>
-              <div className={`${classes.logo}`}>
-                <img src="/assets/img/met_logo.png" alt="" />
-              </div>
+          <div className='bg-white' hidden={window.location.pathname === '/login' || window.location.pathname === '/forgotpassword' || window.location.pathname === '/passwordreset' ? true : false}>
+            <div className={`${classes.logo}`}>
+              <img src="/assets/img/met_logo.png" alt="" />
             </div>
 
-            <div className={`${classes.sidebar}`}>
+
+            <div className={`${classes.sidemenu}`}>
               {isHomeAvailable && <Link to='/' onClick={handleHomeClick} className={`${isHomeActive && classes.active}`} >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                   <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
@@ -363,7 +360,7 @@ const Sidebar = ({ children }) => {
                 </svg>
                 <h3>Staff List</h3>
               </Link>
-              <Link onClick={(e) => handleLogoutClick(e)} className={`${classes.active ? classes.rowColorActive : classes.rowColorDefault}`}  >
+              <Link onClick={(e) => handleLogoutClick(e)} className={`${classes.active ? classes.rowColorActive : classes.rowColorDefault} text-danger`}  >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
                   <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
@@ -371,17 +368,25 @@ const Sidebar = ({ children }) => {
                 <h3>Logout</h3>
               </Link>
             </div>
-          </aside>
+          </div>
         }
 
-        <div className={classes.main}>
-          <Navbar />
-          <div className={classes.mainsection}>
-            <main>{children}</main>
-            <Rightside />
+
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <main className={classes.main}>
+                <div className={classes.nav}>
+                  <Navbar />
+                </div>
+                {children}
+              </main>
+            </div>
           </div>
         </div>
       </div>
+
+
     </Fragment>
   )
 }

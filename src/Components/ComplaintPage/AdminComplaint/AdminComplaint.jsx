@@ -1,9 +1,10 @@
-import React, { Fragment,  useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import classes from './AdminComplaint.module.css';
 import IncomingComplaint from '../AdminComplaint/IncomingComplaint/IncomingComplaint';
 import OutgoingComplaint from '../AdminComplaint/OutgoingComplaint/OutgoingComplaint';
 import OwnComplaint from '../AdminComplaint/OwnComplaint/OwnComplaint';
 import ComplaintNavigation from './ComplaintNavigation/ComplaintNavigation';
+import Rightside from '../../Righside/Rightside';
 
 
 const AdminComplaint = () => {
@@ -14,17 +15,25 @@ const AdminComplaint = () => {
     setOpenLayout(value);
   };
 
-  
+
   return (
     <Fragment>
-      <div className={`${classes.mainTitle}`}>
-        <h2 className="tik-type-title">Complaint</h2>
+      <div className="container">
+        <div className="row">
+          <div className="col-8">
+            <div className={`${classes.mainTitle}`}>
+              <h2 className="tik-type-title">Complaint</h2>
+            </div>
+            <ComplaintNavigation viewLayout={checkLayout} />
+            {openLayout === 'AllStaffIncomingComplaint' && <IncomingComplaint />}
+            {openLayout === 'AllStaffOutGoingComplaint' && <OutgoingComplaint />}
+            {openLayout === 'AllStaffOwnComplaint' && <OwnComplaint />}
+          </div>
+          <div className='col-4'>
+            <Rightside />
+          </div>
+        </div>
       </div>
-      <ComplaintNavigation viewLayout={checkLayout} />
-      {openLayout === 'AllStaffIncomingComplaint' && <IncomingComplaint />}
-      {openLayout === 'AllStaffOutGoingComplaint' && <OutgoingComplaint />}
-      {openLayout === 'AllStaffOwnComplaint' && <OwnComplaint />}
-
     </Fragment>
   )
 }

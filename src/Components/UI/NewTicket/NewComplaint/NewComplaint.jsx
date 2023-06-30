@@ -20,6 +20,7 @@ const NewCompaint = () => {
     const [isToggled, setIsToggled] = useState(false);
     const [departments, setDepartments] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [isRepeated, setIsRepeated] = useState(false);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -53,6 +54,7 @@ const NewCompaint = () => {
         formData.append('priority', priority);
         formData.append('category', requestType);
         formData.append('isRepeated', false);
+
         /* const config = {
             headers: {
                 "content-type": "multipart/form-data"
@@ -96,6 +98,7 @@ const NewCompaint = () => {
         setEditorData(editor.getData());
     }
 
+    //assign
     return (
         <Fragment >
 
@@ -109,7 +112,7 @@ const NewCompaint = () => {
                                 <span>Behalf Email</span>
                                 <div className={classes.behalftoogle}>
                                     <input type="checkbox" defaultChecked={isToggled} onClick={() => { setIsToggled(!isToggled) }} id="toggle-btn" />
-                                    <label for="toggle-btn"></label>
+                                    <label htmlFor="toggle-btn"></label>
                                     {isToggled && <input className={`${classes.behalfField} `} type="text" name="behalf" placeholder="Behalf email" autoComplete='true' required ref={behalfEmailRef} />}
                                 </div>
                             </div>
@@ -138,7 +141,7 @@ const NewCompaint = () => {
                                 </div>
 
                                 <div className={classes.reqType}>
-                                    <span>Request Type</span>
+                                    <span>Complaint Type</span>
                                     <select className={classes.rtypeSelect} onChange={(e) => setRequestType(e.target.value)}>
                                         <option value="" hidden>----- Select Categories -----</option>
                                         <option value="Hardware">Hardware</option>
@@ -163,10 +166,20 @@ const NewCompaint = () => {
                             </div>
 
                             <div className={classes.attachment}>
+                                <div  className={classes.attachmentSection}>
                                 <span>Attachment</span>
                                 <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
-                                <button className={classes.buttonForm} onClick={handleSubmitClick}>Submit</button>
+                                </div>
+                                {/* <div className={classes.repeat}>
+                                    <span>Repeated Complaint:</span>
+                                    <div className={classes.isRepeat}>
+                                        <input type="checkbox" defaultChecked={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} id="toggle-repeat" />
+                                        <label htmlFor="toggle-repeat"></label>
+                                    </div>
+                                </div> */}
+
                             </div>
+                            <button className={classes.buttonForm} onClick={handleSubmitClick}>Submit</button>
 
                         </form>
                     </div>

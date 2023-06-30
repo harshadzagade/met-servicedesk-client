@@ -4,7 +4,8 @@
   height: 6.5rem;
   flex-direction: row;
   justify-content: end;
-  width: 99%;
+  width: auto;
+  margin-right: 1.5rem;
   border-radius: 1rem;
 }
 .adminDept{

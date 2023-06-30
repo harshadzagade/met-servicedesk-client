@@ -1,3 +1,6 @@
+main{
+  display: grid;
+}
 /* search filtes */
 .searchInput {
   background: white;

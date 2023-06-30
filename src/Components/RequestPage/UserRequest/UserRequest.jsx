@@ -36,7 +36,7 @@ const UserRequest = () => {
 
   const getCreatedRequestDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {

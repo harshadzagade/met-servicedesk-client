@@ -21,6 +21,7 @@ const NewRequest = () => {
     const [isToggled, setIsToggled] = useState(false);
     const [departments, setDepartments] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [isRepeated, setIsRepeated] = useState(false);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -53,7 +54,7 @@ const NewRequest = () => {
         formData.append('department', department);
         formData.append('priority', priority);
         formData.append('category', requestType);
-        formData.append('isRepeated', false);
+        formData.append('isRepeated', isRepeated);
         /* const config = {
             headers: {
                 "content-type": "multipart/form-data"
@@ -96,6 +97,8 @@ const NewRequest = () => {
     const handleeditorChange = (e, editor) => {
         setEditorData(editor.getData());
     }
+
+   
 
     return (
         <Fragment >
@@ -164,11 +167,20 @@ const NewRequest = () => {
                             </div>
 
                             <div className={classes.attachment}>
+                                <div  className={classes.attachmentSection}>
                                 <span>Attachment</span>
                                 <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
-                                <button className={classes.buttonForm} onClick={handleSubmitClick}>Submit</button>
-                            </div>
+                                </div>
+                                <div className={classes.repeat}>
+                                    <span>Repeated Complaint:</span>
+                                    <div className={classes.isRepeat}>
+                                        <input type="checkbox" defaultChecked={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} id="toggle-repeat" />
+                                        <label htmlFor="toggle-repeat"></label>
+                                    </div>
+                                </div>
 
+                            </div> 
+                            <button className={classes.buttonForm} onClick={handleSubmitClick}>Submit</button>
                         </form>
                     </div>
                 </div >

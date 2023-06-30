@@ -236,7 +236,7 @@ const AllStaff = () => {
                 data={allStaffList}
                 pagination
                 fixedHeader
-                fixedHeaderScrollHeight='368px'
+                fixedHeaderScrollHeight='56vh'
                 highlightOnHover
                 subHeader
                 onRowClicked={handleRowClick}

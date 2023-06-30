@@ -195,11 +195,11 @@ main .filter {
 
 
 
-main .requests {
+/* main .requests {
   overflow: auto;
   max-height: 24rem;
 
-}
+} */
 
 main .requests h2 {
   margin-bottom: 0.8rem;

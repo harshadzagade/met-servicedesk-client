@@ -24,6 +24,7 @@ import Sidebar from '../Components/Sidebar/Sidebar';
 import TechnicianRequestAttendingForm from '../Components/RequestPage/TechnicianRequest/TechnicianRequestAttendingForm/TechnicianRequestAttendingForm';
 import Report from '../Pages/Report/Report';
 import ReportDetails from '../Components/UI/Details/ReportDetails/ReportDetails';
+import ArchiveStaffDetails from '../Components/Staff/Superadmin/Archive/ArchiveStaffDetails/ArchiveStaffDetails';
 const Routing = () => {
 
   return (
@@ -48,6 +49,7 @@ const Routing = () => {
           <Route exact path='/adminrequestdetails/:requestId' element={<AdminRequestDetails />} />
           <Route exact path='/adminapproval/:requestId' element={<AdminApproval />} />
           <Route exact path='/singlestaff/:staffId' element={<SingleStaff />} />
+          <Route exact path='/archivestaff/:staffId' element={<ArchiveStaffDetails />} />
           <Route exact path='/request' element={<Request />} />
           <Route exact path='/singlestaff/:staffId' element={<SingleStaff />} />
           <Route exact path='/passwordreset' element={<PasswordReset />} />

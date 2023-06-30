@@ -50,7 +50,7 @@ const IncomingRequest = () => {
 
   const getCreatedRequestDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {
@@ -203,7 +203,7 @@ const IncomingRequest = () => {
                 <p className={`${classes.tikId}`}>
                   #{request.id}
                 </p>
-                <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => 'red'], ['medium', () => '#F78D1E'], ['low', () => 'green']) }}>
+                <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => 'red'], ['moderate', () => '#F78D1E'], ['low', () => 'green']) }}>
                   {request.priority}
                 </p>
                 <p className={`${classes.tikId}`}>

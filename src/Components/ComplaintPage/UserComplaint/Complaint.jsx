@@ -32,7 +32,7 @@ const Complaint = () => {
 
   const getCreatedComplaintDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {
@@ -198,7 +198,7 @@ const Complaint = () => {
                     #{complaint.id}
                   </p>
 
-                  <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['High', () => 'red'], ['Medium', () => '#F78D1E'], ['Low', () => 'green']) }}>
+                  <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => 'red'], ['moderate', () => '#F78D1E'], ['low', () => 'green']) }}>
                     {complaint.priority}
                   </p>
 

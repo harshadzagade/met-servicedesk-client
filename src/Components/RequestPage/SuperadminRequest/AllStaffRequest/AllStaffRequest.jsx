@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import Swal from 'sweetalert2';
+import Rightside from '../../../Righside/Rightside';
 
 const AllStaffRequest = () => {
     const navigate = useNavigate();
@@ -308,7 +309,7 @@ const AllStaffRequest = () => {
 
     const getCreatedRequestDate = (createdAt) => {
         const date = new Date(createdAt);
-        return (date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+        return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
 
     const formatAMPM = (date) => {
@@ -325,144 +326,151 @@ const AllStaffRequest = () => {
 
     return (
         <main>
-            <div className={classes.staffrequestform}>
-                <div className={`${classes.mainTitle}`}>
-                    <h2 className="tik-type-title">Request</h2>
-                </div>
-                <div className={classes.search}>
-                    <div className={classes.searchfiltering}>
-                        {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-                        {
-                            openDepartmentList &&
-                            <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
-                                <option value='' hidden>Select Your Department</option>
-                                <option value={'allDepartments'}>All Departments</option>
+            <div className="container">
+                <div className={`${classes.staffrequestform} row`}>
+                    <div className="col-8">
+                        <div className={`${classes.mainTitle}`}>
+                            <h2 className="tik-type-title">Request</h2>
+                        </div>
+                        <div className={classes.search}>
+                            <div className={classes.searchfiltering}>
+                                {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                                 {
-                                    departments.map((department, key) => (
-                                        <option key={key} value={department}>{department}</option>
-                                    ))
+                                    openDepartmentList &&
+                                    <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
+                                        <option value='' hidden>Select Your Department</option>
+                                        <option value={'allDepartments'}>All Departments</option>
+                                        {
+                                            departments.map((department, key) => (
+                                                <option key={key} value={department}>{department}</option>
+                                            ))
+                                        }
+                                    </select>
                                 }
-                            </select>
-                        }
-                        {
-                            openCategoryList &&
-                            <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
-                                <option value='' hidden>Select Your Category</option>
-                                <option value={'allCategories'}>All Categories</option>
                                 {
-                                    categories.map((category, key) => (
-                                        <option key={key} value={category}>{category}</option>
-                                    ))
+                                    openCategoryList &&
+                                    <select value={category} className={`${classes.optionSearchBox}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                                        <option value='' hidden>Select Your Category</option>
+                                        <option value={'allCategories'}>All Categories</option>
+                                        {
+                                            categories.map((category, key) => (
+                                                <option key={key} value={category}>{category}</option>
+                                            ))
+                                        }
+                                    </select>
                                 }
-                            </select>
-                        }
-                        {
-                            openPriorityList &&
-                            <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
-                                <option value='' hidden>Select Your Priority</option>
-                                <option value='allPriorities'>All Priorities</option>
-                                <option value='high'>High</option>
-                                <option value='moderate'>Moderate</option>
-                                <option value='low'>Low</option>
-                            </select>
-                        }
-                        {
-                            openStatusList &&
-                            <select value={status} className={`${classes.optionSearchBox}`} name="status" required onChange={(e) => setStatus(e.target.value)}>
-                                <option value='' hidden>Select Your Status</option>
-                                <option value='allStatus'>All Status</option>
-                                <option value='pending'>Pending</option>
-                                <option value='assigned'>Assigned</option>
-                                <option value='attending'>Attending</option>
-                                <option value='forwarded'>Forwarded</option>
-                                <option value='closed'>Closed</option>
-                                <option value='disapproved'>Disapproved</option>
-                            </select>
-                        }
-                        {
-                            openHodApprovalList &&
-                            <select value={hodApproval} className={`${classes.optionSearchBox}`} name="hod" required onChange={(e) => setHodApproval(e.target.value)}>
-                                <option value='' hidden>Select Your Approval</option>
-                                <option value='allHodApprovals'>All HOD Approvals</option>
-                                <option value={0}>Not Updated</option>
-                                <option value={1}>Approved</option>
-                                <option value={2}>Disapproved</option>
-                            </select>
-                        }
-                        {
-                            openAdminApprovalList &&
-                            <select value={adminApproval} className={`${classes.optionSearchBox}`} name="admin" required onChange={(e) => setAdminApproval(e.target.value)}>
-                                <option value='' hidden>Select Your Approval</option>
-                                <option value='allAdminApprovals'>All Admin Approvals</option>
-                                <option value={0}>Not Updated</option>
-                                <option value={1}>Approved</option>
-                                <option value={2}>Disapproved</option>
-                            </select>
-                        }
-                        <div className="btn-group">
-                            <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {searchType}
-                            </button>
-                            <div className="dropdown-menu">
-                                <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
-                                <div className="dropdown-item" onClick={() => setSearchType('Name')}>Name</div>
-                                <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
-                                <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
-                                <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
-                                <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
-                                <div className="dropdown-item" onClick={() => setSearchType('HOD Approval')}>HOD Approval</div>
-                                <div className="dropdown-item" onClick={() => setSearchType('Admin Approval')}>Admin Approval</div>
+                                {
+                                    openPriorityList &&
+                                    <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                                        <option value='' hidden>Select Your Priority</option>
+                                        <option value='allPriorities'>All Priorities</option>
+                                        <option value='high'>High</option>
+                                        <option value='moderate'>Moderate</option>
+                                        <option value='low'>Low</option>
+                                    </select>
+                                }
+                                {
+                                    openStatusList &&
+                                    <select value={status} className={`${classes.optionSearchBox}`} name="status" required onChange={(e) => setStatus(e.target.value)}>
+                                        <option value='' hidden>Select Your Status</option>
+                                        <option value='allStatus'>All Status</option>
+                                        <option value='pending'>Pending</option>
+                                        <option value='assigned'>Assigned</option>
+                                        <option value='attending'>Attending</option>
+                                        <option value='forwarded'>Forwarded</option>
+                                        <option value='closed'>Closed</option>
+                                        <option value='disapproved'>Disapproved</option>
+                                    </select>
+                                }
+                                {
+                                    openHodApprovalList &&
+                                    <select value={hodApproval} className={`${classes.optionSearchBox}`} name="hod" required onChange={(e) => setHodApproval(e.target.value)}>
+                                        <option value='' hidden>Select Your Approval</option>
+                                        <option value='allHodApprovals'>All HOD Approvals</option>
+                                        <option value={0}>Not Updated</option>
+                                        <option value={1}>Approved</option>
+                                        <option value={2}>Disapproved</option>
+                                    </select>
+                                }
+                                {
+                                    openAdminApprovalList &&
+                                    <select value={adminApproval} className={`${classes.optionSearchBox}`} name="admin" required onChange={(e) => setAdminApproval(e.target.value)}>
+                                        <option value='' hidden>Select Your Approval</option>
+                                        <option value='allAdminApprovals'>All Admin Approvals</option>
+                                        <option value={0}>Not Updated</option>
+                                        <option value={1}>Approved</option>
+                                        <option value={2}>Disapproved</option>
+                                    </select>
+                                }
+                                <div className="btn-group">
+                                    <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {searchType}
+                                    </button>
+                                    <div className="dropdown-menu">
+                                        <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
+                                        <div className="dropdown-item" onClick={() => setSearchType('Name')}>Name</div>
+                                        <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
+                                        <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
+                                        <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                                        <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
+                                        <div className="dropdown-item" onClick={() => setSearchType('HOD Approval')}>HOD Approval</div>
+                                        <div className="dropdown-item" onClick={() => setSearchType('Admin Approval')}>Admin Approval</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={classes.datapage} >
+                                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                             </div>
                         </div>
+
+
+                        <div className={`${classes.requests} `}>
+                            {
+                                currentPageData.map((request) => (
+                                    <div key={request.id} className={classes.tikInfo} onClick={() => navigate(`/requestdetails/${request.id}`)}>
+                                        <div className={`${classes.tikHead}`}>
+
+                                            <h3 className={`${classes.tikTitle}`}>
+                                                {request.subject}
+                                            </h3>
+
+                                            <span className={`${classes.date}`}>
+                                                {getCreatedRequestDate(request.createdAt)}
+                                            </span>
+                                        </div>
+                                        <div className={`${classes.tikMsg}`}>
+                                            <p>
+                                                <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
+                                            </p>
+                                        </div>
+                                        <div className={`${classes.tikOther}`}>
+                                            <p className={`${classes.tikId}`}>
+                                                #{request.id}
+                                            </p>
+
+                                            <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => 'red'], ['moderate', () => '#F78D1E'], ['low', () => 'green']) }}>
+                                                {request.priority}
+                                            </p>
+
+                                            <p className={`${classes.tikId}`}>
+                                                {request.status}
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            <SweetPagination
+                                currentPageData={setCurrentPageData}
+                                dataPerPage={numberOfPages}
+                                getData={allRequestList}
+                                navigation={true}
+                            />
+                        </div>
                     </div>
-                    <div className={classes.datapage} >
-                        <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+                    <div className='col-4'>
+                        <Rightside />
                     </div>
-                </div>
-
-
-                <div className={`${classes.requests} `}>
-                    {
-                        currentPageData.map((request) => (
-                            <div key={request.id} className={classes.tikInfo} onClick={() => navigate(`/requestdetails/${request.id}`)}>
-                                <div className={`${classes.tikHead}`}>
-
-                                    <h3 className={`${classes.tikTitle}`}>
-                                        {request.subject}
-                                    </h3>
-
-                                    <span className={`${classes.date}`}>
-                                        {getCreatedRequestDate(request.createdAt)}
-                                    </span>
-                                </div>
-                                <div className={`${classes.tikMsg}`}>
-                                    <p>
-                                        <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
-                                    </p>
-                                </div>
-                                <div className={`${classes.tikOther}`}>
-                                    <p className={`${classes.tikId}`}>
-                                        #{request.id}
-                                    </p>
-
-                                    <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => 'red'], ['moderate', () => '#F78D1E'], ['low', () => 'green']) }}>
-                                        {request.priority}
-                                    </p>
-
-                                    <p className={`${classes.tikId}`}>
-                                        {request.status}
-                                    </p>
-
-                                </div>
-                            </div>
-                        ))
-                    }
-                    <SweetPagination
-                        currentPageData={setCurrentPageData}
-                        dataPerPage={numberOfPages}
-                        getData={allRequestList}
-                        navigation={true}
-                    />
                 </div>
             </div>
         </main>

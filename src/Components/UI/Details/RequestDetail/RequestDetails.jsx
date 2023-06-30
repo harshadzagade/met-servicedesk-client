@@ -3,6 +3,7 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './RequestDetails.module.css'
 import { useParams } from 'react-router-dom';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
+import Rightside from '../../../Righside/Rightside';
 const RequestDetails = () => {
     const id = useParams().requestId;
     const ticketCtx = useContext(TicketDetailsContext);
@@ -23,7 +24,7 @@ const RequestDetails = () => {
 
     const getCreatedRequestDate = (createdAt) => {
         const date = new Date(createdAt);
-        return (date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+        return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
 
     const formatAMPM = (date) => {
@@ -36,137 +37,168 @@ const RequestDetails = () => {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
         return strTime;
-    }
+    };
+
+    //Attachment
+    const handleDownload = async (e) => {
+        e.preventDefault();
+        try {
+            const file = await axios.get(`/api/request/downloadfile/${requestData.id}`, { responseType: 'blob' });
+            const url = window.URL.createObjectURL(new Blob([file.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'files.zip');
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(url);
+            link.remove();
+        } catch (error) {
+            console.log(error.response.data.message);
+        }
+    };
 
     return (
         <Fragment>
             <main>
-                <div className={classes.reqdetails}>
-                    <h2>Request details</h2>
-                    <div className={`${classes.detail}`}>
-                        <div >
-                            <form className={classes.myform}>
-                                <div className={classes.idDetails}>
-                                    <label>Request Id:</label>
-                                    <p className={classes.complaintDetailsp}>#{requestData.id}</p>
-                                </div>
-
-                                <hr />
-
-                                <div className={classes.subjectDetails}>
-                                    <label>Subject:</label>
-                                    <p className={classes.complaintDetailsp}>{requestData.subject}</p>
-                                </div>
-
-                                <div className={classes.description}>
-                                    <label>Description:</label>
-                                    <div dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
-                                </div>
-
-                                <hr />
-
-                                <div className={classes.deptper}>
-                                    <div className={classes.department}>
-                                        <label>Department:</label>
-                                        <p className={classes.complaintDetailsp}>{requestData.department}</p>
-                                    </div>
-
-                                    <div className={classes.priorityDetails}>
-                                        <label>Priority:</label>
-                                        <p className={classes.complaintDetailsp}> {requestData.priority}  </p>
-                                    </div>
-                                </div>
-
-                                <div className={classes.reqsta}>
-                                    <div className={classes.ComplaintType}>
-                                        <label>Request Type:</label>
-                                        <p className={classes.complaintDetailsp}>{requestData.category}</p>
-                                    </div>
-                                    <div className={classes.name}>
-                                        <label>Status:</label>
-                                        <p className={classes.complaintDetailsp}>{requestData.status} </p>
-                                    </div>
-                                </div>
-                                <hr />
-
-                                <div className={classes.approval1}>
-                                    <div className={classes.approval}>
-                                        <label>HOD Approval:</label>
-                                        <p className={classes.complaintDetailsp}>{(requestData.approval1 === 1 && 'approved') || (requestData.approval1 === 2 && 'Disapproved') || (requestData.approval1 === null && 'Not updated')}</p>
-                                    </div>
-
-                                    {
-                                        requestData.approval1 &&
-                                        <div className={classes.approval}>
-                                            <label>HOD Comment:</label>
-                                            <p className={classes.complaintDetailsp}>{requestData.approval1 ? requestData.approval1Comment : 'Not Commented'}</p>
+                <div className='container'>
+                    <div className={`${classes.reqdetails} row`}>
+                        <div className="col-8">
+                            <h2>Request details</h2>
+                            <div className={`${classes.detail}`}>
+                                <div >
+                                    <form className={classes.myform}>
+                                        <div className={classes.idDetails}>
+                                            <label>Request Id:</label>
+                                            <p className={classes.complaintDetailsp}>#{requestData.id}</p>
                                         </div>
-                                    }
-                                    <div className={classes.approval}>
-                                        <label>Admin Approval:</label>
-                                        <p className={classes.complaintDetailsp}>{(requestData.approval2 === 1 && 'Approved') || (requestData.approval2 === 2 && 'Disapproved') || (requestData.approval2 === null && 'Not updated')}</p>
-                                    </div>
 
-                                    {
-                                        requestData.approval2 &&
-                                        <div className={classes.approval}>
-                                            <label>Admin Comment:</label>
-                                            <p className={classes.complaintDetailsp}>{requestData.approval2 ? requestData.approval2Comment : 'Not Commented'}</p>
+                                        <hr />
+
+                                        <div className={classes.subjectDetails}>
+                                            <label>Subject:</label>
+                                            <p className={classes.complaintDetailsp}>{requestData.subject}</p>
                                         </div>
-                                    }
-                                </div>
-                                {
-                                    (requestData.assign || requestData.forwardComment || (requestData.status === 'forwarded' || requestData.status === 'closed')) &&
-                                    <hr />
-                                }
-                                {
-                                    requestData.assign &&
-                                    <div className={classes.techName}>
-                                        <label>Technician Name:</label>
-                                        <p >{requestData.assignedName}</p>
-                                    </div>
-                                }
 
-                                {
-                                    requestData.status === 'forwarded' &&
-                                    <div className={classes.techName}>
-                                        <label>Forward Comment:</label>
-                                        <p >{requestData.forwardComment}</p>
-                                    </div>
-                                }
+                                        <div className={classes.description}>
+                                            <label>Description:</label>
+                                            <div dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
+                                        </div>
 
-                                {
-                                    (requestData.status === 'forwarded' || requestData.status === 'closed') &&
-                                    <div className={classes.techName}>
-                                        <label>Problem Description:</label>
-                                        <p >{requestData.problemDescription}</p>
-                                    </div>
-                                }
+                                        <hr />
 
-                                {
-                                    (requestData.status === 'forwarded' || requestData.status === 'closed') &&
-                                    <div className={classes.techName}>
-                                        <label>Action Taken:</label>
-                                        <p >{requestData.actionTaken}</p>
-                                    </div>
-                                }
+                                        <div className={classes.deptper}>
+                                            <div className={classes.department}>
+                                                <label>Department:</label>
+                                                <p className={classes.complaintDetailsp}>{requestData.department}</p>
+                                            </div>
 
-                                <hr />
-                                <div className={classes.description}>
-                                    <label>Attachment:</label>
-                                    <p className={classes.complaintDetailsp}>None</p>
-                                </div>
+                                            <div className={classes.priorityDetails}>
+                                                <label>Priority:</label>
+                                                <p className={classes.complaintDetailsp}> {requestData.priority}  </p>
+                                            </div>
+                                        </div>
 
-                                <div className={classes.date}>
-                                    <label>Date:</label>
-                                    <p className={classes.complaintDetailsp}>{getCreatedRequestDate(requestData.createdAt)}</p>
-                                </div>
-                                {/* <div>
+                                        <div className={classes.reqsta}>
+                                            <div className={classes.ComplaintType}>
+                                                <label>Request Type:</label>
+                                                <p className={classes.complaintDetailsp}>{requestData.category}</p>
+                                            </div>
+                                            <div className={classes.name}>
+                                                <label>Status:</label>
+                                                <p className={classes.complaintDetailsp}>{requestData.status} </p>
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <div className={classes.approval1}>
+                                            <div className={classes.approval}>
+                                                <label>HOD Approval:</label>
+                                                <p className={classes.complaintDetailsp}>{(requestData.approval1 === 1 && 'approved') || (requestData.approval1 === 2 && 'Disapproved') || (requestData.approval1 === null && 'Not updated')}</p>
+                                            </div>
+
+                                            {
+                                                requestData.approval1 &&
+                                                <div className={classes.approval}>
+                                                    <label>HOD Comment:</label>
+                                                    <p className={classes.complaintDetailsp}>{requestData.approval1 ? requestData.approval1Comment : 'Not Commented'}</p>
+                                                </div>
+                                            }
+                                            <div className={classes.approval}>
+                                                <label>Admin Approval:</label>
+                                                <p className={classes.complaintDetailsp}>{(requestData.approval2 === 1 && 'Approved') || (requestData.approval2 === 2 && 'Disapproved') || (requestData.approval2 === null && 'Not updated')}</p>
+                                            </div>
+
+                                            {
+                                                requestData.approval2 &&
+                                                <div className={classes.approval}>
+                                                    <label>Admin Comment:</label>
+                                                    <p className={classes.complaintDetailsp}>{requestData.approval2 ? requestData.approval2Comment : 'Not Commented'}</p>
+                                                </div>
+                                            }
+                                        </div>
+                                        {
+                                            (requestData.assign || requestData.forwardComment || (requestData.status === 'forwarded' || requestData.status === 'closed')) &&
+                                            <hr />
+                                        }
+                                        {
+                                            requestData.assign &&
+                                            <div className={classes.techName}>
+                                                <label>Technician Name:</label>
+                                                <p >{requestData.assignedName}</p>
+                                            </div>
+                                        }
+
+                                        {
+                                            requestData.status === 'forwarded' &&
+                                            <div className={classes.techName}>
+                                                <label>Forward Comment:</label>
+                                                <p >{requestData.forwardComment}</p>
+                                            </div>
+                                        }
+
+                                        {
+                                            (requestData.status === 'forwarded' || requestData.status === 'closed') &&
+                                            <div className={classes.techName}>
+                                                <label>Problem Description:</label>
+                                                <p >{requestData.problemDescription}</p>
+                                            </div>
+                                        }
+
+                                        {
+                                            (requestData.status === 'forwarded' || requestData.status === 'closed') &&
+                                            <div className={classes.techName}>
+                                                <label>Action Taken:</label>
+                                                <p >{requestData.actionTaken}</p>
+                                            </div>
+                                        }
+
+                                        <hr />
+                                        <div className={classes.description}>
+                                            <label>Attachment:</label>
+                                            {
+                                                requestData.attachment && (requestData.attachment.length === 0 ?
+                                                    <p className={classes.complaintDetailsp}>None</p>
+                                                    :
+                                                    <button className={classes.buttonForm} onClick={handleDownload}>Download</button>
+                                                )
+                                            }
+                                        </div>
+
+                                        <div className={classes.date}>
+                                            <label>Date:</label>
+                                            <p className={classes.complaintDetailsp}>{getCreatedRequestDate(requestData.createdAt)}</p>
+                                        </div>
+                                        {/* <div>
                                     <button className={classes.complaintAssingBtn}>Self Assign </button>
                                     <button className={classes.complaintAssingBtn}>Forward </button>
                                 </div> */}
 
-                            </form>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-4'>
+                            <Rightside />
                         </div>
                     </div>
                 </div>

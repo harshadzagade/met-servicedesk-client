@@ -108,7 +108,7 @@ const DeleteStaffList = () => {
     },
     {
       name: "Delete",
-      cell: row => <button className={classes.delete} onClick={() => handleDeleteClick(row.id)}>Detele</button>
+      cell: row => <button className={classes.delete} onClick={() => handleDeleteClick(row.id)}>Delete</button>
     },
     {
       name: "Restore",
@@ -134,7 +134,7 @@ const DeleteStaffList = () => {
 
 
   const handleRowClick = row => {
-    navigate(`/singlestaff/${row.id}`);
+    navigate(`/archivestaff/${row.id}`);
   }
 
   return (

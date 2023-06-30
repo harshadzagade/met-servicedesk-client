@@ -79,15 +79,15 @@ const SingleStaff = () => {
             <div className={classes.myform}>
 
               <div className={classes.idDetails}>
-                <label className={classes.la}>staffid:</label>
+                <label className={classes.la}>Staff ID:</label>
                 <p>#{id.staffId}</p>
               </div>
               <div className={classes.fname}>
-                <label className={classes.lb}>first Name:</label>
+                <label className={classes.lb}>Firstname:</label>
                 <p>{name} </p>
               </div>
               <div className={classes.lname}>
-                <label className={classes.lc}>Last Name:</label>
+                <label className={classes.lc}>Lastname:</label>
                 <p >{lname} </p>
               </div>
               <div className={classes.department}>

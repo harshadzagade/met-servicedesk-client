@@ -20,7 +20,7 @@ const ReportDetails = () => {
 
     const getCreatedReportDate = (createdAt) => {
         const date = new Date(createdAt);
-        return (date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+        return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
 
     const formatAMPM = (date) => {
@@ -41,6 +41,7 @@ const ReportDetails = () => {
         let diffMins = Math.round(((assignDuration % 86400000) % 3600000) / 60000);
         return (diffHrs + ' Hours and ' + diffMins + ' Minutes');
     }
+
 
 
     return (
