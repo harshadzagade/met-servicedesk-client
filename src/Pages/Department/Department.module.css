@@ -1,0 +1,38 @@
+.allstaff {
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+  }
+  
+  .allstaff h2 {
+    margin-top: 0.6rem;
+    font-weight: 600;
+  }
+
+  .allCategory{
+    display: flex;
+  }
+  .title{
+    display: flex;
+    margin-right: auto;
+  }
+    
+main .tikReqbtn {
+  display: flex;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  border-radius: 1rem;
+  font-family: inherit;
+  appearance: none;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-dark);
+ margin-bottom: 0.2rem;
+}
+
+main .btnName {
+  margin-top: 0.2rem;
+}

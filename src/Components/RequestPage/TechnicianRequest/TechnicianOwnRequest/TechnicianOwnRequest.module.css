@@ -49,12 +49,6 @@
 /* START REQUESTS Section */
 
 
-main .requests {
-  margin-top: 1rem;
-  overflow: auto;
-  max-height: 60vh;
-}
-
 main .requests h2 {
   margin-bottom: 0.8rem;
 }
@@ -112,13 +106,22 @@ main .tikInfo {
 }
 
 .tikId {
-  border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
   margin: 0px;
   font-size: 1rem;
-  color: var(--color-dark);
+  color: white;
+  background: #5A5A5A;
+}
+
+.tikStatus{
+  border-radius: var(--border-radius-2);
+  padding: 0 2%;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1rem;
+  color: white;
 }
 
 .tikPri {

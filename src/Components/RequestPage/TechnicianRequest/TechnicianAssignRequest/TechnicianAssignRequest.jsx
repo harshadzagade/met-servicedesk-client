@@ -194,10 +194,10 @@ const TechnicianAssignRequest = () => {
                 <p className={`${classes.tikId}`}>
                   #{request.id}
                 </p>
-                <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => 'red'], ['moderate', () => '#F78D1E'], ['low', () => 'green']) }}>
+                <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
                   {request.priority}
                 </p>
-                <p className={`${classes.tikId}`}>
+                <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'],['assigned', () => '#008080'], ['closed', () => '#ADE792'] ) }}>
                   #{request.status}
                 </p>
 

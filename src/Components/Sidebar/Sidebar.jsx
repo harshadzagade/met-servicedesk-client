@@ -15,6 +15,7 @@ const Sidebar = ({ children }) => {
   const [showTabs, setShowTabs] = useState(false);
   const [isHomeAvailable, setIsHomeAvailable] = useState(false);
   const [isHomeActive, setIsHomeActive] = useState(false);
+  const [isDepartmentActive, setIsDepartmentActive] = useState(false);
   const [isCreateActive, setIsCreateActive] = useState(false);
   const [isTrashActive, setIsTrashActive] = useState(false);
   const [isRequestActive, setIsRequestActive] = useState(false);
@@ -118,6 +119,18 @@ const Sidebar = ({ children }) => {
     switch (sessionStorage.getItem('tab')) {
       case 'home':
         setIsHomeActive(true);
+        setIsDepartmentActive(false);
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        setIsReportActive(false);
+        break;
+
+      case 'department':
+        setIsHomeActive(false);
+        setIsDepartmentActive(true);
         setIsCreateActive(false);
         setIsTrashActive(false);
         setIsRequestActive(false);
@@ -128,6 +141,7 @@ const Sidebar = ({ children }) => {
 
       case 'create':
         setIsHomeActive(false);
+        setIsDepartmentActive(false);
         setIsCreateActive(true);
         setIsTrashActive(false);
         setIsRequestActive(false);
@@ -138,6 +152,7 @@ const Sidebar = ({ children }) => {
 
       case 'archive':
         setIsHomeActive(false);
+        setIsDepartmentActive(false);
         setIsCreateActive(false);
         setIsTrashActive(true);
         setIsRequestActive(false);
@@ -148,6 +163,7 @@ const Sidebar = ({ children }) => {
 
       case 'request':
         setIsHomeActive(false);
+        setIsDepartmentActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
         setIsRequestActive(true);
@@ -158,6 +174,7 @@ const Sidebar = ({ children }) => {
 
       case 'complaint':
         setIsHomeActive(false);
+        setIsDepartmentActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
         setIsRequestActive(false);
@@ -168,6 +185,7 @@ const Sidebar = ({ children }) => {
 
       case 'services':
         setIsHomeActive(false);
+        setIsDepartmentActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
         setIsRequestActive(false);
@@ -178,6 +196,7 @@ const Sidebar = ({ children }) => {
 
       case 'report':
         setIsHomeActive(false);
+        setIsDepartmentActive(false);
         setIsCreateActive(false);
         setIsTrashActive(false);
         setIsRequestActive(false);
@@ -194,6 +213,19 @@ const Sidebar = ({ children }) => {
   const handleHomeClick = () => {
     sessionStorage.setItem('tab', 'home');
     setIsHomeActive(true);
+    setIsDepartmentActive(false);
+    setIsCreateActive(false);
+    setIsTrashActive(false);
+    setIsRequestActive(false);
+    setIsComplaintActive(false);
+    setIsServicesActive(false);
+    setIsReportActive(false);
+  };
+
+  const handleDepartmentClick = () => {
+    sessionStorage.setItem('tab', 'department');
+    setIsHomeActive(false);
+    setIsDepartmentActive(true);
     setIsCreateActive(false);
     setIsTrashActive(false);
     setIsRequestActive(false);
@@ -205,6 +237,7 @@ const Sidebar = ({ children }) => {
   const handleCreateStaffClick = () => {
     sessionStorage.setItem('tab', 'create');
     setIsHomeActive(false);
+    setIsDepartmentActive(false);
     setIsCreateActive(true);
     setIsTrashActive(false);
     setIsRequestActive(false);
@@ -216,6 +249,7 @@ const Sidebar = ({ children }) => {
   const handleReportClick = () => {
     sessionStorage.setItem('tab', 'report');
     setIsHomeActive(false);
+    setIsDepartmentActive(false);
     setIsCreateActive(false);
     setIsTrashActive(false);
     setIsRequestActive(false);
@@ -227,6 +261,7 @@ const Sidebar = ({ children }) => {
   const handleArchiveClick = () => {
     sessionStorage.setItem('tab', 'archive');
     setIsHomeActive(false);
+    setIsDepartmentActive(false);
     setIsCreateActive(false);
     setIsTrashActive(true);
     setIsRequestActive(false);
@@ -238,6 +273,7 @@ const Sidebar = ({ children }) => {
   const handleRequestClick = () => {
     sessionStorage.setItem('tab', 'request');
     setIsHomeActive(false);
+    setIsDepartmentActive(false);
     setIsCreateActive(false);
     setIsTrashActive(false);
     setIsRequestActive(true);
@@ -249,6 +285,7 @@ const Sidebar = ({ children }) => {
   const handleComplaintClick = () => {
     sessionStorage.setItem('tab', 'complaint');
     setIsHomeActive(false);
+    setIsDepartmentActive(false);
     setIsCreateActive(false);
     setIsTrashActive(false);
     setIsRequestActive(false);
@@ -260,6 +297,7 @@ const Sidebar = ({ children }) => {
   const handleServicesClick = () => {
     sessionStorage.setItem('tab', 'services');
     setIsHomeActive(false);
+    setIsDepartmentActive(false);
     setIsCreateActive(false);
     setIsTrashActive(false);
     setIsRequestActive(false);
@@ -317,6 +355,13 @@ const Sidebar = ({ children }) => {
                   <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
                 </svg>
                 <h3>Home</h3>
+              </Link>}
+              {showTabs && <Link to='/department' onClick={handleDepartmentClick} className={`${isDepartmentActive && classes.active}`} >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
+                  <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
+                </svg>
+                <h3>Department</h3>
               </Link>}
               {showTabs && <Link to='/createstaff' onClick={handleCreateStaffClick} className={`${isCreateActive && classes.active}`} >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">

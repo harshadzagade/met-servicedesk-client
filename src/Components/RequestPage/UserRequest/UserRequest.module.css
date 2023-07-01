@@ -102,12 +102,6 @@ main .filterButtons {
   background: var(--color-background);
 }
 
- .requests {
-  margin-top: 1rem;
-  overflow: auto;
-  max-height: 60vh;
-}
-
  .requests h2 {
   margin-bottom: 0.8rem;
 }
@@ -158,16 +152,24 @@ main .filterButtons {
   align-items: flex-start;
 }
 
- .tikId {
-  border: 1px solid;
+.tikId {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
   margin: 0px;
   font-size: 1rem;
-  color: var(--color-dark);
+  color: white;
+  background: #5A5A5A;
 }
 
+.tikStatus{
+  border-radius: var(--border-radius-2);
+  padding: 0 2%;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1rem;
+  color: white;
+}
  .tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);

@@ -14,7 +14,7 @@
   --color-light: rgba(132, 139, 200, 0.18);
   --color-primary-variant: #111e88;
   --color-dark-variant: #677483;
-  --color-background: #f6f6f9;
+  --color-background: #eeebdd79;
 
   --card-border-radius: 1rem;
   --border-radius-1: 0.4rem;
@@ -29,6 +29,10 @@
   --border: 2px solid #ddd;
   --left-msg-bg: #ececec;
   --right-msg-bg: #7380ec;
+
+
+  --color-dept: ;
+  --sidebar-select-text: #252A34;
 }
 
 /* DARK THEME VARIABLES */

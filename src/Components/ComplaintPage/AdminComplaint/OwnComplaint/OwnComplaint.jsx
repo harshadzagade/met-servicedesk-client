@@ -46,7 +46,7 @@ const OwnComplaint = () => {
 
   const getCreatedComplaintDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {
@@ -132,7 +132,7 @@ const OwnComplaint = () => {
 
   return (
     <main>
-        <div className={classes.search}>
+      <div className={classes.search}>
         <div className={classes.searchfiltering}>
           {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
           {
@@ -199,11 +199,11 @@ const OwnComplaint = () => {
                 <p className={`${classes.tikId}`}>
                   #{complaint.id}
                 </p>
-                <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => 'red'], ['moderate', () => '#F78D1E'], ['low', () => 'green']) }}>
+                <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
                   {complaint.priority}
                 </p>
-                <p className={`${classes.tikId}`}>
-                  #{complaint.status}
+                <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
+                  {complaint.status}
                 </p>
               </div>
             </div>

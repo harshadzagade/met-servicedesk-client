@@ -42,7 +42,8 @@ const roles = ['technician', 'user'];
         setUpdateRole(e.target.value);
     }
     return (
-        <Modal> <div >
+        <Modal> 
+            <div >
             <h1 >Update Role</h1>
         </div>
             <div className={classes.detail}>

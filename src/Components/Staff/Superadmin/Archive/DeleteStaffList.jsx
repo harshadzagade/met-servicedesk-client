@@ -149,7 +149,7 @@ const DeleteStaffList = () => {
         data={allStaffList}
         pagination
         fixedHeader
-        fixedHeaderScrollHeight='380px'
+        fixedHeaderScrollHeight='auto'
         highlightOnHover
         subHeader
         onRowClicked={handleRowClick}

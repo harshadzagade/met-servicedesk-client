@@ -6,6 +6,7 @@ import TechnicianComplaintNavigation from './TechnicianComplaintNavigation/Techn
 import DepartmentComplaint from './DepartmentComplaint/DepartmentComplaint';
 import OwnTechComplaint from './OwnTechComplaint/OwnTechComplaint'
 import { Fragment } from 'react';
+import Rightside from '../../Righside/Rightside';
 
 const TechnicianComplaint = () => {
   const [openLayout, setOpenLayout] = useState('AllDepartmentComplaint');
@@ -17,14 +18,21 @@ const TechnicianComplaint = () => {
   const navigate = useNavigate();
   return (
     <Fragment>
-
+         <div className="container">
+        <div className="row">
+          <div className="col-8">
       <div className={`${classes.mainTitle}`}>
         <h2 >Complaint</h2>
       </div>
       <TechnicianComplaintNavigation viewLayout={checkLayout} />
       {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint  />}
       {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint  />}
-    
+      </div>
+          <div className='col-4'>
+            <Rightside />
+          </div>
+        </div>
+      </div>
     </Fragment>
   )
 }

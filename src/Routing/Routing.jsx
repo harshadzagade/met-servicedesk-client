@@ -25,6 +25,7 @@ import TechnicianRequestAttendingForm from '../Components/RequestPage/Technician
 import Report from '../Pages/Report/Report';
 import ReportDetails from '../Components/UI/Details/ReportDetails/ReportDetails';
 import ArchiveStaffDetails from '../Components/Staff/Superadmin/Archive/ArchiveStaffDetails/ArchiveStaffDetails';
+import Department from '../Pages/Department/Department';
 const Routing = () => {
 
   return (
@@ -34,6 +35,8 @@ const Routing = () => {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/forgotpassword' element={<ResetPassword />} />
           <Route exact path='/' element={<Home />} />
+          <Route exact path='/department' element={<Department />} />
+          <Route exact path='/createstaff' element={<CreateStaff />} />
           <Route exact path='/createstaff' element={<CreateStaff />} />
           <Route exact path='/complaint' element={<Complaint />} />
           <Route exact path='/report' element={<Report />} />

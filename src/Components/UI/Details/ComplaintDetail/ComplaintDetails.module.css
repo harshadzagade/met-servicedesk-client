@@ -9,9 +9,7 @@
     padding: 1rem;
     box-shadow: var(--box-shadow);
     transition: all 300ms ease;
-    overflow: auto;
-    height: 34rem;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
 .myform label {
@@ -37,7 +35,7 @@
 
 
 
-.name {
+.status {
     display: grid;
     grid-template-columns: 200px 400px;
 }
@@ -46,7 +44,7 @@
 
 .deptper {
     display: grid;
-    grid-template-columns: 400px 100px;
+    grid-template-columns: 50% 50%;
 }
 
 .department {
@@ -64,7 +62,7 @@
 /* request type and status */
 .reqsta {
     display: grid;
-    grid-template-columns: 400px 100px;
+    grid-template-columns: 50% 50%;
 
 }
 

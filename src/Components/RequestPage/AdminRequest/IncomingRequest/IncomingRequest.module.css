@@ -252,14 +252,23 @@ main .tikOther {
   margin-top: 1.2rem;
 }
 
-main .tikId {
-  border: 1px solid;
+.tikId {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
   margin: 0px;
   font-size: 1rem;
-  color: var(--color-dark);
+  color: white;
+  background: #5A5A5A;
+}
+
+.tikStatus{
+  border-radius: var(--border-radius-2);
+  padding: 0 2%;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1rem;
+  color: white;
 }
 
 main .tikPri {

@@ -5,10 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import UpdateStaffDetails from '../UpdateStaff/UpdateStaffDetails';
 
-
-
 const SingleStaff = () => {
-
   const navigate = useNavigate();
   const id = useParams();
   const [name, setName] = useState('');
@@ -20,6 +17,7 @@ const SingleStaff = () => {
   const [department, setDepartment] = useState('');
   const [openUpdate, setOpenUpdate] = useState(false);
   const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     const getStaff = async () => {
       const staff = await axios.get(`/api/staff/superadmin/staffdetails/${id.staffId}`);
@@ -30,7 +28,6 @@ const SingleStaff = () => {
       setPhoneNo(staff.data.staff.phoneNumber);
       setExtension(staff.data.staff.contactExtension);
       setDepartment(staff.data.staff.department);
-      
     };
     getStaff();
     setRefresh(false);
@@ -69,6 +66,7 @@ const SingleStaff = () => {
     setRefresh(true);
     setOpenUpdate(false);
   };
+
   return (
     <main>
       <div className={classes.staffdetails}>

@@ -137,13 +137,6 @@ main{
   background: var(--color-background);
 }
 
-
-
-.complaint {
-  overflow: auto;
-  max-height: 23rem;
-}
-
 .requests h2 {
   margin-bottom: 0.8rem;
 }
@@ -157,12 +150,9 @@ main{
   transition: all 300ms ease;
   margin-bottom: 1rem;
   align-items: center;
+   cursor: pointer;
 }
 
-.tikInfo:hover {
-  cursor: pointer;
-  box-shadow: none;
-}
 
 .tikHead {
   display: flex;
@@ -195,15 +185,23 @@ main{
 }
 
 .tikId {
-  border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
   margin: 0px;
   font-size: 1rem;
-  color: var(--color-dark);
+  color: white;
+  background: #5A5A5A;
 }
 
+.tikStatus{
+  border-radius: var(--border-radius-2);
+  padding: 0 2%;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1rem;
+  color: white;
+}
 .tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);
