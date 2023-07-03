@@ -10,8 +10,8 @@ const DataPerPage = (props) => {
             </div>
             <input type="checkbox" className={`${classes.ddInput}`} id="test" />
             <ul className={`${classes.ddMenu}`}>
-                <li onClick={() => props.setNumberOfPages(1)}>1</li>
-                <li onClick={() => props.setNumberOfPages(5)}>5</li>
+                <li onClick={() => props.setNumberOfPages(10)}>10</li>
+                <li onClick={() => props.setNumberOfPages(20)}>20</li>
                 <li onClick={() => props.setNumberOfPages(30)}>30</li>
             </ul>
         </label>

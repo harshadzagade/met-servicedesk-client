@@ -141,7 +141,7 @@ const DeleteStaffList = () => {
 
     <div>
       <div className={classes.allStaff}>
-        <h2>Delete Staff</h2>
+        <h2>Delete Employees List</h2>
         <input type="text" className={`${classes.searchInput}`} placeholder={`Please search E-mail`} onChange={(e) => setSearchText(e.target.value)} />
       </div>
       <DataTable

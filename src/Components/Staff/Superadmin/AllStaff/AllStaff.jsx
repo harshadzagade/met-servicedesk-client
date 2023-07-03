@@ -194,7 +194,7 @@ const AllStaff = () => {
     return (
         <div >
             <div className={classes.allstaff}>
-                <h2>Staff List</h2>
+                <h2>Employees List</h2>
                 {openNormalList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                 {
                     openDepartmentList &&
