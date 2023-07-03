@@ -89,7 +89,7 @@ const AdminReport = () => {
     }, [adminCtx.department]);
 
     useEffect(() => {
-        const getRequestByCategory = async () => {
+        const getReportByCategory = async () => {
             try {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(reportList);
@@ -106,7 +106,7 @@ const AdminReport = () => {
             }
         };
         if (openCategoryList) {
-            getRequestByCategory();
+            getReportByCategory();
         }
     }, [category, openCategoryList, reportList]);
 

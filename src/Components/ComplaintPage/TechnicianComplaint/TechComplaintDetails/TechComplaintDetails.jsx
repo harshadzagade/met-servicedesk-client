@@ -7,13 +7,13 @@ import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDe
 
 
 const TechComplaintDetails = () => {
+    const navigate = useNavigate();
     const [complaintData, setComplaintData] = useState({});
     const paramsId = useParams();
     const id = paramsId.complaintId;
     const ownId = localStorage.getItem('id');
     const ticketCtx = useContext(TicketDetailsContext);
     ticketCtx.onClickHandler('complaint', complaintData.staffId, complaintData.id);
- 
 
     useEffect(() => {
         const getComplaintDetails = async () => {
@@ -35,26 +35,23 @@ const TechComplaintDetails = () => {
         }
     };
 
-    const navigate = useNavigate();
     return (
         <Fragment>
             <main>
                 <div className={classes.techcomdetails}>
-                    <h2>complaint details</h2>
+                    <h2>Concern details</h2>
                     <div className={`${classes.detail}`}>
                         <div >
                             <form className={classes.myform}>
                                 <div className={classes.idDetails}>
-                                    <label>staffid:</label>
+                                    <label>Staff ID:</label>
                                     <p className={classes.complaintDetailsp}>{complaintData.staffId}</p>
                                 </div>
-                               
                                 <hr />
                                 <div className={classes.subjectDetails}>
                                     <label>Subject:</label>
                                     <p className={classes.complaintDetailsp}>{complaintData.subject}</p>
                                 </div>
-
                                 <div className={classes.description}>
                                     <label>Description:</label>
                                     <div dangerouslySetInnerHTML={{ __html: complaintData.description }}></div>
@@ -65,42 +62,35 @@ const TechComplaintDetails = () => {
                                         <label>Department:</label>
                                         <p className={classes.complaintDetailsp}>{complaintData.department}</p>
                                     </div>
-
                                     <div className={classes.priorityDetails}>
                                         <label>Priority:</label>
                                         <p className={classes.complaintDetailsp}> {complaintData.priority}</p>
                                     </div>
                                 </div>
-
                                 <div className={classes.statech}>
                                     <div className={classes.name}>
                                         <label>Status:</label>
                                         <p className={classes.complaintDetailsp}>{complaintData.status} </p>
                                     </div>
-
                                     <div className={classes.techName}>
                                         <label>Technician Name:</label>
                                         <p className={classes.complaintDetailsp}>{complaintData.assignedName}</p>
                                     </div>
                                 </div>
                                 <hr />
-                               
-
                                 <div className={classes.date}>
                                     <label>Date:</label>
                                     <p className={classes.complaintDetailsp}>{complaintData.createdAt}</p>
-
                                 </div>
                                 <div className={classes.status}>
-                                    <button className={classes.complaintAssingBtn} onClick={() => navigate(`/TechcomplaintAttending/${complaintData.id}`)}>Change Status </button>
-                                    {complaintData.assign !== null ?
-                                        <div className={`${classes.alreadyAssignedText}`}>Request assigned to {complaintData.assignedName}</div>
-                                        :
-                                        <button className={classes.complaintAssingBtn} onClick={handleSelfAssign}>Self Assign</button>
-
+                                    <button className={classes.complaintAssingBtn} onClick={() => navigate(`/TechcomplaintAttending/${complaintData.id}`)}>Change Status</button>
+                                    {
+                                        complaintData.assign !== null ?
+                                            <div className={`${classes.alreadyAssignedText}`}>Concern assigned to {complaintData.assignedName}</div>
+                                            :
+                                            <button className={classes.complaintAssingBtn} onClick={handleSelfAssign}>Self Assign</button>
                                     }
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -112,4 +102,4 @@ const TechComplaintDetails = () => {
 };
 
 
-export default TechComplaintDetails
+export default TechComplaintDetails;

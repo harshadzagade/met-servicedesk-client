@@ -249,7 +249,7 @@ const SuperAdminComplaint = () => {
                 <div className={`${classes.superadmincomplaint} row`}>
                     <div className='col-8'>
                         <div className={`${classes.mainTitle}`}>
-                            <h2 >Complaint</h2>
+                            <h2 >Concern</h2>
                         </div>
                         <div className={classes.search}>
                             <div className={classes.searchfiltering}>
@@ -367,11 +367,10 @@ const SuperAdminComplaint = () => {
                 </div>
             </div>
         </main>
-    )
+    );
+};
 
-}
-
-export default SuperAdminComplaint
+export default SuperAdminComplaint;
 
 
 

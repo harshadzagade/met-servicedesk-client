@@ -50,10 +50,7 @@ const ComplaintDetails = () => {
             link.remove();
         } catch (error) {
             console.log(error.response.data.message);
-
         }
-
-
     };
 
     return (
@@ -62,23 +59,19 @@ const ComplaintDetails = () => {
                 <div className='container '>
                     <div className={`${classes.complaintdetils} row`}>
                         <div className="col-8">
-                            <h2>complaint details</h2>
+                            <h2>Concern details</h2>
                             <div className={`${classes.detail}`}>
                                 <div >
                                     <form className={classes.myform}>
-
                                         <div className={classes.idDetails}>
                                             <label>Complaint Id:</label>
                                             <p className={classes.complaintDetailsp}>#{complaintData.id}</p>
                                         </div>
-
                                         <hr />
-
                                         <div className={classes.subjectDetails}>
                                             <label>Subject:</label>
                                             <p className={classes.complaintDetailsp}>{complaintData.subject}</p>
                                         </div>
-
                                         <div className={classes.description}>
                                             <label>Description:</label>
                                             <div dangerouslySetInnerHTML={{ __html: complaintData.description }}></div>
@@ -94,7 +87,6 @@ const ComplaintDetails = () => {
                                                 <p className={classes.complaintDetailsp}> {complaintData.priority}</p>
                                             </div>
                                         </div>
-
                                         <div className={classes.reqsta}>
                                             <div className={classes.ComplaintType}>
                                                 <label>Request Type:</label>
@@ -105,7 +97,6 @@ const ComplaintDetails = () => {
                                                 <p className={classes.complaintDetailsp}>{complaintData.status} </p>
                                             </div>
                                         </div>
-
                                         {
                                             (complaintData.assign || complaintData.forwardComment || (complaintData.status === 'forwarded' || complaintData.status === 'closed')) &&
                                             <hr />
@@ -117,7 +108,6 @@ const ComplaintDetails = () => {
                                                 <p className={classes.complaintDetailsp}>{complaintData.assignedName}</p>
                                             </div>
                                         }
-
                                         {
                                             complaintData.status === 'forwarded' &&
                                             <div className={classes.techName}>
@@ -125,7 +115,6 @@ const ComplaintDetails = () => {
                                                 <p className={classes.complaintDetailsp}>{complaintData.forwardComment}</p>
                                             </div>
                                         }
-
                                         {
                                             (complaintData.status === 'forwarded' || complaintData.status === 'closed') &&
                                             <div className={classes.techName}>
@@ -133,7 +122,6 @@ const ComplaintDetails = () => {
                                                 <p className={classes.complaintDetailsp}>{complaintData.problemDescription}</p>
                                             </div>
                                         }
-
                                         {
                                             (complaintData.status === 'forwarded' || complaintData.status === 'closed') &&
                                             <div className={classes.techName}>
@@ -155,13 +143,11 @@ const ComplaintDetails = () => {
                                         <div className={classes.date}>
                                             <label>Date:</label>
                                             <p className={classes.complaintDetailsp}>{getCreatedComplaintDate(complaintData.createdAt)}</p>
-
                                         </div>
                                         {/* <div>
                                     <button className={classes.complaintAssingBtn}>Self Assign </button>
                                     <button className={classes.complaintAssingBtn}>Forward </button>
                                 </div> */}
-
                                     </form>
                                 </div>
                             </div>
@@ -172,9 +158,7 @@ const ComplaintDetails = () => {
                     </div>
                 </div>
             </main>
-
         </Fragment>
-
     );
 };
 

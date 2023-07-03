@@ -7,7 +7,7 @@ const TechnicianReport = () => {
     const [reportData, setReportData] = useState({});
     const id = localStorage.getItem('id');
     const [errorMessage, setErrorMessage] = useState('');
-    
+
     useEffect(() => {
         const getReportDetails = async () => {
             try {
@@ -27,7 +27,7 @@ const TechnicianReport = () => {
 
     const getCreatedReportDate = (createdAt) => {
         const date = new Date(createdAt);
-        return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+        return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
 
     const formatAMPM = (date) => {
@@ -69,35 +69,29 @@ const TechnicianReport = () => {
                                             <p className={classes.complaintDetailsp}>#{reportData.requestComplaintId}</p>
                                         </div>
                                         <hr />
-
                                         <div className={classes.subjectDetails}>
                                             <label>Subject:</label>
                                             <p className={classes.complaintDetailsp}>{reportData.subject}</p>
                                         </div>
-
                                         <div className={classes.description}>
                                             <label>Description:</label>
                                             <div dangerouslySetInnerHTML={{ __html: reportData.description }}></div>
                                         </div>
-
                                         <div className={classes.subjectDetails}>
                                             <label>Ticket raised by:</label>
                                             <p className={classes.complaintDetailsp}>{reportData.staffName}</p>
                                         </div>
                                         <hr />
-
                                         <div className={classes.deptper}>
                                             <div className={classes.department}>
                                                 <label>Department:</label>
                                                 <p className={classes.complaintDetailsp}>{reportData.department}</p>
                                             </div>
-
                                             <div className={classes.priorityDetails}>
                                                 <label>Priority:</label>
                                                 <p className={classes.complaintDetailsp}> {reportData.priority}  </p>
                                             </div>
                                         </div>
-
                                         <div className={classes.reqsta}>
                                             <div className={classes.ComplaintType}>
                                                 <label>Request Type:</label>
@@ -109,13 +103,11 @@ const TechnicianReport = () => {
                                             </div>
                                         </div>
                                         <hr />
-
                                         <div className={classes.approval1}>
                                             <div className={classes.approval}>
                                                 <label>HOD Approval:</label>
                                                 <p className={classes.complaintDetailsp}>{(reportData.approval1 === 1 && 'approved') || (reportData.approval1 === 2 && 'Disapproved') || (reportData.approval1 === null && 'Not updated')}</p>
                                             </div>
-
                                             {
                                                 reportData.approval1 &&
                                                 <div className={classes.approval}>
@@ -127,7 +119,6 @@ const TechnicianReport = () => {
                                                 <label>Admin Approval:</label>
                                                 <p className={classes.complaintDetailsp}>{(reportData.approval2 === 1 && 'Approved') || (reportData.approval2 === 2 && 'Disapproved') || (reportData.approval2 === null && 'Not updated')}</p>
                                             </div>
-
                                             {
                                                 reportData.approval2 &&
                                                 <div className={classes.approval}>
@@ -147,7 +138,6 @@ const TechnicianReport = () => {
                                                 <p >{reportData.assignedName}</p>
                                             </div>
                                         }
-
                                         {
                                             reportData.status === 'forwarded' &&
                                             <div className={classes.techName}>
@@ -155,7 +145,6 @@ const TechnicianReport = () => {
                                                 <p >{reportData.forwardComment}</p>
                                             </div>
                                         }
-
                                         {
                                             (reportData.status === 'forwarded' || reportData.status === 'closed') &&
                                             <div className={classes.techName}>
@@ -163,7 +152,6 @@ const TechnicianReport = () => {
                                                 <p >{reportData.problemDescription}</p>
                                             </div>
                                         }
-
                                         {
                                             (reportData.status === 'forwarded' || reportData.status === 'closed') &&
                                             <div className={classes.techName}>
@@ -171,19 +159,16 @@ const TechnicianReport = () => {
                                                 <p >{reportData.actionTaken}</p>
                                             </div>
                                         }
-
                                         <hr />
                                         <div className={classes.description}>
                                             <label>Attachment:</label>
                                             <p className={classes.complaintDetailsp}>None</p>
                                         </div>
                                         <hr />
-
                                         <div className={classes.date}>
                                             <label>Logged Time:</label>
                                             <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.loggedTime)}</p>
                                         </div>
-
                                         <div className={classes.date}>
                                             <label>Assigned Time:</label>
                                             <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.assignedTime)}</p>
@@ -194,25 +179,20 @@ const TechnicianReport = () => {
                                                 <p className={classes.complaintDetailsp}>{getReportDuration(reportData.assignDuration)}</p>
                                             </div>
                                         }
-
-
                                         <div className={classes.date}>
                                             <label>Attended Time:</label>
                                             <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.attendedTime)}</p>
                                         </div>
-
                                         {(reportData.assignedTime && reportData.attendedTime) &&
                                             <div className={classes.date}>
                                                 <label>Attend Duration:</label>
                                                 <p className={classes.complaintDetailsp}>{getReportDuration(reportData.attendDuration)}</p>
                                             </div>
                                         }
-
                                         <div className={classes.date}>
                                             <label>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Time:</label>
                                             <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.lastUpdatedTime)}</p>
                                         </div>
-
                                         {
                                             reportData.lastUpdatedTime &&
                                             <div className={classes.date}>
@@ -229,7 +209,7 @@ const TechnicianReport = () => {
                 }
             </main>
         </Fragment>
-    )
-}
+    );
+};
 
 export default TechnicianReport;

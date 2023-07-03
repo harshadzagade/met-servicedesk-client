@@ -6,7 +6,6 @@ const ComplaintNavigation = (props) => {
   const [activeTab, setActiveTab] = useState('AllStaffIncomingComplaint');
   const navigate = useNavigate();
 
-
   const handleIncoming = () => {
     setActiveTab('AllStaffIncomingComplaint');
     props.viewLayout('AllStaffIncomingComplaint')
@@ -31,11 +30,11 @@ const ComplaintNavigation = (props) => {
         <span className="material-icons-sharp btn-icon">
           add
         </span>
-        <span className={`${classes.btnName}`}> New Ticket</span>
+        <span className={`${classes.btnName}`}>New Ticket</span>
       </button>
     </div>
 
-  )
-}
+  );
+};
 
-export default ComplaintNavigation
+export default ComplaintNavigation;

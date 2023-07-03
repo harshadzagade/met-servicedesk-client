@@ -5,7 +5,6 @@ import TicketDetailsContext from '../../Context/TicketDetailsContext/TicketDetai
 
 
 const ComplaintedDetails = () => {
-
   const ticketCtx = useContext(TicketDetailsContext);
   const [complaimntDetails, setComplaintDetails] = useState({});
 
@@ -24,7 +23,7 @@ const ComplaintedDetails = () => {
   }, [ticketCtx.staffId]);
   return (
     <div className={classes.compdetails}>
-      <h2>Complaint Details</h2>
+      <h2>Concern Details</h2>
       <div className={classes.details}>
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
           <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -36,11 +35,9 @@ const ComplaintedDetails = () => {
           <p>Email: {complaimntDetails.email}</p>
           <p>Extension: {complaimntDetails.contactExtension}</p>
         </div>
-
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default ComplaintedDetails
+export default ComplaintedDetails;

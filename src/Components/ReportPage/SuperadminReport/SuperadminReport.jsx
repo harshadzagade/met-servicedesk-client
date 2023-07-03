@@ -100,7 +100,7 @@ const SuperadminReport = () => {
     }, [selectedDepartment, staffDepartments]);
 
     useEffect(() => {
-        const getRequestByCategory = async () => {
+        const getReportByCategory = async () => {
             try {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(reportList);
@@ -117,7 +117,7 @@ const SuperadminReport = () => {
             }
         };
         if (openCategoryList) {
-            getRequestByCategory();
+            getReportByCategory();
         }
     }, [category, openCategoryList, reportList]);
 

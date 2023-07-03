@@ -59,7 +59,7 @@ const OwnComplaint = () => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime;
-  }
+  };
 
   useEffect(() => {
     let arr = [];
@@ -217,7 +217,7 @@ const OwnComplaint = () => {
         />
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default OwnComplaint;

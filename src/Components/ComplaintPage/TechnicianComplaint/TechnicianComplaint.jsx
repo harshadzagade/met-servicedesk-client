@@ -22,7 +22,7 @@ const TechnicianComplaint = () => {
         <div className="row">
           <div className="col-8">
       <div className={`${classes.mainTitle}`}>
-        <h2 >Complaint</h2>
+        <h2>Concern</h2>
       </div>
       <TechnicianComplaintNavigation viewLayout={checkLayout} />
       {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint  />}
@@ -34,7 +34,7 @@ const TechnicianComplaint = () => {
         </div>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export default TechnicianComplaint;

@@ -55,7 +55,7 @@ const DepartmentComplaint = () => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime;
-  }
+  };
 
   useEffect(() => {
     let arr = [];
@@ -209,7 +209,7 @@ const DepartmentComplaint = () => {
         />
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default DepartmentComplaint;

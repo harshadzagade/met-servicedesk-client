@@ -60,7 +60,7 @@ const OutgoingComplaint = () => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime;
-  }
+  };
 
   useEffect(() => {
     let arr = [];
@@ -219,7 +219,7 @@ const OutgoingComplaint = () => {
         />
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default OutgoingComplaint;

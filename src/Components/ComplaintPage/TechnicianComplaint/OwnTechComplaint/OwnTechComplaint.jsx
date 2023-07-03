@@ -214,7 +214,7 @@ const OwnTechComplaint = () => {
         />
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default OwnTechComplaint
+export default OwnTechComplaint;

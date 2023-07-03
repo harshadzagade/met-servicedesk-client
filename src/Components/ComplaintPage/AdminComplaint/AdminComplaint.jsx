@@ -8,13 +8,10 @@ import Rightside from '../../Righside/Rightside';
 
 
 const AdminComplaint = () => {
-
-
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingComplaint');
   const checkLayout = (value) => {
     setOpenLayout(value);
   };
-
 
   return (
     <Fragment>
@@ -22,7 +19,7 @@ const AdminComplaint = () => {
         <div className="row">
           <div className="col-8">
             <div className={`${classes.mainTitle}`}>
-              <h2 className="tik-type-title">Complaint</h2>
+              <h2 className="tik-type-title">Concern</h2>
             </div>
             <ComplaintNavigation viewLayout={checkLayout} />
             {openLayout === 'AllStaffIncomingComplaint' && <IncomingComplaint />}

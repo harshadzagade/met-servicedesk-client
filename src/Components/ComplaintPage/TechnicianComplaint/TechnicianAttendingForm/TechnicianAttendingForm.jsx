@@ -153,7 +153,7 @@ const TechnicianAttendingForm = (props) => {
                 </div >
             </div>
         </Fragment>
-    )
-}
+    );
+};
 
-export default TechnicianAttendingForm
+export default TechnicianAttendingForm;

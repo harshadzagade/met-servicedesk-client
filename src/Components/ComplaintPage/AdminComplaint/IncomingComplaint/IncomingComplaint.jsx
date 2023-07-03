@@ -57,7 +57,7 @@ const IncomingComplaint = () => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime;
-  }
+  };
 
   useEffect(() => {
     let arr = [];
@@ -125,7 +125,6 @@ const IncomingComplaint = () => {
       setAllComplaintList(complaintList)
     }
   }, [searchText, complaintList, searchType, priority, status]);
-
 
   return (
     <main>
@@ -213,7 +212,7 @@ const IncomingComplaint = () => {
         />
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default IncomingComplaint
+export default IncomingComplaint;

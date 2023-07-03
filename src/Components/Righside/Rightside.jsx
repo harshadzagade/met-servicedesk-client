@@ -5,6 +5,7 @@ import RequestedDetails from '../UI/RequestedDetails/RequestedDetails';
 import ComplaintedDetails from '../UI/ComplaintedDetails/ComplaintedDetails';
 import TicketDetailsContext from '../Context/TicketDetailsContext/TicketDetailsContext';
 import { Fragment } from 'react';
+import RightCard from '../UI/RightCard/RightCard';
 
 const Rightside = () => {
   const ticketCtx = useContext(TicketDetailsContext);
@@ -27,7 +28,8 @@ const Rightside = () => {
   return (
 
     <Fragment>
- <h1>hello</h1>
+      <h1>hello</h1>
+      <RightCard />
 
       <div className={classes.right} hidden={window.location.pathname === '/login' || window.location.pathname === '/forgotpassword' || window.location.pathname === '/passwordreset' ? true : false}>
         {ticketCtx.ticketType === 'complaint' && <ComplaintedDetails />}
