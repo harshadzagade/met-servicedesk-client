@@ -69,7 +69,7 @@ const UserRequest = () => {
         setOpenStatusList(false);
         setIsNormalSearch(true);
         requestList
-          .filter((a) => a.subject.startsWith(searchText))
+          .filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase()))
           .map((data) => {
             return arr.push(data);
           });
@@ -80,7 +80,7 @@ const UserRequest = () => {
         setOpenStatusList(false);
         setIsNormalSearch(true);
         requestList
-          .filter((a) => a.name.startsWith(searchText))
+          .filter((a) => a.name.toLowerCase().startsWith(searchText.toLowerCase()))
           .map((data) => {
             return arr.push(data);
           });
@@ -136,14 +136,9 @@ const UserRequest = () => {
       <div className="container">
         <div className={`${classes.userreq} row`}>
           <div className="col-8">
-            <div className={`${classes.mainTitle}`}>
-              <h2 className="tik-type-title">Request</h2>
-            </div>
             <div className={classes.buttonsSection}>
               <div className={`${classes.filterButtons}`}>
-                <button className={`${classes.button}`} data-filter="all">
-                  Own Request
-                </button>
+              <h2 className="tik-type-title">Request</h2>
               </div>
               <button
                 className={`${classes.tikReqBtn}`}
@@ -269,7 +264,7 @@ const UserRequest = () => {
                     </p>
                   </div>
                   <div className={`${classes.tikOther}`}>
-                    <p className={`${classes.tikId}`}>#{request.id}</p>
+                    <p className={`${classes.tikId}`}>{request.ticketId}</p>
                     <p
                       className={`${classes.tikPri} `}
                       style={{

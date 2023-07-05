@@ -24,6 +24,34 @@ const SuperadminReport = () => {
     const [openCategoryList, setOpenCategoryList] = useState(false);
     const [priority, setPriority] = useState('');
     const [openPriorityList, setOpenPriorityList] = useState(false);
+    const [fromDate, setFromDate] = useState(null);
+    const [toDate, setToDate] = useState(null);
+    
+    const convertDate = (stringDate) => {
+        const validDateStr = new Date(stringDate).toDateString();
+        const date = new Date(validDateStr);
+        const timestamp = date.toISOString();
+        return timestamp;
+    };
+
+    useEffect(() => {
+        const getEntriesAsPerDate = async () => {
+            const filteredData = reportList.filter(report => {
+                const date = new Date(report.createdAt);
+                return date >= new Date(convertDate(fromDate)) && date <= new Date(convertDate(toDate));
+            });
+            setAllReportList(filteredData);
+        };
+        getEntriesAsPerDate();
+    }, [fromDate, toDate, reportList]);
+
+    const handleFromDateChange = (e) => {
+        setFromDate(e.target.value);
+    };
+
+    const handleToDateChange = (e) => {
+        setToDate(e.target.value);
+    };
 
     useEffect(() => {
         const getDepartments = async () => {
@@ -158,7 +186,7 @@ const SuperadminReport = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
                 setIsNormalSearch(true);
-                reportList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
+                reportList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -227,11 +255,10 @@ const SuperadminReport = () => {
             }
         ]
 
-
-
     const handleRowClick = row => {
         navigate(`/reportdetails/${row.id}`);
     }
+
     return (
         <div>
             <div className={`${classes.basicSelection}`}>
@@ -266,49 +293,59 @@ const SuperadminReport = () => {
                 selectedStaff &&
                 <Fragment>
                     <div className={classes.searching}>
-                    {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-                    {
-                        openTicketTypeList &&
-                        <select value={ticketType} className={`${classes.searchInput}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
-                            <option value='' hidden>Select Your Ticket Type</option>
-                            <option value='allTicketTypes'>All Ticket Types</option>
-                            <option value='requests'>Requests</option>
-                            <option value='complaints'>Complaints</option>
-                        </select>
-                    }
-                    {
-                        openCategoryList &&
-                        <select value={category} className={`${classes.searchInput}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
-                            <option value='' hidden>Select Your Category</option>
-                            <option value={'allCategories'}>All Categories</option>
-                            {
-                                categories.map((category, key) => (
-                                    <option key={key} value={category}>{category}</option>
-                                ))
-                            }
-                        </select>
-                    }
-                    {
-                        openPriorityList &&
-                        <select value={priority} className={`${classes.searchInput}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
-                            <option value='' hidden>Select Your Priority</option>
-                            <option value='allPriorities'>All Priorities</option>
-                            <option value='high'>High</option>
-                            <option value='moderate'>Moderate</option>
-                            <option value='low'>Low</option>
-                        </select>
-                    }
-                    <div className="btn-group mb-1">
-                        <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {searchType}
-                        </button>
-                        <div className="dropdown-menu">
-                            <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
-                            <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                        <div className={classes.dateNsearch}>
+                            <div style={{ zIndex: 2 }}>
+                                From:
+                                <input type="date" className={classes.dateStyle} onChange={handleFromDateChange} />
+                            </div>
+                            <div style={{ zIndex: 2 }}>
+                                To:
+                                <input type="date" className={classes.dateStyle} onChange={handleToDateChange} />
+                            </div>
                         </div>
-                    </div>
+                        {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                        {
+                            openTicketTypeList &&
+                            <select value={ticketType} className={`${classes.searchInput}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
+                                <option value='' hidden>Select Your Ticket Type</option>
+                                <option value='allTicketTypes'>All Ticket Types</option>
+                                <option value='requests'>Requests</option>
+                                <option value='complaints'>Complaints</option>
+                            </select>
+                        }
+                        {
+                            openCategoryList &&
+                            <select value={category} className={`${classes.searchInput}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                                <option value='' hidden>Select Your Category</option>
+                                <option value={'allCategories'}>All Categories</option>
+                                {
+                                    categories.map((category, key) => (
+                                        <option key={key} value={category}>{category}</option>
+                                    ))
+                                }
+                            </select>
+                        }
+                        {
+                            openPriorityList &&
+                            <select value={priority} className={`${classes.searchInput}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                                <option value='' hidden>Select Your Priority</option>
+                                <option value='allPriorities'>All Priorities</option>
+                                <option value='high'>High</option>
+                                <option value='moderate'>Moderate</option>
+                                <option value='low'>Low</option>
+                            </select>
+                        }
+                        <div className="btn-group mb-1">
+                            <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {searchType}
+                            </button>
+                            <div className="dropdown-menu">
+                                <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
+                                <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
+                                <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
+                                <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
+                            </div>
+                        </div>
                     </div>
                 </Fragment>
             }

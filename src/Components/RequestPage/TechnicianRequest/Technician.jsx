@@ -6,24 +6,30 @@ import { Fragment } from 'react';
 import RequestNavigation from './RequestNavigation/RequestNavigation';
 import TechnicianAssignRequest from '../TechnicianRequest/TechnicianAssignRequest/TechnicianAssignRequest';
 import TechnicianOwnRequest from '../TechnicianRequest/TechnicianOwnRequest/TechnicianOwnRequest';
+import Rightside from '../../Righside/Rightside';
 
 const Technician = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffAssignRequest');
-  const checkLayout = (value, ) => {
+  const checkLayout = (value,) => {
     setOpenLayout(value);
   }
-
-  const navigate = useNavigate();
   return (
     <Fragment>
-      
-       <div className={`${classes.mainTitle}`}>
-       <h2 className="tik-type-title">Request</h2>
+      <div className="container">
+        <div className="row">
+          <div className="col-8">
+            <div className={`${classes.mainTitle}`}>
+              <h2 className="tik-type-title">Request</h2>
+            </div>
+            <RequestNavigation viewLayout={checkLayout} />
+            {openLayout === 'AllStaffAssignRequest' && <TechnicianAssignRequest />}
+            {openLayout === 'AllStaffOwnRequest' && <TechnicianOwnRequest />}
+          </div>
+          <div className='col-4'>
+            <Rightside />
+          </div>
         </div>
-        <RequestNavigation viewLayout={checkLayout} />
-        {openLayout === 'AllStaffAssignRequest' && <TechnicianAssignRequest  />}
-        {openLayout === 'AllStaffOwnRequest' && <TechnicianOwnRequest  />}
-      
+      </div>
     </Fragment>
 
   )

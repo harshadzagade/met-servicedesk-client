@@ -21,14 +21,13 @@ const Home = () => {
     
     const navigate = useNavigate();
     const location = useLocation() || null;
+    const id = localStorage.getItem('id');
 
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isTechnician, setIsTechnician] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const [refresh, setRefresh] = useState(false);
-
-    const id = localStorage.getItem('id');
 
     useEffect(() => {
         setRefresh(false);
@@ -94,13 +93,14 @@ const Home = () => {
         }
         checkAuth();
     }, [id, navigate, refresh]);
+
     return (
         <Fragment>
             {isSuperAdmin && <SuperAdmin />}
             {isAdmin && <Admin />}
             {(isTechnician || isUser) && <Complaint />}
         </Fragment>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

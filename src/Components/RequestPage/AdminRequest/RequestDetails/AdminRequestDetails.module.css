@@ -1,8 +1,12 @@
 .reqdetails{
   margin-top: 2.4rem;
 }
-.reqdetails h2{
-  font-weight: 600;
+.header {
+  display: flex;
+  gap: 1rem;
+}
+.header svg{
+  margin-top: 0.2rem;
 }
 .detail{
   background: var(--color-white);
@@ -133,16 +137,6 @@
   color: white;
 }
 
-.complaintDetailsp{
-background: white;
-padding: 10px;
-border: none;
-font-size: 1em;
-align-items: center;
-
-
-}
-
 .tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);
@@ -153,26 +147,22 @@ align-items: center;
   font-size: 1rem;
 }
 
-
-
-.complaintAssingBtn{
-  flex: 1;
-  gap: 2rem;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 1em;
-  background-color: var(--color-primary);
-  color: white;
-}
-
 .complaintDetailsp{
 background: white;
 padding: 10px;
 border: none;
 font-size: 1em;
 margin-right: 2rem;
-
-
+}
+.buttonForm {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  width: 10rem;
 }
 
 

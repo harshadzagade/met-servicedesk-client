@@ -147,7 +147,7 @@ const AdminReport = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
                 setIsNormalSearch(true);
-                reportList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
+                reportList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );

@@ -8,6 +8,7 @@ import axios from 'axios';
 const ReportDetails = () => {
     const [reportData, setReportData] = useState({});
     const id = useParams().reportId;
+    console.log(reportData);
 
     useEffect(() => {
         const getReportDetails = async () => {
@@ -190,7 +191,7 @@ const ReportDetails = () => {
 
                                 <div className={classes.date}>
                                     <label>Attended Time:</label>
-                                    <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.attendedTime)}</p>
+                                    <p className={classes.complaintDetailsp}>{reportData.attendedTime ?getCreatedReportDate(reportData.attendedTime) : 'Not updated yet'}</p>
                                 </div>
 
                                 {(reportData.assignedTime && reportData.attendedTime) &&
@@ -202,7 +203,7 @@ const ReportDetails = () => {
 
                                 <div className={classes.date}>
                                     <label>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Time:</label>
-                                    <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.lastUpdatedTime)}</p>
+                                    <p className={classes.complaintDetailsp}>{reportData.lastUpdatedTime ?getCreatedReportDate(reportData.lastUpdatedTime) : 'Not updated yet'}</p>
                                 </div>
 
                                 {reportData.lastUpdatedTime &&

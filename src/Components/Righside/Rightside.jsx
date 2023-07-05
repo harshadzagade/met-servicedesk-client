@@ -28,8 +28,7 @@ const Rightside = () => {
   return (
 
     <Fragment>
-      {/* <h1>hello</h1>
-      <RightCard /> */}
+      <RightCard />
 
       <div className={classes.right} hidden={window.location.pathname === '/login' || window.location.pathname === '/forgotpassword' || window.location.pathname === '/passwordreset' ? true : false}>
         {ticketCtx.ticketType === 'complaint' && <ComplaintedDetails />}

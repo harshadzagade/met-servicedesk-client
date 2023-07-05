@@ -1,152 +1,107 @@
-.detail {
-    background: var(--color-white);
-    width: 100%;
-    border-radius: var(--card-border-radius);
-    padding: 1rem;
-    box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
-    overflow: auto;
-    max-height: 80vh;
+.basicSelection {
+    margin-top: 1vh;
+    justify-content: center;
+    display: flex;
+    margin-top: 2.5rem;
 }
 
-.myform label {
-    font-size: medium;
-    margin-top: 0.5rem;
+.h2 {
+    font-weight: 600;
+    margin-right: auto;
+    margin-top: 1.3rem;
 }
 
-.myform p {
-    font-size: small;
-}
-
-
-.idlab {
-    margin-left: 10rem;
-}
-
-/* details */
-.idDetails {
-    display: grid;
-    grid-template-columns: 200px 100px;
-}
-
-
-
-
-.name {
-    display: grid;
-    grid-template-columns: 200px 150px;
-}
-
-/* end details */
-
-.deptper {
-    display: grid;
-    grid-template-columns: 400px 100px;
-}
-
-.department {
-    display: grid;
-    grid-template-columns: 200px 100px;
-}
-
-
-
-.priorityDetails {
-    display: grid;
-    grid-template-columns: 200px 100px;
-}
-
-/* request type and status */
-.reqsta {
-    display: grid;
-    grid-template-columns: 400px 100px;
-
-}
-
-.ComplaintType {
-    display: grid;
-    grid-template-columns: 200px 100px;
-}
-
-.status {
-    display: grid;
-    grid-template-columns: 200px 100px;
-}
-
-/* end  request type and status */
-
-/* approval */
-
-.approval {
-    display: grid;
-    grid-template-columns: 30vh 70vh;
-}
-
-/* end approval */
-.techName {
-    display: grid;
-    grid-template-columns: 200px 100px;
-}
-
-.subjectDetails {
-    display: grid;
-    grid-template-columns: 30vh 70vh;
-}
-
-
-
-.description {
-    display: grid;
-    grid-template-columns: 30vh 70vh;
-}
-
-.date {
-    display: grid;
-    grid-template-columns: 200px 200px;
-}
-
-
-
-
-.id-details p {
-    background: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    margin-right: 39rem;
-    font-size: medium;
-    margin-top: -0.5rem;
-    border: 1px solid black;
-
-}
-
-.complaintAssingBtn {
-    flex: 1;
-    gap: 2rem;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1em;
-    background-color: var(--color-primary);
-    color: white;
-}
-
-.complaintDetailsp {
-    background: white;
-    padding: 10px;
-    border: none;
-    font-size: 1em;
+.departmentSelection {
     align-items: center;
+    display: flex;
+}
 
+.staffSelection {
+    align-items: center;
+    margin-left: 1vh;
+    display: flex;
+}
+
+.dropdownSelect {
+    width: 35vh;
+    padding: 0.3rem 0.5rem;
+    border-width: 1px;
+    border-color: transparent;
+    background-color: white;
+    border-radius: 0.5rem;
+    outline-color: transparent;
+    border: 0.1rem solid gray;
+}
+
+.dropdownSelect:hover {
+    outline: none;
+    border: 0.1rem solid #292929;
+}
+
+.searching{
+    display: flex;
+    justify-content: end;
+}
+
+.searchInput {
+    margin-top: 0.85rem;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    background: #f9fafa;
+    border: 1px solid #b5bdc4;
+    font-size: 16px;
+    height: 35px;
+    width: 20rem;
+    line-height: 24px;
+    padding: 7px 8px;
+    color: #08090a;
+    box-shadow: none;
+    outline-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.searchInput:focus {
+    border-color: #3b49df;
+    box-shadow: 1px 1px 0 #3b49df;
+}
+
+
+.searchButton {
+    cursor: pointer;
+    margin-top: -0.1rem;
+    font-weight: 500;
+    border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
+    background-color: #7380ec;
+    color: white;
+    max-width: 7rem;
+    height: 2.5rem;
+    gap: 1rem;
+    margin-top: 0.8rem;
 
 }
 
-.tikPri {
-    border: 1px solid;
-    border-radius: var(--border-radius-2);
-    padding: 0 2%;
-    cursor: pointer;
-    margin: 0px;
-    color: white;
-    font-size: 1rem;
+.searchButton:focus {
+    background-color: #7380ec;
+}
+
+
+.searchButton:active {
+    border: 0.1rem solid #292929;
+}
+
+.optionSearchBox {
+    margin-left: 35vh;
+    margin-top: 0.85rem;
+    width: 20rem;
+    padding: 0.287rem 0.5rem;
+    border-width: 1px;
+    border-color: transparent;
+    background-color: #f9fafa;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    outline-color: transparent;
+    border: 0.1rem solid gray;
+}
+
+.optionSearchBox:focus {
+    outline: none;
+    border: 0.1rem solid #292929;
 }

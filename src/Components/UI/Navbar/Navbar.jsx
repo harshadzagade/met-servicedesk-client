@@ -39,18 +39,11 @@ const Navbar = () => {
                     <div className={classes.role}>
                         <p>Hey, <b>{staffInfo.firstname}</b><br />
                             {staffInfo.role} <br />
-                            {staffInfo.department}</p>
-
+                            {staffInfo.department}
+                        </p>
                     </div>
-
-
-
-
                 </div>
             </div>
-
-
-
         </div>
     )
 }

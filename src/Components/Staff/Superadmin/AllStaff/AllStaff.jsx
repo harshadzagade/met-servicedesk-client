@@ -131,7 +131,7 @@ const AllStaff = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.firstname.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.firstname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -142,7 +142,7 @@ const AllStaff = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.lastname.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.lastname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -153,7 +153,7 @@ const AllStaff = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.email.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.email.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -185,11 +185,9 @@ const AllStaff = () => {
         }
     }, [searchText, staffList, searchType]);
 
-    
-
     const handleRowClick = row => {
         navigate(`/singlestaff/${row.id}`);
-    }
+    };
 
     return (
         <div >
@@ -240,9 +238,7 @@ const AllStaff = () => {
                 highlightOnHover
                 subHeader
                 onRowClicked={handleRowClick}
-
             />
-
         </div>
     )
 

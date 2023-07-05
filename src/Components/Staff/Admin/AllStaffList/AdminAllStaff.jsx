@@ -6,8 +6,6 @@ import AdminContext from '../../../Context/AdminContext/AdminContext';
 import classes from './AdminAllStaff.module.css';
 import Swal from 'sweetalert2';
 
-
-
 const AdminAllStaff = () => {
     const id = localStorage.getItem('id');
     const [staffList, setStaffList] = useState([]);
@@ -135,7 +133,7 @@ const AdminAllStaff = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.firstname.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.firstname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -146,7 +144,7 @@ const AdminAllStaff = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.lastname.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.lastname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -157,7 +155,7 @@ const AdminAllStaff = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.email.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.email.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );

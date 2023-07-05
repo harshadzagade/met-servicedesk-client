@@ -12,14 +12,13 @@ import TechnicianComplaint from '../../Components/ComplaintPage/TechnicianCompla
 const Complaint = () => {
   const navigate = useNavigate();
   const location = useLocation() || null;
+  const id = localStorage.getItem('id');
 
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isTechnician, setIsTechnician] = useState(false);
   const [isUser, setIsUser] = useState(false);
   const [refresh, setRefresh] = useState(false);
-
-  const id = localStorage.getItem('id');
 
   useEffect(() => {
       setRefresh(false);
@@ -86,12 +85,10 @@ const Complaint = () => {
   
   return (
       <Fragment>
-          
           {isSuperAdmin && <SuperAdminComplaint />}
           {isAdmin && <AdminComplaint />}
           {isTechnician && <TechnicianComplaint />}
           {isUser && <UserComplaint />}
-         
       </Fragment>
   );
 };

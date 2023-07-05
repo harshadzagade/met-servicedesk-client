@@ -157,7 +157,7 @@ const SuperAdminComplaint = () => {
                 setOpenPriorityList(false);
                 setOpenStatusList(false);
                 setIsNormalSearch(true);
-                complaintList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
+                complaintList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -170,7 +170,7 @@ const SuperAdminComplaint = () => {
                 setOpenPriorityList(false);
                 setOpenStatusList(false);
                 setIsNormalSearch(true);
-                complaintList.filter((a) => a.name.startsWith(searchText)).map((data) => {
+                complaintList.filter((a) => a.name.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -338,7 +338,7 @@ const SuperAdminComplaint = () => {
                                         </div>
                                         <div className={`${classes.tikOther}`}>
                                             <p className={`${classes.tikId}`} >
-                                                #{complaint.id}
+                                                {complaint.ticketId}
                                             </p>
 
                                             <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>

@@ -151,7 +151,7 @@ const AllStaffExt = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.firstname.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.firstname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -162,7 +162,7 @@ const AllStaffExt = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.lastname.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.lastname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -196,7 +196,7 @@ const AllStaffExt = () => {
                 setOpenDepartmentList(false);
                 setOpenRoleList(false);
                 setOpenNormalList(true);
-                staffList.filter((a) => a.phoneNumber.startsWith(searchText)).map((data) => {
+                staffList.filter((a) => a.phoneNumber.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );

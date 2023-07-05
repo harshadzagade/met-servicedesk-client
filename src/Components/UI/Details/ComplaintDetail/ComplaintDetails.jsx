@@ -1,19 +1,26 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState, useContext } from 'react';
 import classes from './ComplaintDetails.module.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
 import Rightside from '../../../Righside/Rightside';
 const ComplaintDetails = () => {
+    const navigate = useNavigate();
     const id = useParams().complaintId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [complaintData, setComplaintData] = useState({});
-    ticketCtx.onClickHandler('complaint', complaintData.staffId, complaintData.id);
+    const [staffId , setStaffId] = useState(null);
+    ticketCtx.onClickHandler('complaint', staffId, complaintData.id);
 
     useEffect(() => {
         const getComplaintDetails = async () => {
             const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
             setComplaintData(complaint.data.complaint);
+            if (complaint.data.complaint.behalf) {
+                setStaffId(complaint.data.complaint.behalfId);
+            }else{
+                setStaffId(complaint.data.complaint.staffId);
+            }
         };
         getComplaintDetails();
     }, [id]);
@@ -59,13 +66,18 @@ const ComplaintDetails = () => {
                 <div className='container '>
                     <div className={`${classes.complaintdetils} row`}>
                         <div className="col-8">
-                            <h2>Concern details</h2>
+                            <div className={classes.header}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16" onClick={() => navigate('/complaint')}>
+                                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                                </svg>
+                                <h2>Concern details</h2>
+                            </div>
                             <div className={`${classes.detail}`}>
                                 <div >
                                     <form className={classes.myform}>
                                         <div className={classes.idDetails}>
                                             <label>Complaint Id:</label>
-                                            <p className={classes.complaintDetailsp}>#{complaintData.id}</p>
+                                            <p className={classes.complaintDetailsp}>{complaintData.ticketId}</p>
                                         </div>
                                         <hr />
                                         <div className={classes.subjectDetails}>
@@ -96,6 +108,10 @@ const ComplaintDetails = () => {
                                                 <label>Status:</label>
                                                 <p className={classes.complaintDetailsp}>{complaintData.status} </p>
                                             </div>
+                                        </div>
+                                        <div className={classes.idDetails}>
+                                            <label>Behalf:</label>
+                                            <p className={classes.complaintDetailsp}>{complaintData.behalf ? 'Yes' : 'No'}</p>
                                         </div>
                                         {
                                             (complaintData.assign || complaintData.forwardComment || (complaintData.status === 'forwarded' || complaintData.status === 'closed')) &&

@@ -71,8 +71,8 @@ const CreateStaff = () => {
         try {
             await axios.post('/api/staff/superadmin/createStaff', data);
             Swal.fire(
-                'Staff Created!',
-                'You have created staff successfully',
+                'User Created!',
+                'You have created user successfully',
                 'success'
             );
             navigate('/', { state: { refreshSuperHome: true } });

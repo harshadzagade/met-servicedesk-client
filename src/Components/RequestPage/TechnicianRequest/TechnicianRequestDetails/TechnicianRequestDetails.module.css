@@ -1,7 +1,13 @@
 .reqdetails {
     margin-top: 5.4rem;
 }
-
+.header {
+    display: flex;
+    gap: 1rem;
+}
+.header svg{
+    margin-top: 0.2rem;
+}
 .detail {
     background: var(--color-white);
     width: 100%;

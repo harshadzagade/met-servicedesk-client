@@ -21,6 +21,7 @@ const NewCompaint = () => {
     const [categories, setCategories] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [isRepeated, setIsRepeated] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -51,7 +52,6 @@ const NewCompaint = () => {
         const getCategories = async () => {
             try {
                 if (department.length !== 0) {
-                    console.log('hello');
                     const categories = await axios.get(`/api/department/categoriesbydepartment/${department}`);
                     setCategories(categories.data.categories);
                 }
@@ -65,6 +65,35 @@ const NewCompaint = () => {
         };
         getCategories();
     }, [department]);
+
+    useEffect(() => {
+        const showLoadingAlert = () => {
+            let timerInterval
+            Swal.fire({
+                title: 'Registering concern',
+                html: 'Please wait...<b></b>',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+            })
+        };
+        if (showLoading) {
+            showLoadingAlert();
+        }
+    }, [showLoading]);
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
@@ -80,7 +109,7 @@ const NewCompaint = () => {
         formData.append('department', department);
         formData.append('priority', priority);
         formData.append('category', requestType);
-        formData.append('isRepeated', false);
+        formData.append('isRepeated', isRepeated);
 
         /* const config = {
             headers: {
@@ -103,7 +132,9 @@ const NewCompaint = () => {
         //     // attachment: dataFile
         // };
         try {
+            setShowLoading(true);
             await axios.post('/api/complaint/', formData);
+            setShowLoading(false);
             Swal.fire(
                 'Complaint Created!',
                 'You have created Complaint successfully',
@@ -193,21 +224,19 @@ const NewCompaint = () => {
                             </div>
 
                             <div className={classes.attachment}>
-                                <div  className={classes.attachmentSection}>
-                                <span>Attachment</span>
-                                <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
+                                <div className={classes.attachmentSection}>
+                                    <span>Attachment</span>
+                                    <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
                                 </div>
-                                {/* <div className={classes.repeat}>
+                                <div className={classes.repeat}>
                                     <span>Repeated Complaint:</span>
                                     <div className={classes.isRepeat}>
                                         <input type="checkbox" defaultChecked={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} id="toggle-repeat" />
                                         <label htmlFor="toggle-repeat"></label>
                                     </div>
-                                </div> */}
-
+                                </div>
                             </div>
                             <button className={classes.buttonForm} onClick={handleSubmitClick}>Submit</button>
-
                         </form>
                     </div>
                 </div >

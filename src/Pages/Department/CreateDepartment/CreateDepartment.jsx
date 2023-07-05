@@ -47,7 +47,7 @@ const CreateDepartment = (props) => {
   const handleCreateDepartment = async () => {
     try {
       const data = {
-        department: departmentRef.current.value.toUpperCase(),
+        department: departmentRef.current.value.toUpperCase().trim(),
         category: categoriesList
       };
       await axios.post(`/api/department/createdepartment`, data);
@@ -76,7 +76,7 @@ const CreateDepartment = (props) => {
           <div className={classes.myform} >
             <div className={`${classes.createForm}`}>
               <label>Department:</label>
-              <input type="text" className={classes.createstaffInput} placeholder="Enter your last name" ref={departmentRef} />
+              <input type="text" className={classes.createstaffInput} placeholder="Enter Department" ref={departmentRef} />
             </div>
             <div className={classes.deptik}>
               <label>Category:</label>

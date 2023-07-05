@@ -6,13 +6,21 @@
 }
 
 .h2 {
-    font-weight: 600;   
+    font-weight: 600;
     margin-right: auto;
 }
 
 .departmentSelection {
     align-items: center;
     display: flex;
+}
+
+.dateStyle {
+    background:white;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1em;
 }
 
 .staffSelection {
@@ -36,10 +44,22 @@
     outline: none;
     border: 0.1rem solid #292929;
 }
-.searching{
+
+.searching {
     display: flex;
-    justify-content: end;
 }
+
+.dateNsearch {
+    display: flex;
+    margin-right: auto;
+    margin-top: 0.3rem;
+    gap: 2rem;
+}
+
+.dateNsearch DatePicker {
+    color: red;
+}
+
 
 .searchInput {
     margin-top: 0.85rem;

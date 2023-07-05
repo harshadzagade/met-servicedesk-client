@@ -66,7 +66,7 @@ const IncomingComplaint = () => {
         setOpenPriorityList(false);
         setOpenStatusList(false);
         setIsNormalSearch(true);
-        complaintList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
+        complaintList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
           return (
             arr.push(data)
           );
@@ -77,7 +77,7 @@ const IncomingComplaint = () => {
         setOpenPriorityList(false);
         setOpenStatusList(false);
         setIsNormalSearch(true);
-        complaintList.filter((a) => a.name.startsWith(searchText)).map((data) => {
+        complaintList.filter((a) => a.name.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
           return (
             arr.push(data)
           );
@@ -179,8 +179,6 @@ const IncomingComplaint = () => {
                 <h3 className={`${classes.tikTitle}`}>
                   {complaint.subject}
                 </h3>
-
-
                 <span className={`${classes.date}`}>
                   {getCreatedComplaintDate(complaint.createdAt)}
                 </span>
@@ -192,12 +190,12 @@ const IncomingComplaint = () => {
               </div>
               <div className={`${classes.tikOther}`}>
                 <p className={`${classes.tikId}`}>
-                  #{complaint.id}
+                  {complaint.ticketId}
                 </p>
                 <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
                   {complaint.priority}
                 </p>
-                <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'],['assigned', () => '#008080'], ['closed', () => '#ADE792'] ) }}>
+                <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
                   {complaint.status}
                 </p>
               </div>

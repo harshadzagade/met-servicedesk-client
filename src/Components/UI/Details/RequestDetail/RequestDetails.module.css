@@ -2,9 +2,15 @@
     margin-top: 2.5rem;
 }
 
-.reqdetails h2 {
-    font-weight: 600;
+.header {
+    display: flex;
+    gap: 1rem;
 }
+.header svg{
+    margin-top: 0.2rem;
+    cursor: pointer;
+}
+
 
 .detail {
     background: var(--color-white);
@@ -102,6 +108,11 @@
 
 
 .description {
+    display: grid;
+    grid-template-columns: 30vh 70vh;
+}
+
+.attachment {
     display: grid;
     grid-template-columns: 30vh 70vh;
 }

@@ -21,17 +21,17 @@ const RequestNavigation = (props) => {
 
   return (
     <div className={`${classes.buttonsSection}`}>
-    <div className={`${classes.filterButtons}`}>
-      <button className={`${classes.button} ${activeTab === 'AllStaffAssignRequest' && classes.active} filter-button list`} data-filter="assigned" onClick={handleAssignRequest}>Assign</button>
-      <button className={`${classes.button} ${activeTab === 'AllStaffOwnRequest' && classes.active} filter-button list`} onClick={handleOwnRequest}>Own</button>
+      <div className={`${classes.filterButtons}`}>
+        <button className={`${classes.button} ${activeTab === 'AllStaffAssignRequest' && classes.active} filter-button list`} data-filter="assigned" onClick={handleAssignRequest}>Assign</button>
+        <button className={`${classes.button} ${activeTab === 'AllStaffOwnRequest' && classes.active} filter-button list`} onClick={handleOwnRequest}>Own</button>
+      </div>
+      <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newrequest')}>
+        <span className="material-icons-sharp btn-icon">
+          add
+        </span>
+        <span className={`${classes.btnName}`}> New Ticket</span>
+      </button>
     </div>
-    <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newrequest')}>
-    <span className="material-icons-sharp btn-icon">
-      add
-    </span>
-    <span className={`${classes.btnName}`}> New Ticket</span>
-  </button>
-  </div>
   )
 }
 

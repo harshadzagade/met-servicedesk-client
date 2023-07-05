@@ -21,8 +21,12 @@ const Login = () => {
 
   const checkLogin = async () => {
     if (localStorage.getItem('id')) {
-      const staff = await axios.get(`/api/staff/staffdetails/${localStorage.getItem('id')}`);
-      ctx.onLogin(staff.data.staff.email);
+      try {
+        const staff = await axios.get(`/api/staff/staffdetails/${localStorage.getItem('id')}`);
+        ctx.onLogin(staff.data.staff.email);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     }
   }
   checkLogin();
@@ -51,12 +55,11 @@ const Login = () => {
           toast.addEventListener('mouseenter', Swal.stopTimer)
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
-
+      });
       Toast.fire({
         icon: 'success',
         title: 'Signed in successfully'
-      })
+      });
     } catch (error) {
       Swal.fire({
         icon: 'error',

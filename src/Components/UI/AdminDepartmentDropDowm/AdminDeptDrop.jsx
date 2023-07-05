@@ -17,11 +17,17 @@ const AdminDeptDrop = (props) => {
 
   useEffect(() => {
     const getDepartments = async () => {
-      const departments = await axios.get(`/api/staff/admin/admindepartments/${id}`);
-      setDepartments(departments.data.departments);
+      try {
+        if (id) {
+          const departments = await axios.get(`/api/staff/admin/admindepartments/${id}`);
+          setDepartments(departments.data.departments);
+        }
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     };
     getDepartments();
-  }, [id,props]);
+  }, [id, props]);
   return (
     // <label className={classes.dropdown} dropdown-toggle>
     //   <div className={classes.ddButton}>
@@ -33,14 +39,14 @@ const AdminDeptDrop = (props) => {
     //   </ul>
     // </label>
     <div className="btn-group ">
-    <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {adminCtx.department === '' ? 'Department' : adminCtx.department}
-    </button>
-    <div className="dropdown-menu">
-    {departments.map((department) => (<li value={department} onClick={() => handleDepartmentClick(department)}>{department}</li>))}
+      <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {adminCtx.department === '' ? 'Department' : adminCtx.department}
+      </button>
+      <div className="dropdown-menu">
+        {departments.map((department) => (<li value={department} onClick={() => handleDepartmentClick(department)}>{department}</li>))}
+      </div>
+
     </div>
-   
-</div>
   )
 }
 

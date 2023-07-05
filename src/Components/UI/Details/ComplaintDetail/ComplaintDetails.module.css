@@ -2,6 +2,31 @@
     margin-top: 2.5rem;
 }
 
+.header {
+    display: flex;
+    gap: 1rem;
+}
+.header svg{
+    margin-top: 0.2rem;
+    cursor: pointer;
+}
+
+
+
+.buttonForm {
+    flex: 1;
+    gap: 2rem;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    max-width: 4rem;
+}
+
+
+
 .detail {
     background: var(--color-white);
     width: 100%;
@@ -9,7 +34,7 @@
     padding: 1rem;
     box-shadow: var(--box-shadow);
     transition: all 300ms ease;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .myform label {
@@ -134,16 +159,6 @@
     color: white;
 }
 
-.buttonForm {
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1em;
-    background-color: var(--color-primary);
-    color: white;
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-    width: 10rem;
-}
 
 .complaintDetailsp {
     background: white;

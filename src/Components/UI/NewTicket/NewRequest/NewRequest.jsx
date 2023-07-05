@@ -21,7 +21,7 @@ const NewRequest = () => {
     const [categories, setCategories] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [isRepeated, setIsRepeated] = useState(false);
-    console.log(department, department.length);
+    const [showLoading, setShowLoading] = useState(false);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -52,7 +52,7 @@ const NewRequest = () => {
         const getCategories = async () => {
             try {
                 if (department.length !== 0) {
-                    console.log('hello');
+                    console.log(department.length);
                     const categories = await axios.get(`/api/department/categoriesbydepartment/${department}`);
                     setCategories(categories.data.categories);
                 }
@@ -66,6 +66,35 @@ const NewRequest = () => {
         };
         getCategories();
     }, [department]);
+
+    useEffect(() => {
+        const showLoadingAlert = () => {
+            let timerInterval
+            Swal.fire({
+                title: 'Registering request',
+                html: 'Please wait...<b></b>',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+            })
+        };
+        if (showLoading) {
+            showLoadingAlert();
+        }
+    }, [showLoading]);
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
@@ -103,7 +132,9 @@ const NewRequest = () => {
         //     attachment: formData
         // };
         try {
+            setShowLoading(true);
             await axios.post('/api/request/', formData);
+            setShowLoading(false);
             Swal.fire(
                 'Request Created!',
                 'You have created request successfully',
@@ -200,7 +231,7 @@ const NewRequest = () => {
                                     <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
                                 </div>
                                 <div className={classes.repeat}>
-                                    <span>Repeated Complaint:</span>
+                                    <span>Repeated Request:</span>
                                     <div className={classes.isRepeat}>
                                         <input type="checkbox" defaultChecked={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} id="toggle-repeat" />
                                         <label htmlFor="toggle-repeat"></label>

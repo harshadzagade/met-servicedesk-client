@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
+import Rightside from '../../../Righside/Rightside';
 
 
 const TechComplaintDetails = () => {
@@ -13,12 +14,18 @@ const TechComplaintDetails = () => {
     const id = paramsId.complaintId;
     const ownId = localStorage.getItem('id');
     const ticketCtx = useContext(TicketDetailsContext);
-    ticketCtx.onClickHandler('complaint', complaintData.staffId, complaintData.id);
+    const [staffId , setStaffId] = useState(null);
+    ticketCtx.onClickHandler('complaint', staffId, complaintData.id);
 
     useEffect(() => {
         const getComplaintDetails = async () => {
             const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
             setComplaintData(complaint.data.complaint);
+            if (complaint.data.complaint.behalf) {
+                setStaffId(complaint.data.complaint.behalfId);
+            }else{
+                setStaffId(complaint.data.complaint.staffId);
+            }
         };
         getComplaintDetails();
     }, [id]);
@@ -36,68 +43,81 @@ const TechComplaintDetails = () => {
     };
 
     return (
-        <Fragment>
-            <main>
-                <div className={classes.techcomdetails}>
-                    <h2>Concern details</h2>
-                    <div className={`${classes.detail}`}>
-                        <div >
-                            <form className={classes.myform}>
-                                <div className={classes.idDetails}>
-                                    <label>Staff ID:</label>
-                                    <p className={classes.complaintDetailsp}>{complaintData.staffId}</p>
-                                </div>
-                                <hr />
-                                <div className={classes.subjectDetails}>
-                                    <label>Subject:</label>
-                                    <p className={classes.complaintDetailsp}>{complaintData.subject}</p>
-                                </div>
-                                <div className={classes.description}>
-                                    <label>Description:</label>
-                                    <div dangerouslySetInnerHTML={{ __html: complaintData.description }}></div>
-                                </div>
-                                <hr />
-                                <div className={classes.deptpri}>
-                                    <div className={classes.department}>
-                                        <label>Department:</label>
-                                        <p className={classes.complaintDetailsp}>{complaintData.department}</p>
+        <main>
+            <div className="container">
+                <div className={`${classes.techcomdetails} row`}>
+                    <div className="col-8">
+                        <div className={classes.header}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16" onClick={() => navigate('/complaint')}>
+                                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                            </svg>
+                            <h2>Concern details</h2>
+                        </div>
+                        <div className={`${classes.detail}`}>
+                            <div >
+                                <form className={classes.myform}>
+                                    <div className={classes.idDetails}>
+                                        <label>Complaint ID:</label>
+                                        <p className={classes.complaintDetailsp}>{complaintData.ticketId}</p>
                                     </div>
-                                    <div className={classes.priorityDetails}>
-                                        <label>Priority:</label>
-                                        <p className={classes.complaintDetailsp}> {complaintData.priority}</p>
+                                    <hr />
+                                    <div className={classes.subjectDetails}>
+                                        <label>Subject:</label>
+                                        <p className={classes.complaintDetailsp}>{complaintData.subject}</p>
                                     </div>
-                                </div>
-                                <div className={classes.statech}>
-                                    <div className={classes.name}>
-                                        <label>Status:</label>
-                                        <p className={classes.complaintDetailsp}>{complaintData.status} </p>
+                                    <div className={classes.description}>
+                                        <label>Description:</label>
+                                        <div dangerouslySetInnerHTML={{ __html: complaintData.description }}></div>
                                     </div>
-                                    <div className={classes.techName}>
-                                        <label>Technician Name:</label>
-                                        <p className={classes.complaintDetailsp}>{complaintData.assignedName}</p>
+                                    <hr />
+                                    <div className={classes.deptpri}>
+                                        <div className={classes.department}>
+                                            <label>Department:</label>
+                                            <p className={classes.complaintDetailsp}>{complaintData.department}</p>
+                                        </div>
+                                        <div className={classes.priorityDetails}>
+                                            <label>Priority:</label>
+                                            <p className={classes.complaintDetailsp}> {complaintData.priority}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr />
-                                <div className={classes.date}>
-                                    <label>Date:</label>
-                                    <p className={classes.complaintDetailsp}>{complaintData.createdAt}</p>
-                                </div>
-                                <div className={classes.status}>
-                                    <button className={classes.complaintAssingBtn} onClick={() => navigate(`/TechcomplaintAttending/${complaintData.id}`)}>Change Status</button>
-                                    {
-                                        complaintData.assign !== null ?
-                                            <div className={`${classes.alreadyAssignedText}`}>Concern assigned to {complaintData.assignedName}</div>
-                                            :
-                                            <button className={classes.complaintAssingBtn} onClick={handleSelfAssign}>Self Assign</button>
-                                    }
-                                </div>
-                            </form>
+                                    <div className={classes.statech}>
+                                        <div className={classes.name}>
+                                            <label>Status:</label>
+                                            <p className={classes.complaintDetailsp}>{complaintData.status} </p>
+                                        </div>
+                                        <div className={classes.techName}>
+                                            <label>Technician Name:</label>
+                                            <p className={classes.complaintDetailsp}>{complaintData.assignedName}</p>
+                                        </div>
+                                    </div>
+                                    <div className={classes.idDetails}>
+                                        <label>Behalf:</label>
+                                        <p className={classes.complaintDetailsp}>{complaintData.behalf ? 'Yes' : 'No'}</p>
+                                    </div>
+                                    <hr />
+                                    <div className={classes.date}>
+                                        <label>Date:</label>
+                                        <p className={classes.complaintDetailsp}>{complaintData.createdAt}</p>
+                                    </div>
+                                    <div className={classes.status}>
+                                        <button className={classes.complaintAssingBtn} onClick={() => navigate(`/TechcomplaintAttending/${complaintData.id}`)}>Change Status</button>
+                                        {
+                                            complaintData.assign !== null ?
+                                                <div className={`${classes.alreadyAssignedText}`}>Concern assigned to {complaintData.assignedName}</div>
+                                                :
+                                                <button className={classes.complaintAssingBtn} onClick={handleSelfAssign}>Self Assign</button>
+                                        }
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                    <div className='col-4'>
+                        <Rightside />
+                    </div>
                 </div>
-            </main>
-        </Fragment>
-
+            </div>
+        </main>
     );
 };
 

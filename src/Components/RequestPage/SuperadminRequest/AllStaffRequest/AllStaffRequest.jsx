@@ -215,7 +215,7 @@ const AllStaffRequest = () => {
                 setOpenHodApprovalList(false);
                 setOpenAdminApprovalList(false);
                 setIsNormalSearch(true);
-                requestList.filter((a) => a.subject.startsWith(searchText)).map((data) => {
+                requestList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -230,7 +230,7 @@ const AllStaffRequest = () => {
                 setOpenHodApprovalList(false);
                 setOpenAdminApprovalList(false);
                 setIsNormalSearch(true);
-                requestList.filter((a) => a.name.startsWith(searchText)).map((data) => {
+                requestList.filter((a) => a.name.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -450,7 +450,7 @@ const AllStaffRequest = () => {
                                         </div>
                                         <div className={`${classes.tikOther}`}>
                                             <p className={`${classes.tikId}`}>
-                                                #{request.id}
+                                                {request.ticketId}
                                             </p>
 
                                             <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>

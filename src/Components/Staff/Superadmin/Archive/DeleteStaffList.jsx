@@ -119,7 +119,7 @@ const DeleteStaffList = () => {
 
   useEffect(() => {
     let arr = [];
-    staffList.filter((a) => a.email.startsWith(searchText)).map((data) => {
+    staffList.filter((a) => a.email.toLowerCase().startsWith(searchText)).map((data) => {
       return (
         arr.push(data)
       );

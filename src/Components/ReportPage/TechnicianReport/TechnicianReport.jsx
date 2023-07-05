@@ -2,17 +2,36 @@ import React, { Fragment, useEffect, useState } from 'react';
 import classes from './TechnicianReport.module.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import DataTable from 'react-data-table-component';
 
 const TechnicianReport = () => {
-    const [reportData, setReportData] = useState({});
+    const [staff, setStaff] = useState({});
     const id = localStorage.getItem('id');
     const [errorMessage, setErrorMessage] = useState('');
+    const [reportList, setReportList] = useState([]);
+    const navigate = useNavigate();
+    const [allReportList, setAllReportList] = useState([]);
+    const [staffDepartments, setStaffDepartments] = useState([]);
+    const [selectedDepartment, setSelectedDepartment] = useState('');
+    const [departmentStaff, setDepartmentStaff] = useState([]);
+    const [searchType, setSearchType] = useState('Subject');
+    const [searchText, setSearchText] = useState('');
+    const [refresh, setRefresh] = useState(false);
+    const [isNormalSearch, setIsNormalSearch] = useState(true);
+    const [ticketType, setTicketType] = useState('allTicketTypes');
+    const [openTicketTypeList, setOpenTicketTypeList] = useState(false);
+    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [openCategoryList, setOpenCategoryList] = useState(false);
+    const [priority, setPriority] = useState('');
+    const [openPriorityList, setOpenPriorityList] = useState(false);
 
     useEffect(() => {
-        const getReportDetails = async () => {
+        const getStaffDetails = async () => {
             try {
-                const report = await axios.get(`/api/report/reportbystaff/${id}`);
-                setReportData(report.data.report);
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                setStaff(staff.data.staff);
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
@@ -21,194 +40,269 @@ const TechnicianReport = () => {
                 });
             }
         };
-        getReportDetails();
+        getStaffDetails();
     }, [id]);
 
+    useEffect(() => {
+        const getCategories = async () => {
+            const categories = await axios.get(`/api/report/reportcategories/categories`);
+            setCategories(categories.data.categories);
+        };
+        getCategories();
+    }, [openCategoryList]);
 
-    const getCreatedReportDate = (createdAt) => {
-        const date = new Date(createdAt);
-        return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
-    };
+    useEffect(() => {
+        const getList = async () => {
+            if (staff.id) {
+                try {
+                    switch (ticketType) {
+                        case 'allTicketTypes':
+                            const full = await axios.get(`/api/report/${staff.id}`);
+                            setReportList(full.data.report);
+                            break;
 
-    const formatAMPM = (date) => {
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let seconds = date.getSeconds();
-        let ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-        return strTime;
+                        case 'requests':
+                            const requests = await axios.get(`/api/report/request/${staff.id}`);
+                            setReportList(requests.data.report);
+                            break;
+
+                        case 'complaints':
+                            const complaints = await axios.get(`/api/report/complaint/${staff.id}`);
+                            setReportList(complaints.data.report);
+                            break;
+
+                        default:
+                            const defaultValue = await axios.get(`/api/report/${staff.id}`);
+                            setReportList(defaultValue.data.report);
+                            break;
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${error.response.data.message}`,
+                        text: 'Unable to fetch report'
+                    });
+                }
+            }
+        };
+        getList();
+        setRefresh(false);
+    }, [staff.id, refresh, ticketType, selectedDepartment]);
+
+    useEffect(() => {
+        const getStaffByDepartment = async () => {
+            try {
+                if (selectedDepartment.length !== 0) {
+                    const staff = await axios.get(`/api/staff/staffbydepartment/${selectedDepartment}`);
+                    setDepartmentStaff(staff.data.staff);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch staff'
+                });
+            }
+        };
+        getStaffByDepartment();
+    }, [selectedDepartment, staffDepartments]);
+
+    useEffect(() => {
+        const getReportByCategory = async () => {
+            try {
+                if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
+                    setAllReportList(reportList);
+                } else {
+                    const report = await axios.get(`/api/report/reportbycategory/${category}`);
+                    setAllReportList(report.data.report);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch report'
+                });
+            }
+        };
+        if (openCategoryList) {
+            getReportByCategory();
+        }
+    }, [category, openCategoryList, reportList]);
+
+    useEffect(() => {
+        const getRequestByPriority = async () => {
+            try {
+                if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
+                    setAllReportList(reportList);
+                } else {
+                    const report = await axios.get(`/api/report/reportbypriority/${priority}`);
+                    setAllReportList(report.data.report);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch report'
+                });
+            }
+        };
+        if (openPriorityList) {
+            getRequestByPriority();
+        }
+    }, [priority, openPriorityList, reportList]);
+
+    useEffect(() => {
+        let arr = [];
+        switch (searchType) {
+            case 'Ticket Type':
+                setOpenTicketTypeList(true);
+                setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setIsNormalSearch(false);
+                break;
+
+            case 'Subject':
+                setOpenTicketTypeList(false);
+                setOpenCategoryList(false);
+                setOpenPriorityList(false);
+                setIsNormalSearch(true);
+                reportList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
+                    return (
+                        arr.push(data)
+                    );
+                });
+                break;
+
+            case 'Category':
+                setOpenTicketTypeList(false);
+                setOpenCategoryList(true);
+                setOpenPriorityList(false);
+                setIsNormalSearch(false);
+                break;
+
+            case 'Priority':
+                setOpenTicketTypeList(false);
+                setOpenCategoryList(false);
+                setOpenPriorityList(true);
+                setIsNormalSearch(false);
+                break;
+
+            default:
+                break;
+        }
+        if (searchText.length !== 0) {
+            setAllReportList(arr);
+        } else {
+            setAllReportList(reportList)
+        }
+    }, [searchText, reportList, searchType]);
+
+    const columns = ticketType === 'allTicketTypes' ?
+        [
+            {
+                name: "Ticket Type",
+                selector: (row) => (row.isRequest && 'Request') || (row.isComplaint && 'Complaint'),
+                sortable: true,
+            },
+            {
+                name: "Subject",
+                selector: (row) => row.subject,
+                sortable: true,
+            },
+            {
+                name: "Category",
+                selector: (row) => row.category,
+            },
+            {
+                name: "Priority",
+                selector: (row) => row.priority,
+            }
+        ]
+        :
+        [
+            {
+                name: "Subject",
+                selector: (row) => row.subject,
+                sortable: true,
+            },
+            {
+                name: "Category",
+                selector: (row) => row.category,
+            },
+            {
+                name: "Priority",
+                selector: (row) => row.priority,
+            }
+        ]
+
+    const handleRowClick = row => {
+        navigate(`/reportdetails/${row.id}`);
     }
-
-    const getReportDuration = (duration) => {
-        const assignDuration = duration;
-        let diffHrs = Math.floor((assignDuration % 86400000) / 3600000);
-        let diffMins = Math.round(((assignDuration % 86400000) % 3600000) / 60000);
-        return (diffHrs + ' Hours and ' + diffMins + ' Minutes');
-    }
-
 
     return (
-        <Fragment>
-            <main>
-                {
-                    errorMessage.length === 0 ?
-                        <div className={classes.reqdetails}>
-                            <h2>Report details</h2>
-                            <div className={`${classes.detail}`}>
-                                <div >
-                                    <form className={classes.myform}>
-                                        <div className={classes.idDetails}>
-                                            <label>Ticket Type:</label>
-                                            <p className={classes.complaintDetailsp}>{(reportData.isRequest && 'Request') || (reportData.isComplaint && 'Complaint')}</p>
-                                        </div>
-                                        <div className={classes.idDetails}>
-                                            <label>Ticket ID:</label>
-                                            <p className={classes.complaintDetailsp}>#{reportData.requestComplaintId}</p>
-                                        </div>
-                                        <hr />
-                                        <div className={classes.subjectDetails}>
-                                            <label>Subject:</label>
-                                            <p className={classes.complaintDetailsp}>{reportData.subject}</p>
-                                        </div>
-                                        <div className={classes.description}>
-                                            <label>Description:</label>
-                                            <div dangerouslySetInnerHTML={{ __html: reportData.description }}></div>
-                                        </div>
-                                        <div className={classes.subjectDetails}>
-                                            <label>Ticket raised by:</label>
-                                            <p className={classes.complaintDetailsp}>{reportData.staffName}</p>
-                                        </div>
-                                        <hr />
-                                        <div className={classes.deptper}>
-                                            <div className={classes.department}>
-                                                <label>Department:</label>
-                                                <p className={classes.complaintDetailsp}>{reportData.department}</p>
-                                            </div>
-                                            <div className={classes.priorityDetails}>
-                                                <label>Priority:</label>
-                                                <p className={classes.complaintDetailsp}> {reportData.priority}  </p>
-                                            </div>
-                                        </div>
-                                        <div className={classes.reqsta}>
-                                            <div className={classes.ComplaintType}>
-                                                <label>Request Type:</label>
-                                                <p className={classes.complaintDetailsp}>{reportData.category}</p>
-                                            </div>
-                                            <div className={classes.name}>
-                                                <label>Status:</label>
-                                                <p className={classes.complaintDetailsp}>{reportData.status} </p>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div className={classes.approval1}>
-                                            <div className={classes.approval}>
-                                                <label>HOD Approval:</label>
-                                                <p className={classes.complaintDetailsp}>{(reportData.approval1 === 1 && 'approved') || (reportData.approval1 === 2 && 'Disapproved') || (reportData.approval1 === null && 'Not updated')}</p>
-                                            </div>
-                                            {
-                                                reportData.approval1 &&
-                                                <div className={classes.approval}>
-                                                    <label>HOD Comment:</label>
-                                                    <p className={classes.complaintDetailsp}>{reportData.approval1 ? reportData.approval1Comment : 'Not Commented'}</p>
-                                                </div>
-                                            }
-                                            <div className={classes.approval}>
-                                                <label>Admin Approval:</label>
-                                                <p className={classes.complaintDetailsp}>{(reportData.approval2 === 1 && 'Approved') || (reportData.approval2 === 2 && 'Disapproved') || (reportData.approval2 === null && 'Not updated')}</p>
-                                            </div>
-                                            {
-                                                reportData.approval2 &&
-                                                <div className={classes.approval}>
-                                                    <label>Admin Comment:</label>
-                                                    <p className={classes.complaintDetailsp}>{reportData.approval2 ? reportData.approval2Comment : 'Not Commented'}</p>
-                                                </div>
-                                            }
-                                        </div>
-                                        {
-                                            (reportData.assign || reportData.forwardComment || (reportData.status === 'forwarded' || reportData.status === 'closed')) &&
-                                            <hr />
-                                        }
-                                        {
-                                            reportData.assign &&
-                                            <div className={classes.techName}>
-                                                <label>Assigned To:</label>
-                                                <p >{reportData.assignedName}</p>
-                                            </div>
-                                        }
-                                        {
-                                            reportData.status === 'forwarded' &&
-                                            <div className={classes.techName}>
-                                                <label>Forward Comment:</label>
-                                                <p >{reportData.forwardComment}</p>
-                                            </div>
-                                        }
-                                        {
-                                            (reportData.status === 'forwarded' || reportData.status === 'closed') &&
-                                            <div className={classes.techName}>
-                                                <label>Problem Description:</label>
-                                                <p >{reportData.problemDescription}</p>
-                                            </div>
-                                        }
-                                        {
-                                            (reportData.status === 'forwarded' || reportData.status === 'closed') &&
-                                            <div className={classes.techName}>
-                                                <label>Action Taken:</label>
-                                                <p >{reportData.actionTaken}</p>
-                                            </div>
-                                        }
-                                        <hr />
-                                        <div className={classes.description}>
-                                            <label>Attachment:</label>
-                                            <p className={classes.complaintDetailsp}>None</p>
-                                        </div>
-                                        <hr />
-                                        <div className={classes.date}>
-                                            <label>Logged Time:</label>
-                                            <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.loggedTime)}</p>
-                                        </div>
-                                        <div className={classes.date}>
-                                            <label>Assigned Time:</label>
-                                            <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.assignedTime)}</p>
-                                        </div>
-                                        {(reportData.loggedTime && reportData.assignedTime) &&
-                                            <div className={classes.date}>
-                                                <label>Assign Duration:</label>
-                                                <p className={classes.complaintDetailsp}>{getReportDuration(reportData.assignDuration)}</p>
-                                            </div>
-                                        }
-                                        <div className={classes.date}>
-                                            <label>Attended Time:</label>
-                                            <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.attendedTime)}</p>
-                                        </div>
-                                        {(reportData.assignedTime && reportData.attendedTime) &&
-                                            <div className={classes.date}>
-                                                <label>Attend Duration:</label>
-                                                <p className={classes.complaintDetailsp}>{getReportDuration(reportData.attendDuration)}</p>
-                                            </div>
-                                        }
-                                        <div className={classes.date}>
-                                            <label>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Time:</label>
-                                            <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.lastUpdatedTime)}</p>
-                                        </div>
-                                        {
-                                            reportData.lastUpdatedTime &&
-                                            <div className={classes.date}>
-                                                <label>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Duration:</label>
-                                                <p className={classes.complaintDetailsp}>{getReportDuration(reportData.lastUpdateDuration)}</p>
-                                            </div>
-                                        }
-                                    </form>
-                                </div>
-                            </div>
+        <div>
+            <Fragment>
+                <div className={classes.searching}>
+                <h2 className={classes.h2}>Report</h2>
+                    {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                    {
+                        openTicketTypeList &&
+                        <select value={ticketType} className={`${classes.searchInput}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
+                            <option value='' hidden>Select Your Ticket Type</option>
+                            <option value='allTicketTypes'>All Ticket Types</option>
+                            <option value='requests'>Requests</option>
+                            <option value='complaints'>Complaints</option>
+                        </select>
+                    }
+                    {
+                        openCategoryList &&
+                        <select value={category} className={`${classes.searchInput}`} name="categories" required onChange={(e) => setCategory(e.target.value)}>
+                            <option value='' hidden>Select Your Category</option>
+                            <option value={'allCategories'}>All Categories</option>
+                            {
+                                categories.map((category, key) => (
+                                    <option key={key} value={category}>{category}</option>
+                                ))
+                            }
+                        </select>
+                    }
+                    {
+                        openPriorityList &&
+                        <select value={priority} className={`${classes.searchInput}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                            <option value='' hidden>Select Your Priority</option>
+                            <option value='allPriorities'>All Priorities</option>
+                            <option value='high'>High</option>
+                            <option value='moderate'>Moderate</option>
+                            <option value='low'>Low</option>
+                        </select>
+                    }
+                    <div className="btn-group mb-1">
+                        <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {searchType}
+                        </button>
+                        <div className="dropdown-menu">
+                            <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
+                            <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
+                            <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
+                            <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
                         </div>
-                        :
-                        <div>{errorMessage}</div>
-                }
-            </main>
-        </Fragment>
+                    </div>
+                </div>
+            </Fragment>
+            <DataTable
+                columns={columns}
+                data={allReportList}
+                pagination
+                fixedHeader
+                fixedHeaderScrollHeight='400px'
+                selectableRows
+                selectableRowsHighlight
+                onRowClicked={handleRowClick}
+                highlightOnHover
+                subHeader
+
+            />
+        </div>
     );
 };
 

@@ -46,18 +46,11 @@
   margin-top: 0.5rem;
 }
 /* START REQUESTS Section */
-.mainTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 2.5rem;
-}
-.mainTitle h2{
-  font-weight: 600;
-}
+
 
 .buttonsSection{
   display: flex;
+  margin-top: 1.8rem;
 }
 .tikReqBtn {
   display: flex;
@@ -73,6 +66,7 @@
   padding: 10px;
   border: 2px solid var(--color-primary);
   color: var(--color-dark);
+  height: 3.5rem;
 }
 
 .btnName {

@@ -64,33 +64,27 @@ const Complaint = () => {
         setOpenPriorityList(false);
         setOpenStatusList(false);
         setIsNormalSearch(true);
-        complaintList
-          .filter((a) => a.subject.startsWith(searchText))
-          .map((data) => {
-            return arr.push(data);
-          });
+        complaintList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
+          return arr.push(data);
+        });
         break;
 
       case "Name":
         setOpenPriorityList(false);
         setOpenStatusList(false);
         setIsNormalSearch(true);
-        complaintList
-          .filter((a) => a.name.startsWith(searchText))
-          .map((data) => {
-            return arr.push(data);
-          });
+        complaintList.filter((a) => a.name.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
+          return arr.push(data);
+        });
         break;
 
       case "Priority":
         setOpenPriorityList(true);
         setOpenStatusList(false);
         setIsNormalSearch(false);
-        const checkPriorities = complaintList
-          .filter((a) => a.priority.startsWith(priority))
-          .map((data) => {
-            return arr.push(data);
-          });
+        const checkPriorities = complaintList.filter((a) => a.priority.startsWith(priority)).map((data) => {
+          return arr.push(data);
+        });
         if (priority === "allPriorities") {
           arr = complaintList;
         } else if (checkPriorities.length === 0) {
@@ -102,11 +96,9 @@ const Complaint = () => {
         setOpenPriorityList(false);
         setOpenStatusList(true);
         setIsNormalSearch(false);
-        const checkStatus = complaintList
-          .filter((a) => a.status.startsWith(status))
-          .map((data) => {
-            return arr.push(data);
-          });
+        const checkStatus = complaintList.filter((a) => a.status.startsWith(status)).map((data) => {
+          return arr.push(data);
+        });
         if (status === "allStatus") {
           arr = complaintList;
         } else if (checkStatus.length === 0) {
@@ -132,14 +124,10 @@ const Complaint = () => {
       <div className="container">
         <div className={`${classes.usercomplaint} row`}>
           <div className="col-8">
-            <div className={`${classes.mainTitle}`}>
-              <h2 className="tik-type-title">Concern</h2>
-            </div>
+
             <div className={classes.buttonsSection}>
               <div className={`${classes.filterButtons}`}>
-                <button className={`${classes.button}`} data-filter="all">
-                  Own Concern
-                </button>
+                <h2 className="tik-type-title">Concern</h2>
               </div>
               <button
                 className={`${classes.tikReqBtn}`}
@@ -268,7 +256,7 @@ const Complaint = () => {
                     </p>
                   </div>
                   <div className={`${classes.tikOther}`}>
-                    <p className={`${classes.tikId}`}>#{complaint.id}</p>
+                    <p className={`${classes.tikId}`}>{complaint.ticketId}</p>
 
                     <p
                       className={`${classes.tikPri} `}
