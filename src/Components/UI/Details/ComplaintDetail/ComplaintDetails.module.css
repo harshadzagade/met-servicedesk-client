@@ -10,6 +10,10 @@
     margin-top: 0.2rem;
     cursor: pointer;
 }
+.header h2{
+    font-weight: 600;
+    color: var(--text-primary);
+}
 
 
 
@@ -34,7 +38,6 @@
     padding: 1rem;
     box-shadow: var(--box-shadow);
     transition: all 300ms ease;
-    margin-top: 1rem;
 }
 
 .myform label {

@@ -3,17 +3,33 @@ import classes from './ComplaintCard.module.css';
 
 const ComplaintCard = () => {
     return (
-        <div>
-            <p>Pending: 20</p>
+        <div className={classes.details}>
+            <hr className='mt-3' />
+            <div className={classes.tikStatus}>
+                <label>Pending: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>Assign: 30</p>
+            <div className={classes.tikStatus}>
+                <label>Assign: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>Attending: 35</p>
+            <div className={classes.tikStatus}>
+                <label>Attending: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>close: 70</p>
+            <div className={classes.tikStatus}>
+                <label>Forwaded: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>forwaed: 87</p>
-
+            <div className={classes.tikStatus}>
+                <label>Closed: </label>
+                <p>2000000</p>
+            </div>
+          
         </div>
     );
 };

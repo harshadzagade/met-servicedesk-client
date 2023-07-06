@@ -1,8 +1,9 @@
 .staffform{
   margin-top: 2.5rem;
 }
-.staffform{
+.staffform h2{
   font-weight: 600;
+  color: var(--text-primary);
 }
 .tikTypeTitle{
   display: flex;

@@ -27,7 +27,7 @@
   border: 1px solid gray;
   border-radius: 4px;
   padding: 10px 10px 10px 10px;
-  background-color: #7380ec;
+  background-color: var(--color-primary);
   cursor: pointer;
   white-space: nowrap;
   color: white;
@@ -48,16 +48,18 @@
 }
 
 /* superadmin complaint */
+.superadmincomplaint{
+  margin-top: 2.5rem;
+}
 .mainTitle {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 2.5rem;
- 
   }
 
   .mainTitle h2{
     font-weight: 600;
+    color: var(--text-primary);
   }
 
 .tikReqBtn {

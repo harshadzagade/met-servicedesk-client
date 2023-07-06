@@ -6,6 +6,7 @@
   .allstaff h2 {
     margin-top: 0.6rem;
     font-weight: 600;
+    color: var(--text-primary);
   }
 
   .allCategory{

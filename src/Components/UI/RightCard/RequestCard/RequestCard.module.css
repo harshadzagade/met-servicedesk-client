@@ -1,0 +1,5 @@
+.tikStatus {
+    margin-left: 1rem;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}

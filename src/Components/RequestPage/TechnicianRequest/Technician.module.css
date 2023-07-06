@@ -1,9 +1,10 @@
-/* START REQUESTS Section */
+.technicianreq{
+  margin-top: 2.5rem;
+}
 .mainTitle {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 2.5rem;
 }
 
 .mainTitle h2{

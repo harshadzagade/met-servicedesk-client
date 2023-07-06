@@ -4,6 +4,7 @@
 
 .staffdetails h2 {
     font-weight: 600;
+    color: var(--text-primary);
 }
 
 .detail {
@@ -88,15 +89,14 @@
 }
 
 .updateBtn {
-    background-color: #7380ec;
+    background-color: var(--subbutton-color);
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 30px 10px 30px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
     border-radius: 1rem;
     box-shadow: var(--box-shadow);
@@ -104,14 +104,13 @@
 }
 
 .deleteBtn {
-    background-color: #ff7782;
+    background-color: var(--color-primary);
+    padding: 10px 30px 10px 30px;
     color: white;
-    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
     border-radius: 1rem;
     box-shadow: var(--box-shadow);

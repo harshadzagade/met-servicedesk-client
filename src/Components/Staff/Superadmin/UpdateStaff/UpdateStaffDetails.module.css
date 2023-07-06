@@ -90,12 +90,13 @@
 }
 
 .detailsBtns {
-    display: grid;
-    grid-template-columns: 30vh 30vh;
+    display: flex;
+    justify-content: space-between;
+    margin-left: -1rem;
 }
 
 .updateBtn {
-    background-color: #7380ec;
+    background-color: var(--subbutton-color);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -111,7 +112,7 @@
 }
 
 .deleteBtn {
-    background-color: #ff7782;
+    background-color: var(--color-primary);
     color: white;
     padding: 15px 32px;
     text-align: center;

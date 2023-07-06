@@ -16,7 +16,7 @@ const Technician = () => {
   return (
     <Fragment>
       <div className="container">
-        <div className="row">
+        <div className={`${classes.technicianreq} row`}>
           <div className="col-8">
             <div className={`${classes.mainTitle}`}>
               <h2 className="tik-type-title">Request</h2>

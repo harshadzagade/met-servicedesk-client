@@ -5,7 +5,18 @@
 .staffdetails h2 {
     font-weight: 600;
 }
-
+.header {
+    display: flex;
+    gap: 1rem;
+}
+.header svg{
+    margin-top: 0.2rem;
+    cursor: pointer;
+}
+.header h2{
+    font-weight: 600;
+    color: var(--text-primary);
+}
 .detail {
     background: var(--color-white);
     width: 100%;
@@ -80,39 +91,4 @@
     grid-template-columns: 200px 400px;
     margin-bottom: 1rem;
 
-}
-
-.detailsBtns {
-    display: flex;
-    gap: 3rem;
-}
-
-.updateBtn {
-    background-color: #7380ec;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 1rem;
-    box-shadow: var(--box-shadow);
-    margin-left: 1rem;
-}
-
-.deleteBtn {
-    background-color: #ff7782;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 1rem;
-    box-shadow: var(--box-shadow);
 }

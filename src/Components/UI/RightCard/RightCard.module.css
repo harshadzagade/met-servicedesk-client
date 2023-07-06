@@ -1,6 +1,8 @@
 
-   .compdetails h2 {
+   h2 {
     margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
   }
   
    .compdetails  {
@@ -14,4 +16,5 @@
 
   .compdetails hr{
     max-width: 20rem;
+    margin-top: 0rem;
   }

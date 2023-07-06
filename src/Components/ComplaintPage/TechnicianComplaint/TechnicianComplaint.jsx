@@ -18,16 +18,16 @@ const TechnicianComplaint = () => {
   const navigate = useNavigate();
   return (
     <Fragment>
-         <div className="container">
-        <div className="row">
+      <div className="container">
+        <div className={`${classes.techniciancom} row`}>
           <div className="col-8">
-      <div className={`${classes.mainTitle}`}>
-        <h2>Concern</h2>
-      </div>
-      <TechnicianComplaintNavigation viewLayout={checkLayout} />
-      {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint  />}
-      {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint  />}
-      </div>
+            <div className={`${classes.mainTitle}`}>
+              <h2>Concern</h2>
+            </div>
+            <TechnicianComplaintNavigation viewLayout={checkLayout} />
+            {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint />}
+            {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint />}
+          </div>
           <div className='col-4'>
             <Rightside />
           </div>

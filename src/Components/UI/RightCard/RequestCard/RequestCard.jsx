@@ -3,18 +3,33 @@ import classes from './RequestCard.module.css';
 
 const RequestCard = () => {
     return (
-        <div>
-            <p>Pending</p>
+        <div className={classes.details}>
+            <hr className='mt-3' />
+            <div className={classes.tikStatus}>
+                <label>Pending: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>Assign</p>
+            <div className={classes.tikStatus}>
+                <label>Assign: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>Attending</p>
+            <div className={classes.tikStatus}>
+                <label>Attending: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>close</p>
+            <div className={classes.tikStatus}>
+                <label>Forwaded: </label>
+                <p>2000000</p>
+            </div>
             <hr />
-            <p>forwaed</p>
-
-        </div>
+            <div className={classes.tikStatus}>
+                <label>Closed: </label>
+                <p>2000000</p>
+            </div>
+         </div>
     );
 };
 

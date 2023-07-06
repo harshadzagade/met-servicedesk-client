@@ -8,6 +8,7 @@
 .h2 {
     font-weight: 600;
     margin-right: auto;
+    color: var(--text-primary);
 }
 
 .departmentSelection {
@@ -88,7 +89,7 @@
     margin-top: -0.1rem;
     font-weight: 500;
     border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
-    background-color: #7380ec;
+    background-color: var(--color-primary);
     color: white;
     max-width: 7rem;
     height: 2.5rem;
