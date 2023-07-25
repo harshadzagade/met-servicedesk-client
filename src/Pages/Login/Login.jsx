@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import classes from './Login.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import AuthContext from '../../Components/Context/AuthContext';
-import { Link } from 'react-router-dom';
-
+import AuthContext from '../../Components/Context/AuthContext/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -70,19 +68,18 @@ const Login = () => {
     navigate('/');
   };
 
-
   return (
     <div className={`${classes.login}`}>
       <div className={classes.formPage}>
         <form className="login-form" onSubmit={(e) => getHome(e)}>
-          <input type="email" placeholder="email" ref={emailRef} />
-          <input type="password" placeholder="password" ref={passwordRef} />
+          <input type="email" placeholder="email" ref={emailRef} required/>
+          <input type="password" minLength={6} placeholder="password" ref={passwordRef} required/>
           <button type='submit'>login</button>
           <Link to='/forgotpassword'>Forget Password</Link>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

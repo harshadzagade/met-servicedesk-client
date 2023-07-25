@@ -83,12 +83,7 @@ const NewCompaint = () => {
                 willClose: () => {
                     clearInterval(timerInterval)
                 }
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
-                }
-            })
+            });
         };
         if (showLoading) {
             showLoadingAlert();
@@ -97,59 +92,45 @@ const NewCompaint = () => {
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        selectedFiles.forEach((file) => {
-            formData.append('file', file);
-        });
-        formData.append('staffId', id);
-        formData.append('behalf', isToggled);
-        formData.append('behalfEmailId', isToggled ? behalfEmailRef.current.value : null);
-        formData.append('subject', subjectRef.current.value);
-        formData.append('description', editorData);
-        formData.append('department', department);
-        formData.append('priority', priority);
-        formData.append('category', requestType);
-        formData.append('isRepeated', isRepeated);
-
-        /* const config = {
-            headers: {
-                "content-type": "multipart/form-data"
-            }
-        }; */
-        // const dataFile = new FormData();
-        // dataFile.append('file', file);
-        // dataFile.append('fileName', file.name);
-        // const data = {
-        //     staffId: id,
-        //     behalf: isToggled,
-        //     behalfEmailId: isToggled ? behalfEmailRef.current.value : null,
-        //     subject: subjectRef.current.value,
-        //     description: editorData,
-        //     department: department,
-        //     priority: priority,
-        //     category: requestType,
-        //     isRepeated: false
-        //     // attachment: dataFile
-        // };
-        try {
-            setShowLoading(true);
-            await axios.post('/api/complaint/', formData);
-            setShowLoading(false);
-            Swal.fire(
-                'Complaint Created!',
-                'You have created Complaint successfully',
-                'success'
-            );
-            navigate('/', { state: { refreshSuperHome: true } });
-        } catch (error) {
+        if (editorData.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: `${error.response.data.message}`,
+                title: `Please enter description`,
                 text: 'Please enter valid fields'
             });
+        } else {
+            const formData = new FormData();
+            selectedFiles.forEach((file) => {
+                formData.append('file', file);
+            });
+            formData.append('staffId', id);
+            formData.append('behalf', isToggled);
+            formData.append('behalfEmailId', isToggled ? behalfEmailRef.current.value : null);
+            formData.append('subject', subjectRef.current.value);
+            formData.append('description', editorData);
+            formData.append('department', department);
+            formData.append('priority', priority);
+            formData.append('category', requestType);
+            formData.append('isRepeated', isRepeated);
+            try {
+                setShowLoading(true);
+                await axios.post('/api/complaint/', formData);
+                setShowLoading(false);
+                Swal.fire(
+                    'Complaint Created!',
+                    'You have created Complaint successfully',
+                    'success'
+                );
+                navigate('/complaint', { state: { refreshSuperHome: true } });
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid fields'
+                });
+            }
         }
     }
-
 
     // ckeditor
     const handleeditorChange = (e, editor) => {
@@ -163,7 +144,7 @@ const NewCompaint = () => {
                 <h2>Create new concern</h2>
                 <div className={classes.createStaffform}>
                     <div className={classes.formStaff}>
-                        <form >
+                        <form onSubmit={handleSubmitClick}>
                             <div className={classes.behalf}>
                                 <span>Behalf Email</span>
                                 <div className={classes.behalftoogle}>
@@ -173,32 +154,30 @@ const NewCompaint = () => {
                                 </div>
                             </div>
 
-                            <div className={classes.deptTik}>
-                                <span>Department</span>
-                                <select className={classes.deptSelect} onChange={(e) => setDepartment(e.target.value)}>
-                                    <option value="" hidden>----- Select Department -----</option>
-                                    {
-                                        departments.map((department, key) => (
-                                            <option key={key} value={department}>{department}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
-
                             <div className={classes.priReq}>
+                                <div className={classes.deptTik}>
+                                    <span>Department</span>
+                                    <select className={classes.deptSelect} onChange={(e) => setDepartment(e.target.value)} required>
+                                        <option value="" hidden>----- Select Department -----</option>
+                                        {
+                                            departments.map((department, key) => (
+                                                <option key={key} value={department}>{department}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
                                 <div className={classes.priority}>
                                     <span>Priority</span>
-                                    <select className={classes.priSelect} onChange={(e) => setPriority(e.target.value)}>
+                                    <select className={classes.priSelect} onChange={(e) => setPriority(e.target.value)} required>
                                         <option value="" hidden>----- Select Priority -----</option>
                                         <option value="high">High</option>
                                         <option value="moderate">Moderate</option>
                                         <option value="low">Low</option>
                                     </select>
                                 </div>
-
                                 <div className={classes.reqType}>
                                     <span>Concern Type</span>
-                                    <select className={classes.rtypeSelect} onChange={(e) => setRequestType(e.target.value)}>
+                                    <select className={classes.rtypeSelect} onChange={(e) => setRequestType(e.target.value)} required>
                                         <option value="" hidden>----- Select Type -----</option>
                                         {
                                             categories.map((category, key) => (
@@ -208,42 +187,34 @@ const NewCompaint = () => {
                                     </select>
                                 </div>
                             </div>
-
                             <div className={classes.subject}>
                                 <span>Subject</span>
-                                <input type="text" className={classes.subInput} placeholder="Enter Subject" ref={subjectRef} />
+                                <input type="text" className={classes.subInput} placeholder="Enter Subject" ref={subjectRef} required />
                             </div>
-
                             <div className={classes.description}>
                                 <span>Description</span>
-                                <CKEditor
-                                    onChange={(e, editor) => { handleeditorChange(e, editor) }}
-                                    editor={ClassicEditor}
-                                >
-                                </CKEditor>
+                                <CKEditor onChange={(e, editor) => { handleeditorChange(e, editor) }} editor={ClassicEditor} required />
                             </div>
-
                             <div className={classes.attachment}>
                                 <div className={classes.attachmentSection}>
                                     <span>Attachment</span>
                                     <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
                                 </div>
                                 <div className={classes.repeat}>
-                                    <span>Repeated Complaint:</span>
+                                    <span className='mt-4'>Repeated Complaint:</span>
                                     <div className={classes.isRepeat}>
                                         <input type="checkbox" defaultChecked={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} id="toggle-repeat" />
                                         <label htmlFor="toggle-repeat"></label>
                                     </div>
                                 </div>
                             </div>
-                            <button className={classes.buttonForm} onClick={handleSubmitClick}>Submit</button>
+                            <button className={classes.buttonForm} type='submit'>Submit</button>
                         </form>
                     </div>
                 </div >
             </div>
         </Fragment>
-    )
-
+    );
 };
 
 export default NewCompaint;

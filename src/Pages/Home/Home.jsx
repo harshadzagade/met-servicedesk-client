@@ -1,24 +1,13 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SuperAdmin from '../../Components/Staff/Superadmin/SuperAdmin';
 import Admin from '../../Components/Staff/Admin/Admin';
-import Complaint from '../Complaint/Complaint';
+import DashBoard from '../../Components/UI/DashBoard/DashBoard';
+import Technician from '../../Components/Staff/Technician/Technician';
+import User from '../../Components/Staff/User/User';
 
 const Home = () => {
-    // const [refresh, setRefresh] = useState(false);
-    // const location = useLocation() || null;
-
-    // useEffect(() => {
-    //     setRefresh(false);
-    //     if (location.state) {
-    //         if (location.state.refreshSuperHome) {
-    //             setRefresh(true);
-    //         }
-    //     }
-    //     setRefresh(false);
-    // }, [refresh, location]);
-    
     const navigate = useNavigate();
     const location = useLocation() || null;
     const id = localStorage.getItem('id');
@@ -69,7 +58,6 @@ const Home = () => {
 
                         case 'technician':
                             localStorage.setItem('department', staff.data.staff.department[0]);
-                            navigate('/complaint')
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
                             setIsTechnician(true);
@@ -95,11 +83,13 @@ const Home = () => {
     }, [id, navigate, refresh]);
 
     return (
-        <Fragment>
+        <div className='container-fluid'>
+            <DashBoard />
             {isSuperAdmin && <SuperAdmin />}
             {isAdmin && <Admin />}
-            {(isTechnician || isUser) && <Complaint />}
-        </Fragment>
+            {isTechnician && <Technician />}
+            {isUser && <User />}
+        </div>
     );
 };
 

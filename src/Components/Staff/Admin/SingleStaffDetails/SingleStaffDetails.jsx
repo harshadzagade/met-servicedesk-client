@@ -4,9 +4,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import AdminUpdateStaffdetails from '../UpdateStaffDetails/AdminUpdateStaffDetails';
 
-
 const SingleStaffDetails = () => {
-  
   const id = useParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -46,7 +44,7 @@ const SingleStaffDetails = () => {
         <div className={classes.detail}>
           <div className={classes.staffDetails}>
             <div className={classes.myform}>
-            <div className={classes.idDetails}>
+              <div className={classes.idDetails}>
                 <label className={classes.la}>staffid:</label>
                 <p>#{id.staffId}</p>
               </div>
@@ -58,13 +56,10 @@ const SingleStaffDetails = () => {
                 <label className={classes.ld}>Department:</label>
                 <p >{department}</p>
               </div>
-
               <div className={classes.email}>
                 <label className={classes.le}>Email:</label>
                 <p >{email}</p>
               </div>
-
-
               <div className={classes.Role}>
                 <label className={classes.lf}>Role:</label>
                 <p >{role}</p>
@@ -73,23 +68,20 @@ const SingleStaffDetails = () => {
                 <label className={classes.lg}>PhoneNo:</label>
                 <p>{phoneNumber}</p>
               </div>
-
               <div className={classes.ContactEXT}>
                 <label className={classes.lh}>ContactEXT:</label>
                 <p >{contactExtension}</p>
               </div>
-
               <div className={classes.detailsBtns}>
                 <button className={classes.updateBtn} onClick={() => setOpenUpdate(true)}>Update</button>
                 <button className={classes.deleteBtn} onClick={() => navigate('/')}>Cancel</button>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
 export default SingleStaffDetails;

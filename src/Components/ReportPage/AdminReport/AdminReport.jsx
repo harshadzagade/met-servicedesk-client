@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useContext } from 'react';
 import classes from './AdminReport.module.css';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import Swal from 'sweetalert2';
-import { useContext } from 'react';
 import AdminContext from '../../Context/AdminContext/AdminContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,6 +24,8 @@ const AdminReport = () => {
     const [openCategoryList, setOpenCategoryList] = useState(false);
     const [priority, setPriority] = useState('');
     const [openPriorityList, setOpenPriorityList] = useState(false);
+    const [fromDate, setFromDate] = useState(null);
+    const [toDate, setToDate] = useState(null);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -42,21 +43,25 @@ const AdminReport = () => {
                         case 'allTicketTypes':
                             const full = await axios.get(`/api/report/${selectedStaff}`);
                             setReportList(full.data.report);
+                            setAllReportList(full.data.report);
                             break;
 
                         case 'requests':
                             const requests = await axios.get(`/api/report/request/${selectedStaff}`);
                             setReportList(requests.data.report);
+                            setAllReportList(requests.data.report);
                             break;
 
                         case 'complaints':
                             const complaints = await axios.get(`/api/report/complaint/${selectedStaff}`);
                             setReportList(complaints.data.report);
+                            setAllReportList(complaints.data.report);
                             break;
 
                         default:
                             const defaultValue = await axios.get(`/api/report/${selectedStaff}`);
                             setReportList(defaultValue.data.report);
+                            setAllReportList(defaultValue.data.report);
                             break;
                     }
                 } catch (error) {
@@ -218,7 +223,35 @@ const AdminReport = () => {
 
     const handleRowClick = row => {
         navigate(`/reportdetails/${row.id}`);
-    }
+    };
+
+    const convertDate = (stringDate) => {
+        const validDateStr = new Date(stringDate).toDateString();
+        const date = new Date(validDateStr);
+        const timestamp = date.toISOString();
+        return timestamp;
+    };
+
+    useEffect(() => {
+        const getEntriesAsPerDate = async () => {
+            const filteredData = reportList.filter(report => {
+                const date = new Date(report.createdAt);
+                return date >= new Date(convertDate(fromDate)) && date <= new Date(convertDate(toDate));
+            });
+            setAllReportList(filteredData);
+        };
+        if (fromDate && toDate) {
+            getEntriesAsPerDate();
+        }
+    }, [fromDate, toDate, reportList]);
+
+    const handleFromDateChange = (e) => {
+        setFromDate(e.target.value);
+    };
+
+    const handleToDateChange = (e) => {
+        setToDate(e.target.value);
+    };
 
     return (
         <div>
@@ -240,6 +273,16 @@ const AdminReport = () => {
                 selectedStaff &&
                 <Fragment>
                     <div className={classes.searching}>
+                        <div className={classes.dateNsearch}>
+                            <div style={{ zIndex: 2 }}>
+                                From:
+                                <input type="date" className={classes.dateStyle} onChange={handleFromDateChange} />
+                            </div>
+                            <div style={{ zIndex: 2 }}>
+                                To:
+                                <input type="date" className={classes.dateStyle} onChange={handleToDateChange} />
+                            </div>
+                        </div>
                         {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                         {
                             openTicketTypeList &&
@@ -276,7 +319,7 @@ const AdminReport = () => {
                             <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {searchType}
                             </button>
-                            <div className="dropdown-menu">
+                            <div className="dropdown-menu dropdown-menu-right">
                                 <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
                                 <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
                                 <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>

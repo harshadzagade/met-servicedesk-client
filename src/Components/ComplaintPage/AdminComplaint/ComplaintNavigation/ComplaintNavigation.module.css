@@ -1,6 +1,7 @@
-.buttonsSection{
+.buttonsSection {
   display: flex;
 }
+
 main .filterButtons {
   display: flex;
   padding: 15px 0 10px;
@@ -29,7 +30,7 @@ main .filterButtons {
   opacity: 1;
 }
 
- .filter {
+.filter {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
@@ -37,8 +38,8 @@ main .filterButtons {
   background: var(--color-background);
 }
 
-  
- .tikReqbtn {
+
+.tikReqbtn {
   display: flex;
   gap: 0.5rem;
   transition: all 0.2s ease-in-out;

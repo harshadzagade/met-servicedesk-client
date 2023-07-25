@@ -16,8 +16,19 @@
     display: flex;
 }
 
+.searching {
+    display: flex;
+}
+
+.dateNsearch {
+    display: flex;
+    margin-right: auto;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
 .dateStyle {
-    background:white;
+    background: white;
     border: 1px solid black;
     padding: 5px;
     border-radius: 5px;
@@ -46,21 +57,9 @@
     border: 0.1rem solid #292929;
 }
 
-.searching {
-    display: flex;
-}
-
-.dateNsearch {
-    display: flex;
-    margin-right: auto;
-    margin-top: 0.3rem;
-    gap: 2rem;
-}
-
 .dateNsearch DatePicker {
     color: red;
 }
-
 
 .searchInput {
     margin-top: 0.85rem;
@@ -79,7 +78,7 @@
 }
 
 .searchInput:focus {
-    border-color: #3b49df;
+    border-color: var(--color-primary);
     box-shadow: 1px 1px 0 #3b49df;
 }
 
@@ -95,11 +94,10 @@
     height: 2.5rem;
     gap: 1rem;
     margin-top: 0.8rem;
-
 }
 
 .searchButton:focus {
-    background-color: #7380ec;
+    background-color: var(--color-primary);
 }
 
 .searchButton:active {

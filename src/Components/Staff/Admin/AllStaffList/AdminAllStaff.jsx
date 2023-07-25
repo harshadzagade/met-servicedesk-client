@@ -14,7 +14,6 @@ const AdminAllStaff = () => {
     const adminCtx = useContext(AdminContext);
     const [searchText, setSearchText] = useState('');
     const [searchType, setSearchType] = useState('Firstname');
-    const [refresh, setRefresh] = useState(false);
     const [openNormalList, setOpenNormalList] = useState(false);
     const [department, setDepartment] = useState('');
     const [departments, setDepartments] = useState([]);
@@ -22,10 +21,10 @@ const AdminAllStaff = () => {
     const [role, setRole] = useState('');
     const [openRoleList, setOpenRoleList] = useState(false);
 
- const handleRowClick = row => {
+    const handleRowClick = row => {
         navigate(`/adminstaffdetails/${row.id}`);
-    }
-     
+    };
+
     const columns = [
         {
             name: "ID",
@@ -57,8 +56,7 @@ const AdminAllStaff = () => {
             selector: (row) => row.phoneNumber,
             sortable: true,
         },
-
-    ]
+    ];
 
     useEffect(() => {
         const getStaff = async () => {
@@ -71,10 +69,9 @@ const AdminAllStaff = () => {
             }
         };
         getStaff();
-    }, [id , adminCtx.department ])
+    }, [id, adminCtx.department])
 
-
- useEffect(() => {
+    useEffect(() => {
         const getDepartments = async () => {
             const departments = await axios.get(`/api/staff/departments`);
             setDepartments(departments.data.departments);
@@ -187,11 +184,9 @@ const AdminAllStaff = () => {
         }
     }, [searchText, staffList, searchType]);
 
-   
     return (
         <div className={classes.AdminAllStaff}>
-             <div className={classes.allstaff}>
-            
+            <div className={classes.allstaff}>
                 <h2>Staff List</h2>
                 {openNormalList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                 {
@@ -229,8 +224,8 @@ const AdminAllStaff = () => {
                     </div>
                 </div>
             </div>
-            
-            <DataTable 
+
+            <DataTable
                 columns={columns}
                 data={allStaffList}
                 pagination
@@ -239,12 +234,9 @@ const AdminAllStaff = () => {
                 highlightOnHover
                 subHeader
                 onRowClicked={handleRowClick}
-             
             />
         </div>
-    )
-
-
-    }
+    );
+};
 
 export default AdminAllStaff;

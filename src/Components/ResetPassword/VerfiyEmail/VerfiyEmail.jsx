@@ -18,14 +18,15 @@ const VerfiyEmail = (props) => {
                 text: 'Please enter valid email'
             });
         }
-    }
+    };
+
     return (
         <div className="send-email">
             <div className={classes.Email}>
                 <div className={classes.emailform}>
                     <form className={classes.loginform} onSubmit={handleSendOTP}>
                         <h2>Please enter the email address below </h2>
-                        <input type="text" placeholder="Enter Email" ref={emailRef} />
+                        <input type="email" placeholder="Enter Email" ref={emailRef} />
                         <button type='submit'>send OTP</button>
                     </form>
                 </div>

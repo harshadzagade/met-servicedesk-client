@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import classes from './DepartmentComplaint.module.css';
 import { useNavigate } from 'react-router-dom';
 import Sweetpagination from 'sweetpagination';
-import { useState } from 'react';
 import { iswitch } from 'iswitch';
 import axios from 'axios';
-import { useEffect } from 'react';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 
 const DepartmentComplaint = () => {
@@ -42,7 +40,7 @@ const DepartmentComplaint = () => {
 
   const getCreatedComplaintDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {
@@ -124,7 +122,6 @@ const DepartmentComplaint = () => {
     }
   }, [searchText, complaintList, searchType, priority, status]);
 
-
   return (
     <main>
       <div className={classes.search}>
@@ -146,11 +143,9 @@ const DepartmentComplaint = () => {
               <option value='' hidden>Select Your Status</option>
               <option value='allStatus'>All Status</option>
               <option value='pending'>Pending</option>
-              <option value='assigned'>Assigned</option>
               <option value='attending'>Attending</option>
               <option value='forwarded'>Forwarded</option>
               <option value='closed'>Closed</option>
-              <option value='disapproved'>Disapproved</option>
             </select>
           }
           <div className="btn-group mb-1">
@@ -169,37 +164,46 @@ const DepartmentComplaint = () => {
           <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
         </div>
       </div>
-      
       <div className={`${classes.requests} `}>
         {
-          currentPageData.map((complaint) => (
-            <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/Techcomplaintdetails/${complaint.id}`)} >
-              <div className={`${classes.tikHead}`}>
-                <h3 className={`${classes.tikTitle}`}>
-                  {complaint.subject}
-                </h3>
-                <span className={`${classes.date}`}>
-                  {getCreatedComplaintDate(complaint.createdAt)}
-                </span>
-              </div>
-              <div className={`${classes.tikMsg}`}>
-                <p>
-                  <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
-                </p>
-              </div>
-              <div className={`${classes.tikOther}`}>
-                <p className={`${classes.tikId}`}>
-                  {complaint.ticketId}
-                </p>
-                <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
-                  {complaint.priority}
-                </p>
-                <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'],['assigned', () => '#008080'], ['closed', () => '#ADE792'] ) }}>
-                  {complaint.status}
-                </p>
-              </div>
-            </div>
-          ))
+          allComplaintList.length !== 0 ?
+            <Fragment>
+              {
+                currentPageData.map((complaint) => (
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/techcomplaintdetails/${complaint.id}`)} >
+                    <div className={`${classes.tikHead}`}>
+                      <h3 className={`${classes.tikTitle}`}>
+                        {complaint.subject}
+                      </h3>
+                      <span className={`${classes.date}`}>
+                        {getCreatedComplaintDate(complaint.createdAt)}
+                      </span>
+                    </div>
+                    <div className={`${classes.tikMsg}`}>
+                      <p>
+                        <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
+                      </p>
+                    </div>
+                    <div className={`${classes.tikOther}`}>
+                      <p className={`${classes.tikId}`}>
+                        {complaint.ticketId}
+                      </p>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
+                        {complaint.priority}
+                      </p>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
+                        {complaint.status}
+                      </p>
+                      <p className={`${classes.tikAssigned}`}>
+                        {complaint.assignedName ? 'Assigned to ' + complaint.assignedName : 'Not assigned yet'}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              }
+            </Fragment>
+            :
+            <div>{errorMessage}</div>
         }
         <Sweetpagination
           currentPageData={setCurrentPageData}

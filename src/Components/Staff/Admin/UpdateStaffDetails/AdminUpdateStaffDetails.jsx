@@ -5,14 +5,11 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-
 const AdminUpdateStaffdetails = (props) => {
     const id = useParams();
-const roles = ['technician', 'user'];
-
     const [staff, setStaff] = useState({});
     const [updateRole, setUpdateRole] = useState(staff.role);
-   
+
     useEffect(() => {
         const fetchStaff = async () => {
             try {
@@ -33,19 +30,20 @@ const roles = ['technician', 'user'];
         setUpdateRole(staff.role);
     }, [staff]);
 
-    const handleSubmitClick = async ( id, role) => {
+    const handleSubmitClick = async (id, role) => {
         await axios.put(`/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
         props.onConfirm();
     };
 
     const handleChange = (e) => {
         setUpdateRole(e.target.value);
-    }
+    };
+
     return (
-        <Modal> 
+        <Modal>
             <div >
-            <h1 >Update Role</h1>
-        </div>
+                <h1 >Update Role</h1>
+            </div>
             <div className={classes.detail}>
                 <div >
                     <div className={classes.myform} >
@@ -56,16 +54,15 @@ const roles = ['technician', 'user'];
                                 <option value="user">User</option>
                             </select>
                         </div>
-
                         <div className={classes.detailsBtns}>
-                            <button className={classes.updateBtn} onClick={() => handleSubmitClick( id.staffId, updateRole)}>Update</button>
+                            <button className={classes.updateBtn} onClick={() => handleSubmitClick(id.staffId, updateRole)}>Update</button>
                             <button className={classes.deleteBtn} onClick={() => props.onConfirm()}>Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
         </Modal>
-    )
-}
+    );
+};
 
 export default AdminUpdateStaffdetails;

@@ -6,15 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 
 const TechnicianReport = () => {
-    const [staff, setStaff] = useState({});
     const id = localStorage.getItem('id');
-    const [errorMessage, setErrorMessage] = useState('');
     const [reportList, setReportList] = useState([]);
     const navigate = useNavigate();
     const [allReportList, setAllReportList] = useState([]);
-    const [staffDepartments, setStaffDepartments] = useState([]);
-    const [selectedDepartment, setSelectedDepartment] = useState('');
-    const [departmentStaff, setDepartmentStaff] = useState([]);
     const [searchType, setSearchType] = useState('Subject');
     const [searchText, setSearchText] = useState('');
     const [refresh, setRefresh] = useState(false);
@@ -26,22 +21,8 @@ const TechnicianReport = () => {
     const [openCategoryList, setOpenCategoryList] = useState(false);
     const [priority, setPriority] = useState('');
     const [openPriorityList, setOpenPriorityList] = useState(false);
-
-    useEffect(() => {
-        const getStaffDetails = async () => {
-            try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
-                setStaff(staff.data.staff);
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: `You haven't assigned with any task yet`
-                });
-            }
-        };
-        getStaffDetails();
-    }, [id]);
+    const [fromDate, setFromDate] = useState(null);
+    const [toDate, setToDate] = useState(null);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -53,26 +34,26 @@ const TechnicianReport = () => {
 
     useEffect(() => {
         const getList = async () => {
-            if (staff.id) {
+            if (id) {
                 try {
                     switch (ticketType) {
                         case 'allTicketTypes':
-                            const full = await axios.get(`/api/report/${staff.id}`);
+                            const full = await axios.get(`/api/report/${id}`);
                             setReportList(full.data.report);
                             break;
 
                         case 'requests':
-                            const requests = await axios.get(`/api/report/request/${staff.id}`);
+                            const requests = await axios.get(`/api/report/request/${id}`);
                             setReportList(requests.data.report);
                             break;
 
                         case 'complaints':
-                            const complaints = await axios.get(`/api/report/complaint/${staff.id}`);
+                            const complaints = await axios.get(`/api/report/complaint/${id}`);
                             setReportList(complaints.data.report);
                             break;
 
                         default:
-                            const defaultValue = await axios.get(`/api/report/${staff.id}`);
+                            const defaultValue = await axios.get(`/api/report/${id}`);
                             setReportList(defaultValue.data.report);
                             break;
                     }
@@ -87,25 +68,7 @@ const TechnicianReport = () => {
         };
         getList();
         setRefresh(false);
-    }, [staff.id, refresh, ticketType, selectedDepartment]);
-
-    useEffect(() => {
-        const getStaffByDepartment = async () => {
-            try {
-                if (selectedDepartment.length !== 0) {
-                    const staff = await axios.get(`/api/staff/staffbydepartment/${selectedDepartment}`);
-                    setDepartmentStaff(staff.data.staff);
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
-                });
-            }
-        };
-        getStaffByDepartment();
-    }, [selectedDepartment, staffDepartments]);
+    }, [id, refresh, ticketType]);
 
     useEffect(() => {
         const getReportByCategory = async () => {
@@ -237,13 +200,50 @@ const TechnicianReport = () => {
 
     const handleRowClick = row => {
         navigate(`/reportdetails/${row.id}`);
-    }
+    };
 
+    const convertDate = (stringDate) => {
+        const validDateStr = new Date(stringDate).toDateString();
+        const date = new Date(validDateStr);
+        const timestamp = date.toISOString();
+        return timestamp;
+    };
+
+    useEffect(() => {
+        const getEntriesAsPerDate = async () => {
+            const filteredData = reportList.filter(report => {
+                const date = new Date(report.createdAt);
+                return date >= new Date(convertDate(fromDate)) && date <= new Date(convertDate(toDate));
+            });
+            setAllReportList(filteredData);
+        };
+        if (fromDate && toDate) {
+            getEntriesAsPerDate();
+        }
+    }, [fromDate, toDate, reportList]);
+
+    const handleFromDateChange = (e) => {
+        setFromDate(e.target.value);
+    };
+
+    const handleToDateChange = (e) => {
+        setToDate(e.target.value);
+    };
     return (
         <div>
             <Fragment>
-                <div className={classes.searching}>
                 <h2 className={classes.h2}>Report</h2>
+                <div className={classes.searching}>
+                    <div className={classes.dateNsearch}>
+                        <div style={{ zIndex: 2 }}>
+                            From:
+                            <input type="date" className={classes.dateStyle} onChange={handleFromDateChange} />
+                        </div>
+                        <div style={{ zIndex: 2 }}>
+                            To:
+                            <input type="date" className={classes.dateStyle} onChange={handleToDateChange} />
+                        </div>
+                    </div>
                     {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                     {
                         openTicketTypeList &&
@@ -280,7 +280,7 @@ const TechnicianReport = () => {
                         <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {searchType}
                         </button>
-                        <div className="dropdown-menu">
+                        <div className="dropdown-menu dropdown-menu-right">
                             <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
                             <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>
@@ -300,7 +300,6 @@ const TechnicianReport = () => {
                 onRowClicked={handleRowClick}
                 highlightOnHover
                 subHeader
-
             />
         </div>
     );

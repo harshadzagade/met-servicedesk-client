@@ -7,19 +7,24 @@
     transition: all 300ms ease;
     margin-top: 1rem;
 }
- .createForm{
+
+.createForm {
     display: grid;
     margin-bottom: 1rem;
- }
+}
 
 .myform label {
     font-size: large;
+    color: black;
 }
 
 .myform input {
-    font-size: medium;
-    border: 0.5px solid black;
-    border-radius: 0.2rem;
+    background: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px solid black;
 }
 
 .myform p {
@@ -27,19 +32,35 @@
     border: 0.5px solid black;
     border-radius: 0.2rem;
 }
-
+/* 
 .deptik {
     display: grid;
     grid-template-columns: 50vh;
     margin-bottom: 1rem;
 }
 
-.tags {
-    min-width: 18rem;
-    max-width: 12rem;
-    border: 0.5px solid black;
-    border-radius: 0.2rem;
-    height: fit-content;
+
+.tag {
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding: 2px;
+    border-radius: 0.3rem;
+    margin-left: 0.1rem;
+}
+
+.departmentParent {
+   
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 15px;
+    padding: 5px;
+}  */
+
+.deptik {
+    display: grid;
+    grid-template-columns: 50vh;
+    margin-bottom: 1rem;
 }
 
 .tag {
@@ -56,6 +77,25 @@
     flex-flow: row wrap;
     column-gap: 15px;
     padding: 5px;
+}
+
+.institue {
+    display: grid;
+    margin-bottom: 1rem;
+}
+
+.priority {
+    display: grid;
+    margin-bottom: 1rem;
+}
+
+.priSelect {
+    background: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px solid black;
 }
 
 .detailsBtns {

@@ -1,5 +1,6 @@
 .tikStatus {
-    margin-left: 1rem;
+    margin-left: 22%;
     display: grid;
     grid-template-columns: 50% 50%;
+    font-weight: 600;
 }

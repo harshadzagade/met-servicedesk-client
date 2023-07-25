@@ -5,7 +5,6 @@ import SuperadminReport from '../../Components/ReportPage/SuperadminReport/Super
 import AdminReport from '../../Components/ReportPage/AdminReport/AdminReport';
 import TechnicianReport from '../../Components/ReportPage/TechnicianReport/TechnicianReport';
 
-
 const Report = () => {
     const id = localStorage.getItem('id');
     const navigate = useNavigate();

@@ -4,7 +4,7 @@ import AllStaffExt from './AllStaffList/AllStaffExt';
 const Service = () => {
   return (
     <div>
-      <AllStaffExt/>
+      <AllStaffExt />
     </div>
   );
 };

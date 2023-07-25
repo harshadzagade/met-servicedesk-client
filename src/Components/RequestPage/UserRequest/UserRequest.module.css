@@ -34,10 +34,12 @@
   margin-bottom: 1rem;
 
 }
-.search{
+
+.search {
   display: flex;
 }
-.searchfiltering{
+
+.searchfiltering {
   display: flex;
   margin-right: auto;
 }
@@ -45,13 +47,16 @@
 .datapage {
   margin-top: 0.5rem;
 }
+
 /* START REQUESTS Section */
-
-
-.buttonsSection{
-  display: flex;
-  margin-top: 1.8rem;
+.userreq {
+  margin-top: 2.5rem;
 }
+
+.buttonsSection {
+  display: flex;
+}
+
 .tikReqBtn {
   display: flex;
   gap: 0.5rem;
@@ -88,6 +93,7 @@ main .filterButtons {
   font-size: 18px;
   color: var(--color-dark);
 }
+
 .filter {
   display: flex;
   gap: 1rem;
@@ -96,7 +102,7 @@ main .filterButtons {
   background: var(--color-background);
 }
 
- .requests h2 {
+.requests h2 {
   margin-bottom: 0.8rem;
 }
 
@@ -111,19 +117,19 @@ main .filterButtons {
   align-items: center;
 }
 
- .tikInfo:hover {
+.tikInfo:hover {
   cursor: pointer;
   box-shadow: none;
 }
 
- .tikHead {
+.tikHead {
   display: flex;
   align-items: flex-start;
   position: relative;
   gap: 2rem;
 }
 
- .tikTitle {
+.tikTitle {
   font-size: medium;
 }
 
@@ -132,7 +138,7 @@ main .filterButtons {
   font-size: small;
 }
 
- .tikMsg p {
+.tikMsg p {
   width: 35rem;
   white-space: nowrap;
   overflow: hidden;
@@ -140,7 +146,7 @@ main .filterButtons {
   margin-top: 0.5rem;
 }
 
- .tikOther {
+.tikOther {
   display: flex;
   gap: 3rem;
   align-items: flex-start;
@@ -156,7 +162,7 @@ main .filterButtons {
   background: #5A5A5A;
 }
 
-.tikStatus{
+.tikStatus {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
@@ -164,7 +170,8 @@ main .filterButtons {
   font-size: 1rem;
   color: white;
 }
- .tikPri {
+
+.tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;

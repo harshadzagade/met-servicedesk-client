@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './ToggleSwitch.css'
+import classes from './ToggleSwitch.module.css'
 
 export const ToggleSwitch = ({ toggled, onClick }) => {
     const [isToggled, toggle] = useState(toggled)
@@ -10,9 +10,9 @@ export const ToggleSwitch = ({ toggled, onClick }) => {
     }
 
     return (
-        <label className="switch">
+        <label className={classes.switch}>
             <input type="checkbox" defaultChecked={isToggled} onClick={callback} />
-            <span className="slider round"></span>
+            <span className={`${classes.slider} ${classes.round}`}></span>
         </label>
     );
 };

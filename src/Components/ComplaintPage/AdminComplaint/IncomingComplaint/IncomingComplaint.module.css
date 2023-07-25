@@ -1,6 +1,7 @@
-main{
+main {
   display: grid;
 }
+
 /* search filtes */
 .searchInput {
   background: white;
@@ -38,10 +39,12 @@ main{
   margin-bottom: 1rem;
 
 }
-.search{
+
+.search {
   display: flex;
 }
-.searchfiltering{
+
+.searchfiltering {
   display: flex;
   margin-right: auto;
 }
@@ -49,6 +52,7 @@ main{
 .datapage {
   margin-top: 0.5rem;
 }
+
 /* superadmin complaint */
 .mainTitle {
   display: flex;
@@ -150,7 +154,7 @@ main{
   transition: all 300ms ease;
   margin-bottom: 1rem;
   align-items: center;
-   cursor: pointer;
+  cursor: pointer;
 }
 
 
@@ -194,7 +198,7 @@ main{
   background: #5A5A5A;
 }
 
-.tikStatus{
+.tikStatus {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
@@ -202,6 +206,7 @@ main{
   font-size: 1rem;
   color: white;
 }
+
 .tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);
@@ -210,4 +215,11 @@ main{
   margin: 0px;
   color: white;
   font-size: 1rem;
+}
+
+.tikAssigned {
+  font-size: larger;
+  font-weight: 500;
+  margin-left: auto;
+  margin-bottom: 0rem;
 }

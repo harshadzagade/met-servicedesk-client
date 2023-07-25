@@ -34,10 +34,12 @@
   margin-bottom: 1rem;
 
 }
-.search{
+
+.search {
   display: flex;
 }
-.searchfiltering{
+
+.searchfiltering {
   display: flex;
   margin-right: auto;
 }
@@ -45,133 +47,136 @@
 .datapage {
   margin-top: 0.5rem;
 }
-/* START REQUESTS Section */
-.buttonsSection{
-  display: flex;
-  margin-top: 1.8rem;
-}
-  
-  .tikReqBtn {
-    display: flex;
-    gap: 0.5rem;
-    transition: all 0.2s ease-in-out;
-    -webkit-appearance: none;
-    border-radius: 1rem;
-    font-family: inherit;
-    appearance: none;
-    background: none;
-    font-weight: 700;
-    cursor: pointer;
-    padding: 10px;
-    border: 2px solid var(--color-primary);
-    color: var(--color-dark);
-    height: 3.5rem;
-  }
-  
- .btnName {
-    margin-top: 0.2rem;
-  }
-  
-  
-  
-.filterButtons {
-    display: flex;
-    padding: 15px 0 10px;
-    margin-right: auto;
-  }
-  
-  .button {
-    background: none;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--color-dark);
-  }
 
-  
-  
+/* START REQUESTS Section */
+.usercomplaint {
+  margin-top: 2.5rem;
+}
+
+.buttonsSection {
+  display: flex;
+}
+
+.tikReqBtn {
+  display: flex;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  border-radius: 1rem;
+  font-family: inherit;
+  appearance: none;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-dark);
+  height: 3.5rem;
+}
+
+.btnName {
+  margin-top: 0.2rem;
+}
+
+
+
+.filterButtons {
+  display: flex;
+  padding: 15px 0 10px;
+  margin-right: auto;
+}
+
+.button {
+  background: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-dark);
+}
+
+
+
 .filter {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    margin-top: 1.5rem;
-    background: var(--color-background);
-  }
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  background: var(--color-background);
+}
 
 .tikInfo {
-    background: var(--color-white);
-    width: 100%;
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
-    margin-bottom: 1rem;
-    align-items: center;
-  }
-  
- .tikInfo:hover {
-    cursor: pointer;
-    box-shadow: none;
-  }
-  
- .tikHead {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    gap:2rem;
-  }
-  
- .tikTitle {
-    font-size: medium;
-  }
+  background: var(--color-white);
+  width: 100%;
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--box-shadow);
+  transition: all 300ms ease;
+  margin-bottom: 1rem;
+  align-items: center;
+}
 
-.date{
-    margin-left: auto;
-    font-size: small;
-  }
-  
-  
+.tikInfo:hover {
+  cursor: pointer;
+  box-shadow: none;
+}
 
- .tikMsg p {
-    width: 35rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 0.5rem;
-  }
-  
- .tikOther {
-    display: flex;
-    gap: 3rem;
-    align-items: flex-start;
-  }
-  
-  .tikId {
-    border-radius: var(--border-radius-2);
-    padding: 0 2%;
-    cursor: pointer;
-    margin: 0px;
-    font-size: 1rem;
-    color: white;
-    background: #5A5A5A;
-  }
-  
-  .tikStatus{
-    border-radius: var(--border-radius-2);
-    padding: 0 2%;
-    cursor: pointer;
-    margin: 0px;
-    font-size: 1rem;
-    color: white;
-  }
+.tikHead {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  gap: 2rem;
+}
+
+.tikTitle {
+  font-size: medium;
+}
+
+.date {
+  margin-left: auto;
+  font-size: small;
+}
+
+
+
+.tikMsg p {
+  width: 35rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.5rem;
+}
+
+.tikOther {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.tikId {
+  border-radius: var(--border-radius-2);
+  padding: 0 2%;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1rem;
+  color: white;
+  background: #5A5A5A;
+}
+
+.tikStatus {
+  border-radius: var(--border-radius-2);
+  padding: 0 2%;
+  cursor: pointer;
+  margin: 0px;
+  font-size: 1rem;
+  color: white;
+}
+
 .tikPri {
-    border: 1px solid;
-    border-radius: var(--border-radius-2);
-    padding: 0 2%;
-    cursor: pointer;
-    margin: 0px;
-    color: white;
-    font-size: 1rem;
-  }
-
- 
+  border: 1px solid;
+  border-radius: var(--border-radius-2);
+  padding: 0 2%;
+  cursor: pointer;
+  margin: 0px;
+  color: white;
+  font-size: 1rem;
+}

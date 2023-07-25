@@ -35,10 +35,12 @@
   margin-bottom: 1rem;
 
 }
-.search{
+
+.search {
   display: flex;
 }
-.searchfiltering{
+
+.searchfiltering {
   display: flex;
   margin-right: auto;
 }
@@ -48,50 +50,51 @@
 }
 
 /* superadmin complaint */
-.superadmincomplaint{
+.superadmincomplaint {
   margin-top: 2.5rem;
 }
+
 .mainTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .mainTitle h2{
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-.tikReqBtn {
-    display: flex;
-    gap: 0.5rem;
-    transition: all 0.2s ease-in-out;
-    -webkit-appearance: none;
-    border-radius: 1rem;
-    font-family: inherit;
-    appearance: none;
-    background: none;
-    font-weight: 700;
-    cursor: pointer;
-    padding: 10px;
-    border: 2px solid var(--color-primary);
-    color: var(--color-dark);
-  }
-  
- .btnName {
-    margin-top: 0.2rem;
-  }
-
-
-
-/* START REQUESTS Section */
- .mainTitle {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
- .tikReqBtn {
+.mainTitle h2 {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tikReqBtn {
+  display: flex;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none;
+  border-radius: 1rem;
+  font-family: inherit;
+  appearance: none;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-dark);
+}
+
+.btnName {
+  margin-top: 0.2rem;
+}
+
+
+
+/* START REQUESTS Section */
+.mainTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tikReqBtn {
   display: flex;
   gap: 0.5rem;
   transition: all 0.2s ease-in-out;
@@ -121,7 +124,7 @@
   font-family: inherit;
   font-weight: 700;
   font-size: 18px;
-  color: var(--color-dark); 
+  color: var(--color-dark);
 
 }
 
@@ -133,7 +136,7 @@
   background: var(--color-background);
 }
 
- .requests h2 {
+.requests h2 {
   margin-bottom: 0.8rem;
 }
 
@@ -149,23 +152,22 @@
   cursor: pointer;
 }
 
- .tikHead {
+.tikHead {
   display: flex;
   align-items: flex-start;
-  position: relative;
-  gap:2rem;
+  gap: 2rem;
 }
 
- .tikTitle {
+.tikTitle {
   font-size: medium;
 }
 
- .date{
+.date {
   margin-left: auto;
   font-size: small;
 }
 
- .tikMsg p {
+.tikMsg p {
   width: 35rem;
   white-space: nowrap;
   overflow: hidden;
@@ -179,7 +181,7 @@
   align-items: flex-start;
 }
 
- .tikId {
+.tikId {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
@@ -189,7 +191,7 @@
   background: #5A5A5A;
 }
 
-.tikStatus{
+.tikStatus {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
@@ -198,7 +200,7 @@
   color: white;
 }
 
- .tikPri {
+.tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
@@ -206,4 +208,11 @@
   margin: 0px;
   color: white;
   font-size: 1rem;
+}
+
+.tikAssigned {
+  font-size: larger;
+  font-weight: 500;
+  margin-left: auto;
+  margin-bottom: 0rem;
 }

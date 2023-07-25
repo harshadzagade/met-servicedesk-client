@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import classes from './AllStaffRequest.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SweetPagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import Swal from 'sweetalert2';
 import Rightside from '../../../Righside/Rightside';
@@ -34,10 +32,10 @@ const AllStaffRequest = () => {
     const [adminApproval, setAdminApproval] = useState('');
     const [openAdminApprovalList, setOpenAdminApprovalList] = useState(false);
 
-    useEffect(() => {
-        const sortedData = [...allRequestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        setAllRequestList(sortedData);
-    }, [allRequestList]);
+    // useEffect(() => {
+    //     const sortedData = [...allRequestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    //     setAllRequestList(sortedData);
+    // }, [allRequestList]);
 
     useEffect(() => {
         const getDepartments = async () => {
@@ -70,7 +68,6 @@ const AllStaffRequest = () => {
         };
         getList();
     }, []);
-
 
     useEffect(() => {
         const getRequestByDepartment = async () => {
@@ -314,7 +311,7 @@ const AllStaffRequest = () => {
 
     const getCreatedRequestDate = (createdAt) => {
         const date = new Date(createdAt);
-        return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+        return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
 
     const formatAMPM = (date) => {
@@ -327,11 +324,11 @@ const AllStaffRequest = () => {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
         return strTime;
-    }
+    };
 
     return (
         <main>
-            <div className="container">
+            <div className="container-fluid">
                 <div className={`${classes.staffrequestform} row`}>
                     <div className="col-8">
                         <div className={`${classes.mainTitle}`}>
@@ -427,25 +424,21 @@ const AllStaffRequest = () => {
                                 <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                             </div>
                         </div>
-
-
                         <div className={`${classes.requests} `}>
                             {
                                 currentPageData.map((request) => (
                                     <div key={request.id} className={classes.tikInfo} onClick={() => navigate(`/requestdetails/${request.id}`)}>
                                         <div className={`${classes.tikHead}`}>
-
                                             <h3 className={`${classes.tikTitle}`}>
                                                 {request.subject}
                                             </h3>
-
                                             <span className={`${classes.date}`}>
                                                 {getCreatedRequestDate(request.createdAt)}
                                             </span>
                                         </div>
                                         <div className={`${classes.tikMsg}`}>
                                             <p>
-                                                <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
+                                                <span dangerouslySetInnerHTML={{ __html: request.description }} />
                                             </p>
                                         </div>
                                         <div className={`${classes.tikOther}`}>
@@ -457,10 +450,12 @@ const AllStaffRequest = () => {
                                                 {request.priority}
                                             </p>
 
-                                            <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'],['assigned', () => '#008080'], ['closed', () => '#ADE792'] ) }}>
+                                            <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'], ['disapproved', () => '#2e2a2b'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
                                                 {request.status}
                                             </p>
-
+                                            <p className={`${classes.tikAssigned}`}>
+                                                {request.assignedName ? 'Assigned to ' + request.assignedName : 'Not assigned yet'}
+                                            </p>
                                         </div>
                                     </div>
                                 ))

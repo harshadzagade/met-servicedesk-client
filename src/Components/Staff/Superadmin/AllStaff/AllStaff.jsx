@@ -5,14 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import Swal from 'sweetalert2';
 
-
 const AllStaff = () => {
     const navigate = useNavigate();
     const [staffList, setStaffList] = useState([]);
     const [allStaffList, setAllStaffList] = useState(staffList);
     const [searchText, setSearchText] = useState('');
     const [searchType, setSearchType] = useState('Firstname');
-    const [refresh, setRefresh] = useState(false);
     const [openNormalList, setOpenNormalList] = useState(false);
     const [department, setDepartment] = useState('');
     const [departments, setDepartments] = useState([]);
@@ -27,7 +25,6 @@ const AllStaff = () => {
         };
         getDepartments();
     }, [openDepartmentList]);
-
 
     const columns = [
         {
@@ -60,8 +57,7 @@ const AllStaff = () => {
             selector: (row) => row.phoneNumber,
             sortable: true,
         },
-
-    ]
+    ];
 
     useEffect(() => {
         const getList = async () => {
@@ -77,8 +73,7 @@ const AllStaff = () => {
             }
         };
         getList();
-        setRefresh(false);
-    }, [refresh]);
+    }, []);
 
     useEffect(() => {
         const getStaffByDepartment = async () => {
@@ -190,8 +185,8 @@ const AllStaff = () => {
     };
 
     return (
-        <div >
-            <div className={classes.allstaff}>
+        <div className='container-fluid' >
+            <div className={`${classes.allstaff} `}>
                 <h2>Employees List</h2>
                 {openNormalList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                 {
@@ -240,11 +235,8 @@ const AllStaff = () => {
                 onRowClicked={handleRowClick}
             />
         </div>
-    )
-
-
-}
-
+    );
+};
 
 export default AllStaff;
 

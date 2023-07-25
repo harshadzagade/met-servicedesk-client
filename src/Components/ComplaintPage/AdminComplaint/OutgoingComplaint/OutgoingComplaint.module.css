@@ -35,10 +35,12 @@
   margin-bottom: 1rem;
 
 }
-.search{
+
+.search {
   display: flex;
 }
-.searchfiltering{
+
+.searchfiltering {
   display: flex;
   margin-right: auto;
 }
@@ -46,6 +48,7 @@
 .datapage {
   margin-top: 0.5rem;
 }
+
 /* START complaint Section */
 main .mainTitle {
   display: flex;
@@ -137,14 +140,14 @@ main .tikHead {
   display: flex;
   align-items: flex-start;
   position: relative;
-  gap:2rem;
+  gap: 2rem;
 }
 
 main .tikTitle {
   font-size: medium;
 }
 
-main .date{
+main .date {
   margin-left: auto;
   font-size: small;
 }
@@ -164,7 +167,6 @@ main .tikOther {
   margin-top: 1.2rem;
 }
 
-
 .tikId {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
@@ -175,7 +177,7 @@ main .tikOther {
   background: #5A5A5A;
 }
 
-.tikStatus{
+.tikStatus {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
@@ -194,3 +196,9 @@ main .tikPri {
   font-size: 1rem;
 }
 
+.tikAssigned {
+  font-size: larger;
+  font-weight: 500;
+  margin-left: auto;
+  margin-bottom: 0rem;
+}

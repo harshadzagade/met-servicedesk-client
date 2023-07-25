@@ -26,8 +26,8 @@ import Report from '../Pages/Report/Report';
 import ReportDetails from '../Components/UI/Details/ReportDetails/ReportDetails';
 import ArchiveStaffDetails from '../Components/Staff/Superadmin/Archive/ArchiveStaffDetails/ArchiveStaffDetails';
 import Department from '../Pages/Department/Department';
+import Institute from '../Pages/Institute/Institute';
 const Routing = () => {
-
   return (
     <Router>
       <Sidebar>
@@ -36,6 +36,7 @@ const Routing = () => {
           <Route exact path='/forgotpassword' element={<ResetPassword />} />
           <Route exact path='/' element={<Home />} />
           <Route exact path='/department' element={<Department />} />
+          <Route exact path='/institute' element={<Institute />} />
           <Route exact path='/createstaff' element={<CreateStaff />} />
           <Route exact path='/createstaff' element={<CreateStaff />} />
           <Route exact path='/complaint' element={<Complaint />} />
@@ -43,9 +44,9 @@ const Routing = () => {
           <Route exact path='/reportdetails/:reportId' element={<ReportDetails />} />
           <Route exact path='/newcomplaint' element={<NewCompaint />} />
           <Route exact path='/complaintdetails/:complaintId' element={<ComplaintDetails />} />
-          <Route exact path='/Techcomplaintdetails/:complaintId' element={<TechComplaintDetails />} />
-          <Route exact path='/TechcomplaintAttending/:complaintId' element={<TechnicianAttendingForm />} />
-          <Route exact path='/TechrequestAttending/:requestId' element={<TechnicianRequestAttendingForm />} />
+          <Route exact path='/techcomplaintdetails/:complaintId' element={<TechComplaintDetails />} />
+          <Route exact path='/techcomplaintattending/:complaintId' element={<TechnicianAttendingForm />} />
+          <Route exact path='/techrequestattending/:requestId' element={<TechnicianRequestAttendingForm />} />
           <Route exact path='/newrequest' element={<NewRequest />} />
           <Route exact path='/requestdetails/:requestId' element={<RequestDetails />} />
           <Route exact path='/technicianRequestDetails/:requestId' element={<TechnicianRequestDetails />} />
@@ -62,7 +63,7 @@ const Routing = () => {
         </Routes>
       </Sidebar>
     </Router>
-  )
-}
+  );
+};
 
 export default Routing;

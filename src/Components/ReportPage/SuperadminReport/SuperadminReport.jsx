@@ -26,7 +26,7 @@ const SuperadminReport = () => {
     const [openPriorityList, setOpenPriorityList] = useState(false);
     const [fromDate, setFromDate] = useState(null);
     const [toDate, setToDate] = useState(null);
-    
+
     const convertDate = (stringDate) => {
         const validDateStr = new Date(stringDate).toDateString();
         const date = new Date(validDateStr);
@@ -339,7 +339,7 @@ const SuperadminReport = () => {
                             <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {searchType}
                             </button>
-                            <div className="dropdown-menu">
+                            <div className="dropdown-menu dropdown-menu-right">
                                 <div className="dropdown-item" onClick={() => setSearchType('Ticket Type')}>Ticket Type</div>
                                 <div className="dropdown-item" onClick={() => setSearchType('Subject')}>Subject</div>
                                 <div className="dropdown-item" onClick={() => setSearchType('Category')}>Category</div>

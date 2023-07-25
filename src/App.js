@@ -4,9 +4,8 @@ import Routing from './Routing/Routing';
 
 const App = () => {
   return (
-    <div ><Routing /></div>
-  
-  )
-}
+    <Routing />
+  );
+};
 
-export default App
+export default App;

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import AllStaffRequest from './AllStaffRequest/AllStaffRequest';
 
 const SuperadminRequest = () => {
   return (
-    <div><AllStaffRequest/></div>
-  )
-}
+    <Fragment><AllStaffRequest /></Fragment>
+  );
+};
 
-export default SuperadminRequest
+export default SuperadminRequest;

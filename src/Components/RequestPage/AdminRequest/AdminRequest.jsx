@@ -1,13 +1,11 @@
-import React from 'react';
-import classes from './AdminRequest.module.css'
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import classes from './AdminRequest.module.css';
 import RequestNavigation from './RequestNavigation/RequestNavigation';
 import IncomingRequest from './IncomingRequest/IncomingRequest';
 import OwnRequest from './OwnRequest/OwnRequest';
 import OutgoingDepartmentRequest from './OutgoingDepartmentRequest/OutgoingDepartmentRequest';
 import Rightside from '../../Righside/Rightside';
+
 const AdminRequest = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingRequest');
 
@@ -17,8 +15,8 @@ const AdminRequest = () => {
 
   return (
     <Fragment>
-      <div className="container">
-        <div className="row">
+      <div className="container-fluid">
+        <div className={`${classes.adminRequest} row`}>
           <div className="col-8">
             <div className={`${classes.mainTitle}`}>
               <h2 className="tik-type-title">Request</h2>
@@ -34,8 +32,7 @@ const AdminRequest = () => {
         </div>
       </div>
     </Fragment>
+  );
+};
 
-  )
-}
-
-export default AdminRequest
+export default AdminRequest;

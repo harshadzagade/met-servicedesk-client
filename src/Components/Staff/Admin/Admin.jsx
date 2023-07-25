@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import AdminAllStaff from './AllStaffList/AdminAllStaff';
-import { Fragment } from 'react';
 
 const Admin = () => {
   return (
     <Fragment>
       <AdminAllStaff />
-      </Fragment>
+    </Fragment>
   );
 };
 

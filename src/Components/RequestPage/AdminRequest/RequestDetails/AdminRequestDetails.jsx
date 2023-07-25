@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { Fragment, useContext, useState, useEffect } from 'react';
 import classes from './AdminRequestDetails.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import axios from 'axios';
-import { Fragment } from 'react';
 import Swal from 'sweetalert2';
-import { useContext } from 'react';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
 import Rightside from '../../../Righside/Rightside';
@@ -18,7 +14,7 @@ const AdminRequestDetails = () => {
     const id = paramsId.requestId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [requestData, setRequestData] = useState({});
-    const [staffId , setStaffId] = useState(null);
+    const [staffId, setStaffId] = useState(null);
     ticketCtx.onClickHandler('request', staffId, requestData.id);
 
     useEffect(() => {
@@ -35,8 +31,8 @@ const AdminRequestDetails = () => {
             setRequestData(request.data.request);
             if (request.data.request.behalf) {
                 setStaffId(request.data.request.behalfId);
-            }else{
-                setStaffId(request.data.request  .staffId);
+            } else {
+                setStaffId(request.data.request.staffId);
             }
         };
         getRequestDetails();
@@ -86,16 +82,16 @@ const AdminRequestDetails = () => {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
         return strTime;
-    }
+    };
 
     return (
         <Fragment>
             <main>
-                <div className="container">
+                <div className="container-fluid">
                     <div className={`${classes.reqdetails} row`}>
                         <div className="col-8">
                             <div className={classes.header}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16" onClick={() => navigate('/request')}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16" onClick={() => navigate('/request')}>
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                                 </svg>
                                 <h2>Request details</h2>
@@ -112,19 +108,16 @@ const AdminRequestDetails = () => {
                                             <label>Subject:</label>
                                             <p className={classes.complaintDetailsp}>{requestData.subject}</p>
                                         </div>
-
                                         <div className={classes.description}>
                                             <label>Description:</label>
-                                            <div dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
+                                            <div  className={classes.complaintDetailsp} dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
                                         </div>
-
                                         <hr />
                                         <div className={classes.deptper}>
                                             <div className={classes.department}>
                                                 <label>Department:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.department}</p>
                                             </div>
-
                                             <div className={classes.priorityDetails}>
                                                 <label>Priority:</label>
                                                 <p className={classes.complaintDetailsp}> {requestData.priority}  </p>
@@ -230,9 +223,7 @@ const AdminRequestDetails = () => {
                 </div>
             </main>
         </Fragment>
-
     );
 };
 
-
-export default AdminRequestDetails
+export default AdminRequestDetails;

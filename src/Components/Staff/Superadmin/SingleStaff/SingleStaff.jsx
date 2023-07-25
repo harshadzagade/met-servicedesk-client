@@ -8,26 +8,14 @@ import UpdateStaffDetails from '../UpdateStaff/UpdateStaffDetails';
 const SingleStaff = () => {
   const navigate = useNavigate();
   const id = useParams();
-  const [name, setName] = useState('');
-  const [lname, setLName] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
-  const [phoneno, setPhoneNo] = useState('');
-  const [extention, setExtension] = useState('');
-  const [department, setDepartment] = useState('');
+  const [staff, setStaff] = useState({});
   const [openUpdate, setOpenUpdate] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const getStaff = async () => {
       const staff = await axios.get(`/api/staff/superadmin/staffdetails/${id.staffId}`);
-      setName(staff.data.staff.firstname);
-      setLName(staff.data.staff.lastname);
-      setEmail(staff.data.staff.email);
-      setRole(staff.data.staff.role);
-      setPhoneNo(staff.data.staff.phoneNumber);
-      setExtension(staff.data.staff.contactExtension);
-      setDepartment(staff.data.staff.department);
+      setStaff(staff.data.staff);
     };
     getStaff();
     setRefresh(false);
@@ -75,59 +63,60 @@ const SingleStaff = () => {
         <div className={classes.detail}>
           <div className={classes.staffDetails}>
             <div className={classes.myform}>
-
-              <div className={classes.idDetails}>
+              <div className={classes.staff}>
                 <label className={classes.la}>Staff ID:</label>
                 <p>#{id.staffId}</p>
               </div>
-              <div className={classes.fname}>
+              <div className={classes.staff}>
                 <label className={classes.lb}>Firstname:</label>
-                <p>{name} </p>
+                <p>{staff.firstname} </p>
               </div>
-              <div className={classes.lname}>
+              <div className={classes.staff}>
+                <label className={classes.lb}>Middlename:</label>
+                <p>{staff.middlename} </p>
+              </div>
+              <div className={classes.staff}>
                 <label className={classes.lc}>Lastname:</label>
-                <p >{lname} </p>
+                <p >{staff.lastname} </p>
               </div>
-              <div className={classes.department}>
+              <div className={classes.staff}>
                 <label className={classes.ld}>Department:</label>
-                <p >{department.toString()}</p>
+                <p >{staff.department}</p>
               </div>
-
-              <div className={classes.email}>
+              <div className={classes.staff}>
+                <label className={classes.le}>Institute:</label>
+                <p >{staff.institute}</p>
+              </div>
+              <div className={classes.staff}>
+                <label className={classes.le}>Department type:</label>
+                <p >{staff.departmentType}</p>
+              </div>
+              <div className={classes.staff}>
                 <label className={classes.le}>Email:</label>
-                <p >{email}</p>
+                <p >{staff.email}</p>
               </div>
-
-
-              <div className={classes.Role}>
+              <div className={classes.staff}>
                 <label className={classes.lf}>Role:</label>
-                <p >{role}</p>
+                <p >{staff.role}</p>
               </div>
-              <div className={classes.phoneNo}>
-                <label className={classes.lg}>PhoneNo:</label>
-                <p>{phoneno}</p>
+              <div className={classes.staff}>
+                <label className={classes.lg}>Phone Number:</label>
+                <p>{staff.phoneNumber}</p>
               </div>
-
-              <div className={classes.ContactEXT}>
-                <label className={classes.lh}>ContactEXT:</label>
-                <p >{extention}</p>
+              <div className={classes.staff}>
+                <label className={classes.lh}>Contact Extension:</label>
+                <p >{staff.contactExtension}</p>
               </div>
-
-
-
               <div className={classes.detailsBtns}>
                 <button className={classes.updateBtn} onClick={() => setOpenUpdate(true)}>Update</button>
                 <button className={classes.deleteBtn} onClick={handleDeleteClick}>Delete</button>
               </div>
-
-
             </div>
           </div>
         </div>
       </div>
     </main >
   );
-
 };
 
 export default SingleStaff;

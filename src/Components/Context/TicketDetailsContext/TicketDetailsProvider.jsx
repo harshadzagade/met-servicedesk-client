@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TicketDetailsContext from './TicketDetailsContext';
 
 const TicketDetailsProvider = props => {
-
     const [ticketType, setTicketType] = useState('');
     const [staffId, setStaffId] = useState(null);
     const [ticketId, setTicketId] = useState(null);
-
-    console.log(ticketType, staffId, ticketId);
 
     const ticketClickHandler = (type, staffId, ticketId) => {
         setTicketType(type);

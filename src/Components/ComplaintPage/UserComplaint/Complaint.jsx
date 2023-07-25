@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Complaint.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -24,9 +24,7 @@ const Complaint = () => {
 
   useEffect(() => {
     const getList = async () => {
-      const list = await axios.get(
-        `/api/complaint/owncomplaints/${id}`
-      );
+      const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
       setComplaintList(list.data.complaints);
     };
     getList();
@@ -119,25 +117,21 @@ const Complaint = () => {
       setAllComplaintList(complaintList);
     }
   }, [searchText, complaintList, searchType, priority, status]);
+
   return (
     <main>
-      <div className="container">
+      <div className="container-fluid">
         <div className={`${classes.usercomplaint} row`}>
           <div className="col-8">
-
             <div className={classes.buttonsSection}>
               <div className={`${classes.filterButtons}`}>
                 <h2 className="tik-type-title">Concern</h2>
               </div>
-              <button
-                className={`${classes.tikReqBtn}`}
-                onClick={() => navigate("/newcomplaint")}
-              >
+              <button className={`${classes.tikReqBtn}`} onClick={() => navigate("/newcomplaint")}>
                 <span className="material-icons-sharp btn-icon">add</span>
                 <span className={`${classes.btnName}`}> New Ticket</span>
               </button>
             </div>
-
             <div className={classes.search}>
               <div className={classes.searchfiltering}>
                 {isNormalSearch && (
@@ -149,16 +143,8 @@ const Complaint = () => {
                   />
                 )}
                 {openPriorityList && (
-                  <select
-                    value={priority}
-                    className={`${classes.optionSearchBox}`}
-                    name="priorities"
-                    required
-                    onChange={(e) => setPriority(e.target.value)}
-                  >
-                    <option value="" hidden>
-                      Select Your Priority
-                    </option>
+                  <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
+                    <option value="" hidden>Select Your Priority</option>
                     <option value="allPriorities">All Priorities</option>
                     <option value="high">High</option>
                     <option value="moderate">Moderate</option>
@@ -166,78 +152,34 @@ const Complaint = () => {
                   </select>
                 )}
                 {openStatusList && (
-                  <select
-                    value={status}
-                    className={`${classes.optionSearchBox}`}
-                    name="status"
-                    required
-                    onChange={(e) => setStatus(e.target.value)}
-                  >
-                    <option value="" hidden>
-                      Select Your Status
-                    </option>
+                  <select value={status} className={`${classes.optionSearchBox}`}name="status" required onChange={(e) => setStatus(e.target.value)}>
+                    <option value="" hidden>Select Your Status</option>
                     <option value="allStatus">All Status</option>
                     <option value="pending">Pending</option>
-                    <option value="assigned">Assigned</option>
                     <option value="attending">Attending</option>
                     <option value="forwarded">Forwarded</option>
                     <option value="closed">Closed</option>
-                    <option value="disapproved">Disapproved</option>
                   </select>
                 )}
                 <div className="btn-group">
-                  <button
-                    type="button"
-                    className={`${classes.searchButton} dropdown-toggle`}
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
+                  <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {searchType}
                   </button>
                   <div className="dropdown-menu">
-                    <div
-                      className="dropdown-item"
-                      onClick={() => setSearchType("Subject")}
-                    >
-                      Subject
-                    </div>
-                    <div
-                      className="dropdown-item"
-                      onClick={() => setSearchType("Name")}
-                    >
-                      Name
-                    </div>
-                    <div
-                      className="dropdown-item"
-                      onClick={() => setSearchType("Priority")}
-                    >
-                      Priority
-                    </div>
-                    <div
-                      className="dropdown-item"
-                      onClick={() => setSearchType("Status")}
-                    >
-                      Status
-                    </div>
+                    <div className="dropdown-item" onClick={() => setSearchType("Subject")}>Subject</div>
+                    <div className="dropdown-item" onClick={() => setSearchType("Name")}>Name</div>
+                    <div className="dropdown-item" onClick={() => setSearchType("Priority")}>Priority</div>
+                    <div className="dropdown-item" onClick={() => setSearchType("Status")}>Status</div>
                   </div>
                 </div>
               </div>
               <div className={classes.datapage}>
-                <DataPerPage
-                  numberOfPages={numberOfPages}
-                  setNumberOfPages={setNumberOfPages}
-                />
+                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages}/>
               </div>
             </div>
-
             <div className={`${classes.requests} `}>
               {currentPageData.map((complaint) => (
-                <div
-                  key={complaint.id}
-                  className={`${classes.tikInfo}`}
-                  onClick={() => navigate(`/complaintdetails/${complaint.id}`)}
-                >
+                <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)}>
                   <div className={`${classes.tikHead}`}>
                     <h3 className={`${classes.tikTitle}`}>
                       {complaint.subject}
@@ -247,44 +189,14 @@ const Complaint = () => {
                     </span>
                   </div>
                   <div className={`${classes.tikMsg}`}>
-                    <p>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: complaint.description,
-                        }}
-                      ></div>
-                    </p>
+                    <p><div dangerouslySetInnerHTML={{ __html: complaint.description }}/></p>
                   </div>
                   <div className={`${classes.tikOther}`}>
                     <p className={`${classes.tikId}`}>{complaint.ticketId}</p>
-
-                    <p
-                      className={`${classes.tikPri} `}
-                      style={{
-                        background: iswitch(
-                          complaint.priority,
-                          ["high", () => "#E70000"],
-                          ["moderate", () => "#FFBF00"],
-                          ["low", () => "#90EE90"]
-                        ),
-                      }}
-                    >
+                    <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ["high", () => "#E70000"], ["moderate", () => "#FFBF00"], ["low", () => "#90EE90"])}}>
                       {complaint.priority}
                     </p>
-
-                    <p
-                      className={`${classes.tikStatus}`}
-                      style={{
-                        background: iswitch(
-                          complaint.status,
-                          ["pending", () => "#FF6000"],
-                          ["forwarded", () => "#9681EB"],
-                          ["attending", () => " #30D5C8"],
-                          ["assigned", () => "#008080"],
-                          ["closed", () => "#ADE792"]
-                        ),
-                      }}
-                    >
+                    <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ["pending", () => "#FF6000"], ["forwarded", () => "#9681EB"], ["attending", () => " #30D5C8"], ["closed", () => "#ADE792"])}}>
                       {complaint.status}
                     </p>
                   </div>
@@ -306,4 +218,5 @@ const Complaint = () => {
     </main>
   );
 };
+
 export default Complaint;

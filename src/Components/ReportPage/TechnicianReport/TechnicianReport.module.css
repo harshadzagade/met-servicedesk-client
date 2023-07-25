@@ -11,6 +11,25 @@
     margin-top: 1.3rem;
 }
 
+.searching {
+    display: flex;
+}
+
+.dateNsearch {
+    display: flex;
+    margin-right: auto;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.dateStyle {
+    background: white;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
 .departmentSelection {
     align-items: center;
     display: flex;
@@ -36,11 +55,6 @@
 .dropdownSelect:hover {
     outline: none;
     border: 0.1rem solid #292929;
-}
-
-.searching{
-    display: flex;
-    justify-content: end;
 }
 
 .searchInput {
@@ -70,7 +84,7 @@
     margin-top: -0.1rem;
     font-weight: 500;
     border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
-    background-color: #7380ec;
+    background-color: var(--color-primary);
     color: white;
     max-width: 7rem;
     height: 2.5rem;
@@ -80,7 +94,7 @@
 }
 
 .searchButton:focus {
-    background-color: #7380ec;
+    background-color: var(--color-primary);
 }
 
 

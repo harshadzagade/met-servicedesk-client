@@ -6,17 +6,17 @@ import OwnComplaint from '../AdminComplaint/OwnComplaint/OwnComplaint';
 import ComplaintNavigation from './ComplaintNavigation/ComplaintNavigation';
 import Rightside from '../../Righside/Rightside';
 
-
 const AdminComplaint = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingComplaint');
+  
   const checkLayout = (value) => {
     setOpenLayout(value);
   };
 
   return (
     <Fragment>
-      <div className="container">
-        <div className="row">
+      <div className="container-fluid">
+        <div className={`${classes.adminComplaint} row`}>
           <div className="col-8">
             <div className={`${classes.mainTitle}`}>
               <h2 className="tik-type-title">Concern</h2>
@@ -32,7 +32,7 @@ const AdminComplaint = () => {
         </div>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
-export default AdminComplaint
+export default AdminComplaint;

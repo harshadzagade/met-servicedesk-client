@@ -6,11 +6,13 @@
     display: flex;
     gap: 1rem;
 }
-.header svg{
+
+.header svg {
     margin-top: 0.2rem;
     cursor: pointer;
 }
-.header h2{
+
+.header h2 {
     font-weight: 600;
     color: var(--text-primary);
 }
@@ -42,18 +44,18 @@
 /* details */
 .idDetails {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 25% 75%;
 }
 
-
-
-
-.name {
+.subjectDetails {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 25% 75%;
 }
 
-/* end details */
+.description {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
 .deptper {
     display: grid;
@@ -62,17 +64,14 @@
 
 .department {
     display: grid;
-    grid-template-columns: 200px 100px;
-}
-
-
-
-.priorityDetails {
-    display: grid;
     grid-template-columns: 50% 50%;
 }
 
-/* request type and status */
+.priorityDetails {
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
 .reqsta {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -81,54 +80,42 @@
 
 .ComplaintType {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 50% 50%;
 }
 
 .status {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 40% 60%;
 }
 
-/* end  request type and status */
+.behalf {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
-/* approval */
+.techName {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
 .approval {
     display: grid;
-    grid-template-columns: 30vh 70vh;
+    grid-template-columns: 25% 75%;
 }
 
-/* end approval */
-.techName {
+.date {
+
     display: grid;
-    grid-template-columns: 200px 100px;
-}
+    grid-template-columns: 25% 75%;
 
-.subjectDetails {
-    display: grid;
-    grid-template-columns: 30vh 70vh;
-}
-
-
-
-.description {
-    display: grid;
-    grid-template-columns: 30vh 70vh;
 }
 
 .attachment {
     display: grid;
-    grid-template-columns: 30vh 70vh;
+    grid-template-columns: 25% 75%;
 }
 
-.date {
-    display: grid;
-    grid-template-columns: 200px 200px;
-}
-
-
-
-
+/* buttons */
 .id-details p {
     background: white;
     padding: 10px;

@@ -6,11 +6,13 @@
     display: flex;
     gap: 1rem;
 }
-.header svg{
+
+.header svg {
     margin-top: 0.2rem;
     cursor: pointer;
 }
-.header h2{
+
+.header h2 {
     font-weight: 600;
     color: var(--text-primary);
 }
@@ -26,7 +28,7 @@
     background-color: var(--color-primary);
     color: white;
     cursor: pointer;
-    max-width: 4rem;
+    max-width: 14rem;
 }
 
 
@@ -57,18 +59,18 @@
 /* details */
 .idDetails {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 25% 75%;
 }
 
-
-
-
-.status {
+.subjectDetails {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 25% 75%;
 }
 
-/* end details */
+.description {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
 .deptper {
     display: grid;
@@ -77,17 +79,14 @@
 
 .department {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 50% 50%;
 }
-
-
 
 .priorityDetails {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 40% 60%;
 }
 
-/* request type and status */
 .reqsta {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -96,49 +95,42 @@
 
 .ComplaintType {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 50% 50%;
 }
 
 .status {
     display: grid;
-    grid-template-columns: 200px 100px;
+    grid-template-columns: 40% 60%;
 }
 
-/* end  request type and status */
+.behalf {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
-/* approval */
+.techName {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
 .approval {
     display: grid;
-    grid-template-columns: 30vh 70vh;
-}
-
-/* end approval */
-.techName {
-    display: grid;
-    grid-template-columns: 200px 300px;
-}
-
-.subjectDetails {
-    display: grid;
-    grid-template-columns: 25% 70%;
-}
-
-
-
-.description {
-    display: grid;
-    grid-template-columns: 25% 70%;
+    grid-template-columns: 25% 75%;
 }
 
 .date {
+
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 25% 75%;
+
 }
 
+.attachment {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
 
-
-
+/* buttons */
 .id-details p {
     background: white;
     padding: 10px;

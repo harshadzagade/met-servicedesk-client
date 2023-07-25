@@ -4,12 +4,13 @@ import classes from './ComplaintDetails.module.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
 import Rightside from '../../../Righside/Rightside';
+
 const ComplaintDetails = () => {
     const navigate = useNavigate();
     const id = useParams().complaintId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [complaintData, setComplaintData] = useState({});
-    const [staffId , setStaffId] = useState(null);
+    const [staffId, setStaffId] = useState(null);
     ticketCtx.onClickHandler('complaint', staffId, complaintData.id);
 
     useEffect(() => {
@@ -18,7 +19,7 @@ const ComplaintDetails = () => {
             setComplaintData(complaint.data.complaint);
             if (complaint.data.complaint.behalf) {
                 setStaffId(complaint.data.complaint.behalfId);
-            }else{
+            } else {
                 setStaffId(complaint.data.complaint.staffId);
             }
         };
@@ -63,7 +64,7 @@ const ComplaintDetails = () => {
     return (
         <Fragment>
             <main>
-                <div className='container '>
+                <div className='container-fluid '>
                     <div className={`${classes.complaintdetils} row`}>
                         <div className="col-8">
                             <div className={classes.header}>
@@ -86,7 +87,7 @@ const ComplaintDetails = () => {
                                         </div>
                                         <div className={classes.description}>
                                             <label>Description:</label>
-                                            <div dangerouslySetInnerHTML={{ __html: complaintData.description }}></div>
+                                            <div className={classes.complaintDetailsp} dangerouslySetInnerHTML={{ __html: complaintData.description }}></div>
                                         </div>
                                         <hr />
                                         <div className={classes.deptper}>
@@ -109,7 +110,7 @@ const ComplaintDetails = () => {
                                                 <p className={classes.complaintDetailsp}>{complaintData.status} </p>
                                             </div>
                                         </div>
-                                        <div className={classes.idDetails}>
+                                        <div className={classes.behalf}>
                                             <label>Behalf:</label>
                                             <p className={classes.complaintDetailsp}>{complaintData.behalf ? 'Yes' : 'No'}</p>
                                         </div>
@@ -146,7 +147,7 @@ const ComplaintDetails = () => {
                                             </div>
                                         }
                                         <hr />
-                                        <div className={classes.description}>
+                                        <div className={classes.attachment}>
                                             <label>Attachment:</label>
                                             {
                                                 complaintData.attachment && (complaintData.attachment.length === 0 ?

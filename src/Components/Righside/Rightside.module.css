@@ -1,93 +1,95 @@
-.right{
+.right {
   margin-right: 1rem;
 }
 
 
-.profile{
+.profile {
   display: flex;
-    
+
 }
-.profile span{
+
+.profile span {
   font-size: xx-large;
   margin-top: 0.2rem;
 }
-.role{
+
+.role {
   margin-bottom: 0.5rem;
 }
 
 
 
-  /* drop down */
-  .dropdown {
-    display: inline-block;
-    position: relative;
-    margin-right: 18rem;
-  }
-  
-  .ddButton {
-    display: inline-block;
-    border: 1px solid gray;
-    border-radius: 4px;
-    padding: 10px 30px 10px 20px;
-    background-color: #7380ec;
-    color: #ffffff;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  
-  .ddButton:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0; 
-    height: 0; 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid black;
-  }
-  
-  .ddButton:hover {
-    background-color: #eeeeee;
-  }
-  
-  
-  .ddInput {
-    display: none;
-  }
-  
-  .ddMenu {
-    position: absolute;
-    top: 100%;
-    border: 1px solid rgba(132, 139, 200, 0.18);
-    border-radius: 4px;
-    padding: 0;
-    margin: 2px 0 0 0;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
-    background-color: #ffffff;
-    list-style-type: none;
-  }
-  
-  .ddInput + .ddMenu {  
-    display: none;
-  } 
-  
-  .ddInput:checked + .ddMenu {
-    display: block;
-  } 
-  
-  .ddMenu li {
-    padding: 10px 20px;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  
-  .ddMenu li:hover {
-    background-color: #7380ec;
-  }
-  
-  .ddMenu li a {
-    display: block;
-    margin: -10px -20px;
-    padding: 10px 20px;
-  }
+/* drop down */
+.dropdown {
+  display: inline-block;
+  position: relative;
+  margin-right: 18rem;
+}
+
+.ddButton {
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 30px 10px 20px;
+  background-color: #7380ec;
+  color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ddButton:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
+
+.ddButton:hover {
+  background-color: #eeeeee;
+}
+
+
+.ddInput {
+  display: none;
+}
+
+.ddMenu {
+  position: absolute;
+  top: 100%;
+  border: 1px solid rgba(132, 139, 200, 0.18);
+  border-radius: 4px;
+  padding: 0;
+  margin: 2px 0 0 0;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  list-style-type: none;
+}
+
+.ddInput+.ddMenu {
+  display: none;
+}
+
+.ddInput:checked+.ddMenu {
+  display: block;
+}
+
+.ddMenu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ddMenu li:hover {
+  background-color: #7380ec;
+}
+
+.ddMenu li a {
+  display: block;
+  margin: -10px -20px;
+  padding: 10px 20px;
+}

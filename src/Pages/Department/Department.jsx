@@ -47,20 +47,18 @@ const Department = () => {
                 axios.delete(`/api/department/deletedepartment/${id}`);
                 setRefresh(true);
                 Swal.fire(
-                    'Staff Deleted!',
-                    'You have deleted staff successfully',
+                    'Department Deleted!',
+                    'You have deleted department successfully',
                     'success'
                 );
             }
-        }
-        ).catch((error) => {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: `Unable to delete department`
-                });
-            }
-        )
+        }).catch((error) => {
+            Swal.fire({
+                icon: 'error',
+                title: `${error.response.data.message}`,
+                text: `Unable to delete department`
+            });
+        });
     };
 
     const handleEditClick = (id) => {
@@ -75,20 +73,30 @@ const Department = () => {
             sortable: true,
         },
         {
+            name: "Type",
+            selector: (row) => row.type
+        },
+        {
             name: "Categories",
-            selector: (row) => row.category.toString(),
+            selector: (row) => row.type === 'service' ? row.category.toString() : 'No categories available'
         },
         {
             name: "Action",
-            cell: row => <div><button className='btn btn-primary' onClick={() => handleEditClick(row.id)}>Edit</button><button className='btn btn-danger ml-2' onClick={() => handleDeleteDepartment(row.id)}>Delete</button></div>
+            cell: row => <div><button disabled={row.type === 'service' ? false : true} className='btn btn-primary' onClick={() => handleEditClick(row.id)}>Edit</button><button className='btn btn-danger ml-2' onClick={() => handleDeleteDepartment(row.id)}>Delete</button></div>
         }
-    ]
+    ];
 
     useEffect(() => {
-        const result = departmentData.filter(department => {
-            return department.department.toLowerCase().match(search.toLowerCase())
-        });
-        setFilteredDepartments(result);
+        if (departmentData) {
+            const result = departmentData.filter(department => {
+                if (department.department) {
+                    return department.department.toLowerCase().match(search.toLowerCase());
+                } else {
+                    return null;
+                }
+            });
+            setFilteredDepartments(result);
+        }
     }, [search, departmentData]);
 
     const handleUpdateCancel = () => {
@@ -133,7 +141,7 @@ const Department = () => {
                 }
             />
         </div>
-    )
-}
+    );
+};
 
 export default Department;

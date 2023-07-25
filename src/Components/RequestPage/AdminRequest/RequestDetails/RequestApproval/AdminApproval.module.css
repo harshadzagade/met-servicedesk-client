@@ -1,9 +1,11 @@
-.approvalform{
+.approvalform {
     margin-top: 2.5rem;
 }
-.approvalform h2{
+
+.approvalform h2 {
     font-weight: 600;
 }
+
 .RequestApproval {
     background: var(--color-white);
     width: 100%;
@@ -19,27 +21,17 @@
     margin-left: 2rem;
 }
 
-.form span {
-    display: flex;
-    justify-content: center;
-    font-size: medium;
-}
-
-
-
 .approvalStatus {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    gap: 2rem;
     margin-bottom: 1rem;
+
 }
 
 
 .selectStaff {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
+    gap: 5rem;
     margin-bottom: 1rem;
 }
 
@@ -50,7 +42,6 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;
-    margin-right: 29.5rem;
 
 }
 
@@ -103,7 +94,7 @@
     font-size: 1em;
     border: 1px solid black;
 }
-    
+
 
 
 
@@ -121,7 +112,7 @@
     justify-content: space-between;
 }
 
-.cancelBtn{
+.cancelBtn {
     flex: 1;
     gap: 2rem;
     padding: 10px;
@@ -133,4 +124,4 @@
     box-shadow: var(--box-shadow);
     justify-content: space-between;
     margin-left: 1rem;
-  }
+}

@@ -3,70 +3,36 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import classes from './CreateStaff.module.css';
-
+import CheckboxDropdown from '../../../UI/CheckboxDropdown/CheckboxDropdown';
 
 const CreateStaff = () => {
-
     const firstnameRef = useRef();
+    const middlenameRef = useRef();
     const lastnameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const phoneRef = useRef();
     const extensionRef = useRef();
     const navigate = useNavigate();
-    const [input, setInput] = useState('');
     const [departmentList, setDepartmentList] = useState([]);
-    const [isKeyReleased, setIsKeyReleased] = useState(false);
-
-    // const [departmentItems, setDepartmentItems] = useState([]);
-    // const [departmentValue, setDepartmentValue] = useState('');
-    // const [role, setRole] = useState('demo');
-
-    // const handleKeyDown = evt => {
-    //     if (["Enter", "Tab", ","].includes(evt.key)) {
-    //         evt.preventDefault();
-    //         const value = departmentValue.trim().match(/^[a-z0-9]+$/i)
-    //         try {
-    //             let toBeAdded = value.filter(department => !departmentItems.includes(department));
-    //             setDepartmentItems([...departmentItems, ...toBeAdded]);
-    //         } catch (error) {
-    //             console.log('Please enter valid department name');
-    //         }
-    //         setDepartmentValue('');
-    //     }
-    // };
-
-    // const handleChange = evt => {
-    //     setDepartmentValue(evt.target.value);
-    // };
-
-    // const handleDelete = item => {
-    //     setDepartmentItems(departmentItems.filter(i => i !== item));
-    // };
-
-    // const handlePaste = evt => {
-    //     evt.preventDefault();
-    //     let paste = evt.clipboardData.getData("text");
-    //     var departments = paste.match(/^[a-z0-9]+$/i);
-    //     try {
-    //         let toBeAdded = departments.filter(department => !departmentItems.includes(department));
-    //         setDepartmentItems([...departmentItems, ...toBeAdded]);
-    //     } catch (error) {
-    //         console.log('Please enter valid department name');
-    //     }
-    // };
+    const [departments, setDepartments] = useState([]);
+    const [institutes, setInstitutes] = useState([]);
+    const [institute, setInstitute] = useState('');
+    const [departmentType, setDepartmentType] = useState('');
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
         const data = {
             firstname: firstnameRef.current.value,
+            middlename: middlenameRef.current.value,
             lastname: lastnameRef.current.value,
             email: emailRef.current.value.toLowerCase(),
             password: passwordRef.current.value,
+            institute: institute,
             department: departmentList,
-            // role: role,
+            departmentType: departmentType,
             phoneNumber: +phoneRef.current.value,
-            contactExtension: +extensionRef.current.value
+            contactExtension: extensionRef.current.value
         };
         try {
             await axios.post('/api/staff/superadmin/createStaff', data);
@@ -80,115 +46,130 @@ const CreateStaff = () => {
             Swal.fire({
                 icon: 'error',
                 title: `${error.response.data.message}`,
-                text: 'Please enter valid fields'
+                text: 'Unable to fetch departments'
             });
         }
     };
 
-    //department function 
-    //set the department functionality
-    const onChange = (e) => {
-        const { value } = e.target;
-        setInput(value);
-    };
+    useEffect(() => {
+        const getInstitutes = async () => {
+            try {
+                const institutes = await axios.get(`/api/institute/`);
+                setInstitutes(institutes.data.instituteData);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch institutes'
+                });
+            }
+        };
+        getInstitutes();
+    }, []);
+
+    useEffect(() => {
+        const getDepartments = async () => {
+            try {
+                const departments = await axios.get(`/api/department/departments`);
+                setDepartments(departments.data.departments);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Please enter valid fields'
+                });
+            }
+        };
+        getDepartments();
+    }, []);
 
     useEffect(() => {
         setDepartmentList(departmentList);
     }, [departmentList]);
 
-    const onKeyDown = (e) => {
-        const { key } = e;
-        const trimmedInput = input.toUpperCase().trim();
-
-        if (key === 'Enter' && trimmedInput.length && !departmentList.includes(trimmedInput)) {
-            e.preventDefault();
-            setDepartmentList(prevState => [...prevState, trimmedInput]);
-            setInput('');
-        }
-
-        if (key === "Backspace" && !input.length && departmentList.length && isKeyReleased) {
-            const tagsCopy = [...departmentList];
-            const poppedTag = tagsCopy.pop();
-            e.preventDefault();
-            setDepartmentList(tagsCopy);
-            setInput(poppedTag);
-        }
-
-        setIsKeyReleased(false);
+    const handleDepartmentData = (values) => {
+        setDepartmentList(values);
     };
 
-    const onKeyUp = () => {
-        setIsKeyReleased(true);
-    };
-
-
-    const deleteTag = (index) => {
-        setDepartmentList(prevState => prevState.filter((tag, i) => i !== index))
-    };
     return (
-        <div >
+        <div>
             <main>
                 <div className={classes.staffform}>
                     <h2>Create Employee</h2>
                     <div className={`${classes.createStaffform}`}>
                         <div className={`${classes.formStaff}`}>
-                            <form method='POST' onSubmit={handleSubmitClick}>
+                            <form method='GET' onSubmit={handleSubmitClick}>
                                 <div className={classes.names}>
+                                    {/* <div className={`${classes.createForm}`}>
+                                        <select name="dog-names" id="dog-names">
+                                            <option value="rigatoni">MR.</option>
+                                            <option value="dave">DR.</option>
+                                            <option value="pumpernickel">MS.</option>
+                                        </select>
+                                    </div> */}
                                     <div className={`${classes.createForm}`}>
                                         <span>First Name</span>
-                                        <input type="text" className={classes.createstaffInput} placeholder="Enter your name" ref={firstnameRef} />
+                                        <input type="text" className={classes.createstaffInput} placeholder="Enter your firstname" ref={firstnameRef} required />
+                                    </div>
+                                    <div className={`${classes.createForm}`}>
+                                        <span>Middle Name</span>
+                                        <input type="text" className={classes.createstaffInput} placeholder="Enter your middlename" ref={middlenameRef} required />
                                     </div>
                                     <div className={`${classes.createForm}`}>
                                         <span>Last Name</span>
-                                        <input type="text" className={classes.createstaffInput} placeholder="Enter your last name" ref={lastnameRef} />
+                                        <input type="text" className={classes.createstaffInput} placeholder="Enter your last name" ref={lastnameRef} required />
                                     </div>
                                 </div>
                                 <div className={classes.emailpass}>
                                     <div className={`${classes.createForm}`}>
                                         <span>Email</span>
-                                        <input type="text" className={classes.createstaffInput} placeholder="Enter your email" ref={emailRef} />
+                                        <input type="email" className={classes.createstaffInput} placeholder="Enter your email" ref={emailRef} required />
                                     </div>
                                     <div className={`${classes.createForm}`}>
                                         <span>Password</span>
-                                        <input type="password" className={classes.createstaffInput} placeholder="Enter your password" ref={passwordRef} />
+                                        <input type="password" minLength={6} className={classes.createstaffInput} placeholder="Enter your password" ref={passwordRef} required />
                                     </div>
                                 </div>
-                                <div className={classes.deptik}>
-                                    <label>Department</label>
-                                    <div className={`${classes.createForm}`}>
-                                        <input
-                                            value={input}
-                                            placeholder="Enter a department"
-                                            className={classes.createstaffInput}
-                                            onKeyDown={onKeyDown}
-                                            onKeyUp={onKeyUp}
-                                            onChange={onChange}
 
-                                        />
-                                        <div className={classes.departmentParent}>
-                                            {departmentList.map((tag, index) => (
-                                                <div className={classes.tag}>
-                                                    {tag} &nbsp;
-                                                    <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
-                                                </div>
-                                            ))}
-                                        </div>
+                                <div className={classes.instDept}>
+                                    <div className={classes.institute}>
+                                        <span>Institute</span>
+                                        <select className={classes.instituteSelect} onChange={(e) => setInstitute(e.target.value)} required>
+                                            <option value="" hidden>----- Select Institute -----</option>
+                                            {
+                                                institutes.map((institute) => (
+                                                    <option key={institute.id} value={institute.institute}>{institute.institute}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
 
+                                    <div className={classes.deptik}>
+                                        <label>Department</label>
+                                        <CheckboxDropdown data={departments} selectedData={handleDepartmentData} />
+                                    </div>
+
+                                    <div className={classes.category}>
+                                        <span>Department Type</span>
+                                        <select className={classes.categoryType} onChange={(e) => setDepartmentType(e.target.value)} required>
+                                            <option value='' hidden>----- Select type -----</option>
+                                            <option value='teaching'>teaching</option>
+                                            <option value='non-teaching'>non-teaching</option>
+                                        </select>
+                                    </div>
                                 </div>
+
 
                                 <div className={classes.phone}>
-                                     <div className={`${classes.createForm}`}>
-                                    <span>Phone No.</span>
-                                    <input type="text" className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef} />
-                                </div>
+                                    <div className={`${classes.createForm}`} >
+                                        <span>Phone No.</span>
+                                        <input type="tel" name="phone" pattern="[0-9]{10}" className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef} required />
+                                    </div>
                                     <div className={`${classes.createForm}`}>
                                         <span>Extension</span>
-                                        <input type="text" className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} />
+                                        <input type="tel" name="phone" pattern="[0-9]{3}" maxLength={3} className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} required />
                                     </div>
                                 </div>
-
-
                                 <button type="submit" className={`${classes.createButton}`} >Submit</button>
                             </form>
                         </div>
@@ -196,9 +177,6 @@ const CreateStaff = () => {
                 </div>
             </main>
         </div>
-
-
-
     );
 };
 

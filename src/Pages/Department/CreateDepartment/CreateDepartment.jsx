@@ -9,6 +9,8 @@ const CreateDepartment = (props) => {
   const [input, setInput] = useState('');
   const [categoriesList, setCategoriesList] = useState([]);
   const [isKeyReleased, setIsKeyReleased] = useState(false);
+  const [departmentType, setDepartmentType] = useState('');
+
   //department function 
   //set the department functionality
   const onChange = (e) => {
@@ -20,7 +22,7 @@ const CreateDepartment = (props) => {
     const { key } = e;
     const trimmedInput = input.trim();
 
-    if (key === 'Enter' && trimmedInput.length && !categoriesList.includes(trimmedInput)) {
+    if (key === ',' && trimmedInput.length && !categoriesList.includes(trimmedInput)) {
       e.preventDefault();
       setCategoriesList(prevState => [...prevState, trimmedInput]);
       setInput('');
@@ -44,11 +46,20 @@ const CreateDepartment = (props) => {
     setCategoriesList(prevState => prevState.filter((tag, i) => i !== index))
   };
 
-  const handleCreateDepartment = async () => {
+  const handleCreateDepartment = async (e) => {
+    e.preventDefault();
+    if (departmentType === 'service' &&  (categoriesList.length === 0)) {
+      Swal.fire({
+        icon: 'error',
+        title: `Please add categories`,
+        text: `You haven't added any categories`
+      });
+    }else{
     try {
       const data = {
         department: departmentRef.current.value.toUpperCase().trim(),
-        category: categoriesList
+        type: departmentType,
+        category: departmentType === 'service' ? categoriesList : null
       };
       await axios.post(`/api/department/createdepartment`, data);
       props.onConfirm();
@@ -64,6 +75,7 @@ const CreateDepartment = (props) => {
         text: 'Unable to create department'
       });
     }
+    }
   };
 
   return (
@@ -73,38 +85,48 @@ const CreateDepartment = (props) => {
       </div>
       <div className={classes.detail}>
         <div >
-          <div className={classes.myform} >
+          <form className={classes.myform} onSubmit={handleCreateDepartment}>
             <div className={`${classes.createForm}`}>
               <label>Department:</label>
-              <input type="text" className={classes.createstaffInput} placeholder="Enter Department" ref={departmentRef} />
+              <input type="text" className={classes.createstaffInput} placeholder="Enter Department" required ref={departmentRef} />
             </div>
-            <div className={classes.deptik}>
-              <label>Category:</label>
-              <div className={`${classes.createForm}`}>
-                <input
-                  value={input}
-                  placeholder="Enter a department"
-                  className={classes.createstaffInput}
-                  onKeyDown={onKeyDown}
-                  onKeyUp={onKeyUp}
-                  onChange={onChange}
-
-                />
-                <div className={classes.departmentParent}>
-                  {categoriesList.map((tag, index) => (
-                    <div className={classes.tag}>
-                      {tag} &nbsp;
-                      <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
-                    </div>
-                  ))}
+            <div className={classes.priority}>
+              <label>Department Type:</label>
+              <select className={classes.priSelect} onChange={(e) => setDepartmentType(e.target.value)} required>
+                <option value='' hidden>----- Select type -----</option>
+                <option value='regular'>regular</option>
+                <option value='service'>service</option>
+              </select>
+            </div>
+            {
+              departmentType === 'service' &&
+              <div className={classes.deptik}>
+                <label>Category:</label>
+                <div className={`${classes.createForm}`}>
+                  <input
+                    value={input}
+                    placeholder="Enter a department"
+                    className={classes.createstaffInput}
+                    onKeyDown={onKeyDown}
+                    onKeyUp={onKeyUp}
+                    onChange={onChange}
+                  />
+                  <div className={classes.departmentParent}>
+                    {categoriesList.map((tag, index) => (
+                      <div key={index} className={classes.tag}>
+                        {tag} &nbsp;
+                        <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            }
             <div className={classes.detailsBtns}>
-              <button className={classes.updateBtn} onClick={handleCreateDepartment}>Create</button>
+              <button className={classes.updateBtn} type='submit'>Create</button>
               <button className={classes.deleteBtn} onClick={props.onConfirm}>Cancel</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </Modal>

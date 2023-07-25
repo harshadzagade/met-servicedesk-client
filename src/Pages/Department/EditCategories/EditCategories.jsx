@@ -25,8 +25,6 @@ const EditCategories = (props) => {
         getCategories();
     }, [props.departmentId]);
 
-    //department function 
-    //set the department functionality
     const onChange = (e) => {
         const { value } = e.target;
         setInput(value);
@@ -35,13 +33,11 @@ const EditCategories = (props) => {
     const onKeyDown = (e) => {
         const { key } = e;
         const trimmedInput = input.trim();
-
-        if (key === 'Enter' && trimmedInput.length && !categoriesList.includes(trimmedInput)) {
+        if (key === ',' && trimmedInput.length && !categoriesList.includes(trimmedInput)) {
             e.preventDefault();
             setCategoriesList(prevState => [...prevState, trimmedInput]);
             setInput('');
         }
-
         if (key === "Backspace" && !input.length && categoriesList.length && isKeyReleased) {
             const tagsCopy = [...categoriesList];
             const poppedTag = tagsCopy.pop();
@@ -77,27 +73,19 @@ const EditCategories = (props) => {
 
     return (
         <Modal>
-            <div >
-                <h1 >Update Department</h1>
+            <div>
+                <h1>Update Department</h1>
             </div>
             <div className={classes.detail}>
-                <div >
-                    <div className={classes.myform} >
+                <div>
+                    <form className={classes.myform} onSubmit={handleUpdateCategories}>
                         <div className={classes.deptik}>
                             <label>Department</label>
                             <div className={`${classes.createForm}`}>
-                                <input
-                                    value={input}
-                                    placeholder="Enter a department"
-                                    className={classes.createstaffInput}
-                                    onKeyDown={onKeyDown}
-                                    onKeyUp={onKeyUp}
-                                    onChange={onChange}
-
-                                />
+                                <input value={input} placeholder="Enter a department" className={classes.createstaffInput} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} required/>
                                 <div className={classes.departmentParent}>
                                     {categoriesList.map((tag, index) => (
-                                        <div className={classes.tag}>
+                                        <div key={index} className={classes.tag}>
                                             {tag} &nbsp;
                                             <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
                                         </div>
@@ -105,15 +93,15 @@ const EditCategories = (props) => {
                                 </div>
                             </div>
                         </div>
-
                         <div className={classes.detailsBtns}>
-                            <button className={classes.updateBtn} onClick={() => handleUpdateCategories()}>Update</button>
+                            <button className={classes.updateBtn} type='submit' >Update</button>
                             <button className={classes.deleteBtn} onClick={props.onConfirm}>Cancel</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </Modal>
     );
 };
+
 export default EditCategories;

@@ -7,6 +7,7 @@
   margin-left: 35rem;
   margin-top: 5rem;
 }
+
 .formPage {
   position: relative;
   z-index: 1;
@@ -19,6 +20,7 @@
   border-radius: 1rem;
 
 }
+
 .formPage input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -31,6 +33,7 @@
   font-size: 14px;
   border-radius: 0.5rem;
 }
+
 .formPage button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -47,6 +50,9 @@
   border-radius: 0.5rem;
   margin-bottom: 1rem;
 }
-.formPage button:hover,.formPage button:active,.formPage button:focus {
+
+.formPage button:hover,
+.formPage button:active,
+.formPage button:focus {
   background: #43A047;
 }

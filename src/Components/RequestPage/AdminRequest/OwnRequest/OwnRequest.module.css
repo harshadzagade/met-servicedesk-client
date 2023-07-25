@@ -130,3 +130,10 @@ main .tikPri {
   color: white;
   font-size: 1rem;
 }
+
+.tikAssigned {
+  font-size: larger;
+  font-weight: 500;
+  margin-left: auto;
+  margin-bottom: 0rem;
+}

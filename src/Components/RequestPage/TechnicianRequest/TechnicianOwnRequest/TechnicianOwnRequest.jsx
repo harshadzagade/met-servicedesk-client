@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import classes from './TechnicianOwnRequest.module.css';
 import { useNavigate } from 'react-router-dom';
 import Sweetpagination from 'sweetpagination';
-import { useState } from 'react';
 import { iswitch } from 'iswitch';
-import { useEffect } from 'react';
 import axios from 'axios';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 
-
 const TechnicianOwnRequest = () => {
+  const navigate = useNavigate();
   const id = localStorage.getItem('id');
   const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
   const [requestList, setRequestList] = useState([]);
@@ -23,7 +21,6 @@ const TechnicianOwnRequest = () => {
   const [openPriorityList, setOpenPriorityList] = useState(false);
   const [status, setStatus] = useState('');
   const [openStatusList, setOpenStatusList] = useState(false);
-
 
   useEffect(() => {
     const getList = async () => {
@@ -40,10 +37,9 @@ const TechnicianOwnRequest = () => {
     getList();
   }, [id, numberOfPages]);
 
-
   const getCreatedRequestDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {
@@ -56,8 +52,7 @@ const TechnicianOwnRequest = () => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
     return strTime;
-  }
-
+  };
 
   useEffect(() => {
     let arr = [];
@@ -126,12 +121,7 @@ const TechnicianOwnRequest = () => {
     }
   }, [searchText, requestList, searchType, priority, status]);
 
-
-
-
-  const navigate = useNavigate();
   return (
-
     <main>
       <div className={classes.search}>
         <div className={classes.searchfiltering}>
@@ -177,38 +167,45 @@ const TechnicianOwnRequest = () => {
       </div>
       <div className={`${classes.requests} `}>
         {
-          currentPageData.map((request) => (
-            <div key={request.id} className={classes.tikInfo} onClick={() => navigate(`/requestdetails/${request.id}`)}>
-              <div className={`${classes.tikHead}`}>
+          allRequestList.length !== 0 ?
+            <Fragment>
+              {
+                currentPageData.map((request) => (
+                  <div key={request.id} className={classes.tikInfo} onClick={() => navigate(`/requestdetails/${request.id}`)}>
+                    <div className={`${classes.tikHead}`}>
 
-                <h3 className={`${classes.tikTitle}`}>
-                  {request.subject}
-                </h3>
-
-
-                <span className={`${classes.date}`}>
-                  {getCreatedRequestDate(request.createdAt)}
-                </span>
-              </div>
-              <div className={`${classes.tikMsg}`}>
-                <p>
-                  <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
-                </p>
-              </div>
-              <div className={`${classes.tikOther}`}>
-                <p className={`${classes.tikId}`}>
-                  {request.ticketId}
-                </p>
-                <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
-                  {request.priority}
-                </p>
-                <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'],['assigned', () => '#008080'], ['closed', () => '#ADE792'] ) }}>
-                  {request.status}
-                </p>
-
-              </div>
-            </div>
-          ))
+                      <h3 className={`${classes.tikTitle}`}>
+                        {request.subject}
+                      </h3>
+                      <span className={`${classes.date}`}>
+                        {getCreatedRequestDate(request.createdAt)}
+                      </span>
+                    </div>
+                    <div className={`${classes.tikMsg}`}>
+                      <p>
+                        <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
+                      </p>
+                    </div>
+                    <div className={`${classes.tikOther}`}>
+                      <p className={`${classes.tikId}`}>
+                        {request.ticketId}
+                      </p>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
+                        {request.priority}
+                      </p>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
+                        {request.status}
+                      </p>
+                      <p className={`${classes.tikAssigned}`}>
+                        {request.assignedName ? 'Assigned to ' + request.assignedName : 'Not assigned yet'}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              }
+            </Fragment>
+            :
+            <div>{errorMessage}</div>
         }
         <Sweetpagination
           currentPageData={setCurrentPageData}
@@ -218,7 +215,7 @@ const TechnicianOwnRequest = () => {
         />
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default TechnicianOwnRequest
+export default TechnicianOwnRequest;

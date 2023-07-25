@@ -5,18 +5,22 @@
 .staffdetails h2 {
     font-weight: 600;
 }
+
 .header {
     display: flex;
     gap: 1rem;
 }
-.header svg{
+
+.header svg {
     margin-top: 0.2rem;
     cursor: pointer;
 }
-.header h2{
+
+.header h2 {
     font-weight: 600;
     color: var(--text-primary);
 }
+
 .detail {
     background: var(--color-white);
     width: 100%;

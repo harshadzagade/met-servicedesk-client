@@ -12,6 +12,7 @@
 
 .myform label {
     font-size: large;
+    color: black;
 }
 
 .myform input {
@@ -49,31 +50,16 @@
     grid-template-columns: 30vh 30vh;
     margin-bottom: 1rem;
 }
-
-.tags {
-    min-width: 18rem;
-    max-width: 12rem;
-    border: 0.5px solid black;
-    border-radius: 0.2rem;
-    height: fit-content;
+.institute{
+    display: grid;
+    grid-template-columns: 30vh 30vh;
+    margin-bottom: 1rem;
 }
-
-.tag {
-    background-color: black;
-    color: white;
-    width: fit-content;
-    padding: 2px;
-    border-radius: 0.3rem;
-    margin-left: 0.1rem;
+.category{
+    display: grid;
+    grid-template-columns: 30vh 30vh;
+    margin-bottom: 1rem;
 }
-
-.departmentParent {
-    display: flex;
-    flex-flow: row wrap;
-    column-gap: 15px;
-    padding: 5px;
-}
-
 .createForm {
     display: grid;
     margin-bottom: 1rem;

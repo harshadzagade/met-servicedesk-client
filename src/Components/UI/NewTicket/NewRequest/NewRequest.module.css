@@ -1,9 +1,11 @@
-.newrequest{
+.newrequest {
     margin-top: 2.4rem;
 }
-.newrequest h2{
+
+.newrequest h2 {
     font-weight: 600;
 }
+
 .createStaffform {
     background: var(--color-white);
     width: 100%;
@@ -13,8 +15,6 @@
     transition: all 300ms ease;
     margin-bottom: 1rem;
     align-items: center;
-    overflow: auto;
-    max-height: 35rem;
 }
 
 
@@ -27,7 +27,8 @@
     border: 1px solid black;
     margin-left: 20vh;
 }
-.behalftoogle{
+
+.behalftoogle {
     display: flex;
 }
 
@@ -35,53 +36,48 @@
     display: grid;
     grid-template-columns: 100px 600px;
     margin-bottom: 1rem;
-} 
+}
 
 
 /*  toggle btn */
-.behalf  label {
-	position: relative;
-	cursor: pointer;
-	display :block;
-	width: 50px;
-	height: 30px;
-	background: #cccccc;
-	border-radius: 50px;
-	transition: 300ms linear;
+.behalf label {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    width: 50px;
+    height: 30px;
+    background: #cccccc;
+    border-radius: 50px;
+    transition: 300ms linear;
 }
 
-.behalf  label:before {
-	position: absolute;
-	top: 50%;
-	left: 2px;
-	transform: translateY(-50%);
-	content: "";
-	display: block;
-	width: 25px;
-	height: 25px;
-	background: #ffffff;
-	border-radius: 50%;
-	transition: left 300ms linear;
+.behalf label:before {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: left 300ms linear;
 }
 
-.behalf input:checked + label {
-	background: #000000;
+.behalf input:checked+label {
+    background: #000000;
 }
 
-.behalf  input:checked + label:before {
-	left: 23px;
+.behalf input:checked+label:before {
+    left: 23px;
 }
+
 /* end toggle btn */
 
 /* discription */
 
-.deptTik {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
+
 
 
 
@@ -94,33 +90,34 @@
     font-size: 1em;
 
 }
+
 /* end discription */
 
 /* priority and request type */
-.priReq{
-    display: flex;
-    gap:25% ;
+.priReq {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    margin-top: 1rem;
+    gap: 1rem;
 
 }
-.priority{
+
+.deptTik {
     display: grid;
-    grid-template-columns: 234px;
     margin-bottom: 1rem;
 }
 
-.priority  span{
-    margin-bottom: 0.5rem;
-}
-
-.reqType{
+.priority {
     display: grid;
-    grid-template-columns: 207px;
     margin-bottom: 1rem;
 }
 
-.reqType  span{
-    margin-bottom: 0.5rem;
+
+.reqType {
+    display: grid;
+    margin-bottom: 1rem;
 }
+
 
 .priSelect {
     background: white;
@@ -128,7 +125,6 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;
-    margin-right: 2rem;
 
 }
 
@@ -141,14 +137,9 @@
     border: 1px solid black;
 
 }
-
-/* end priority and request type */
-
-/* subject */
-
 .subject {
     display: grid;
-    grid-template-columns: 623px;
+    grid-template-columns: 60%;
     margin-bottom: 1rem;
     gap: 0.5rem;
 }
@@ -164,6 +155,7 @@
     font-size: 1em;
     border: 1px solid black;
 }
+
 /* end subject */
 
 .description {
@@ -174,18 +166,16 @@
     margin-bottom: 1rem;
 }
 
-
-.attachment{
+.attachment {
     display: flex;
-    gap:25% ;
-
+    grid-template-columns: 30% 30%;
+    margin-top: 1rem;
+    gap: 1rem;
 }
 
 .attachmentSection {
     display: grid;
-    grid-template-columns: 50vh ;
     margin-bottom: 1rem;
-    gap: 0.5rem;
 }
 
 .attachInput {
@@ -201,47 +191,45 @@
 
 .repeat {
     display: grid;
-    grid-template-columns: 12rem 12rem;
+    grid-template-columns: 150px 15px;
     margin-bottom: 1rem;
-} 
-.repeat span{
-    margin-top: 1.5rem;
 }
 
 /*  toggle btn */
 
-.repeat  label {
-	position: relative;
-	cursor: pointer;
-	display :block;
-	width: 50px;
-	height: 30px;
-	background: #cccccc;
-	border-radius: 50px;
-	transition: 300ms linear;
+.repeat label {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    width: 50px;
+    height: 30px;
+    background: #cccccc;
+    border-radius: 50px;
+    transition: 300ms linear;
 }
 
-.repeat  label:before {
-	position: absolute;
-	top: 50%;
-	left: 2px;
-	transform: translateY(-50%);
-	content: "";
-	display: block;
-	width: 25px;
-	height: 25px;
-	background: #ffffff;
-	border-radius: 50%;
-	transition: left 300ms linear;
+.repeat label:before {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: left 300ms linear;
 }
 
-.repeat input:checked + label {
-	background: #000000;
+.repeat input:checked+label {
+    background: #000000;
 }
 
-.repeat  input:checked + label:before {
-	left: 23px;
+.repeat input:checked+label:before {
+    left: 23px;
 }
+
 /* end toggle btn */
 
 .buttonForm {

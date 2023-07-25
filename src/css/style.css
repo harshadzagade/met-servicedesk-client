@@ -3,28 +3,28 @@
 
 /* ROOT VARIABLES */
 :root {
- 
+
   --color-danger: #ff7782;
   --color-success: #41f1b6;
   --color-warning: #ffbb55;
   --color-white: #fff;
   --color-info-dark: #7d8da1;
-  --color-info-light:#F6F6F9;
+  --color-info-light: #F6F6F9;
   --color-dark: #6e7288;
- 
+
   --color-primary-variant: #111e88;
   --color-dark-variant: #677483;
- 
+
 
   --card-border-radius: 1rem;
   --border-radius-1: 0.4rem;
   --border-radius-2: 0.8rem;
   --border-radius-3: 1.2rem;
 
-  --card-padding: 1.8rem;
+  --card-padding: 1.4rem 1.4rem 1.4rem 1.4rem;
   --padding-1: 1.2rem;
 
-  --box-shadow: 0 0.1rem 0.5rem  var(--color-light);
+  --box-shadow: 0 0.1rem 0.5rem var(--color-light);
 
   --border: 2px solid #ddd;
   --left-msg-bg: #ececec;
@@ -32,13 +32,14 @@
 
   --color-primary: #CE1212;
   --color-background: #F5F5F5;
-  --text-primary:#1B1717;
-  --text-secondary:#F5F5F5;
-  --hover-color: #9aaabd;
+  --text-primary: #1B1717;
+  --text-secondary: #F5F5F5;
+  --hover-color: #d3e2ec;
+  --hover-sidebar: #646f72;
   --subbutton-color: #677483;
 
-  
-  
+
+
 }
 
 /* DARK THEME VARIABLES */
@@ -48,7 +49,7 @@
   --color-dark: #edeffd;
   --color-dark-variant: #a3bdcc;
   --color-light: rgba(0, 0, 0, 0.4);
-  --box-shadow: 0 0.8rem 0.5rem  var(--color-light);
+  --box-shadow: 0 0.8rem 0.5rem var(--color-light);
 }
 
 /* STYLES */
@@ -76,10 +77,11 @@ body {
   user-select: none;
   overflow-x: hidden;
   color: var(--color-dark);
-  
- 
+
+
 }
-.helpdesk{
+
+.helpdesk {
   display: grid;
   width: 100%;
   margin: 0 auto;
@@ -196,15 +198,16 @@ main .dept-tik {
 }
 
 main .dept-select {
-  
+
   background: white;
   border: 1px solid black;
   padding: 10px;
   border-radius: 5px;
   font-size: 1em;
   margin-right: 29.5rem;
-  
+
 }
+
 /* create staff start */
 main .create-staffform {
   background: var(--color-white);
@@ -216,22 +219,25 @@ main .create-staffform {
   margin-bottom: 1rem;
   align-items: center;
 }
-main .form-staff{
- margin-left: 2rem;
+
+main .form-staff {
+  margin-left: 2rem;
 }
+
 main .form-staff span {
   display: flex;
   justify-content: center;
   font-size: medium;
 }
 
-main .create-form{
+main .create-form {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-   margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
-main .behalf-input{
+
+main .behalf-input {
   background: white;
   padding: 10px;
   border: none;
@@ -239,10 +245,10 @@ main .behalf-input{
   font-size: 1em;
   margin-right: 29rem;
   border: 1px solid black;
-  
+
 }
 
-main .create-button{
+main .create-button {
   flex: 1;
   gap: 2rem;
   padding: 10px;
@@ -251,6 +257,7 @@ main .create-button{
   background-color: var(--color-primary);
   color: white;
 }
+
 main .create-button {
   cursor: pointer;
   box-shadow: var(--box-shadow);
@@ -260,7 +267,7 @@ main .create-button {
 /* end */
 
 
-main .priority{
+main .priority {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -268,16 +275,17 @@ main .priority{
   margin-bottom: 1rem;
 }
 
-main .pri-select{
+main .pri-select {
   background: white;
   border: 1px solid black;
   padding: 10px;
   border-radius: 5px;
   font-size: 1em;
   margin-right: 2rem;
-  
+
 }
-main .rtype-select{
+
+main .rtype-select {
   background: white;
   padding: 10px;
   border: none;
@@ -297,13 +305,14 @@ main .subject {
   margin-bottom: 1rem;
 }
 
-main .behalf{
+main .behalf {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-   margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
-main .behalf-input{
+
+main .behalf-input {
   background: white;
   padding: 10px;
   border: none;
@@ -311,9 +320,10 @@ main .behalf-input{
   font-size: 1em;
   margin-right: 29rem;
   border: 1px solid black;
-  
+
 }
-main .sub-input{
+
+main .sub-input {
   flex: 1;
   gap: 2rem;
   background: white;
@@ -324,7 +334,7 @@ main .sub-input{
   border: 1px solid black;
 }
 
-main .des{
+main .des {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -332,7 +342,7 @@ main .des{
   margin-bottom: 1rem;
 }
 
-main .des-text-area{
+main .des-text-area {
   flex: 1;
   gap: 2rem;
   background: white;
@@ -343,10 +353,10 @@ main .des-text-area{
   width: 300px;
   height: 150px;
   border: 1px solid black;
-  
+
 }
 
-main .attachment{
+main .attachment {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -354,17 +364,17 @@ main .attachment{
   margin-bottom: 1rem;
 }
 
-main .attach-input{
+main .attach-input {
   flex: 1;
   gap: 2rem;
   padding: 10px;
   border: 1px solid black;
   border-radius: 5px;
   font-size: 1em;
- 
+
 }
 
-main .button-form{
+main .button-form {
   flex: 1;
   gap: 2rem;
   padding: 10px;
@@ -373,6 +383,7 @@ main .button-form{
   background-color: var(--color-primary);
   color: white;
 }
+
 main .button-form {
   cursor: pointer;
   box-shadow: var(--box-shadow);
@@ -523,7 +534,7 @@ main .tik-desc-chat {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  transition:  0.23s;
+  transition: 0.23s;
 }
 
 .msger-send-btn:hover {
@@ -632,7 +643,7 @@ main .tik-desc-chat {
     padding: 0 1rem;
   }
 
-/* rightside */
+  /* rightside */
 
   .right {
     width: 94%;

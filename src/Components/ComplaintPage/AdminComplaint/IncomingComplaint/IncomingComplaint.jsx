@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './IncomingComplaint.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -147,11 +147,9 @@ const IncomingComplaint = () => {
               <option value='' hidden>Select Your Status</option>
               <option value='allStatus'>All Status</option>
               <option value='pending'>Pending</option>
-              <option value='assigned'>Assigned</option>
               <option value='attending'>Attending</option>
               <option value='forwarded'>Forwarded</option>
               <option value='closed'>Closed</option>
-              <option value='disapproved'>Disapproved</option>
             </select>
           }
           <div className="btn-group ">
@@ -172,35 +170,45 @@ const IncomingComplaint = () => {
       </div>
       <div className={`${classes.complaint} `}>
         {
-          currentPageData.map((complaint) => (
-            <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)} >
-              <div className={`${classes.tikHead}`}>
+          allComplaintList.length !== 0 ?
+            <Fragment>
+              {
+                currentPageData.map((complaint) => (
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)} >
+                    <div className={`${classes.tikHead}`}>
 
-                <h3 className={`${classes.tikTitle}`}>
-                  {complaint.subject}
-                </h3>
-                <span className={`${classes.date}`}>
-                  {getCreatedComplaintDate(complaint.createdAt)}
-                </span>
-              </div>
-              <div className={`${classes.tikMsg}`}>
-                <p>
-                  <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
-                </p>
-              </div>
-              <div className={`${classes.tikOther}`}>
-                <p className={`${classes.tikId}`}>
-                  {complaint.ticketId}
-                </p>
-                <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
-                  {complaint.priority}
-                </p>
-                <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
-                  {complaint.status}
-                </p>
-              </div>
-            </div>
-          ))
+                      <h3 className={`${classes.tikTitle}`}>
+                        {complaint.subject}
+                      </h3>
+                      <span className={`${classes.date}`}>
+                        {getCreatedComplaintDate(complaint.createdAt)}
+                      </span>
+                    </div>
+                    <div className={`${classes.tikMsg}`}>
+                      <p>
+                        <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
+                      </p>
+                    </div>
+                    <div className={`${classes.tikOther}`}>
+                      <p className={`${classes.tikId}`}>
+                        {complaint.ticketId}
+                      </p>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
+                        {complaint.priority}
+                      </p>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
+                        {complaint.status}
+                      </p>
+                      <p className={`${classes.tikAssigned}`}>
+                        {complaint.assignedName ? 'Assigned to ' + complaint.assignedName : 'Not assigned yet'}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              }
+            </Fragment>
+            :
+            <div>{errorMessage}</div>
         }
         <SweetPagination
           currentPageData={setCurrentPageData}

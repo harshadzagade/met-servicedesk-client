@@ -1,14 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import classes from './ReportDetails.module.css';
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const ReportDetails = () => {
     const [reportData, setReportData] = useState({});
     const id = useParams().reportId;
-    console.log(reportData);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getReportDetails = async () => {
@@ -21,7 +19,7 @@ const ReportDetails = () => {
 
     const getCreatedReportDate = (createdAt) => {
         const date = new Date(createdAt);
-        return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+        return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
 
     const formatAMPM = (date) => {
@@ -49,9 +47,14 @@ const ReportDetails = () => {
         <Fragment>
             <main>
                 <div className={classes.reqdetails}>
-                    <h2>Report details</h2>
+                    <div className={classes.header}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16" onClick={() => navigate('/report')}>
+                            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                        </svg>
+                        <h2>Report details</h2>
+                    </div>
                     <div className={`${classes.detail}`}>
-                        <div >
+                        <div>
                             <form className={classes.myform}>
                                 <div className={classes.idDetails}>
                                     <label>Ticket Type:</label>
@@ -62,35 +65,29 @@ const ReportDetails = () => {
                                     <p className={classes.complaintDetailsp}>#{reportData.requestComplaintId}</p>
                                 </div>
                                 <hr />
-
                                 <div className={classes.subjectDetails}>
                                     <label>Subject:</label>
                                     <p className={classes.complaintDetailsp}>{reportData.subject}</p>
                                 </div>
-
                                 <div className={classes.description}>
-                                    <label>Description:</label>
-                                    <div dangerouslySetInnerHTML={{ __html: reportData.description }}></div>
+                                    <label>Description :</label>
+                                    <div className={classes.complaintDetailsp} dangerouslySetInnerHTML={{ __html: reportData.description }}></div>
                                 </div>
-
                                 <div className={classes.subjectDetails}>
                                     <label>Ticket raised by:</label>
                                     <p className={classes.complaintDetailsp}>{reportData.staffName}</p>
                                 </div>
                                 <hr />
-
                                 <div className={classes.deptper}>
                                     <div className={classes.department}>
                                         <label>Department:</label>
                                         <p className={classes.complaintDetailsp}>{reportData.department}</p>
                                     </div>
-
                                     <div className={classes.priorityDetails}>
                                         <label>Priority:</label>
                                         <p className={classes.complaintDetailsp}> {reportData.priority}  </p>
                                     </div>
                                 </div>
-
                                 <div className={classes.reqsta}>
                                     <div className={classes.ComplaintType}>
                                         <label>Request Type:</label>
@@ -102,13 +99,11 @@ const ReportDetails = () => {
                                     </div>
                                 </div>
                                 <hr />
-
                                 <div className={classes.approval1}>
                                     <div className={classes.approval}>
                                         <label>HOD Approval:</label>
                                         <p className={classes.complaintDetailsp}>{(reportData.approval1 === 1 && 'approved') || (reportData.approval1 === 2 && 'Disapproved') || (reportData.approval1 === null && 'Not updated')}</p>
                                     </div>
-
                                     {
                                         reportData.approval1 &&
                                         <div className={classes.approval}>
@@ -120,7 +115,6 @@ const ReportDetails = () => {
                                         <label>Admin Approval:</label>
                                         <p className={classes.complaintDetailsp}>{(reportData.approval2 === 1 && 'Approved') || (reportData.approval2 === 2 && 'Disapproved') || (reportData.approval2 === null && 'Not updated')}</p>
                                     </div>
-
                                     {
                                         reportData.approval2 &&
                                         <div className={classes.approval}>
@@ -140,7 +134,6 @@ const ReportDetails = () => {
                                         <p >{reportData.assignedName}</p>
                                     </div>
                                 }
-
                                 {
                                     reportData.status === 'forwarded' &&
                                     <div className={classes.techName}>
@@ -164,14 +157,12 @@ const ReportDetails = () => {
                                         <p >{reportData.actionTaken}</p>
                                     </div>
                                 }
-
                                 <hr />
-                                <div className={classes.description}>
+                                <div className={classes.attachment}>
                                     <label>Attachment:</label>
                                     <p className={classes.complaintDetailsp}>None</p>
                                 </div>
                                 <hr />
-
                                 <div className={classes.date}>
                                     <label>Logged Time:</label>
                                     <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.loggedTime)}</p>
@@ -187,26 +178,22 @@ const ReportDetails = () => {
                                         <p className={classes.complaintDetailsp}>{getReportDuration(reportData.assignDuration)}</p>
                                     </div>
                                 }
-
-
                                 <div className={classes.date}>
                                     <label>Attended Time:</label>
-                                    <p className={classes.complaintDetailsp}>{reportData.attendedTime ?getCreatedReportDate(reportData.attendedTime) : 'Not updated yet'}</p>
+                                    <p className={classes.complaintDetailsp}>{reportData.attendedTime ? getCreatedReportDate(reportData.attendedTime) : 'Not updated yet'}</p>
                                 </div>
-
                                 {(reportData.assignedTime && reportData.attendedTime) &&
                                     <div className={classes.date}>
                                         <label>Attend Duration:</label>
                                         <p className={classes.complaintDetailsp}>{getReportDuration(reportData.attendDuration)}</p>
                                     </div>
                                 }
-
                                 <div className={classes.date}>
                                     <label>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Time:</label>
-                                    <p className={classes.complaintDetailsp}>{reportData.lastUpdatedTime ?getCreatedReportDate(reportData.lastUpdatedTime) : 'Not updated yet'}</p>
+                                    <p className={classes.complaintDetailsp}>{reportData.lastUpdatedTime ? getCreatedReportDate(reportData.lastUpdatedTime) : 'Not updated yet'}</p>
                                 </div>
-
-                                {reportData.lastUpdatedTime &&
+                                {
+                                    reportData.lastUpdatedTime &&
                                     <div className={classes.date}>
                                         <label>{(reportData.status === 'closed' && 'Solved') || (reportData.status === 'forwarded' && 'Forwarded')} Duration:</label>
                                         <p className={classes.complaintDetailsp}>{getReportDuration(reportData.lastUpdateDuration)}</p>
@@ -219,7 +206,7 @@ const ReportDetails = () => {
                 </div>
             </main>
         </Fragment>
-    )
-}
+    );
+};
 
-export default ReportDetails
+export default ReportDetails;

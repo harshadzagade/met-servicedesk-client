@@ -4,8 +4,9 @@ import VerfiyEmail from './VerfiyEmail/VerfiyEmail';
 import NewPassword from './NewPasword/NewPassword';
 import SendOTP from './SendOTP/SendOTP';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../Context/AuthContext';
+import AuthContext from '../Context/AuthContext/AuthContext';
 import axios from 'axios';
+
 const ResetPassword = () => {
     const ctx = useContext(AuthContext);
     const navigate = useNavigate();
@@ -16,12 +17,11 @@ const ResetPassword = () => {
 
     const checkLogin = async () => {
         if (localStorage.getItem('id')) {
-            console.log('hi');
             const staff = await axios.get(`/api/staff/staffdetails/${localStorage.getItem('id')}`);
             ctx.onLogin(staff.data.staff.email);
             navigate('/');
         }
-    }
+    };
     checkLogin();
 
     const handleGoToVerify = () => {

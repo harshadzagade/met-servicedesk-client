@@ -1,15 +1,16 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
-import classes from './RequestDetails.module.css'
+import classes from './RequestDetails.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
 import Rightside from '../../../Righside/Rightside';
+
 const RequestDetails = () => {
     const navigate = useNavigate();
     const id = useParams().requestId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [requestData, setRequestData] = useState({});
-    const [staffId , setStaffId] = useState(null);
+    const [staffId, setStaffId] = useState(null);
     ticketCtx.onClickHandler('request', staffId, requestData.id);
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const RequestDetails = () => {
                 setRequestData(request.data.request);
                 if (request.data.request.behalf) {
                     setStaffId(request.data.request.behalfId);
-                }else{
+                } else {
                     setStaffId(request.data.request.staffId);
                 }
             } catch (error) {
@@ -67,7 +68,7 @@ const RequestDetails = () => {
     return (
         <Fragment>
             <main>
-                <div className='container'>
+                <div className='container-fluid'>
                     <div className={`${classes.reqdetails} row`}>
                         <div className="col-8">
                             <div className={classes.header}>
@@ -83,56 +84,46 @@ const RequestDetails = () => {
                                             <label>Request Id:</label>
                                             <p className={classes.complaintDetailsp}>{requestData.ticketId}</p>
                                         </div>
-
                                         <hr />
-
                                         <div className={classes.subjectDetails}>
                                             <label>Subject:</label>
                                             <p className={classes.complaintDetailsp}>{requestData.subject}</p>
                                         </div>
-
                                         <div className={classes.description}>
                                             <label>Description:</label>
-                                            <div dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
+                                            <div className={classes.complaintDetailsp} dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
                                         </div>
-
                                         <hr />
-
                                         <div className={classes.deptper}>
                                             <div className={classes.department}>
                                                 <label>Department:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.department}</p>
                                             </div>
-
                                             <div className={classes.priorityDetails}>
                                                 <label>Priority:</label>
                                                 <p className={classes.complaintDetailsp}> {requestData.priority}  </p>
                                             </div>
                                         </div>
-
                                         <div className={classes.reqsta}>
                                             <div className={classes.ComplaintType}>
                                                 <label>Request Type:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.category}</p>
                                             </div>
-                                            <div className={classes.name}>
+                                            <div className={classes.status}>
                                                 <label>Status:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.status} </p>
                                             </div>
                                         </div>
-
                                         <div className={classes.idDetails}>
                                             <label>Behalf:</label>
                                             <p className={classes.complaintDetailsp}>{requestData.behalf ? 'Yes' : 'No'}</p>
                                         </div>
                                         <hr />
-
                                         <div className={classes.approval1}>
                                             <div className={classes.approval}>
                                                 <label>HOD Approval:</label>
                                                 <p className={classes.complaintDetailsp}>{(requestData.approval1 === 1 && 'approved') || (requestData.approval1 === 2 && 'Disapproved') || (requestData.approval1 === null && 'Not updated')}</p>
                                             </div>
-
                                             {
                                                 requestData.approval1 &&
                                                 <div className={classes.approval}>
@@ -144,7 +135,6 @@ const RequestDetails = () => {
                                                 <label>Admin Approval:</label>
                                                 <p className={classes.complaintDetailsp}>{(requestData.approval2 === 1 && 'Approved') || (requestData.approval2 === 2 && 'Disapproved') || (requestData.approval2 === null && 'Not updated')}</p>
                                             </div>
-
                                             {
                                                 requestData.approval2 &&
                                                 <div className={classes.approval}>
@@ -164,7 +154,6 @@ const RequestDetails = () => {
                                                 <p >{requestData.assignedName}</p>
                                             </div>
                                         }
-
                                         {
                                             requestData.status === 'forwarded' &&
                                             <div className={classes.techName}>
@@ -172,7 +161,6 @@ const RequestDetails = () => {
                                                 <p >{requestData.forwardComment}</p>
                                             </div>
                                         }
-
                                         {
                                             (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                             <div className={classes.techName}>
@@ -180,7 +168,6 @@ const RequestDetails = () => {
                                                 <p >{requestData.problemDescription}</p>
                                             </div>
                                         }
-
                                         {
                                             (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                             <div className={classes.techName}>
@@ -188,7 +175,6 @@ const RequestDetails = () => {
                                                 <p >{requestData.actionTaken}</p>
                                             </div>
                                         }
-
                                         <hr />
                                         <div className={classes.attachment}>
                                             <label>Attachment:</label>
@@ -200,7 +186,6 @@ const RequestDetails = () => {
                                                 )
                                             }
                                         </div>
-
                                         <div className={classes.date}>
                                             <label>Date:</label>
                                             <p className={classes.complaintDetailsp}>{getCreatedRequestDate(requestData.createdAt)}</p>
@@ -209,7 +194,6 @@ const RequestDetails = () => {
                                     <button className={classes.complaintAssingBtn}>Self Assign </button>
                                     <button className={classes.complaintAssingBtn}>Forward </button>
                                 </div> */}
-
                                     </form>
                                 </div>
                             </div>

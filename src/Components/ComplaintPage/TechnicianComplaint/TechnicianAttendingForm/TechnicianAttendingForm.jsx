@@ -1,14 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef, useState, useEffect } from 'react';
 import classes from './TechnicianAttendingForm.module.css';
-import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { useEffect } from 'react';
+import Rightside from '../../../Righside/Rightside';
 
-
-const TechnicianAttendingForm = (props) => {
+const TechnicianAttendingForm = () => {
     const problemDescriptionRef = useRef();
     const actionTakenRef = useRef();
     const forwardCommentRef = useRef();
@@ -25,9 +22,7 @@ const TechnicianAttendingForm = (props) => {
         const getTechnicians = async () => {
             try {
                 const technician = await axios.get(`/api/staff/superadmin/staffdetails/${loginId}`);
-
                 const technicians = await axios.get(`/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department[0]}`);
-
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 Swal.fire({
@@ -42,10 +37,6 @@ const TechnicianAttendingForm = (props) => {
 
     useEffect(() => {
         switch (status) {
-            case 'attending':
-                setIsAttending(true);
-                setIsForwarded(false);
-                break;
             case 'closed':
                 setIsAttending(false);
                 setIsForwarded(false);
@@ -63,9 +54,7 @@ const TechnicianAttendingForm = (props) => {
         }
     }, [status])
 
-
     const handleSubmitClick = async (id) => {
-
         const data = {
             status: status,
             assign: technicianId,
@@ -90,65 +79,66 @@ const TechnicianAttendingForm = (props) => {
     };
 
     return (
-        <Fragment >
-
-            <div className={classes.statusform}>
-                <h2>Status chnage</h2>
-
-                <div className={classes.createStaffform}>
-                    <div className={classes.formStaff}>
-                        <div >
-                            <div className={classes.deptTik}>
-                                <span> Approval Status</span>
-                                <select className={classes.deptSelect} name="role" required onChange={(e) => setStatus(e.target.value)} >
-                                    <option key="0" value="" hidden>----- Select Categories -----</option>
-                                    <option key="1" value="attending">Attending</option>
-                                    <option key="2" value="closed">Closed</option>
-                                    <option key="3" value="forwarded">Forwarded</option>
-                                </select>
+        <Fragment>
+            <div className="container-fluid">
+                <div className={`${classes.statusform} row`}>
+                    <div className="col-8">
+                        <h2>Status chnage</h2>
+                        <div className={classes.createStaffform}>
+                            <div className={classes.formStaff}>
+                                <div>
+                                    <div className={classes.assignStatus}>
+                                        <span>Change Status:</span>
+                                        <select className={classes.deptSelect} name="role" required onChange={(e) => setStatus(e.target.value)} >
+                                            <option key="0" value="" hidden>----- Select Categories -----</option>
+                                            <option key="2" value="closed">Closed</option>
+                                            <option key="3" value="forwarded">Forwarded</option>
+                                        </select>
+                                    </div>
+                                    {
+                                        isForwarded &&
+                                        <div className={classes.assignStatus}>
+                                            <span>Forwarded:</span>
+                                            <select className={classes.deptSelect} name="role" required onChange={handleTechnicianChange}>
+                                                <option key='0' value='' hidden defaultValue=''>Assign to technician</option>
+                                                {
+                                                    technicians.map((technician) =>
+                                                        <option key={technician.id}  value={technician.id}>{technician.firstname + ' ' + technician.lastname}</option>
+                                                    )
+                                                }
+                                            </select>
+                                        </div>
+                                    }
+                                    {
+                                        !isAttending &&
+                                        <div className={classes.subject}>
+                                            <span>Problem Description:</span>
+                                            <input type="text" className={classes.subInput} required placeholder="Problem Description" ref={problemDescriptionRef} />
+                                        </div>
+                                    }
+                                    {
+                                        !isAttending &&
+                                        <div className={classes.subject}>
+                                            <span>Action Taken: </span>
+                                            <input type="text" className={classes.subInput} required placeholder="Action Taken" ref={actionTakenRef} />
+                                        </div>
+                                    }
+                                    {
+                                        isForwarded &&
+                                        <div className={classes.subject}>
+                                            <span>Forward Comment:</span>
+                                            <input type="text" className={classes.subInput} required placeholder="Forward Comment" ref={forwardCommentRef} />
+                                        </div>
+                                    }
+                                    <div className={classes.btn}>
+                                        <button className={classes.buttonForm} onClick={() => handleSubmitClick(id.complaintId)}>Submit</button>
+                                    </div>
+                                </div>
                             </div>
-
-                            {
-                                isForwarded &&
-                                <div className={classes.deptTik}>
-                                    <span> Forwarded </span>
-                                    <select className={classes.deptSelect} name="role" required onChange={handleTechnicianChange}>
-                                        <option key='0' value='' hidden defaultValue=''>Assign to technician</option>
-                                        {
-                                            technicians.map((technician) =>
-                                                <option key={technician.id} value={technician.id}>{technician.firstname + ' ' + technician.lastname}</option>
-                                            )
-                                        }
-                                    </select>
-                                </div>
-                            }
-
-                            {!isAttending &&
-                                <div className={classes.subject}>
-                                    <span>Problem Description</span>
-                                    <input type="text" className={classes.subInput} placeholder="Problem Description" ref={problemDescriptionRef} />
-                                </div>
-                            }
-
-                            {!isAttending &&
-                                <div className={classes.subject}>
-                                    <span>Action Taken   </span>
-                                    <input type="text" className={classes.subInput} placeholder="Action Taken" ref={actionTakenRef} />
-                                </div>
-                            }
-
-                            {isForwarded &&
-                                <div className={classes.subject}>
-                                    <span>Forward Comment</span>
-                                    <input type="text" className={classes.subInput} placeholder="Forward Comment" ref={forwardCommentRef} />
-                                </div>
-                            }
-
-                            <div className={classes.attachment}>
-                                <button className={classes.buttonForm} onClick={() => handleSubmitClick(id.complaintId)}>Submit</button>
-                            </div>
-
                         </div>
+                    </div>
+                    <div className="col-4">
+                        <Rightside />
                     </div>
                 </div >
             </div>

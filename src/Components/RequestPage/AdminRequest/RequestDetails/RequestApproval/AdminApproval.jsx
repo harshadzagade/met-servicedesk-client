@@ -1,18 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import classes from './AdminApproval.module.css';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
-import { Fragment } from 'react';
+import Rightside from '../../../../Righside/Rightside';
 
-const AdminApproval = (props) => {
-
+const AdminApproval = () => {
     const loginId = localStorage.getItem('id');
     const navigate = useNavigate();
     const adminCtx = useContext(AdminContext);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const { search } = useLocation();
     const id = useParams();
     const approvalCommentRef = useRef();
     const [approval, setApproval] = useState('approve');
@@ -20,14 +17,6 @@ const AdminApproval = (props) => {
     const [technicians, setTechnicians] = useState([]);
     const [technicianId, setTechnicianId] = useState(null);
     const [assignDisability, setAssignDisability] = useState('');
-
-    useEffect(() => {
-        if (adminCtx.approval === '1') {
-            setSearchParams(`?${new URLSearchParams({ approval: '1' })}`)
-        } else if (adminCtx.approval === '2') {
-            setSearchParams(`?${new URLSearchParams({ approval: '2' })}`)
-        }
-    }, [adminCtx]);
 
     useEffect(() => {
         if (approval === 'disapprove') {
@@ -39,12 +28,12 @@ const AdminApproval = (props) => {
     }, [approval]);
 
     useEffect(() => {
-        if (search.charAt(search.length - 1) === '2') {
+        if (adminCtx.approval === '2') {
             setIsApproval2(true);
-        } else if (search.charAt(search.length - 1) === '1') {
+        } else if (adminCtx.approval === '1') {
             setIsApproval2(false);
         }
-    }, [search]);
+    }, [adminCtx.approval]);
 
     useEffect(() => {
         const getTechnicians = async () => {
@@ -107,53 +96,51 @@ const AdminApproval = (props) => {
 
     return (
         <Fragment>
-            <div className={classes.approvalform}>
-                <h2>Approval</h2>
-                <div hidden>
-                </div>
-                <div className={classes.RequestApproval} >
-                    <div className={classes.form}>
-                        <div >
-
-                            <div className={classes.approvalStatus}>
-                                <span>Change Status</span>
-                                <select className={classes.selectStatus} name="role" required onChange={handleChange} >
-                                    <option key='0' value="" hidden>----- Approval Status -----</option>
-                                    <option key='1' value="approve">Approve</option>
-                                    <option key='2' value="disapprove">Disapprove</option>
-                                </select>
-
-                            </div>
-                            {
-                                isApproval2 &&
-                                <div className={classes.selectStaff}>
-
-                                    <span>Staff List</span>
-
-                                    <select className={classes.selectStatus} disabled={assignDisability} name="role" required onChange={handleTechnicianChange} >
-                                        <option key='0' value='' hidden defaultValue=''>----- Select Categories -----</option>
-
-                                        {
-                                            technicians.map((technician) =>
-                                                <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>
-                                            )
-                                        }
-                                    </select>
-
-                                </div>
-                            }
-
-                            <div className={classes.comment}>
-                                <span>Comment</span>
-                                <input type="text" className={classes.subInput} placeholder="Select Your Comment" ref={approvalCommentRef} />
-                            </div>
-
-                            <div className={classes.btn}>
-                                <button className={classes.submitBtn} onClick={() => handleSubmitClick(id.requestId)} >Submit</button>
-                                <button className={classes.cancelBtn} onClick={() => navigate('/request')}>Cancel</button>
-                            </div>
-
+            <div className="container-fluid">
+                <div className={`${classes.approvalform} row`}>
+                    <div className="col-8">
+                        <h2>Approval</h2>
+                        <div hidden>
                         </div>
+                        <div className={classes.RequestApproval} >
+                            <form className={classes.form} onSubmit={() => handleSubmitClick(id.requestId)}>
+                                <div >
+                                    <div className={classes.approvalStatus}>
+                                        <span>Change Status</span>
+                                        <select className={classes.selectStatus} name="role" required onChange={handleChange} >
+                                            <option key='0' value="" hidden>----- Approval Status -----</option>
+                                            <option key='1' value="approve">Approve</option>
+                                            <option key='2' value="disapprove">Disapprove</option>
+                                        </select>
+                                    </div>
+                                    {
+                                        isApproval2 &&
+                                        <div className={classes.selectStaff}>
+                                            <span>Staff List</span>
+                                            <select className={classes.selectStatus} disabled={assignDisability} name="role" required onChange={handleTechnicianChange} >
+                                                <option key='0' value='' hidden defaultValue=''>----- Select Categories -----</option>
+                                                {
+                                                    technicians.map((technician) =>
+                                                        <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>
+                                                    )
+                                                }
+                                            </select>
+                                        </div>
+                                    }
+                                    <div className={classes.comment}>
+                                        <span>Comment</span>
+                                        <input type="text" className={classes.subInput} placeholder="Select Your Comment" ref={approvalCommentRef} required/>
+                                    </div>
+                                    <div className={classes.btn}>
+                                        <button className={classes.submitBtn} type='submit' >Submit</button>
+                                        <button className={classes.cancelBtn} onClick={() => navigate('/request')}>Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div className="col-4">
+                        <Rightside />
                     </div>
                 </div>
             </div >

@@ -27,7 +27,7 @@
   border: 1px solid gray;
   border-radius: 4px;
   padding: 10px 10px 10px 10px;
-  background-color: #7380ec;
+  background-color: var(--color-primary);
   cursor: pointer;
   white-space: nowrap;
   color: white;
@@ -35,10 +35,12 @@
   margin-bottom: 1rem;
 
 }
-.search{
+
+.search {
   display: flex;
 }
-.searchfiltering{
+
+.searchfiltering {
   display: flex;
   margin-right: auto;
 }
@@ -46,6 +48,7 @@
 .datapage {
   margin-top: 0.5rem;
 }
+
 /* START complaint Section */
 .mainTitle {
   display: flex;
@@ -74,8 +77,6 @@
   margin-top: 0.2rem;
 }
 
-
-
 .filterButtons {
   display: flex;
   padding: 15px 0 10px;
@@ -103,8 +104,6 @@
   opacity: 1;
 }
 
-
-
 .filter {
   display: flex;
   gap: 1rem;
@@ -113,11 +112,11 @@
   background: var(--color-background);
 }
 
- .requests h2 {
+.requests h2 {
   margin-bottom: 0.8rem;
 }
 
- .tikInfo {
+.tikInfo {
   background: var(--color-white);
   width: 100%;
   border-radius: var(--card-border-radius);
@@ -128,12 +127,12 @@
   align-items: center;
 }
 
- .tikInfo:hover {
+.tikInfo:hover {
   cursor: pointer;
   box-shadow: none;
 }
 
- .tikHead {
+.tikHead {
   display: flex;
   align-items: flex-start;
   position: relative;
@@ -144,12 +143,12 @@ main .tikTitle {
   font-size: medium;
 }
 
- .date {
+.date {
   margin-left: auto;
   font-size: small;
 }
 
- .tikMsg p {
+.tikMsg p {
   width: 35rem;
   white-space: nowrap;
   overflow: hidden;
@@ -157,13 +156,12 @@ main .tikTitle {
   margin-top: 0.5rem;
 }
 
- .tikOther {
+.tikOther {
   display: flex;
   gap: 3rem;
   align-items: flex-start;
   margin-top: 1.2rem;
 }
-
 
 .tikId {
   border-radius: var(--border-radius-2);
@@ -175,7 +173,7 @@ main .tikTitle {
   background: #5A5A5A;
 }
 
-.tikStatus{
+.tikStatus {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
@@ -184,7 +182,7 @@ main .tikTitle {
   color: white;
 }
 
- .tikPri {
+.tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
@@ -192,4 +190,11 @@ main .tikTitle {
   margin: 0px;
   color: white;
   font-size: 1rem;
+}
+
+.tikAssigned {
+  font-size: larger;
+  font-weight: 500;
+  margin-left: auto;
+  margin-bottom: 0rem;
 }

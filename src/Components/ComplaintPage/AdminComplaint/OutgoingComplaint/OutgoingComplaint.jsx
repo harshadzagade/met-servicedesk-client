@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Sweetpagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import classes from './OutgoingComplaint.module.css'
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 
@@ -25,7 +24,6 @@ const OutgoingComplaint = () => {
   const [status, setStatus] = useState('');
   const [openStatusList, setOpenStatusList] = useState(false);
 
-
   useEffect(() => {
     const getList = async () => {
       try {
@@ -43,11 +41,11 @@ const OutgoingComplaint = () => {
     } else {
       setErrorMessage('Please select department')
     }
-  }, [adminCtx.department]);
+  }, [id, adminCtx.department]);
 
   const getCreatedComplaintDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {
@@ -129,7 +127,6 @@ const OutgoingComplaint = () => {
     }
   }, [searchText, complaintList, searchType, priority, status]);
 
-
   return (
     <main>
       <div className={classes.search}>
@@ -151,11 +148,9 @@ const OutgoingComplaint = () => {
               <option value='' hidden>Select Your Status</option>
               <option value='allStatus'>All Status</option>
               <option value='pending'>Pending</option>
-              <option value='assigned'>Assigned</option>
               <option value='attending'>Attending</option>
               <option value='forwarded'>Forwarded</option>
               <option value='closed'>Closed</option>
-              <option value='disapproved'>Disapproved</option>
             </select>
           }
           <div className="btn-group ">
@@ -168,7 +163,6 @@ const OutgoingComplaint = () => {
               <div className="dropdown-item" onClick={() => setSearchType('Priority')}>Priority</div>
               <div className="dropdown-item" onClick={() => setSearchType('Status')}>Status</div>
             </div>
-
           </div>
         </div>
         <div className={classes.datapage}>
@@ -177,39 +171,44 @@ const OutgoingComplaint = () => {
       </div>
       <div className={`${classes.complaint} `}>
         {
-          currentPageData.map((complaint) => (
-            <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)} >
-              <div className={`${classes.tikHead}`}>
-
-                <h3 className={`${classes.tikTitle}`}>
-                  {complaint.subject}
-                </h3>
-
-
-                <span className={`${classes.date}`}>
-                  {getCreatedComplaintDate(complaint.createdAt)}
-                </span>
-              </div>
-              <div className={`${classes.tikMsg}`}>
-                <p>
-                  <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
-                </p>
-              </div>
-              <div className={`${classes.tikOther}`}>
-                <p className={`${classes.tikId}`}>
-                  {complaint.ticketId}
-                </p>
-                <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
-                  {complaint.priority}
-                </p>
-                <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'],['assigned', () => '#008080'], ['closed', () => '#ADE792'] ) }}>
-                  {complaint.status}
-                </p>
-
-                
-              </div>
-            </div>
-          ))
+          allComplaintList.length !== 0 ?
+            <Fragment>
+              {
+                currentPageData.map((complaint) => (
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)} >
+                    <div className={`${classes.tikHead}`}>
+                      <h3 className={`${classes.tikTitle}`}>
+                        {complaint.subject}
+                      </h3>
+                      <span className={`${classes.date}`}>
+                        {getCreatedComplaintDate(complaint.createdAt)}
+                      </span>
+                    </div>
+                    <div className={`${classes.tikMsg}`}>
+                      <p>
+                        <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
+                      </p>
+                    </div>
+                    <div className={`${classes.tikOther}`}>
+                      <p className={`${classes.tikId}`}>
+                        {complaint.ticketId}
+                      </p>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
+                        {complaint.priority}
+                      </p>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
+                        {complaint.status}
+                      </p>
+                      <p className={`${classes.tikAssigned}`}>
+                        {complaint.assignedName ? 'Assigned to ' + complaint.assignedName : 'Not assigned yet'}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              }
+            </Fragment>
+            :
+            <div>{errorMessage}</div>
         }
         <Sweetpagination
           currentPageData={setCurrentPageData}

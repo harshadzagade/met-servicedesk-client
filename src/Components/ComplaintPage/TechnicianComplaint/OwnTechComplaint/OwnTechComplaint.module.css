@@ -35,10 +35,12 @@
   margin-bottom: 1rem;
 
 }
-.search{
+
+.search {
   display: flex;
 }
-.searchfiltering{
+
+.searchfiltering {
   display: flex;
   margin-right: auto;
 }
@@ -46,6 +48,7 @@
 .datapage {
   margin-top: 0.5rem;
 }
+
 /* Complaint Details */
 
 .requests h2 {
@@ -113,7 +116,7 @@
   background: #5A5A5A;
 }
 
-.tikStatus{
+.tikStatus {
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;
@@ -130,4 +133,11 @@
   margin: 0px;
   color: white;
   font-size: 1rem;
+}
+
+.tikAssigned {
+  font-size: larger;
+  font-weight: 500;
+  margin-left: auto;
+  margin-bottom: 0rem;
 }

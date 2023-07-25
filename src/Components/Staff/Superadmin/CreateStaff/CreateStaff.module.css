@@ -1,17 +1,20 @@
-.staffform{
+.staffform {
   margin-top: 2.5rem;
 }
-.staffform h2{
+
+.staffform h2 {
   font-weight: 600;
   color: var(--text-primary);
 }
-.tikTypeTitle{
+
+.tikTypeTitle {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
 }
+
 .createStaffform {
   background: var(--color-white);
   width: 100%;
@@ -21,53 +24,68 @@
   transition: all 300ms ease;
   margin-top: 3 rem;
   align-items: center;
-  display: flex;
-  justify-content: center;
   margin-top: 1.5rem;
 }
- .formStaff {
+.createStaffform span{
+  color: black;
+}
+
+.formStaff {
   margin-left: 2rem;
 }
+
 .createForm {
   display: grid;
   margin-bottom: 1rem;
 }
-.names{
+
+.names {
   display: grid;
-  grid-template-columns: 50vh 50vh;
+  grid-template-columns:  30% 30% 30%;
   gap: 1rem;
 }
-.emailpass{
+
+.emailpass {
   display: grid;
-  grid-template-columns: 50vh 50vh;
+  grid-template-columns: 30% 30%;
   gap: 1rem;
 }
+
 .deptik {
   display: grid;
-  grid-template-columns: 50vh;
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.instDept{
+  display: grid;
+  /* grid-template-columns: 30% 30% 30%; */
+  gap: 1rem;
 }
 
-.tags{
-  min-width: 18rem ;
-  max-width: 12rem;
-  border: 0.5px solid black;
-  border-radius: 0.2rem;
-  height: fit-content;
-}
-.tag{
-    background-color: black;
-    color: white;
-    width: fit-content;
-    padding: 2px;
-    border-radius: 0.3rem;
-    margin-left: 0.1rem;
+.institute {
+  display: grid;
+  grid-template-columns: 30%;
+  margin-bottom: 1rem;
 }
 
-.departmentParent {
-  display: flex;
-  margin-top: 0.2rem;
-  width: 50vh;
+.instituteSelect {
+  background: white;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+.category {
+  display: grid;
+  grid-template-columns: 30%;
+  margin-bottom: 1rem;
+}
+
+.categoryType {
+  background: white;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em; 
 }
 
 .createButton {
@@ -84,18 +102,19 @@
   margin-left: auto;
   margin-right: auto;
 }
-.createstaffInput{
+
+.createstaffInput {
   background: white;
   padding: 10px;
   border: none;
   border-radius: 5px;
   font-size: 1em;
   border: 1px solid black;
-  
+
 }
 
-.phone{
+.phone {
   display: grid;
-  grid-template-columns: 50vh 50vh;
+  grid-template-columns: 30% 30%;
   gap: 1rem;
 }

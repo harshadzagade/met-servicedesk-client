@@ -3,21 +3,24 @@
   background-color: white;
   height: 6.5rem;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   width: auto;
   margin-right: 1.5rem;
-  border-radius: 1rem;
+  border-radius: 0.6rem;
 }
-.adminDept{
+
+.adminDept {
   display: flex;
   margin-top: 1rem;
   margin-bottom: 1rem;
 
 }
-.adminDept h3{
+
+.adminDept h3 {
   margin-left: 1rem;
   margin-top: 2rem;
 }
+
 .departmentSelection {
   margin-right: auto;
 }

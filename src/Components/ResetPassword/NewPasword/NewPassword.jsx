@@ -1,18 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import classes from './NewPassword.module.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const NewPassword = (props) => {
-    
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
-  const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
 
   const handleReset = async (e) => {
     e.preventDefault();
     if (confirmPasswordRef.current.value !== passwordRef.current.value) {
-      setIsConfirmPasswordValid(false);
       Swal.fire({
         icon: 'error',
         title: 'Password don\'t match',
@@ -41,15 +38,15 @@ const NewPassword = (props) => {
 
   return (
     <div className={classes.createPassword}>
-    <div className={classes.form}>
-      <form className={classes.passwordForm} onSubmit={(e) => handleReset(e)}>
-        <h2>Please enter below your new password  </h2>
-        <input type="password" placeholder="New-Password" required ref={passwordRef} />
-        <input type="password" placeholder="confirm-password" required ref={confirmPasswordRef} />
-        <button type='submit'>submit</button>
-      </form>
+      <div className={classes.form}>
+        <form className={classes.passwordForm} onSubmit={(e) => handleReset(e)}>
+          <h2>Please enter below your new password  </h2>
+          <input type="password" minLength={6} placeholder="New-Password" required ref={passwordRef} />
+          <input type="password" minLength={6} placeholder="confirm-password" required ref={confirmPasswordRef} />
+          <button type='submit'>submit</button>
+        </form>
+      </div>
     </div>
-  </div>
   );
 };
 

@@ -1,6 +1,7 @@
-.buttonsSection{
+.buttonsSection {
   display: flex;
 }
+
 main .filterButtons {
   display: flex;
   padding: 15px 0 10px;
@@ -41,7 +42,7 @@ main .filter {
   background: var(--color-background);
 }
 
-  
+
 main .tikReqbtn {
   display: flex;
   gap: 0.5rem;

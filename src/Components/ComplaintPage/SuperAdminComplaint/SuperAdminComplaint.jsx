@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './SuperAdminComplaint.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { iswitch } from 'iswitch';
 import SweetPagination from 'sweetpagination';
-
 import axios from 'axios';
 import DataPerPage from '../../UI/DataPerPage/DataPerPage';
 import Swal from 'sweetalert2';
 import Rightside from '../../Righside/Rightside';
-
 
 const SuperAdminComplaint = () => {
     const navigate = useNavigate();
@@ -52,12 +49,9 @@ const SuperAdminComplaint = () => {
         const getList = async () => {
             const list = await axios.get(`/api/complaint/allcomplaints`);
             setComplaintList(list.data.complaints);
-            console.log(list.data.complaints);
         };
         getList();
     }, []);
-
-
 
     useEffect(() => {
         const getRequestByDepartment = async () => {
@@ -147,7 +141,6 @@ const SuperAdminComplaint = () => {
         }
     }, [status, openStatusList, complaintList]);
 
-
     useEffect(() => {
         let arr = [];
         switch (searchType) {
@@ -228,7 +221,7 @@ const SuperAdminComplaint = () => {
 
     const getCreatedComplaintDate = (createdAt) => {
         const date = new Date(createdAt);
-        return (date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+        return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
 
     const formatAMPM = (date) => {
@@ -245,7 +238,8 @@ const SuperAdminComplaint = () => {
 
     return (
         <main >
-            <div className='container '>
+            <div className='container-fluid '>
+
                 <div className={`${classes.superadmincomplaint} row`}>
                     <div className='col-8'>
                         <div className={`${classes.mainTitle}`}>
@@ -298,7 +292,6 @@ const SuperAdminComplaint = () => {
                                         <option value='attending'>Attending</option>
                                         <option value='forwarded'>Forwarded</option>
                                         <option value='closed'>Closed</option>
-                                        <option value='disapproved'>Disapproved</option>
                                     </select>
                                 }
                                 <div className="btn-group">
@@ -333,22 +326,22 @@ const SuperAdminComplaint = () => {
                                         </div>
                                         <div className={`${classes.tikMsg}`}>
                                             <p>
-                                                <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
+                                                <span dangerouslySetInnerHTML={{ __html: complaint.description }}></span>
                                             </p>
                                         </div>
                                         <div className={`${classes.tikOther}`}>
                                             <p className={`${classes.tikId}`} >
                                                 {complaint.ticketId}
                                             </p>
-
                                             <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
                                                 {complaint.priority}
                                             </p>
-
-                                            <p className={`${classes.tikStatus}` } style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'],['assigned', () => '#008080'], ['closed', () => '#ADE792'] ) }}>
+                                            <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
                                                 {complaint.status}
                                             </p>
-
+                                            <p className={`${classes.tikAssigned}`}>
+                                                {complaint.assignedName ? 'Assigned to ' + complaint.assignedName : 'Not assigned yet'}
+                                            </p>
                                         </div>
                                     </div>
                                 ))

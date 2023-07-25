@@ -8,7 +8,6 @@ import classes from './DeleteStaffList.module.css'
 const DeleteStaffList = () => {
   const navigate = useNavigate();
   const id = useParams();
-  const [search, setSearch] = useState("");
   const [staffList, setStaffList] = useState([]);
   const [allStaffList, setAllStaffList] = useState(staffList);
   const [searchText, setSearchText] = useState('');
@@ -114,8 +113,7 @@ const DeleteStaffList = () => {
       name: "Restore",
       cell: row => <button className={classes.restore} onClick={() => handleRestoreClick(row.id)}>Restore</button>
     }
-  ]
-
+  ];
 
   useEffect(() => {
     let arr = [];
@@ -131,14 +129,11 @@ const DeleteStaffList = () => {
     }
   }, [searchText, staffList]);
 
-
-
   const handleRowClick = row => {
     navigate(`/archivestaff/${row.id}`);
   }
 
   return (
-
     <div>
       <div className={classes.allStaff}>
         <h2>Delete Employees List</h2>
@@ -155,10 +150,7 @@ const DeleteStaffList = () => {
         onRowClicked={handleRowClick}
       />
     </div>
-  )
-
-
-}
-
+  );
+};
 
 export default DeleteStaffList;

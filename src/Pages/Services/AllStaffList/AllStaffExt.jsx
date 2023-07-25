@@ -219,9 +219,7 @@ const AllStaffExt = () => {
     return (
         <Fragment>
             <div className={classes.allstaff}>
-
                 <h2>Contact List</h2>
-
                 {openNormalList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                 {
                     openDepartmentList &&
@@ -267,11 +265,8 @@ const AllStaffExt = () => {
                 highlightOnHover
                 subHeader
             />
-
         </Fragment>
-    )
-
-
-}
+    );
+};
 
 export default AllStaffExt;

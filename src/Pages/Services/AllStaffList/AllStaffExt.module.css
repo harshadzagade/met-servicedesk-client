@@ -11,33 +11,33 @@
   color: var(--text-primary);
 }
 
-.searchInput{
-    background: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    border: 1px solid black;
-  }
-  .optionSearchBox{
-    background: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    border: 1px solid black;
-  }
-  .searchButton{
-    display: inline-block;
-      margin-left: 0.5rem;
-      border: 1px solid gray;
-      border-radius: 4px;
-      padding: 10px 30px 10px 20px;
-      background-color: var(--color-primary);
-      cursor: pointer;
-      white-space: nowrap;
-      color: white;
-      width: 10rem;
-  }
-  
+.searchInput {
+  background: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 1px solid black;
+}
 
+.optionSearchBox {
+  background: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  border: 1px solid black;
+}
+
+.searchButton {
+  display: inline-block;
+  margin-left: 0.5rem;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 30px 10px 20px;
+  background-color: var(--color-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  color: white;
+  width: 10rem;
+}
