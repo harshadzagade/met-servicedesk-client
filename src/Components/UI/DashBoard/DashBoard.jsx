@@ -118,11 +118,38 @@ const DashBoard = () => {
             }
             break;
 
+          case 'subadmin':
+            try {
+              const adminRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+              const adminRequestList = adminRequests.data.requests;
+              const lastUpdatedAdminRequestTime = adminRequestList.length !== 0 && adminRequestList[adminRequestList.length - 1].updatedAt;
+              const adminComplaint = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
+              const adminComplaintList = adminComplaint.data.complaints;
+              const lastUpdatedAdminComplaintTime = adminComplaintList.length !== 0 && adminComplaintList[adminComplaintList.length - 1].updatedAt;
+              let lastUpdatedAdminTime;
+              if ((adminRequestList.length !== 0) && (adminComplaintList.length === 0)) {
+                lastUpdatedAdminTime = lastUpdatedAdminRequestTime;
+              } else if ((adminRequestList.length === 0) && (adminComplaintList.length !== 0)) {
+                lastUpdatedAdminTime = lastUpdatedAdminComplaintTime;
+              } else {
+                if (lastUpdatedAdminRequestTime > lastUpdatedAdminComplaintTime) {
+                  lastUpdatedAdminTime = lastUpdatedAdminRequestTime;
+                } else {
+                  lastUpdatedAdminTime = lastUpdatedAdminComplaintTime;
+                }
+              }
+              setTotalsDate({ totalRequestsDate: lastUpdatedAdminRequestTime, totalComplaintsDate: lastUpdatedAdminComplaintTime, totalTicketsDate: lastUpdatedAdminTime });
+              setTotals({ totalRequests: adminRequestList.length, totalComplaints: adminComplaintList.length, totalTickets: adminRequestList.length + adminComplaintList.length });
+            } catch (error) {
+              console.log(error);
+            }
+            break;
+
           case 'technician':
-            const technicianRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department[0]}`);
+            const technicianRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
             const technicianRequestList = technicianRequests.data.requests;
             const lastUpdatedTechnicianRequestTime = technicianRequestList.length !== 0 && technicianRequestList[technicianRequestList.length - 1].updatedAt;
-            const technicianComplaints = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department[0]}`);
+            const technicianComplaints = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
             const technicianComplaintList = technicianComplaints.data.complaints;
             const lastUpdatedTechnicianComplaintTime = technicianComplaintList.length !== 0 && technicianComplaintList[technicianComplaintList.length - 1].updatedAt;
             let lastUpdatedTechnicianTime;

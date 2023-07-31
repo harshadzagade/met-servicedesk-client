@@ -1,12 +1,30 @@
 .nav {
   display: flex;
+  gap: 4rem;
   background-color: white;
-  height: 6.5rem;
+  height: 14vh;
   flex-direction: row;
   justify-content: flex-end;
   width: auto;
-  margin-right: 1.5rem;
   border-radius: 0.6rem;
+  box-shadow: 0 8px 10px -9px;
+}
+
+.logo {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  gap: 0.8rem;
+  margin-left: 2rem;
+ 
+}
+
+.logo img {
+  width: 9rem;
+  height: 5rem;
+  margin-left: auto;
+  margin-right: auto; 
+  box-shadow: 0 8px 10px -9px black;
 }
 
 .adminDept {

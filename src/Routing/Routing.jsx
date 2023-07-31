@@ -27,6 +27,11 @@ import ReportDetails from '../Components/UI/Details/ReportDetails/ReportDetails'
 import ArchiveStaffDetails from '../Components/Staff/Superadmin/Archive/ArchiveStaffDetails/ArchiveStaffDetails';
 import Department from '../Pages/Department/Department';
 import Institute from '../Pages/Institute/Institute';
+import SubadminActivities from '../Pages/SubadminActivities/SubadminActivities';
+import SubadminSingleStaffDetails from '../Components/Staff/Subadmin/SingleStaffDetails/SubadminSingleStaffDetails';
+import SubadminRequestDetails from '../Components/RequestPage/SubadminRequest/RequestDetails/SubadminRequestDetails';
+import SubadminApproval from '../Components/RequestPage/SubadminRequest/RequestDetails/RequestApproval/SubadminApproval';
+
 const Routing = () => {
   return (
     <Router>
@@ -51,15 +56,18 @@ const Routing = () => {
           <Route exact path='/requestdetails/:requestId' element={<RequestDetails />} />
           <Route exact path='/technicianRequestDetails/:requestId' element={<TechnicianRequestDetails />} />
           <Route exact path='/adminrequestdetails/:requestId' element={<AdminRequestDetails />} />
+          <Route exact path='/subadminrequestdetails/:requestId' element={<SubadminRequestDetails />} />
           <Route exact path='/adminapproval/:requestId' element={<AdminApproval />} />
+          <Route exact path='/subadminapproval/:requestId' element={<SubadminApproval />} />
           <Route exact path='/singlestaff/:staffId' element={<SingleStaff />} />
           <Route exact path='/archivestaff/:staffId' element={<ArchiveStaffDetails />} />
           <Route exact path='/request' element={<Request />} />
-          <Route exact path='/singlestaff/:staffId' element={<SingleStaff />} />
           <Route exact path='/passwordreset' element={<PasswordReset />} />
           <Route exact path='/archive' element={<DeleteStaffList />} />
+          <Route exact path='/subadminactivities' element={<SubadminActivities />} />
           <Route exact path='/services' element={<Service />} />
           <Route exact path='/adminstaffdetails/:staffId' element={<SingleStaffDetails />} />
+          <Route exact path='/subadminstaffdetails/:staffId' element={<SubadminSingleStaffDetails />} />
         </Routes>
       </Sidebar>
     </Router>

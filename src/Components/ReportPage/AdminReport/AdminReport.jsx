@@ -27,6 +27,8 @@ const AdminReport = () => {
     const [fromDate, setFromDate] = useState(null);
     const [toDate, setToDate] = useState(null);
 
+    const sortedData = React.useMemo(() => { return [...reportList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [reportList]);
+
     useEffect(() => {
         const getCategories = async () => {
             const categories = await axios.get(`/api/report/reportcategories/categories`);
@@ -97,7 +99,7 @@ const AdminReport = () => {
         const getReportByCategory = async () => {
             try {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
-                    setAllReportList(reportList);
+                    setAllReportList(sortedData);
                 } else {
                     const report = await axios.get(`/api/report/reportbycategory/${category}`);
                     setAllReportList(report.data.report);
@@ -113,13 +115,13 @@ const AdminReport = () => {
         if (openCategoryList) {
             getReportByCategory();
         }
-    }, [category, openCategoryList, reportList]);
+    }, [category, openCategoryList, sortedData]);
 
     useEffect(() => {
         const getRequestByPriority = async () => {
             try {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
-                    setAllReportList(reportList);
+                    setAllReportList(sortedData);
                 } else {
                     const report = await axios.get(`/api/report/reportbypriority/${priority}`);
                     setAllReportList(report.data.report);
@@ -135,7 +137,7 @@ const AdminReport = () => {
         if (openPriorityList) {
             getRequestByPriority();
         }
-    }, [priority, openPriorityList, reportList]);
+    }, [priority, openPriorityList, sortedData]);
 
     useEffect(() => {
         let arr = [];
@@ -152,7 +154,7 @@ const AdminReport = () => {
                 setOpenCategoryList(false);
                 setOpenPriorityList(false);
                 setIsNormalSearch(true);
-                reportList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
+                sortedData.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
                     return (
                         arr.push(data)
                     );
@@ -179,9 +181,9 @@ const AdminReport = () => {
         if (searchText.length !== 0) {
             setAllReportList(arr);
         } else {
-            setAllReportList(reportList)
+            setAllReportList(sortedData)
         }
-    }, [searchText, reportList, searchType]);
+    }, [searchText, sortedData, searchType]);
 
     const columns = ticketType === 'allTicketTypes' ?
         [
@@ -234,7 +236,7 @@ const AdminReport = () => {
 
     useEffect(() => {
         const getEntriesAsPerDate = async () => {
-            const filteredData = reportList.filter(report => {
+            const filteredData = sortedData.filter(report => {
                 const date = new Date(report.createdAt);
                 return date >= new Date(convertDate(fromDate)) && date <= new Date(convertDate(toDate));
             });
@@ -243,7 +245,7 @@ const AdminReport = () => {
         if (fromDate && toDate) {
             getEntriesAsPerDate();
         }
-    }, [fromDate, toDate, reportList]);
+    }, [fromDate, toDate, sortedData]);
 
     const handleFromDateChange = (e) => {
         setFromDate(e.target.value);

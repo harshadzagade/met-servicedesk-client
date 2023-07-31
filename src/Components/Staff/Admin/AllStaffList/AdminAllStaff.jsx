@@ -13,13 +13,8 @@ const AdminAllStaff = () => {
     const navigate = useNavigate();
     const adminCtx = useContext(AdminContext);
     const [searchText, setSearchText] = useState('');
-    const [searchType, setSearchType] = useState('Firstname');
-    const [openNormalList, setOpenNormalList] = useState(false);
-    const [department, setDepartment] = useState('');
-    const [departments, setDepartments] = useState([]);
-    const [openDepartmentList, setOpenDepartmentList] = useState(false);
-    const [role, setRole] = useState('');
-    const [openRoleList, setOpenRoleList] = useState(false);
+
+    const sortedData = React.useMemo(() => { return [...staffList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [staffList]);
 
     const handleRowClick = row => {
         navigate(`/adminstaffdetails/${row.id}`);
@@ -69,162 +64,34 @@ const AdminAllStaff = () => {
             }
         };
         getStaff();
-    }, [id, adminCtx.department])
+    }, [id, adminCtx.department]);
 
     useEffect(() => {
-        const getDepartments = async () => {
-            const departments = await axios.get(`/api/staff/departments`);
-            setDepartments(departments.data.departments);
-        };
-        getDepartments();
-    }, [openDepartmentList]);
-
-    useEffect(() => {
-        const getStaffByDepartment = async () => {
+        const getStaff = async () => {
             try {
-                if ((openDepartmentList && department.length === 0) || (openDepartmentList && department === 'allDepartments')) {
-                    setAllStaffList(staffList);
+                if (searchText) {
+                    const staff = await axios.get(`/api/staff/admin/searchalldepartmentstaff/${adminCtx.department}/${searchText}`);
+                    setAllStaffList(staff.data);
                 } else {
-                    const staff = await axios.get(`/api/staff/staffbydepartment/${department}`);
-                    setAllStaffList(staff.data.staff);
+                    setAllStaffList(sortedData);
                 }
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
+                    text: 'Unable to search staff'
                 });
             }
         };
-        if (openDepartmentList) {
-            getStaffByDepartment();
-        }
-    }, [department, openDepartmentList, staffList]);
-
-    useEffect(() => {
-        const getStaffByRole = async () => {
-            try {
-                if ((openRoleList && role.length === 0) || (openRoleList && role === 'allRoles')) {
-                    setAllStaffList(staffList);
-                } else {
-                    const staff = await axios.get(`/api/staff/superadmin/staffbyrole/${role}`);
-                    setAllStaffList(staff.data.staff);
-                }
-            } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
-                });
-            }
-        };
-        if (openRoleList) {
-            getStaffByRole();
-        }
-    }, [role, openRoleList, staffList]);
-
-    useEffect(() => {
-        let arr = [];
-        switch (searchType) {
-            case 'Firstname':
-                setOpenDepartmentList(false);
-                setOpenRoleList(false);
-                setOpenNormalList(true);
-                staffList.filter((a) => a.firstname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
-                    return (
-                        arr.push(data)
-                    );
-                });
-                break;
-
-            case 'Lastname':
-                setOpenDepartmentList(false);
-                setOpenRoleList(false);
-                setOpenNormalList(true);
-                staffList.filter((a) => a.lastname.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
-                    return (
-                        arr.push(data)
-                    );
-                });
-                break;
-
-            case 'E-Mail':
-                setOpenDepartmentList(false);
-                setOpenRoleList(false);
-                setOpenNormalList(true);
-                staffList.filter((a) => a.email.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
-                    return (
-                        arr.push(data)
-                    );
-                });
-                break;
-
-            case 'Role':
-                setOpenDepartmentList(false);
-                setOpenRoleList(true);
-                setOpenNormalList(false);
-                break;
-
-            case 'Department':
-                setOpenDepartmentList(true);
-                setOpenRoleList(false);
-                setOpenNormalList(false);
-                break;
-
-            default:
-                setOpenDepartmentList(false);
-                setOpenRoleList(false);
-                setOpenNormalList(true);
-                break;
-        }
-        if (searchText.length !== 0) {
-            setAllStaffList(arr);
-        } else {
-            setAllStaffList(staffList)
-        }
-    }, [searchText, staffList, searchType]);
+        getStaff();
+    }, [searchText, adminCtx.department, sortedData]);
 
     return (
         <div className={classes.AdminAllStaff}>
             <div className={classes.allstaff}>
-                <h2>Staff List</h2>
-                {openNormalList && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
-                {
-                    openDepartmentList &&
-                    <select value={department} className={`${classes.optionSearchBox}`} name="departments" required onChange={(e) => setDepartment(e.target.value)}>
-                        <option value='' hidden>Select Your Department</option>
-                        <option value={'allDepartments'}>All Departments</option>
-                        {
-                            departments.map((department, key) => (
-                                <option key={key} value={department}>{department}</option>
-                            ))
-                        }
-                    </select>
-                }
-                {
-                    openRoleList &&
-                    <select value={role} className={`${classes.optionSearchBox}`} name="roles" required onChange={(e) => setRole(e.target.value)}>
-                        <option value='' hidden>Select Role</option>
-                        <option value='allRoles'>All Roles</option>
-                        <option value='admin'>Admin</option>
-                        <option value='technician'>Technician</option>
-                        <option value='user'>User</option>
-                    </select>
-                }
-                <div className="btn-group mb-1">
-                    <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {searchType}
-                    </button>
-                    <div className="dropdown-menu">
-                        <div className="dropdown-item" onClick={() => setSearchType('Firstname')}>Firstname</div>
-                        <div className="dropdown-item" onClick={() => setSearchType('Lastname')}>Lastname</div>
-                        <div className="dropdown-item" onClick={() => setSearchType('E-Mail')}>E-Mail</div>
-                        <div className="dropdown-item" onClick={() => setSearchType('Role')}>Role</div>
-                        <div className="dropdown-item" onClick={() => setSearchType('Department')}>Department</div>
-                    </div>
-                </div>
+                <h2 className={classes.title}>Staff List</h2>
+                <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
             </div>
-
             <DataTable
                 columns={columns}
                 data={allStaffList}

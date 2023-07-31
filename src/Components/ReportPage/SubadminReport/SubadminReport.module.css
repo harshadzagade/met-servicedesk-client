@@ -1,0 +1,125 @@
+.basicSelection {
+    margin-top: 1vh;
+    justify-content: center;
+    display: flex;
+    margin-top: 2.5rem;
+}
+
+.h2 {
+    font-weight: 600;
+    margin-right: auto;
+}
+
+.departmentSelection {
+    align-items: center;
+    display: flex;
+}
+
+.searching {
+    display: flex;
+}
+
+.dateNsearch {
+    display: flex;
+    margin-right: auto;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.dateStyle {
+    background: white;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.staffSelection {
+    align-items: center;
+    margin-left: 1vh;
+    display: flex;
+}
+
+.dropdownSelect {
+    width: 35vh;
+    padding: 0.3rem 0.5rem;
+    border-width: 1px;
+    border-color: transparent;
+    background-color: white;
+    border-radius: 0.5rem;
+    outline-color: transparent;
+    border: 0.1rem solid gray;
+}
+
+.dropdownSelect:hover {
+    outline: none;
+    border: 0.1rem solid #292929;
+}
+
+.searching {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.searchInput {
+    margin-top: 0.85rem;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    background: #f9fafa;
+    border: 1px solid #b5bdc4;
+    font-size: 16px;
+    height: 35px;
+    width: 20rem;
+    line-height: 24px;
+    padding: 7px 8px;
+    color: #08090a;
+    box-shadow: none;
+    outline-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.searchInput:focus {
+    border-color: black;
+    box-shadow: 1px 1px 0 black;
+}
+
+
+.searchButton {
+    cursor: pointer;
+    margin-top: -0.1rem;
+    font-weight: 500;
+    border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;
+    background-color: var(--color-primary);
+    color: white;
+    max-width: 7rem;
+    height: 2.5rem;
+    gap: 1rem;
+    margin-top: 0.8rem;
+
+}
+
+.searchButton:focus {
+    background-color: var(--color-primary);
+}
+
+
+.searchButton:active {
+    border: 0.1rem solid #292929;
+}
+
+.optionSearchBox {
+    margin-left: 35vh;
+    margin-top: 0.85rem;
+    width: 20rem;
+    padding: 0.287rem 0.5rem;
+    border-width: 1px;
+    border-color: transparent;
+    background-color: #f9fafa;
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+    outline-color: transparent;
+    border: 0.1rem solid gray;
+}
+
+.optionSearchBox:focus {
+    outline: none;
+    border: 0.1rem solid #292929;
+}

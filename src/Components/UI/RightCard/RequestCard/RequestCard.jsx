@@ -46,8 +46,20 @@ const RequestCard = () => {
                         setRequestStatus({ pending: pending.length, disapproved: disapproved.length, assigned: assigned.length, attending: attending.length, forwarded: forwarded.length, closed: closed.length });
                         break;
 
+                    case 'subadmin':
+                        const subadminList = await axios.get(`/api/staff/subadmin/requests/incoming/${res.data.staff.department}`);
+                        const subadminRequestList = subadminList.data.requests;
+                        pending = subadminRequestList.filter((data) => data.status.startsWith('pending'));
+                        disapproved = subadminRequestList.filter((data) => data.status.startsWith('disapproved'));
+                        assigned = subadminRequestList.filter((data) => data.status.startsWith('assigned'));
+                        attending = subadminRequestList.filter((data) => data.status.startsWith('attending'));
+                        forwarded = subadminRequestList.filter((data) => data.status.startsWith('forwarded'));
+                        closed = subadminRequestList.filter((data) => data.status.startsWith('closed'));
+                        setRequestStatus({ pending: pending.length, disapproved: disapproved.length, assigned: assigned.length, attending: attending.length, forwarded: forwarded.length, closed: closed.length });
+                        break;
+
                     case 'technician':
-                        const technicianList = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department[0]}`);
+                        const technicianList = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
                         const technicianRequestList = technicianList.data.requests;
                         pending = technicianRequestList.filter((data) => data.status.startsWith('pending'));
                         disapproved = technicianRequestList.filter((data) => data.status.startsWith('disapproved'));

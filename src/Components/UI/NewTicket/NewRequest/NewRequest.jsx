@@ -1,13 +1,15 @@
-import React, { Fragment, useRef, useState, useEffect } from 'react';
+import React, { Fragment, useRef, useState, useEffect, useContext } from 'react';
 import classes from './NewRequest.module.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import AdminContext from '../../../Context/AdminContext/AdminContext';
 
 const NewRequest = () => {
     const id = localStorage.getItem('id');
+    const adminCtx = useContext(AdminContext);
     const behalfEmailRef = useRef();
     const subjectRef = useRef();
     const navigate = useNavigate();
@@ -21,6 +23,23 @@ const NewRequest = () => {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [isRepeated, setIsRepeated] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
+    const [staff, setStaff] = useState({});
+
+    useEffect(() => {
+        const getStaffDetails = async () => {
+            try {
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                setStaff(staff.data.staff);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch staff'
+                });
+            }
+        };
+        getStaffDetails();
+    }, [id]);
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -107,6 +126,7 @@ const NewRequest = () => {
             formData.append('subject', subjectRef.current.value);
             formData.append('description', editorData);
             formData.append('department', department);
+            formData.append('staffDepartment', staff.role === 'admin'? adminCtx.department : staff.department[0]);
             formData.append('priority', priority);
             formData.append('category', requestType);
             formData.append('isRepeated', isRepeated);
@@ -115,7 +135,7 @@ const NewRequest = () => {
                 await axios.post('/api/request/', formData);
                 setShowLoading(false);
                 Swal.fire(
-                    'Request Created!',
+                    'Request Created',
                     'You have created request successfully',
                     'success'
                 );

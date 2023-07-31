@@ -1,11 +1,13 @@
-.wrapper {
+/* .wrapper {
   display: grid;
   width: 100%;
   margin: 0 auto;
   gap: 1rem;
   grid-template-columns: 15% auto;
-  /* display: flex; */
-}
+} */
+/* .wrapper{
+  height: 86vh;
+} */
 
 .nav {
   position: -webkit-sticky;
@@ -14,15 +16,16 @@
   z-index: 8;
 }
 
-.main {
-  margin-right: 2rem;
+.mainScreen {
+  height: 86vh;
+  overflow: scroll;
+  overflow-y: auto;
 }
 
 .sidemenu {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 2rem;
-  margin-top: 2rem;
+  height: 86vh;
+  padding-top: 2rem;
+  padding-bottom: auto;
 }
 
 .sidemenu h3 {

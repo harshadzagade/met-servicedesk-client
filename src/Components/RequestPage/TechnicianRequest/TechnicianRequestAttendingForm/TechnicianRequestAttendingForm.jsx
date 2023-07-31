@@ -17,6 +17,7 @@ const TechnicianRequestAttendingForm = () => {
     const [technicianId, setTechnicianId] = useState(null);
     const [isAttending, setIsAttending] = useState(false);
     const [isForwarded, setIsForwarded] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
     const [status, setStatus] = useState('');
 
     useEffect(() => {
@@ -35,6 +36,30 @@ const TechnicianRequestAttendingForm = () => {
         };
         getTechnicians();
     }, [loginId, navigate]);
+
+    useEffect(() => {
+        const showLoadingAlert = () => {
+            let timerInterval
+            Swal.fire({
+                title: 'Changing status',
+                html: 'Please wait...<b></b>',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            });
+        };
+        if (showLoading) {
+            showLoadingAlert();
+        }
+    }, [showLoading]);
 
     useEffect(() => {
         switch (status) {
@@ -84,7 +109,14 @@ const TechnicianRequestAttendingForm = () => {
             actionTaken: actionTakenRef.current ? actionTakenRef.current.value : null
         }
         try {
+            setShowLoading(true);
             await axios.put(`/api/staff/technician/changerequeststatus/${id}`, data);
+            setShowLoading(false);
+            Swal.fire(
+                'Changed status',
+                'You have changed status successfully',
+                'success'
+            );
             navigate('/request');
         } catch (error) {
             Swal.fire({

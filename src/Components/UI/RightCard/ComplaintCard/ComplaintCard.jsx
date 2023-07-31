@@ -42,8 +42,18 @@ const ComplaintCard = () => {
                         setComplaintStatus({ pending: pending.length, attending: attending.length, forwarded: forwarded.length, closed: closed.length });
                         break;
 
+                    case 'subadmin':
+                        const subadminList = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
+                        const subadminComplaintList = subadminList.data.complaints;
+                        pending = subadminComplaintList.filter((data) => data.status.startsWith('pending'));
+                        attending = subadminComplaintList.filter((data) => data.status.startsWith('attending'));
+                        forwarded = subadminComplaintList.filter((data) => data.status.startsWith('forwarded'));
+                        closed = subadminComplaintList.filter((data) => data.status.startsWith('closed'));
+                        setComplaintStatus({ pending: pending.length, attending: attending.length, forwarded: forwarded.length, closed: closed.length });
+                        break;
+
                     case 'technician':
-                        const technicianList = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department[0]}`);
+                        const technicianList = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
                         const technicianComplaintList = technicianList.data.complaints;
                         pending = technicianComplaintList.filter((data) => data.status.startsWith('pending'));
                         attending = technicianComplaintList.filter((data) => data.status.startsWith('attending'));

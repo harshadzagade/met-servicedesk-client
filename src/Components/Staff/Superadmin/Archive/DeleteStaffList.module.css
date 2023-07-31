@@ -1,16 +1,16 @@
 .allStaff {
-  display: grid;
-  grid-template-columns: 70% 30%;
+  display: flex;
   margin-bottom: 0.5rem;
-  margin-top: 2.4rem;
+  margin-top: 1rem;
 }
-
-.allStaff h2 {
-  margin-top: 0.3rem;
+.title{
+  display: flex;
+  margin-right: auto;
+    margin-top: 0.3rem;
   font-weight: 600;
   color: var(--text-primary);
-
 }
+
 
 .datatable {
   border-radius: 1rem;

@@ -56,18 +56,27 @@ const EditCategories = (props) => {
         setCategoriesList(prevState => prevState.filter((tag, i) => i !== index))
     };
 
-    const handleUpdateCategories = async () => {
-        try {
-            await axios.put(`/api/department/editcategories/${props.departmentId}`, {
-                category: categoriesList
-            });
-            props.onConfirm();
-        } catch (error) {
+    const handleUpdateCategories = async (e) => {
+        e.preventDefault();
+        if (categoriesList.length === 0) {
             Swal.fire({
                 icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Unable to update categories'
+                title: `Please add categories`,
+                text: `You haven't added any categories`
             });
+        } else {
+            try {
+                await axios.put(`/api/department/editcategories/${props.departmentId}`, {
+                    category: categoriesList
+                });
+                props.onConfirm();
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to update categories'
+                });
+            }
         }
     };
 
@@ -82,7 +91,7 @@ const EditCategories = (props) => {
                         <div className={classes.deptik}>
                             <label>Department</label>
                             <div className={`${classes.createForm}`}>
-                                <input value={input} placeholder="Enter a department" className={classes.createstaffInput} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} required/>
+                                <input value={input} placeholder="Enter a department" className={classes.createstaffInput} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange}  />
                                 <div className={classes.departmentParent}>
                                     {categoriesList.map((tag, index) => (
                                         <div key={index} className={classes.tag}>

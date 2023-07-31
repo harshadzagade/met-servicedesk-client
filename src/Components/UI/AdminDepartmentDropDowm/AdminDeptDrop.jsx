@@ -32,7 +32,7 @@ const AdminDeptDrop = (props) => {
         {adminCtx.department === '' ? 'Department' : adminCtx.department}
       </button>
       <div className="dropdown-menu">
-        {departments.map((department) => (<li value={department} onClick={() => handleDepartmentClick(department)}>{department}</li>))}
+        {departments.map((department, key) => (<li key={key} value={department} onClick={() => handleDepartmentClick(department)}>{department}</li>))}
       </div>
     </div>
   );

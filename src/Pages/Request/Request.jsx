@@ -5,6 +5,7 @@ import SuperadminRequest from '../../Components/RequestPage/SuperadminRequest/Su
 import UserRequest from '../../Components/RequestPage/UserRequest/UserRequest';
 import AdminRequest from '../../Components/RequestPage/AdminRequest/AdminRequest';
 import Technician from '../../Components/RequestPage/TechnicianRequest/Technician';
+import SubadminRequest from '../../Components/RequestPage/SubadminRequest/SubadminRequest';
 
 const Request = () => {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Request = () => {
     const id = localStorage.getItem('id');
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isSubadmin, setIsSubadmin] = useState(false);
     const [isTechnician, setIsTechnician] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const [refresh, setRefresh] = useState(false);
@@ -39,6 +41,7 @@ const Request = () => {
                     case 'superadmin':
                         setIsSuperAdmin(true);
                         setIsAdmin(false);
+                        setIsSubadmin(false);
                         setIsTechnician(false);
                         setIsUser(false);
                         break;
@@ -46,6 +49,15 @@ const Request = () => {
                     case 'admin':
                         setIsSuperAdmin(false);
                         setIsAdmin(true);
+                        setIsSubadmin(false);
+                        setIsTechnician(false);
+                        setIsUser(false);
+                        break;
+
+                    case 'subadmin':
+                        setIsSuperAdmin(false);
+                        setIsAdmin(false);
+                        setIsSubadmin(true);
                         setIsTechnician(false);
                         setIsUser(false);
                         break;
@@ -53,6 +65,7 @@ const Request = () => {
                     case 'technician':
                         setIsSuperAdmin(false);
                         setIsAdmin(false);
+                        setIsSubadmin(false);
                         setIsTechnician(true);
                         setIsUser(false);
                         break;
@@ -60,6 +73,7 @@ const Request = () => {
                     case 'user':
                         setIsSuperAdmin(false);
                         setIsAdmin(false);
+                        setIsSubadmin(false);
                         setIsTechnician(false);
                         setIsUser(true);
                         break;
@@ -78,6 +92,7 @@ const Request = () => {
         <Fragment>
             {isSuperAdmin && <SuperadminRequest />}
             {isAdmin && <AdminRequest />}
+            {isSubadmin && <SubadminRequest />}
             {isTechnician && <Technician />}
             {isUser && <UserRequest />}
         </Fragment>

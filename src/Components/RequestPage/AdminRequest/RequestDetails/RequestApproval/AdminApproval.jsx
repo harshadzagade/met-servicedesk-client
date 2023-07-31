@@ -52,7 +52,8 @@ const AdminApproval = () => {
         getTechnicians();
     }, [loginId, adminCtx.department, navigate]);
 
-    const handleSubmitClick = async (id) => {
+    const handleSubmitClick = async (e, id) => {
+        e.preventDefault();
         let approvalValue = null;
         if (approval === 'approve') {
             approvalValue = 1;
@@ -103,7 +104,7 @@ const AdminApproval = () => {
                         <div hidden>
                         </div>
                         <div className={classes.RequestApproval} >
-                            <form className={classes.form} onSubmit={() => handleSubmitClick(id.requestId)}>
+                            <form className={classes.form} onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
                                 <div >
                                     <div className={classes.approvalStatus}>
                                         <span>Change Status</span>

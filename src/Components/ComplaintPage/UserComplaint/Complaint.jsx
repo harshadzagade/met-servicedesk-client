@@ -6,41 +6,54 @@ import { iswitch } from "iswitch";
 import SweetPagination from "sweetpagination";
 import DataPerPage from "../../UI/DataPerPage/DataPerPage";
 import Rightside from "../../Righside/Rightside";
+import Swal from "sweetalert2";
 
 const Complaint = () => {
   const id = localStorage.getItem("id");
+  const navigate = useNavigate();
   const [complaintList, setComplaintList] = useState([]);
-  const [allComplaintList, setAllComplaintList] = useState(complaintList);
+  const [allComplaintList, setAllComplaintList] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState(10);
   const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
-  const [searchType, setSearchType] = useState("Subject");
   const [searchText, setSearchText] = useState("");
-  const [isNormalSearch, setIsNormalSearch] = useState(true);
-  const [priority, setPriority] = useState("");
-  const [openPriorityList, setOpenPriorityList] = useState(false);
-  const [status, setStatus] = useState("");
-  const [openStatusList, setOpenStatusList] = useState(false);
-  const navigate = useNavigate();
+  const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
   useEffect(() => {
     const getList = async () => {
-      const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
-      setComplaintList(list.data.complaints);
+      try {
+        const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
+        setComplaintList(list.data.complaints);
+        setAllComplaintList(list.data.complaints);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
     };
     getList();
   }, [id]);
 
+  useEffect(() => {
+    const getStaff = async () => {
+      try {
+        if (searchText) {
+          const complaint = await axios.get(`/api/complaint/owncomplaintsearch/${id}/${searchText}`);
+          setAllComplaintList(complaint.data);
+        } else {
+          setAllComplaintList(sortedData);
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: `${error.response.data.message}`,
+          text: 'Unable to search complaints'
+        });
+      }
+    };
+    getStaff();
+  }, [searchText, id, sortedData]);
+
   const getCreatedComplaintDate = (createdAt) => {
     const date = new Date(createdAt);
-    return (
-      date.getDate() +
-      "/" +
-      (date.getMonth() + 1) +
-      "/" +
-      date.getFullYear() +
-      " " +
-      formatAMPM(date)
-    );
+    return (date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + formatAMPM(date));
   };
 
   const formatAMPM = (date) => {
@@ -54,69 +67,6 @@ const Complaint = () => {
     let strTime = hours + ":" + minutes + ":" + seconds + " " + ampm;
     return strTime;
   };
-
-  useEffect(() => {
-    let arr = [];
-    switch (searchType) {
-      case "Subject":
-        setOpenPriorityList(false);
-        setOpenStatusList(false);
-        setIsNormalSearch(true);
-        complaintList.filter((a) => a.subject.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
-          return arr.push(data);
-        });
-        break;
-
-      case "Name":
-        setOpenPriorityList(false);
-        setOpenStatusList(false);
-        setIsNormalSearch(true);
-        complaintList.filter((a) => a.name.toLowerCase().startsWith(searchText.toLowerCase())).map((data) => {
-          return arr.push(data);
-        });
-        break;
-
-      case "Priority":
-        setOpenPriorityList(true);
-        setOpenStatusList(false);
-        setIsNormalSearch(false);
-        const checkPriorities = complaintList.filter((a) => a.priority.startsWith(priority)).map((data) => {
-          return arr.push(data);
-        });
-        if (priority === "allPriorities") {
-          arr = complaintList;
-        } else if (checkPriorities.length === 0) {
-          arr = [];
-        }
-        break;
-
-      case "Status":
-        setOpenPriorityList(false);
-        setOpenStatusList(true);
-        setIsNormalSearch(false);
-        const checkStatus = complaintList.filter((a) => a.status.startsWith(status)).map((data) => {
-          return arr.push(data);
-        });
-        if (status === "allStatus") {
-          arr = complaintList;
-        } else if (checkStatus.length === 0) {
-          arr = [];
-        }
-        break;
-
-      default:
-        break;
-    }
-    if (
-      searchText.length !== 0 ||
-      priority.length !== 0 ||
-      status.length !== 0
-    ) {
-      setAllComplaintList(arr);
-    } else {
-      setAllComplaintList(complaintList);
-    }
-  }, [searchText, complaintList, searchType, priority, status]);
 
   return (
     <main>
@@ -134,47 +84,10 @@ const Complaint = () => {
             </div>
             <div className={classes.search}>
               <div className={classes.searchfiltering}>
-                {isNormalSearch && (
-                  <input
-                    type="text"
-                    className={`${classes.searchInput}`}
-                    placeholder={`Please search ${searchType}`}
-                    onChange={(e) => setSearchText(e.target.value)}
-                  />
-                )}
-                {openPriorityList && (
-                  <select value={priority} className={`${classes.optionSearchBox}`} name="priorities" required onChange={(e) => setPriority(e.target.value)}>
-                    <option value="" hidden>Select Your Priority</option>
-                    <option value="allPriorities">All Priorities</option>
-                    <option value="high">High</option>
-                    <option value="moderate">Moderate</option>
-                    <option value="low">Low</option>
-                  </select>
-                )}
-                {openStatusList && (
-                  <select value={status} className={`${classes.optionSearchBox}`}name="status" required onChange={(e) => setStatus(e.target.value)}>
-                    <option value="" hidden>Select Your Status</option>
-                    <option value="allStatus">All Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="attending">Attending</option>
-                    <option value="forwarded">Forwarded</option>
-                    <option value="closed">Closed</option>
-                  </select>
-                )}
-                <div className="btn-group">
-                  <button type="button" className={`${classes.searchButton} dropdown-toggle`} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {searchType}
-                  </button>
-                  <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={() => setSearchType("Subject")}>Subject</div>
-                    <div className="dropdown-item" onClick={() => setSearchType("Name")}>Name</div>
-                    <div className="dropdown-item" onClick={() => setSearchType("Priority")}>Priority</div>
-                    <div className="dropdown-item" onClick={() => setSearchType("Status")}>Status</div>
-                  </div>
-                </div>
+                <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
               </div>
               <div className={classes.datapage}>
-                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages}/>
+                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
               </div>
             </div>
             <div className={`${classes.requests} `}>
@@ -189,14 +102,14 @@ const Complaint = () => {
                     </span>
                   </div>
                   <div className={`${classes.tikMsg}`}>
-                    <p><div dangerouslySetInnerHTML={{ __html: complaint.description }}/></p>
+                    <p><div dangerouslySetInnerHTML={{ __html: complaint.description }} /></p>
                   </div>
                   <div className={`${classes.tikOther}`}>
                     <p className={`${classes.tikId}`}>{complaint.ticketId}</p>
-                    <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ["high", () => "#E70000"], ["moderate", () => "#FFBF00"], ["low", () => "#90EE90"])}}>
+                    <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ["high", () => "#E70000"], ["moderate", () => "#FFBF00"], ["low", () => "#90EE90"]) }}>
                       {complaint.priority}
                     </p>
-                    <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ["pending", () => "#FF6000"], ["forwarded", () => "#9681EB"], ["attending", () => " #30D5C8"], ["closed", () => "#ADE792"])}}>
+                    <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ["pending", () => "#FF6000"], ["forwarded", () => "#9681EB"], ["attending", () => " #30D5C8"], ["closed", () => "#ADE792"]) }}>
                       {complaint.status}
                     </p>
                   </div>

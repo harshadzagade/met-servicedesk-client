@@ -6,6 +6,7 @@ import UserComplaint from '../../Components/ComplaintPage/UserComplaint/Complain
 import SuperAdminComplaint from '../../Components/ComplaintPage/SuperAdminComplaint/SuperAdminComplaint';
 import AdminComplaint from '../../Components/ComplaintPage/AdminComplaint/AdminComplaint';
 import TechnicianComplaint from '../../Components/ComplaintPage/TechnicianComplaint/TechnicianComplaint';
+import SubadminComplaint from '../../Components/ComplaintPage/SubadminComplaint/SubadminComplaint';
 
 const Complaint = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Complaint = () => {
 
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isSubadmin, setIsSubadmin] = useState(false);
     const [isTechnician, setIsTechnician] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const [refresh, setRefresh] = useState(false);
@@ -45,6 +47,7 @@ const Complaint = () => {
                         case 'superadmin':
                             setIsSuperAdmin(true);
                             setIsAdmin(false);
+                            setIsSubadmin(false);
                             setIsTechnician(false);
                             setIsUser(false);
                             break;
@@ -52,6 +55,15 @@ const Complaint = () => {
                         case 'admin':
                             setIsSuperAdmin(false);
                             setIsAdmin(true);
+                            setIsSubadmin(false);
+                            setIsTechnician(false);
+                            setIsUser(false);
+                            break;
+
+                        case 'subadmin':
+                            setIsSuperAdmin(false);
+                            setIsAdmin(false);
+                            setIsSubadmin(true);
                             setIsTechnician(false);
                             setIsUser(false);
                             break;
@@ -59,6 +71,7 @@ const Complaint = () => {
                         case 'technician':
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
+                            setIsSubadmin(false);
                             setIsTechnician(true);
                             setIsUser(false);
                             break;
@@ -66,6 +79,7 @@ const Complaint = () => {
                         case 'user':
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
+                            setIsSubadmin(false);
                             setIsTechnician(false);
                             setIsUser(true);
                             break;
@@ -85,6 +99,7 @@ const Complaint = () => {
         <Fragment>
             {isSuperAdmin && <SuperAdminComplaint />}
             {isAdmin && <AdminComplaint />}
+            {isSubadmin && <SubadminComplaint />}
             {isTechnician && <TechnicianComplaint />}
             {isUser && <UserComplaint />}
         </Fragment>

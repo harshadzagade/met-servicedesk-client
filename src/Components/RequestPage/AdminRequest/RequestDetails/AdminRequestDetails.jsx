@@ -110,7 +110,7 @@ const AdminRequestDetails = () => {
                                         </div>
                                         <div className={classes.description}>
                                             <label>Description:</label>
-                                            <div  className={classes.complaintDetailsp} dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
+                                            <div className={classes.complaintDetailsp} dangerouslySetInnerHTML={{ __html: requestData.description }}></div>
                                         </div>
                                         <hr />
                                         <div className={classes.deptper}>
@@ -210,7 +210,7 @@ const AdminRequestDetails = () => {
                                             <p className={classes.complaintDetailsp}>{getCreatedRequestDate(requestData.createdAt)}</p>
                                         </div>
                                         <div>
-                                            <button className={classes.complaintAssingBtn} onClick={handleApprovalClick}>Request Approval</button>
+                                            {(((requestData.approval1 === null) || (requestData.approval2 === null)) && requestData.status === 'pending') && <button className={classes.complaintAssingBtn} onClick={handleApprovalClick}>Request Approval</button>}
                                         </div>
                                     </form>
                                 </div>

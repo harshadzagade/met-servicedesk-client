@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SuperAdmin from '../../Components/Staff/Superadmin/SuperAdmin';
@@ -6,6 +6,7 @@ import Admin from '../../Components/Staff/Admin/Admin';
 import DashBoard from '../../Components/UI/DashBoard/DashBoard';
 import Technician from '../../Components/Staff/Technician/Technician';
 import User from '../../Components/Staff/User/User';
+import Subadmin from '../../Components/Staff/Subadmin/Subadmin';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Home = () => {
 
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isSubadmin, setIsSubadmin] = useState(false);
     const [isTechnician, setIsTechnician] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const [refresh, setRefresh] = useState(false);
@@ -45,6 +47,7 @@ const Home = () => {
                         case 'superadmin':
                             setIsSuperAdmin(true);
                             setIsAdmin(false);
+                            setIsSubadmin(false);
                             setIsTechnician(false);
                             setIsUser(false);
                             break;
@@ -52,6 +55,15 @@ const Home = () => {
                         case 'admin':
                             setIsSuperAdmin(false);
                             setIsAdmin(true);
+                            setIsSubadmin(false);
+                            setIsTechnician(false);
+                            setIsUser(false);
+                            break;
+
+                        case 'subadmin':
+                            setIsSuperAdmin(false);
+                            setIsAdmin(false);
+                            setIsSubadmin(true);
                             setIsTechnician(false);
                             setIsUser(false);
                             break;
@@ -60,6 +72,7 @@ const Home = () => {
                             localStorage.setItem('department', staff.data.staff.department[0]);
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
+                            setIsSubadmin(false);
                             setIsTechnician(true);
                             setIsUser(false);
                             break;
@@ -67,6 +80,7 @@ const Home = () => {
                         case 'user':
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
+                            setIsSubadmin(false);
                             setIsTechnician(false);
                             setIsUser(true);
                             break;
@@ -83,13 +97,14 @@ const Home = () => {
     }, [id, navigate, refresh]);
 
     return (
-        <div className='container-fluid'>
+        <Fragment>
             <DashBoard />
             {isSuperAdmin && <SuperAdmin />}
             {isAdmin && <Admin />}
+            {isSubadmin && <Subadmin />}
             {isTechnician && <Technician />}
             {isUser && <User />}
-        </div>
+        </Fragment>
     );
 };
 

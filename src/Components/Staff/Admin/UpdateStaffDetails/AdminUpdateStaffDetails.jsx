@@ -49,7 +49,8 @@ const AdminUpdateStaffdetails = (props) => {
                     <div className={classes.myform} >
                         <div className={classes.department}>
                             <label className="ld">Role:</label>
-                            <select className="dept-select" defaultValue={staff.role} name='role' onChange={handleChange} >
+                            <select className="dept-select" value={updateRole} name='role' onChange={handleChange} >
+                                <option value="subadmin">Sub-Admin</option>
                                 <option value="technician">Technician</option>
                                 <option value="user">User</option>
                             </select>

@@ -1,13 +1,15 @@
-.allstaff {
-  display: grid;
-  grid-template-columns: 52% 30% 20%;
-  margin-bottom: 0.5rem;
-  margin-top: 2.5rem;
-}
 
-.allstaff h2 {
-  margin-top: 0.3rem;
+.allstaff {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+.title{
+  display: flex;
+  margin-right: auto;
+   margin-top: 0.3rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .searchInput {

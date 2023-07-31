@@ -22,7 +22,11 @@ const Navbar = () => {
     }, [id]);
 
     return (
+
         <div className={classes.nav} hidden={window.location.pathname === '/login' || window.location.pathname === '/forgotpassword' || window.location.pathname === '/passwordreset' ? true : false}>
+            <div className={`${classes.logo}`}>
+                <img src="/assets/img/met_logo.png" alt="" />
+            </div>
             <div className={classes.departmentSelection}>
                 {staffInfo.role === 'admin' &&
                     <div className={classes.adminDept}>

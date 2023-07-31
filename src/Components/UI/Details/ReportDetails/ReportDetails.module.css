@@ -17,13 +17,13 @@
     padding: 1rem;
     box-shadow: var(--box-shadow);
     transition: all 300ms ease;
-    overflow: auto;
-    max-height: 75vh;
+    margin-bottom: 1rem;
 }
 
 .myform label {
     font-size: medium;
     margin-top: 0.5rem;
+    color: black;
 }
 
 .myform p {

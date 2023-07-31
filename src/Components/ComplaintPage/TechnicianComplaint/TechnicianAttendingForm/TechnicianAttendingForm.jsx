@@ -16,13 +16,14 @@ const TechnicianAttendingForm = () => {
     const [technicianId, setTechnicianId] = useState(null);
     const [isAttending, setIsAttending] = useState(false);
     const [isForwarded, setIsForwarded] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
     const [status, setStatus] = useState('');
 
     useEffect(() => {
         const getTechnicians = async () => {
             try {
                 const technician = await axios.get(`/api/staff/superadmin/staffdetails/${loginId}`);
-                const technicians = await axios.get(`/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department[0]}`);
+                const technicians = await axios.get(`/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 Swal.fire({
@@ -52,7 +53,31 @@ const TechnicianAttendingForm = () => {
                 setIsAttending(false);
                 break;
         }
-    }, [status])
+    }, [status]);
+
+    useEffect(() => {
+        const showLoadingAlert = () => {
+            let timerInterval
+            Swal.fire({
+                title: 'Changing status',
+                html: 'Please wait...<b></b>',
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            });
+        };
+        if (showLoading) {
+            showLoadingAlert();
+        }
+    }, [showLoading]);
 
     const handleSubmitClick = async (id) => {
         const data = {
@@ -63,7 +88,14 @@ const TechnicianAttendingForm = () => {
             actionTaken: actionTakenRef.current ? actionTakenRef.current.value : null
         }
         try {
+            setShowLoading(true);
             await axios.put(`/api/staff/technician/changecomplaintstatus/${id}`, data);
+            setShowLoading(false);
+            Swal.fire(
+                'Changed status',
+                'You have changed status successfully',
+                'success'
+            );
             navigate('/complaint');
         } catch (error) {
             Swal.fire({
@@ -103,7 +135,7 @@ const TechnicianAttendingForm = () => {
                                                 <option key='0' value='' hidden defaultValue=''>Assign to technician</option>
                                                 {
                                                     technicians.map((technician) =>
-                                                        <option key={technician.id}  value={technician.id}>{technician.firstname + ' ' + technician.lastname}</option>
+                                                        <option key={technician.id} value={technician.id}>{technician.firstname + ' ' + technician.lastname}</option>
                                                     )
                                                 }
                                             </select>
