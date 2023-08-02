@@ -48,7 +48,7 @@ const AllStaff = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get('/api/staff/superadmin/allstafflist/fullstaff');
+                const list = await axios.get('/api/staff/superadmin/allstafflist');
                 setStaffList(list.data.totalStaff);
                 setAllStaffList(list.data.totalStaff)
             } catch (error) {
