@@ -26,6 +26,7 @@ const SubadminReport = () => {
     const [fromDate, setFromDate] = useState(null);
     const [toDate, setToDate] = useState(null);
     const [subadminDetails, setSubadminDetails] = useState({});
+    const [csvFile, setCsvFile] = useState('');
 
     const sortedData = React.useMemo(() => { return [...reportList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [reportList]);
 
@@ -201,6 +202,22 @@ const SubadminReport = () => {
         }
     }, [searchText, sortedData, searchType]);
 
+    useEffect(() => {
+        const setCsvData = async () => {
+            try {
+                const csv = await axios.post('/api/report/reportcsv', { reportData: allReportList });
+                setCsvFile(csv.data)
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to export report'
+                });
+            }
+        };
+        setCsvData();
+    }, [allReportList]);
+
     const columns = ticketType === 'allTicketTypes' ?
         [
             {
@@ -274,7 +291,15 @@ const SubadminReport = () => {
     return (
         <div>
             <div className={`${classes.basicSelection}`}>
-                <h2 className={classes.h2}>Report</h2>
+            <div className={classes.h2}>
+                    <div className='d-flex'>
+                        <h2>Report</h2>
+                        <a  href={`data:text/csv;charset=utf-8,${escape(csvFile)}`} download="report_data.csv" className={`${classes.generate} d-none d-sm-inline-block btn btn-sm  shadow-sm mb-2 ml-3`}>
+                            <i className="fas fa-download fa-sm "></i>
+                            Generate Report
+                        </a>
+                    </div>
+                </div>
                 <div className={`${classes.staffSelection}`}>
                     <div>Staff:&nbsp;</div>
                     <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>

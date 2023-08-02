@@ -20,7 +20,7 @@ const UpdateStaffDetails = (props) => {
     useEffect(() => {
         const fetchStaff = async () => {
             try {
-                const staff = await axios.get(`/api/staff/superadmin/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
                 setStaff(staff.data.staff);
                 setDepartmentList(staff.data.staff.department);
                 setInstitute(staff.data.staff.institute);
@@ -57,7 +57,7 @@ const UpdateStaffDetails = (props) => {
             });
         } else {
             try {
-                await axios.put(`/api/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
+                await axios.put(`/api/staff/staffdetails/updateStaff/${id}`, updates);
                 props.onConfirm();
             } catch (error) {
                 Swal.fire({

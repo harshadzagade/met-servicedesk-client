@@ -22,7 +22,7 @@ const TechnicianAttendingForm = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technician = await axios.get(`/api/staff/superadmin/staffdetails/${loginId}`);
+                const technician = await axios.get(`/api/staff/staffdetails/${loginId}`);
                 const technicians = await axios.get(`/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {

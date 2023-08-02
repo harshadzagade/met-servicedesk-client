@@ -10,7 +10,10 @@
     margin-right: auto;
     margin-top: 1.3rem;
 }
-
+.generate{
+    background-color: var(--color-primary);
+    color: #f9fafa;
+}
 .searching {
     display: flex;
 }

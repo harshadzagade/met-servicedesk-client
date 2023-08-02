@@ -4,11 +4,15 @@
     display: flex;
     margin-top: 2.5rem;
 }
-
+ 
 .h2 {
     font-weight: 600;
     margin-right: auto;
     color: var(--text-primary);
+}
+.generate{
+    background-color: var(--color-primary);
+    color: #f9fafa;
 }
 
 .departmentSelection {
