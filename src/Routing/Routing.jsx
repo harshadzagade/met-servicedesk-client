@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '../Pages/Login/Login';
 import ResetPassword from '../Components/ResetPassword/ResetPassword';
-import PasswordReset from '../Components/ResetPassword/PasswordReset/PasswordReset';
 import SingleStaff from '../Components/Staff/Superadmin/SingleStaff/SingleStaff';
 import Home from '../Pages/Home/Home';
 import CreateStaff from '../Components/Staff/Superadmin/CreateStaff/CreateStaff';
@@ -31,6 +30,7 @@ import SubadminActivities from '../Pages/SubadminActivities/SubadminActivities';
 import SubadminSingleStaffDetails from '../Components/Staff/Subadmin/SingleStaffDetails/SubadminSingleStaffDetails';
 import SubadminRequestDetails from '../Components/RequestPage/SubadminRequest/RequestDetails/SubadminRequestDetails';
 import SubadminApproval from '../Components/RequestPage/SubadminRequest/RequestDetails/RequestApproval/SubadminApproval';
+import NewPassword from '../Components/ResetPassword/NewPasword/NewPassword';
 
 const Routing = () => {
   return (
@@ -62,7 +62,7 @@ const Routing = () => {
           <Route exact path='/singlestaff/:staffId' element={<SingleStaff />} />
           <Route exact path='/archivestaff/:staffId' element={<ArchiveStaffDetails />} />
           <Route exact path='/request' element={<Request />} />
-          <Route exact path='/passwordreset' element={<PasswordReset />} />
+          <Route exact path='/passwordreset' element={<NewPassword />} />
           <Route exact path='/archive' element={<DeleteStaffList />} />
           <Route exact path='/subadminactivities' element={<SubadminActivities />} />
           <Route exact path='/services' element={<Service />} />

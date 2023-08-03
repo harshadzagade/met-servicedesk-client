@@ -1,9 +1,6 @@
 .sendOtp {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-  margin-left: 35rem;
   margin-top: 5rem;
+  margin-right: 15rem;
 }
 
 .loginform h2 {

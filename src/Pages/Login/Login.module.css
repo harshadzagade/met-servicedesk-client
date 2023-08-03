@@ -1,11 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-  margin-left: 35rem;
   margin-top: 5rem;
+  margin-right: 15rem;
 }
 
 .formPage {

@@ -42,6 +42,7 @@ const CreateStaff = () => {
                 'success'
             );
             navigate('/', { state: { refreshSuperHome: true } });
+            sessionStorage.setItem('tab', 'home');
         } catch (error) {
             Swal.fire({
                 icon: 'error',

@@ -33,7 +33,7 @@ const SingleStaff = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`/api/staff/staffdetails/${id.staffId}`);
+        axios.delete(`/api/staff/superadmin/staffdetails/${id.staffId}`);
         navigate('/', { state: { refreshSuperHome: true } });
         Swal.fire(
           'Staff Deleted!',

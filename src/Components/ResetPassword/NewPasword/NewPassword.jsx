@@ -1,11 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import classes from './NewPassword.module.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import AuthContext from '../../Context/AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-const NewPassword = (props) => {
+const NewPassword = () => {
+  const ctx = useContext(AuthContext);
+  const navigate = useNavigate();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  const email = ctx.email;
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -17,7 +22,7 @@ const NewPassword = (props) => {
       });
     } else {
       try {
-        await axios.put('/api/staff/resetpassword', { email: props.getEmail, password: passwordRef.current.value });
+        await axios.put(`/api/staff/newuserlogin`, { email: email, password: passwordRef.current.value });
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -25,7 +30,7 @@ const NewPassword = (props) => {
           showConfirmButton: false,
           timer: 1500
         })
-        props.goBackToLogin();
+        navigate('/');
       } catch (error) {
         Swal.fire({
           icon: 'error',
@@ -37,17 +42,20 @@ const NewPassword = (props) => {
   };
 
   return (
-    <div className={classes.createPassword}>
-      <div className={classes.form}>
-        <form className={classes.passwordForm} onSubmit={(e) => handleReset(e)}>
-          <h2>Please enter below your new password  </h2>
-          <input type="password" minLength={6} placeholder="New-Password" required ref={passwordRef} />
-          <input type="password" minLength={6} placeholder="confirm-password" required ref={confirmPasswordRef} />
-          <button type='submit'>submit</button>
-        </form>
+    <div className="send-email">
+      <div className={classes.sendOtp}>
+        <div className={classes.OTPform}>
+          <form className={classes.loginform} onSubmit={(e) => handleReset(e)}>
+            <h2>Please enter below your new password  </h2>
+            <input type="password" minLength={6} placeholder="New-Password" required ref={passwordRef} />
+            <input type="password" minLength={6} placeholder="confirm-password" required ref={confirmPasswordRef} />
+            <button type='submit'>Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
+
 
 export default NewPassword;

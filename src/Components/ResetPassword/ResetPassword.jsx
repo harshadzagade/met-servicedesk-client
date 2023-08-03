@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import classes from './ResetPassword.module.css';
 import VerfiyEmail from './VerfiyEmail/VerfiyEmail';
-import NewPassword from './NewPasword/NewPassword';
 import SendOTP from './SendOTP/SendOTP';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../Context/AuthContext/AuthContext';
 import axios from 'axios';
+import PasswordReset from './PasswordReset/PasswordReset';
 
 const ResetPassword = () => {
     const ctx = useContext(AuthContext);
@@ -48,7 +48,7 @@ const ResetPassword = () => {
         <div className={classes.resetPassword}>
             {sendOTP && <VerfiyEmail goToVerify={handleGoToVerify} emailAddress={setEmailAddress} />}
             {verifyOTP && <SendOTP goToResetPassword={handleGoToResetPassword} />}
-            {setNewPassword && <NewPassword goBackToLogin={handleGoBackToLogin} getEmail={email} />}
+            {setNewPassword && <PasswordReset goBackToLogin={handleGoBackToLogin} getEmail={email} />}
         </div>
     );
 };
