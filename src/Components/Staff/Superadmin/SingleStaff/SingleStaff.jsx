@@ -97,7 +97,7 @@ const SingleStaff = () => {
               </div>
               <div className={classes.staff}>
                 <label className={classes.lf}>Role:</label>
-                <p >{staff.role}</p>
+                <p >{staff.role && (staff.role === 'technician'? 'Engineer' : staff.role.charAt(0).toUpperCase() + staff.role.slice(1).toLowerCase())}</p>
               </div>
               <div className={classes.staff}>
                 <label className={classes.lg}>Phone Number:</label>

@@ -51,7 +51,7 @@ const AdminUpdateStaffdetails = (props) => {
                             <label className="ld">Role:</label>
                             <select className={`${classes.selectUSer} dept-select`} value={updateRole} name='role' onChange={handleChange} >
                                 <option value="subadmin">Sub-Admin</option>
-                                <option value="technician">Technician</option>
+                                <option value="technician">Engineer</option>
                                 <option value="user">User</option>
                             </select>
                         </div>

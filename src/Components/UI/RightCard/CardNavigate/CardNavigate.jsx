@@ -16,7 +16,7 @@ const CardNavigate = (props) => {
 
   return (
     <div className={`${classes.filterButtons}`}>
-      <button className={`${classes.button} ${activeTab === 'Complaint' && classes.active} filter-button list`} data-filter="assigned" onClick={handleComplaint}>Complaint</button>
+      <button className={`${classes.button} ${activeTab === 'Complaint' && classes.active} filter-button list`} data-filter="assigned" onClick={handleComplaint}>Concern</button>
       <button className={`${classes.button} ${activeTab === 'Request' && classes.active} filter-button list`} onClick={handleRequest}>Request</button>
     </div>
   );
