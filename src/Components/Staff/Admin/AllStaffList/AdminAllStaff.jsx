@@ -43,7 +43,7 @@ const AdminAllStaff = () => {
         },
         {
             name: "Role",
-            selector: (row) => row.role,
+            selector: (row) => row.role === 'technician'? 'engineer' : row.role,
             sortable: true,
         },
         {

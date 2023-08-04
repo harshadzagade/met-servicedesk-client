@@ -45,7 +45,7 @@ const SingleStaffDetails = () => {
           <div className={classes.staffDetails}>
             <div className={classes.myform}>
               <div className={classes.idDetails}>
-                <label className={classes.la}>staffid:</label>
+                <label className={classes.la}>StaffID:</label>
                 <p>#{id.staffId}</p>
               </div>
               <div className={classes.fname}>
@@ -62,7 +62,7 @@ const SingleStaffDetails = () => {
               </div>
               <div className={classes.Role}>
                 <label className={classes.lf}>Role:</label>
-                <p >{role}</p>
+                <p >{role === 'technician'? 'engineer' : role}</p>
               </div>
               <div className={classes.phoneNo}>
                 <label className={classes.lg}>PhoneNo:</label>

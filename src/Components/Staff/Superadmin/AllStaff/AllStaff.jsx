@@ -35,11 +35,11 @@ const AllStaff = () => {
         },
         {
             name: "Role",
-            selector: (row) => row.role,
+            selector: (row) => row.role === 'technician'? 'engineer' : row.role,
             sortable: true,
         },
         {
-            name: "PhoneNo",
+            name: "Phone Number",
             selector: (row) => row.phoneNumber,
             sortable: true,
         },

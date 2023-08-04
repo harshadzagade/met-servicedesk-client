@@ -172,7 +172,7 @@ const ReportDetails = () => {
                                     <label>Assigned Time:</label>
                                     <p className={classes.complaintDetailsp}>{getCreatedReportDate(reportData.assignedTime)}</p>
                                 </div>
-                                {(reportData.loggedTime && reportData.assignedTime) &&
+                                {reportData.isRequest && (reportData.loggedTime && reportData.assignedTime) &&
                                     <div className={classes.date}>
                                         <label>Assign Duration:</label>
                                         <p className={classes.complaintDetailsp}>{getReportDuration(reportData.assignDuration)}</p>

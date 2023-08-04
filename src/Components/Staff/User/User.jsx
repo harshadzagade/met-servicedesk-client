@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './User.module.css';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const User = () => {
+    const [userDetails , setUserDetails] = useState({});
+    const id = localStorage.getItem('id');
+
+    useEffect (() => {
+        const getUserName = async () => {
+            try {
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                setUserDetails(staff.data.staff);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch staff'
+                  });
+            }
+        }
+        getUserName();
+    }, [id]);
+
     return (
         <div className="row">
             <h1 className="d-flex justify-content-center mt-5">
-                Welcome Mahesh
+                Welcome {userDetails.firstname}
             </h1>
             <div className="col-4">
                 <div className={classes.step}>

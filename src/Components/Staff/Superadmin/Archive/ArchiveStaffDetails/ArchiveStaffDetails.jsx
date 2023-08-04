@@ -74,7 +74,7 @@ const ArchiveStaffDetails = () => {
                             </div>
                             <div className={classes.Role}>
                                 <label className={classes.lf}>Role:</label>
-                                <p >{role}</p>
+                                <p >{role === 'technician'? 'engineer' : role}</p>
                             </div>
                             <div className={classes.phoneNo}>
                                 <label className={classes.lg}>PhoneNo:</label>

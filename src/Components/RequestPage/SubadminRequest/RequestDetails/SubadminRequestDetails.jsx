@@ -189,7 +189,7 @@ const SubadminRequestDetails = () => {
                                         {
                                             requestData.assign &&
                                             <div className={classes.techName}>
-                                                <label>Technician Name:</label>
+                                                <label>Engineer Name:</label>
                                                 <p >{requestData.assignedName}</p>
                                             </div>
                                         }

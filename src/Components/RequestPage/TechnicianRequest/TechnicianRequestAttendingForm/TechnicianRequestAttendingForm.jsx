@@ -154,7 +154,7 @@ const TechnicianRequestAttendingForm = () => {
                                         <div className={classes.deptTik}>
                                             <span> Forwarded </span>
                                             <select className={classes.deptSelect} name="role" required onChange={handleTechnicianChange}>
-                                                <option key='0' value='' hidden defaultValue=''>Assign to technician</option>
+                                                <option key='0' value='' hidden defaultValue=''>Assign to engineer</option>
                                                 {
                                                     technicians.map((technician) =>
                                                         <option key={technician.id} value={technician.id}>{technician.firstname + ' ' + technician.lastname}</option>

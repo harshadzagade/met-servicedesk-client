@@ -101,7 +101,7 @@ const DeleteStaffList = () => {
       sortable: true,
     },
     {
-      name: "PhoneNo",
+      name: "Phone Number",
       selector: (row) => row.phoneNumber,
       sortable: true,
     },

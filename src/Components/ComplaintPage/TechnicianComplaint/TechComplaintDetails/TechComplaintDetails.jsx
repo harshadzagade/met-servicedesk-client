@@ -135,7 +135,7 @@ const TechComplaintDetails = () => {
                                     {
                                         complaintData.assign &&
                                         <div className={classes.techName}>
-                                            <label>Technician Name:</label>
+                                            <label>Engineer Name:</label>
                                             <p className={classes.complaintDetailsp}>{complaintData.assignedName}</p>
                                         </div>
                                     }

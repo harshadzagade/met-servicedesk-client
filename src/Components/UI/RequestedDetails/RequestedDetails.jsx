@@ -23,7 +23,7 @@ const RequestedDetails = () => {
 
   return (
     <div className={classes.requesterdetails}>
-      <h2>Requester Details</h2>
+      <h2>Request issued by</h2>
       <div className={classes.details}>
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
           <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -31,7 +31,7 @@ const RequestedDetails = () => {
         </svg>
         <div className={classes.name}>
           <h2>{requesterDetails.firstname} </h2>
-          <p>Dept: {requesterDetails.department}</p>
+          <p>Department: {requesterDetails.department}</p>
           <p>Institute: {requesterDetails.institute}</p>
           <p>Email: {requesterDetails.email}</p>
           <p>Extension: {requesterDetails.contactExtension}</p>
