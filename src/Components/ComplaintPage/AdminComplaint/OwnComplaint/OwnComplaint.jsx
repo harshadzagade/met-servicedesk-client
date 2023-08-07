@@ -26,7 +26,7 @@ const OwnComplaint = () => {
       try {
         const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
         if (list.data.complaints.length === 0) {
-          setErrorMessage('No complaints available')
+          setErrorMessage('No concern available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);

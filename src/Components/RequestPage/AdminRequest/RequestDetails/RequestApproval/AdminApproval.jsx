@@ -45,7 +45,7 @@ const AdminApproval = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Please select department',
-                    text: 'Please enter valid fields'
+                    text: 'Unable to fetch technicians'
                 });
             }
         };
@@ -82,7 +82,7 @@ const AdminApproval = () => {
             Swal.fire({
                 icon: 'error',
                 title: `${error.response.data.message}`,
-                text: 'Please enter valid fields'
+                text: 'Unable to approve request'
             });
         }
     };

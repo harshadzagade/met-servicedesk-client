@@ -47,7 +47,7 @@
   border-radius: 0.5rem;
 }
 
-.OTPform button {
+.button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -63,8 +63,20 @@
   border-radius: 0.5rem;
 }
 
-.OTPform button:hover,
-.OTPform button:active,
-.OTPform button:focus {
+.button:hover,
+.button:active,
+.button:focus {
   background: #43A047;
+}
+
+.timmer{
+  display: flex;
+}
+
+.timmerBtn{
+  display: flex;
+  color: "#FF5630";
+  margin-left: auto;
+  background-color: #ffffff;
+  color: red;
 }

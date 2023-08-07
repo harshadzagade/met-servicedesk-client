@@ -47,7 +47,7 @@ const ResetPassword = () => {
     return (
         <div className={classes.resetPassword}>
             {sendOTP && <VerfiyEmail goToVerify={handleGoToVerify} emailAddress={setEmailAddress} />}
-            {verifyOTP && <SendOTP goToResetPassword={handleGoToResetPassword} />}
+            {verifyOTP && <SendOTP goToResetPassword={handleGoToResetPassword} getEmail={email} />}
             {setNewPassword && <PasswordReset goBackToLogin={handleGoBackToLogin} getEmail={email} />}
         </div>
     );

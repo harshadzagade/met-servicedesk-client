@@ -57,13 +57,12 @@
 }
 .instDept{
   display: grid;
-  /* grid-template-columns: 30% 30% 30%; */
+  grid-template-columns: 30% 30% 30%;
   gap: 1rem;
 }
 
 .institute {
   display: grid;
-  grid-template-columns: 30%;
   margin-bottom: 1rem;
 }
 
@@ -76,7 +75,6 @@
 }
 .category {
   display: grid;
-  grid-template-columns: 30%;
   margin-bottom: 1rem;
 }
 

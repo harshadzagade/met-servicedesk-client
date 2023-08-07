@@ -75,7 +75,7 @@ const Login = () => {
           <input type="email" placeholder="email" ref={emailRef} required/>
           <input type="password" minLength={6} placeholder="password" ref={passwordRef} required/>
           <button type='submit'>login</button>
-          <Link to='/forgotpassword'>Forget Password</Link>
+          <Link to='/forgotpassword'>Forgot Password</Link>
         </form>
       </div>
     </div>

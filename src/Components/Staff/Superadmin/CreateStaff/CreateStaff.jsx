@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import classes from './CreateStaff.module.css';
-import CheckboxDropdown from '../../../UI/CheckboxDropdown/CheckboxDropdown';
 
 const CreateStaff = () => {
     const firstnameRef = useRef();
@@ -14,7 +13,7 @@ const CreateStaff = () => {
     const phoneRef = useRef();
     const extensionRef = useRef();
     const navigate = useNavigate();
-    const [departmentList, setDepartmentList] = useState([]);
+    const [department, setDepartment] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [institutes, setInstitutes] = useState([]);
     const [institute, setInstitute] = useState('');
@@ -29,7 +28,7 @@ const CreateStaff = () => {
             email: emailRef.current.value.toLowerCase(),
             password: passwordRef.current.value,
             institute: institute,
-            department: departmentList,
+            department: department,
             departmentType: departmentType,
             phoneNumber: +phoneRef.current.value,
             contactExtension: extensionRef.current.value
@@ -84,13 +83,6 @@ const CreateStaff = () => {
         getDepartments();
     }, []);
 
-    useEffect(() => {
-        setDepartmentList(departmentList);
-    }, [departmentList]);
-
-    const handleDepartmentData = (values) => {
-        setDepartmentList(values);
-    };
 
     return (
         <div>
@@ -146,8 +138,15 @@ const CreateStaff = () => {
                                     </div>
 
                                     <div className={classes.deptik}>
-                                        <label>Department</label>
-                                        <CheckboxDropdown data={departments} selectedData={handleDepartmentData} />
+                                        <span>Department</span>
+                                        <select className={classes.instituteSelect} onChange={(e) => setDepartment(e.target.value)} required>
+                                            <option value="" hidden>----- Select Department -----</option>
+                                            {
+                                                departments.map((department) => (
+                                                    <option key={department.id} value={department}>{department}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
 
                                     <div className={classes.category}>
@@ -164,11 +163,11 @@ const CreateStaff = () => {
                                 <div className={classes.phone}>
                                     <div className={`${classes.createForm}`} >
                                         <span>Phone No.</span>
-                                        <input type="tel" name="phone" pattern="[0-9]{10}" className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef} required />
+                                        <input type="tel" name="phone"  className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef}  />
                                     </div>
                                     <div className={`${classes.createForm}`}>
                                         <span>Extension</span>
-                                        <input type="tel" name="phone" pattern="[0-9]{3}" maxLength={3} className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} required />
+                                        <input type="tel" name="phone"  maxLength={3} className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef}  />
                                     </div>
                                 </div>
                                 <button type="submit" className={`${classes.createButton}`} >Submit</button>

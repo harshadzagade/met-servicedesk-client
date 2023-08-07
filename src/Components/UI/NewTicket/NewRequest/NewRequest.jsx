@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
+import { Bars } from 'react-loader-spinner';
 
 const NewRequest = () => {
     const id = localStorage.getItem('id');
@@ -84,29 +85,33 @@ const NewRequest = () => {
         getCategories();
     }, [department]);
 
-    useEffect(() => {
-        const showLoadingAlert = () => {
-            let timerInterval
-            Swal.fire({
-                title: 'Registering request',
-                html: 'Please wait...<b></b>',
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            });
-        };
-        if (showLoading) {
-            showLoadingAlert();
-        }
-    }, [showLoading]);
+    // useEffect(() => {
+    //     const showLoadingAlert = () => {
+    //         let timerInterval;
+    //         const timerCallback = () => {
+    //             const b = Swal.getHtmlContainer().querySelector('b');
+    //             if (b) {
+    //                 b.textContent = Swal.getTimerLeft();
+    //             }
+    //         };
+    //         Swal.fire({
+    //             title: 'Registering request',
+    //             html: 'Please wait...<b></b>',
+    //             timerProgressBar: true,
+    //             didOpen: () => {
+    //                 Swal.showLoading();
+    //                 timerInterval = setInterval(timerCallback, 100);
+    //             },
+    //             willClose: () => {
+    //                 clearInterval(timerInterval);
+    //             }
+    //         });
+    //     };
+
+    //     if (showLoading) {
+    //         showLoadingAlert();
+    //     }
+    // }, [showLoading]);
 
     const handleSubmitClick = async (e) => {
         e.preventDefault(); if (editorData.length === 0) {
@@ -126,19 +131,13 @@ const NewRequest = () => {
             formData.append('subject', subjectRef.current.value);
             formData.append('description', editorData);
             formData.append('department', department);
-            formData.append('staffDepartment', staff.role === 'admin'? adminCtx.department : staff.department[0]);
+            formData.append('staffDepartment', staff.role === 'admin' ? adminCtx.department : staff.department[0]);
             formData.append('priority', priority);
             formData.append('category', requestType);
             formData.append('isRepeated', isRepeated);
+            setShowLoading(true);
             try {
-                setShowLoading(true);
                 await axios.post('/api/request/', formData);
-                setShowLoading(false);
-                Swal.fire(
-                    'Request Created',
-                    'You have created request successfully',
-                    'success'
-                );
                 navigate('/request', { state: { refreshSuperHome: true } });
             } catch (error) {
                 Swal.fire({
@@ -146,19 +145,36 @@ const NewRequest = () => {
                     title: `${error.response.data.message}`,
                     text: 'Please enter valid fields'
                 });
+            } finally {
+                setShowLoading(false);
             }
         }
-
     };
 
     // ckeditor
-    const handleeditorChange = (e, editor) => {
+    const handleEditorChange = (e, editor) => {
         setEditorData(editor.getData());
     }
 
     return (
         <Fragment >
-            <div className={classes.newrequest} >
+            {showLoading && (
+                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <h1>Registering Request </h1>
+                    <div className='d-flex justify-content-center'>
+                    <Bars
+                        height="80"
+                        width="80"
+                        color="#CE1212"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                    />
+                    </div>
+                </div>
+            )}
+            {!showLoading && <div className={classes.newrequest} >
                 <h2>Create new request</h2>
                 <div className={classes.createStaffform}>
                     <div className={classes.formStaff}>
@@ -211,7 +227,7 @@ const NewRequest = () => {
                             </div>
                             <div className={classes.description}>
                                 <span>Description</span>
-                                <CKEditor onChange={(e, editor) => { handleeditorChange(e, editor) }} editor={ClassicEditor} />
+                                <CKEditor onChange={(e, editor) => { handleEditorChange(e, editor) }} editor={ClassicEditor} />
                             </div>
                             <div className={classes.attachment}>
                                 <div className={classes.attachmentSection}>
@@ -230,7 +246,7 @@ const NewRequest = () => {
                         </form>
                     </div>
                 </div >
-            </div>
+            </div>}
         </Fragment>
     );
 };

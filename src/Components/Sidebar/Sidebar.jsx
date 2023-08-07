@@ -407,7 +407,7 @@ const Sidebar = ({ children }) => {
       </div>
       <div className="container-fluid">
         <div className={`${classes.wrapper} row`} >
-          <div className="col-2">
+          <div className="col-2 p-0">
             {
               id &&
               <div className='bg-white' hidden={window.location.pathname === '/login' || window.location.pathname === '/forgotpassword' || window.location.pathname === '/passwordreset' ? true : false}>

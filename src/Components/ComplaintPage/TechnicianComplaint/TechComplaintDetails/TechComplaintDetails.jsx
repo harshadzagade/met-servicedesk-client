@@ -14,9 +14,11 @@ const TechComplaintDetails = () => {
     const ownId = localStorage.getItem('id');
     const ticketCtx = useContext(TicketDetailsContext);
     const [staffId, setStaffId] = useState(null);
+    const [refresh, setRefresh] = useState(false);
     ticketCtx.onClickHandler('complaint', staffId, complaintData.id);
 
     useEffect(() => {
+        setRefresh(true);
         const getComplaintDetails = async () => {
             const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
             setComplaintData(complaint.data.complaint);
@@ -27,11 +29,14 @@ const TechComplaintDetails = () => {
             }
         };
         getComplaintDetails();
-    }, [id]);
+        setRefresh(false);
+    }, [id, refresh]);
 
-    const handleSelfAssign = async () => {
+    const handleSelfAssign = async (e) => {
+        e.preventDefault();
         try {
             await axios.put(`/api/staff/technician/selfassigncomplaint/${id}/${ownId}`);
+            setRefresh(true);
         } catch (error) {
             Swal.fire({
                 icon: 'error',

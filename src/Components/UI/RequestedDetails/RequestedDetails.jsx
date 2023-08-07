@@ -12,6 +12,7 @@ const RequestedDetails = () => {
       try {
         if (ticketCtx.staffId) {
           const list = await axios.get(`/api/staff/staffdetails/${ticketCtx.staffId}`);
+          console.log(list.data.staff);
           setRequesterDetails(list.data.staff);
         }
       } catch (error) {
@@ -30,7 +31,7 @@ const RequestedDetails = () => {
           <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
         </svg>
         <div className={classes.name}>
-          <h2>{requesterDetails.firstname} </h2>
+          <h2> {requesterDetails.firstname + ' ' + requesterDetails.lastname} </h2>
           <p>Department: {requesterDetails.department}</p>
           <p>Institute: {requesterDetails.institute}</p>
           <p>Email: {requesterDetails.email}</p>

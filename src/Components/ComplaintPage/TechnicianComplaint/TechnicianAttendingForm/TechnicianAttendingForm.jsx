@@ -115,7 +115,7 @@ const TechnicianAttendingForm = () => {
             <div className="container-fluid">
                 <div className={`${classes.statusform} row`}>
                     <div className="col-8">
-                        <h2>Status chnage</h2>
+                        <h2>Status change</h2>
                         <div className={classes.createStaffform}>
                             <div className={classes.formStaff}>
                                 <div>
