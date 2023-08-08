@@ -52,7 +52,7 @@ const User = () => {
                             <li>4.	&nbsp;Click "Submit" to send the ticket to the Help Desk.</li>
                         </ol>
                     </div>
-                    <br />                   
+                    <br />
                 </div>
             </div>
             <div className="col-4">

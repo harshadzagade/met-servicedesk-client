@@ -10,6 +10,7 @@ const RequestDetails = () => {
     const id = useParams().requestId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [requestData, setRequestData] = useState({});
+    const [behalfStaffName, setBehalfStaffName] = useState('');
     const [staffId, setStaffId] = useState(null);
     ticketCtx.onClickHandler('request', staffId, requestData.id);
 
@@ -30,7 +31,25 @@ const RequestDetails = () => {
         getRequestDetails();
     }, [id]);
 
+    useEffect(() => {
+        const getStaffDetails = async () => {
+            try {
+                if (requestData.behalfId) {
+                    const behalf = await axios.get(`/api/staff/staffdetails/${requestData.behalfId}`);
+                    setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
+                }
+            } catch (error) {
+                console.log(error.response.data.message);
+            }
+
+        };
+        getStaffDetails();
+    }, [requestData.behalfId]);
+
     const getCreatedRequestDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
         const date = new Date(createdAt);
         return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
@@ -114,10 +133,10 @@ const RequestDetails = () => {
                                                 <p className={classes.complaintDetailsp}>{requestData.status} </p>
                                             </div>
                                         </div>
-                                        <div className={classes.idDetails}>
+                                        {requestData.behalf && <div className={classes.idDetails}>
                                             <label>Behalf:</label>
-                                            <p className={classes.complaintDetailsp}>{requestData.behalf ? 'Yes' : 'No'}</p>
-                                        </div>
+                                            <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
+                                        </div>}
                                         <hr />
                                         <div className={classes.approval1}>
                                             <div className={classes.approval}>

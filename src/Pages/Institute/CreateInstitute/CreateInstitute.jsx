@@ -23,7 +23,7 @@ const CreateInstitute = (props) => {
         icon: 'error',
         title: `${error.response.data.message}`,
         text: 'Unable to create institute'
-    });
+      });
     }
   };
 
@@ -37,7 +37,7 @@ const CreateInstitute = (props) => {
           <div className={classes.myform} >
             <div className={`${classes.institue}`}>
               <label>Institute:</label>
-              <input type="text" className={classes.createstaffInput} placeholder="Enter Institute" ref={instituteRef} required/>
+              <input type="text" className={classes.createstaffInput} placeholder="Enter Institute" ref={instituteRef} required />
             </div>
             <div className={classes.detailsBtns}>
               <button className={classes.updateBtn} type='submit'>Create</button>

@@ -17,22 +17,24 @@
     align-items: center;
 }
 
-.form {
-    margin-left: 2rem;
+.RequestApproval label {
+    font-size: medium;
+    margin-top: 0.5rem;
+    color: black;
 }
 
 .approvalStatus {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 30% 50%;
+    margin-bottom: 0.5rem;
 
 }
 
 
 .selectStaff {
-    display: flex;
-    gap: 5rem;
-    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 30% 50%;
+    margin-bottom: 0.5rem;
 }
 
 .selectStatus {
@@ -43,6 +45,11 @@
     border-radius: 5px;
     font-size: 1em;
 
+}
+
+.comment {
+    display: grid;
+    grid-template-columns: 30% 50%;
 }
 
 .priority {
@@ -75,13 +82,6 @@
 
 
 
-.comment {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3.8rem;
-    margin-bottom: 1rem;
-}
 
 
 .subInput {
@@ -118,7 +118,7 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;
-    background-color: #ff7782;
+    background-color: var(--subbutton-color);
     color: white;
     cursor: pointer;
     box-shadow: var(--box-shadow);

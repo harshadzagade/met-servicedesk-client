@@ -14,93 +14,29 @@
     font-size: large;
 }
 
-.myform input {
-    font-size: medium;
-    border: 0.5px solid black;
-    border-radius: 0.2rem;
-}
 
-.myform p {
-    font-size: medium;
-    border: 0.5px solid black;
-    border-radius: 0.2rem;
-}
-
-.idDetails {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 1rem;
-
-}
-
-.name {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 1rem;
+.selectUSer {
+    background: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px solid black;
+    width: 10rem;
 }
 
 .department {
     display: flex;
-    gap: 3rem;
-    margin-bottom: 1rem;
-}
-
-.tags {
-    display: flex;
-
-
-}
-
-.tags input {
-    font-size: medium;
-}
-
-
-
-.Email {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 1rem;
-
-}
-
-.deptik {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
 }
-
-.phoneNo {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 1rem;
-}
-
-
-.ext {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 1rem;
-
-
-
-}
-
-.date {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 1rem;
-}
-
 
 .detailsBtns {
     display: flex;
 }
 
 .updateBtn {
-    background-color: #7380ec;
+    background-color: var(--color-primary);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -116,7 +52,7 @@
 }
 
 .deleteBtn {
-    background-color: #ff7782;
+    background-color: var(--subbutton-color);
     color: white;
     padding: 15px 32px;
     text-align: center;

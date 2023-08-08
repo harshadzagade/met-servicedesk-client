@@ -43,25 +43,28 @@ const OwnRequest = () => {
 
   useEffect(() => {
     const getStaff = async () => {
-        try {
-            if (searchText) {
-                const request = await axios.get(`/api/request/ownrequestsearch/${id}/${searchText}`);
-                setAllRequestList(request.data);
-            } else {
-                setAllRequestList(sortedData);
-            }
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Unable to search requests'
-            });
+      try {
+        if (searchText) {
+          const request = await axios.get(`/api/request/ownrequestsearch/${id}/${searchText}`);
+          setAllRequestList(request.data);
+        } else {
+          setAllRequestList(sortedData);
         }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: `${error.response.data.message}`,
+          text: 'Unable to search requests'
+        });
+      }
     };
     getStaff();
-}, [searchText, id, sortedData]);
+  }, [searchText, id, sortedData]);
 
   const getCreatedRequestDate = (createdAt) => {
+    if (createdAt === null) {
+      return null;
+    }
     const date = new Date(createdAt);
     return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };

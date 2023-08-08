@@ -8,7 +8,7 @@ import Rightside from '../../Righside/Rightside';
 
 const AdminComplaint = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingComplaint');
-  
+
   const checkLayout = (value) => {
     setOpenLayout(value);
   };

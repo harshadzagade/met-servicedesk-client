@@ -88,6 +88,9 @@ const SubadminRequestDetails = () => {
     };
 
     const getCreatedRequestDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
         const date = new Date(createdAt);
         return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
@@ -190,28 +193,28 @@ const SubadminRequestDetails = () => {
                                             requestData.assign &&
                                             <div className={classes.techName}>
                                                 <label>Engineer Name:</label>
-                                                <p >{requestData.assignedName}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.assignedName}</p>
                                             </div>
                                         }
                                         {
                                             requestData.status === 'forwarded' &&
                                             <div className={classes.techName}>
                                                 <label>Forward Comment:</label>
-                                                <p >{requestData.forwardComment}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.forwardComment}</p>
                                             </div>
                                         }
                                         {
                                             (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                             <div className={classes.techName}>
                                                 <label>Problem Description:</label>
-                                                <p >{requestData.problemDescription}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.problemDescription}</p>
                                             </div>
                                         }
                                         {
                                             (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                             <div className={classes.techName}>
                                                 <label>Action Taken:</label>
-                                                <p >{requestData.actionTaken}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.actionTaken}</p>
                                             </div>
                                         }
                                         <hr />

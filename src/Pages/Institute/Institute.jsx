@@ -95,7 +95,7 @@ const Institute = () => {
         setRefresh(true);
         setOpenCreateInstitute(false);
     };
-    
+
     const handleEditCancel = () => {
         setRefresh(true);
         setOpenEditInstitute(false);
@@ -124,7 +124,7 @@ const Institute = () => {
                 selectableRowsHighlight
                 highlightOnHover
                 subHeader
-                subHeaderComponent={<input type='text' placeholder='Search here' value={search} onChange={(e) => setSearch(e.target.value)}/>}
+                subHeaderComponent={<input type='text' placeholder='Search here' value={search} onChange={(e) => setSearch(e.target.value)} />}
             />
         </div>
     );

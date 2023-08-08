@@ -65,10 +65,11 @@
     border: 1px solid black;
 }
 
-.btn{
+.btn {
     display: grid;
     grid-template-columns: 30%;
 }
+
 .buttonForm {
     flex: 1;
     gap: 2rem;

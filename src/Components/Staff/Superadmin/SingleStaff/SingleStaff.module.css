@@ -29,7 +29,7 @@
 
 
 
-.staff{
+.staff {
     display: grid;
     grid-template-columns: 20% 70%;
     margin-bottom: 1rem;

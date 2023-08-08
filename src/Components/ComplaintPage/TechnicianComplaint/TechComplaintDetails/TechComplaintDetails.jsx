@@ -15,6 +15,7 @@ const TechComplaintDetails = () => {
     const ticketCtx = useContext(TicketDetailsContext);
     const [staffId, setStaffId] = useState(null);
     const [refresh, setRefresh] = useState(false);
+    const [behalfStaffName, setBehalfStaffName] = useState('');
     ticketCtx.onClickHandler('complaint', staffId, complaintData.id);
 
     useEffect(() => {
@@ -46,7 +47,27 @@ const TechComplaintDetails = () => {
         }
     };
 
+    useEffect(() => {
+        const getStaffDetails = async () => {
+            try {
+                if (complaintData.behalfId) {
+                    const behalf = await axios.get(`/api/staff/staffdetails/${complaintData.behalfId}`);
+                    setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
+                }
+            } catch (error) {
+                console.log(error.response.data.message);
+            }
+
+        };
+        getStaffDetails();
+    }, [complaintData.behalfId]);
+
+
+
     const getCreatedComplaintDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
         const date = new Date(createdAt);
         return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
@@ -129,10 +150,10 @@ const TechComplaintDetails = () => {
                                             <p className={classes.complaintDetailsp}>{complaintData.status} </p>
                                         </div>
                                     </div>
-                                    <div className={classes.behalf}>
+                                    {complaintData.behalf && <div className={classes.behalf}>
                                         <label>Behalf:</label>
-                                        <p className={classes.complaintDetailsp}>{complaintData.behalf ? 'Yes' : 'No'}</p>
-                                    </div>
+                                        <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
+                                    </div>}
                                     {
                                         (complaintData.assign || complaintData.forwardComment || (complaintData.status === 'forwarded' || complaintData.status === 'closed')) &&
                                         <hr />
@@ -181,10 +202,10 @@ const TechComplaintDetails = () => {
                                         <p className={classes.complaintDetailsp}>{getCreatedComplaintDate(complaintData.createdAt)}</p>
                                     </div>
                                     <div className={classes.btns}>
-                                        {(complaintData.assign && (complaintData.assign.toString() === ownId.toString() && (!(complaintData.status === 'closed' || complaintData.status === 'forwarded')))) && <button className={classes.complaintAssingBtn} onClick={() => navigate(`/techcomplaintattending/${complaintData.id}`)}>Change Status</button>}
+                                        {(complaintData.assign && (complaintData.assign.toString() === ownId.toString() && ((complaintData.status !== 'closed')))) && <button className={classes.complaintAssingBtn} onClick={() => navigate(`/techcomplaintattending/${complaintData.id}`)}>Change Status</button>}
                                         {
-                                            complaintData.assign?
-                                                <div className={`${classes.alreadyAssignedText}`}>Concern assigned to {complaintData.assign.toString() === ownId.toString()? 'You' : complaintData.assignedName}</div>
+                                            complaintData.assign ?
+                                                <div className={`${classes.alreadyAssignedText}`}>Concern assigned to {complaintData.assign.toString() === ownId.toString() ? 'You' : complaintData.assignedName}</div>
                                                 :
                                                 <button className={classes.complaintAssingBtn} onClick={handleSelfAssign}>Self Assign</button>
                                         }

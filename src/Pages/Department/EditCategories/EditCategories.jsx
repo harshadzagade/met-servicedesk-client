@@ -91,7 +91,7 @@ const EditCategories = (props) => {
                         <div className={classes.deptik}>
                             <label>Department</label>
                             <div className={`${classes.createForm}`}>
-                                <input value={input} placeholder="Enter a department" className={classes.createstaffInput} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange}  />
+                                <input value={input} placeholder="Enter a department" className={classes.createstaffInput} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
                                 <div className={classes.departmentParent}>
                                     {categoriesList.map((tag, index) => (
                                         <div key={index} className={classes.tag}>

@@ -73,7 +73,7 @@ const UpdateStaffDetails = (props) => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`/api/department/departments`);
+                const departments = await axios.get(`/api/department/alldepartments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 Swal.fire({
@@ -164,9 +164,9 @@ const UpdateStaffDetails = (props) => {
                                 {
                                     roles.map((role, key) =>
                                         staff.role === role ?
-                                            <option key={key} className={`${classes.roleOption}`} selected value={role}>{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
+                                            <option key={key} className={`${classes.roleOption}`} selected value={role}>{role === 'technician' ? 'Engineer' : role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
                                             :
-                                            <option key={key} className={`${classes.roleOption}`} value={role}>{role === 'technician'? 'Engineer' : role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
+                                            <option key={key} className={`${classes.roleOption}`} value={role}>{role === 'technician' ? 'Engineer' : role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
                                     )
                                 }
                             </select>
@@ -177,11 +177,11 @@ const UpdateStaffDetails = (props) => {
                         </div>
                         <div className={classes.updateDetails}>
                             <label className="lg">PhoneNo:</label>
-                            <input type="tel" pattern="[0-9]{10}"  className={classes.input} placeholder='PhoneNo' autoComplete='true' name='phoneNumber' defaultValue={staff.phoneNumber} onChange={handleChange} />
+                            <input type="tel" pattern="[0-9]{10}" className={classes.input} placeholder='PhoneNo' autoComplete='true' name='phoneNumber' defaultValue={staff.phoneNumber} onChange={handleChange} />
                         </div>
                         <div className={classes.updateDetails}>
                             <label className="lh">ContactEXT:</label>
-                            <input type="tel" pattern="[0-9]{3}"  className={classes.input} placeholder='ContactEXT' name='contactExtension' autoComplete='true' defaultValue={staff.contactExtension} onChange={handleChange} />
+                            <input type="tel" pattern="[0-9]{3}" className={classes.input} placeholder='ContactEXT' name='contactExtension' autoComplete='true' defaultValue={staff.contactExtension} onChange={handleChange} />
                         </div>
                         <div className={classes.detailsBtns}>
                             <button className={classes.updateBtn} type='submit'>Update</button>

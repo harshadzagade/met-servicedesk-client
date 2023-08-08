@@ -48,33 +48,33 @@ const CreateDepartment = (props) => {
 
   const handleCreateDepartment = async (e) => {
     e.preventDefault();
-    if (departmentType === 'service' &&  (categoriesList.length === 0)) {
+    if (departmentType === 'service' && (categoriesList.length === 0)) {
       Swal.fire({
         icon: 'error',
         title: `Please add categories`,
         text: `You haven't added any categories`
       });
-    }else{
-    try {
-      const data = {
-        department: departmentRef.current.value.toUpperCase().trim(),
-        type: departmentType,
-        category: departmentType === 'service' ? categoriesList : null
-      };
-      await axios.post(`/api/department/createdepartment`, data);
-      props.onConfirm();
-      Swal.fire(
-        'Department Created!',
-        'You have created department successfully',
-        'success'
-      );
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: `${error.response.data.message}`,
-        text: 'Unable to create department'
-      });
-    }
+    } else {
+      try {
+        const data = {
+          department: departmentRef.current.value.toUpperCase().trim(),
+          type: departmentType,
+          category: departmentType === 'service' ? categoriesList : null
+        };
+        await axios.post(`/api/department/createdepartment`, data);
+        props.onConfirm();
+        Swal.fire(
+          'Department Created!',
+          'You have created department successfully',
+          'success'
+        );
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: `${error.response.data.message}`,
+          text: 'Unable to create department'
+        });
+      }
     }
   };
 

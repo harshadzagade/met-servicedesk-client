@@ -15,6 +15,7 @@ const AdminRequestDetails = () => {
     const ticketCtx = useContext(TicketDetailsContext);
     const [requestData, setRequestData] = useState({});
     const [staffId, setStaffId] = useState(null);
+    const [behalfStaffName, setBehalfStaffName] = useState('');
     ticketCtx.onClickHandler('request', staffId, requestData.id);
 
     useEffect(() => {
@@ -67,7 +68,25 @@ const AdminRequestDetails = () => {
         }
     };
 
+    useEffect(() => {
+        const getStaffDetails = async () => {
+            try {
+                if (requestData.behalfId) {
+                    const behalf = await axios.get(`/api/staff/staffdetails/${requestData.behalfId}`);
+                    setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
+                }
+            } catch (error) {
+                console.log(error.response.data.message);
+            }
+
+        };
+        getStaffDetails();
+    }, [requestData.behalfId]);
+
     const getCreatedRequestDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
         const date = new Date(createdAt);
         return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
@@ -133,10 +152,10 @@ const AdminRequestDetails = () => {
                                                 <p className={classes.complaintDetailsp}>{requestData.status} </p>
                                             </div>
                                         </div>
-                                        <div className={classes.idDetails}>
+                                        {requestData.behalf && <div className={classes.idDetails}>
                                             <label>Behalf:</label>
-                                            <p className={classes.complaintDetailsp}>{requestData.behalf ? 'Yes' : 'No'}</p>
-                                        </div>
+                                            <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
+                                        </div>}
                                         <hr />
                                         <div className={classes.approval1}>
                                             <div className={classes.approval}>
@@ -170,32 +189,32 @@ const AdminRequestDetails = () => {
                                             requestData.assign &&
                                             <div className={classes.techName}>
                                                 <label>Engineer Name:</label>
-                                                <p >{requestData.assignedName}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.assignedName}</p>
                                             </div>
                                         }
                                         {
                                             requestData.status === 'forwarded' &&
                                             <div className={classes.techName}>
                                                 <label>Forward Comment:</label>
-                                                <p >{requestData.forwardComment}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.forwardComment}</p>
                                             </div>
                                         }
                                         {
                                             (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                             <div className={classes.techName}>
                                                 <label>Problem Description:</label>
-                                                <p >{requestData.problemDescription}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.problemDescription}</p>
                                             </div>
                                         }
                                         {
                                             (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                             <div className={classes.techName}>
                                                 <label>Action Taken:</label>
-                                                <p >{requestData.actionTaken}</p>
+                                                <p className={classes.complaintDetailsp}>{requestData.actionTaken}</p>
                                             </div>
                                         }
                                         <hr />
-                                        <div className={classes.description}>
+                                        <div className={classes.attachment}>
                                             <label>Attachment:</label>
                                             {
                                                 requestData.attachment && (requestData.attachment.length === 0 ?

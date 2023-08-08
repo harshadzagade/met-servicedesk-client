@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Rightside from '../../../../Righside/Rightside';
 import SubadminContext from '../../../../Context/SubadminContext/SubadminContext';
+import { Bars } from 'react-loader-spinner';
 
 const SubadminApproval = () => {
     const loginId = localStorage.getItem('id');
@@ -35,30 +36,6 @@ const SubadminApproval = () => {
         };
         getSubadminDetails();
     }, [loginId]);
-
-    useEffect(() => {
-        const showLoadingAlert = () => {
-            let timerInterval
-            Swal.fire({
-                title: 'Updating approval status',
-                html: 'Please wait...<b></b>',
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            });
-        };
-        if (showLoading) {
-            showLoadingAlert();
-        }
-    }, [showLoading]);
 
     useEffect(() => {
         if (approval === 'disapprove') {
@@ -122,7 +99,6 @@ const SubadminApproval = () => {
             } else {
                 await axios.put(`/api/staff/subadmin/approval1/${id}`, approval1data);
             }
-            setShowLoading(false);
             Swal.fire(
                 'Approval status updated',
                 'You have updated approval status successfully',
@@ -135,6 +111,8 @@ const SubadminApproval = () => {
                 title: `${error.response.data.message}`,
                 text: 'Please enter valid fields'
             });
+        } finally {
+            setShowLoading(false);
         }
     };
 
@@ -148,54 +126,69 @@ const SubadminApproval = () => {
 
     return (
         <Fragment>
-            <div className="container-fluid">
-                <div className={`${classes.approvalform} row`}>
-                    <div className="col-8">
-                        <h2>Approval</h2>
-                        <div hidden>
-                        </div>
-                        <div className={classes.RequestApproval} >
-                            <form className={classes.form} onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
-                                <div >
-                                    <div className={classes.approvalStatus}>
-                                        <span>Change Status</span>
-                                        <select className={classes.selectStatus} name="role" required onChange={handleChange} >
-                                            <option key='0' value="" hidden>----- Approval Status -----</option>
-                                            <option key='1' value="approve">Approve</option>
-                                            <option key='2' value="disapprove">Disapprove</option>
-                                        </select>
-                                    </div>
-                                    {
-                                        isApproval2 &&
-                                        <div className={classes.selectStaff}>
-                                            <span>Staff List</span>
-                                            <select className={classes.selectStatus} disabled={assignDisability} name="role" required onChange={handleTechnicianChange} >
-                                                <option key='0' value='' hidden defaultValue=''>----- Select Categories -----</option>
-                                                {
-                                                    technicians.map((technician) =>
-                                                        <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>
-                                                    )
-                                                }
-                                            </select>
-                                        </div>
-                                    }
-                                    <div className={classes.comment}>
-                                        <span>Comment</span>
-                                        <input type="text" className={classes.subInput} placeholder="Select Your Comment" ref={approvalCommentRef} required/>
-                                    </div>
-                                    <div className={classes.btn}>
-                                        <button className={classes.submitBtn} type='submit' >Submit</button>
-                                        <button className={classes.cancelBtn} onClick={() => navigate('/request')}>Cancel</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div className="col-4">
-                        <Rightside />
+            {showLoading && (
+                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <h1>Approving request</h1>
+                    <div className='d-flex justify-content-center'>
+                        <Bars
+                            height="80"
+                            width="80"
+                            color="#CE1212"
+                            ariaLabel="bars-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
                     </div>
                 </div>
-            </div >
+            )}
+            {!showLoading && <div className={`${classes.approvalform} row`}>
+                <div className="col-8">
+                    <h2>Approval</h2>
+                    <div hidden>
+                    </div>
+                    <div className={classes.RequestApproval} >
+                        <form className={classes.form} onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
+                            <div >
+                                <div className={classes.approvalStatus}>
+                                    <span>Change Status</span>
+                                    <select className={classes.selectStatus} name="role" required onChange={handleChange} >
+                                        <option key='0' value="" hidden>----- Approval Status -----</option>
+                                        <option key='1' value="approve">Approve</option>
+                                        <option key='2' value="disapprove">Disapprove</option>
+                                    </select>
+                                </div>
+                                {
+                                    isApproval2 &&
+                                    <div className={classes.selectStaff}>
+                                        <span>Staff List</span>
+                                        <select className={classes.selectStatus} disabled={assignDisability} name="role" required onChange={handleTechnicianChange} >
+                                            <option key='0' value='' hidden defaultValue=''>----- Select Categories -----</option>
+                                            {
+                                                technicians.map((technician) =>
+                                                    <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>
+                                                )
+                                            }
+                                        </select>
+                                    </div>
+                                }
+                                <div className={classes.comment}>
+                                    <span>Comment</span>
+                                    <input type="text" className={classes.subInput} placeholder="Select Your Comment" ref={approvalCommentRef} required />
+                                </div>
+                                <div className={classes.btn}>
+                                    <button className={classes.submitBtn} type='submit' >Submit</button>
+                                    <button className={classes.cancelBtn} onClick={() => navigate('/request')}>Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div className="col-4">
+                    <Rightside />
+                </div>
+            </div>
+            }
         </Fragment>
     );
 };

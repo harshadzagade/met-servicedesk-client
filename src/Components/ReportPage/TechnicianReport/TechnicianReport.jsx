@@ -251,10 +251,10 @@ const TechnicianReport = () => {
     return (
         <div className='mt-3'>
             <Fragment>
-            <div className={classes.h2}>
+                <div className={classes.h2}>
                     <div className='d-flex'>
                         <h2>Report</h2>
-                        <a  href={`data:text/csv;charset=utf-8,${escape(csvFile)}`} download="report_data.csv" className={`${classes.generate} d-none d-sm-inline-block btn btn-sm  shadow-sm mb-2 ml-3`}>
+                        <a href={`data:text/csv;charset=utf-8,${escape(csvFile)}`} download="report_data.csv" className={`${classes.generate} d-none d-sm-inline-block btn btn-sm  shadow-sm mb-2 ml-3`}>
                             <i className="fas fa-download fa-sm "></i>
                             Generate Report
                         </a>

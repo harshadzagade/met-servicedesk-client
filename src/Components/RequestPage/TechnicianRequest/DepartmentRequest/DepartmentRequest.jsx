@@ -23,19 +23,19 @@ const DepartmentRequest = () => {
 
     useEffect(() => {
         const getStaffDetails = async () => {
-          try {
-            const staff = await axios.get(`/api/staff/staffdetails/${id}`);
-            setStaff(staff.data.staff);
-          } catch (error) {
-            Swal.fire({
-              icon: 'error',
-              title: `${error.response.data.message}`,
-              text: 'Unable to fetch staff'
-            });
-          }
+            try {
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                setStaff(staff.data.staff);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to fetch staff'
+                });
+            }
         };
         getStaffDetails();
-      }, [id]);
+    }, [id]);
 
     useEffect(() => {
         const getList = async () => {
@@ -55,25 +55,28 @@ const DepartmentRequest = () => {
 
     useEffect(() => {
         const getStaff = async () => {
-          try {
-            if (searchText) {
-              const request = await axios.get(`/api/request/requestsbydepartmentsearch/${staff.department}/${searchText}`);
-              setAllRequestList(request.data);
-            } else {
-              setAllRequestList(sortedData);
+            try {
+                if (searchText) {
+                    const request = await axios.get(`/api/request/requestsbydepartmentsearch/${staff.department}/${searchText}`);
+                    setAllRequestList(request.data);
+                } else {
+                    setAllRequestList(sortedData);
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to search requests'
+                });
             }
-          } catch (error) {
-            Swal.fire({
-              icon: 'error',
-              title: `${error.response.data.message}`,
-              text: 'Unable to search requests'
-            });
-          }
         };
         getStaff();
-      }, [searchText, staff.department, sortedData]);
+    }, [searchText, staff.department, sortedData]);
 
     const getCreatedRequestDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
         const date = new Date(createdAt);
         return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 
 const Technician = () => {
     const [complaintStatus, setComplaintStatus] = useState({ pending: '', attending: '', forwarded: '', closed: '' })
@@ -100,20 +100,25 @@ const Technician = () => {
             </BarChart> */}
             <div style={{ width: '100%', height: 300 }}>
                 <ResponsiveContainer>
-                    <AreaChart
+                    <BarChart
+                        width={500}
+                        height={300}
                         data={data}
                         margin={{
-                            top: 10,
+                            top: 5,
                             right: 30,
-                            left: 0,
-                            bottom: 0,
+                            left: 20,
+                            bottom: 5,
                         }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
+                        {/* <CartesianGrid strokeDasharray="3 3" /> */}
                         <XAxis dataKey="name" />
+                        {/* <YAxis /> */}
                         <Tooltip />
-                        <Area type="monotone" dataKey="concern" stroke="#8884d8" fill="#8884d8" />
-                    </AreaChart>
+                        <Legend />
+                        <Bar dataKey="request" fill="#8884d8" />
+                        <Bar dataKey="concern" fill="#82ca9d" />
+                    </BarChart>
                 </ResponsiveContainer>
             </div>
         </div>

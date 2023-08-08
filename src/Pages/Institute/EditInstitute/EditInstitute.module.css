@@ -7,6 +7,7 @@
     transition: all 300ms ease;
     margin-top: 1rem;
 }
+
 .myform label {
     font-size: large;
     color: black;
@@ -20,6 +21,7 @@
     font-size: 1em;
     border: 1px solid black;
 }
+
 .institue {
     display: grid;
     margin-bottom: 1rem;

@@ -50,16 +50,19 @@
     grid-template-columns: 30vh 30vh;
     margin-bottom: 1rem;
 }
-.institute{
+
+.institute {
     display: grid;
     grid-template-columns: 30vh 30vh;
     margin-bottom: 1rem;
 }
-.category{
+
+.category {
     display: grid;
     grid-template-columns: 30vh 30vh;
     margin-bottom: 1rem;
 }
+
 .createForm {
     display: grid;
     margin-bottom: 1rem;

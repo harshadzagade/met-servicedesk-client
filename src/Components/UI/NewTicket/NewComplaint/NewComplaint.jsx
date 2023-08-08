@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
+import { Bars } from 'react-loader-spinner';
 
 const NewCompaint = () => {
     const id = localStorage.getItem('id');
@@ -84,30 +85,6 @@ const NewCompaint = () => {
         getCategories();
     }, [department]);
 
-    useEffect(() => {
-        const showLoadingAlert = () => {
-            let timerInterval
-            Swal.fire({
-                title: 'Registering concern',
-                html: 'Please wait...<b></b>',
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            });
-        };
-        if (showLoading) {
-            showLoadingAlert();
-        }
-    }, [showLoading]);
-
     const handleSubmitClick = async (e) => {
         e.preventDefault();
         if (editorData.length === 0) {
@@ -127,14 +104,13 @@ const NewCompaint = () => {
             formData.append('subject', subjectRef.current.value);
             formData.append('description', editorData);
             formData.append('department', department);
-            formData.append('staffDepartment', staff.role === 'admin'? adminCtx.department : staff.department[0]);
+            formData.append('staffDepartment', staff.role === 'admin' ? adminCtx.department : staff.department[0]);
             formData.append('priority', priority);
             formData.append('category', requestType);
             formData.append('isRepeated', isRepeated);
             try {
                 setShowLoading(true);
                 await axios.post('/api/complaint/', formData);
-                setShowLoading(false);
                 Swal.fire(
                     'Complaint Created!',
                     'You have created Complaint successfully',
@@ -147,6 +123,8 @@ const NewCompaint = () => {
                     title: `${error.response.data.message}`,
                     text: 'Please enter valid fields'
                 });
+            } finally {
+                setShowLoading(false);
             }
         }
     }
@@ -158,8 +136,24 @@ const NewCompaint = () => {
 
     //assign
     return (
-        <Fragment >
-            <div className={classes.newcomplaint} >
+        <Fragment>
+            {showLoading && (
+                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <h1>Registering Concern</h1>
+                    <div className='d-flex justify-content-center'>
+                        <Bars
+                            height="80"
+                            width="80"
+                            color="#CE1212"
+                            ariaLabel="bars-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
+                    </div>
+                </div>
+            )}
+            {!showLoading && <div className={classes.newcomplaint} >
                 <h2>Create new concern</h2>
                 <div className={classes.createStaffform}>
                     <div className={classes.formStaff}>
@@ -172,7 +166,6 @@ const NewCompaint = () => {
                                     {isToggled && <input className={`${classes.behalfField} `} type="text" name="behalf" placeholder="Behalf email" autoComplete='true' required ref={behalfEmailRef} />}
                                 </div>
                             </div>
-
                             <div className={classes.priReq}>
                                 <div className={classes.deptTik}>
                                     <span>Department</span>
@@ -231,7 +224,7 @@ const NewCompaint = () => {
                         </form>
                     </div>
                 </div >
-            </div>
+            </div>}
         </Fragment>
     );
 };

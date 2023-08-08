@@ -85,34 +85,6 @@ const NewRequest = () => {
         getCategories();
     }, [department]);
 
-    // useEffect(() => {
-    //     const showLoadingAlert = () => {
-    //         let timerInterval;
-    //         const timerCallback = () => {
-    //             const b = Swal.getHtmlContainer().querySelector('b');
-    //             if (b) {
-    //                 b.textContent = Swal.getTimerLeft();
-    //             }
-    //         };
-    //         Swal.fire({
-    //             title: 'Registering request',
-    //             html: 'Please wait...<b></b>',
-    //             timerProgressBar: true,
-    //             didOpen: () => {
-    //                 Swal.showLoading();
-    //                 timerInterval = setInterval(timerCallback, 100);
-    //             },
-    //             willClose: () => {
-    //                 clearInterval(timerInterval);
-    //             }
-    //         });
-    //     };
-
-    //     if (showLoading) {
-    //         showLoadingAlert();
-    //     }
-    // }, [showLoading]);
-
     const handleSubmitClick = async (e) => {
         e.preventDefault(); if (editorData.length === 0) {
             Swal.fire({
@@ -160,17 +132,17 @@ const NewRequest = () => {
         <Fragment >
             {showLoading && (
                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                    <h1>Registering Request </h1>
+                    <h1>Registering Request</h1>
                     <div className='d-flex justify-content-center'>
-                    <Bars
-                        height="80"
-                        width="80"
-                        color="#CE1212"
-                        ariaLabel="bars-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                        visible={true}
-                    />
+                        <Bars
+                            height="80"
+                            width="80"
+                            color="#CE1212"
+                            ariaLabel="bars-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
                     </div>
                 </div>
             )}

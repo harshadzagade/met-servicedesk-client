@@ -10,7 +10,7 @@ const AllStaffExt = () => {
     const [allStaffList, setAllStaffList] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [showPhone, setShowPhone] = useState(false);
-    
+
     const sortedData = React.useMemo(() => { return [...staffList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [staffList]);
 
     useEffect(() => {

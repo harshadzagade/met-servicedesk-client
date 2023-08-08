@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Rightside from '../../../Righside/Rightside';
+import { Bars } from 'react-loader-spinner';
 
 const TechnicianRequestAttendingForm = () => {
     const ticketId = useParams().requestId;
@@ -36,30 +37,6 @@ const TechnicianRequestAttendingForm = () => {
         };
         getTechnicians();
     }, [loginId, navigate]);
-
-    useEffect(() => {
-        const showLoadingAlert = () => {
-            let timerInterval
-            Swal.fire({
-                title: 'Changing status',
-                html: 'Please wait...<b></b>',
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            });
-        };
-        if (showLoading) {
-            showLoadingAlert();
-        }
-    }, [showLoading]);
 
     useEffect(() => {
         switch (status) {
@@ -111,7 +88,6 @@ const TechnicianRequestAttendingForm = () => {
         try {
             setShowLoading(true);
             await axios.put(`/api/staff/technician/changerequeststatus/${id}`, data);
-            setShowLoading(false);
             Swal.fire(
                 'Changed status',
                 'You have changed status successfully',
@@ -124,6 +100,8 @@ const TechnicianRequestAttendingForm = () => {
                 title: `${error.response.data.message}`,
                 text: 'Please enter valid fields'
             });
+        } finally {
+            setShowLoading(false);
         }
     };
 
@@ -133,7 +111,23 @@ const TechnicianRequestAttendingForm = () => {
 
     return (
         <Fragment>
-            <div className="container-fluid">
+            {showLoading && (
+                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <h1>Closing Request </h1>
+                    <div className='d-flex justify-content-center'>
+                        <Bars
+                            height="80"
+                            width="80"
+                            color="#CE1212"
+                            ariaLabel="bars-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
+                    </div>
+                </div>
+            )}
+            {!showLoading &&
                 <div className={`${classes.statusform} row`}>
                     <div className="col-8">
                         <h1>Status change</h1>
@@ -195,7 +189,7 @@ const TechnicianRequestAttendingForm = () => {
                         <Rightside />
                     </div>
                 </div >
-            </div>
+            }
         </Fragment>
     );
 };

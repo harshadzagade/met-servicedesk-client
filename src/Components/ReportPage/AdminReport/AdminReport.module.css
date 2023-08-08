@@ -9,7 +9,8 @@
     font-weight: 600;
     margin-right: auto;
 }
-.generate{
+
+.generate {
     background-color: var(--color-primary);
     color: #f9fafa;
 }

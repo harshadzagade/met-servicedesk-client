@@ -24,6 +24,7 @@
 .myform label {
   font-size: medium;
   margin-top: 0.5rem;
+  color: black;
 }
 
 .myform p {
@@ -38,15 +39,11 @@
 /* details */
 .idDetails {
   display: grid;
-  grid-template-columns: 200px 100px;
+  grid-template-columns: 25% 75%;
 }
-
-
-
-
-.status {
+.description {
   display: grid;
-  grid-template-columns: 200px 150px;
+  grid-template-columns: 25% 75%;
 }
 
 /* end details */
@@ -58,14 +55,12 @@
 
 .department {
   display: grid;
-  grid-template-columns: 200px 100px;
+  grid-template-columns: 50% 50%;
 }
-
-
 
 .priorityDetails {
   display: grid;
-  grid-template-columns: 200px 100px;
+  grid-template-columns: 40% 60%;
 }
 
 /* request type and status */
@@ -77,12 +72,12 @@
 
 .ComplaintType {
   display: grid;
-  grid-template-columns: 200px 100px;
+  grid-template-columns: 50% 50%;
 }
 
 .status {
   display: grid;
-  grid-template-columns: 200px 100px;
+  grid-template-columns: 40% 60%;
 }
 
 /* end  request type and status */
@@ -91,30 +86,30 @@
 
 .approval {
   display: grid;
-  grid-template-columns: 30vh 70vh;
+  grid-template-columns: 25% 75%;
 }
 
 /* end approval */
 .techName {
   display: grid;
-  grid-template-columns: 200px 100px;
+  grid-template-columns: 26% 74%;
 }
 
 .subjectDetails {
   display: grid;
-  grid-template-columns: 30vh 70vh;
+  grid-template-columns: 25% 75%;
 }
 
 
 
-.description {
+.attachment {
   display: grid;
-  grid-template-columns: 30vh 70vh;
+  grid-template-columns: 25% 75%;
 }
 
 .date {
   display: grid;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: 25% 75%;
 }
 
 

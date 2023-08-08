@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import UpdateStaffDetails from '../UpdateStaffDetails/UpdateStaffDetails';
 
 const SubadminSingleStaffDetails = () => {
+  const navigate = useNavigate();
   const id = useParams();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,42 +35,40 @@ const SubadminSingleStaffDetails = () => {
     setOpenUpdate(false);
   };
 
-
-  const navigate = useNavigate();
   return (
     <main>
       <div className={classes.adminstaffdetails}>
-        <h1>Staff Details</h1>
+        <h2>Staff Details</h2>
         {openUpdate && <UpdateStaffDetails onConfirm={handleUpdateCancel} />}
         <div className={classes.detail}>
           <div className={classes.staffDetails}>
             <div className={classes.myform}>
               <div className={classes.idDetails}>
-                <label className={classes.la}>StaffID:</label>
+                <label>StaffID:</label>
                 <p>#{id.staffId}</p>
               </div>
               <div className={classes.fname}>
-                <label className={classes.lb}>Name:</label>
+                <label >Name:</label>
                 <p>{name} </p>
               </div>
               <div className={classes.department}>
-                <label className={classes.ld}>Department:</label>
+                <label >Department:</label>
                 <p >{department}</p>
               </div>
               <div className={classes.email}>
-                <label className={classes.le}>Email:</label>
+                <label >Email:</label>
                 <p >{email}</p>
               </div>
               <div className={classes.Role}>
-                <label className={classes.lf}>Role:</label>
-                <p >{role === 'technician'? 'engineer' : role}</p>
+                <label >Role:</label>
+                <p >{role === 'technician' ? 'engineer' : role}</p>
               </div>
               <div className={classes.phoneNo}>
-                <label className={classes.lg}>Phone Number:</label>
+                <label >Phone Number:</label>
                 <p>{phoneNumber}</p>
               </div>
               <div className={classes.ContactEXT}>
-                <label className={classes.lh}>Contact Extension:</label>
+                <label >Contact Extension:</label>
                 <p >{contactExtension}</p>
               </div>
               <div className={classes.detailsBtns}>

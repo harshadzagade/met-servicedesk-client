@@ -56,6 +56,9 @@ const TechnicianOwnRequest = () => {
   }, [searchText, id, sortedData]);
 
   const getCreatedRequestDate = (createdAt) => {
+    if (createdAt === null) {
+      return null;
+    }
     const date = new Date(createdAt);
     return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };

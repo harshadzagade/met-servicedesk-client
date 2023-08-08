@@ -17,7 +17,7 @@ const AllStaff = () => {
     const handleRowClick = row => {
         navigate(`/subadminstaffdetails/${row.id}`);
     };
-    
+
     useEffect(() => {
         const getSubadminDetails = async () => {
             try {
@@ -57,7 +57,7 @@ const AllStaff = () => {
         },
         {
             name: "Role",
-            selector: (row) => row.role === 'technician'? 'engineer' : row.role,
+            selector: (row) => row.role === 'technician' ? 'engineer' : row.role,
             sortable: true,
         },
         {

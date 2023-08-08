@@ -28,12 +28,18 @@ const CreateStaff = () => {
             email: emailRef.current.value.toLowerCase(),
             password: passwordRef.current.value,
             institute: institute,
-            department: department,
+            department: [department],
             departmentType: departmentType,
-            phoneNumber: +phoneRef.current.value,
+            phoneNumber: phoneRef.current.value,
             contactExtension: extensionRef.current.value
         };
         try {
+            // if (data.phoneNumber.length !== 0 && data.phoneNumber.length !== 10) {
+            //     throw new Error('Invalid phone number')
+            // }
+            // if (data.contactExtension.length !== 0 && data.contactExtension.length !== 3) {
+            //     throw new Error('Invalid contact extension number')
+            // }
             await axios.post('/api/staff/superadmin/createStaff', data);
             Swal.fire(
                 'User Created!',
@@ -43,11 +49,19 @@ const CreateStaff = () => {
             navigate('/', { state: { refreshSuperHome: true } });
             sessionStorage.setItem('tab', 'home');
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Unable to fetch departments'
-            });
+            if (error.response === undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error}`,
+                    text: 'Unable to create staff'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to create staff'
+                });
+            }
         }
     };
 
@@ -70,7 +84,7 @@ const CreateStaff = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`/api/department/departments`);
+                const departments = await axios.get(`/api/department/alldepartments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 Swal.fire({
@@ -163,11 +177,11 @@ const CreateStaff = () => {
                                 <div className={classes.phone}>
                                     <div className={`${classes.createForm}`} >
                                         <span>Phone No.</span>
-                                        <input type="tel" name="phone"  className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef}  />
+                                        <input type="number" name="phone" className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef} />
                                     </div>
                                     <div className={`${classes.createForm}`}>
                                         <span>Extension</span>
-                                        <input type="tel" name="phone"  maxLength={3} className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef}  />
+                                        <input type="number" name="phone" className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} />
                                     </div>
                                 </div>
                                 <button type="submit" className={`${classes.createButton}`} >Submit</button>

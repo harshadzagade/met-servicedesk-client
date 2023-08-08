@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './SubadminActivities.module.css';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 
 const SubadminActivities = () => {
     const id = localStorage.getItem('id');
@@ -10,6 +9,9 @@ const SubadminActivities = () => {
     const [allSubadminActivities, setAllSubadminActivities] = useState([]);
 
     const getActivityDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
         const date = new Date(createdAt);
         return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
@@ -35,11 +37,7 @@ const SubadminActivities = () => {
                     setAllSubadminActivities(activities.data.activities.activities);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch sub-admin activities'
-                });
+                console.log(error.response.data.message);
             }
         };
         getStaff();

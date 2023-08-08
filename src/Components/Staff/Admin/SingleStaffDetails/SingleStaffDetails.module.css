@@ -12,9 +12,14 @@
 
 
 }
+.detail h2{
+    font-weight: 600;
+  color: var(--text-primary);
+}
 
 .myform label {
     font-size: medium;
+    color: black;
 }
 
 .myform p {
@@ -23,7 +28,7 @@
 
 .idDetails {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 
 }
@@ -33,13 +38,13 @@
 
 .fname {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 }
 
 .lname {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 }
 
@@ -49,7 +54,7 @@
 
 .department {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 }
 
@@ -57,20 +62,20 @@
 
 .email {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 
 }
 
 .Role {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 }
 
 .phoneNo {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 }
 
@@ -79,7 +84,7 @@
 
 .ContactEXT {
     display: grid;
-    grid-template-columns: 200px 400px;
+    grid-template-columns: 20% 70%;
     margin-bottom: 1rem;
 
 }
@@ -93,7 +98,7 @@
 }
 
 .updateBtn {
-    background-color: #7380ec;
+    background-color: var(--color-primary);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -109,7 +114,7 @@
 }
 
 .deleteBtn {
-    background-color: #ff7782;
+    background-color: var(--subbutton-color);
     color: white;
     padding: 15px 32px;
     text-align: center;

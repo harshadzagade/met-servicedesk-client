@@ -69,11 +69,11 @@
   background: #43A047;
 }
 
-.timmer{
+.timmer {
   display: flex;
 }
 
-.timmerBtn{
+.timmerBtn {
   display: flex;
   color: "#FF5630";
   margin-left: auto;

@@ -15,7 +15,7 @@
 }
 
 
-.selectUSer{
+.selectUSer {
     background: white;
     padding: 10px;
     border: none;
@@ -30,12 +30,13 @@
     gap: 1rem;
     margin-bottom: 1rem;
 }
+
 .detailsBtns {
     display: flex;
 }
 
 .updateBtn {
-    background-color: #7380ec;
+    background-color: var(--color-primary);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -51,7 +52,7 @@
 }
 
 .deleteBtn {
-    background-color: #ff7782;
+    background-color: var(--subbutton-color);
     color: white;
     padding: 15px 32px;
     text-align: center;

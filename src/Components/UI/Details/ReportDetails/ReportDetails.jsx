@@ -18,6 +18,9 @@ const ReportDetails = () => {
 
 
     const getCreatedReportDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
         const date = new Date(createdAt);
         return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
     };
@@ -40,8 +43,6 @@ const ReportDetails = () => {
         let diffMins = Math.round(((assignDuration % 86400000) % 3600000) / 60000);
         return (diffHrs + ' Hours and ' + diffMins + ' Minutes');
     }
-
-
 
     return (
         <Fragment>

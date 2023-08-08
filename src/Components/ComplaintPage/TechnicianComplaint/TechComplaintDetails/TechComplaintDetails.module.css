@@ -131,10 +131,12 @@
     display: grid;
     grid-template-columns: 25% 75%;
 }
-.btns{
+
+.btns {
     display: grid;
     grid-template-columns: 50% 50%;
 }
+
 /* buttons */
 .id-details p {
     background: white;

@@ -1,13 +1,13 @@
-
 .allstaff {
   display: flex;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
-.title{
+
+.title {
   display: flex;
   margin-right: auto;
-   margin-top: 0.3rem;
+  margin-top: 0.3rem;
   font-weight: 600;
   color: var(--text-primary);
 }

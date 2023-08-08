@@ -6,13 +6,16 @@
   margin-top: 0.3rem;
   font-weight: 600;
 }
-.upper{
+
+.upper {
   display: flex;
 }
-.title{
-  display:flex ;
+
+.title {
+  display: flex;
   margin-right: auto;
 }
+
 .search {
   background: white;
   padding: 10px;

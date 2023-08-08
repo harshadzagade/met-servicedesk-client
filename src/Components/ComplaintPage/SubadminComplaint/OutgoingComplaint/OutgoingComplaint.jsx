@@ -22,19 +22,19 @@ const OutgoingComplaint = () => {
 
   useEffect(() => {
     const getSubadminDetails = async () => {
-        try {
-            const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
-            setSubadminDetails(subadmin.data.staff);
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Unable to fetch sub-admin'
-            });
-        }
+      try {
+        const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
+        setSubadminDetails(subadmin.data.staff);
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: `${error.response.data.message}`,
+          text: 'Unable to fetch sub-admin'
+        });
+      }
     };
     getSubadminDetails();
-}, [id]);
+  }, [id]);
 
   useEffect(() => {
     const getList = async () => {
@@ -49,7 +49,7 @@ const OutgoingComplaint = () => {
         setErrorMessage(`${error.response.data.message}`);
       }
     };
-      getList();
+    getList();
   }, [id, subadminDetails.department]);
 
   useEffect(() => {
@@ -73,6 +73,9 @@ const OutgoingComplaint = () => {
   }, [searchText, subadminDetails.department, sortedData]);
 
   const getCreatedComplaintDate = (createdAt) => {
+    if (createdAt === null) {
+      return null;
+    }
     const date = new Date(createdAt);
     return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
   };

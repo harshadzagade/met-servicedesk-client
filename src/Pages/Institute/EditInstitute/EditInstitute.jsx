@@ -35,7 +35,7 @@ const EditInstitute = (props) => {
           <div className={classes.myform} >
             <div className={`${classes.institue}`}>
               <label>Institute:</label>
-              <input type="text" className={classes.createstaffInput} defaultValue={props.instituteName} placeholder="Enter Institute" ref={instituteRef} required/>
+              <input type="text" className={classes.createstaffInput} defaultValue={props.instituteName} placeholder="Enter Institute" ref={instituteRef} required />
             </div>
             <div className={classes.detailsBtns}>
               <button className={classes.updateBtn} onClick={handleEditSubmit}>Edit</button>

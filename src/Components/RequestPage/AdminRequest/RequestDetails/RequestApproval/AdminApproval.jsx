@@ -107,7 +107,7 @@ const AdminApproval = () => {
                             <form className={classes.form} onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
                                 <div >
                                     <div className={classes.approvalStatus}>
-                                        <span>Change Status</span>
+                                        <label>Change Status:</label>
                                         <select className={classes.selectStatus} name="role" required onChange={handleChange} >
                                             <option key='0' value="" hidden>----- Approval Status -----</option>
                                             <option key='1' value="approve">Approve</option>
@@ -117,7 +117,7 @@ const AdminApproval = () => {
                                     {
                                         isApproval2 &&
                                         <div className={classes.selectStaff}>
-                                            <span>Staff List</span>
+                                            <label>Staff List:</label>
                                             <select className={classes.selectStatus} disabled={assignDisability} name="role" required onChange={handleTechnicianChange} >
                                                 <option key='0' value='' hidden defaultValue=''>----- Select Categories -----</option>
                                                 {
@@ -129,8 +129,8 @@ const AdminApproval = () => {
                                         </div>
                                     }
                                     <div className={classes.comment}>
-                                        <span>Comment</span>
-                                        <input type="text" className={classes.subInput} placeholder="Select Your Comment" ref={approvalCommentRef} required/>
+                                        <label>Comment:</label>
+                                        <input type="text" className={classes.subInput} placeholder="Select Your Comment" ref={approvalCommentRef} required />
                                     </div>
                                     <div className={classes.btn}>
                                         <button className={classes.submitBtn} type='submit' >Submit</button>
