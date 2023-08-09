@@ -272,7 +272,7 @@ const DashBoard = () => {
             <div className={classes.circle} style={{ width: 70, height: 70 }}>
               <CircularProgressbar
                 value={Math.round(ticketsDays)}
-                text={`${(new Date().getDate() - 1)} days`}
+                text={`${(new Date().getDate())} days`}
                 background
                 backgroundPadding={6}
                 styles={buildStyles({

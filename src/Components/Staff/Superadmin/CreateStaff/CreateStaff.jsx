@@ -30,8 +30,8 @@ const CreateStaff = () => {
             institute: institute,
             department: [department],
             departmentType: departmentType,
-            phoneNumber: phoneRef.current.value,
-            contactExtension: extensionRef.current.value
+            phoneNumber: phoneRef.current.value.length !== 0? phoneRef.current.value : null,
+            contactExtension: extensionRef.current.value.length !== 0? extensionRef.current.value : null
         };
         try {
             // if (data.phoneNumber.length !== 0 && data.phoneNumber.length !== 10) {

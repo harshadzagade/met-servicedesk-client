@@ -23,7 +23,6 @@ const Technician = () => {
                     closed = technicianComplaintList.filter((data) => data.status.startsWith('closed'));
                     setComplaintStatus({ pending: pending.length, attending: attending.length, forwarded: forwarded.length, closed: closed.length });
                 }
-
             } catch (error) {
                 console.log(error.response.data.message);
             }
