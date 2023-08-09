@@ -1,0 +1,39 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: #000000bf;
+}
+
+.modal {
+    position: fixed;
+    width: auto;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px #00000040;
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        width: auto;
+        left: calc(50% - 14rem);
+    }
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-3rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

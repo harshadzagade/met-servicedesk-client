@@ -1,0 +1,92 @@
+.layout {
+    width: 90vh;
+    max-height: 95vh;
+    overflow: auto;
+}
+
+.reportDetailsHeading {
+    width: fit-content;
+    margin: auto;
+    font-family: "Bahnschrift", Times, serif;
+    font-weight: 700;
+    font-size: 2rem;
+    text-shadow: 1px 1px 1px gray;
+}
+
+.detailsView {
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.detailsTag,
+.detailsField {
+    font-family: "Bahnschrift", Times, serif;
+}
+
+.detailsTag {
+    font-size: larger;
+}
+
+.detailsField {
+    margin-left: auto;
+}
+
+.hrTag {
+    margin: 0rem;
+}
+
+.boxDetails {
+    box-shadow: inset 1px 1px 8px #1f1f1f;
+    background-color: #c7c7c7;
+    border-radius: 1.5rem;
+    margin-top: 1rem;
+    padding-inline: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.boxHeading {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.wrapData {
+    width: 60% !important;
+    text-align: right;
+    max-width: 25em !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+.cancelLayout {
+    width: 100%;
+}
+
+.cancelButton {
+    width: fit-content;
+    margin: auto;
+    background-color: #dbdbdb;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .5s ease-in-out;
+}
+
+.cancelButton:hover {
+    background-color: #ff6868;
+}
+
+.cancelButton:focus {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 0 0 0 #007bff00;
+}
+
+.cancelButton:active {
+    background-color: red;
+    color: black;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition-duration: 0.2s;
+    transform: translateX(0px) translateY(2px);
+}

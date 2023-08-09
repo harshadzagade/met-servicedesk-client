@@ -1,0 +1,79 @@
+.parent {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.newStaffHeading {
+    font-family: "Bahnschrift", Times, serif;
+    font-weight: 700;
+    font-size: 2rem;
+    text-shadow: 1px 1px 1px gray;
+}
+
+.setPasswordFormDiv {
+    display: flex;
+    height: 60vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.setPasswordForm {
+    border: 1px solid whitesmoke;
+    background-color: #e2e2e2;
+    border-radius: 20px;
+    box-shadow: 0 1px 8px #b6b6b6;
+}
+
+.setPasswordInfo {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.setPasswordInput {
+    text-align: center;
+    border-width: 1px;
+    border-color: transparent;
+    border-radius: 8px;
+    margin: 8px;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .3s ease-in-out;
+}
+
+.setPasswordInput:focus {
+    border-color: lightskyblue;
+    box-shadow: 1px 1px 2px gray;
+}
+
+.setPasswordInputError {
+    border-color: red;
+}
+
+.setPasswordButton {
+    background-color: lightblue;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .5s ease-in-out;
+    margin-right: 10px;
+}
+
+.setPasswordButton:hover {
+    background-color: #54c7ee;
+}
+
+.setPasswordButton:focus {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 0 0 0 #007bff00;
+}
+
+.setPasswordButton:active {
+    background-color: #0ab9f3;
+    color: black;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition-duration: 0.2s;
+    transform: translateX(0px) translateY(2px);
+}

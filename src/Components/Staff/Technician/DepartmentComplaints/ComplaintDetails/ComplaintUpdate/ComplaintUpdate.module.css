@@ -1,0 +1,117 @@
+.updateStatusHeading {
+    font-family: "Bahnschrift", Times, serif;
+    margin-left: 2.5rem;
+    font-weight: 700;
+    font-size: 3rem;
+    text-shadow: 1px 1px 1px gray;
+}
+
+.statusSelect {
+    align-self: center;
+    width: 265px;
+    border-width: 1px;
+    border-color: transparent;
+    border-radius: 8px;
+    margin: 8px;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .3s ease-in-out;
+}
+
+.updateStatusInput {
+    align-self: center;
+    width: 265px;
+    border-width: 1px;
+    border-color: transparent;
+    border-radius: 8px;
+    margin: 8px;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .3s ease-in-out;
+}
+
+@media (min-width: 768px) {
+    .updateStaffHeading {
+        margin-left: 6.5rem;
+    }
+    .statusSelect {
+        width: 400px;
+    }
+    .updateStatusInput {
+        width: 400px;
+    }
+}
+
+.updateStatusInput:focus {
+    border-color: lightskyblue;
+    box-shadow: 1px 1px 2px gray;
+}
+
+.statusSelect:focus {
+    border-color: lightskyblue;
+    box-shadow: 1px 1px 2px gray;
+}
+
+.updateLayoutButtons {
+    margin-left: 14%;
+    width: 80%;
+}
+
+.updateButton {
+    background-color: lightgoldenrodyellow;
+    width: 40%;
+    margin-top: 1rem;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .5s ease-in-out;
+}
+
+.updateButton:hover {
+    background-color: #ffff5d;
+}
+
+.updateButton:focus {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+}
+
+.updateButton:active {
+    background-color: yellow;
+    color: black;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition-duration: 0.2s;
+    transform: translateX(0px) translateY(2px);
+}
+
+.cancelButton {
+    background-color: #ffacac;
+    width: 40%;
+    margin-left: 10%;
+    margin-top: 1rem;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition: all .5s ease-in-out;
+}
+
+.cancelButton:hover {
+    background-color: #ff6868;
+}
+
+.cancelButton:focus {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 0 0 0 #007bff00;
+}
+
+.cancelButton:active {
+    background-color: red;
+    color: black;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition-duration: 0.2s;
+    transform: translateX(0px) translateY(2px);
+}

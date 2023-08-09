@@ -5,7 +5,7 @@ import SetNewPassword from './SetNewPassword/SetNewPassword';
 import VerifyOTP from './VerifyOTP/VerifyOTP';
 import classes from './ResetPassword.module.css';
 import axios from 'axios';
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from '../../Context/AuthContext/AuthContext';
 
 const ResetPassword = () => {
     const ctx = useContext(AuthContext);
@@ -17,7 +17,7 @@ const ResetPassword = () => {
 
     const checkLogin = async () => {
         if (localStorage.getItem('id')) {
-            const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${localStorage.getItem('id')}`);
+            const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${localStorage.getItem('id')}`);
             ctx.onLogin(staff.data.staff.email);
             navigate('/');
         }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from '../../Context/AuthContext/AuthContext';
 import classes from './Login.module.css';
 import Swal from 'sweetalert2';
 import METLogo from '../../Images/met-logo.png';
@@ -20,7 +20,7 @@ const Login = () => {
 
     const checkLogin = async () => {
         if (localStorage.getItem('id')) {
-            const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${localStorage.getItem('id')}`);
+            const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${localStorage.getItem('id')}`);
             ctx.onLogin(staff.data.staff.email);
         }
     }
@@ -36,7 +36,7 @@ const Login = () => {
         }
         let loginStaff;
         try {
-            loginStaff = await axios.post('http://localhost:8001/', staffInfo);
+            loginStaff = await axios.post('http://localhost:8001/api/', staffInfo);
             localStorage.setItem('token', loginStaff.data.token);
             localStorage.setItem('id', loginStaff.data.staffId);
             ctx.onLogin(staffInfo.email);
@@ -60,7 +60,7 @@ const Login = () => {
             Swal.fire({
                 icon: 'error',
                 title: `${error.response.data.message}`,
-                text: 'Please enter valid credentials'
+                text: 'Unable to login'
             });
         }
         navigate('/');

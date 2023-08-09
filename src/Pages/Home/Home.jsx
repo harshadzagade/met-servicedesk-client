@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
+// import NavBar from '../../Components/NavBar/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SuperAdmin from '../../Staff/SuperAdmin/SuperAdmin';
-import Admin from '../../Staff/Admin/Admin';
-import Technician from '../../Staff/Technician/Technician';
-import User from '../../Staff/User/User';
+import SuperAdmin from '../../Components/Staff/SuperAdmin/SuperAdmin';
+import Admin from '../../Components/Staff/Admin/Admin';
+import Technician from '../../Components/Staff/Technician/Technician';
+import User from '../../Components/Staff/User/User';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -37,11 +37,12 @@ const Home = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const staff = await axios.get(`http://localhost:8001/staff/staffdetails/${id}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 if (staff.data.staff.isNew === true) {
                     navigate('/passwordreset');
                 } else {
-                    const res = await axios.get(`http://localhost:8001/staff/check/${id}`);
+                    localStorage.removeItem('email');
+                    const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
                     switch (res.data.role) {
                         case 'superadmin':
                             setIsSuperAdmin(true);
@@ -58,6 +59,7 @@ const Home = () => {
                             break;
 
                         case 'technician':
+                            localStorage.setItem('department', staff.data.staff.department[0]);
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
                             setIsTechnician(true);
@@ -84,7 +86,7 @@ const Home = () => {
 
     return (
         <Fragment>
-            <NavBar tab={'none'} />
+            {/* <NavBar tab={'none'} /> */}
             {isSuperAdmin && <SuperAdmin />}
             {isAdmin && <Admin />}
             {isTechnician && <Technician />}

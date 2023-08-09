@@ -1,0 +1,124 @@
+.staffDetailsHeading {
+    font-family: "Bahnschrift", Times, serif;
+    font-weight: 700;
+    font-size: 2rem;
+    text-shadow: 1px 1px 1px gray;
+}
+
+.detailsView {
+    min-width: 120vh;
+    border: 1px solid #e2e2e2;
+    padding: 4rem;
+    border-radius: 2rem;
+    background-color: #e2e2e2;
+    box-shadow: 0px 1px 8px gray;
+}
+
+.detailsView:hover {
+    box-shadow: 0px 1px 8px black;
+    transition: box-shadow .5s ease-in-out;
+}
+
+.detailsTag,
+.detailsField {
+    font-family: "Bahnschrift", Times, serif;
+}
+
+.detailsTag {
+    font-size: larger;
+}
+
+.detailsField {
+    margin-left: auto;
+}
+
+.hrTag {
+    margin: 0rem;
+}
+
+.boxDetails {
+    box-shadow: inset 1px 1px 8px #1f1f1f;
+    background-color: #c7c7c7;
+    border-radius: 1.5rem;
+    margin-top: 1rem;
+    padding-inline: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.boxHeading {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.buttons {
+    border-radius: 0.7rem 0.7rem 0.7rem 0.7rem;
+    background-color: gray;
+    width: fit-content;
+    margin-top: 2rem;
+    margin-inline: auto;
+    box-shadow: 0rem 0.1rem 0.1rem gray;
+}
+
+.restoreButton {
+    border: none;
+    background-color: #dbdbdb;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 0.7rem 0rem 0rem 0.7rem;
+    transition: all .5s ease-in-out;
+    padding-inline: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-right: 0.2rem;
+}
+
+.restoreButton:hover {
+    background-color: #ffff5d;
+}
+
+.restoreButton:focus {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+}
+
+.restoreButton:active {
+    background-color: yellow;
+    color: black;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition-duration: 0.2s;
+    transform: translateX(0px) translateY(2px);
+}
+
+.deleteButton {
+    border: none;
+    background-color: #dbdbdb;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 0rem 0.7rem 0.7rem 0rem;
+    transition: all .5s ease-in-out;
+    padding-inline: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.deleteButton:hover {
+    background-color: #ff6868;
+}
+
+.deleteButton:focus {
+    outline: 0;
+    outline-color: transparent;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 0 0 0 #007bff00;
+}
+
+.deleteButton:active {
+    background-color: red;
+    color: black;
+    box-shadow: 1px 1px 1px 1px gray;
+    transition-duration: 0.2s;
+    transform: translateX(0px) translateY(2px);
+}
