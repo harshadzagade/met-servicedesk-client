@@ -209,7 +209,7 @@ const TechnicianRequestDetails = () => {
                                             <p className={classes.complaintDetailsp}>{getCreatedRequestDate(requestData.createdAt)}</p>
                                         </div>
                                         <div className={classes.status}>
-                                            {(requestData.status !== 'closed') && <button className={classes.complaintAssingBtn} onClick={() => navigate(`/techrequestattending/${requestData.id}`)}>Change Status</button>}
+                                            {(requestData.status !== 'closed') && <button className={classes.complaintAssingBtn} onClick={() => navigate(`/engineerrequestattending/${requestData.id}`)}>Change Status</button>}
                                         </div>
                                     </form>
                                 </div>

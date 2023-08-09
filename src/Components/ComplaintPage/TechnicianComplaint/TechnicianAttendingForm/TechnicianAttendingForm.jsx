@@ -72,7 +72,7 @@ const TechnicianAttendingForm = () => {
                 'You have changed status successfully',
                 'success'
             );
-            navigate('/complaint');
+            navigate('/concern');
         } catch (error) {
             Swal.fire({
                 icon: 'error',

@@ -43,18 +43,17 @@ const Routing = () => {
           <Route exact path='/department' element={<Department />} />
           <Route exact path='/institute' element={<Institute />} />
           <Route exact path='/createstaff' element={<CreateStaff />} />
-          <Route exact path='/createstaff' element={<CreateStaff />} />
-          <Route exact path='/complaint' element={<Complaint />} />
+          <Route exact path='/concern' element={<Complaint />} />
           <Route exact path='/report' element={<Report />} />
           <Route exact path='/reportdetails/:reportId' element={<ReportDetails />} />
-          <Route exact path='/newcomplaint' element={<NewCompaint />} />
-          <Route exact path='/complaintdetails/:complaintId' element={<ComplaintDetails />} />
-          <Route exact path='/techcomplaintdetails/:complaintId' element={<TechComplaintDetails />} />
-          <Route exact path='/techcomplaintattending/:complaintId' element={<TechnicianAttendingForm />} />
-          <Route exact path='/techrequestattending/:requestId' element={<TechnicianRequestAttendingForm />} />
+          <Route exact path='/newconcern' element={<NewCompaint />} />
+          <Route exact path='/concerndetails/:complaintId' element={<ComplaintDetails />} />
+          <Route exact path='/engineerconcerndetails/:complaintId' element={<TechComplaintDetails />} />
+          <Route exact path='/engineerconcernattending/:complaintId' element={<TechnicianAttendingForm />} />
+          <Route exact path='/engineerrequestattending/:requestId' element={<TechnicianRequestAttendingForm />} />
           <Route exact path='/newrequest' element={<NewRequest />} />
           <Route exact path='/requestdetails/:requestId' element={<RequestDetails />} />
-          <Route exact path='/technicianRequestDetails/:requestId' element={<TechnicianRequestDetails />} />
+          <Route exact path='/engineerrequestdetails/:requestId' element={<TechnicianRequestDetails />} />
           <Route exact path='/adminrequestdetails/:requestId' element={<AdminRequestDetails />} />
           <Route exact path='/subadminrequestdetails/:requestId' element={<SubadminRequestDetails />} />
           <Route exact path='/adminapproval/:requestId' element={<AdminApproval />} />

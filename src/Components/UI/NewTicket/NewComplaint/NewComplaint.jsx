@@ -112,11 +112,11 @@ const NewCompaint = () => {
                 setShowLoading(true);
                 await axios.post('/api/complaint/', formData);
                 Swal.fire(
-                    'Complaint Created!',
-                    'You have created Complaint successfully',
+                    'Concern Created!',
+                    'You have created concern successfully',
                     'success'
                 );
-                navigate('/complaint', { state: { refreshSuperHome: true } });
+                navigate('/concern', { state: { refreshSuperHome: true } });
             } catch (error) {
                 Swal.fire({
                     icon: 'error',

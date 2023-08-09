@@ -256,7 +256,7 @@ const TechnicianReport = () => {
                         <h2>Report</h2>
                         <a href={`data:text/csv;charset=utf-8,${escape(csvFile)}`} download="report_data.csv" className={`${classes.generate} d-none d-sm-inline-block btn btn-sm  shadow-sm mb-2 ml-3`}>
                             <i className="fas fa-download fa-sm "></i>
-                            Generate Report
+                            Download Report
                         </a>
                     </div>
                 </div>

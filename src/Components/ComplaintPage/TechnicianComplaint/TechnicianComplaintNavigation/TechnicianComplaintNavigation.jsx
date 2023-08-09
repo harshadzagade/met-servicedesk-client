@@ -21,7 +21,7 @@ const TechnicianComplaintNavigation = (props) => {
         <button className={`${classes.button} ${activeTab === 'AllDepartmentComplaint' && classes.active} filter-button list`} data-filter="assigned" onClick={handleDepartmentComplaint}>Department</button>
         <button className={`${classes.button} ${activeTab === 'AllStaffOwnComplaint' && classes.active} filter-button list`} onClick={handleOwnComplaint}>My Concerns</button>
       </div>
-      <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newcomplaint')}>
+      <button className={`${classes.tikReqbtn}`} onClick={() => navigate('/newconcern')}>
         <span className="material-icons-sharp btn-icon">
           add
         </span>

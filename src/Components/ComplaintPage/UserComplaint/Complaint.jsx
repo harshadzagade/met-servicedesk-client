@@ -77,7 +77,7 @@ const Complaint = () => {
               <div className={`${classes.filterButtons}`}>
                 <h2 className="tik-type-title">Concern</h2>
               </div>
-              <button className={`${classes.tikReqBtn}`} onClick={() => navigate("/newcomplaint")}>
+              <button className={`${classes.tikReqBtn}`} onClick={() => navigate("/newconcern")}>
                 <span className="material-icons-sharp btn-icon">add</span>
                 <span className={`${classes.btnName}`}> New Ticket</span>
               </button>
@@ -92,7 +92,7 @@ const Complaint = () => {
             </div>
             <div className={`${classes.requests} `}>
               {currentPageData.map((complaint) => (
-                <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)}>
+                <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)}>
                   <div className={`${classes.tikHead}`}>
                     <h3 className={`${classes.tikTitle}`}>
                       {complaint.subject}

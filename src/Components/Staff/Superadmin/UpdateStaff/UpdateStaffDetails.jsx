@@ -120,7 +120,7 @@ const UpdateStaffDetails = (props) => {
         <Modal>
             <div className={classes.detail}>
                 <div >
-                    <form className={classes.myform} method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, middlename: updateStaff.middlename, lastname: updateStaff.lastname, email: updateStaff.email.toLowerCase(), role: updateStaff.role, institute: institute, department: departmentList, departmentType: departmentType, phoneNumber: +updateStaff.phoneNumber, contactExtension: updateStaff.contactExtension, createdAt: staff.createdAt })}>
+                    <form className={classes.myform} method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, middlename: updateStaff.middlename, lastname: updateStaff.lastname, email: updateStaff.email.toLowerCase(), role: updateStaff.role, institute: institute, department: departmentList, departmentType: departmentType, phoneNumber: updateStaff.phoneNumber, contactExtension: updateStaff.contactExtension, createdAt: staff.createdAt })}>
                         <div className={classes.updateDetails}>
                             <label className="la">Staff ID:</label>
                             <p>#{staff.id}</p>
@@ -172,16 +172,16 @@ const UpdateStaffDetails = (props) => {
                             </select>
                         </div>
                         <div className={classes.updateDetails}>
-                            <label className="le">Email:</label>
+                            <label className="le">E-mail:</label>
                             <input type="text" placeholder='Email' className={classes.input} autoComplete='true' name='email' defaultValue={staff.email} onChange={handleChange} />
                         </div>
                         <div className={classes.updateDetails}>
-                            <label className="lg">PhoneNo:</label>
-                            <input type="tel" pattern="[0-9]{10}" className={classes.input} placeholder='PhoneNo' autoComplete='true' name='phoneNumber' defaultValue={staff.phoneNumber} onChange={handleChange} />
+                            <label className="lg">Phone Number:</label>
+                            <input type="tel" pattern="[0-9]{10}" className={classes.input} placeholder='Phone Number' autoComplete='true' name='phoneNumber' defaultValue={staff.phoneNumber} onChange={handleChange} />
                         </div>
                         <div className={classes.updateDetails}>
-                            <label className="lh">ContactEXT:</label>
-                            <input type="tel" pattern="[0-9]{3}" className={classes.input} placeholder='ContactEXT' name='contactExtension' autoComplete='true' defaultValue={staff.contactExtension} onChange={handleChange} />
+                            <label className="lh">Contact Extension:</label>
+                            <input type="tel" pattern="[0-9]{3}" className={classes.input} placeholder='Contact Extension' name='contactExtension' autoComplete='true' defaultValue={staff.contactExtension} onChange={handleChange} />
                         </div>
                         <div className={classes.detailsBtns}>
                             <button className={classes.updateBtn} type='submit'>Update</button>
