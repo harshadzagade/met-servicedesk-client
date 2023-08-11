@@ -83,8 +83,10 @@ const AdminReport = () => {
     useEffect(() => {
         const getStaffByDepartment = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffbydepartment/${adminCtx.department}`);
-                setDepartmentStaff(staff.data.staff);
+                if (adminCtx.department) {
+                    const staff = await axios.get(`/api/staff/staffbydepartment/${adminCtx.department}`);
+                    setDepartmentStaff(staff.data.staff);
+                }
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
