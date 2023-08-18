@@ -20,10 +20,10 @@ const Login = () => {
   const checkLogin = async () => {
     if (localStorage.getItem('id')) {
       try {
-        const staff = await axios.get(`/api/staff/staffdetails/${localStorage.getItem('id')}`);
+        const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${localStorage.getItem('id')}`);
         ctx.onLogin(staff.data.staff.email);
       } catch (error) {
-        console.log(error.response.data.message);
+        console.log(error.message);
       }
     }
   }
@@ -39,7 +39,7 @@ const Login = () => {
     }
     let loginStaff;
     try {
-      loginStaff = await axios.post('/api/', staffInfo);
+      loginStaff = await axios.post('http://localhost:8001/api/', staffInfo);
       localStorage.setItem('token', loginStaff.data.token);
       localStorage.setItem('id', loginStaff.data.staffId);
       ctx.onLogin(staffInfo.email);
@@ -59,11 +59,7 @@ const Login = () => {
         title: 'Signed in successfully'
       });
     } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: `${error.response.data.message}`,
-        text: 'Please enter valid credentials'
-      });
+      console.log(error.message);
     }
     navigate('/');
   };

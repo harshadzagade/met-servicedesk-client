@@ -1,0 +1,27 @@
+.feedback{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    overflow: auto;
+    max-height: 90vh;
+}
+
+.textArea{
+    border: solid 0.1rem;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+}
+.submitbtn{
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1em;
+    background-color: var(--color-primary);
+    color: white;
+    width: 5rem;
+    margin-bottom: 0.5rem;
+}

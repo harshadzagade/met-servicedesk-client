@@ -11,27 +11,27 @@ const SendOTP = (props) => {
     const handleOTPVerification = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('/api/staff/verifyOTP', { otp: enteredOTP.current.value });
+            await axios.post('http://localhost:8001/api/staff/verifyOTP', { otp: enteredOTP.current.value });
             props.goToResetPassword();
         } catch (error) {
             Swal.fire({
                 icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Please enter valid OTP'
+                title: 'Please enter valid OTP',
+                text: `${error.message}`
             });
         }
     };
 
     const handleResendOTP = async () => {
         try {
-            await axios.post('/api/staff/sendOTP', { email: props.getEmail });
+            await axios.post('http://localhost:8001/api/staff/sendOTP', { email: props.getEmail });
             setMinutes(1);
             setSeconds(0);
         } catch (error) {
             Swal.fire({
                 icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Please enter valid OTP'
+                title: 'Please enter valid OTP',
+                text: `${error.message}`
             });
         }
     };

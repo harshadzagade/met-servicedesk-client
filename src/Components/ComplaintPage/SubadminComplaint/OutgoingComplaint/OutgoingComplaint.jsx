@@ -5,7 +5,6 @@ import { iswitch } from 'iswitch';
 import classes from './OutgoingComplaint.module.css'
 import { useNavigate } from 'react-router-dom';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
-import Swal from 'sweetalert2';
 
 const OutgoingComplaint = () => {
   const navigate = useNavigate();
@@ -23,14 +22,10 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getSubadminDetails = async () => {
       try {
-        const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
+        const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
         setSubadminDetails(subadmin.data.staff);
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to fetch sub-admin'
-        });
+        console.log(error.message);
       }
     };
     getSubadminDetails();
@@ -39,14 +34,14 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
+        const list = await axios.get(`http://localhost:8001/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
       } catch (error) {
-        setErrorMessage(`${error.response.data.message}`);
+        setErrorMessage(`${error.message}`);
       }
     };
     getList();
@@ -56,17 +51,13 @@ const OutgoingComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`/api/staff/subadmin/complaints/outgoingcomplaintsearch/${subadminDetails.department}/${searchText}`);
+          const complaint = await axios.get(`http://localhost:8001/api/staff/subadmin/complaints/outgoingcomplaintsearch/${subadminDetails.department}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);
         }
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to search requests'
-        });
+        console.log(error.message);
       }
     };
     getStaff();

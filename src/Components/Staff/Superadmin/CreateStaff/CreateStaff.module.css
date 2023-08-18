@@ -119,3 +119,36 @@
   grid-template-columns: 30% 30%;
   gap: 1rem;
 }
+
+
+/* Mobile Responsive */
+@media screen and (max-width: 767px) {
+  .createForm,
+  .names,
+  .emailpass,
+  .deptik,
+  .instDept,
+  .institute,
+  .category,
+  .phone {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .createForm span {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .instituteSelect,
+  .categoryType {
+    width: 100%;
+  }
+
+  .createButton {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+}

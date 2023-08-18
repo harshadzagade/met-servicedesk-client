@@ -6,7 +6,6 @@ import { iswitch } from 'iswitch';
 import SweetPagination from 'sweetpagination';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
-import Swal from 'sweetalert2';
 
 const OwnComplaint = () => {
   const navigate = useNavigate();
@@ -24,14 +23,14 @@ const OwnComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
+        const list = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
       } catch (error) {
-        setErrorMessage(`${error.response.data.message}`);
+        setErrorMessage(`${error.message}`);
       }
     };
     if (adminCtx.department) {
@@ -53,17 +52,13 @@ const OwnComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`/api/complaint/owncomplaintsearch/${id}/${searchText}`);
+          const complaint = await axios.get(`http://localhost:8001/api/complaint/owncomplaintsearch/${id}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);
         }
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to search complaints'
-        });
+        console.log(error.message);
       }
     };
     getStaff();

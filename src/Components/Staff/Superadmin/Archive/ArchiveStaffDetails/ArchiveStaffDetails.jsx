@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import classes from './ArchiveStaffDetails.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 
 const ArchiveStaffDetails = () => {
     const navigate = useNavigate();
@@ -19,7 +18,7 @@ const ArchiveStaffDetails = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const staff = await axios.get(`/api/trash/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`http://localhost:8001/api/trash/staffdetails/${id.staffId}`);
                 setName(staff.data.staff.firstname);
                 setLName(staff.data.staff.lastname);
                 setEmail(staff.data.staff.email);
@@ -28,11 +27,7 @@ const ArchiveStaffDetails = () => {
                 setExtension(staff.data.staff.contactExtension);
                 setDepartment(staff.data.staff.department);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
-                });
+                console.log(error.message);
             }
 
         };

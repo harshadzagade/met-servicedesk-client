@@ -5,7 +5,6 @@ import { iswitch } from 'iswitch';
 import axios from 'axios';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
-import Swal from 'sweetalert2';
 
 const DepartmentRequest = () => {
     const id = localStorage.getItem('id');
@@ -24,14 +23,10 @@ const DepartmentRequest = () => {
     useEffect(() => {
         const getStaffDetails = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 setStaff(staff.data.staff);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
-                });
+                console.log(error.message);
             }
         };
         getStaffDetails();
@@ -40,14 +35,14 @@ const DepartmentRequest = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`/api/request/requestsbydepartment/${department}`);
+                const list = await axios.get(`http://localhost:8001/api/request/requestsbydepartment/${department}`);
                 if (list.data.requests.length === 0) {
                     setErrorMessage('No requests available')
                 }
                 setRequestList(list.data.requests);
                 setAllRequestList(list.data.requests);
             } catch (error) {
-                setErrorMessage(`${error.response.data.message}`);
+                setErrorMessage(`${error.message}`);
             }
         };
         getList();
@@ -57,17 +52,13 @@ const DepartmentRequest = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const request = await axios.get(`/api/request/requestsbydepartmentsearch/${staff.department}/${searchText}`);
+                    const request = await axios.get(`http://localhost:8001/api/request/requestsbydepartmentsearch/${staff.department}/${searchText}`);
                     setAllRequestList(request.data);
                 } else {
                     setAllRequestList(sortedData);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to search requests'
-                });
+                console.log(error.message);
             }
         };
         getStaff();

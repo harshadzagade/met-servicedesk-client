@@ -5,7 +5,6 @@ import Sweetpagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import axios from 'axios';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
-import Swal from 'sweetalert2';
 
 const DepartmentComplaint = () => {
   const id = localStorage.getItem('id');
@@ -24,14 +23,10 @@ const DepartmentComplaint = () => {
   useEffect(() => {
     const getStaffDetails = async () => {
       try {
-        const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+        const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
         setStaff(staff.data.staff);
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to fetch staff'
-        });
+        console.log(error.message);
       }
     };
     getStaffDetails();
@@ -40,14 +35,14 @@ const DepartmentComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/complaint/complaints/incoming/${department}`);
+        const list = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No requests available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
       } catch (error) {
-        setErrorMessage(`${error.response.data.message}`);
+        setErrorMessage(`${error.message}`);
       }
     };
     getList();
@@ -57,17 +52,13 @@ const DepartmentComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`/api/complaint/complaints/incomingcomplaintsearch/${staff.department}/${searchText}`);
+          const complaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incomingcomplaintsearch/${staff.department}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);
         }
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to search complaints'
-        });
+        console.log(error.message);
       }
     };
     getStaff();

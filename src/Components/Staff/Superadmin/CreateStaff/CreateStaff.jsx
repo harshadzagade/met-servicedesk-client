@@ -34,13 +34,7 @@ const CreateStaff = () => {
             contactExtension: extensionRef.current.value.length !== 0? extensionRef.current.value : null
         };
         try {
-            // if (data.phoneNumber.length !== 0 && data.phoneNumber.length !== 10) {
-            //     throw new Error('Invalid phone number')
-            // }
-            // if (data.contactExtension.length !== 0 && data.contactExtension.length !== 3) {
-            //     throw new Error('Invalid contact extension number')
-            // }
-            await axios.post('/api/staff/superadmin/createStaff', data);
+            await axios.post('http://localhost:8001/api/staff/superadmin/createStaff', data);
             Swal.fire(
                 'User Created!',
                 'You have created user successfully',
@@ -49,33 +43,21 @@ const CreateStaff = () => {
             navigate('/', { state: { refreshSuperHome: true } });
             sessionStorage.setItem('tab', 'home');
         } catch (error) {
-            if (error.response === undefined) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error}`,
-                    text: 'Unable to create staff'
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to create staff'
-                });
-            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Unable to create staff',
+                text: `${error.message}`
+            });
         }
     };
 
     useEffect(() => {
         const getInstitutes = async () => {
             try {
-                const institutes = await axios.get(`/api/institute/`);
+                const institutes = await axios.get(`http://localhost:8001/api/institute/`);
                 setInstitutes(institutes.data.instituteData);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch institutes'
-                });
+                console.log(error.message);
             }
         };
         getInstitutes();
@@ -84,14 +66,10 @@ const CreateStaff = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`/api/department/alldepartments`);
+                const departments = await axios.get(`http://localhost:8001/api/department/alldepartments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Please enter valid fields'
-                });
+                console.log(error.message);
             }
         };
         getDepartments();

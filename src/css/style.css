@@ -585,7 +585,7 @@ main .tik-desc-chat {
   /* Request */
 }
 
-/* SMALL TABLETS AND MOBILE */
+
 @media screen and (max-width: 768px) {
   .container {
     width: 100%;
@@ -638,12 +638,7 @@ main .tik-desc-chat {
     cursor: pointer;
   }
 
-  main {
-    margin-top: 8rem;
-    padding: 0 1rem;
-  }
-
-  /* rightside */
+ 
 
   .right {
     width: 94%;

@@ -38,11 +38,11 @@ const Home = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 if (staff.data.staff.isNew === true) {
                     navigate('/passwordreset');
                 } else {
-                    const res = await axios.get(`/api/staff/check/${id}`);
+                    const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
                     switch (res.data.role) {
                         case 'superadmin':
                             setIsSuperAdmin(true);
@@ -90,7 +90,7 @@ const Home = () => {
                     }
                 };
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         }
         checkAuth();

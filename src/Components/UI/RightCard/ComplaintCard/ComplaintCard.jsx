@@ -20,10 +20,10 @@ const ComplaintCard = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`/api/staff/staffdetails/${id}`);
+                const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 switch (res.data.staff.role) {
                     case 'superadmin':
-                        const superadminList = await axios.get(`/api/complaint/allcomplaints`);
+                        const superadminList = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
                         const superadminComplaintList = superadminList.data.complaints;
                         pending = superadminComplaintList.filter((data) => data.status.startsWith('pending'));
                         attending = superadminComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -33,7 +33,7 @@ const ComplaintCard = () => {
                         break;
 
                     case 'admin':
-                        const adminList = await axios.get(`/api/complaint/complaints/incoming/${adminCtx.department}`);
+                        const adminList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${adminCtx.department}`);
                         const adminComplaintList = adminList.data.complaints;
                         pending = adminComplaintList.filter((data) => data.status.startsWith('pending'));
                         attending = adminComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -43,7 +43,7 @@ const ComplaintCard = () => {
                         break;
 
                     case 'subadmin':
-                        const subadminList = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
+                        const subadminList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
                         const subadminComplaintList = subadminList.data.complaints;
                         pending = subadminComplaintList.filter((data) => data.status.startsWith('pending'));
                         attending = subadminComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -53,7 +53,7 @@ const ComplaintCard = () => {
                         break;
 
                     case 'technician':
-                        const technicianList = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
+                        const technicianList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
                         const technicianComplaintList = technicianList.data.complaints;
                         pending = technicianComplaintList.filter((data) => data.status.startsWith('pending'));
                         attending = technicianComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -63,7 +63,7 @@ const ComplaintCard = () => {
                         break;
 
                     case 'user':
-                        const userList = await axios.get(`/api/complaint/owncomplaints/${id}`);
+                        const userList = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
                         const userComplaintList = userList.data.complaints;
                         pending = userComplaintList.filter((data) => data.status.startsWith('pending'));
                         attending = userComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -76,7 +76,7 @@ const ComplaintCard = () => {
                         navigate(`/404`);
                 }
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         }
         checkAuth();

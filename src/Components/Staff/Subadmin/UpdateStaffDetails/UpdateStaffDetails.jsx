@@ -17,14 +17,10 @@ const UpdateStaffDetails = (props) => {
     useEffect(() => {
         const fetchStaff = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id.staffId}`);
                 setStaff(staff.data.staff);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Please enter valid fields'
-                });
+                console.log(error.message);
             }
         };
         fetchStaff();
@@ -37,7 +33,7 @@ const UpdateStaffDetails = (props) => {
     const handleSubmitClick = async (id, role) => {
         try {
             setShowLoading(true);
-            await axios.put(`/api/staff/subadmin/staffdetails/updateStaff/${id}`, { subadminId: subadminId, role: role });
+            await axios.put(`http://localhost:8001/api/staff/subadmin/staffdetails/updateStaff/${id}`, { subadminId: subadminId, role: role });
             Swal.fire(
                 'Updated employee role',
                 'You have updated employee role successfully',
@@ -46,8 +42,8 @@ const UpdateStaffDetails = (props) => {
         } catch (error) {
             Swal.fire({
                 icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Please enter valid fields'
+                title: 'Please enter valid fields',
+                text: `${error.message}`
             });
         } finally {
             setShowLoading(false);

@@ -5,7 +5,6 @@ import axios from 'axios';
 import SweetPagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
-import Swal from 'sweetalert2';
 import Rightside from '../../../Righside/Rightside';
 
 const AllStaffRequest = () => {
@@ -21,15 +20,11 @@ const AllStaffRequest = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get(`/api/request/allrequests`);
+                const list = await axios.get(`http://localhost:8001/api/request/allrequests`);
                 setRequestList(list.data.requests);
                 setAllRequestList(list.data.requests);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch requests'
-                });
+                console.log(error.message);
             }
         };
         getList();
@@ -39,17 +34,13 @@ const AllStaffRequest = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const request = await axios.get(`/api/request/searchallrequests/${searchText}`);
+                    const request = await axios.get(`http://localhost:8001/api/request/searchallrequests/${searchText}`);
                     setAllRequestList(request.data);
                 } else {
                     setAllRequestList(sortedData);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to search requests'
-                });
+                console.log(error.message);
             }
         };
         getStaff();

@@ -29,14 +29,10 @@ const NewCompaint = () => {
     useEffect(() => {
         const getStaffDetails = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 setStaff(staff.data.staff);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
-                });
+                console.log(error.message);
             }
         };
         getStaffDetails();
@@ -54,14 +50,10 @@ const NewCompaint = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`/api/department/departments`);
+                const departments = await axios.get(`http://localhost:8001/api/department/departments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch departments'
-                });
+                console.log(error.message);
             }
         };
         getDepartments();
@@ -71,15 +63,11 @@ const NewCompaint = () => {
         const getCategories = async () => {
             try {
                 if (department.length !== 0) {
-                    const categories = await axios.get(`/api/department/categoriesbydepartment/${department}`);
+                    const categories = await axios.get(`http://localhost:8001/api/department/categoriesbydepartment/${department}`);
                     setCategories(categories.data.categories);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch categories'
-                });
+                console.log(error.message);
             }
         };
         getCategories();
@@ -110,7 +98,7 @@ const NewCompaint = () => {
             formData.append('isRepeated', isRepeated);
             try {
                 setShowLoading(true);
-                await axios.post('/api/complaint/', formData);
+                await axios.post('http://localhost:8001/api/complaint/', formData);
                 Swal.fire(
                     'Concern Created!',
                     'You have created concern successfully',
@@ -120,8 +108,8 @@ const NewCompaint = () => {
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Please enter valid fields'
+                    title: 'Please enter valid fields',
+                    text: `${error.message}`
                 });
             } finally {
                 setShowLoading(false);

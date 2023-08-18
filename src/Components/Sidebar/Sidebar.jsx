@@ -20,6 +20,7 @@ const Sidebar = ({ children }) => {
   const [isRequestActive, setIsRequestActive] = useState(false);
   const [isComplaintActive, setIsComplaintActive] = useState(false);
   const [isServicesActive, setIsServicesActive] = useState(false);
+  const [isFeedback, setIsFeedback] = useState(false);
   const [isReportActive, setIsReportActive] = useState(false);
   const [staffInfo, setStaffInfo] = useState({});
   const navigate = useNavigate();
@@ -92,6 +93,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'institute':
@@ -105,6 +107,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'department':
@@ -118,6 +121,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'create':
@@ -131,6 +135,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'archive':
@@ -144,6 +149,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'subadmin':
@@ -157,6 +163,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'request':
@@ -170,6 +177,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'complaint':
@@ -183,6 +191,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(true);
         setIsServicesActive(false);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'services':
@@ -196,6 +205,7 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(true);
         setIsReportActive(false);
+        setIsFeedback(false);
         break;
 
       case 'report':
@@ -209,6 +219,21 @@ const Sidebar = ({ children }) => {
         setIsComplaintActive(false);
         setIsServicesActive(false);
         setIsReportActive(true);
+        setIsFeedback(false);
+        break;
+
+      case 'feedback':
+        setIsHomeActive(false);
+        setIsInstituteActive(false);
+        setIsDepartmentActive(false);
+        setIsCreateActive(false);
+        setIsTrashActive(false);
+        setIsSubadminActivitiesActive(false);
+        setIsRequestActive(false);
+        setIsComplaintActive(false);
+        setIsServicesActive(false);
+        setIsReportActive(false);
+        setIsFeedback(true);
         break;
 
       default:
@@ -228,6 +253,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   const handleInstituteClick = () => {
@@ -242,6 +268,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   const handleDepartmentClick = () => {
@@ -256,6 +283,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   const handleCreateStaffClick = () => {
@@ -270,6 +298,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   const handleReportClick = () => {
@@ -284,6 +313,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(true);
+    setIsFeedback(false);
   };
 
   const handleArchiveClick = () => {
@@ -298,6 +328,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   const handleSubadminClick = () => {
@@ -312,6 +343,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   const handleRequestClick = () => {
@@ -326,6 +358,7 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   const handleComplaintClick = () => {
@@ -340,6 +373,22 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(true);
     setIsServicesActive(false);
     setIsReportActive(false);
+    setIsFeedback(false);
+  };
+
+  const handleFeedbackClick = () => {
+    sessionStorage.setItem('tab', 'feedback');
+    setIsHomeActive(false);
+    setIsInstituteActive(false);
+    setIsDepartmentActive(false);
+    setIsCreateActive(false);
+    setIsTrashActive(false);
+    setIsSubadminActivitiesActive(false);
+    setIsRequestActive(false);
+    setIsComplaintActive(false);
+    setIsServicesActive(false);
+    setIsReportActive(false);
+    setIsFeedback(true);
   };
 
   const handleServicesClick = () => {
@@ -354,17 +403,18 @@ const Sidebar = ({ children }) => {
     setIsComplaintActive(false);
     setIsServicesActive(true);
     setIsReportActive(false);
+    setIsFeedback(false);
   };
 
   useEffect(() => {
     const getUserInfo = async () => {
       try {
         if (id) {
-          const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+          const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
           setStaffInfo(staff.data.staff);
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        console.log(error.message);
       }
     };
     getUserInfo();
@@ -380,13 +430,13 @@ const Sidebar = ({ children }) => {
     const checkStaff = async () => {
       try {
         if (id) {
-          await axios.get(`/api/staff/checkstaffexistence/${id}`);
+          await axios.get(`http://localhost:8001/api/staff/checkstaffexistence/${id}`);
         }
       } catch (error) {
-        if (error.response.data.message === 'Staff not found') {
+        if (error.message === 'Staff not found') {
           ctx.onLogout();
         } else {
-          console.log(error.response.data.message);
+          console.log(error.message);
         }
       }
     };
@@ -444,7 +494,7 @@ const Sidebar = ({ children }) => {
                   </Link>}
 
                   {staffInfo.role === 'admin' && <Link to='/subadminactivities' onClick={handleSubadminClick} className={`${isSubadminActivitiesActive && classes.active}`} >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-person-workspace" viewBox="0 0 16 16">
                       <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                       <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.373 5.373 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2H2Z" />
                     </svg>
@@ -485,6 +535,13 @@ const Sidebar = ({ children }) => {
                     </svg>
                     <h3>Contact List</h3>
                   </Link>
+
+                  {staffInfo.role === 'admin' && <Link to='/feedback' onClick={handleFeedbackClick} className={`${isFeedback && classes.active}`} >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-send-fill" viewBox="0 0 16 16">
+                      <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+                    </svg>
+                    <h3>Feedback</h3>
+                  </Link>}
                   <Link onClick={(e) => handleLogoutClick(e)} className={`${classes.active ? classes.rowColorActive : classes.rowColorDefault} text-danger`}  >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
                       <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />

@@ -24,14 +24,10 @@ const SubadminApproval = () => {
     useEffect(() => {
         const getSubadminDetails = async () => {
             try {
-                const subadmin = await axios.get(`/api/staff/staffdetails/${loginId}`);
+                const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${loginId}`);
                 setSubadminDetails(subadmin.data.staff);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch sub-admin'
-                });
+                console.log(error.message);
             }
         };
         getSubadminDetails();
@@ -57,7 +53,7 @@ const SubadminApproval = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technicians = await axios.get(`/api/staff/subadmin/admindepartmenttechnicians/${loginId}/${subadminDetails.department}`);
+                const technicians = await axios.get(`http://localhost:8001/api/staff/subadmin/admindepartmenttechnicians/${loginId}/${subadminDetails.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 navigate('/request');
@@ -95,9 +91,9 @@ const SubadminApproval = () => {
         try {
             setShowLoading(true);
             if (isApproval2) {
-                await axios.put(`/api/staff/subadmin/approval2/${id}`, approval2data);
+                await axios.put(`http://localhost:8001/api/staff/subadmin/approval2/${id}`, approval2data);
             } else {
-                await axios.put(`/api/staff/subadmin/approval1/${id}`, approval1data);
+                await axios.put(`http://localhost:8001/api/staff/subadmin/approval1/${id}`, approval1data);
             }
             Swal.fire(
                 'Approval status updated',
@@ -106,11 +102,7 @@ const SubadminApproval = () => {
             );
             navigate('/request');
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Please enter valid fields'
-            });
+            console.log(error.message);
         } finally {
             setShowLoading(false);
         }

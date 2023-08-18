@@ -8,14 +8,14 @@ const VerfiyEmail = (props) => {
     const handleSendOTP = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/staff/sendOTP', { email: emailRef.current.value });
+            await axios.post('http://localhost:8001/api/staff/sendOTP', { email: emailRef.current.value });
             props.goToVerify();
             props.emailAddress(emailRef.current.value)
         } catch (error) {
             Swal.fire({
                 icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Please enter valid email'
+                title: 'Please enter valid email',
+                text: `${error.message}`
             });
         }
     };

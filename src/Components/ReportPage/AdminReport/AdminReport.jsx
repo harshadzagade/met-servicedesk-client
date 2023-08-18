@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment, useContext } from 'react';
 import classes from './AdminReport.module.css';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import Swal from 'sweetalert2';
 import AdminContext from '../../Context/AdminContext/AdminContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,7 +31,7 @@ const AdminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories`);
+            const categories = await axios.get(`http://localhost:8001/api/report/reportcategories/categories`);
             setCategories(categories.data.categories);
         };
         getCategories();
@@ -44,35 +43,31 @@ const AdminReport = () => {
                 try {
                     switch (ticketType) {
                         case 'allTicketTypes':
-                            const full = await axios.get(`/api/report/${selectedStaff}`);
+                            const full = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
                             setReportList(full.data.report);
                             setAllReportList(full.data.report);
                             break;
 
                         case 'requests':
-                            const requests = await axios.get(`/api/report/request/${selectedStaff}`);
+                            const requests = await axios.get(`http://localhost:8001/api/report/request/${selectedStaff}`);
                             setReportList(requests.data.report);
                             setAllReportList(requests.data.report);
                             break;
 
                         case 'complaints':
-                            const complaints = await axios.get(`/api/report/complaint/${selectedStaff}`);
+                            const complaints = await axios.get(`http://localhost:8001/api/report/complaint/${selectedStaff}`);
                             setReportList(complaints.data.report);
                             setAllReportList(complaints.data.report);
                             break;
 
                         default:
-                            const defaultValue = await axios.get(`/api/report/${selectedStaff}`);
+                            const defaultValue = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
                             setReportList(defaultValue.data.report);
                             setAllReportList(defaultValue.data.report);
                             break;
                     }
                 } catch (error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: `${error.response.data.message}`,
-                        text: 'Unable to fetch report'
-                    });
+                    console.log(error.message);
                 }
             }
         };
@@ -83,16 +78,10 @@ const AdminReport = () => {
     useEffect(() => {
         const getStaffByDepartment = async () => {
             try {
-                if (adminCtx.department) {
-                    const staff = await axios.get(`/api/staff/staffbydepartment/${adminCtx.department}`);
-                    setDepartmentStaff(staff.data.staff);
-                }
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffbydepartment/${adminCtx.department}`);
+                setDepartmentStaff(staff.data.staff);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
-                });
+                console.log(error.message);
             }
         };
         getStaffByDepartment();
@@ -104,15 +93,11 @@ const AdminReport = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbycategory/${category}`);
+                    const report = await axios.get(`http://localhost:8001/api/report/reportbycategory/${category}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch report'
-                });
+                console.log(error.message);
             }
         };
         if (openCategoryList) {
@@ -126,15 +111,11 @@ const AdminReport = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbypriority/${priority}`);
+                    const report = await axios.get(`http://localhost:8001/api/report/reportbypriority/${priority}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch report'
-                });
+                console.log(error.message);
             }
         };
         if (openPriorityList) {
@@ -191,14 +172,10 @@ const AdminReport = () => {
     useEffect(() => {
         const setCsvData = async () => {
             try {
-                const csv = await axios.post('/api/report/reportcsv', { reportData: allReportList });
+                const csv = await axios.post('http://localhost:8001/api/report/reportcsv', { reportData: allReportList });
                 setCsvFile(csv.data)
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to export report'
-                });
+                console.log(error.message);
             }
         };
         setCsvData();
@@ -287,9 +264,9 @@ const AdminReport = () => {
                     </div>
                 </div>
                 <div className={`${classes.staffSelection}`}>
-                    <div>Staff:&nbsp;</div>
+                    <div>Engineer:&nbsp;</div>
                     <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>
-                        <option value='' hidden>Select staff</option>
+                        <option value='' hidden>Select engineer</option>
                         {
                             departmentStaff.map((staff, key) => (
                                 <option key={key} value={staff.id}>{staff.firstname + ' ' + staff.lastname}</option>

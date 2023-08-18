@@ -23,7 +23,7 @@ const Report = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`/api/staff/check/${id}`);
+                const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
                 switch (res.data.role) {
                     case 'superadmin':
                         setIsSuperAdmin(true);
@@ -57,7 +57,7 @@ const Report = () => {
                         navigate(`/404`);
                 }
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         }
         checkAuth();

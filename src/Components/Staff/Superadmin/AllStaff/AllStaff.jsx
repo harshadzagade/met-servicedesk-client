@@ -3,7 +3,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import classes from './Allstaff.module.css'
 import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
-import Swal from 'sweetalert2';
 
 const AllStaff = () => {
     const navigate = useNavigate();
@@ -48,15 +47,11 @@ const AllStaff = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get('/api/staff/superadmin/allstafflist');
+                const list = await axios.get('http://localhost:8001/api/staff/superadmin/allstafflist');
                 setStaffList(list.data.totalStaff);
                 setAllStaffList(list.data.totalStaff)
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch staff'
-                });
+                console.log(error.message);
             }
         };
         getList();
@@ -66,17 +61,13 @@ const AllStaff = () => {
         const getStaff = async () => {
             try {
                 if (query) {
-                    const staff = await axios.get(`/api/staff/superadmin/searchallstaff/${query}`);
+                    const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/searchallstaff/${query}`);
                     setAllStaffList(staff.data);
                 } else {
                     setAllStaffList(sortedData);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to search staff'
-                });
+                console.log(error.message);
             }
         };
         getStaff();

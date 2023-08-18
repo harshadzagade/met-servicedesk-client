@@ -20,10 +20,10 @@ const RequestCard = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`/api/staff/staffdetails/${id}`);
+                const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 switch (res.data.staff.role) {
                     case 'superadmin':
-                        const superadminList = await axios.get(`/api/request/allrequests`);
+                        const superadminList = await axios.get(`http://localhost:8001/api/request/allrequests`);
                         const superadminRequestList = superadminList.data.requests;
                         pending = superadminRequestList.filter((data) => data.status.startsWith('pending'));
                         disapproved = superadminRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -35,7 +35,7 @@ const RequestCard = () => {
                         break;
 
                     case 'admin':
-                        const adminList = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
+                        const adminList = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${adminCtx.department}`);
                         const adminRequestList = adminList.data.requests;
                         pending = adminRequestList.filter((data) => data.status.startsWith('pending'));
                         disapproved = adminRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -47,7 +47,7 @@ const RequestCard = () => {
                         break;
 
                     case 'subadmin':
-                        const subadminList = await axios.get(`/api/staff/subadmin/requests/incoming/${res.data.staff.department}`);
+                        const subadminList = await axios.get(`http://localhost:8001/api/staff/subadmin/requests/incoming/${res.data.staff.department}`);
                         const subadminRequestList = subadminList.data.requests;
                         pending = subadminRequestList.filter((data) => data.status.startsWith('pending'));
                         disapproved = subadminRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -59,7 +59,7 @@ const RequestCard = () => {
                         break;
 
                     case 'technician':
-                        const technicianList = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+                        const technicianList = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
                         const technicianRequestList = technicianList.data.requests;
                         pending = technicianRequestList.filter((data) => data.status.startsWith('pending'));
                         disapproved = technicianRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -71,7 +71,7 @@ const RequestCard = () => {
                         break;
 
                     case 'user':
-                        const userList = await axios.get(`/api/request/ownrequests/${id}`);
+                        const userList = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
                         const userRequestList = userList.data.requests;
                         pending = userRequestList.filter((data) => data.status.startsWith('pending'));
                         disapproved = userRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -86,7 +86,7 @@ const RequestCard = () => {
                         navigate(`/404`);
                 }
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         }
         checkAuth();

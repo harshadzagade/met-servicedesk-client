@@ -167,6 +167,7 @@
   font-size: small;
 }
 
+
 .tikMsg p {
   width: 35rem;
   white-space: nowrap;
@@ -215,4 +216,55 @@
   font-weight: 500;
   margin-left: auto;
   margin-bottom: 0rem;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .tikOther {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .tikAssigned {
+    font-size: x-small;
+    font-weight: 500;
+    margin-left: auto;
+    margin-bottom: 0rem;
+  }
+  .tikId {
+    border-radius: var(--border-radius-2);
+    padding: 0 2%;
+    cursor: pointer;
+    margin: 0px;
+    font-size: 1rem;
+    color: white;
+    background: #5A5A5A;
+    font-size: x-small;
+  }
+  .date {
+    margin-left: auto;
+    font-size: xx-small;
+  }
+  .tikTitle {
+    font-size: x-small;
+  }
+  .tikMsg p {
+    width: 35rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: x-small;
+  }
+  .title{
+    font-size: medium !important;
+  }
+
+  .searchInput {
+    background: white;
+    padding: 0;
+    border-radius: 5px;
+    font-size: 1em;
+    border: 1px solid black;
+    height: 2rem;
+  }
 }

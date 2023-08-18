@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import classes from './AllStaffExt.module.css';
-import Swal from 'sweetalert2';
 
 const AllStaffExt = () => {
     const id = localStorage.getItem('id');
@@ -78,11 +77,11 @@ const AllStaffExt = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const response = await axios.get(`/api/staff/contacts/${id}`);
+                const response = await axios.get(`http://localhost:8001/api/staff/contacts/${id}`);
                 setStaffList(response.data.contacts);
                 setAllStaffList(response.data.contacts);
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         };
         getStaff();
@@ -92,17 +91,13 @@ const AllStaffExt = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const staff = await axios.get(`/api/staff/contactsearch/${id}/${searchText}`);
+                    const staff = await axios.get(`http://localhost:8001/api/staff/contactsearch/${id}/${searchText}`);
                     setAllStaffList(staff.data);
                 } else {
                     setAllStaffList(sortedData);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to search staff'
-                });
+                console.log(error.message);
             }
         };
         getStaff();

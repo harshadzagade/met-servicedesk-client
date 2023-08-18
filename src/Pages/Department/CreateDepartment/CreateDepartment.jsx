@@ -11,8 +11,6 @@ const CreateDepartment = (props) => {
   const [isKeyReleased, setIsKeyReleased] = useState(false);
   const [departmentType, setDepartmentType] = useState('');
 
-  //department function 
-  //set the department functionality
   const onChange = (e) => {
     const { value } = e.target;
     setInput(value);
@@ -61,7 +59,7 @@ const CreateDepartment = (props) => {
           type: departmentType,
           category: departmentType === 'service' ? categoriesList : null
         };
-        await axios.post(`/api/department/createdepartment`, data);
+        await axios.post(`http://localhost:8001/api/department/createdepartment`, data);
         props.onConfirm();
         Swal.fire(
           'Department Created!',
@@ -71,8 +69,8 @@ const CreateDepartment = (props) => {
       } catch (error) {
         Swal.fire({
           icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to create department'
+          title: 'Unable to create department',
+          text: `${error.message}`
         });
       }
     }

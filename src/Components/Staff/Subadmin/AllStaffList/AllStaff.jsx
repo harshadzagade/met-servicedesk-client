@@ -21,14 +21,10 @@ const AllStaff = () => {
     useEffect(() => {
         const getSubadminDetails = async () => {
             try {
-                const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
+                const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 setSubadminDetails(subadmin.data.staff);
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch sub-admin'
-                });
+                console.log(error.message);
             }
         };
         getSubadminDetails();
@@ -70,11 +66,11 @@ const AllStaff = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const response = await axios.get(`/api/staff/subadmin/allstaff/${id}/${subadminDetails.department}`)
+                const response = await axios.get(`http://localhost:8001/api/staff/subadmin/allstaff/${id}/${subadminDetails.department}`)
                 setStaffList(response.data.totalStaff);
                 setAllStaffList(response.data.totalStaff);
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         };
         getStaff();
@@ -84,7 +80,7 @@ const AllStaff = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const staff = await axios.get(`/api/staff/subadmin/searchalldepartmentstaff/${subadminDetails.department}/${searchText}`);
+                    const staff = await axios.get(`http://localhost:8001/api/staff/subadmin/searchalldepartmentstaff/${subadminDetails.department}/${searchText}`);
                     setAllStaffList(staff.data);
                 } else {
                     setAllStaffList(sortedData);
@@ -92,7 +88,7 @@ const AllStaff = () => {
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
-                    title: `${error.response.data.message}`,
+                    title: `${error.message}`,
                     text: 'Unable to search staff'
                 });
             }

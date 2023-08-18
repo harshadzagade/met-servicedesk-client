@@ -6,7 +6,6 @@ import SweetPagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
-import Swal from 'sweetalert2';
 
 const IncomingRequest = () => {
   const navigate = useNavigate();
@@ -28,14 +27,14 @@ const IncomingRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
+        const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${adminCtx.department}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
         setRequestList(list.data.requests);
         setAllRequestList(list.data.requests);
       } catch (error) {
-        setErrorMessage(`${error.response.data.message}`);
+        setErrorMessage(`${error.message}`);
       }
     };
     if (adminCtx.department) {
@@ -49,17 +48,13 @@ const IncomingRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`/api/staff/admin/requests/incomingrequestsearch/${adminCtx.department}/${searchText}`);
+          const request = await axios.get(`http://localhost:8001/api/staff/admin/requests/incomingrequestsearch/${adminCtx.department}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);
         }
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to search requests'
-        });
+        console.log(error.message);
       }
     };
     getStaff();

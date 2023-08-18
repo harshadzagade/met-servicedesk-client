@@ -22,7 +22,7 @@ const NewPassword = () => {
       });
     } else {
       try {
-        await axios.put(`/api/staff/newuserlogin`, { email: email, password: passwordRef.current.value });
+        await axios.put(`http://localhost:8001/api/staff/newuserlogin`, { email: email, password: passwordRef.current.value });
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -34,8 +34,8 @@ const NewPassword = () => {
       } catch (error) {
         Swal.fire({
           icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Please enter a new password'
+          title: 'Please enter a new password',
+          text: `${error.message}`
         });
       }
     }

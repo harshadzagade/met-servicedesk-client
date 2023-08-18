@@ -11,7 +11,7 @@ const CreateInstitute = (props) => {
   const handleCreateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`/api/institute/createinstitute`, { institute: instituteRef.current.value });
+      await axios.post(`http://localhost:8001/api/institute/createinstitute`, { institute: instituteRef.current.value });
       props.onConfirm();
       Swal.fire(
         'Institute Created!',
@@ -21,8 +21,8 @@ const CreateInstitute = (props) => {
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        title: `${error.response.data.message}`,
-        text: 'Unable to create institute'
+        title: 'Unable to create institute',
+        text: `${error.message}`
       });
     }
   };

@@ -1,12 +1,16 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './SubadminActivities.module.css';
 import axios from 'axios';
+import DataPerPage from '../../Components/UI/DataPerPage/DataPerPage';
+import Sweetpagination from 'sweetpagination';
 
 const SubadminActivities = () => {
     const id = localStorage.getItem('id');
     const [search, setSearch] = useState('');
     const [subadminActivities, setSubadminActivities] = useState([]);
     const [allSubadminActivities, setAllSubadminActivities] = useState([]);
+    const [numberOfPages, setNumberOfPages] = useState(10);
+    const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
 
     const getActivityDate = (createdAt) => {
         if (createdAt === null) {
@@ -31,13 +35,13 @@ const SubadminActivities = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const activities = await axios.get(`/api/staff/admin/subadminactivities/${id}`);
+                const activities = await axios.get(`http://localhost:8001/api/staff/admin/subadminactivities/${id}`);
                 if (activities.data.activities.activities) {
                     setSubadminActivities(activities.data.activities.activities);
                     setAllSubadminActivities(activities.data.activities.activities);
                 }
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         };
         getStaff();
@@ -62,9 +66,10 @@ const SubadminActivities = () => {
                 <div className={classes.upper}>
                     <h2 className={classes.title}>Sub-Admin Activity List</h2>
                     <input type="text" className={classes.search} placeholder='Search here' onChange={(e) => setSearch(e.target.value)} />
+                    <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                 </div>
                 {
-                    allSubadminActivities.map((activity, key) => (
+                    currentPageData.map((activity, key) => (
                         <div className={classes.flair} key={key}>
                             <div className={classes.activity}>
                                 <span>{activity.activity}</span>
@@ -75,6 +80,12 @@ const SubadminActivities = () => {
                         </div>
                     ))
                 }
+                <Sweetpagination
+                    currentPageData={setCurrentPageData}
+                    dataPerPage={numberOfPages}
+                    getData={allSubadminActivities}
+                    navigation={true}
+                />
             </div>
         </Fragment>
     );

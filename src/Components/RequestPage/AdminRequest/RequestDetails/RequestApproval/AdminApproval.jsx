@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import classes from './AdminApproval.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
 import Rightside from '../../../../Righside/Rightside';
 
@@ -38,15 +37,11 @@ const AdminApproval = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technicians = await axios.get(`/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
+                const technicians = await axios.get(`http://localhost:8001/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 navigate('/request');
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Please select department',
-                    text: 'Unable to fetch technicians'
-                });
+                console.log(error.message);
             }
         };
         getTechnicians();
@@ -73,17 +68,13 @@ const AdminApproval = () => {
         };
         try {
             if (isApproval2) {
-                await axios.put(`/api/staff/admin/approval2/${id}`, approval2data);
+                await axios.put(`http://localhost:8001/api/staff/admin/approval2/${id}`, approval2data);
             } else {
-                await axios.put(`/api/staff/admin/approval1/${id}`, approval1data);
+                await axios.put(`http://localhost:8001/api/staff/admin/approval1/${id}`, approval1data);
             }
             navigate('/request');
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: `${error.response.data.message}`,
-                text: 'Unable to approve request'
-            });
+            console.log(error.message);
         }
     };
 

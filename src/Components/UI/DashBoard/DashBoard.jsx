@@ -66,13 +66,13 @@ const DashBoard = () => {
     const checkAuth = async () => {
       setRefresh(true);
       try {
-        const res = await axios.get(`/api/staff/staffdetails/${id}`);
+        const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
         switch (res.data.staff.role) {
           case 'superadmin':
-            const superadminRequest = await axios.get(`/api/request/allrequests`);
+            const superadminRequest = await axios.get(`http://localhost:8001/api/request/allrequests`);
             const superadminRequestList = superadminRequest.data.requests;
             const lastUpdatedSuperadminRequestTime = superadminRequestList.length !== 0 && superadminRequestList[superadminRequestList.length - 1].updatedAt;
-            const superadminComplaint = await axios.get(`/api/complaint/allcomplaints`);
+            const superadminComplaint = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
             const superadminComplaintList = superadminComplaint.data.complaints;
             const lastUpdatedSuperadminComplaintTime = superadminComplaintList.length !== 0 && superadminComplaintList[superadminComplaintList.length - 1].updatedAt;
             let lastUpdatedSuperadminTime;
@@ -93,10 +93,10 @@ const DashBoard = () => {
 
           case 'admin':
             try {
-              const adminRequests = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
+              const adminRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${adminCtx.department}`);
               const adminRequestList = adminRequests.data.requests;
               const lastUpdatedAdminRequestTime = adminRequestList.length !== 0 && adminRequestList[adminRequestList.length - 1].updatedAt;
-              const adminComplaint = await axios.get(`/api/complaint/complaints/incoming/${adminCtx.department}`);
+              const adminComplaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${adminCtx.department}`);
               const adminComplaintList = adminComplaint.data.complaints;
               const lastUpdatedAdminComplaintTime = adminComplaintList.length !== 0 && adminComplaintList[adminComplaintList.length - 1].updatedAt;
               let lastUpdatedAdminTime;
@@ -120,10 +120,10 @@ const DashBoard = () => {
 
           case 'subadmin':
             try {
-              const adminRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+              const adminRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
               const adminRequestList = adminRequests.data.requests;
               const lastUpdatedAdminRequestTime = adminRequestList.length !== 0 && adminRequestList[adminRequestList.length - 1].updatedAt;
-              const adminComplaint = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
+              const adminComplaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
               const adminComplaintList = adminComplaint.data.complaints;
               const lastUpdatedAdminComplaintTime = adminComplaintList.length !== 0 && adminComplaintList[adminComplaintList.length - 1].updatedAt;
               let lastUpdatedAdminTime;
@@ -146,10 +146,10 @@ const DashBoard = () => {
             break;
 
           case 'technician':
-            const technicianRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+            const technicianRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
             const technicianRequestList = technicianRequests.data.requests;
             const lastUpdatedTechnicianRequestTime = technicianRequestList.length !== 0 && technicianRequestList[technicianRequestList.length - 1].updatedAt;
-            const technicianComplaints = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
+            const technicianComplaints = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
             const technicianComplaintList = technicianComplaints.data.complaints;
             const lastUpdatedTechnicianComplaintTime = technicianComplaintList.length !== 0 && technicianComplaintList[technicianComplaintList.length - 1].updatedAt;
             let lastUpdatedTechnicianTime;
@@ -169,10 +169,10 @@ const DashBoard = () => {
             break;
 
           case 'user':
-            const userRequests = await axios.get(`/api/request/ownrequests/${id}`);
+            const userRequests = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
             const userRequestList = userRequests.data.requests;
             const lastUpdatedUserRequestTime = userRequestList.length !== 0 && userRequestList[userRequestList.length - 1].updatedAt;
-            const userComplaints = await axios.get(`/api/complaint/owncomplaints/${id}`);
+            const userComplaints = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
             const userComplaintList = userComplaints.data.complaints;
             const lastUpdatedUserComplaintTime = userComplaintList.length !== 0 && userComplaintList[userComplaintList.length - 1].updatedAt;
             let lastUpdatedUserTime;
@@ -195,20 +195,17 @@ const DashBoard = () => {
             navigate(`/404`);
         }
       } catch (error) {
-        console.log(error.response.data.message);
+        console.log(error.message);
       }
     }
     checkAuth();
   }, [id, navigate, refresh, adminCtx.department]);
 
   return (
-    <div className={`${classes.DashBoard} row`}>
-      <div className="col-4">
+    <div className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3" >
+      <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
-          <div className={classes.request}>
-            {/* <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className"bi bi-envelope-fill" viewBox="0 0 16 16">
-              <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
-            </svg> */}
+          <div className={`${classes.request} `}>
             <h1>Total Requests</h1>
           </div>
           <div className={classes.count}>
@@ -233,10 +230,10 @@ const DashBoard = () => {
           <p>{!totalsDate.totalRequestsDate ? 'No requests initiated' : 'Last update ' + getLastDate(totalsDate.totalRequestsDate)}</p>
         </div>
       </div>
-      <div className="col-4">
+      <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
-          <div className={classes.complaint}>
-            <h1>Total Concerns</h1>
+          <div className={`${classes.request} `}>
+            <h1>Total Concern</h1>
           </div>
           <div className={classes.count}>
             <div className={classes.progress}>
@@ -257,12 +254,12 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <p>{!totalsDate.totalComplaintsDate ? 'No concerns initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
+          <p>{!totalsDate.totalComplaintsDate ? 'No requests initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
         </div>
       </div>
-      <div className="col-4">
+      <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
-          <div className={classes.pending}>
+          <div className={`${classes.request} `}>
             <h1>Total Tickets</h1>
           </div>
           <div className={classes.count}>
@@ -272,7 +269,7 @@ const DashBoard = () => {
             <div className={classes.circle} style={{ width: 70, height: 70 }}>
               <CircularProgressbar
                 value={Math.round(ticketsDays)}
-                text={`${(new Date().getDate())} days`}
+                text={`${(new Date().getDate() - 1)} days`}
                 background
                 backgroundPadding={6}
                 styles={buildStyles({
@@ -284,7 +281,7 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <p>{!totalsDate.totalTicketsDate ? 'No tickets initiated' : 'Last update ' + getLastDate(totalsDate.totalTicketsDate)}</p>
+          <p>{!totalsDate.totalTicketsDate ? 'No requests initiated' : 'Last update ' + getLastDate(totalsDate.totalTicketsDate)}</p>
         </div>
       </div>
     </div>

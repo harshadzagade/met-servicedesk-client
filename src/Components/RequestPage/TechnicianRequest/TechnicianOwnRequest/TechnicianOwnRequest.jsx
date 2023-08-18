@@ -5,7 +5,6 @@ import Sweetpagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import axios from 'axios';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
-import Swal from 'sweetalert2';
 
 const TechnicianOwnRequest = () => {
   const navigate = useNavigate();
@@ -22,14 +21,14 @@ const TechnicianOwnRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/request/ownrequests/${id}`);
+        const list = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
         setRequestList(list.data.requests);
         setAllRequestList(list.data.requests);
       } catch (error) {
-        setErrorMessage(`${error.response.data.message}`);
+        setErrorMessage(`${error.message}`);
       }
     };
     getList();
@@ -39,17 +38,13 @@ const TechnicianOwnRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`/api/request/ownrequestsearch/${id}/${searchText}`);
+          const request = await axios.get(`http://localhost:8001/api/request/ownrequestsearch/${id}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);
         }
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: `${error.response.data.message}`,
-          text: 'Unable to search requests'
-        });
+        console.log(error.message);
       }
     };
     getStaff();

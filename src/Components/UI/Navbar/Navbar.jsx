@@ -11,11 +11,11 @@ const Navbar = () => {
         const getStaffInfo = async () => {
             try {
                 if (id) {
-                    const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                    const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                     setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role, department: staff.data.staff.department });
                 }
             } catch (error) {
-                console.log(error.response.data.message);
+                console.log(error.message);
             }
         };
         getStaffInfo();

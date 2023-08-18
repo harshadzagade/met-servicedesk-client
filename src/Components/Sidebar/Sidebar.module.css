@@ -27,9 +27,10 @@
   height: 86vh;
   padding-top: 2rem;
   padding-bottom: auto;
-  border-right: 0.5px solid #000000;
-
+  border-right: 0.5px solid #dbdbdb;
 }
+
+
 
 .sidemenu h3 {
   margin-top: 0.5rem;
@@ -37,18 +38,8 @@
 
 /* sidemenu */
 
-.logo {
-  display: flex;
-  margin-top: 1rem;
-  gap: 0.8rem;
-}
 
-.logo img {
-  width: 9rem;
-  height: 5rem;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 
 /* End logo */
 
@@ -191,3 +182,20 @@ aside .req-fields {
 /* END sidemenu */
 
 /* END ASIDE */
+/* Media query for 6-inch display mobile devices */
+@media (min-width: 320px) and (max-width: 767px) {
+  /* Your CSS styles for 6-inch display mobiles here */
+ .sidemenu h3{
+    display: none;
+  }
+
+  .sidemenu svg{
+    display: flex;
+    margin-left: 0;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.7rem;
+  }
+  
+}

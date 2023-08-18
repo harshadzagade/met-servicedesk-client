@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import classes from './TechnicianReport.module.css';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 
@@ -29,7 +28,7 @@ const TechnicianReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories`);
+            const categories = await axios.get(`http://localhost:8001/api/report/reportcategories/categories`);
             setCategories(categories.data.categories);
         };
         getCategories();
@@ -41,31 +40,27 @@ const TechnicianReport = () => {
                 try {
                     switch (ticketType) {
                         case 'allTicketTypes':
-                            const full = await axios.get(`/api/report/${id}`);
+                            const full = await axios.get(`http://localhost:8001/api/report/${id}`);
                             setReportList(full.data.report);
                             break;
 
                         case 'requests':
-                            const requests = await axios.get(`/api/report/request/${id}`);
+                            const requests = await axios.get(`http://localhost:8001/api/report/request/${id}`);
                             setReportList(requests.data.report);
                             break;
 
                         case 'complaints':
-                            const complaints = await axios.get(`/api/report/complaint/${id}`);
+                            const complaints = await axios.get(`http://localhost:8001/api/report/complaint/${id}`);
                             setReportList(complaints.data.report);
                             break;
 
                         default:
-                            const defaultValue = await axios.get(`/api/report/${id}`);
+                            const defaultValue = await axios.get(`http://localhost:8001/api/report/${id}`);
                             setReportList(defaultValue.data.report);
                             break;
                     }
                 } catch (error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: `${error.response.data.message}`,
-                        text: 'Unable to fetch report'
-                    });
+                    console.log(error.message);
                 }
             }
         };
@@ -79,15 +74,11 @@ const TechnicianReport = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbycategory/${category}`);
+                    const report = await axios.get(`http://localhost:8001/api/report/reportbycategory/${category}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch report'
-                });
+                console.log(error.message);
             }
         };
         if (openCategoryList) {
@@ -101,15 +92,11 @@ const TechnicianReport = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbypriority/${priority}`);
+                    const report = await axios.get(`http://localhost:8001/api/report/reportbypriority/${priority}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to fetch report'
-                });
+                console.log(error.message);
             }
         };
         if (openPriorityList) {
@@ -166,14 +153,10 @@ const TechnicianReport = () => {
     useEffect(() => {
         const setCsvData = async () => {
             try {
-                const csv = await axios.post('/api/report/reportcsv', { reportData: allReportList });
+                const csv = await axios.post('http://localhost:8001/api/report/reportcsv', { reportData: allReportList });
                 setCsvFile(csv.data)
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: `${error.response.data.message}`,
-                    text: 'Unable to export report'
-                });
+                console.log(error.message);
             }
         };
         setCsvData();
