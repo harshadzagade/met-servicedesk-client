@@ -8,17 +8,48 @@ import FeedbackForm from '../../../UI/FeedbackForm/FeedbackForm';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import AdminContext from '../../../Context/AdminContext/AdminContext';
 
 const AdminDetails = () => {
     const navigate = useNavigate();
     const loginId = getItemWithExpiry('id');
+    const adminCtx = useContext(AdminContext);
     const id = useParams().complaintId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [complaintData, setComplaintData] = useState({});
     const [behalfStaffName, setBehalfStaffName] = useState('');
     const [openFeedback, setOpenFeedback] = useState(false);
     const [staffId, setStaffId] = useState(null);
+    const [technicians, setTechnicians] = useState([]);
+    const [technicianId, setTechnicianId] = useState(null);
+    const [refresh, setRefresh] = useState(false);
     ticketCtx.onClickHandler('complaint', staffId, complaintData.id);
+
+    const handleAssignComplaint = async (e) => {
+        e.preventDefault();
+        setRefresh(true);
+        try {
+            if (technicianId) {
+                await axios.put(`/api/staff/admin/assigncomplaint/${id}`, { assignId: technicianId });
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+        setRefresh(false);
+    };
+
+    useEffect(() => {
+        const getTechnicians = async () => {
+            try {
+                const technicians = await axios.get(`/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
+                setTechnicians(technicians.data.technicians);
+            } catch (error) {
+                navigate('/request');
+                console.log(error.message);
+            }
+        };
+        getTechnicians();
+    }, [loginId, adminCtx.department, navigate]);
 
     useEffect(() => {
         const getComplaintDetails = async () => {
@@ -31,7 +62,7 @@ const AdminDetails = () => {
             }
         };
         getComplaintDetails();
-    }, [id]);
+    }, [id, refresh]);
 
     useEffect(() => {
         const getStaffDetails = async () => {
@@ -99,6 +130,10 @@ const AdminDetails = () => {
         setOpenFeedback(false);
     };
 
+    const handleTechnicianChange = (e) => {
+        setTechnicianId(e.target.value);
+    };
+
     return (
         <Fragment>
             <main>
@@ -112,7 +147,7 @@ const AdminDetails = () => {
                                 <h2>Concern details</h2>
                                 {openFeedback && <FeedbackForm ticketType={'complaint'} ticketId={complaintData.ticketId} department={complaintData.department} onConfirm={handleFeedback} />}
                                 <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                                {(complaintData.status === 'closed' && complaintData.staffId.toString() === loginId) &&<button className={`${classes.feedbackBtn}`} onClick={() => setOpenFeedback(true)}>Feedback</button>}
+                                {(complaintData.status === 'closed' && complaintData.staffId.toString() === loginId) && <button className={`${classes.feedbackBtn}`} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
                                 <div>
@@ -206,14 +241,17 @@ const AdminDetails = () => {
                                             <label>Date:</label>
                                             <p className={classes.complaintDetailsp}>{getCreatedComplaintDate(complaintData.createdAt)}</p>
                                         </div>
-                                        <div className={classes.assignTo}>
-                                        <button className={classes.complaintAssingBtn} >Assign to engineer</button>
-                                        <select className={classes.selectStatus}name="role">
+                                        {!complaintData.assign && <div className={classes.assignTo}>
+                                            <button className={classes.complaintAssingBtn} onClick={handleAssignComplaint}>Assign to engineer</button>
+                                            <select className={classes.selectStatus} name="role" required onChange={handleTechnicianChange} >
                                                 <option key='0' value='' hidden defaultValue=''>----- Select Engineer -----</option>
-                                                <option >Ani mhatre</option>
-                                                <option >sid bhat</option>
+                                                {
+                                                    technicians.map((technician) =>
+                                                        <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>
+                                                    )
+                                                }
                                             </select>
-                                        </div>
+                                        </div>}
                                     </form>
                                 </div>
                             </div>
