@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import classes from './User.module.css';
 import axios from 'axios';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const User = () => {
     const [userDetails, setUserDetails] = useState({});
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
 
     useEffect(() => {
         const getUserName = async () => {
             try {
-                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
                 setUserDetails(staff.data.staff);
             } catch (error) {
                 console.log(error.message);

@@ -22,7 +22,7 @@ const IncomingComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${adminCtx.department}`);
+        const list = await axios.get(`/api/complaint/complaints/incoming/${adminCtx.department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
@@ -43,7 +43,7 @@ const IncomingComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incomingcomplaintsearch/${adminCtx.department}/${searchText}`);
+          const complaint = await axios.get(`/api/complaint/complaints/incomingcomplaintsearch/${adminCtx.department}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);
@@ -91,7 +91,7 @@ const IncomingComplaint = () => {
             <Fragment>
               {
                 currentPageData.map((complaint) => (
-                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)} >
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/adminconcerndetails/${complaint.id}`)} >
                     <div className={`${classes.tikHead}`}>
 
                       <h3 className={`${classes.tikTitle}`}>

@@ -6,10 +6,11 @@ import { iswitch } from 'iswitch';
 import SweetPagination from 'sweetpagination';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const OwnComplaint = () => {
   const navigate = useNavigate();
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const adminCtx = useContext(AdminContext);
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
@@ -23,7 +24,7 @@ const OwnComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
+        const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
@@ -52,7 +53,7 @@ const OwnComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`http://localhost:8001/api/complaint/owncomplaintsearch/${id}/${searchText}`);
+          const complaint = await axios.get(`/api/complaint/owncomplaintsearch/${id}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);
@@ -92,7 +93,7 @@ const OwnComplaint = () => {
             <Fragment>
               {
                 currentPageData.map((complaint) => (
-                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)} >
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/adminconcerndetails/${complaint.id}`)} >
                     <div className={`${classes.tikHead}`}>
 
                       <h3 className={`${classes.tikTitle}`}>

@@ -6,10 +6,11 @@ import classes from './OutgoingComplaint.module.css'
 import { useNavigate } from 'react-router-dom';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const OutgoingComplaint = () => {
   const navigate = useNavigate();
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const adminCtx = useContext(AdminContext);
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
@@ -23,7 +24,7 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/admin/complaints/outgoing/${id}/${adminCtx.department}`);
+        const list = await axios.get(`/api/staff/admin/complaints/outgoing/${id}/${adminCtx.department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
@@ -44,7 +45,7 @@ const OutgoingComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`http://localhost:8001/api/staff/admin/complaints/outgoingcomplaintsearch/${adminCtx.department}/${searchText}`);
+          const complaint = await axios.get(`/api/staff/admin/complaints/outgoingcomplaintsearch/${adminCtx.department}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);
@@ -92,7 +93,7 @@ const OutgoingComplaint = () => {
             <Fragment>
               {
                 currentPageData.map((complaint) => (
-                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)} >
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/adminconcerndetails/${complaint.id}`)} >
                     <div className={`${classes.tikHead}`}>
                       <h3 className={`${classes.tikTitle}`}>
                         {complaint.subject}

@@ -5,10 +5,11 @@ import Sweetpagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import axios from 'axios';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const TechnicianOwnRequest = () => {
   const navigate = useNavigate();
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
   const [requestList, setRequestList] = useState([]);
   const [allRequestList, setAllRequestList] = useState([]);
@@ -21,7 +22,7 @@ const TechnicianOwnRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
+        const list = await axios.get(`/api/request/ownrequests/${id}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -38,7 +39,7 @@ const TechnicianOwnRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`http://localhost:8001/api/request/ownrequestsearch/${id}/${searchText}`);
+          const request = await axios.get(`/api/request/ownrequestsearch/${id}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);

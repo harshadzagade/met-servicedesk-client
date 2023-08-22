@@ -179,17 +179,27 @@ aside .req-fields {
   font-size: 500;
 }
 
+.counter {
+  padding: 0.5px 7px 0.5px 7px;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 8rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
 /* END sidemenu */
 
 /* END ASIDE */
 /* Media query for 6-inch display mobile devices */
 @media (min-width: 320px) and (max-width: 767px) {
+
   /* Your CSS styles for 6-inch display mobiles here */
- .sidemenu h3{
+  .sidemenu h3 {
     display: none;
   }
 
-  .sidemenu svg{
+  .sidemenu svg {
     display: flex;
     margin-left: 0;
     gap: 1rem;
@@ -197,5 +207,5 @@ aside .req-fields {
     position: relative;
     height: 3.7rem;
   }
-  
+
 }

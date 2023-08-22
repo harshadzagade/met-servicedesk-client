@@ -5,10 +5,11 @@ import { iswitch } from 'iswitch';
 import classes from './OutgoingComplaint.module.css'
 import { useNavigate } from 'react-router-dom';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const OutgoingComplaint = () => {
   const navigate = useNavigate();
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState(10);
@@ -22,7 +23,7 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getSubadminDetails = async () => {
       try {
-        const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+        const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
         setSubadminDetails(subadmin.data.staff);
       } catch (error) {
         console.log(error.message);
@@ -34,7 +35,7 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
+        const list = await axios.get(`/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
@@ -51,7 +52,7 @@ const OutgoingComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`http://localhost:8001/api/staff/subadmin/complaints/outgoingcomplaintsearch/${subadminDetails.department}/${searchText}`);
+          const complaint = await axios.get(`/api/staff/subadmin/complaints/outgoingcomplaintsearch/${subadminDetails.department}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);

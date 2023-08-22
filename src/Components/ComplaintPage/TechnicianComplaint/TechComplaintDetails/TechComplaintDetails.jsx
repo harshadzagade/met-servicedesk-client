@@ -7,13 +7,14 @@ import Rightside from '../../../Righside/Rightside';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import FeedbackForm from '../../../UI/FeedbackForm/FeedbackForm';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const TechComplaintDetails = () => {
     const navigate = useNavigate();
     const [complaintData, setComplaintData] = useState({});
     const paramsId = useParams();
     const id = paramsId.complaintId;
-    const ownId = localStorage.getItem('id');
+    const ownId = getItemWithExpiry('id');
     const ticketCtx = useContext(TicketDetailsContext);
     const [openFeedback, setOpenFeedback] = useState(false);
     const [staffId, setStaffId] = useState(null);
@@ -24,7 +25,7 @@ const TechComplaintDetails = () => {
     useEffect(() => {
         setRefresh(true);
         const getComplaintDetails = async () => {
-            const complaint = await axios.get(`http://localhost:8001/api/complaint/getcomplaintdetails/${id}`);
+            const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
             setComplaintData(complaint.data.complaint);
             if (complaint.data.complaint.behalf) {
                 setStaffId(complaint.data.complaint.behalfId);
@@ -39,7 +40,7 @@ const TechComplaintDetails = () => {
     const handleSelfAssign = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:8001/api/staff/technician/selfassigncomplaint/${id}/${ownId}`);
+            await axios.put(`/api/staff/technician/selfassigncomplaint/${id}/${ownId}`);
             setRefresh(true);
         } catch (error) {
             console.log(error.message);
@@ -50,7 +51,7 @@ const TechComplaintDetails = () => {
         const getStaffDetails = async () => {
             try {
                 if (complaintData.behalfId) {
-                    const behalf = await axios.get(`http://localhost:8001/api/staff/staffdetails/${complaintData.behalfId}`);
+                    const behalf = await axios.get(`/api/staff/staffdetails/${complaintData.behalfId}`);
                     setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
                 }
             } catch (error) {
@@ -87,7 +88,7 @@ const TechComplaintDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`http://localhost:8001/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;
@@ -125,9 +126,9 @@ const TechComplaintDetails = () => {
                                 <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                             </svg>
                             <h2>Concern details</h2>
-                            {openFeedback && <FeedbackForm onConfirm={handleFeedback} />}
+                            {openFeedback && <FeedbackForm ticketType={'complaint'} ticketId={complaintData.ticketId} department={complaintData.department} onConfirm={handleFeedback} />}
                             <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                            <button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>
+                            {(complaintData.status === 'closed' && complaintData.staffId.toString() === ownId) &&<button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                         </div>
                         <div className={`${classes.detail}`}>
                             <div >

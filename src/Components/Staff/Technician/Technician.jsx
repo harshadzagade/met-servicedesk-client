@@ -1,21 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const Technician = () => {
     const [complaintStatus, setComplaintStatus] = useState({ pending: '', attending: '', forwarded: '', closed: '' })
     const [requestStatus, setRequestStatus] = useState({ pending: '', disapproved: '', assigned: '', attending: '', forwarded: '', closed: '' })
     const [refresh, setRefresh] = useState(false);
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
 
     useEffect(() => {
         let pending, attending, forwarded, closed;
         const getGraph = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const res = await axios.get(`/api/staff/staffdetails/${id}`);
                 {
-                    const technicianList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
+                    const technicianList = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
                     const technicianComplaintList = technicianList.data.complaints;
                     pending = technicianComplaintList.filter((data) => data.status.startsWith('pending'));
                     attending = technicianComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -35,9 +36,9 @@ const Technician = () => {
         const getGraph = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const res = await axios.get(`/api/staff/staffdetails/${id}`);
                 {
-                    const technicianList = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+                    const technicianList = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
                     const technicianRequestList = technicianList.data.requests;
                     pending = technicianRequestList.filter((data) => data.status.startsWith('pending'));
                     disapproved = technicianRequestList.filter((data) => data.status.startsWith('disapproved'));

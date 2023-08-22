@@ -27,7 +27,7 @@ const IncomingRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${adminCtx.department}`);
+        const list = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -48,7 +48,7 @@ const IncomingRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`http://localhost:8001/api/staff/admin/requests/incomingrequestsearch/${adminCtx.department}/${searchText}`);
+          const request = await axios.get(`/api/staff/admin/requests/incomingrequestsearch/${adminCtx.department}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);

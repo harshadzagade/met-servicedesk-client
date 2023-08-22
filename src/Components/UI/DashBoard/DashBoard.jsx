@@ -6,9 +6,10 @@ import axios from 'axios';
 import moment from 'moment/moment';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const DashBoard = () => {
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const navigate = useNavigate();
   const [totals, setTotals] = useState({ totalRequests: null, totalComplaints: null, totalTickets: null });
   const [totalsDate, setTotalsDate] = useState({ totalRequestsDate: null, totalComplaintsDate: null, totalTicketsDate: null });
@@ -66,13 +67,13 @@ const DashBoard = () => {
     const checkAuth = async () => {
       setRefresh(true);
       try {
-        const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+        const res = await axios.get(`/api/staff/staffdetails/${id}`);
         switch (res.data.staff.role) {
           case 'superadmin':
-            const superadminRequest = await axios.get(`http://localhost:8001/api/request/allrequests`);
+            const superadminRequest = await axios.get(`/api/request/allrequests`);
             const superadminRequestList = superadminRequest.data.requests;
             const lastUpdatedSuperadminRequestTime = superadminRequestList.length !== 0 && superadminRequestList[superadminRequestList.length - 1].updatedAt;
-            const superadminComplaint = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
+            const superadminComplaint = await axios.get(`/api/complaint/allcomplaints`);
             const superadminComplaintList = superadminComplaint.data.complaints;
             const lastUpdatedSuperadminComplaintTime = superadminComplaintList.length !== 0 && superadminComplaintList[superadminComplaintList.length - 1].updatedAt;
             let lastUpdatedSuperadminTime;
@@ -93,10 +94,10 @@ const DashBoard = () => {
 
           case 'admin':
             try {
-              const adminRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${adminCtx.department}`);
+              const adminRequests = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
               const adminRequestList = adminRequests.data.requests;
               const lastUpdatedAdminRequestTime = adminRequestList.length !== 0 && adminRequestList[adminRequestList.length - 1].updatedAt;
-              const adminComplaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${adminCtx.department}`);
+              const adminComplaint = await axios.get(`/api/complaint/complaints/incoming/${adminCtx.department}`);
               const adminComplaintList = adminComplaint.data.complaints;
               const lastUpdatedAdminComplaintTime = adminComplaintList.length !== 0 && adminComplaintList[adminComplaintList.length - 1].updatedAt;
               let lastUpdatedAdminTime;
@@ -114,16 +115,16 @@ const DashBoard = () => {
               setTotalsDate({ totalRequestsDate: lastUpdatedAdminRequestTime, totalComplaintsDate: lastUpdatedAdminComplaintTime, totalTicketsDate: lastUpdatedAdminTime });
               setTotals({ totalRequests: adminRequestList.length, totalComplaints: adminComplaintList.length, totalTickets: adminRequestList.length + adminComplaintList.length });
             } catch (error) {
-              console.log(error);
+              console.log(error.message);
             }
             break;
 
           case 'subadmin':
             try {
-              const adminRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+              const adminRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
               const adminRequestList = adminRequests.data.requests;
               const lastUpdatedAdminRequestTime = adminRequestList.length !== 0 && adminRequestList[adminRequestList.length - 1].updatedAt;
-              const adminComplaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
+              const adminComplaint = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
               const adminComplaintList = adminComplaint.data.complaints;
               const lastUpdatedAdminComplaintTime = adminComplaintList.length !== 0 && adminComplaintList[adminComplaintList.length - 1].updatedAt;
               let lastUpdatedAdminTime;
@@ -141,15 +142,15 @@ const DashBoard = () => {
               setTotalsDate({ totalRequestsDate: lastUpdatedAdminRequestTime, totalComplaintsDate: lastUpdatedAdminComplaintTime, totalTicketsDate: lastUpdatedAdminTime });
               setTotals({ totalRequests: adminRequestList.length, totalComplaints: adminComplaintList.length, totalTickets: adminRequestList.length + adminComplaintList.length });
             } catch (error) {
-              console.log(error);
+              console.log(error.message);
             }
             break;
 
           case 'technician':
-            const technicianRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+            const technicianRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
             const technicianRequestList = technicianRequests.data.requests;
             const lastUpdatedTechnicianRequestTime = technicianRequestList.length !== 0 && technicianRequestList[technicianRequestList.length - 1].updatedAt;
-            const technicianComplaints = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
+            const technicianComplaints = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
             const technicianComplaintList = technicianComplaints.data.complaints;
             const lastUpdatedTechnicianComplaintTime = technicianComplaintList.length !== 0 && technicianComplaintList[technicianComplaintList.length - 1].updatedAt;
             let lastUpdatedTechnicianTime;
@@ -169,10 +170,10 @@ const DashBoard = () => {
             break;
 
           case 'user':
-            const userRequests = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
+            const userRequests = await axios.get(`/api/request/ownrequests/${id}`);
             const userRequestList = userRequests.data.requests;
             const lastUpdatedUserRequestTime = userRequestList.length !== 0 && userRequestList[userRequestList.length - 1].updatedAt;
-            const userComplaints = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
+            const userComplaints = await axios.get(`/api/complaint/owncomplaints/${id}`);
             const userComplaintList = userComplaints.data.complaints;
             const lastUpdatedUserComplaintTime = userComplaintList.length !== 0 && userComplaintList[userComplaintList.length - 1].updatedAt;
             let lastUpdatedUserTime;

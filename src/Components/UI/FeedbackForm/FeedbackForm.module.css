@@ -15,12 +15,22 @@
 .btn{
     display: flex;
     justify-content: center;
+    gap: 1rem;
 }
 .submitbtn{
     padding: 10px;
     border-radius: 10px;
     font-size: 1em;
     background-color: var(--color-primary);
+    color: white;
+    width: 5rem;
+    margin-bottom: 0.5rem;
+}
+.cancelbtn{
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1em;
+    background-color: var(--subbutton-color);
     color: white;
     width: 5rem;
     margin-bottom: 0.5rem;

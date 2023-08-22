@@ -5,13 +5,14 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Rightside from '../../../Righside/Rightside';
 import { Bars } from 'react-loader-spinner';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const TechnicianRequestAttendingForm = () => {
     const ticketId = useParams().requestId;
     const problemDescriptionRef = useRef();
     const actionTakenRef = useRef();
     const forwardCommentRef = useRef();
-    const loginId = localStorage.getItem('id');
+    const loginId = getItemWithExpiry('id');
     const navigate = useNavigate();
     const id = useParams();
     const [technicians, setTechnicians] = useState([]);
@@ -24,8 +25,8 @@ const TechnicianRequestAttendingForm = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technician = await axios.get(`http://localhost:8001/api/staff/staffdetails/${loginId}`);
-                const technicians = await axios.get(`http://localhost:8001/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department[0]}`);
+                const technician = await axios.get(`/api/staff/staffdetails/${loginId}`);
+                const technicians = await axios.get(`/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department[0]}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 console.log(error.message);
@@ -60,7 +61,7 @@ const TechnicianRequestAttendingForm = () => {
     useEffect(() => {
         const getTicketInfo = async () => {
             try {
-                const ticket = await axios.get(`http://localhost:8001/api/request/getrequestdetails/${ticketId}`);
+                const ticket = await axios.get(`/api/request/getrequestdetails/${ticketId}`);
                 setStatus(ticket.data.request.status);
             } catch (error) {
                 console.log(error.message);
@@ -79,7 +80,7 @@ const TechnicianRequestAttendingForm = () => {
         }
         try {
             setShowLoading(true);
-            await axios.put(`http://localhost:8001/api/staff/technician/changerequeststatus/${id}`, data);
+            await axios.put(`/api/staff/technician/changerequeststatus/${id}`, data);
             Swal.fire(
                 'Changed status',
                 'You have changed status successfully',

@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { iswitch } from 'iswitch';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const IncomingComplaint = () => {
   const navigate = useNavigate();
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState(10);
@@ -22,7 +23,7 @@ const IncomingComplaint = () => {
   useEffect(() => {
     const getSubadminDetails = async () => {
       try {
-        const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+        const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
         setSubadminDetails(subadmin.data.staff);
       } catch (error) {
         console.log(error.message);
@@ -34,7 +35,7 @@ const IncomingComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${subadminDetails.department}`);
+        const list = await axios.get(`/api/complaint/complaints/incoming/${subadminDetails.department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
@@ -51,7 +52,7 @@ const IncomingComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incomingcomplaintsearch/${subadminDetails.department}/${searchText}`);
+          const complaint = await axios.get(`/api/complaint/complaints/incomingcomplaintsearch/${subadminDetails.department}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);

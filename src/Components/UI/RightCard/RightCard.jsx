@@ -5,7 +5,8 @@ import ComplaintCard from './ComplaintCard/ComplaintCard';
 import RequestCard from './RequestCard/RequestCard';
 
 const RightCard = () => {
-  const [openLayout, setOpenLayout] = useState('Complaint');
+  const currentTab = sessionStorage.getItem('tab');
+  const [openLayout, setOpenLayout] = useState(currentTab);
 
   const checkLayout = (value,) => {
     setOpenLayout(value);
@@ -17,8 +18,8 @@ const RightCard = () => {
       <div className={classes.compdetails}>
         <div className={classes.details}>
           <CardNavigate viewLayout={checkLayout} />
-          {openLayout === 'Complaint' && <ComplaintCard />}
-          {openLayout === 'Request' && <RequestCard />}
+          {openLayout === 'complaint' && <ComplaintCard />}
+          {openLayout === 'request' && <RequestCard />}
         </div>
       </div>
     </Fragment>

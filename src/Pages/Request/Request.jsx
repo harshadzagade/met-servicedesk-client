@@ -6,11 +6,12 @@ import UserRequest from '../../Components/RequestPage/UserRequest/UserRequest';
 import AdminRequest from '../../Components/RequestPage/AdminRequest/AdminRequest';
 import Technician from '../../Components/RequestPage/TechnicianRequest/Technician';
 import SubadminRequest from '../../Components/RequestPage/SubadminRequest/SubadminRequest';
+import getItemWithExpiry from '../../Utils/expiryFunction';
 
 const Request = () => {
     const navigate = useNavigate();
     const location = useLocation() || null;
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isSubadmin, setIsSubadmin] = useState(false);
@@ -36,7 +37,7 @@ const Request = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
+                const res = await axios.get(`/api/staff/check/${id}`);
                 switch (res.data.role) {
                     case 'superadmin':
                         setIsSuperAdmin(true);

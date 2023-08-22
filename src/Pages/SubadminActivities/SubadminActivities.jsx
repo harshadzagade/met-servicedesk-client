@@ -3,14 +3,20 @@ import classes from './SubadminActivities.module.css';
 import axios from 'axios';
 import DataPerPage from '../../Components/UI/DataPerPage/DataPerPage';
 import Sweetpagination from 'sweetpagination';
+import getItemWithExpiry from '../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
+import { useNavigate } from 'react-router';
 
 const SubadminActivities = () => {
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
+    const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const [subadminActivities, setSubadminActivities] = useState([]);
     const [allSubadminActivities, setAllSubadminActivities] = useState([]);
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
+
+    const sortedData = React.useMemo(() => { return [...subadminActivities].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)) }, [subadminActivities]);
 
     const getActivityDate = (createdAt) => {
         if (createdAt === null) {
@@ -33,9 +39,10 @@ const SubadminActivities = () => {
     };
 
     useEffect(() => {
-        const getStaff = async () => {
+        const socket = openSocket('')
+        const getActivities = async () => {
             try {
-                const activities = await axios.get(`http://localhost:8001/api/staff/admin/subadminactivities/${id}`);
+                const activities = await axios.get(`/api/staff/admin/subadminactivities/${id}`);
                 if (activities.data.activities.activities) {
                     setSubadminActivities(activities.data.activities.activities);
                     setAllSubadminActivities(activities.data.activities.activities);
@@ -44,12 +51,15 @@ const SubadminActivities = () => {
                 console.log(error.message);
             }
         };
-        getStaff();
+        getActivities();
+        socket.on('subadminactivities', () => {
+            getActivities();
+        });
     }, [id]);
 
     useEffect(() => {
-        if (subadminActivities) {
-            const result = subadminActivities.filter(activity => {
+        if (sortedData) {
+            const result = sortedData.filter(activity => {
                 if (activity.activity) {
                     return activity.activity.toLowerCase().match(search.toLowerCase());
                 } else {
@@ -58,7 +68,17 @@ const SubadminActivities = () => {
             });
             setAllSubadminActivities(result);
         }
-    }, [search, subadminActivities]);
+    }, [search, sortedData]);
+
+    const handleActivityClick = (activity) => {
+        if (activity.data.type === 'role') {
+            navigate(`/adminstaffdetails/${activity.data.id}`);
+            sessionStorage.setItem('tab', 'home');
+        } else if (activity.data.type === 'request') {
+            navigate(`/adminrequestdetails/${activity.data.id}`)
+            sessionStorage.setItem('tab', 'request');
+        }
+    };
 
     return (
         <Fragment>
@@ -70,7 +90,7 @@ const SubadminActivities = () => {
                 </div>
                 {
                     currentPageData.map((activity, key) => (
-                        <div className={classes.flair} key={key}>
+                        <div className={classes.flair} key={key} onClick={() => handleActivityClick(activity)}>
                             <div className={classes.activity}>
                                 <span>{activity.activity}</span>
                                 <div className={classes.date}>

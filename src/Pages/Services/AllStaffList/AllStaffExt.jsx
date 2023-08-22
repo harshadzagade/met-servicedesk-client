@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import classes from './AllStaffExt.module.css';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const AllStaffExt = () => {
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
     const [staffList, setStaffList] = useState([]);
     const [allStaffList, setAllStaffList] = useState([]);
     const [searchText, setSearchText] = useState('');
@@ -77,7 +78,7 @@ const AllStaffExt = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/staff/contacts/${id}`);
+                const response = await axios.get(`/api/staff/contacts/${id}`);
                 setStaffList(response.data.contacts);
                 setAllStaffList(response.data.contacts);
             } catch (error) {
@@ -91,7 +92,7 @@ const AllStaffExt = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/contactsearch/${id}/${searchText}`);
+                    const staff = await axios.get(`/api/staff/contactsearch/${id}/${searchText}`);
                     setAllStaffList(staff.data);
                 } else {
                     setAllStaffList(sortedData);

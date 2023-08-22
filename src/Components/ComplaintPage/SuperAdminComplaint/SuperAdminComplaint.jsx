@@ -6,6 +6,7 @@ import SweetPagination from 'sweetpagination';
 import axios from 'axios';
 import DataPerPage from '../../UI/DataPerPage/DataPerPage';
 import Rightside from '../../Righside/Rightside';
+import openSocket from 'socket.io-client';
 
 const SuperAdminComplaint = () => {
     const navigate = useNavigate();
@@ -18,9 +19,10 @@ const SuperAdminComplaint = () => {
     const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
     useEffect(() => {
+        const socket = openSocket('');
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
+                const list = await axios.get(`/api/complaint/allcomplaints`);
                 setComplaintList(list.data.complaints);
                 setAllComplaintList(list.data.complaints);
             } catch (error) {
@@ -28,13 +30,17 @@ const SuperAdminComplaint = () => {
             }
         };
         getList();
+        socket.on('complaints', () => {
+            console.log('hola');
+            getList();
+        });
     }, []);
 
     useEffect(() => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const complaint = await axios.get(`http://localhost:8001/api/complaint/searchallcomplaints/${searchText}`);
+                    const complaint = await axios.get(`/api/complaint/searchallcomplaints/${searchText}`);
                     setAllComplaintList(complaint.data);
                 } else {
                     setAllComplaintList(sortedData);

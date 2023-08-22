@@ -32,6 +32,7 @@ import SubadminRequestDetails from '../Components/RequestPage/SubadminRequest/Re
 import SubadminApproval from '../Components/RequestPage/SubadminRequest/RequestDetails/RequestApproval/SubadminApproval';
 import NewPassword from '../Components/ResetPassword/NewPasword/NewPassword';
 import Feedback from '../Pages/Feedback/Feedback';
+import AdminDetails from '../Components/ComplaintPage/AdminComplaint/AdminDetails/AdminDetails';
 
 const Routing = () => {
   return (
@@ -49,6 +50,7 @@ const Routing = () => {
           <Route exact path='/reportdetails/:reportId' element={<ReportDetails />} />
           <Route exact path='/newconcern' element={<NewCompaint />} />
           <Route exact path='/concerndetails/:complaintId' element={<ComplaintDetails />} />
+          <Route exact path='/adminconcerndetails/:complaintId' element={<AdminDetails />} />
           <Route exact path='/engineerconcerndetails/:complaintId' element={<TechComplaintDetails />} />
           <Route exact path='/engineerconcernattending/:complaintId' element={<TechnicianAttendingForm />} />
           <Route exact path='/engineerrequestattending/:requestId' element={<TechnicianRequestAttendingForm />} />

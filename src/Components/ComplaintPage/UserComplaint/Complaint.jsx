@@ -6,9 +6,10 @@ import { iswitch } from "iswitch";
 import SweetPagination from "sweetpagination";
 import DataPerPage from "../../UI/DataPerPage/DataPerPage";
 import Rightside from "../../Righside/Rightside";
+import getItemWithExpiry from "../../../Utils/expiryFunction";
 
 const Complaint = () => {
-  const id = localStorage.getItem("id");
+  const id = getItemWithExpiry('id');
   const navigate = useNavigate();
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
@@ -20,7 +21,7 @@ const Complaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
+        const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
       } catch (error) {
@@ -34,7 +35,7 @@ const Complaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`http://localhost:8001/api/complaint/owncomplaintsearch/${id}/${searchText}`);
+          const complaint = await axios.get(`/api/complaint/owncomplaintsearch/${id}/${searchText}`);
           setAllComplaintList(complaint.data);
         } else {
           setAllComplaintList(sortedData);

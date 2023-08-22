@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import classes from './Navbar.module.css';
 import axios from 'axios';
 import AdminDeptDrop from '../AdminDepartmentDropDowm/AdminDeptDrop';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const Navbar = () => {
     const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '', department: '' });
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
 
     useEffect(() => {
         const getStaffInfo = async () => {
             try {
                 if (id) {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                    const staff = await axios.get(`/api/staff/staffdetails/${id}`);
                     setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role, department: staff.data.staff.department });
                 }
             } catch (error) {

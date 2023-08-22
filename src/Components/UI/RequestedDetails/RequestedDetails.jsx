@@ -11,8 +11,7 @@ const RequestedDetails = () => {
     const getList = async () => {
       try {
         if (ticketCtx.staffId) {
-          const list = await axios.get(`http://localhost:8001/api/staff/staffdetails/${ticketCtx.staffId}`);
-          console.log(list.data.staff);
+          const list = await axios.get(`/api/staff/staffdetails/${ticketCtx.staffId}`);
           setRequesterDetails(list.data.staff);
         }
       } catch (error) {

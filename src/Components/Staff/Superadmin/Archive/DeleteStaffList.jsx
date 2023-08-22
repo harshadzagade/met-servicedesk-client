@@ -15,7 +15,7 @@ const DeleteStaffList = () => {
 
   useEffect(() => {
     const getList = async () => {
-      const list = await axios.get(`http://localhost:8001/api/trash/`);
+      const list = await axios.get(`/api/trash/`);
       setStaffList(list.data.allStaff);
     };
     getList();
@@ -34,7 +34,7 @@ const DeleteStaffList = () => {
       confirmButtonText: 'Yes, restore it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:8001/api/trash/staffdetails/restore/${id}`);
+        axios.delete(`/api/trash/staffdetails/restore/${id}`);
         setRefresh(true);
         Swal.fire(
           'Restored Staff!',
@@ -58,7 +58,7 @@ const DeleteStaffList = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:8001/api/trash/staffdetails/remove/${id}`);
+        axios.delete(`/api/trash/staffdetails/remove/${id}`);
         setRefresh(true);
         Swal.fire(
           'Deleted Staff!',

@@ -6,9 +6,10 @@ import Sweetpagination from 'sweetpagination';
 import { useNavigate } from 'react-router-dom';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import SubadminContext from '../../../Context/SubadminContext/SubadminContext';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const OutgoingDepartmentRequest = () => {
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const navigate = useNavigate();
   const subadminCtx = useContext(SubadminContext);
   const [requestList, setRequestList] = useState([]);
@@ -24,7 +25,7 @@ const OutgoingDepartmentRequest = () => {
   useEffect(() => {
     const getSubadminDetails = async () => {
       try {
-        const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+        const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
         setSubadminDetails(subadmin.data.staff);
       } catch (error) {
         console.log(error.message);
@@ -36,7 +37,7 @@ const OutgoingDepartmentRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/subadmin/requests/outgoing/${id}/${subadminDetails.department}`);
+        const list = await axios.get(`/api/staff/subadmin/requests/outgoing/${id}/${subadminDetails.department}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -53,7 +54,7 @@ const OutgoingDepartmentRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`http://localhost:8001/api/staff/subadmin/requests/outgoingrequestsearch/${subadminDetails.department}/${searchText}`);
+          const request = await axios.get(`/api/staff/subadmin/requests/outgoingrequestsearch/${subadminDetails.department}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);

@@ -7,9 +7,10 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import { Bars } from 'react-loader-spinner';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const NewRequest = () => {
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
     const adminCtx = useContext(AdminContext);
     const behalfEmailRef = useRef();
     const subjectRef = useRef();
@@ -29,7 +30,7 @@ const NewRequest = () => {
     useEffect(() => {
         const getStaffDetails = async () => {
             try {
-                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
                 setStaff(staff.data.staff);
             } catch (error) {
                 console.log(error.message);
@@ -50,7 +51,7 @@ const NewRequest = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`http://localhost:8001/api/department/departments`);
+                const departments = await axios.get(`/api/department/departments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 console.log(error.message);
@@ -63,7 +64,7 @@ const NewRequest = () => {
         const getCategories = async () => {
             try {
                 if (department.length !== 0) {
-                    const categories = await axios.get(`http://localhost:8001/api/department/categoriesbydepartment/${department}`);
+                    const categories = await axios.get(`/api/department/categoriesbydepartment/${department}`);
                     setCategories(categories.data.categories);
                 }
             } catch (error) {
@@ -97,7 +98,7 @@ const NewRequest = () => {
             formData.append('isRepeated', isRepeated);
             setShowLoading(true);
             try {
-                await axios.post('http://localhost:8001/api/request/', formData);
+                await axios.post('/api/request/', formData);
                 navigate('/request', { state: { refreshSuperHome: true } });
             } catch (error) {
                 Swal.fire({

@@ -18,7 +18,7 @@ const ArchiveStaffDetails = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const staff = await axios.get(`http://localhost:8001/api/trash/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`/api/trash/staffdetails/${id.staffId}`);
                 setName(staff.data.staff.firstname);
                 setLName(staff.data.staff.lastname);
                 setEmail(staff.data.staff.email);

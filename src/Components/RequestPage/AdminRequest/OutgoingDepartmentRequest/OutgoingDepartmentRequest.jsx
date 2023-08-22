@@ -6,9 +6,10 @@ import Sweetpagination from 'sweetpagination';
 import { useNavigate } from 'react-router-dom';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const OutgoingDepartmentRequest = () => {
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const navigate = useNavigate();
   const adminCtx = useContext(AdminContext);
   const [requestList, setRequestList] = useState([]);
@@ -23,7 +24,7 @@ const OutgoingDepartmentRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoing/${id}/${adminCtx.department}`);
+        const list = await axios.get(`/api/staff/admin/requests/outgoing/${id}/${adminCtx.department}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -44,7 +45,7 @@ const OutgoingDepartmentRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoingrequestsearch/${adminCtx.department}/${searchText}`);
+          const request = await axios.get(`/api/staff/admin/requests/outgoingrequestsearch/${adminCtx.department}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);

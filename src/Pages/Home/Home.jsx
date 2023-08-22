@@ -7,11 +7,12 @@ import DashBoard from '../../Components/UI/DashBoard/DashBoard';
 import Technician from '../../Components/Staff/Technician/Technician';
 import User from '../../Components/Staff/User/User';
 import Subadmin from '../../Components/Staff/Subadmin/Subadmin';
+import getItemWithExpiry from '../../Utils/expiryFunction';
 
 const Home = () => {
     const navigate = useNavigate();
     const location = useLocation() || null;
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
 
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -38,11 +39,11 @@ const Home = () => {
         const checkAuth = async () => {
             setRefresh(true);
             try {
-                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
                 if (staff.data.staff.isNew === true) {
                     navigate('/passwordreset');
                 } else {
-                    const res = await axios.get(`http://localhost:8001/api/staff/check/${id}`);
+                    const res = await axios.get(`/api/staff/check/${id}`);
                     switch (res.data.role) {
                         case 'superadmin':
                             setIsSuperAdmin(true);
@@ -69,7 +70,13 @@ const Home = () => {
                             break;
 
                         case 'technician':
-                            localStorage.setItem('department', staff.data.staff.department[0]);
+                            const now = new Date();
+                            const expirationTime = now.getTime() + 8 * 60 * 60 * 1000;
+                            const department = {
+                                value: staff.data.staff.department[0],
+                                expiry: expirationTime
+                            };
+                            localStorage.setItem('department', JSON.stringify(department));
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
                             setIsSubadmin(false);

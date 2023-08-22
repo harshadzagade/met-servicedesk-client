@@ -4,9 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
 import Rightside from '../../../../Righside/Rightside';
+import getItemWithExpiry from '../../../../../Utils/expiryFunction';
 
 const AdminApproval = () => {
-    const loginId = localStorage.getItem('id');
+    const loginId = getItemWithExpiry('id');
     const navigate = useNavigate();
     const adminCtx = useContext(AdminContext);
     const id = useParams();
@@ -37,7 +38,7 @@ const AdminApproval = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technicians = await axios.get(`http://localhost:8001/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
+                const technicians = await axios.get(`/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 navigate('/request');
@@ -68,9 +69,9 @@ const AdminApproval = () => {
         };
         try {
             if (isApproval2) {
-                await axios.put(`http://localhost:8001/api/staff/admin/approval2/${id}`, approval2data);
+                await axios.put(`/api/staff/admin/approval2/${id}`, approval2data);
             } else {
-                await axios.put(`http://localhost:8001/api/staff/admin/approval1/${id}`, approval1data);
+                await axios.put(`/api/staff/admin/approval1/${id}`, approval1data);
             }
             navigate('/request');
         } catch (error) {
@@ -110,7 +111,7 @@ const AdminApproval = () => {
                                         <div className={classes.selectStaff}>
                                             <label>Staff List:</label>
                                             <select className={classes.selectStatus} disabled={assignDisability} name="role" required onChange={handleTechnicianChange} >
-                                                <option key='0' value='' hidden defaultValue=''>----- Select Categories -----</option>
+                                                <option key='0' value='' hidden defaultValue=''>----- Select Engineer -----</option>
                                                 {
                                                     technicians.map((technician) =>
                                                         <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>

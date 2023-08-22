@@ -73,7 +73,8 @@
   border: 1px solid black;
   padding: 10px;
   border-radius: 5px;
-  font-size: 1em;
+  font-size: 1em;   
+   max-width: 22.5rem;
 }
 
 .category {

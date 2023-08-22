@@ -1,0 +1,177 @@
+.complaintdetils {
+    margin-top: 2.5rem;
+}
+
+.header {
+    display: flex;
+    gap: 1rem;
+}
+
+.header svg {
+    margin-top: 0.2rem;
+    cursor: pointer;
+}
+
+.header h2 {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+
+
+.buttonForm {
+    flex: 1;
+    gap: 2rem;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    max-width: 14rem;
+}
+
+
+
+.detail {
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+.myform label {
+    font-size: medium;
+    margin-top: 0.5rem;
+    color: black;
+}
+
+.myform p {
+    font-size: small;
+}
+.idlab {
+    margin-left: 10rem;
+}
+.printBtn {
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: var(--color-primary);
+    color: white;
+    width: 5rem;
+    margin-bottom: 0.5rem;
+  }
+  .feedbackBtn {
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: var(--subbutton-color);
+    color: white;
+    width: 5rem;
+    margin-bottom: 0.5rem;
+  }
+/* details */
+.idDetails {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.subjectDetails {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.description {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.deptper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.department {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.priorityDetails {
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+.reqsta {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+}
+.ComplaintType {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.status {
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+.behalf {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.techName {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.approval {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.date {
+
+    display: grid;
+    grid-template-columns: 25% 75%;
+
+}
+.attachment {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.assignTo{
+    display: grid;
+    grid-template-columns: 25% 35%;
+    gap: 1rem;
+}
+/* buttons */
+.id-details p {
+    background: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-right: 39rem;
+    font-size: medium;
+    margin-top: -0.5rem;
+    border: 1px solid black;
+
+}
+.complaintAssingBtn {
+    flex: 1;
+    gap: 2rem;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: var(--color-primary);
+    color: white;
+}
+.complaintDetailsp {
+    background: white;
+    padding: 10px;
+    border: none;
+    font-size: 1em;
+    align-items: center;
+
+
+}
+.selectStatus {
+
+    background: white;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+
+}

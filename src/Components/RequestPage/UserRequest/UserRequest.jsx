@@ -6,9 +6,10 @@ import { iswitch } from "iswitch";
 import SweetPagination from "sweetpagination";
 import DataPerPage from "../../UI/DataPerPage/DataPerPage";
 import Rightside from "../../Righside/Rightside";
+import getItemWithExpiry from "../../../Utils/expiryFunction";
 
 const UserRequest = () => {
-  const id = localStorage.getItem("id");
+  const id = getItemWithExpiry('id');
   const navigate = useNavigate();
   const [requestList, setRequestList] = useState([]);
   const [allRequestList, setAllRequestList] = useState([]);
@@ -21,7 +22,7 @@ const UserRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
+        const list = await axios.get(`/api/request/ownrequests/${id}`);
         setRequestList(list.data.requests);
         setAllRequestList(list.data.requests);
       } catch (error) {
@@ -35,7 +36,7 @@ const UserRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`http://localhost:8001/api/request/ownrequestsearch/${id}/${searchText}`);
+          const request = await axios.get(`/api/request/ownrequestsearch/${id}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);

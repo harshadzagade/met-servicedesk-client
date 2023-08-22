@@ -5,6 +5,7 @@ import OutgoingComplaint from '../AdminComplaint/OutgoingComplaint/OutgoingCompl
 import OwnComplaint from '../AdminComplaint/OwnComplaint/OwnComplaint';
 import ComplaintNavigation from './ComplaintNavigation/ComplaintNavigation';
 import Rightside from '../../Righside/Rightside';
+import InformationBtn from '../../UI/InformationBtn/InformationBtn';
 
 const AdminComplaint = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingComplaint');
@@ -20,6 +21,7 @@ const AdminComplaint = () => {
           <div className="col-8">
             <div className={`${classes.mainTitle}`}>
               <h2 className="tik-type-title">Concern</h2>
+              <InformationBtn />
             </div>
             <ComplaintNavigation viewLayout={checkLayout} />
             {openLayout === 'AllStaffIncomingComplaint' && <IncomingComplaint />}

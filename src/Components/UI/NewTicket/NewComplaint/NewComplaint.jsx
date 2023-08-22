@@ -7,9 +7,10 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import { Bars } from 'react-loader-spinner';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const NewCompaint = () => {
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
     const adminCtx = useContext(AdminContext);
     const behalfEmailRef = useRef();
     const subjectRef = useRef();
@@ -29,7 +30,7 @@ const NewCompaint = () => {
     useEffect(() => {
         const getStaffDetails = async () => {
             try {
-                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
                 setStaff(staff.data.staff);
             } catch (error) {
                 console.log(error.message);
@@ -50,7 +51,7 @@ const NewCompaint = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`http://localhost:8001/api/department/departments`);
+                const departments = await axios.get(`/api/department/departments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 console.log(error.message);
@@ -63,7 +64,7 @@ const NewCompaint = () => {
         const getCategories = async () => {
             try {
                 if (department.length !== 0) {
-                    const categories = await axios.get(`http://localhost:8001/api/department/categoriesbydepartment/${department}`);
+                    const categories = await axios.get(`/api/department/categoriesbydepartment/${department}`);
                     setCategories(categories.data.categories);
                 }
             } catch (error) {
@@ -98,7 +99,7 @@ const NewCompaint = () => {
             formData.append('isRepeated', isRepeated);
             try {
                 setShowLoading(true);
-                await axios.post('http://localhost:8001/api/complaint/', formData);
+                await axios.post('/api/complaint/', formData);
                 Swal.fire(
                     'Concern Created!',
                     'You have created concern successfully',
@@ -201,7 +202,7 @@ const NewCompaint = () => {
                                     <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
                                 </div>
                                 <div className={classes.repeat}>
-                                    <span className='mt-4'>Repeated Complaint:</span>
+                                    <span className='mt-4'>Repeated concern:</span>
                                     <div className={classes.isRepeat}>
                                         <input type="checkbox" defaultChecked={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} id="toggle-repeat" />
                                         <label htmlFor="toggle-repeat"></label>

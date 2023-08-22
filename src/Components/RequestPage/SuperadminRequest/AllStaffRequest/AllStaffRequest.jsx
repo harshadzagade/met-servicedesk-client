@@ -6,6 +6,7 @@ import SweetPagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import Rightside from '../../../Righside/Rightside';
+import openSocket from 'socket.io-client';
 
 const AllStaffRequest = () => {
     const navigate = useNavigate();
@@ -18,9 +19,10 @@ const AllStaffRequest = () => {
     const sortedData = React.useMemo(() => { return [...requestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [requestList]);
 
     useEffect(() => {
+        const socket = openSocket('');
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/request/allrequests`);
+                const list = await axios.get(`/api/request/allrequests`);
                 setRequestList(list.data.requests);
                 setAllRequestList(list.data.requests);
             } catch (error) {
@@ -28,13 +30,16 @@ const AllStaffRequest = () => {
             }
         };
         getList();
+        socket.on('requests', () => {
+            getList();
+        });
     }, []);
 
     useEffect(() => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const request = await axios.get(`http://localhost:8001/api/request/searchallrequests/${searchText}`);
+                    const request = await axios.get(`/api/request/searchallrequests/${searchText}`);
                     setAllRequestList(request.data);
                 } else {
                     setAllRequestList(sortedData);

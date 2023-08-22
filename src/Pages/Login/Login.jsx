@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AuthContext from '../../Components/Context/AuthContext/AuthContext';
+import getItemWithExpiry from '../../Utils/expiryFunction';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,9 +19,9 @@ const Login = () => {
   }, [ctx.isLoggedIn, navigate])
 
   const checkLogin = async () => {
-    if (localStorage.getItem('id')) {
+    if (getItemWithExpiry('id')) {
       try {
-        const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${localStorage.getItem('id')}`);
+        const staff = await axios.get(`/api/staff/staffdetails/${getItemWithExpiry('id')}`);
         ctx.onLogin(staff.data.staff.email);
       } catch (error) {
         console.log(error.message);
@@ -39,9 +40,19 @@ const Login = () => {
     }
     let loginStaff;
     try {
-      loginStaff = await axios.post('http://localhost:8001/api/', staffInfo);
-      localStorage.setItem('token', loginStaff.data.token);
-      localStorage.setItem('id', loginStaff.data.staffId);
+      loginStaff = await axios.post('/api/', staffInfo);
+      const now = new Date();
+      const expirationTime = now.getTime() + 8 * 60 * 60 * 1000;
+      const loginId = {
+        value: loginStaff.data.staffId,
+        expiry: expirationTime
+      };
+      const tokenString = {
+        value: loginStaff.data.token,
+        expiry: expirationTime
+      };
+      localStorage.setItem('token', JSON.stringify(tokenString));
+      localStorage.setItem('id', JSON.stringify(loginId));
       ctx.onLogin(staffInfo.email);
       const Toast = Swal.mixin({
         toast: true,

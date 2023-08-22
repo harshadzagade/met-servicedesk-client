@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import classes from './AdminDeptDrop.module.css'
 import axios from 'axios';
 import AdminContext from '../../Context/AdminContext/AdminContext';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const AdminDeptDrop = (props) => {
   const adminCtx = useContext(AdminContext);
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const [departments, setDepartments] = useState([]);
 
   const handleDepartmentClick = (department) => {
@@ -16,7 +17,7 @@ const AdminDeptDrop = (props) => {
     const getDepartments = async () => {
       try {
         if (id) {
-          const departments = await axios.get(`http://localhost:8001/api/staff/admin/admindepartments/${id}`);
+          const departments = await axios.get(`/api/staff/admin/admindepartments/${id}`);
           setDepartments(departments.data.departments);
         }
       } catch (error) {

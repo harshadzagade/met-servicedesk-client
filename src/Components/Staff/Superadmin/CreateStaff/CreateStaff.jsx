@@ -34,7 +34,7 @@ const CreateStaff = () => {
             contactExtension: extensionRef.current.value.length !== 0? extensionRef.current.value : null
         };
         try {
-            await axios.post('http://localhost:8001/api/staff/superadmin/createStaff', data);
+            await axios.post('/api/staff/superadmin/createStaff', data);
             Swal.fire(
                 'User Created!',
                 'You have created user successfully',
@@ -54,7 +54,7 @@ const CreateStaff = () => {
     useEffect(() => {
         const getInstitutes = async () => {
             try {
-                const institutes = await axios.get(`http://localhost:8001/api/institute/`);
+                const institutes = await axios.get(`/api/institute/`);
                 setInstitutes(institutes.data.instituteData);
             } catch (error) {
                 console.log(error.message);
@@ -66,7 +66,7 @@ const CreateStaff = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`http://localhost:8001/api/department/alldepartments`);
+                const departments = await axios.get(`/api/department/alldepartments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 console.log(error.message);

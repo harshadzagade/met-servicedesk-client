@@ -5,9 +5,10 @@ import { iswitch } from 'iswitch';
 import axios from 'axios';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const TechnicianAssignRequest = () => {
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const navigate = useNavigate();
   const [numberOfPages, setNumberOfPages] = useState(10);
   const [requestList, setRequestList] = useState([]);
@@ -21,7 +22,7 @@ const TechnicianAssignRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/technician/getassignedrequests/${id}`);
+        const list = await axios.get(`/api/staff/technician/getassignedrequests/${id}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -38,7 +39,7 @@ const TechnicianAssignRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`http://localhost:8001/api/staff/technician/assignedrequestsearch/${id}/${searchText}`);
+          const request = await axios.get(`/api/staff/technician/assignedrequestsearch/${id}/${searchText}`);
           setAllRequestList(request.data);
         } else {
           setAllRequestList(sortedData);

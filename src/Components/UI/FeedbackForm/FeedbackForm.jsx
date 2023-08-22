@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import Modal from '../Modal/Modal';
 import classes from './FeedbackForm.module.css';
 import { useRef } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Bars } from 'react-loader-spinner';
 
 const FeedbackForm = (props) => {
     const feedbackRef = useRef();
+    const [showLoading, setShowLoading] = useState(false);
 
     const handleSubmit = async () => {
         const feedbackData = {
             ticketType: props.ticketType,
             ticketId: props.ticketId,
+            department: props.department,
             feedback: feedbackRef.current.value
         };
+        setShowLoading(true);
         try {
-            await axios.post('http://localhost:8001/api/feedback', feedbackData);
+            await axios.post('/api/feedback', feedbackData);
             Swal.fire(
                 'Feedback Submitted!',
                 'You have submitted feedback successfully',
@@ -32,18 +36,40 @@ const FeedbackForm = (props) => {
             } else {
                 console.log(error.message);
             }
+        } finally {
+            setShowLoading(false);
         }
     };
     return (
         <Modal>
-            <div className={classes.feedback}>
-                <h2>Feedback:</h2>
-                <textarea className={classes.textArea} rows="15" cols="50" ref={feedbackRef} />
-            </div>
-            <div className={classes.btn}>
-                <button className={classes.submitbtn} onClick={handleSubmit}>Submit</button>
-                <button className={classes.submitbtn} onClick={props.onConfirm}>Cancel</button>
-            </div>
+            {showLoading && (
+                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <h1>Registering Feedback</h1>
+                    <div className='d-flex justify-content-center'>
+                        <Bars
+                            height="80"
+                            width="80"
+                            color="#CE1212"
+                            ariaLabel="bars-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
+                    </div>
+                </div>
+            )}
+            {
+                !showLoading &&
+                <Fragment>
+                <div className={classes.feedback}>
+                    <h2>Feedback:</h2>
+                    <textarea className={classes.textArea} rows="4" cols="50" ref={feedbackRef} />
+                </div>
+                <div className={classes.btn}>
+                    <button className={classes.submitbtn} onClick={handleSubmit}>Submit</button>
+                    <button className={classes.cancelbtn} onClick={props.onConfirm}>Cancel</button>
+                </div>
+            </Fragment>}
         </Modal>
     );
 };

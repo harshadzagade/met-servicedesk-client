@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../Context/AuthContext/AuthContext';
 import axios from 'axios';
 import PasswordReset from './PasswordReset/PasswordReset';
+import getItemWithExpiry from '../../Utils/expiryFunction';
 
 const ResetPassword = () => {
     const ctx = useContext(AuthContext);
@@ -16,8 +17,8 @@ const ResetPassword = () => {
     const [email, setEmail] = useState('');
 
     const checkLogin = async () => {
-        if (localStorage.getItem('id')) {
-            const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${localStorage.getItem('id')}`);
+        if (getItemWithExpiry('id')) {
+            const staff = await axios.get(`/api/staff/staffdetails/${getItemWithExpiry('id')}`);
             ctx.onLogin(staff.data.staff.email);
             navigate('/');
         }

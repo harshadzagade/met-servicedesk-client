@@ -7,9 +7,11 @@ import Rightside from '../../../Righside/Rightside';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import FeedbackForm from '../../../UI/FeedbackForm/FeedbackForm';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const TechnicianRequestDetails = () => {
     const paramsId = useParams();
+    const loginId = getItemWithExpiry('id');
     const id = paramsId.requestId;
     const [requestData, setRequestData] = useState({});
     const navigate = useNavigate();
@@ -21,7 +23,7 @@ const TechnicianRequestDetails = () => {
 
     useEffect(() => {
         const getRequestDetails = async () => {
-            const request = await axios.get(`http://localhost:8001/api/request/getrequestdetails/${id}`);
+            const request = await axios.get(`/api/request/getrequestdetails/${id}`);
             setRequestData(request.data.request);
             if (request.data.request.behalf) {
                 setStaffId(request.data.request.behalfId);
@@ -55,7 +57,7 @@ const TechnicianRequestDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`http://localhost:8001/api/request/downloadfile/${requestData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`/api/request/downloadfile/${requestData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;
@@ -74,7 +76,7 @@ const TechnicianRequestDetails = () => {
         const getStaffDetails = async () => {
             try {
                 if (requestData.behalfId) {
-                    const behalf = await axios.get(`http://localhost:8001/api/staff/staffdetails/${requestData.behalfId}`);
+                    const behalf = await axios.get(`/api/staff/staffdetails/${requestData.behalfId}`);
                     setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
                 }
             } catch (error) {
@@ -109,9 +111,9 @@ const TechnicianRequestDetails = () => {
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                                 </svg>
                                 <h2>Request details</h2>
-                                {openFeedback && <FeedbackForm onConfirm={handleFeedback} />}
+                                {openFeedback && <FeedbackForm ticketType={'request'} ticketId={requestData.ticketId} department={requestData.department} onConfirm={handleFeedback} />}
                                 <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                                <button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>
+                                {(requestData.status === 'closed' && requestData.staffId.toString() === loginId) &&<button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
                                 <div>
@@ -188,28 +190,28 @@ const TechnicianRequestDetails = () => {
                                                 requestData.assign &&
                                                 <div className={classes.techName}>
                                                     <label>Engineer Name:</label>
-                                                    <p >{requestData.assignedName}</p>
+                                                    <p className={classes.complaintDetailsp}>{requestData.assignedName}</p>
                                                 </div>
                                             }
                                             {
                                                 requestData.status === 'forwarded' &&
                                                 <div className={classes.techName}>
                                                     <label>Forward Comment:</label>
-                                                    <p >{requestData.forwardComment}</p>
+                                                    <p className={classes.complaintDetailsp}>{requestData.forwardComment}</p>
                                                 </div>
                                             }
                                             {
                                                 (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                                 <div className={classes.techName}>
                                                     <label>Problem Description:</label>
-                                                    <p >{requestData.problemDescription}</p>
+                                                    <p className={classes.complaintDetailsp}>{requestData.problemDescription}</p>
                                                 </div>
                                             }
                                             {
                                                 (requestData.status === 'forwarded' || requestData.status === 'closed') &&
                                                 <div className={classes.techName}>
                                                     <label>Action Taken:</label>
-                                                    <p >{requestData.actionTaken}</p>
+                                                    <p className={classes.complaintDetailsp}>{requestData.actionTaken}</p>
                                                 </div>
                                             }
                                         </span>

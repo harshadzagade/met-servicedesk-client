@@ -8,10 +8,12 @@ import Rightside from '../../../Righside/Rightside';
 import SubadminContext from '../../../Context/SubadminContext/SubadminContext';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import FeedbackForm from '../../../UI/FeedbackForm/FeedbackForm';
+import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const SubadminRequestDetails = () => {
     const navigate = useNavigate();
-    const id = localStorage.getItem('id');
+    const id = getItemWithExpiry('id');
     const subadminCtx = useContext(SubadminContext);
     const paramsId = useParams();
     const requestId = paramsId.requestId;
@@ -19,12 +21,13 @@ const SubadminRequestDetails = () => {
     const [requestData, setRequestData] = useState({});
     const [staffId, setStaffId] = useState(null);
     ticketCtx.onClickHandler('request', staffId, requestData.id);
+    const [openFeedback, setOpenFeedback] = useState(false);
     const [subadminDetails, setSubadminDetails] = useState({});
 
     useEffect(() => {
         const getSubadminDetails = async () => {
             try {
-                const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
                 setSubadminDetails(subadmin.data.staff);
             } catch (error) {
                 console.log(error.message);
@@ -45,7 +48,7 @@ const SubadminRequestDetails = () => {
 
     useEffect(() => {
         const getRequestDetails = async () => {
-            const request = await axios.get(`http://localhost:8001/api/request/getrequestdetails/${requestId}`);
+            const request = await axios.get(`/api/request/getrequestdetails/${requestId}`);
             setRequestData(request.data.request);
             if (request.data.request.behalf) {
                 setStaffId(request.data.request.behalfId);
@@ -71,7 +74,7 @@ const SubadminRequestDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`http://localhost:8001/api/request/downloadfile/${requestData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`/api/request/downloadfile/${requestData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;
@@ -115,6 +118,10 @@ const SubadminRequestDetails = () => {
         });
     };
 
+    const handleFeedback = () => {
+        setOpenFeedback(false);
+    };
+
     return (
         <Fragment>
             <main>
@@ -126,8 +133,9 @@ const SubadminRequestDetails = () => {
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                                 </svg>
                                 <h2>Request details</h2>
+                                {openFeedback && <FeedbackForm ticketType={'request'} ticketId={requestData.ticketId} department={requestData.department} onConfirm={handleFeedback}/>}
                                 <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                                <button className={`${classes.feedbackBtn} `}>Feedback</button>
+                                {(requestData.status === 'closed' && requestData.staffId.toString() === id) && <button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
                                 <div>

@@ -6,9 +6,11 @@ import AuthContext from '../Context/AuthContext/AuthContext';
 import axios from 'axios';
 import TicketDetailsContext from '../Context/TicketDetailsContext/TicketDetailsContext';
 import Navbar from '../UI/Navbar/Navbar';
+import getItemWithExpiry from '../../Utils/expiryFunction';
+import TicketCounterContext from '../Context/TicketCounterContext/TicketCounterContext';
 
 const Sidebar = ({ children }) => {
-  const id = localStorage.getItem('id');
+  const id = getItemWithExpiry('id');
   const ticketCtx = useContext(TicketDetailsContext);
   const [showTabs, setShowTabs] = useState(false);
   const [isHomeActive, setIsHomeActive] = useState(false);
@@ -24,7 +26,27 @@ const Sidebar = ({ children }) => {
   const [isReportActive, setIsReportActive] = useState(false);
   const [staffInfo, setStaffInfo] = useState({});
   const navigate = useNavigate();
-  const ctx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
+  const ticketCounterCtx = useContext(TicketCounterContext);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const idItem = getItemWithExpiry('id');
+      const tokenItem = getItemWithExpiry('token');
+      if (!idItem || !tokenItem) {
+        authCtx.onLogout();
+        navigate('/login');
+        return;
+      }
+      const now = new Date().getTime();
+      if (now > idItem.expiry || now > tokenItem.expiry) {
+        authCtx.onLogout();
+        navigate('/login');
+        return;
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [authCtx, navigate]);
 
   useEffect(() => {
     if (window.location.pathname !== '/forgotpassword') {
@@ -46,7 +68,7 @@ const Sidebar = ({ children }) => {
       confirmButtonText: 'Yes, logout!'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        ctx.onLogout();
+        authCtx.onLogout();
         navigate('/login');
         const Toast = Swal.mixin({
           toast: true,
@@ -73,7 +95,7 @@ const Sidebar = ({ children }) => {
   }
 
   useEffect(() => {
-    if (id === '1') {
+    if (id === 1) {
       setShowTabs(true);
     } else {
       setShowTabs(false);
@@ -410,7 +432,7 @@ const Sidebar = ({ children }) => {
     const getUserInfo = async () => {
       try {
         if (id) {
-          const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+          const staff = await axios.get(`/api/staff/staffdetails/${id}`);
           setStaffInfo(staff.data.staff);
         }
       } catch (error) {
@@ -430,11 +452,11 @@ const Sidebar = ({ children }) => {
     const checkStaff = async () => {
       try {
         if (id) {
-          await axios.get(`http://localhost:8001/api/staff/checkstaffexistence/${id}`);
+          await axios.get(`/api/staff/checkstaffexistence/${id}`);
         }
       } catch (error) {
         if (error.message === 'Staff not found') {
-          ctx.onLogout();
+          authCtx.onLogout();
         } else {
           console.log(error.message);
         }
@@ -448,7 +470,7 @@ const Sidebar = ({ children }) => {
     return () => {
       clearInterval(interval);
     };
-  }, [ctx, id]);
+  }, [authCtx, id]);
 
   return (
     <Fragment>
@@ -506,6 +528,9 @@ const Sidebar = ({ children }) => {
                       <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                     </svg>
                     <h3>Concern</h3>
+                    {ticketCounterCtx.complaintStatusCount.pending && <div className={classes.counter}>
+                      <h3>{ticketCounterCtx.complaintStatusCount.pending}</h3>
+                    </div>}
                   </Link>
 
                   <Link to='/request' onClick={handleRequestClick} className={`${isRequestActive && classes.active}`} >
@@ -513,6 +538,9 @@ const Sidebar = ({ children }) => {
                       <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
                     </svg>
                     <h3>Request</h3>
+                    {ticketCounterCtx.requestStatusCount.pending && <div className={classes.counter}>
+                      <h3>{ticketCounterCtx.requestStatusCount.pending}</h3>
+                    </div>}
                   </Link>
 
                   {staffInfo.role !== 'user' && <Link to='/report' onClick={handleReportClick} className={`${isReportActive && classes.active}`} >

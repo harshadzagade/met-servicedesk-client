@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import jwtDecode from "jwt-decode";
 import AuthContext from './AuthContext';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const defaultAuthState = {
     isLoggedIn: false,
@@ -23,7 +24,7 @@ const AuthProvider = props => {
 
     useEffect(() => {
         const checkToken = () => {
-            const storageToken = localStorage.getItem('token');
+            const storageToken = getItemWithExpiry('token');
             if (storageToken) {
                 const token = jwtDecode(storageToken);
                 const email = authState.email
