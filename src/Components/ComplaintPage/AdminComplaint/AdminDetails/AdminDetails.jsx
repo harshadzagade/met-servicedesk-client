@@ -154,9 +154,21 @@ const AdminDetails = () => {
                                     <form className={classes.myform}>
                                         <span id='printContent'>
                                             <div className={classes.idDetails}>
-                                                <label>Complaint Id:</label>
+                                                <label>Concern Id:</label>
                                                 <p className={classes.complaintDetailsp}>{complaintData.ticketId}</p>
                                             </div>
+                                            {
+                                                complaintData.behalf && <div className={classes.behalf}>
+                                                    <label>Behalf:</label>
+                                                    <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
+                                                </div>
+                                            }
+                                              {
+                                                complaintData.isRepeated && <div className={classes.behalf}>
+                                                    <label>Repeated:</label>
+                                                    <p className={classes.complaintDetailsp}>{complaintData.isRepeated && 'Yes'}</p>
+                                                </div>
+                                            }
                                             <hr />
                                             <div className={classes.subjectDetails}>
                                                 <label>Subject:</label>
@@ -187,12 +199,6 @@ const AdminDetails = () => {
                                                     <p className={classes.complaintDetailsp}>{complaintData.status} </p>
                                                 </div>
                                             </div>
-                                            {
-                                                complaintData.behalf && <div className={classes.behalf}>
-                                                    <label>Behalf:</label>
-                                                    <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
-                                                </div>
-                                            }
                                             {
                                                 (complaintData.assign || complaintData.forwardComment || (complaintData.status === 'forwarded' || complaintData.status === 'closed')) &&
                                                 <hr />

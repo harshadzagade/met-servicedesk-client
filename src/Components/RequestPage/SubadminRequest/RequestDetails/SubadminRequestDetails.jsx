@@ -19,6 +19,7 @@ const SubadminRequestDetails = () => {
     const requestId = paramsId.requestId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [requestData, setRequestData] = useState({});
+    const [behalfStaffName, setBehalfStaffName] = useState('');
     const [staffId, setStaffId] = useState(null);
     ticketCtx.onClickHandler('request', staffId, requestData.id);
     const [openFeedback, setOpenFeedback] = useState(false);
@@ -122,6 +123,21 @@ const SubadminRequestDetails = () => {
         setOpenFeedback(false);
     };
 
+    useEffect(() => {
+        const getStaffDetails = async () => {
+            try {
+                if (requestData.behalfId) {
+                    const behalf = await axios.get(`/api/staff/staffdetails/${requestData.behalfId}`);
+                    setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+
+        };
+        getStaffDetails();
+    }, [requestData.behalfId]);
+
     return (
         <Fragment>
             <main>
@@ -145,6 +161,14 @@ const SubadminRequestDetails = () => {
                                                 <label>Request Id:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.ticketId}</p>
                                             </div>
+                                            {requestData.behalf && <div className={classes.idDetails}>
+                                                <label>Behalf:</label>
+                                                <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
+                                            </div>}
+                                            {requestData.isRepeated && <div className={classes.idDetails}>
+                                                <label>Repeated:</label>
+                                                <p className={classes.complaintDetailsp}>{requestData.isRepeated && 'Yes'}</p>
+                                            </div>}
                                             <hr />
                                             <div className={classes.subjectDetails}>
                                                 <label>Subject:</label>
@@ -174,10 +198,6 @@ const SubadminRequestDetails = () => {
                                                     <label>Status:</label>
                                                     <p className={classes.complaintDetailsp}>{requestData.status} </p>
                                                 </div>
-                                            </div>
-                                            <div className={classes.idDetails}>
-                                                <label>Behalf:</label>
-                                                <p className={classes.complaintDetailsp}>{requestData.behalf ? 'Yes' : 'No'}</p>
                                             </div>
                                             <hr />
                                             <div className={classes.approval1}>

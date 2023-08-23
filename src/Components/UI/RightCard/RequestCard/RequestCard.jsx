@@ -19,7 +19,7 @@ const RequestCard = () => {
             </div>
             <hr />
             <div className={classes.tikStatus}>
-                <label>Assign:</label>
+                <label>Assigned:</label>
                 <p>{ticketCounterCtx.requestStatusCount.assigned}</p>
             </div>
             <hr />
@@ -29,7 +29,7 @@ const RequestCard = () => {
             </div>
             <hr />
             <div className={classes.tikStatus}>
-                <label>Forwaded:</label>
+                <label>Forwarded:</label>
                 <p>{ticketCounterCtx.requestStatusCount.forwarded}</p>
             </div>
             <hr />

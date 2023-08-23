@@ -151,18 +151,17 @@ const CreateStaff = () => {
                                     </div>
                                 </div>
 
-
                                 <div className={classes.phone}>
                                     <div className={`${classes.createForm}`} >
-                                        <span>Phone No.</span>
-                                        <input type="number" name="phone" className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef} />
+                                        <span>Phone Number</span>
+                                        <input type="tel" name="phone" pattern='[1-9]{1}[0-9]{9}' className={classes.createstaffInput} placeholder="Enter your phone number" ref={phoneRef} />
                                     </div>
                                     <div className={`${classes.createForm}`}>
                                         <span>Extension</span>
-                                        <input type="number" name="phone" className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} />
+                                        <input type="text" name="phone" length='[0-9]{3}' className={classes.createstaffInput} placeholder="enter contact" ref={extensionRef} />
                                     </div>
                                 </div>
-                                <button type="submit" className={`${classes.createButton}`} >Submit</button>
+                                <button type="submit" className={`${classes.createButton}`}>Submit</button>
                             </form>
                         </div>
                     </div>

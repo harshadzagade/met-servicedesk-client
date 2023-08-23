@@ -147,6 +147,14 @@ const AdminRequestDetails = () => {
                                                 <label>Request Id:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.ticketId}</p>
                                             </div>
+                                            {requestData.behalf && <div className={classes.idDetails}>
+                                                <label>Behalf:</label>
+                                                <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
+                                            </div>}
+                                            {requestData.isRepeated && <div className={classes.idDetails}>
+                                                <label>Repeated:</label>
+                                                <p className={classes.complaintDetailsp}>{requestData.isRepeated && 'Yes'}</p>
+                                            </div>}
                                             <hr />
                                             <div className={classes.subjectDetails}>
                                                 <label>Subject:</label>
@@ -177,10 +185,6 @@ const AdminRequestDetails = () => {
                                                     <p className={classes.complaintDetailsp}>{requestData.status} </p>
                                                 </div>
                                             </div>
-                                            {requestData.behalf && <div className={classes.idDetails}>
-                                                <label>Behalf:</label>
-                                                <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
-                                            </div>}
                                             <hr />
                                             <div className={classes.approval1}>
                                                 <div className={classes.approval}>

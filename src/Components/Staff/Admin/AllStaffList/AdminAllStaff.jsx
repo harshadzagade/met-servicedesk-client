@@ -85,7 +85,7 @@ const AdminAllStaff = () => {
     return (
         <div className={classes.AdminAllStaff}>
             <div className={classes.allstaff}>
-                <h2 className={classes.title}>Staff List</h2>
+                <h2 className={classes.title}>Employee List</h2>
                 <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
             </div>
             <DataTable

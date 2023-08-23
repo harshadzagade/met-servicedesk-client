@@ -19,7 +19,7 @@ const ComplaintCard = () => {
             </div>
             <hr />
             <div className={classes.tikStatus}>
-                <label>Forwaded:</label>
+                <label>Forwarded:</label>
                 <p>{ticketCounterCtx.complaintStatusCount.forwarded}</p>
             </div>
             <hr />

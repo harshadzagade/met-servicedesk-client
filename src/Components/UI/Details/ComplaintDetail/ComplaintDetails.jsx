@@ -112,16 +112,28 @@ const ComplaintDetails = () => {
                                 <h2>Concern details</h2>
                                 {openFeedback && <FeedbackForm ticketType={'complaint'} ticketId={complaintData.ticketId} department={complaintData.department} onConfirm={handleFeedback} />}
                                 <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                                {(complaintData.status === 'closed' && complaintData.staffId.toString() === loginId) &&<button className={`${classes.feedbackBtn}`} onClick={() => setOpenFeedback(true)}>Feedback</button>}
+                                {(complaintData.status === 'closed' && complaintData.staffId.toString() === loginId) && <button className={`${classes.feedbackBtn}`} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
                                 <div>
                                     <form className={classes.myform}>
                                         <span id='printContent'>
                                             <div className={classes.idDetails}>
-                                                <label>Complaint Id:</label>
+                                                <label>Concern Id:</label>
                                                 <p className={classes.complaintDetailsp}>{complaintData.ticketId}</p>
                                             </div>
+                                            {
+                                                complaintData.behalf && <div className={classes.behalf}>
+                                                    <label>Behalf:</label>
+                                                    <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
+                                                </div>
+                                            }
+                                            {
+                                                complaintData.isRepeated && <div className={classes.behalf}>
+                                                    <label>Repeated:</label>
+                                                    <p className={classes.complaintDetailsp}>{complaintData.isRepeated && 'Yes'}</p>
+                                                </div>
+                                            }
                                             <hr />
                                             <div className={classes.subjectDetails}>
                                                 <label>Subject:</label>
@@ -152,12 +164,6 @@ const ComplaintDetails = () => {
                                                     <p className={classes.complaintDetailsp}>{complaintData.status} </p>
                                                 </div>
                                             </div>
-                                            {
-                                                complaintData.behalf && <div className={classes.behalf}>
-                                                    <label>Behalf:</label>
-                                                    <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
-                                                </div>
-                                            }
                                             {
                                                 (complaintData.assign || complaintData.forwardComment || (complaintData.status === 'forwarded' || complaintData.status === 'closed')) &&
                                                 <hr />

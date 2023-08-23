@@ -99,6 +99,11 @@ const NewRequest = () => {
             setShowLoading(true);
             try {
                 await axios.post('/api/request/', formData);
+                Swal.fire(
+                    'Request Created!',
+                    'You have created Request successfully',
+                    'success'
+                );
                 navigate('/request', { state: { refreshSuperHome: true } });
             } catch (error) {
                 Swal.fire({

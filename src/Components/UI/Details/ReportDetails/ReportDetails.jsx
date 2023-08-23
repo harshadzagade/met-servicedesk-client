@@ -91,7 +91,7 @@ const ReportDetails = () => {
                                 </div>
                                 <div className={classes.reqsta}>
                                     <div className={classes.ComplaintType}>
-                                        <label>Request Type:</label>
+                                        <label>Category:</label>
                                         <p className={classes.complaintDetailsp}>{reportData.category}</p>
                                     </div>
                                     <div className={classes.name}>
