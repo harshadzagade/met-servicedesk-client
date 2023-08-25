@@ -25,7 +25,11 @@ const VerfiyEmail = (props) => {
             <div className={classes.Email}>
                 <div className={classes.emailform}>
                     <form className={classes.loginform} onSubmit={handleSendOTP}>
-                        <h2>Please enter the email address below </h2>
+                        <div className={`${classes.logo} mb-3`}>
+                            <img src="/assets/img/met_logo.png" alt="" />
+                        </div>
+                        <h2>MET Helpdesk</h2>
+                        <h3>Please enter the email address below </h3>
                         <input type="email" placeholder="Enter Email" ref={emailRef} />
                         <button type='submit'>send OTP</button>
                     </form>

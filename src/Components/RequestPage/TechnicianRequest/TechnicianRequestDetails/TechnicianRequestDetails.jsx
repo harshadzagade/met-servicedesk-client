@@ -113,7 +113,7 @@ const TechnicianRequestDetails = () => {
                                 <h2>Request details</h2>
                                 {openFeedback && <FeedbackForm ticketType={'request'} ticketId={requestData.ticketId} department={requestData.department} onConfirm={handleFeedback} />}
                                 <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                                {(requestData.status === 'closed' && requestData.staffId.toString() === loginId) &&<button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
+                                {(requestData.status === 'closed' && requestData.staffId.toString() === loginId.toString()) &&<button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
                                 <div>

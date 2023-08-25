@@ -128,7 +128,7 @@ const TechComplaintDetails = () => {
                             <h2>Concern details</h2>
                             {openFeedback && <FeedbackForm ticketType={'complaint'} ticketId={complaintData.ticketId} department={complaintData.department} onConfirm={handleFeedback} />}
                             <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                            {(complaintData.status === 'closed' && complaintData.staffId.toString() === ownId) &&<button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
+                            {(complaintData.status === 'closed' && complaintData.staffId.toString() === ownId.toString()) &&<button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                         </div>
                         <div className={`${classes.detail}`}>
                             <div >
@@ -168,7 +168,7 @@ const TechComplaintDetails = () => {
                                         </div>
                                         <div className={classes.reqsta}>
                                             <div className={classes.ComplaintType}>
-                                                <label>Request Type:</label>
+                                                <label>Concern Type:</label>
                                                 <p className={classes.complaintDetailsp}>{complaintData.category}</p>
                                             </div>
                                             <div className={classes.status}>

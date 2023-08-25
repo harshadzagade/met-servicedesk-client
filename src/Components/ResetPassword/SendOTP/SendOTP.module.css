@@ -3,9 +3,18 @@
   margin-right: 15rem;
 }
 
-.loginform h2 {
+.loginform h3 {
   margin-bottom: 1rem;
-  font-size: larger;
+  font-size: small;
+  color: black;
+}
+
+.logo img {
+  margin-left: auto;
+  margin-right: auto;
+  height: 50%;
+  width: 50%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .OTPform {
@@ -14,7 +23,7 @@
   background: #FFFFFF;
   max-width: 360px;
   margin: 0 auto 100px;
-  padding: 45px;
+  padding: 30px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 1rem;
@@ -51,7 +60,7 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #7380ec;
+  background: var(--color-primary);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -61,12 +70,13 @@
   transition: all 0.3 ease;
   cursor: pointer;
   border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .button:hover,
 .button:active,
 .button:focus {
-  background: #43A047;
+  background: var(--subbutton-color);
 }
 
 .timmer {

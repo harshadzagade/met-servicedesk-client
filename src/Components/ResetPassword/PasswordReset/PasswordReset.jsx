@@ -41,7 +41,11 @@ const PasswordReset = (props) => {
       <div className={classes.sendOtp}>
         <div className={classes.OTPform}>
           <form className={classes.loginform} onSubmit={(e) => handleReset(e)}>
-            <h2>Please enter below your new password</h2>
+          <div className={`${classes.logo} mb-3`}>
+            <img src="/assets/img/met_logo.png" alt="" />
+          </div>
+          <h2>MET Helpdesk</h2>
+            <h3>Please enter below your new password</h3>
             <input type="password" minLength={6} placeholder="New-Password" required ref={passwordRef} />
             <input type="password" minLength={6} placeholder="confirm-password" required ref={confirmPasswordRef} />
             <button type='submit'>Submit</button>

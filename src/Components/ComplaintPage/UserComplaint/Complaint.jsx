@@ -105,7 +105,7 @@ const Complaint = () => {
                     <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ["high", () => "#E70000"], ["moderate", () => "#FFBF00"], ["low", () => "#90EE90"]) }}>
                       {complaint.priority}
                     </p>
-                    <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ["pending", () => "#FF6000"], ["forwarded", () => "#9681EB"], ["attending", () => " #30D5C8"], ["closed", () => "#ADE792"]) }}>
+                    <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ["pending", () => "#FF6000"],['disapproved', () => '#2e2a2b'], ["forwarded", () => "#9681EB"], ["attending", () => " #30D5C8"], ["closed", () => "#ADE792"]) }}>
                       {complaint.status}
                     </p>
                   </div>

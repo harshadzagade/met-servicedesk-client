@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './SubadminActivities.module.css';
 import axios from 'axios';
 import DataPerPage from '../../Components/UI/DataPerPage/DataPerPage';
@@ -6,9 +6,11 @@ import Sweetpagination from 'sweetpagination';
 import getItemWithExpiry from '../../Utils/expiryFunction';
 import openSocket from 'socket.io-client';
 import { useNavigate } from 'react-router';
+import AdminContext from '../../Components/Context/AdminContext/AdminContext';
 
 const SubadminActivities = () => {
     const id = getItemWithExpiry('id');
+    const adminCtx = useContext(AdminContext);
     const navigate = useNavigate();
     const [search, setSearch] = useState('');
     const [subadminActivities, setSubadminActivities] = useState([]);
@@ -42,20 +44,28 @@ const SubadminActivities = () => {
         const socket = openSocket('')
         const getActivities = async () => {
             try {
-                const activities = await axios.get(`/api/staff/admin/subadminactivities/${id}`);
-                if (activities.data.activities.activities) {
+                const activities = await axios.get(`/api/staff/admin/subadminactivities/${id}/${adminCtx.department}`);
+                if (activities.data.activities) {
                     setSubadminActivities(activities.data.activities.activities);
                     setAllSubadminActivities(activities.data.activities.activities);
+                } else {
+                    setSubadminActivities([]);
+                    setAllSubadminActivities([]);
                 }
             } catch (error) {
-                console.log(error.message);
+                if (error.response.status === 401) {
+                    setSubadminActivities([]);
+                    setAllSubadminActivities([]);
+                } else {
+                    console.log(error.message);
+                }
             }
         };
         getActivities();
         socket.on('subadminactivities', () => {
             getActivities();
         });
-    }, [id]);
+    }, [id, adminCtx]);
 
     useEffect(() => {
         if (sortedData) {

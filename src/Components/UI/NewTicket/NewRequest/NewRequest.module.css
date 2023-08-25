@@ -144,7 +144,7 @@
 
 .subject {
     display: grid;
-    grid-template-columns: 60%;
+    grid-template-columns: 61%;
     margin-bottom: 1rem;
     gap: 0.5rem;
 }
@@ -162,13 +162,11 @@
 }
 
 /* end subject */
-
 .description {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: 61%;
     margin-bottom: 1rem;
+    gap: 0.5rem;
 }
 
 .attachment {

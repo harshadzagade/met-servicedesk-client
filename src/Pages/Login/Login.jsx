@@ -79,8 +79,12 @@ const Login = () => {
     <div className={`${classes.login}`}>
       <div className={classes.formPage}>
         <form className="login-form" onSubmit={(e) => getHome(e)}>
-          <input type="email" placeholder="email" ref={emailRef} required />
-          <input type="password" minLength={6} placeholder="password" ref={passwordRef} required />
+          <div className={`${classes.logo} mb-3`}>
+            <img src="/assets/img/met_logo.png" alt="" />
+          </div>
+          <h2>MET Helpdesk</h2>
+            <input type="email" placeholder="email" ref={emailRef} required />
+            <input type="password" minLength={6} placeholder="password" ref={passwordRef} required />
           <button type='submit'>login</button>
           <Link to='/forgotpassword'>Forgot Password</Link>
         </form>

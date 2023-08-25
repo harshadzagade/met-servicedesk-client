@@ -58,18 +58,18 @@ const SingleStaffDetails = () => {
               </div>
               <div className={classes.email}>
                 <label>Email:</label>
-                <p >{email}</p>
+                <p>{email}</p>
               </div>
               <div className={classes.Role}>
                 <label>Role:</label>
                 <p >{role === 'technician' ? 'engineer' : role}</p>
               </div>
               <div className={classes.phoneNo}>
-                <label >PhoneNo:</label>
+                <label>Phone Number:</label>
                 <p>{phoneNumber}</p>
               </div>
               <div className={classes.ContactEXT}>
-                <label >ContactEXT:</label>
+                <label>Contact Extension:</label>
                 <p >{contactExtension}</p>
               </div>
               <div className={classes.detailsBtns}>

@@ -63,14 +63,17 @@ const Department = () => {
             name: "Department",
             selector: (row) => row.department,
             sortable: true,
+            width: '300px',
         },
         {
             name: "Type",
-            selector: (row) => row.type
+            selector: (row) => row.type,
+            width: '300px',
         },
         {
             name: "Categories",
-            selector: (row) => row.type === 'service' ? row.category.toString() : 'No categories available'
+            selector: (row) => row.type === 'service' ? row.category.toString() : 'No categories available',
+            width: '300px',
         },
         {
             name: "Action",

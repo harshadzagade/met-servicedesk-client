@@ -8,9 +8,12 @@ import TicketDetailsContext from '../Context/TicketDetailsContext/TicketDetailsC
 import Navbar from '../UI/Navbar/Navbar';
 import getItemWithExpiry from '../../Utils/expiryFunction';
 import TicketCounterContext from '../Context/TicketCounterContext/TicketCounterContext';
+// import openSocket from 'socket.io-client';
+import AdminContext from '../Context/AdminContext/AdminContext';
 
 const Sidebar = ({ children }) => {
   const id = getItemWithExpiry('id');
+  const department = getItemWithExpiry('department');
   const ticketCtx = useContext(TicketDetailsContext);
   const [showTabs, setShowTabs] = useState(false);
   const [isHomeActive, setIsHomeActive] = useState(false);
@@ -27,6 +30,7 @@ const Sidebar = ({ children }) => {
   const [staffInfo, setStaffInfo] = useState({});
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
+  const adminCtx = useContext(AdminContext);
   const ticketCounterCtx = useContext(TicketCounterContext);
 
   useEffect(() => {
@@ -90,6 +94,13 @@ const Sidebar = ({ children }) => {
     });
   };
 
+  // useEffect(() => {
+  //   const socket = openSocket('');
+  //   socket.on('deletestaff', () => {
+  //     authCtx.onLogout();
+  //   });
+  // }, [authCtx]);
+
   if ((window.location.pathname !== `/requestdetails/${ticketCtx.ticketId}`) && (window.location.pathname !== `/concerndetails/${ticketCtx.ticketId}`) && (window.location.pathname !== `/adminrequestdetails/${ticketCtx.ticketId}`) && (window.location.pathname !== `/engineerconcerndetails/${ticketCtx.ticketId}`) && (window.location.pathname !== `/engineerrequestdetails/${ticketCtx.ticketId}`)) {
     ticketCtx.onClickHandler('', null, null)
   }
@@ -101,6 +112,47 @@ const Sidebar = ({ children }) => {
       setShowTabs(false);
     }
   }, [id]);
+
+  useEffect(() => {
+    const checkStaff = async () => {
+      switch (staffInfo.role) {
+        case 'superadmin':
+          if (staffInfo) {
+            ticketCounterCtx.setStaffDetails(id, staffInfo.department, 'superadmin');
+          }
+          break;
+
+        case 'admin':
+          if (adminCtx.department === '') {
+            adminCtx.setDepartment(staffInfo.department[0]);
+          }
+          if (adminCtx.department) {
+            ticketCounterCtx.setStaffDetails(id, adminCtx.department, 'admin');
+          }
+          break;
+
+        case 'subadmin':
+          if (staffInfo) {
+            ticketCounterCtx.setStaffDetails(id, staffInfo.department, 'subadmin');
+          }
+          break;
+
+        case 'technician':
+          ticketCounterCtx.setStaffDetails(id, department, 'technician');
+          break;
+
+        case 'user':
+          if (staffInfo) {
+            ticketCounterCtx.setStaffDetails(id, staffInfo.department, 'user');
+          }
+          break;
+
+        default:
+          break;
+      }
+    };
+    checkStaff();
+  }, [adminCtx, department, id, staffInfo, ticketCounterCtx]);
 
   useEffect(() => {
     switch (sessionStorage.getItem('tab')) {
@@ -427,6 +479,7 @@ const Sidebar = ({ children }) => {
     setIsReportActive(false);
     setIsFeedback(false);
   };
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -447,29 +500,29 @@ const Sidebar = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    const checkStaff = async () => {
-      try {
-        if (id) {
-          await axios.get(`/api/staff/checkstaffexistence/${id}`);
-        }
-      } catch (error) {
-        if (error.message === 'Staff not found') {
-          authCtx.onLogout();
-        } else {
-          console.log(error.message);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const checkStaff = async () => {
+  //     try {
+  //       if (id) {
+  //         await axios.get(`/api/staff/checkstaffexistence/${id}`);
+  //       }
+  //     } catch (error) {
+  //       if (error.message === 'Staff not found') {
+  //         authCtx.onLogout();
+  //       } else {
+  //         console.log(error.message);
+  //       }
+  //     }
+  //   };
 
-    const interval = setInterval(() => {
-      checkStaff();
-    }, 5000);
+  //   const interval = setInterval(() => {
+  //     checkStaff();
+  //   }, 5000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [authCtx, id]);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [authCtx, id]);
 
   return (
     <Fragment>

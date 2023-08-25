@@ -167,7 +167,7 @@ const TechnicianReport = () => {
         [
             {
                 name: "Ticket Type",
-                selector: (row) => (row.isRequest && 'Request') || (row.isComplaint && 'Complaint'),
+                selector: (row) => (row.isRequest && 'Request') || (row.isComplaint && 'Concern'),
                 sortable: true,
             },
             {
