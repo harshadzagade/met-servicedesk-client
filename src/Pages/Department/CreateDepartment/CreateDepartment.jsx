@@ -67,11 +67,15 @@ const CreateDepartment = (props) => {
           'success'
         );
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Unable to create department',
-          text: `${error.message}`
-        });
+        if (error.response.status === 422 || error.response.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: `${error.response.data.message}`,
+            text: 'Unable to create department'
+          });
+        } else {
+          console.log(error.message);
+        }
       }
     }
   };

@@ -19,11 +19,15 @@ const CreateInstitute = (props) => {
         'success'
       );
     } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Unable to create institute',
-        text: `${error.message}`
-      });
+      if (error.response.status === 422) {
+        Swal.fire({
+          icon: 'error',
+          title: `${error.response.data.message}`,
+          text: 'Unable to create institute'
+        });
+      } else {
+        console.log(error.message);
+      }
     }
   };
 

@@ -59,12 +59,16 @@ const AdminDetails = () => {
 
     useEffect(() => {
         const getComplaintDetails = async () => {
-            const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
-            setComplaintData(complaint.data.complaint);
-            if (complaint.data.complaint.behalf) {
-                setStaffId(complaint.data.complaint.behalfId);
-            } else {
-                setStaffId(complaint.data.complaint.staffId);
+            try {
+                const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
+                setComplaintData(complaint.data.complaint);
+                if (complaint.data.complaint.behalf) {
+                    setStaffId(complaint.data.complaint.behalfId);
+                } else {
+                    setStaffId(complaint.data.complaint.staffId);
+                }
+            } catch (error) {
+                console.log(error.message);
             }
         };
         getComplaintDetails();
@@ -169,7 +173,7 @@ const AdminDetails = () => {
                                                     <p className={classes.complaintDetailsp}>{behalfStaffName}</p>
                                                 </div>
                                             }
-                                              {
+                                            {
                                                 complaintData.isRepeated && <div className={classes.behalf}>
                                                     <label>Repeated:</label>
                                                     <p className={classes.complaintDetailsp}>{complaintData.isRepeated && 'Yes'}</p>

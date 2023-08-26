@@ -14,11 +14,15 @@ const SendOTP = (props) => {
             await axios.post('/api/staff/verifyOTP', { otp: enteredOTP.current.value });
             props.goToResetPassword();
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Please enter valid OTP',
-                text: `${error.message}`
-            });
+            if (error.response.status === 422 || error.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to verify OTP'
+                });
+            } else {
+                console.log(error.message);
+            }
         }
     };
 
@@ -28,11 +32,15 @@ const SendOTP = (props) => {
             setMinutes(1);
             setSeconds(0);
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Please enter valid OTP',
-                text: `${error.message}`
-            });
+            if (error.response.status === 422 || error.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to send OTP'
+                });
+            } else {
+                console.log(error.message);
+            }
         }
     };
 

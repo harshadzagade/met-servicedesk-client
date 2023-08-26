@@ -12,11 +12,15 @@ const VerfiyEmail = (props) => {
             props.goToVerify();
             props.emailAddress(emailRef.current.value)
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Please enter valid email',
-                text: `${error.message}`
-            });
+            if (error.response.status === 422 || error.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to send OTP'
+                });
+            } else {
+                console.log(error.message);
+            }
         }
     };
 

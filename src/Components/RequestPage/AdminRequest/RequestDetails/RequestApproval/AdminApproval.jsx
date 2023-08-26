@@ -5,6 +5,7 @@ import axios from 'axios';
 import AdminContext from '../../../../Context/AdminContext/AdminContext';
 import Rightside from '../../../../Righside/Rightside';
 import getItemWithExpiry from '../../../../../Utils/expiryFunction';
+import Swal from 'sweetalert2';
 
 const AdminApproval = () => {
     const loginId = getItemWithExpiry('id');
@@ -75,7 +76,15 @@ const AdminApproval = () => {
             }
             navigate('/request');
         } catch (error) {
-            console.log(error.message);
+            if (error.response.status === 422 || error.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to approve ticket'
+                });
+            } else {
+                console.log(error.message);
+            }
         }
     };
 

@@ -37,15 +37,19 @@ const Sidebar = ({ children }) => {
     const interval = setInterval(() => {
       const idItem = getItemWithExpiry('id');
       const tokenItem = getItemWithExpiry('token');
-      if (!idItem || !tokenItem) {
-        authCtx.onLogout();
-        navigate('/login');
+      if (!idItem && !tokenItem) {
+        if (window.location.pathname !== '/forgotpassword') {
+          authCtx.onLogout();
+          navigate('/login');
+        }
         return;
       }
       const now = new Date().getTime();
       if (now > idItem.expiry || now > tokenItem.expiry) {
-        authCtx.onLogout();
-        navigate('/login');
+        if (window.location.pathname !== '/forgotpassword') {
+          authCtx.onLogout();
+          navigate('/login');
+        }
         return;
       }
     }, 1000);

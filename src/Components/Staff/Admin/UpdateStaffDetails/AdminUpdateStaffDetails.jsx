@@ -31,14 +31,25 @@ const AdminUpdateStaffdetails = (props) => {
     }, [staff]);
 
     const handleSubmitClick = async (id, role) => {
-        await axios.put(`/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role }); 
-        props.onConfirm();
+        try {
+            await axios.put(`/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
+            props.onConfirm();
             Swal.fire(
                 'Update successfully',
                 'You have updated employee role successfully',
                 'success'
             );
-        
+        } catch (error) {
+            if (error.response.status === 422 || error.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to update employee'
+                });
+            } else {
+                console.log(error.message);
+            }
+        }
     };
 
     const handleChange = (e) => {

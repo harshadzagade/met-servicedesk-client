@@ -88,7 +88,15 @@ const TechnicianRequestAttendingForm = () => {
             );
             navigate('/request');
         } catch (error) {
-            console.log(error.message);
+            if (error.response.status === 422 || error.response.status === 401) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to change status'
+                });
+            } else {
+                console.log(error.message);
+            }
         } finally {
             setShowLoading(false);
         }

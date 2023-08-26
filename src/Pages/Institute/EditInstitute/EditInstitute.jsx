@@ -17,11 +17,15 @@ const EditInstitute = (props) => {
         'success'
       );
     } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Unable to edit institute',
-        text: `${error.message}`
-      });
+      if (error.response.status === 422 || error.response.status === 401) {
+        Swal.fire({
+            icon: 'error',
+            title: `${error.response.data.message}`,
+            text: 'Unable to edit institute'
+        });
+    } else {
+        console.log(error.message);
+    }
     }
   };
 

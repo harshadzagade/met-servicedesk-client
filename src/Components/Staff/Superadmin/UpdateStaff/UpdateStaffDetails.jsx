@@ -70,12 +70,11 @@ const UpdateStaffDetails = (props) => {
                     Swal.fire({
                         icon: 'error',
                         title: `${error.response.data.message}`,
-                        text: 'Unable to update staff'
+                        text: 'Unable to update employee'
                     });
                 } else {
                     console.log(error.message);
                 }
-
             }
         }
     };

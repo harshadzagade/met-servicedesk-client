@@ -106,11 +106,15 @@ const NewRequest = () => {
                 );
                 navigate('/request', { state: { refreshSuperHome: true } });
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Please enter valid fields',
-                    text: `${error.message}`
-                });
+                if (error.response.status === 422 || error.response.status === 401) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${error.response.data.message}`,
+                        text: 'Unable to create request'
+                    });
+                } else {
+                    console.log(error.message);
+                }
             } finally {
                 setShowLoading(false);
             }

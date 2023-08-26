@@ -27,11 +27,15 @@ const PasswordReset = (props) => {
         })
         props.goBackToLogin();
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Please enter a new password',
-          text: `${error.message}`
-        });
+        if (error.response.status === 422 || error.response.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: `${error.response.data.message}`,
+            text: 'Unable to set password'
+          });
+        } else {
+          console.log(error.message);
+        }
       }
     }
   };
@@ -41,10 +45,10 @@ const PasswordReset = (props) => {
       <div className={classes.sendOtp}>
         <div className={classes.OTPform}>
           <form className={classes.loginform} onSubmit={(e) => handleReset(e)}>
-          <div className={`${classes.logo} mb-3`}>
-            <img src="/assets/img/met_logo.png" alt="" />
-          </div>
-          <h2>MET Helpdesk</h2>
+            <div className={`${classes.logo} mb-3`}>
+              <img src="/assets/img/met_logo.png" alt="" />
+            </div>
+            <h2>MET Helpdesk</h2>
             <h3>Please enter below your new password</h3>
             <input type="password" minLength={6} placeholder="New-Password" required ref={passwordRef} />
             <input type="password" minLength={6} placeholder="confirm-password" required ref={confirmPasswordRef} />
