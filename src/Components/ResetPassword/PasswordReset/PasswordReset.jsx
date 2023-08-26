@@ -50,8 +50,8 @@ const PasswordReset = (props) => {
             </div>
             <h2>MET Helpdesk</h2>
             <h3>Please enter below your new password</h3>
-            <input type="password" minLength={6} placeholder="New-Password" required ref={passwordRef} />
-            <input type="password" minLength={6} placeholder="confirm-password" required ref={confirmPasswordRef} />
+            <input type="password" minLength={6} placeholder="New Password" required ref={passwordRef} />
+            <input type="password" minLength={6} placeholder="Confirm Password" required ref={confirmPasswordRef} />
             <button type='submit'>Submit</button>
           </form>
         </div>

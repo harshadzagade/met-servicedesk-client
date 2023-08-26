@@ -34,26 +34,24 @@ const Sidebar = ({ children }) => {
   const ticketCounterCtx = useContext(TicketCounterContext);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const idItem = getItemWithExpiry('id');
-      const tokenItem = getItemWithExpiry('token');
-      if (!idItem && !tokenItem) {
-        if (window.location.pathname !== '/forgotpassword') {
+    if (window.location.pathname !== '/login' && window.location.pathname !== '/forgotpassword') {
+      const interval = setInterval(() => {
+        const idItem = getItemWithExpiry('id');
+        const tokenItem = getItemWithExpiry('token');
+        if (!idItem && !tokenItem) {
           authCtx.onLogout();
           navigate('/login');
+          return;
         }
-        return;
-      }
-      const now = new Date().getTime();
-      if (now > idItem.expiry || now > tokenItem.expiry) {
-        if (window.location.pathname !== '/forgotpassword') {
+        const now = new Date().getTime();
+        if (now > idItem.expiry || now > tokenItem.expiry) {
           authCtx.onLogout();
           navigate('/login');
+          return;
         }
-        return;
-      }
-    }, 1000);
-    return () => clearInterval(interval);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
   }, [authCtx, navigate]);
 
   useEffect(() => {
