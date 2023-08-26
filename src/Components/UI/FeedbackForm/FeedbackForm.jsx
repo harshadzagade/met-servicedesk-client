@@ -19,7 +19,7 @@ const FeedbackForm = (props) => {
         };
         setShowLoading(true);
         try {
-            await axios.post('/api/feedback', feedbackData);
+            await axios.post('http://localhost:8001/api/feedback', feedbackData);
             Swal.fire(
                 'Feedback Submitted!',
                 'You have submitted feedback successfully',

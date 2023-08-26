@@ -23,7 +23,7 @@ const RequestDetails = () => {
     useEffect(() => {
         const getRequestDetails = async () => {
             try {
-                const request = await axios.get(`/api/request/getrequestdetails/${id}`);
+                const request = await axios.get(`http://localhost:8001/api/request/getrequestdetails/${id}`);
                 setRequestData(request.data.request);
                 if (request.data.request.behalf) {
                     setStaffId(request.data.request.behalfId);
@@ -41,7 +41,7 @@ const RequestDetails = () => {
         const getStaffDetails = async () => {
             try {
                 if (requestData.behalfId) {
-                    const behalf = await axios.get(`/api/staff/staffdetails/${requestData.behalfId}`);
+                    const behalf = await axios.get(`http://localhost:8001/api/staff/staffdetails/${requestData.behalfId}`);
                     setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
                 }
             } catch (error) {
@@ -75,7 +75,7 @@ const RequestDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`/api/request/downloadfile/${requestData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`http://localhost:8001/api/request/downloadfile/${requestData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;

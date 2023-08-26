@@ -24,7 +24,7 @@ const OutgoingDepartmentRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/staff/admin/requests/outgoing/${id}/${adminCtx.department}`);
+        const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoing/${id}/${adminCtx.department}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -45,7 +45,7 @@ const OutgoingDepartmentRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`/api/staff/admin/requests/outgoingrequestsearch/${adminCtx.department}/${searchText}`);
+          const request = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoingrequestsearch/${adminCtx.department}/${searchText}`);
           setAllRequestList(request.data);
           if (request.data.length === 0) {
             setErrorMessage('No such data')

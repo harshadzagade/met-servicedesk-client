@@ -31,7 +31,7 @@ const AdminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories`);
+            const categories = await axios.get(`http://localhost:8001/api/report/reportcategories/categories`);
             setCategories(categories.data.categories);
         };
         getCategories();
@@ -43,25 +43,25 @@ const AdminReport = () => {
                 try {
                     switch (ticketType) {
                         case 'allTicketTypes':
-                            const full = await axios.get(`/api/report/${selectedStaff}`);
+                            const full = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
                             setReportList(full.data.report);
                             setAllReportList(full.data.report);
                             break;
 
                         case 'requests':
-                            const requests = await axios.get(`/api/report/request/${selectedStaff}`);
+                            const requests = await axios.get(`http://localhost:8001/api/report/request/${selectedStaff}`);
                             setReportList(requests.data.report);
                             setAllReportList(requests.data.report);
                             break;
 
                         case 'complaints':
-                            const complaints = await axios.get(`/api/report/complaint/${selectedStaff}`);
+                            const complaints = await axios.get(`http://localhost:8001/api/report/complaint/${selectedStaff}`);
                             setReportList(complaints.data.report);
                             setAllReportList(complaints.data.report);
                             break;
 
                         default:
-                            const defaultValue = await axios.get(`/api/report/${selectedStaff}`);
+                            const defaultValue = await axios.get(`http://localhost:8001/api/report/${selectedStaff}`);
                             setReportList(defaultValue.data.report);
                             setAllReportList(defaultValue.data.report);
                             break;
@@ -78,7 +78,7 @@ const AdminReport = () => {
     useEffect(() => {
         const getStaffByDepartment = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffbydepartment/${adminCtx.department}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffbydepartment/${adminCtx.department}`);
                 setDepartmentStaff(staff.data.staff);
             } catch (error) {
                 console.log(error.message);
@@ -93,7 +93,7 @@ const AdminReport = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbycategory/${category}`);
+                    const report = await axios.get(`http://localhost:8001/api/report/reportbycategory/${category}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
@@ -111,7 +111,7 @@ const AdminReport = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbypriority/${priority}`);
+                    const report = await axios.get(`http://localhost:8001/api/report/reportbypriority/${priority}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
@@ -126,7 +126,7 @@ const AdminReport = () => {
     /* useEffect(() => {
         const getReportByDepartment = async () => {
             try {
-                const report = await axios.get(`/api/report/departmentreport/${adminCtx.department}`);
+                const report = await axios.get(`http://localhost:8001/api/report/departmentreport/${adminCtx.department}`);
                 setAllReportList(report.data.report);
             } catch (error) {
                 console.log(error.message);
@@ -184,7 +184,7 @@ const AdminReport = () => {
     useEffect(() => {
         const setCsvData = async () => {
             try {
-                const csv = await axios.post('/api/report/reportcsv', { reportData: allReportList });
+                const csv = await axios.post('http://localhost:8001/api/report/reportcsv', { reportData: allReportList });
                 setCsvFile(csv.data)
             } catch (error) {
                 console.log(error.message);

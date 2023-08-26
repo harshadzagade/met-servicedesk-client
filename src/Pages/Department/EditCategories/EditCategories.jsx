@@ -12,7 +12,7 @@ const EditCategories = (props) => {
     useEffect(() => {
         const getCategories = async () => {
             try {
-                const categories = await axios.get(`/api/department/categories/${props.departmentId}`);
+                const categories = await axios.get(`http://localhost:8001/api/department/categories/${props.departmentId}`);
                 setCategoriesList(categories.data.categories);
             } catch (error) {
                 console.log(error.message);
@@ -62,7 +62,7 @@ const EditCategories = (props) => {
             });
         } else {
             try {
-                await axios.put(`/api/department/editcategories/${props.departmentId}`, {
+                await axios.put(`http://localhost:8001/api/department/editcategories/${props.departmentId}`, {
                     category: categoriesList
                 });
                 props.onConfirm();

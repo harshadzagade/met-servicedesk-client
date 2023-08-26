@@ -18,7 +18,7 @@ const Department = () => {
     useEffect(() => {
         const getDepartmentData = async () => {
             try {
-                const departments = await axios.get('/api/department/')
+                const departments = await axios.get('http://localhost:8001/api/department/')
                 setDepartmentData(departments.data.departmentData);
                 setFilteredDepartments(departments.data.departmentData);
                 setRefresh(false);
@@ -40,7 +40,7 @@ const Department = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`/api/department/deletedepartment/${id}`);
+                axios.delete(`http://localhost:8001/api/department/deletedepartment/${id}`);
                 setRefresh(true);
                 Swal.fire(
                     'Department Deleted!',

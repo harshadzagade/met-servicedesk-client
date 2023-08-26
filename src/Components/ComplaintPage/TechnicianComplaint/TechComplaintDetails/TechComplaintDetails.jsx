@@ -25,7 +25,7 @@ const TechComplaintDetails = () => {
     useEffect(() => {
         setRefresh(true);
         const getComplaintDetails = async () => {
-            const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
+            const complaint = await axios.get(`http://localhost:8001/api/complaint/getcomplaintdetails/${id}`);
             setComplaintData(complaint.data.complaint);
             if (complaint.data.complaint.behalf) {
                 setStaffId(complaint.data.complaint.behalfId);
@@ -40,7 +40,7 @@ const TechComplaintDetails = () => {
     const handleSelfAssign = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`/api/staff/technician/selfassigncomplaint/${id}/${ownId}`);
+            await axios.put(`http://localhost:8001/api/staff/technician/selfassigncomplaint/${id}/${ownId}`);
             setRefresh(true);
         } catch (error) {
             console.log(error.message);
@@ -51,7 +51,7 @@ const TechComplaintDetails = () => {
         const getStaffDetails = async () => {
             try {
                 if (complaintData.behalfId) {
-                    const behalf = await axios.get(`/api/staff/staffdetails/${complaintData.behalfId}`);
+                    const behalf = await axios.get(`http://localhost:8001/api/staff/staffdetails/${complaintData.behalfId}`);
                     setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
                 }
             } catch (error) {
@@ -88,7 +88,7 @@ const TechComplaintDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`http://localhost:8001/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;

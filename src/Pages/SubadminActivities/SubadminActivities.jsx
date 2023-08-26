@@ -41,10 +41,10 @@ const SubadminActivities = () => {
     };
 
     useEffect(() => {
-        const socket = openSocket('')
+        const socket = openSocket('http://localhost:8001')
         const getActivities = async () => {
             try {
-                const activities = await axios.get(`/api/staff/admin/subadminactivities/${id}/${adminCtx.department}`);
+                const activities = await axios.get(`http://localhost:8001/api/staff/admin/subadminactivities/${id}/${adminCtx.department}`);
                 if (activities.data.activities) {
                     setSubadminActivities(activities.data.activities.activities);
                     setAllSubadminActivities(activities.data.activities.activities);

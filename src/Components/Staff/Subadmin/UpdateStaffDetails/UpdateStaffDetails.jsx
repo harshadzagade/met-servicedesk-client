@@ -18,7 +18,7 @@ const UpdateStaffDetails = (props) => {
     useEffect(() => {
         const fetchStaff = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id.staffId}`);
                 setStaff(staff.data.staff);
             } catch (error) {
                 console.log(error.message);
@@ -34,7 +34,7 @@ const UpdateStaffDetails = (props) => {
     const handleSubmitClick = async (id, role) => {
         try {
             setShowLoading(true);
-            await axios.put(`/api/staff/subadmin/staffdetails/updateStaff/${id}`, { subadminId: subadminId, role: role });
+            await axios.put(`http://localhost:8001/api/staff/subadmin/staffdetails/updateStaff/${id}`, { subadminId: subadminId, role: role });
             Swal.fire(
                 'Updated employee role',
                 'You have updated employee role successfully',

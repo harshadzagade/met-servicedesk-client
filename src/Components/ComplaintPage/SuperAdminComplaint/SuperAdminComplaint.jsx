@@ -21,10 +21,10 @@ const SuperAdminComplaint = () => {
     const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
     useEffect(() => {
-        const socket = openSocket('');
+        const socket = openSocket('http://localhost:8001');
         const getList = async () => {
             try {
-                const list = await axios.get(`/api/complaint/allcomplaints`);
+                const list = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
                 if (list.data.complaints.length === 0) {
                     setErrorMessage('No concern available')
                 }
@@ -45,7 +45,7 @@ const SuperAdminComplaint = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const complaint = await axios.get(`/api/complaint/searchallcomplaints/${searchText}`);
+                    const complaint = await axios.get(`http://localhost:8001/api/complaint/searchallcomplaints/${searchText}`);
                     setAllComplaintList(complaint.data);
                     if (complaint.data.length === 0) {
                         setErrorMessage('No such data')

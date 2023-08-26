@@ -19,7 +19,7 @@ const Institute = () => {
     useEffect(() => {
         const getInstitutes = async () => {
             try {
-                const institutes = await axios.get(`/api/institute/`);
+                const institutes = await axios.get(`http://localhost:8001/api/institute/`);
                 setInstitutes(institutes.data.instituteData);
                 setFilterInstitutes(institutes.data.instituteData);
                 setRefresh(false);
@@ -41,7 +41,7 @@ const Institute = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`/api/institute/deleteinstitute/${id}`);
+                axios.delete(`http://localhost:8001/api/institute/deleteinstitute/${id}`);
                 setRefresh(true);
                 Swal.fire(
                     'Institute Deleted!',

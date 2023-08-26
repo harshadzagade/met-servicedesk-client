@@ -9,7 +9,7 @@ const EditInstitute = (props) => {
 
   const handleEditSubmit = async () => {
     try {
-      await axios.put(`/api/institute/editinstitute/${props.instituteId}`, { instituteName: instituteRef.current.value });
+      await axios.put(`http://localhost:8001/api/institute/editinstitute/${props.instituteId}`, { instituteName: instituteRef.current.value });
       props.onConfirm();
       Swal.fire(
         'Institute Edited!',

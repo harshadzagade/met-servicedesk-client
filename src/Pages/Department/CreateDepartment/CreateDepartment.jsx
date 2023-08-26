@@ -59,7 +59,7 @@ const CreateDepartment = (props) => {
           type: departmentType,
           category: departmentType === 'service' ? categoriesList : null
         };
-        await axios.post(`/api/department/createdepartment`, data);
+        await axios.post(`http://localhost:8001/api/department/createdepartment`, data);
         props.onConfirm();
         Swal.fire(
           'Department Created!',

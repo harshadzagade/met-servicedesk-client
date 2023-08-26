@@ -24,7 +24,7 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/staff/admin/complaints/outgoing/${id}/${adminCtx.department}`);
+        const list = await axios.get(`http://localhost:8001/api/staff/admin/complaints/outgoing/${id}/${adminCtx.department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
@@ -45,7 +45,7 @@ const OutgoingComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`/api/staff/admin/complaints/outgoingcomplaintsearch/${adminCtx.department}/${searchText}`);
+          const complaint = await axios.get(`http://localhost:8001/api/staff/admin/complaints/outgoingcomplaintsearch/${adminCtx.department}/${searchText}`);
           setAllComplaintList(complaint.data);
           if (complaint.data.length === 0) {
             setErrorMessage('No such data')

@@ -24,8 +24,8 @@ const TechnicianAttendingForm = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technician = await axios.get(`/api/staff/staffdetails/${loginId}`);
-                const technicians = await axios.get(`/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department}`);
+                const technician = await axios.get(`http://localhost:8001/api/staff/staffdetails/${loginId}`);
+                const technicians = await axios.get(`http://localhost:8001/api/staff/technician/techniciandepartmenttechnicians/${loginId}/${technician.data.staff.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 console.log(error.message);
@@ -63,7 +63,7 @@ const TechnicianAttendingForm = () => {
         }
         try {
             setShowLoading(true);
-            await axios.put(`/api/staff/technician/changecomplaintstatus/${id}`, data);
+            await axios.put(`http://localhost:8001/api/staff/technician/changecomplaintstatus/${id}`, data);
             Swal.fire(
                 'Changed status',
                 'You have changed status successfully',

@@ -97,7 +97,7 @@ const Sidebar = ({ children }) => {
   };
 
   // useEffect(() => {
-  //   const socket = openSocket('');
+  //   const socket = openSocket('http://localhost:8001');
   //   socket.on('deletestaff', () => {
   //     authCtx.onLogout();
   //   });
@@ -486,7 +486,7 @@ const Sidebar = ({ children }) => {
     const getUserInfo = async () => {
       try {
         if (id) {
-          const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+          const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
           setStaffInfo(staff.data.staff);
         }
       } catch (error) {
@@ -506,7 +506,7 @@ const Sidebar = ({ children }) => {
   //   const checkStaff = async () => {
   //     try {
   //       if (id) {
-  //         await axios.get(`/api/staff/checkstaffexistence/${id}`);
+  //         await axios.get(`http://localhost:8001/api/staff/checkstaffexistence/${id}`);
   //       }
   //     } catch (error) {
   //       if (error.message === 'Staff not found') {

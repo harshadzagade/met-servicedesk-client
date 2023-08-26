@@ -22,7 +22,7 @@ const TechnicianAssignRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/staff/technician/getassignedrequests/${id}`);
+        const list = await axios.get(`http://localhost:8001/api/staff/technician/getassignedrequests/${id}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -39,7 +39,7 @@ const TechnicianAssignRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`/api/staff/technician/assignedrequestsearch/${id}/${searchText}`);
+          const request = await axios.get(`http://localhost:8001/api/staff/technician/assignedrequestsearch/${id}/${searchText}`);
           setAllRequestList(request.data);
           if (request.data.length === 0) {
             setErrorMessage('No such data')

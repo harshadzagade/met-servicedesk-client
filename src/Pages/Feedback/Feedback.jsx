@@ -10,7 +10,7 @@ const Feedback = () => {
   useEffect(() => {
     const getFeedback = async () => {
       try {
-        const feedback = await axios.get(`/api/feedback/allfeedbacks/${adminCtx.department}`);
+        const feedback = await axios.get(`http://localhost:8001/api/feedback/allfeedbacks/${adminCtx.department}`);
         setFeedback(feedback.data.feedback);
       } catch (error) {
         console.log(error.message);

@@ -24,7 +24,7 @@ const DepartmentComplaint = () => {
   useEffect(() => {
     const getStaffDetails = async () => {
       try {
-        const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+        const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
         setStaff(staff.data.staff);
       } catch (error) {
         console.log(error.message);
@@ -36,7 +36,7 @@ const DepartmentComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/complaint/complaints/incoming/${department}`);
+        const list = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -53,7 +53,7 @@ const DepartmentComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`/api/complaint/complaints/incomingcomplaintsearch/${staff.department}/${searchText}`);
+          const complaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incomingcomplaintsearch/${staff.department}/${searchText}`);
           setAllComplaintList(complaint.data);
           if (complaint.data.length === 0) {
             setErrorMessage('No such data')

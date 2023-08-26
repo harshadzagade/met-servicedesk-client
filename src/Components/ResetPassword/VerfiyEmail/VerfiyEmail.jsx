@@ -8,7 +8,7 @@ const VerfiyEmail = (props) => {
     const handleSendOTP = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/staff/sendOTP', { email: emailRef.current.value });
+            await axios.post('http://localhost:8001/api/staff/sendOTP', { email: emailRef.current.value });
             props.goToVerify();
             props.emailAddress(emailRef.current.value)
         } catch (error) {

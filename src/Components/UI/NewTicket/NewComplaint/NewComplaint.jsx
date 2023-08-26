@@ -30,7 +30,7 @@ const NewCompaint = () => {
     useEffect(() => {
         const getStaffDetails = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 setStaff(staff.data.staff);
             } catch (error) {
                 console.log(error.message);
@@ -51,7 +51,7 @@ const NewCompaint = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`/api/department/departments`);
+                const departments = await axios.get(`http://localhost:8001/api/department/departments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 console.log(error.message);
@@ -64,7 +64,7 @@ const NewCompaint = () => {
         const getCategories = async () => {
             try {
                 if (department.length !== 0) {
-                    const categories = await axios.get(`/api/department/categoriesbydepartment/${department}`);
+                    const categories = await axios.get(`http://localhost:8001/api/department/categoriesbydepartment/${department}`);
                     setCategories(categories.data.categories);
                 }
             } catch (error) {
@@ -99,7 +99,7 @@ const NewCompaint = () => {
             formData.append('isRepeated', isRepeated);
             try {
                 setShowLoading(true);
-                await axios.post('/api/complaint/', formData);
+                await axios.post('http://localhost:8001/api/complaint/', formData);
                 Swal.fire(
                     'Concern Created!',
                     'You have created concern successfully',

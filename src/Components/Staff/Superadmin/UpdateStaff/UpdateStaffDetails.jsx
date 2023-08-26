@@ -21,7 +21,7 @@ const UpdateStaffDetails = (props) => {
     useEffect(() => {
         const fetchStaff = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id.staffId}`);
                 setStaff(staff.data.staff);
                 setDepartmentList(staff.data.staff.department);
                 setInstitute(staff.data.staff.institute);
@@ -58,7 +58,7 @@ const UpdateStaffDetails = (props) => {
             });
         } else {
             try {
-                await axios.put(`/api/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
+                await axios.put(`http://localhost:8001/api/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
                 Swal.fire(
                     'Update Employee',
                     'You have updated employee successfully',
@@ -82,7 +82,7 @@ const UpdateStaffDetails = (props) => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`/api/department/alldepartments`);
+                const departments = await axios.get(`http://localhost:8001/api/department/alldepartments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 console.log(error.message);
@@ -94,7 +94,7 @@ const UpdateStaffDetails = (props) => {
     useEffect(() => {
         const getInstitutes = async () => {
             try {
-                const institutes = await axios.get(`/api/institute/`);
+                const institutes = await axios.get(`http://localhost:8001/api/institute/`);
                 setInstitutes(institutes.data.instituteData);
             } catch (error) {
                 console.log(error.message);

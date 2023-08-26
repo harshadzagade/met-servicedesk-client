@@ -11,12 +11,12 @@ const TicketDetailsProvider = props => {
     const [complaintStatus, setComplaintStatus] = useState({ pending: '', attending: '', forwarded: '', closed: '' });
 
     useEffect(() => {
-        const socket = openSocket('');
+        const socket = openSocket('http://localhost:8001');
         let pending, disapproved, assigned, attending, forwarded, closed;
         const checkRequestAuth = async () => {
             switch (role) {
                 case 'superadmin':
-                    const superadminList = await axios.get(`/api/request/allrequests`);
+                    const superadminList = await axios.get(`http://localhost:8001/api/request/allrequests`);
                     const superadminRequestList = superadminList.data.requests;
                     pending = superadminRequestList.filter((data) => data.status.startsWith('pending'));
                     disapproved = superadminRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -28,7 +28,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'admin':
-                    const adminList = await axios.get(`/api/staff/admin/requests/incoming/${department}`);
+                    const adminList = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${department}`);
                     const adminRequestList = adminList.data.requests;
                     pending = adminRequestList.filter((data) => data.status.startsWith('pending'));
                     disapproved = adminRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -40,7 +40,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'subadmin':
-                    const subadminList = await axios.get(`/api/staff/subadmin/requests/incoming/${department}`);
+                    const subadminList = await axios.get(`http://localhost:8001/api/staff/subadmin/requests/incoming/${department}`);
                     const subadminRequestList = subadminList.data.requests;
                     pending = subadminRequestList.filter((data) => data.status.startsWith('pending'));
                     disapproved = subadminRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -52,7 +52,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'technician':
-                    const technicianList = await axios.get(`/api/staff/admin/requests/incoming/${department}`);
+                    const technicianList = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${department}`);
                     const technicianRequestList = technicianList.data.requests;
                     pending = technicianRequestList.filter((data) => data.status.startsWith('pending'));
                     disapproved = technicianRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -64,7 +64,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'user':
-                    const userList = await axios.get(`/api/request/ownrequests/${id}`);
+                    const userList = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
                     const userRequestList = userList.data.requests;
                     pending = userRequestList.filter((data) => data.status.startsWith('pending'));
                     disapproved = userRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -81,7 +81,7 @@ const TicketDetailsProvider = props => {
         const checkComplaintAuth = async () => {
             switch (role) {
                 case 'superadmin':
-                    const superadminList = await axios.get(`/api/complaint/allcomplaints`);
+                    const superadminList = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
                     const superadminComplaintList = superadminList.data.complaints;
                     pending = superadminComplaintList.filter((data) => data.status.startsWith('pending'));
                     attending = superadminComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -91,7 +91,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'admin':
-                    const adminList = await axios.get(`/api/complaint/complaints/incoming/${department}`);
+                    const adminList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${department}`);
                     const adminComplaintList = adminList.data.complaints;
                     pending = adminComplaintList.filter((data) => data.status.startsWith('pending'));
                     attending = adminComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -101,7 +101,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'subadmin':
-                    const subadminList = await axios.get(`/api/complaint/complaints/incoming/${department}`);
+                    const subadminList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${department}`);
                     const subadminComplaintList = subadminList.data.complaints;
                     pending = subadminComplaintList.filter((data) => data.status.startsWith('pending'));
                     attending = subadminComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -111,7 +111,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'technician':
-                    const technicianList = await axios.get(`/api/complaint/complaints/incoming/${department}`);
+                    const technicianList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${department}`);
                     const technicianComplaintList = technicianList.data.complaints;
                     pending = technicianComplaintList.filter((data) => data.status.startsWith('pending'));
                     attending = technicianComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -121,7 +121,7 @@ const TicketDetailsProvider = props => {
                     break;
 
                 case 'user':
-                    const userList = await axios.get(`/api/complaint/owncomplaints/${id}`);
+                    const userList = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
                     const userComplaintList = userList.data.complaints;
                     pending = userComplaintList.filter((data) => data.status.startsWith('pending'));
                     attending = userComplaintList.filter((data) => data.status.startsWith('attending'));

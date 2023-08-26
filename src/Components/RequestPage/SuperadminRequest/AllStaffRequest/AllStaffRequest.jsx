@@ -21,10 +21,10 @@ const AllStaffRequest = () => {
     const sortedData = React.useMemo(() => { return [...requestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [requestList]);
 
     useEffect(() => {
-        const socket = openSocket('');
+        const socket = openSocket('http://localhost:8001');
         const getList = async () => {
             try {
-                const list = await axios.get(`/api/request/allrequests`);
+                const list = await axios.get(`http://localhost:8001/api/request/allrequests`);
                 if (list.data.requests.length === 0) {
                     setErrorMessage('No requests available')
                 }
@@ -44,7 +44,7 @@ const AllStaffRequest = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const request = await axios.get(`/api/request/searchallrequests/${searchText}`);
+                    const request = await axios.get(`http://localhost:8001/api/request/searchallrequests/${searchText}`);
                     setAllRequestList(request.data);
                     if (request.data.length === 0) {
                         setErrorMessage('No such data')

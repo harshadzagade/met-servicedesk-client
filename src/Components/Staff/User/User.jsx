@@ -10,7 +10,7 @@ const User = () => {
     useEffect(() => {
         const getUserName = async () => {
             try {
-                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
                 setUserDetails(staff.data.staff);
             } catch (error) {
                 console.log(error.message);

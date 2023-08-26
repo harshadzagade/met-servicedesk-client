@@ -11,7 +11,7 @@ const SendOTP = (props) => {
     const handleOTPVerification = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('/api/staff/verifyOTP', { otp: enteredOTP.current.value });
+            await axios.post('http://localhost:8001/api/staff/verifyOTP', { otp: enteredOTP.current.value });
             props.goToResetPassword();
         } catch (error) {
             if (error.response.status === 422 || error.response.status === 401) {
@@ -28,7 +28,7 @@ const SendOTP = (props) => {
 
     const handleResendOTP = async () => {
         try {
-            await axios.post('/api/staff/sendOTP', { email: props.getEmail });
+            await axios.post('http://localhost:8001/api/staff/sendOTP', { email: props.getEmail });
             setMinutes(1);
             setSeconds(0);
         } catch (error) {

@@ -21,7 +21,7 @@ const Login = () => {
   const checkLogin = async () => {
     if (getItemWithExpiry('id')) {
       try {
-        const staff = await axios.get(`/api/staff/staffdetails/${getItemWithExpiry('id')}`);
+        const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${getItemWithExpiry('id')}`);
         ctx.onLogin(staff.data.staff.email);
       } catch (error) {
         console.log(error.message);
@@ -40,7 +40,7 @@ const Login = () => {
     }
     let loginStaff;
     try {
-      loginStaff = await axios.post('/api/', staffInfo);
+      loginStaff = await axios.post('http://localhost:8001/api/', staffInfo);
       const now = new Date();
       const expirationTime = now.getTime() + 8 * 60 * 60 * 1000;
       const loginId = {

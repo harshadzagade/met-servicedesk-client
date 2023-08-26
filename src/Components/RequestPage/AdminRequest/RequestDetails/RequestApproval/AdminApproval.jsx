@@ -39,7 +39,7 @@ const AdminApproval = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technicians = await axios.get(`/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
+                const technicians = await axios.get(`http://localhost:8001/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 navigate('/request');
@@ -70,9 +70,9 @@ const AdminApproval = () => {
         };
         try {
             if (isApproval2) {
-                await axios.put(`/api/staff/admin/approval2/${id}`, approval2data);
+                await axios.put(`http://localhost:8001/api/staff/admin/approval2/${id}`, approval2data);
             } else {
-                await axios.put(`/api/staff/admin/approval1/${id}`, approval1data);
+                await axios.put(`http://localhost:8001/api/staff/admin/approval1/${id}`, approval1data);
             }
             navigate('/request');
         } catch (error) {

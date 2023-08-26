@@ -47,7 +47,7 @@ const AllStaff = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const list = await axios.get('/api/staff/superadmin/allstafflist');
+                const list = await axios.get('http://localhost:8001/api/staff/superadmin/allstafflist');
                 setStaffList(list.data.totalStaff);
                 setAllStaffList(list.data.totalStaff)
             } catch (error) {
@@ -61,7 +61,7 @@ const AllStaff = () => {
         const getStaff = async () => {
             try {
                 if (query) {
-                    const staff = await axios.get(`/api/staff/superadmin/searchallstaff/${query}`);
+                    const staff = await axios.get(`http://localhost:8001/api/staff/superadmin/searchallstaff/${query}`);
                     setAllStaffList(staff.data);
                 } else {
                     setAllStaffList(sortedData);

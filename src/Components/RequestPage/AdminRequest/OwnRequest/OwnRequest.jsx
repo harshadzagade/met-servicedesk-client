@@ -24,7 +24,7 @@ const OwnRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`/api/request/ownrequests/${id}`);
+        const list = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -45,7 +45,7 @@ const OwnRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`/api/request/ownrequestsearch/${id}/${searchText}`);
+          const request = await axios.get(`http://localhost:8001/api/request/ownrequestsearch/${id}/${searchText}`);
           setAllRequestList(request.data);
           if (request.data.length === 0) {
             setErrorMessage('No such data')
