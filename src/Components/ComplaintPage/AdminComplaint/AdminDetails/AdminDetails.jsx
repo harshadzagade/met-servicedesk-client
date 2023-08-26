@@ -9,6 +9,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
+import Swal from 'sweetalert2';
 
 const AdminDetails = () => {
     const navigate = useNavigate();
@@ -31,6 +32,11 @@ const AdminDetails = () => {
         try {
             if (technicianId) {
                 await axios.put(`/api/staff/admin/assigncomplaint/${id}`, { assignId: technicianId });
+                Swal.fire(
+                    'Assigned concern',
+                    'Engineer assigned to a concern successfully',
+                    'success'
+                );
             }
         } catch (error) {
             console.log(error.message);

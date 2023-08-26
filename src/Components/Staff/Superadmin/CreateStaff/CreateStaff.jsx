@@ -30,8 +30,8 @@ const CreateStaff = () => {
             institute: institute,
             department: [department],
             departmentType: departmentType,
-            phoneNumber: phoneRef.current.value.length !== 0? phoneRef.current.value : null,
-            contactExtension: extensionRef.current.value.length !== 0? extensionRef.current.value : null
+            phoneNumber: phoneRef.current.value.length !== 0 ? phoneRef.current.value : null,
+            contactExtension: extensionRef.current.value.length !== 0 ? extensionRef.current.value : null
         };
         try {
             await axios.post('/api/staff/superadmin/createStaff', data);
@@ -43,11 +43,16 @@ const CreateStaff = () => {
             navigate('/', { state: { refreshSuperHome: true } });
             sessionStorage.setItem('tab', 'home');
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Unable to create staff',
-                text: `${error.message}`
-            });
+            if (error.response.status === 422) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to create staff'
+                });
+            } else {
+                console.log(error.message);
+            }
+
         }
     };
 

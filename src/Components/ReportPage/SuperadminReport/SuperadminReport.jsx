@@ -139,6 +139,18 @@ const SuperadminReport = () => {
         }
     }, [category, openCategoryList, sortedData]);
 
+    /* useEffect(() => {
+        const getReportByDepartment = async () => {
+            try {
+                const report = await axios.get(`/api/report/departmentreport/${selectedDepartment}`);
+                setAllReportList(report.data.report);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        getReportByDepartment();
+    }, [selectedDepartment]); */
+
     useEffect(() => {
         const getRequestByPriority = async () => {
             try {

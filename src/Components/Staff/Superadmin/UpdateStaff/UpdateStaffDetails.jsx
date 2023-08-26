@@ -59,13 +59,23 @@ const UpdateStaffDetails = (props) => {
         } else {
             try {
                 await axios.put(`/api/staff/superadmin/staffdetails/updateStaff/${id}`, updates);
+                Swal.fire(
+                    'Update Employee',
+                    'You have updated employee successfully',
+                    'success'
+                );
                 props.onConfirm();
             } catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Unable to update staff',
-                    text: `${error.message}`
-                });
+                if (error.response.status === 422 || error.response.status === 401 || error.response.status === 409) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: `${error.response.data.message}`,
+                        text: 'Unable to update staff'
+                    });
+                } else {
+                    console.log(error.message);
+                }
+
             }
         }
     };

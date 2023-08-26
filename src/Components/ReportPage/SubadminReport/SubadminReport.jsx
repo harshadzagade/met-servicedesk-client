@@ -42,6 +42,18 @@ const SubadminReport = () => {
         getSubadminDetails();
     }, [id]);
 
+    /* useEffect(() => {
+        const getReportByDepartment = async () => {
+            try {
+                const report = await axios.get(`/api/report/departmentreport/${subadminDetails.department}`);
+                setAllReportList(report.data.report);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        getReportByDepartment();
+    }, [subadminDetails.department]); */
+
     useEffect(() => {
         const getCategories = async () => {
             const categories = await axios.get(`/api/report/reportcategories/categories`);

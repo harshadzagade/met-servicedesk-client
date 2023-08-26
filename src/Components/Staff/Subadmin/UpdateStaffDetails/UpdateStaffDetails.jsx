@@ -67,7 +67,6 @@ const UpdateStaffDetails = (props) => {
                 <div className={classes.detail}>
                     {showLoading && (
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <h1>Updating role</h1>
                             <div className='d-flex justify-content-center'>
                                 <Bars
                                     height="80"

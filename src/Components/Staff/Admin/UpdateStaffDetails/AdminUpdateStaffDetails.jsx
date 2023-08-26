@@ -31,8 +31,14 @@ const AdminUpdateStaffdetails = (props) => {
     }, [staff]);
 
     const handleSubmitClick = async (id, role) => {
-        await axios.put(`/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
+        await axios.put(`/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role }); 
         props.onConfirm();
+            Swal.fire(
+                'Update successfully',
+                'You have updated employee role successfully',
+                'success'
+            );
+        
     };
 
     const handleChange = (e) => {

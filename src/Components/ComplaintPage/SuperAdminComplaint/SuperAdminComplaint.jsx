@@ -7,6 +7,7 @@ import axios from 'axios';
 import DataPerPage from '../../UI/DataPerPage/DataPerPage';
 import Rightside from '../../Righside/Rightside';
 import openSocket from 'socket.io-client';
+import { Fragment } from 'react';
 
 const SuperAdminComplaint = () => {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ const SuperAdminComplaint = () => {
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
     const [searchText, setSearchText] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
@@ -23,6 +25,9 @@ const SuperAdminComplaint = () => {
         const getList = async () => {
             try {
                 const list = await axios.get(`/api/complaint/allcomplaints`);
+                if (list.data.complaints.length === 0) {
+                    setErrorMessage('No concern available')
+                }
                 setComplaintList(list.data.complaints);
                 setAllComplaintList(list.data.complaints);
             } catch (error) {
@@ -42,6 +47,9 @@ const SuperAdminComplaint = () => {
                 if (searchText) {
                     const complaint = await axios.get(`/api/complaint/searchallcomplaints/${searchText}`);
                     setAllComplaintList(complaint.data);
+                    if (complaint.data.length === 0) {
+                        setErrorMessage('No such data')
+                    }
                 } else {
                     setAllComplaintList(sortedData);
                 }
@@ -93,39 +101,48 @@ const SuperAdminComplaint = () => {
                                 <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                             </div>
                         </div>
+
                         <div className={`${classes.complaint} `}>
                             {
-                                currentPageData.map((complaint) => (
-                                    <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)} >
-                                        <div className={`${classes.tikHead}`}>
-                                            <h3 className={`${classes.tikTitle}`}>
-                                                {complaint.subject}
-                                            </h3>
-                                            <span className={`${classes.date}`}>
-                                                {getCreatedComplaintDate(complaint.createdAt)}
-                                            </span>
-                                        </div>
-                                        <div className={`${classes.tikMsg}`}>
-                                            <span dangerouslySetInnerHTML={{ __html: complaint.description }}></span>
-                                        </div>
-                                        <div className={`${classes.tikOther}`}>
-                                            <p className={`${classes.tikId}`} >
-                                                {complaint.ticketId}
-                                            </p>
-                                            <p className={`${classes.tikId} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
-                                                {complaint.priority}
-                                            </p>
-                                            <p className={`${classes.tikId}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'],['disapproved', () => '#2e2a2b'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
-                                                {complaint.status}
-                                            </p>
-                                            <p className={`${classes.tikAssigned}`}>
-                                                {complaint.assignedName ? 'Assigned to ' + complaint.assignedName : 'Not assigned yet'}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))
+                                (allComplaintList.length !== 0) ?
+                                    <Fragment>
+                                        {
+                                            currentPageData.map((complaint) => (
+                                                <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)} >
+                                                    <div className={`${classes.tikHead}`}>
+                                                        <h3 className={`${classes.tikTitle}`}>
+                                                            {complaint.subject}
+                                                        </h3>
+                                                        <span className={`${classes.date}`}>
+                                                            {getCreatedComplaintDate(complaint.createdAt)}
+                                                        </span>
+                                                    </div>
+                                                    <div className={`${classes.tikMsg}`}>
+                                                        <span dangerouslySetInnerHTML={{ __html: complaint.description }}></span>
+                                                    </div>
+                                                    <div className={`${classes.tikOther}`}>
+                                                        <p className={`${classes.tikId}`} >
+                                                            {complaint.ticketId}
+                                                        </p>
+                                                        <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#FF0000'], ['moderate', () => '#FFFF00'], ['low', () => '#90EE90']) }}>
+                                                            {complaint.priority}
+                                                        </p>
+                                                        <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#D3D3D3'], ['forwarded', () => '#FFA500'], ['attending', () => ' #00FFFF'], ['assigned', () => '#800080'], ['closed', () => '#A9A9A9']) }}>
+                                                            {complaint.status}
+                                                        </p>
+                                                        <p className={`${classes.tikAssigned}`}>
+                                                            {complaint.assignedName ? 'Assigned to ' + complaint.assignedName : 'Not assigned yet'}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                    </Fragment>
+                                    :
+                                    <div>{errorMessage}</div>
                             }
                             <SweetPagination currentPageData={setCurrentPageData} dataPerPage={numberOfPages} getData={allComplaintList} navigation={true} />
+
                         </div>
                     </div>
                     <div className="col-12 col-md-4 mt-4 mt-md-0">

@@ -50,6 +50,9 @@ const IncomingRequest = () => {
         if (searchText) {
           const request = await axios.get(`/api/staff/admin/requests/incomingrequestsearch/${adminCtx.department}/${searchText}`);
           setAllRequestList(request.data);
+          if (request.data.length === 0) {
+            setErrorMessage('No such data')
+          }
         } else {
           setAllRequestList(sortedData);
         }
@@ -92,7 +95,7 @@ const IncomingRequest = () => {
       </div>
       <div className={`${classes.requests} `}>
         {
-          allRequestList.length !== 0 ?
+          (allRequestList.length !== 0) ?
             <Fragment>
               {
                 currentPageData.map((request) => (
@@ -114,10 +117,10 @@ const IncomingRequest = () => {
                       <p className={`${classes.tikId}`}>
                         {request.ticketId}
                       </p>
-                      <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#FF0000'], ['moderate', () => '#FFFF00'], ['low', () => '#90EE90']) }}>
                         {request.priority}
                       </p>
-                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'],['disapproved', () => '#2e2a2b'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#D3D3D3'], ['disapproved', () => '#FF0000'], ['forwarded', () => '#FFA500'], ['attending', () => ' #00FFFF'], ['assigned', () => '#0000FF'], ['closed', () => '#A9A9A9']) }}>
                         {request.status}
                       </p>
                       <p className={`${classes.tikAssigned}`}>

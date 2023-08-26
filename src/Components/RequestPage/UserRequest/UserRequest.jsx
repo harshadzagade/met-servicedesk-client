@@ -7,6 +7,7 @@ import SweetPagination from "sweetpagination";
 import DataPerPage from "../../UI/DataPerPage/DataPerPage";
 import Rightside from "../../Righside/Rightside";
 import getItemWithExpiry from "../../../Utils/expiryFunction";
+import { Fragment } from "react";
 
 const UserRequest = () => {
   const id = getItemWithExpiry('id');
@@ -16,13 +17,16 @@ const UserRequest = () => {
   const [numberOfPages, setNumberOfPages] = useState(10);
   const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
   const [searchText, setSearchText] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState('');
   const sortedData = React.useMemo(() => { return [...requestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [requestList]);
 
   useEffect(() => {
     const getList = async () => {
       try {
         const list = await axios.get(`/api/request/ownrequests/${id}`);
+        if (list.data.requests.length === 0) {
+          setErrorMessage('No requests available')
+        }
         setRequestList(list.data.requests);
         setAllRequestList(list.data.requests);
       } catch (error) {
@@ -38,6 +42,9 @@ const UserRequest = () => {
         if (searchText) {
           const request = await axios.get(`/api/request/ownrequestsearch/${id}/${searchText}`);
           setAllRequestList(request.data);
+          if (request.data.length === 0) {
+            setErrorMessage('No such data')
+          }
         } else {
           setAllRequestList(sortedData);
         }
@@ -93,28 +100,35 @@ const UserRequest = () => {
             </div>
             <div className={`${classes.requests} `}>
               {
-                currentPageData.map((request) => (
-                  <div key={request.id} className={`${classes.tikInfo}`} onClick={() => handleRequestDetailsClick(request.id)}>
-                    <div className={`${classes.tikHead}`}>
-                      <h3 className={`${classes.tikTitle}`}>{request.subject}</h3>
-                      <span className={`${classes.date}`}>
-                        {getCreatedRequestDate(request.createdAt)}
-                      </span>
-                    </div>
-                    <div className={`${classes.tikMsg}`}>
-                      <p><div dangerouslySetInnerHTML={{ __html: request.description }} /></p>
-                    </div>
-                    <div className={`${classes.tikOther}`}>
-                      <p className={`${classes.tikId}`}>{request.ticketId}</p>
-                      <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ["high", () => "#E70000"], ["moderate", () => "#FFBF00"], ["low", () => "#90EE90"]) }}>
-                        {request.priority}
-                      </p>
-                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ["pending", () => "#FF6000"],['disapproved', () => '#2e2a2b'], ["forwarded", () => "#9681EB"], ["attending", () => " #30D5C8"], ["assigned", () => "#008080"], ["closed", () => "#ADE792"]) }}>
-                        {request.status}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                (allRequestList.length !== 0) ?
+                  <Fragment>
+                    {
+                      currentPageData.map((request) => (
+                        <div key={request.id} className={`${classes.tikInfo}`} onClick={() => handleRequestDetailsClick(request.id)}>
+                          <div className={`${classes.tikHead}`}>
+                            <h3 className={`${classes.tikTitle}`}>{request.subject}</h3>
+                            <span className={`${classes.date}`}>
+                              {getCreatedRequestDate(request.createdAt)}
+                            </span>
+                          </div>
+                          <div className={`${classes.tikMsg}`}>
+                            <p><div dangerouslySetInnerHTML={{ __html: request.description }} /></p>
+                          </div>
+                          <div className={`${classes.tikOther}`}>
+                            <p className={`${classes.tikId}`}>{request.ticketId}</p>
+                            <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#FF0000'], ['moderate', () => '#FFFF00'], ['low', () => '#90EE90']) }}>
+                              {request.priority}
+                            </p>
+                            <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#D3D3D3'], ['disapproved', () => '#FF0000'], ['forwarded', () => '#FFA500'], ['attending', () => ' #00FFFF'], ['assigned', () => '#0000FF'], ['closed', () => '#A9A9A9']) }}>
+                              {request.status}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                  </Fragment>
+                  :
+                  <div>{errorMessage}</div>
+              }
               <SweetPagination
                 currentPageData={setCurrentPageData}
                 dataPerPage={numberOfPages}

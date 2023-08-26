@@ -123,6 +123,18 @@ const AdminReport = () => {
         }
     }, [priority, openPriorityList, sortedData]);
 
+    /* useEffect(() => {
+        const getReportByDepartment = async () => {
+            try {
+                const report = await axios.get(`/api/report/departmentreport/${adminCtx.department}`);
+                setAllReportList(report.data.report);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        getReportByDepartment();
+    }, [adminCtx.department]); */
+
     useEffect(() => {
         let arr = [];
         switch (searchType) {

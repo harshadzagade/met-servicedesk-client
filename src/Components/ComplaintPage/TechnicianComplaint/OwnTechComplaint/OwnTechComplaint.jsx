@@ -41,6 +41,9 @@ const OwnTechComplaint = () => {
         if (searchText) {
           const complaint = await axios.get(`/api/complaint/owncomplaintsearch/${id}/${searchText}`);
           setAllComplaintList(complaint.data);
+          if (complaint.data.length === 0) {
+            setErrorMessage('No such data')
+          }
         } else {
           setAllComplaintList(sortedData);
         }
@@ -83,7 +86,7 @@ const OwnTechComplaint = () => {
       </div>
       <div className={`${classes.requests} `}>
         {
-          allComplaintList.length !== 0 ?
+          (allComplaintList.length !== 0)?
             <Fragment>
               {
                 currentPageData.map((complaint) => (
@@ -105,10 +108,10 @@ const OwnTechComplaint = () => {
                       <p className={`${classes.tikId}`}>
                         {complaint.ticketId}
                       </p>
-                      <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#90EE90']) }}>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#FF0000'], ['moderate', () => '#FFFF00'], ['low', () => '#90EE90']) }}>
                         {complaint.priority}
                       </p>
-                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'],['disapproved', () => '#2e2a2b'], ['forwarded', () => '#9681EB'], ['attending', () => ' #30D5C8'], ['assigned', () => '#008080'], ['closed', () => '#ADE792']) }}>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#D3D3D3'], ['forwarded', () => '#FFA500'], ['attending', () => ' #00FFFF'], ['assigned', () => '#800080'], ['closed', () => '#A9A9A9']) }}>
                         {complaint.status}
                       </p>
                       <p className={`${classes.tikAssigned}`}>
