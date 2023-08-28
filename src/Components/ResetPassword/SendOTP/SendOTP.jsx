@@ -11,7 +11,7 @@ const SendOTP = (props) => {
     const handleOTPVerification = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:8001/api/staff/verifyOTP', { otp: enteredOTP.current.value });
+            await axios.post('/api/staff/verifyOTP', { otp: enteredOTP.current.value });
             props.goToResetPassword();
         } catch (error) {
             if (error.response.status === 422 || error.response.status === 401) {
@@ -26,9 +26,10 @@ const SendOTP = (props) => {
         }
     };
 
-    const handleResendOTP = async () => {
+    const handleResendOTP = async (e) => {
+        e.preventDefault();
         try {
-            await axios.post('http://localhost:8001/api/staff/sendOTP', { email: props.getEmail });
+            await axios.post('/api/staff/sendOTP', { email: props.getEmail });
             setMinutes(1);
             setSeconds(0);
         } catch (error) {
@@ -72,7 +73,7 @@ const SendOTP = (props) => {
                             <img src="/assets/img/met_logo.png" alt="" />
                         </div>
                         <h2>MET Helpdesk</h2>
-                        <h3>Please enter OTP </h3>
+                        <h3>Please enter OTP</h3>
                         <input type="text" placeholder="Enter OTP" required ref={enteredOTP} />
                         <div className={classes.timmer}>
                             {seconds > 0 || minutes > 0 ? (

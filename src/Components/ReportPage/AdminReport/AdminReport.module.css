@@ -55,7 +55,6 @@
     outline-color: transparent;
     border: 0.1rem solid gray;
 }
-
 .dropdownSelect:hover {
     outline: none;
     border: 0.1rem solid #292929;
@@ -81,13 +80,6 @@
     outline-color: transparent;
     margin-bottom: 1rem;
 }
-
-.searchInput:focus {
-    border-color: black;
-    box-shadow: 1px 1px 0 black;
-}
-
-
 .searchButton {
     cursor: pointer;
     margin-top: -0.1rem;

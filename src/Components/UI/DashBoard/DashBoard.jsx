@@ -11,20 +11,14 @@ import getItemWithExpiry from '../../../Utils/expiryFunction';
 const DashBoard = () => {
   const id = getItemWithExpiry('id');
   const navigate = useNavigate();
-  const [totals, setTotals] = useState({ totalRequests: null, totalComplaints: null, totalTickets: null });
+  const [pendingTickets, setPendingTickets] = useState({ pendingRequests: null, totalRequests: null, pendingComplaints: null, totalComplaints: null, totalPendingTickets: null, totalTickets: null });
   const [totalsDate, setTotalsDate] = useState({ totalRequestsDate: null, totalComplaintsDate: null, totalTicketsDate: null });
   const adminCtx = useContext(AdminContext);
   const [refresh, setRefresh] = useState(false);
 
-  const daysInThisMonth = () => {
-    var now = new Date();
-    return new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-  };
-
-  const requestsPercentage = (totals.totalRequests * 100) / totals.totalTickets;
-  const complaintsPercentage = (totals.totalComplaints * 100) / totals.totalTickets;
-  const currentDate = new Date();
-  const ticketsDays = ((currentDate.getDate() - 1) * 100) / daysInThisMonth();
+  const requestsPercentage = (pendingTickets.pendingRequests * 100) / pendingTickets.totalRequests;
+  const complaintsPercentage = (pendingTickets.pendingComplaints * 100) / pendingTickets.totalComplaints;
+  const ticketsPercentage = (pendingTickets.totalPendingTickets * 100) / pendingTickets.totalTickets;
 
   const getLastDate = (lastDate) => {
     const now = moment();
@@ -67,13 +61,13 @@ const DashBoard = () => {
     const checkAuth = async () => {
       setRefresh(true);
       try {
-        const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+        const res = await axios.get(`/api/staff/staffdetails/${id}`);
         switch (res.data.staff.role) {
           case 'superadmin':
-            const superadminRequest = await axios.get(`http://localhost:8001/api/request/allrequests`);
+            const superadminRequest = await axios.get(`/api/request/allrequests`);
             const superadminRequestList = superadminRequest.data.requests;
             const lastUpdatedSuperadminRequestTime = superadminRequestList.length !== 0 && superadminRequestList[superadminRequestList.length - 1].updatedAt;
-            const superadminComplaint = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
+            const superadminComplaint = await axios.get(`/api/complaint/allcomplaints`);
             const superadminComplaintList = superadminComplaint.data.complaints;
             const lastUpdatedSuperadminComplaintTime = superadminComplaintList.length !== 0 && superadminComplaintList[superadminComplaintList.length - 1].updatedAt;
             let lastUpdatedSuperadminTime;
@@ -88,16 +82,18 @@ const DashBoard = () => {
                 lastUpdatedSuperadminTime = lastUpdatedSuperadminComplaintTime;
               }
             }
+            const superadminPendingRequestList = superadminRequestList.filter((request) => request.status === 'pending');
+            const superadminPendingComplaintList = superadminComplaintList.filter((complaint) => complaint.status === 'pending');
             setTotalsDate({ totalRequestsDate: lastUpdatedSuperadminRequestTime, totalComplaintsDate: lastUpdatedSuperadminComplaintTime, totalTicketsDate: lastUpdatedSuperadminTime });
-            setTotals({ totalRequests: superadminRequestList.length, totalComplaints: superadminComplaintList.length, totalTickets: superadminRequestList.length + superadminComplaintList.length });
+            setPendingTickets({ pendingRequests: superadminPendingRequestList.length, totalRequests: superadminRequestList.length, pendingComplaints: superadminPendingComplaintList.length, totalComplaints: superadminComplaintList.length, totalPendingTickets: superadminPendingRequestList.length + superadminPendingComplaintList.length, totalTickets: superadminRequestList.length + superadminComplaintList.length });
             break;
 
           case 'admin':
             try {
-              const adminRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${adminCtx.department}`);
+              const adminRequests = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
               const adminRequestList = adminRequests.data.requests;
               const lastUpdatedAdminRequestTime = adminRequestList.length !== 0 && adminRequestList[adminRequestList.length - 1].updatedAt;
-              const adminComplaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${adminCtx.department}`);
+              const adminComplaint = await axios.get(`/api/complaint/complaints/incoming/${adminCtx.department}`);
               const adminComplaintList = adminComplaint.data.complaints;
               const lastUpdatedAdminComplaintTime = adminComplaintList.length !== 0 && adminComplaintList[adminComplaintList.length - 1].updatedAt;
               let lastUpdatedAdminTime;
@@ -112,8 +108,10 @@ const DashBoard = () => {
                   lastUpdatedAdminTime = lastUpdatedAdminComplaintTime;
                 }
               }
+              const adminPendingRequestList = adminRequestList.filter((request) => request.status === 'pending');
+              const adminPendingComplaintList = adminComplaintList.filter((complaint) => complaint.status === 'pending');
               setTotalsDate({ totalRequestsDate: lastUpdatedAdminRequestTime, totalComplaintsDate: lastUpdatedAdminComplaintTime, totalTicketsDate: lastUpdatedAdminTime });
-              setTotals({ totalRequests: adminRequestList.length, totalComplaints: adminComplaintList.length, totalTickets: adminRequestList.length + adminComplaintList.length });
+              setPendingTickets({ pendingRequests: adminPendingRequestList.length, totalRequests: adminRequestList.length, pendingComplaints: adminPendingComplaintList.length, totalComplaints: adminComplaintList.length, totalPendingTickets: adminPendingRequestList.length + adminPendingComplaintList.length, totalTickets: adminRequestList.length + adminComplaintList.length });
             } catch (error) {
               console.log(error.message);
             }
@@ -121,16 +119,16 @@ const DashBoard = () => {
 
           case 'subadmin':
             try {
-              const adminRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
-              const adminRequestList = adminRequests.data.requests;
-              const lastUpdatedAdminRequestTime = adminRequestList.length !== 0 && adminRequestList[adminRequestList.length - 1].updatedAt;
-              const adminComplaint = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
-              const adminComplaintList = adminComplaint.data.complaints;
-              const lastUpdatedAdminComplaintTime = adminComplaintList.length !== 0 && adminComplaintList[adminComplaintList.length - 1].updatedAt;
+              const subadminRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+              const subadminRequestList = subadminRequests.data.requests;
+              const lastUpdatedAdminRequestTime = subadminRequestList.length !== 0 && subadminRequestList[subadminRequestList.length - 1].updatedAt;
+              const subadminComplaint = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
+              const subadminComplaintList = subadminComplaint.data.complaints;
+              const lastUpdatedAdminComplaintTime = subadminComplaintList.length !== 0 && subadminComplaintList[subadminComplaintList.length - 1].updatedAt;
               let lastUpdatedAdminTime;
-              if ((adminRequestList.length !== 0) && (adminComplaintList.length === 0)) {
+              if ((subadminRequestList.length !== 0) && (subadminComplaintList.length === 0)) {
                 lastUpdatedAdminTime = lastUpdatedAdminRequestTime;
-              } else if ((adminRequestList.length === 0) && (adminComplaintList.length !== 0)) {
+              } else if ((subadminRequestList.length === 0) && (subadminComplaintList.length !== 0)) {
                 lastUpdatedAdminTime = lastUpdatedAdminComplaintTime;
               } else {
                 if (lastUpdatedAdminRequestTime > lastUpdatedAdminComplaintTime) {
@@ -139,18 +137,20 @@ const DashBoard = () => {
                   lastUpdatedAdminTime = lastUpdatedAdminComplaintTime;
                 }
               }
+              const subadminPendingRequestList = subadminRequestList.filter((request) => request.status === 'pending');
+              const subadminPendingComplaintList = subadminComplaintList.filter((complaint) => complaint.status === 'pending');
               setTotalsDate({ totalRequestsDate: lastUpdatedAdminRequestTime, totalComplaintsDate: lastUpdatedAdminComplaintTime, totalTicketsDate: lastUpdatedAdminTime });
-              setTotals({ totalRequests: adminRequestList.length, totalComplaints: adminComplaintList.length, totalTickets: adminRequestList.length + adminComplaintList.length });
+              setPendingTickets({ pendingRequests: subadminPendingRequestList.length, totalRequests: subadminRequestList.length, pendingComplaints: subadminPendingComplaintList.length, totalComplaints: subadminComplaintList.length, totalPendingTickets: subadminPendingRequestList.length + subadminPendingComplaintList.length, totalTickets: subadminRequestList.length + subadminComplaintList.length });
             } catch (error) {
               console.log(error.message);
             }
             break;
 
           case 'technician':
-            const technicianRequests = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+            const technicianRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
             const technicianRequestList = technicianRequests.data.requests;
             const lastUpdatedTechnicianRequestTime = technicianRequestList.length !== 0 && technicianRequestList[technicianRequestList.length - 1].updatedAt;
-            const technicianComplaints = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
+            const technicianComplaints = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
             const technicianComplaintList = technicianComplaints.data.complaints;
             const lastUpdatedTechnicianComplaintTime = technicianComplaintList.length !== 0 && technicianComplaintList[technicianComplaintList.length - 1].updatedAt;
             let lastUpdatedTechnicianTime;
@@ -165,15 +165,17 @@ const DashBoard = () => {
                 lastUpdatedTechnicianTime = lastUpdatedTechnicianComplaintTime;
               }
             }
+            const technicianPendingRequestList = technicianRequestList.filter((request) => request.status === 'pending');
+            const technicianPendingComplaintList = technicianComplaintList.filter((complaint) => complaint.status === 'pending');
             setTotalsDate({ totalRequestsDate: lastUpdatedTechnicianRequestTime, totalComplaintsDate: lastUpdatedTechnicianComplaintTime, totalTicketsDate: lastUpdatedTechnicianTime });
-            setTotals({ totalRequests: technicianRequestList.length, totalComplaints: technicianComplaintList.length, totalTickets: technicianRequestList.length + technicianComplaintList.length });
+            setPendingTickets({ pendingRequests: technicianPendingRequestList.length, totalRequests: technicianRequestList.length, pendingComplaints: technicianPendingComplaintList.length, totalComplaints: technicianComplaintList.length, totalPendingTickets: technicianPendingRequestList.length + technicianPendingComplaintList.length, totalTickets: technicianRequestList.length + technicianComplaintList.length });
             break;
 
           case 'user':
-            const userRequests = await axios.get(`http://localhost:8001/api/request/ownrequests/${id}`);
+            const userRequests = await axios.get(`/api/request/ownrequests/${id}`);
             const userRequestList = userRequests.data.requests;
             const lastUpdatedUserRequestTime = userRequestList.length !== 0 && userRequestList[userRequestList.length - 1].updatedAt;
-            const userComplaints = await axios.get(`http://localhost:8001/api/complaint/owncomplaints/${id}`);
+            const userComplaints = await axios.get(`/api/complaint/owncomplaints/${id}`);
             const userComplaintList = userComplaints.data.complaints;
             const lastUpdatedUserComplaintTime = userComplaintList.length !== 0 && userComplaintList[userComplaintList.length - 1].updatedAt;
             let lastUpdatedUserTime;
@@ -188,12 +190,14 @@ const DashBoard = () => {
                 lastUpdatedUserTime = lastUpdatedUserComplaintTime;
               }
             }
+            const userPendingRequestList = userRequestList.filter((request) => request.status === 'pending');
+            const userPendingComplaintList = userComplaintList.filter((complaint) => complaint.status === 'pending');
             setTotalsDate({ totalRequestsDate: lastUpdatedUserRequestTime, totalComplaintsDate: lastUpdatedUserComplaintTime, totalTicketsDate: lastUpdatedUserTime });
-            setTotals({ totalRequests: userRequestList.length, totalComplaints: userComplaintList.length, totalTickets: userRequestList.length + userComplaintList.length });
+            setPendingTickets({ pendingRequests: userPendingRequestList.length, totalRequests: userRequestList.length, pendingComplaints: userPendingComplaintList.length, totalComplaints: userComplaintList.length, totalPendingTickets: userPendingRequestList.length + userPendingComplaintList.length, totalTickets: userRequestList.length + userComplaintList.length });
             break;
 
           default:
-            navigate(`/404`);
+            break;
         }
       } catch (error) {
         console.log(error.message);
@@ -207,11 +211,11 @@ const DashBoard = () => {
       <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
           <div className={`${classes.request} `}>
-            <h1>Total Requests</h1>
+            <h1>Pending Requests</h1>
           </div>
           <div className={classes.count}>
             <div className={classes.progress}>
-              <h1>{totals.totalRequests}</h1>
+              <h1>{pendingTickets.pendingRequests}</h1>
             </div>
             <div className={classes.circle} style={{ width: 70, height: 70 }}>
               <CircularProgressbar
@@ -228,17 +232,17 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <p>{!totalsDate.totalRequestsDate ? 'No requests initiated' : 'Last update ' + getLastDate(totalsDate.totalRequestsDate)}</p>
+          <p>{!totalsDate.totalRequestsDate ? 'No Requests initiated' : 'Last update ' + getLastDate(totalsDate.totalRequestsDate)}</p>
         </div>
       </div>
       <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
           <div className={`${classes.request} `}>
-            <h1>Total Concern</h1>
+            <h1>Pending Concern</h1>
           </div>
           <div className={classes.count}>
             <div className={classes.progress}>
-              <h1>{totals.totalComplaints}</h1>
+              <h1>{pendingTickets.pendingComplaints}</h1>
             </div>
             <div className={classes.circle} style={{ width: 70, height: 70 }}>
               <CircularProgressbar
@@ -255,22 +259,22 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <p>{!totalsDate.totalComplaintsDate ? 'No requests initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
+          <p>{!totalsDate.totalComplaintsDate ? 'No Concerns initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
         </div>
       </div>
       <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
           <div className={`${classes.request} `}>
-            <h1>Total Tickets</h1>
+            <h1>Total Pending</h1>
           </div>
           <div className={classes.count}>
             <div className={classes.progress}>
-              <h1>{totals.totalTickets}</h1>
+              <h1>{pendingTickets.totalPendingTickets}</h1>
             </div>
             <div className={classes.circle} style={{ width: 70, height: 70 }}>
               <CircularProgressbar
-                value={Math.round(ticketsDays)}
-                text={`${(new Date().getDate() - 1)} days`}
+                value={Math.round(ticketsPercentage)}
+                text={`${Math.round(ticketsPercentage)}%`}
                 background
                 backgroundPadding={6}
                 styles={buildStyles({
@@ -282,7 +286,7 @@ const DashBoard = () => {
               />
             </div>
           </div>
-          <p>{!totalsDate.totalTicketsDate ? 'No requests initiated' : 'Last update ' + getLastDate(totalsDate.totalTicketsDate)}</p>
+          <p>{!totalsDate.totalTicketsDate ? 'No Tickets initiated' : 'Last update ' + getLastDate(totalsDate.totalTicketsDate)}</p>
         </div>
       </div>
     </div>

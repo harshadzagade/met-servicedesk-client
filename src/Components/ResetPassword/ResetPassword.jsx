@@ -18,7 +18,7 @@ const ResetPassword = () => {
 
     const checkLogin = async () => {
         if (getItemWithExpiry('id')) {
-            const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${getItemWithExpiry('id')}`);
+            const staff = await axios.get(`/api/staff/staffdetails/${getItemWithExpiry('id')}`);
             ctx.onLogin(staff.data.staff.email);
             navigate('/');
         }

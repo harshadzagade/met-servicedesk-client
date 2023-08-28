@@ -30,7 +30,7 @@ const NewRequest = () => {
     useEffect(() => {
         const getStaffDetails = async () => {
             try {
-                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const staff = await axios.get(`/api/staff/staffdetails/${id}`);
                 setStaff(staff.data.staff);
             } catch (error) {
                 console.log(error.message);
@@ -51,7 +51,7 @@ const NewRequest = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`http://localhost:8001/api/department/departments`);
+                const departments = await axios.get(`/api/department/departments`);
                 setDepartments(departments.data.departments);
             } catch (error) {
                 console.log(error.message);
@@ -64,7 +64,7 @@ const NewRequest = () => {
         const getCategories = async () => {
             try {
                 if (department.length !== 0) {
-                    const categories = await axios.get(`http://localhost:8001/api/department/categoriesbydepartment/${department}`);
+                    const categories = await axios.get(`/api/department/categoriesbydepartment/${department}`);
                     setCategories(categories.data.categories);
                 }
             } catch (error) {
@@ -98,7 +98,7 @@ const NewRequest = () => {
             formData.append('isRepeated', isRepeated);
             setShowLoading(true);
             try {
-                await axios.post('http://localhost:8001/api/request/', formData);
+                await axios.post('/api/request/', formData);
                 Swal.fire(
                     'Request Created!',
                     'You have created Request successfully',

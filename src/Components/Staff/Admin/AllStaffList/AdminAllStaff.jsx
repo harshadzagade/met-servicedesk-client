@@ -56,7 +56,7 @@ const AdminAllStaff = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/staff/admin/allstaff/${id}/${adminCtx.department}`)
+                const response = await axios.get(`/api/staff/admin/allstaff/${id}/${adminCtx.department}`)
                 setStaffList(response.data.totalStaff);
                 setAllStaffList(response.data.totalStaff);
             } catch (error) {
@@ -70,7 +70,7 @@ const AdminAllStaff = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/admin/searchalldepartmentstaff/${adminCtx.department}/${searchText}`);
+                    const staff = await axios.get(`/api/staff/admin/searchalldepartmentstaff/${adminCtx.department}/${searchText}`);
                     setAllStaffList(staff.data);
                 } else {
                     setAllStaffList(sortedData);
@@ -93,7 +93,7 @@ const AdminAllStaff = () => {
                 data={allStaffList}
                 pagination
                 fixedHeader
-                fixedHeaderScrollHeight='368px'
+                fixedHeaderScrollHeight='auto'
                 highlightOnHover
                 subHeader
                 onRowClicked={handleRowClick}

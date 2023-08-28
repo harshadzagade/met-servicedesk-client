@@ -23,7 +23,7 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getSubadminDetails = async () => {
       try {
-        const subadmin = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+        const subadmin = await axios.get(`/api/staff/staffdetails/${id}`);
         setSubadminDetails(subadmin.data.staff);
       } catch (error) {
         console.log(error.message);
@@ -35,7 +35,7 @@ const OutgoingComplaint = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
+        const list = await axios.get(`/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
         if (list.data.complaints.length === 0) {
           setErrorMessage('No concern available')
         }
@@ -52,7 +52,7 @@ const OutgoingComplaint = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const complaint = await axios.get(`http://localhost:8001/api/staff/subadmin/complaints/outgoingcomplaintsearch/${subadminDetails.department}/${searchText}`);
+          const complaint = await axios.get(`/api/staff/subadmin/complaints/outgoingcomplaintsearch/${subadminDetails.department}/${searchText}`);
           setAllComplaintList(complaint.data);
           if (complaint.data.length === 0) {
             setErrorMessage('No such data')
@@ -99,7 +99,7 @@ const OutgoingComplaint = () => {
       </div>
       <div className={`${classes.complaint} `}>
         {
-          (allComplaintList.length !== 0)?
+          (allComplaintList.length !== 0) ?
             <Fragment>
               {
                 currentPageData.map((complaint) => (
@@ -121,10 +121,10 @@ const OutgoingComplaint = () => {
                       <p className={`${classes.tikId}`}>
                         {complaint.ticketId}
                       </p>
-                      <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#FF0000'], ['moderate', () => '#FFFF00'], ['low', () => '#90EE90']) }}>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#165C49']) }}>
                         {complaint.priority}
                       </p>
-                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#D3D3D3'], ['forwarded', () => '#FFA500'], ['attending', () => ' #00FFFF'], ['assigned', () => '#800080'], ['closed', () => '#A9A9A9']) }}>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#FF5C89'], ['attending', () => ' #483DF6'], ['assigned', () => '#B954B6'], ['closed', () => '#437C28']) }}>
                         {complaint.status}
                       </p>
                       <p className={`${classes.tikAssigned}`}>
@@ -136,7 +136,9 @@ const OutgoingComplaint = () => {
               }
             </Fragment>
             :
-            <div>{errorMessage}</div>
+            <div className={classes.errorMsg}>
+              <h2>{errorMessage}</h2>
+            </div>
         }
         <Sweetpagination
           currentPageData={setCurrentPageData}

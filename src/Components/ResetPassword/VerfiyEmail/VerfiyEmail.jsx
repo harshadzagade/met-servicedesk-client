@@ -8,7 +8,7 @@ const VerfiyEmail = (props) => {
     const handleSendOTP = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8001/api/staff/sendOTP', { email: emailRef.current.value });
+            await axios.post('/api/staff/sendOTP', { email: emailRef.current.value });
             props.goToVerify();
             props.emailAddress(emailRef.current.value)
         } catch (error) {
@@ -34,8 +34,8 @@ const VerfiyEmail = (props) => {
                         </div>
                         <h2>MET Helpdesk</h2>
                         <h3>Please enter the email address below </h3>
-                        <input type="email" placeholder="Enter Email" ref={emailRef} />
-                        <button type='submit'>send OTP</button>
+                        <input type="email" placeholder="Enter Email" required ref={emailRef} />
+                        <button type='submit'>Send OTP</button>
                     </form>
                 </div>
             </div>

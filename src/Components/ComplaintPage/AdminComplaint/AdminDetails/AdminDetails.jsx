@@ -31,7 +31,7 @@ const AdminDetails = () => {
         setRefresh(true);
         try {
             if (technicianId) {
-                await axios.put(`http://localhost:8001/api/staff/admin/assigncomplaint/${id}`, { assignId: technicianId });
+                await axios.put(`/api/staff/admin/assigncomplaint/${id}`, { assignId: technicianId });
                 Swal.fire(
                     'Assigned concern',
                     'Engineer assigned to a concern successfully',
@@ -47,7 +47,7 @@ const AdminDetails = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technicians = await axios.get(`http://localhost:8001/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
+                const technicians = await axios.get(`/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
                 navigate('/request');
@@ -60,7 +60,7 @@ const AdminDetails = () => {
     useEffect(() => {
         const getComplaintDetails = async () => {
             try {
-                const complaint = await axios.get(`http://localhost:8001/api/complaint/getcomplaintdetails/${id}`);
+                const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
                 setComplaintData(complaint.data.complaint);
                 if (complaint.data.complaint.behalf) {
                     setStaffId(complaint.data.complaint.behalfId);
@@ -78,7 +78,7 @@ const AdminDetails = () => {
         const getStaffDetails = async () => {
             try {
                 if (complaintData.behalfId) {
-                    const behalf = await axios.get(`http://localhost:8001/api/staff/staffdetails/${complaintData.behalfId}`);
+                    const behalf = await axios.get(`/api/staff/staffdetails/${complaintData.behalfId}`);
                     setBehalfStaffName(behalf.data.staff.firstname + ' ' + behalf.data.staff.lastname)
                 }
             } catch (error) {
@@ -112,7 +112,7 @@ const AdminDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`http://localhost:8001/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;

@@ -3,17 +3,23 @@ import classes from './EditCategories.module.css';
 import Modal from '../../../Components/UI/Modal/Modal';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useRef } from 'react';
 
 const EditCategories = (props) => {
+    const departmentNameRef = useRef();
     const [input, setInput] = useState('');
+    const [type, setType] = useState(null);
     const [categoriesList, setCategoriesList] = useState([]);
+    const [departmentName, setDepartmentName] = useState(null);
     const [isKeyReleased, setIsKeyReleased] = useState(false);
 
     useEffect(() => {
         const getCategories = async () => {
             try {
-                const categories = await axios.get(`http://localhost:8001/api/department/categories/${props.departmentId}`);
-                setCategoriesList(categories.data.categories);
+                const department = await axios.get(`/api/department/departmentdetails/${props.departmentId}`);
+                setCategoriesList(department.data.department.category);
+                setDepartmentName(department.data.department.department);
+                setType(department.data.department.type);
             } catch (error) {
                 console.log(error.message);
             }
@@ -52,9 +58,9 @@ const EditCategories = (props) => {
         setCategoriesList(prevState => prevState.filter((tag, i) => i !== index))
     };
 
-    const handleUpdateCategories = async (e) => {
+    const handleUpdateDepartment = async (e) => {
         e.preventDefault();
-        if (categoriesList.length === 0) {
+        if (type === 'service' && (categoriesList.length === 0)) {
             Swal.fire({
                 icon: 'error',
                 title: `Please add categories`,
@@ -62,8 +68,10 @@ const EditCategories = (props) => {
             });
         } else {
             try {
-                await axios.put(`http://localhost:8001/api/department/editcategories/${props.departmentId}`, {
-                    category: categoriesList
+                await axios.put(`/api/department/editdepartment/${props.departmentId}`, {
+                    departmentName: departmentNameRef.current.value,
+                    type: type,
+                    category: type === 'service' ? categoriesList : null
                 });
                 props.onConfirm();
             } catch (error) {
@@ -87,21 +95,36 @@ const EditCategories = (props) => {
             </div>
             <div className={classes.detail}>
                 <div>
-                    <form className={classes.myform} onSubmit={handleUpdateCategories}>
-                        <div className={classes.deptik}>
-                            <label>Department</label>
-                            <div className={`${classes.createForm}`}>
-                                <input value={input} placeholder="Enter a department" className={classes.createstaffInput} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
-                                <div className={classes.departmentParent}>
-                                    {categoriesList.map((tag, index) => (
-                                        <div key={index} className={classes.tag}>
-                                            {tag} &nbsp;
-                                            <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
-                                        </div>
-                                    ))}
+                    <form className={classes.myform} onSubmit={handleUpdateDepartment}>
+                        <div className={`${classes.createForm}`}>
+                            <label>Department:</label>
+                            <input type="text" className={classes.createstaffInput} placeholder="Enter Department" defaultValue={departmentName} ref={departmentNameRef} />
+                        </div>
+                        <div className={classes.priority}>
+                            <label>Department Type:</label>
+                            <select value={type} className={classes.priSelect} onChange={(e) => setType(e.target.value)} >
+                                <option value='' hidden>----- Select type -----</option>
+                                <option value='regular'>regular</option>
+                                <option value='service'>service</option>
+                            </select>
+                        </div>
+                        {
+                            type === 'service' &&
+                            <div className={classes.deptik}>
+                                <label>Categories</label>
+                                <div className={`${classes.createForm}`}>
+                                    <input value={input} placeholder="Enter a department" className={classes.createstaffInput} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
+                                    <div className={classes.departmentParent}>
+                                        {categoriesList.map((tag, index) => (
+                                            <div key={index} className={classes.tag}>
+                                                {tag} &nbsp;
+                                                <button className={classes.tag} onClick={() => deleteTag(index)}>x</button>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                         <div className={classes.detailsBtns}>
                             <button className={classes.updateBtn} type='submit' >Update</button>
                             <button className={classes.deleteBtn} onClick={props.onConfirm}>Cancel</button>

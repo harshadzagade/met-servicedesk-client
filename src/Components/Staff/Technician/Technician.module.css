@@ -1,0 +1,21 @@
+.statusCard{
+    display: flex;
+    justify-content: center;
+}
+.compdetails {
+    background: var(--color-white);
+    padding: 0.5rem;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    max-width: 100%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  }
+  .compdetails hr {
+    max-width: 100%;
+    margin-top: 0rem;
+  }
+  .compdetails h2{
+    display: flex;
+    justify-content: center;
+  }

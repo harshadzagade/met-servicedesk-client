@@ -10,7 +10,7 @@ const ReportDetails = () => {
 
     useEffect(() => {
         const getReportDetails = async () => {
-            const report = await axios.get(`http://localhost:8001/api/report/reportdetails/${id}`);
+            const report = await axios.get(`/api/report/reportdetails/${id}`);
             setReportData(report.data.report);
         };
         getReportDetails();
@@ -95,35 +95,38 @@ const ReportDetails = () => {
                                         <p className={classes.complaintDetailsp}>{reportData.category}</p>
                                     </div>
                                     <div className={classes.name}>
-                                        <label>Status:</label>
+                                        <label> C/R Status:</label>
                                         <p className={classes.complaintDetailsp}>{reportData.status} </p>
                                     </div>
                                 </div>
                                 <hr />
-                                <div className={classes.approval1}>
-                                    <div className={classes.approval}>
-                                        <label>HOD Approval:</label>
-                                        <p className={classes.complaintDetailsp}>{(reportData.approval1 === 1 && 'approved') || (reportData.approval1 === 2 && 'Disapproved') || (reportData.approval1 === null && 'Not updated')}</p>
-                                    </div>
-                                    {
-                                        reportData.approval1 &&
+                                {
+                                    reportData.isRequest &&
+                                    <div className={classes.approval1}>
                                         <div className={classes.approval}>
-                                            <label>HOD Comment:</label>
-                                            <p className={classes.complaintDetailsp}>{reportData.approval1 ? reportData.approval1Comment : 'Not Commented'}</p>
+                                            <label>HOD Approval:</label>
+                                            <p className={classes.complaintDetailsp}>{(reportData.approval1 !== null ? reportData.approval1Status : 'Not updated')}</p>
                                         </div>
-                                    }
-                                    <div className={classes.approval}>
-                                        <label>Admin Approval:</label>
-                                        <p className={classes.complaintDetailsp}>{(reportData.approval2 === 1 && 'Approved') || (reportData.approval2 === 2 && 'Disapproved') || (reportData.approval2 === null && 'Not updated')}</p>
-                                    </div>
-                                    {
-                                        reportData.approval2 &&
+                                        {
+                                            reportData.approval1 !== null &&
+                                            <div className={classes.approval}>
+                                                <label>HOD Comment:</label>
+                                                <p className={classes.complaintDetailsp}>{reportData.approval1 !== null ? reportData.approval1Comment : 'Not Commented'}</p>
+                                            </div>
+                                        }
                                         <div className={classes.approval}>
-                                            <label>Admin Comment:</label>
-                                            <p className={classes.complaintDetailsp}>{reportData.approval2 ? reportData.approval2Comment : 'Not Commented'}</p>
+                                            <label>Admin Approval:</label>
+                                            <p className={classes.complaintDetailsp}>{(reportData.approval2 !== null ? reportData.approval2Status : 'Not updated')}</p>
                                         </div>
-                                    }
-                                </div>
+                                        {
+                                            reportData.approval2 !== null &&
+                                            <div className={classes.approval}>
+                                                <label>Admin Comment:</label>
+                                                <p className={classes.complaintDetailsp}>{reportData.approval2 !== null ? reportData.approval2Comment : 'Not Commented'}</p>
+                                            </div>
+                                        }
+                                    </div>
+                                }
                                 {
                                     (reportData.assign || reportData.forwardComment || (reportData.status === 'forwarded' || reportData.status === 'closed')) &&
                                     <hr />

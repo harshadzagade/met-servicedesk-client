@@ -78,7 +78,7 @@ const AllStaffExt = () => {
     useEffect(() => {
         const getStaff = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/staff/contacts/${id}`);
+                const response = await axios.get(`/api/staff/contacts/${id}`);
                 setStaffList(response.data.contacts);
                 setAllStaffList(response.data.contacts);
             } catch (error) {
@@ -92,7 +92,7 @@ const AllStaffExt = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/contactsearch/${id}/${searchText}`);
+                    const staff = await axios.get(`/api/staff/contactsearch/${id}/${searchText}`);
                     setAllStaffList(staff.data);
                 } else {
                     setAllStaffList(sortedData);

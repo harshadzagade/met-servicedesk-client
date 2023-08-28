@@ -17,7 +17,7 @@ const SingleStaffDetails = () => {
 
   useEffect(() => {
     const getStaff = async () => {
-      const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id.staffId}`);
+      const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
       setName(staff.data.staff.firstname + ' ' + staff.data.staff.lastname);
       setEmail(staff.data.staff.email);
       setRole(staff.data.staff.role);

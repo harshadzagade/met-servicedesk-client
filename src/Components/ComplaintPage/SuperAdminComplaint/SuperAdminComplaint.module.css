@@ -217,6 +217,14 @@
   margin-left: auto;
   margin-bottom: 0rem;
 }
+.errorMsg{
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.errorMsg h2{
+  color: #646f72;
+}
 
 @media (min-width: 320px) and (max-width: 767px) {
   .tikOther {

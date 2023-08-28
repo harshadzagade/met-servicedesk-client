@@ -21,10 +21,10 @@ const SuperAdminComplaint = () => {
     const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
     useEffect(() => {
-        const socket = openSocket('http://localhost:8001');
+        const socket = openSocket('');
         const getList = async () => {
             try {
-                const list = await axios.get(`http://localhost:8001/api/complaint/allcomplaints`);
+                const list = await axios.get(`/api/complaint/allcomplaints`);
                 if (list.data.complaints.length === 0) {
                     setErrorMessage('No concern available')
                 }
@@ -45,7 +45,7 @@ const SuperAdminComplaint = () => {
         const getStaff = async () => {
             try {
                 if (searchText) {
-                    const complaint = await axios.get(`http://localhost:8001/api/complaint/searchallcomplaints/${searchText}`);
+                    const complaint = await axios.get(`/api/complaint/searchallcomplaints/${searchText}`);
                     setAllComplaintList(complaint.data);
                     if (complaint.data.length === 0) {
                         setErrorMessage('No such data')
@@ -124,10 +124,10 @@ const SuperAdminComplaint = () => {
                                                         <p className={`${classes.tikId}`} >
                                                             {complaint.ticketId}
                                                         </p>
-                                                        <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#FF0000'], ['moderate', () => '#FFFF00'], ['low', () => '#90EE90']) }}>
+                                                        <p className={`${classes.tikPri} `} style={{ background: iswitch(complaint.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#165C49']) }}>
                                                             {complaint.priority}
                                                         </p>
-                                                        <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#D3D3D3'], ['forwarded', () => '#FFA500'], ['attending', () => ' #00FFFF'], ['assigned', () => '#800080'], ['closed', () => '#A9A9A9']) }}>
+                                                        <p className={`${classes.tikStatus}`} style={{ background: iswitch(complaint.status, ['pending', () => '#FF6000'], ['forwarded', () => '#FF5C89'], ['attending', () => ' #483DF6'], ['assigned', () => '#B954B6'], ['closed', () => '#437C28']) }}>
                                                             {complaint.status}
                                                         </p>
                                                         <p className={`${classes.tikAssigned}`}>
@@ -139,7 +139,9 @@ const SuperAdminComplaint = () => {
                                         }
                                     </Fragment>
                                     :
-                                    <div>{errorMessage}</div>
+                                    <div className={classes.errorMsg}>
+                                        <h2>{errorMessage}</h2>
+                                    </div>
                             }
                             <SweetPagination currentPageData={setCurrentPageData} dataPerPage={numberOfPages} getData={allComplaintList} navigation={true} />
 

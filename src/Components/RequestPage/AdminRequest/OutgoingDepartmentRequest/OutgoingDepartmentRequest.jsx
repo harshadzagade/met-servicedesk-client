@@ -24,7 +24,7 @@ const OutgoingDepartmentRequest = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const list = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoing/${id}/${adminCtx.department}`);
+        const list = await axios.get(`/api/staff/admin/requests/outgoing/${id}/${adminCtx.department}`);
         if (list.data.requests.length === 0) {
           setErrorMessage('No requests available')
         }
@@ -45,7 +45,7 @@ const OutgoingDepartmentRequest = () => {
     const getStaff = async () => {
       try {
         if (searchText) {
-          const request = await axios.get(`http://localhost:8001/api/staff/admin/requests/outgoingrequestsearch/${adminCtx.department}/${searchText}`);
+          const request = await axios.get(`/api/staff/admin/requests/outgoingrequestsearch/${adminCtx.department}/${searchText}`);
           setAllRequestList(request.data);
           if (request.data.length === 0) {
             setErrorMessage('No such data')
@@ -119,10 +119,10 @@ const OutgoingDepartmentRequest = () => {
                       <p className={`${classes.tikId}`}>
                         {request.ticketId}
                       </p>
-                      <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#FF0000'], ['moderate', () => '#FFFF00'], ['low', () => '#90EE90']) }}>
+                      <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#165C49']) }}>
                         {request.priority}
                       </p>
-                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#D3D3D3'], ['disapproved', () => '#FF0000'], ['forwarded', () => '#FFA500'], ['attending', () => ' #00FFFF'], ['assigned', () => '#0000FF'], ['closed', () => '#A9A9A9']) }}>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'], ['forwarded', () => '#FF5C89'], ['attending', () => ' #483DF6'], ['assigned', () => '#B954B6'], ['closed', () => '#437C28'], ['disapproved', () => '#FF0000']) }}>
                         {request.status}
                       </p>
                       <p className={`${classes.tikAssigned}`}>
@@ -134,7 +134,9 @@ const OutgoingDepartmentRequest = () => {
               }
             </Fragment>
             :
-            <div>{errorMessage}</div>
+            <div className={classes.errorMsg}>
+              <h2>{errorMessage}</h2>
+            </div>
         }
         <Sweetpagination
           currentPageData={setCurrentPageData}

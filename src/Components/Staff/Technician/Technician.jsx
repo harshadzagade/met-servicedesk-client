@@ -1,22 +1,23 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
-import getItemWithExpiry from '../../../Utils/expiryFunction';
+// import axios from 'axios';
+import React from 'react';
+import classes from './Technician.module.css';
+import ComplaintCard from '../../UI/RightCard/ComplaintCard/ComplaintCard';
+import RequestCard from '../../UI/RightCard/RequestCard/RequestCard';
 
 const Technician = () => {
-    const [complaintStatus, setComplaintStatus] = useState({ pending: '', attending: '', forwarded: '', closed: '' })
-    const [requestStatus, setRequestStatus] = useState({ pending: '', disapproved: '', assigned: '', attending: '', forwarded: '', closed: '' })
-    const [refresh, setRefresh] = useState(false);
-    const id = getItemWithExpiry('id');
+    // const [complaintStatus, setComplaintStatus] = useState({ pending: '', attending: '', forwarded: '', closed: '' })
+    // const [requestStatus, setRequestStatus] = useState({ pending: '', disapproved: '', assigned: '', attending: '', forwarded: '', closed: '' })
+    // const [refresh, setRefresh] = useState(false);
+    // const id = getItemWithExpiry('id');
 
-    useEffect(() => {
+    /* useEffect(() => {
         let pending, attending, forwarded, closed;
         const getGraph = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const res = await axios.get(`/api/staff/staffdetails/${id}`);
                 {
-                    const technicianList = await axios.get(`http://localhost:8001/api/complaint/complaints/incoming/${res.data.staff.department}`);
+                    const technicianList = await axios.get(`/api/complaint/complaints/incoming/${res.data.staff.department}`);
                     const technicianComplaintList = technicianList.data.complaints;
                     pending = technicianComplaintList.filter((data) => data.status.startsWith('pending'));
                     attending = technicianComplaintList.filter((data) => data.status.startsWith('attending'));
@@ -36,9 +37,9 @@ const Technician = () => {
         const getGraph = async () => {
             setRefresh(true);
             try {
-                const res = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                const res = await axios.get(`/api/staff/staffdetails/${id}`);
                 {
-                    const technicianList = await axios.get(`http://localhost:8001/api/staff/admin/requests/incoming/${res.data.staff.department}`);
+                    const technicianList = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
                     const technicianRequestList = technicianList.data.requests;
                     pending = technicianRequestList.filter((data) => data.status.startsWith('pending'));
                     disapproved = technicianRequestList.filter((data) => data.status.startsWith('disapproved'));
@@ -55,9 +56,9 @@ const Technician = () => {
             }
         }
         getGraph();
-    }, [id, refresh]);
+    }, [id, refresh]); */
 
-    const data = [
+    /* const data = [
         {
             "name": "Pending",
             "request": requestStatus.pending,
@@ -87,18 +88,11 @@ const Technician = () => {
             "concern": complaintStatus.closed,
         }
 
-    ]
+    ] */
 
     return (
-        <div className='mt-2'>
-            {/* <BarChart width={800} height={350} data={data}>
-                <XAxis dataKey="name" />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="concern" fill="#8884d8" />
-                <Bar dataKey="request" fill="#82ca9d" />
-            </BarChart> */}
-            <div style={{ width: '100%', height: 300 }}>
+        <div className='row'>
+            {/* <div style={{ width: '100%', height: 300 }}>
                 <ResponsiveContainer>
                     <BarChart
                         width={500}
@@ -111,15 +105,27 @@ const Technician = () => {
                             bottom: 5,
                         }}
                     >
-                        {/* <CartesianGrid strokeDasharray="3 3" /> */}
                         <XAxis dataKey="name" />
-                        {/* <YAxis /> */}
                         <Tooltip />
                         <Legend />
                         <Bar dataKey="request" fill="#8884d8" />
                         <Bar dataKey="concern" fill="#82ca9d" />
                     </BarChart>
                 </ResponsiveContainer>
+            </div> */}
+            <div className={classes.statusCard}>
+                <div className='col-5 mt-2'>
+                    <div className={classes.compdetails}>
+                        <h2>Concern Status</h2>
+                        <ComplaintCard />
+                    </div>
+                </div>
+                <div className='col-5 mt-2'>
+                    <div className={classes.compdetails}>
+                        <h2>Request Status</h2>
+                        <RequestCard />
+                    </div>
+                </div>
             </div>
         </div>
     );

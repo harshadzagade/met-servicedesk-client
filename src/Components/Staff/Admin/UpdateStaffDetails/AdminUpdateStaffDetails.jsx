@@ -13,7 +13,7 @@ const AdminUpdateStaffdetails = (props) => {
     useEffect(() => {
         const fetchStaff = async () => {
             try {
-                const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id.staffId}`);
+                const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
                 setStaff(staff.data.staff);
             } catch (error) {
                 Swal.fire({
@@ -32,7 +32,7 @@ const AdminUpdateStaffdetails = (props) => {
 
     const handleSubmitClick = async (id, role) => {
         try {
-            await axios.put(`http://localhost:8001/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
+            await axios.put(`/api/staff/admin/staffdetails/updateStaff/${id}`, { role: role });
             props.onConfirm();
             Swal.fire(
                 'Update successfully',
