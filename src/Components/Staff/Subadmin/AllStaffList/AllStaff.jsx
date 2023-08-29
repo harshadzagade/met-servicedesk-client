@@ -39,7 +39,7 @@ const AllStaff = () => {
         },
         {
             name: "Name",
-            selector: (row) => row.firstname,
+            selector: (row) => row.firstname + ' ' + row.lastname,
             sortable: true,
         },
         {

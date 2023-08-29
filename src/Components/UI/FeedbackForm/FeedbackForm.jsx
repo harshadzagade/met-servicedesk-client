@@ -63,7 +63,7 @@ const FeedbackForm = (props) => {
                 <Fragment>
                 <div className={classes.feedback}>
                     <h2>Feedback:</h2>
-                    <textarea className={classes.textArea} rows="4" cols="50" ref={feedbackRef} />
+                    <textarea className={classes.textArea} rows="4" cols="50" ref={feedbackRef} required />
                 </div>
                 <div className={classes.btn}>
                     <button className={classes.submitbtn} onClick={handleSubmit}>Submit</button>
