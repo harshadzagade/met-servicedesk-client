@@ -203,24 +203,24 @@ const SubadminRequestDetails = () => {
                                             <div className={classes.approval1}>
                                                 <div className={classes.approval}>
                                                     <label>HOD Approval:</label>
-                                                    <p className={classes.complaintDetailsp}>{(requestData.approval1 === 1 && 'approved') || (requestData.approval1 === 2 && 'Disapproved') || (requestData.approval1 === null && 'Not updated')}</p>
+                                                    <p className={classes.complaintDetailsp}>{(requestData.approval1 === 1 && 'approved') || (requestData.approval1 === 2 && 'disapproved') || (requestData.approval1 === null && 'not updated')}</p>
                                                 </div>
                                                 {
                                                     requestData.approval1 &&
                                                     <div className={classes.approval}>
                                                         <label>HOD Comment:</label>
-                                                        <p className={classes.complaintDetailsp}>{requestData.approval1 ? requestData.approval1Comment : 'Not Commented'}</p>
+                                                        <p className={classes.complaintDetailsp}>{requestData.approval1 ? requestData.approval1Comment : 'not commented'}</p>
                                                     </div>
                                                 }
                                                 <div className={classes.approval}>
                                                     <label>Admin Approval:</label>
-                                                    <p className={classes.complaintDetailsp}>{(requestData.approval2 === 1 && 'Approved') || (requestData.approval2 === 2 && 'Disapproved') || (requestData.approval2 === null && 'Not updated')}</p>
+                                                    <p className={classes.complaintDetailsp}>{(requestData.approval2 === 1 && 'approved') || (requestData.approval2 === 2 && 'disapproved') || (requestData.approval2 === null && 'not updated')}</p>
                                                 </div>
                                                 {
                                                     requestData.approval2 &&
                                                     <div className={classes.approval}>
                                                         <label>Admin Comment:</label>
-                                                        <p className={classes.complaintDetailsp}>{requestData.approval2 ? requestData.approval2Comment : 'Not Commented'}</p>
+                                                        <p className={classes.complaintDetailsp}>{requestData.approval2 ? requestData.approval2Comment : 'not commented'}</p>
                                                     </div>
                                                 }
                                             </div>

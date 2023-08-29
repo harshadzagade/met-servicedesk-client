@@ -135,7 +135,7 @@ const Department = () => {
                 data={filteredDepartments}
                 pagination
                 fixedHeader
-                fixedHeaderScrollHeight='56vh'
+                fixedHeaderScrollHeight='auto'
                 selectableRows
                 selectableRowsHighlight
                 highlightOnHover
