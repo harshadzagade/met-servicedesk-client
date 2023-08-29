@@ -146,7 +146,7 @@ const DashBoard = () => {
             }
             break;
 
-          case 'technician':
+          case 'engineer':
             const technicianRequests = await axios.get(`/api/staff/admin/requests/incoming/${res.data.staff.department}`);
             const technicianRequestList = technicianRequests.data.requests;
             const lastUpdatedTechnicianRequestTime = technicianRequestList.length !== 0 && technicianRequestList[technicianRequestList.length - 1].updatedAt;

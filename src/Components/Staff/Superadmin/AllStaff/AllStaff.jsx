@@ -34,7 +34,7 @@ const AllStaff = () => {
         },
         {
             name: "Role",
-            selector: (row) => row.role === 'technician' ? 'engineer' : row.role,
+            selector: (row) => row.role,
             sortable: true,
         },
         {

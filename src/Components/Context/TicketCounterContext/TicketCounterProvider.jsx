@@ -51,7 +51,7 @@ const TicketDetailsProvider = props => {
                     setRequestStatus({ pending: pending.length, disapproved: disapproved.length, assigned: assigned.length, attending: attending.length, forwarded: forwarded.length, closed: closed.length });
                     break;
 
-                case 'technician':
+                case 'engineer':
                     const technicianList = await axios.get(`/api/staff/admin/requests/incoming/${department}`);
                     const technicianRequestList = technicianList.data.requests;
                     pending = technicianRequestList.filter((data) => data.status.startsWith('pending'));
@@ -110,7 +110,7 @@ const TicketDetailsProvider = props => {
                     setComplaintStatus({ pending: pending.length, attending: attending.length, forwarded: forwarded.length, closed: closed.length });
                     break;
 
-                case 'technician':
+                case 'engineer':
                     const technicianList = await axios.get(`/api/complaint/complaints/incoming/${department}`);
                     const technicianComplaintList = technicianList.data.complaints;
                     pending = technicianComplaintList.filter((data) => data.status.startsWith('pending'));

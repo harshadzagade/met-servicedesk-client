@@ -62,7 +62,7 @@ const SingleStaffDetails = () => {
               </div>
               <div className={classes.Role}>
                 <label>Role:</label>
-                <p >{role === 'technician' ? 'engineer' : role}</p>
+                <p >{role}</p>
               </div>
               <div className={classes.phoneNo}>
                 <label>Phone Number:</label>

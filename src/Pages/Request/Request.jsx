@@ -63,7 +63,7 @@ const Request = () => {
                         setIsUser(false);
                         break;
 
-                    case 'technician':
+                    case 'engineer':
                         setIsSuperAdmin(false);
                         setIsAdmin(false);
                         setIsSubadmin(false);
@@ -80,7 +80,7 @@ const Request = () => {
                         break;
 
                     default:
-                        navigate(`/404`);
+                        break;
                 }
             } catch (error) {
                 console.log(error.message);

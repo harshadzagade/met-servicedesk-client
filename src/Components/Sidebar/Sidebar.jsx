@@ -139,8 +139,8 @@ const Sidebar = ({ children }) => {
           }
           break;
 
-        case 'technician':
-          ticketCounterCtx.setStaffDetails(id, department, 'technician');
+        case 'engineer':
+          ticketCounterCtx.setStaffDetails(id, department, 'engineer');
           break;
 
         case 'user':

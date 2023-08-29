@@ -90,7 +90,7 @@ const UpdateStaffDetails = (props) => {
                                 <div className={classes.department}>
                                     <label className="ld">Role:</label>
                                     <select className={`${classes.selectUSer} dept-select`} value={updateRole} name='role' onChange={handleChange}>
-                                        <option value="technician">Engineer</option>
+                                        <option value="engineer">Engineer</option>
                                         <option value="user">User</option>
                                     </select>
                                 </div>

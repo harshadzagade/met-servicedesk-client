@@ -69,7 +69,7 @@ const Home = () => {
                             setIsUser(false);
                             break;
 
-                        case 'technician':
+                        case 'engineer':
                             const now = new Date();
                             const expirationTime = now.getTime() + 8 * 60 * 60 * 1000;
                             const department = {
@@ -93,7 +93,7 @@ const Home = () => {
                             break;
 
                         default:
-                            navigate(`/404`);
+                            break;
                     }
                 };
             } catch (error) {

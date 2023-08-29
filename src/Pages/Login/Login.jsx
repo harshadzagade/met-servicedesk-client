@@ -7,28 +7,31 @@ import AuthContext from '../../Components/Context/AuthContext/AuthContext';
 import getItemWithExpiry from '../../Utils/expiryFunction';
 
 const Login = () => {
+  const id = getItemWithExpiry('id');
   const navigate = useNavigate();
-  const ctx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
 
   useEffect(() => {
-    if (ctx.isLoggedIn) {
+    if (authCtx.isLoggedIn) {
       navigate('/');
     }
-  }, [ctx.isLoggedIn, navigate])
+  }, [authCtx.isLoggedIn, navigate])
 
-  const checkLogin = async () => {
-    if (getItemWithExpiry('id')) {
+  useEffect(() => {
+    const checkLogin = async () => {
       try {
-        const staff = await axios.get(`/api/staff/staffdetails/${getItemWithExpiry('id')}`);
-        ctx.onLogin(staff.data.staff.email);
+        if (id) {
+          const staff = await axios.get(`/api/staff/staffdetails/${id}`);
+          authCtx.onLogin(staff.data.staff.email);
+        }
       } catch (error) {
         console.log(error.message);
       }
     }
-  }
-  checkLogin();
+    checkLogin();
+  }, [id, authCtx]);
 
   const getHome = async (e) => {
     e.preventDefault();
@@ -53,7 +56,7 @@ const Login = () => {
       };
       localStorage.setItem('token', JSON.stringify(tokenString));
       localStorage.setItem('id', JSON.stringify(loginId));
-      ctx.onLogin(staffInfo.email);
+      authCtx.onLogin(staffInfo.email);
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -83,8 +86,8 @@ const Login = () => {
             <img src="/assets/img/met_logo.png" alt="" />
           </div>
           <h2>MET Helpdesk</h2>
-            <input type="email" placeholder="email" ref={emailRef} required />
-            <input type="password" minLength={6} placeholder="password" ref={passwordRef} required />
+          <input type="email" placeholder="email" ref={emailRef} required />
+          <input type="password" minLength={6} placeholder="password" ref={passwordRef} required />
           <button type='submit'>login</button>
           <Link to='/forgotpassword'>Forgot Password</Link>
         </form>

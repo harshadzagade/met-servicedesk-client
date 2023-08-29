@@ -13,11 +13,10 @@ const UpdateStaffDetails = (props) => {
     const [institute, setInstitute] = useState('');
     const [institutes, setInstitutes] = useState([]);
     const [departmentType, setDepartmentType] = useState('');
-    const roles = ['admin', 'technician', 'user'];
+    const roles = ['admin', 'subadmin', 'engineer', 'user'];
     const [staff, setStaff] = useState({});
     const [updateStaff, setUpdateStaff] = useState({ id: staff.id, firstname: staff.firstname, middlename: staff.middlename, lastname: staff.lastname, email: staff.email, role: staff.role, institute: staff.institute, department: staff.department, departmentType: staff.departmentType, phoneNumber: staff.phoneNumber, contactExtension: staff.contactExtension });
 
-    console.log(updateStaff);
     useEffect(() => {
         const fetchStaff = async () => {
             try {
@@ -166,9 +165,9 @@ const UpdateStaffDetails = (props) => {
                                 {
                                     roles.map((role, key) =>
                                         staff.role === role ?
-                                            <option key={key} className={`${classes.roleOption}`} selected value={role}>{role === 'technician' ? 'Engineer' : role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
+                                            <option key={key} className={`${classes.roleOption}`} selected value={role}>{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
                                             :
-                                            <option key={key} className={`${classes.roleOption}`} value={role}>{role === 'technician' ? 'Engineer' : role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
+                                            <option key={key} className={`${classes.roleOption}`} value={role}>{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
                                     )
                                 }
                             </select>

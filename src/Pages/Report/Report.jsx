@@ -47,7 +47,7 @@ const Report = () => {
                         setIsTechnician(false);
                         break;
 
-                    case 'technician':
+                    case 'engineer':
                         setIsSuperAdmin(false);
                         setIsAdmin(false);
                         setIsSubadmin(false);
@@ -55,7 +55,7 @@ const Report = () => {
                         break;
 
                     default:
-                        navigate(`/404`);
+                        break;
                 }
             } catch (error) {
                 console.log(error.message);
