@@ -39,7 +39,15 @@ const AdminDetails = () => {
                 );
             }
         } catch (error) {
-            console.log(error.message);
+            if (error.response.status === 401 || error.response.status === 403) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data.message}`,
+                    text: 'Unable to assign concern'
+                });
+            } else {
+                console.log(error.message);
+            }
         }
         setRefresh(false);
     };
