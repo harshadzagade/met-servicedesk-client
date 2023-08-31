@@ -135,3 +135,46 @@
     font-size: 1em;
     align-items: center;
 }
+
+
+/* Print */
+.printheader{
+    display: none;
+  }
+  
+  .printfooter{
+    display: none;
+  }
+  
+  
+  @media print{
+    .printheader{
+      display: block;
+    }
+  
+    .printfooter{
+      display: block;
+    }
+  
+    .printheader{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50px; /* Adjust height as needed */
+      background-color: #333; /* Header background color */
+      color: white; /* Header text color */
+      text-align: center;
+    }
+  
+    .printfooter {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30px; /* Adjust height as needed */
+      background-color: #333; /* Footer background color */
+      color: white; /* Footer text color */
+      text-align: center;
+    }
+  }

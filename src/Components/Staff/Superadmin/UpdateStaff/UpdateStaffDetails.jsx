@@ -167,6 +167,9 @@ const UpdateStaffDetails = (props) => {
                                         staff.role === role ?
                                             <option key={key} className={`${classes.roleOption}`} selected value={role}>{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
                                             :
+                                            role === 'subadmin' ?
+                                            <option hidden key={key} className={`${classes.roleOption}`} value={role}>{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
+                                            :
                                             <option key={key} className={`${classes.roleOption}`} value={role}>{role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()}</option>
                                     )
                                 }

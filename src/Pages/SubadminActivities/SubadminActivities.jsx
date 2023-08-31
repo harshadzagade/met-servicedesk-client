@@ -18,7 +18,17 @@ const SubadminActivities = () => {
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
 
-    const sortedData = React.useMemo(() => { return [...subadminActivities].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)) }, [subadminActivities]);
+    const sortedData = React.useMemo(() => {
+        if (!Array.isArray(subadminActivities)) {
+            console.error('subadminActivities is not an array');
+            return [];
+        }
+        if (subadminActivities.some(activity => !activity.dateTime)) {
+            console.error('Some activities are missing the dateTime property');
+            return [];
+        }
+        return [...subadminActivities].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+    }, [subadminActivities]);
 
     const getActivityDate = (createdAt) => {
         if (createdAt === null) {
@@ -99,16 +109,23 @@ const SubadminActivities = () => {
                     <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                 </div>
                 {
-                    currentPageData.map((activity, key) => (
-                        <div className={classes.flair} key={key} onClick={() => handleActivityClick(activity)}>
-                            <div className={classes.activity}>
-                                <span>{activity.activity}</span>
-                                <div className={classes.date}>
-                                    <span>{getActivityDate(activity.dateTime)}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))
+                    allSubadminActivities !== null ?
+                        <Fragment>
+                            {
+                                currentPageData.map((activity, key) => (
+                                    <div className={classes.flair} key={key} onClick={() => handleActivityClick(activity)}>
+                                        <div className={classes.activity}>
+                                            <span>{activity.activity}</span>
+                                            <div className={classes.date}>
+                                                <span>{getActivityDate(activity.dateTime)}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </Fragment>
+                        :
+                        <div>No subadmin activities available</div>
                 }
                 <Sweetpagination
                     currentPageData={setCurrentPageData}

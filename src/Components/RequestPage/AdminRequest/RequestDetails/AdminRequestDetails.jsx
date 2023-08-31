@@ -6,8 +6,6 @@ import Swal from 'sweetalert2';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
 import Rightside from '../../../Righside/Rightside';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import FeedbackForm from '../../../UI/FeedbackForm/FeedbackForm';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
@@ -109,17 +107,23 @@ const AdminRequestDetails = () => {
         return strTime;
     };
 
-    const handleGeneratePDF = () => {
-        const content = document.getElementById('printContent');
-        html2canvas(content).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, 'PNG', 10, 10);
-            pdf.save('generated.pdf');
-        });
+    // Print
+    const handlePrint = () => {
+        const printContent = document.querySelector('.printcontent');
+        if (printContent) {
+            const printWindow = window.open('', '', 'width=793.70,height=1122.52');
+            printWindow.document.open();
+            printWindow.document.write('<link rel="stylesheet" type="text/css" href="AdminRequestDetails.module.css">');
+            printWindow.document.write('<html><head><title>MET Helpdesk</title></head>');
+            printWindow.document.write('<div> ' + printContent.innerHTML + '</div>');
+            printWindow.document.write('</body></html>');
+
+            printWindow.document.close();
+            printWindow.print();
+            printWindow.close();
+        }
     };
 
-    
     const handleFeedback = () => {
         setOpenFeedback(false);
     };
@@ -135,14 +139,17 @@ const AdminRequestDetails = () => {
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                                 </svg>
                                 <h2>Request details</h2>
-                                {openFeedback && <FeedbackForm ticketType={'request'} ticketId={requestData.ticketId} department={requestData.department} onConfirm={handleFeedback}/>}
-                                <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
+                                {openFeedback && <FeedbackForm ticketType={'request'} ticketId={requestData.ticketId} department={requestData.department} onConfirm={handleFeedback} />}
+                                <button onClick={handlePrint} className={`${classes.printBtn} `}>Print</button>
                                 {(requestData.status === 'closed' && requestData.staffId.toString() === loginId.toString()) && <button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
                                 <div>
                                     <form className={classes.myform}>
-                                        <span id='printContent'>
+                                        <span id='printContent' className='printcontent'>
+                                            <div className={classes.printheader} id='printheader'>
+                                                <h3 style={{ textAlign: 'center', marginTop: '2rem', marginBottom: '2rem' }}>Internal Note</h3>
+                                            </div>
                                             <div className={classes.idDetails}>
                                                 <label>Request Id:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.ticketId}</p>
@@ -189,7 +196,7 @@ const AdminRequestDetails = () => {
                                             <div className={classes.approval1}>
                                                 <div className={classes.approval}>
                                                     <label>HOD Approval:</label>
-                                                    <p className={classes.complaintDetailsp}>{(requestData.approval1 === 1 && 'approved') || (requestData.approval1 === 2 && 'disapproved') || (requestData.approval1 === null && 'not updated')}</p>
+                                                    <p className={classes.complaintDetailsp}>{(requestData.approval1 === 1 && 'Approved') || (requestData.approval1 === 2 && 'Disapproved') || (requestData.approval1 === null && 'Not updated')}</p>
                                                 </div>
                                                 {
                                                     requestData.approval1 &&
@@ -200,13 +207,13 @@ const AdminRequestDetails = () => {
                                                 }
                                                 <div className={classes.approval}>
                                                     <label>Admin Approval:</label>
-                                                    <p className={classes.complaintDetailsp}>{(requestData.approval2 === 1 && 'approved') || (requestData.approval2 === 2 && 'disapproved') || (requestData.approval2 === null && 'not updated')}</p>
+                                                    <p className={classes.complaintDetailsp}>{(requestData.approval2 === 1 && 'Approved') || (requestData.approval2 === 2 && 'Disapproved') || (requestData.approval2 === null && 'Not updated')}</p>
                                                 </div>
                                                 {
                                                     requestData.approval2 &&
                                                     <div className={classes.approval}>
                                                         <label>Admin Comment:</label>
-                                                        <p className={classes.complaintDetailsp}>{requestData.approval2 ? requestData.approval2Comment : 'not commented'}</p>
+                                                        <p className={classes.complaintDetailsp}>{requestData.approval2 ? requestData.approval2Comment : 'Not Commented'}</p>
                                                     </div>
                                                 }
                                             </div>
@@ -242,6 +249,17 @@ const AdminRequestDetails = () => {
                                                     <p className={classes.complaintDetailsp}>{requestData.actionTaken}</p>
                                                 </div>
                                             }
+                                            <br /><br />
+                                            <div className={classes.printfooter} id="printfooter">
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <div>
+                                                        HOD Signature
+                                                    </div>
+                                                    <div>
+                                                        Trustee Signature
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </span>
                                         <hr />
                                         <div className={classes.attachment}>
