@@ -73,7 +73,15 @@ const Login = () => {
         title: 'Signed in successfully'
       });
     } catch (error) {
-      console.log(error.message);
+      if (error.response.status === 401 || error.response.status === 422) {
+        Swal.fire({
+          icon: 'error',
+          title: `${error.response.data.message}`,
+          text: 'Unable to login'
+        });
+      } else {
+        console.log(error.message);
+      }
     }
     navigate('/');
   };

@@ -22,17 +22,16 @@
 }
 
 .approvalStatus {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 1rem;
-
+    display: grid;
+    grid-template-columns: 30% 50%;
+    margin-bottom: 0.5rem;
 }
 
 
-.selectStaff {
-    display: flex;
-    gap: 5rem;
-    margin-bottom: 1rem;
+.selectStaff { 
+    display: grid;
+    grid-template-columns: 30% 50%;
+    margin-bottom: 0.5rem;
 }
 
 .selectStatus {
@@ -76,11 +75,8 @@
 
 
 .comment {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3.8rem;
-    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 30% 50%;
 }
 
 
@@ -118,7 +114,7 @@
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;
-    background-color: #ff7782;
+    background-color: var(--subbutton-color);
     color: white;
     cursor: pointer;
     box-shadow: var(--box-shadow);

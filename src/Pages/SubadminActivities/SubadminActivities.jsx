@@ -21,11 +21,11 @@ const SubadminActivities = () => {
     const sortedData = React.useMemo(() => {
         if (!Array.isArray(subadminActivities)) {
             console.error('subadminActivities is not an array');
-            return [];
+            return null;
         }
         if (subadminActivities.some(activity => !activity.dateTime)) {
             console.error('Some activities are missing the dateTime property');
-            return [];
+            return null;
         }
         return [...subadminActivities].sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
     }, [subadminActivities]);
@@ -59,13 +59,13 @@ const SubadminActivities = () => {
                     setSubadminActivities(activities.data.activities.activities);
                     setAllSubadminActivities(activities.data.activities.activities);
                 } else {
-                    setSubadminActivities([]);
-                    setAllSubadminActivities([]);
+                    setSubadminActivities(null);
+                    setAllSubadminActivities(null);
                 }
             } catch (error) {
                 if (error.response.status === 401) {
-                    setSubadminActivities([]);
-                    setAllSubadminActivities([]);
+                    setSubadminActivities(null);
+                    setAllSubadminActivities(null);
                 } else {
                     console.log(error.message);
                 }
@@ -123,16 +123,16 @@ const SubadminActivities = () => {
                                     </div>
                                 ))
                             }
+                            <Sweetpagination
+                                currentPageData={setCurrentPageData}
+                                dataPerPage={numberOfPages}
+                                getData={allSubadminActivities}
+                                navigation={true}
+                            />
                         </Fragment>
                         :
                         <div>No subadmin activities available</div>
                 }
-                <Sweetpagination
-                    currentPageData={setCurrentPageData}
-                    dataPerPage={numberOfPages}
-                    getData={allSubadminActivities}
-                    navigation={true}
-                />
             </div>
         </Fragment>
     );

@@ -24,79 +24,31 @@
 }
 
 
-
-.behalf {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
-.behalfInput {
-    background: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    margin-right: 29rem;
-    border: 1px solid black;
-
-}
-
 .deptTik {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 25% 70%;
     margin-bottom: 1rem;
+    gap: 1rem;
 }
 
 .deptSelect {
-
     background: white;
     border: 1px solid black;
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;
-
 }
-
 .priority {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 25% 70%;
+    margin-bottom: 1rem;
     gap: 1rem;
-    margin-bottom: 1rem;
 }
-
-.priSelect {
-    background: white;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1em;
-    margin-right: 2rem;
-
-}
-
-.rtypeSelect {
-    background: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    border: 1px solid black;
-
-}
-
-
-
 .subject {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3.8rem;
+    display: grid;
+    grid-template-columns: 25% 70%;
     margin-bottom: 1rem;
+    gap: 1rem;
 }
 
 
@@ -110,34 +62,6 @@
     font-size: 1em;
     border: 1px solid black;
 }
-
-.description {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1.6rem;
-    margin-bottom: 1rem;
-}
-
-
-.attachment {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1.6rem;
-    margin-bottom: 1rem;
-}
-
-.attachInput {
-    flex: 1;
-    gap: 2rem;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-size: 1em;
-
-}
-
 .buttonForm {
     flex: 1;
     gap: 2rem;
