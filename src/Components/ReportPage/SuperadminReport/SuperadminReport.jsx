@@ -65,8 +65,12 @@ const SuperadminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories/${selectedDepartment}`);
-            setCategories(categories.data.categories);
+            try {
+                const categories = await axios.get(`/api/report/reportcategories/categories/${selectedDepartment}`);
+                setCategories(categories.data.categories);
+            } catch (error) {
+                console.log(error.message);
+            }
         };
         getCategories();
     }, [openCategoryList, selectedDepartment]);

@@ -63,7 +63,7 @@ const ReportDetails = () => {
                                 </div>
                                 <div className={classes.idDetails}>
                                     <label>Ticket ID:</label>
-                                    <p className={classes.complaintDetailsp}>#{reportData.requestComplaintId}</p>
+                                    <p className={classes.complaintDetailsp}>{reportData.ticketId}</p>
                                 </div>
                                 <hr />
                                 <div className={classes.subjectDetails}>
