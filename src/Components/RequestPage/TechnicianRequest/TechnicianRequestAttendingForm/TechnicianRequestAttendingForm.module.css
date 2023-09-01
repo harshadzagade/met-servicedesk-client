@@ -50,8 +50,6 @@
     margin-bottom: 1rem;
     gap: 1rem;
 }
-
-
 .subInput {
     flex: 1;
     gap: 2rem;
@@ -62,9 +60,11 @@
     font-size: 1em;
     border: 1px solid black;
 }
+.attachment{
+    display: flex;
+    justify-content: center;
+}
 .buttonForm {
-    flex: 1;
-    gap: 2rem;
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;

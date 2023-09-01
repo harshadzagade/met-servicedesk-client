@@ -152,7 +152,7 @@ const AdminApproval = () => {
                                     }
                                     <div className={classes.comment}>
                                         <label>Comment:</label>
-                                        <input type="text" className={classes.subInput} placeholder="Select Your Comment" ref={approvalCommentRef} required />
+                                        <input type="text" className={classes.subInput} placeholder="Enter your comment" ref={approvalCommentRef} required />
                                     </div>
                                     <div className={classes.btn}>
                                         <button className={classes.submitBtn} type='submit' >Submit</button>

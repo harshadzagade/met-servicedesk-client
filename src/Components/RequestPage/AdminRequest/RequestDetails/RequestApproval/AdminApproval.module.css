@@ -94,14 +94,12 @@
     font-size: 1em;
     border: 1px solid black;
 }
-
-
-
-
-
+.btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
 .submitBtn {
-    flex: 1;
-    gap: 2rem;
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;
@@ -111,10 +109,7 @@
     box-shadow: var(--box-shadow);
     justify-content: space-between;
 }
-
 .cancelBtn {
-    flex: 1;
-    gap: 2rem;
     padding: 10px;
     border-radius: 5px;
     font-size: 1em;
