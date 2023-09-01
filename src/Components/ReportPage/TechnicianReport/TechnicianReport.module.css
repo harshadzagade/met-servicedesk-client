@@ -78,11 +78,6 @@
     margin-bottom: 1rem;
 }
 
-.searchInput:focus {
-    border-color: #3b49df;
-    box-shadow: 1px 1px 0 #3b49df;
-}
-
 
 .searchButton {
     cursor: pointer;

@@ -110,7 +110,7 @@ const TechnicianRequestAttendingForm = () => {
         <Fragment>
             {showLoading && (
                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                    <h1>Closing Request </h1>
+                    <h1>Changing request status</h1>
                     <div className='d-flex justify-content-center'>
                         <Bars
                             height="80"

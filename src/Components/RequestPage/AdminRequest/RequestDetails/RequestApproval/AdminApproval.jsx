@@ -6,6 +6,7 @@ import AdminContext from '../../../../Context/AdminContext/AdminContext';
 import Rightside from '../../../../Righside/Rightside';
 import getItemWithExpiry from '../../../../../Utils/expiryFunction';
 import Swal from 'sweetalert2';
+import { Bars } from 'react-loader-spinner';
 
 const AdminApproval = () => {
     const loginId = getItemWithExpiry('id');
@@ -18,6 +19,7 @@ const AdminApproval = () => {
     const [technicians, setTechnicians] = useState([]);
     const [technicianId, setTechnicianId] = useState(null);
     const [assignDisability, setAssignDisability] = useState('');
+    const [showLoading, setShowLoading] = useState(false);
 
     useEffect(() => {
         if (approval === 'disapprove') {
@@ -69,6 +71,7 @@ const AdminApproval = () => {
             approvalComment: approvalCommentRef.current.value
         };
         try {
+            setShowLoading(true);
             if (isApproval2) {
                 await axios.put(`/api/staff/admin/approval2/${id}`, approval2data);
             } else {
@@ -85,6 +88,8 @@ const AdminApproval = () => {
             } else {
                 console.log(error.message);
             }
+        } finally {
+            setShowLoading(false);
         }
     };
 
@@ -104,9 +109,25 @@ const AdminApproval = () => {
                         <h2>Approval</h2>
                         <div hidden>
                         </div>
-                        <div className={classes.RequestApproval} >
-                            <form className={classes.form} onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
-                                <div >
+                        <div className={classes.RequestApproval}>
+                            {showLoading && (
+                                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                                    <h1>Changing approval status</h1>
+                                    <div className='d-flex justify-content-center'>
+                                        <Bars
+                                            height="80"
+                                            width="80"
+                                            color="#CE1212"
+                                            ariaLabel="bars-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClass=""
+                                            visible={true}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                            {!showLoading &&<form className={classes.form} onSubmit={(e) => handleSubmitClick(e, id.requestId)}>
+                                <div>
                                     <div className={classes.approvalStatus}>
                                         <label>Change Status:</label>
                                         <select className={classes.selectStatus} name="role" required onChange={handleChange} >
@@ -138,7 +159,7 @@ const AdminApproval = () => {
                                         <button className={classes.cancelBtn} onClick={() => navigate('/request')}>Cancel</button>
                                     </div>
                                 </div>
-                            </form>
+                            </form>}
                         </div>
                     </div>
                     <div className="col-4">

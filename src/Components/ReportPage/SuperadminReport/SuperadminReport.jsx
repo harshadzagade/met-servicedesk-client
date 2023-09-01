@@ -65,11 +65,11 @@ const SuperadminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories`);
+            const categories = await axios.get(`/api/report/reportcategories/categories/${selectedDepartment}`);
             setCategories(categories.data.categories);
         };
         getCategories();
-    }, [openCategoryList]);
+    }, [openCategoryList, selectedDepartment]);
 
     useEffect(() => {
         const getList = async () => {
@@ -292,7 +292,6 @@ const SuperadminReport = () => {
                         }
                     </select>
                 </div>
-
                 {
                     departmentStaff.length !== 0 &&
                     <div className={`${classes.staffSelection}`}>
@@ -379,7 +378,6 @@ const SuperadminReport = () => {
                 onRowClicked={handleRowClick}
                 highlightOnHover
                 subHeader
-
             />
         </div>
     );

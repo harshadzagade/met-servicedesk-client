@@ -56,11 +56,11 @@ const SubadminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories`);
+            const categories = await axios.get(`/api/report/reportcategories/categories/${subadminDetails.department}`);
             setCategories(categories.data.categories);
         };
         getCategories();
-    }, [openCategoryList]);
+    }, [openCategoryList, subadminDetails]);
 
     useEffect(() => {
         const getList = async () => {

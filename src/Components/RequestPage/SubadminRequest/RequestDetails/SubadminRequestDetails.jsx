@@ -6,8 +6,6 @@ import Swal from 'sweetalert2';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
 import Rightside from '../../../Righside/Rightside';
 import SubadminContext from '../../../Context/SubadminContext/SubadminContext';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import FeedbackForm from '../../../UI/FeedbackForm/FeedbackForm';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
@@ -109,15 +107,22 @@ const SubadminRequestDetails = () => {
         return strTime;
     };
 
-    const handleGeneratePDF = () => {
-        const content = document.getElementById('printContent');
-        html2canvas(content).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, 'PNG', 10, 10);
-            pdf.save('generated.pdf');
-        });
-    };
+   // Print
+   const handlePrint = () => {
+    const printContent = document.querySelector('.printcontent');
+    if (printContent) {
+        const printWindow = window.open('', '', 'width=793.70,height=1122.52');
+        printWindow.document.open();
+        printWindow.document.write('<link rel="stylesheet" type="text/css" href="AdminRequestDetails.module.css">');
+        printWindow.document.write('<html><head><title>MET Helpdesk</title></head>');
+        printWindow.document.write('<div> ' + printContent.innerHTML + '</div>');
+        printWindow.document.write('</body></html>');
+
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    }
+};
 
     const handleFeedback = () => {
         setOpenFeedback(false);
@@ -150,13 +155,13 @@ const SubadminRequestDetails = () => {
                                 </svg>
                                 <h2>Request details</h2>
                                 {openFeedback && <FeedbackForm ticketType={'request'} ticketId={requestData.ticketId} department={requestData.department} onConfirm={handleFeedback}/>}
-                                <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
+                                <button onClick={handlePrint} className={`${classes.printBtn} `}>Print</button>
                                 {(requestData.status === 'closed' && requestData.staffId.toString() === id.toString()) && <button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
                                 <div>
                                     <form className={classes.myform}>
-                                        <span id='printContent'>
+                                        <span className='printcontent'>
                                             <div className={classes.idDetails}>
                                                 <label>Request Id:</label>
                                                 <p className={classes.complaintDetailsp}>{requestData.ticketId}</p>
@@ -256,6 +261,17 @@ const SubadminRequestDetails = () => {
                                                     <p className={classes.complaintDetailsp}>{requestData.actionTaken}</p>
                                                 </div>
                                             }
+                                             <br /><br />
+                                            <div className={classes.printfooter} id="printfooter">
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <div>
+                                                        HOD Signature
+                                                    </div>
+                                                    <div>
+                                                        Trustee Signature
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </span>
                                         <hr />
                                         <div className={classes.description}>

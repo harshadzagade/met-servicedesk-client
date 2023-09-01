@@ -7,6 +7,7 @@ import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const TechnicianReport = () => {
     const id = getItemWithExpiry('id');
+    const department = getItemWithExpiry('department');
     const [reportList, setReportList] = useState([]);
     const navigate = useNavigate();
     const [allReportList, setAllReportList] = useState([]);
@@ -29,11 +30,15 @@ const TechnicianReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories`);
-            setCategories(categories.data.categories);
+            try {
+                const categories = await axios.get(`/api/report/reportcategories/categories/${department}`);
+                setCategories(categories.data.categories);
+            } catch (error) {
+                console.log(error.message);
+            }
         };
         getCategories();
-    }, [openCategoryList]);
+    }, [openCategoryList, department]);
 
     useEffect(() => {
         const getList = async () => {

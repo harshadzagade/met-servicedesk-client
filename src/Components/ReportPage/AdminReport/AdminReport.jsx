@@ -31,11 +31,11 @@ const AdminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories`);
+            const categories = await axios.get(`/api/report/reportcategories/categories/${adminCtx.department}`);
             setCategories(categories.data.categories);
         };
         getCategories();
-    }, [openCategoryList]);
+    }, [openCategoryList, adminCtx.department]);
 
     useEffect(() => {
         const getList = async () => {

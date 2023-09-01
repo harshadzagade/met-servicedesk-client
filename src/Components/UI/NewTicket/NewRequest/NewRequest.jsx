@@ -153,7 +153,7 @@ const NewRequest = () => {
                                 <span>Behalf Email:</span>
                                 <div className={classes.behalftoogle}>
                                     <input type="checkbox" defaultChecked={isToggled} onClick={() => { setIsToggled(!isToggled) }} id="toggle-btn" />
-                                    <label for="toggle-btn"></label>
+                                    <label htmlFor="toggle-btn"></label>
                                     {isToggled && <input className={`${classes.behalfField} `} type="text" name="behalf" placeholder="Behalf email" autoComplete='true' required ref={behalfEmailRef} />}
                                 </div>
                             </div>
