@@ -62,10 +62,12 @@ const AdminApproval = () => {
             approvalValue = null;
         }
         const approval1data = {
+            department: adminCtx.department,
             approval: approvalValue,
             approvalComment: approvalCommentRef.current.value
         };
         const approval2data = {
+            department: adminCtx.department,
             staffId: technicianId,
             approval: approvalValue,
             approvalComment: approvalCommentRef.current.value
