@@ -81,6 +81,7 @@
     box-shadow: none;
     outline-color: transparent;
     margin-bottom: 1rem;
+    font-size: small;
 }
 .searchButton {
     cursor: pointer;

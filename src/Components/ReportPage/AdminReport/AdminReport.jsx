@@ -38,6 +38,13 @@ const AdminReport = () => {
     }, [openCategoryList, adminCtx.department]);
 
     useEffect(() => {
+        if (departmentStaff.length === 0) {
+            setReportList([]);
+            setAllReportList([]);
+        }
+    }, [departmentStaff, adminCtx.department]);
+
+    useEffect(() => {
         const getList = async () => {
             if (selectedStaff) {
                 try {

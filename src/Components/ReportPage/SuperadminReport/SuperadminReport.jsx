@@ -273,6 +273,13 @@ const SuperadminReport = () => {
         navigate(`/reportdetails/${row.id}`);
     };
 
+    useEffect(() => {
+        if (departmentStaff.length === 0) {
+            setReportList([]);
+            setAllReportList([]);
+        }
+    }, [departmentStaff, selectedDepartment]);
+
     return (
         <div>
             <div className={`${classes.basicSelection}`}>
