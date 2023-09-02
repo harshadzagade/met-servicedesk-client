@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import classes from './CreateStaff.module.css';
+import { Bars } from 'react-loader-spinner';
 
 const CreateStaff = () => {
     const firstnameRef = useRef();
@@ -18,6 +19,7 @@ const CreateStaff = () => {
     const [institutes, setInstitutes] = useState([]);
     const [institute, setInstitute] = useState('');
     const [departmentType, setDepartmentType] = useState('');
+    const [showLoading, setShowLoading] = useState(false);
 
     const handleSubmitClick = async (e) => {
         e.preventDefault();
@@ -34,6 +36,7 @@ const CreateStaff = () => {
             contactExtension: extensionRef.current.value.length !== 0 ? extensionRef.current.value : null
         };
         try {
+            setShowLoading(true);
             await axios.post('/api/staff/superadmin/createStaff', data);
             Swal.fire(
                 'User Created!',
@@ -52,7 +55,8 @@ const CreateStaff = () => {
             } else {
                 console.log(error.message);
             }
-
+        } finally {
+            setShowLoading(false);
         }
     };
 
@@ -87,7 +91,23 @@ const CreateStaff = () => {
                 <div className={classes.staffform}>
                     <h2>Create Employee</h2>
                     <div className={`${classes.createStaffform}`}>
-                        <div className={`${classes.formStaff}`}>
+                    {showLoading && (
+                                <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                                    <h1>Changing approval status</h1>
+                                    <div className='d-flex justify-content-center'>
+                                        <Bars
+                                            height="80"
+                                            width="80"
+                                            color="#CE1212"
+                                            ariaLabel="bars-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClass=""
+                                            visible={true}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        {!showLoading && <div className={`${classes.formStaff}`}>
                             <form method='GET' onSubmit={handleSubmitClick}>
                                 <div className={classes.names}>
                                     {/* <div className={`${classes.createForm}`}>
@@ -168,7 +188,7 @@ const CreateStaff = () => {
                                 </div>
                                 <button type="submit" className={`${classes.createButton}`}>Submit</button>
                             </form>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </main>
