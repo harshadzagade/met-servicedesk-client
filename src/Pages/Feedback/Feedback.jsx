@@ -2,8 +2,10 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 import classes from './Feedback.module.css';
 import AdminContext from '../../Components/Context/AdminContext/AdminContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Feedback = () => {
+  const navigate = useNavigate();
   const adminCtx = useContext(AdminContext);
   const [feedback, setFeedback] = useState([]);
 
@@ -39,6 +41,17 @@ const Feedback = () => {
     return strTime;
   };
 
+  const handleFeedbackClick = (ticketId, ticketType) => {
+    const id = ticketId.slice(8);
+    if (ticketType === 'request') {
+      navigate(`/requestdetails/${id}`);
+      sessionStorage.setItem('tab', 'request');
+    } else if (ticketType === 'complaint') {
+      sessionStorage.setItem('tab', 'complaint');
+      navigate(`/concerndetails/${id}`);
+    }
+  };
+
   return (
     <Fragment>
       <div className={classes.allstaff}>
@@ -47,12 +60,12 @@ const Feedback = () => {
           <input type="text" className={classes.search} placeholder='Search here' />
         </div>
         {
-          feedback.map((feedback, key) => (
-            <div className={classes.flair}>
-              <div className={classes.activity} key={key}>
+          feedback.map((feedback) => (
+            <div className={classes.flair} onClick={() => handleFeedbackClick(feedback.ticketId, feedback.ticketType)}>
+              <div className={classes.activity} key={feedback.ticketId}>
                 <div className={classes.detalis}>
                   <span>{feedback.ticketId}</span>
-                  <span> {feedback.ticketType}</span>
+                  <span> {(feedback.ticketType === 'request' && 'Request') || (feedback.ticketType === 'complaint' && 'Concern')}</span>
                   <span>{feedback.feedback}</span>
                 </div>
                 <div className={classes.date}>

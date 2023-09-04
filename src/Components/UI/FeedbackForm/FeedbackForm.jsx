@@ -27,7 +27,7 @@ const FeedbackForm = (props) => {
             );
             props.onConfirm();
         } catch (error) {
-            if (error.response.status === 403 || error.response.status === 422) {
+            if (error.response.status === 401 || error.response.status === 403 || error.response.status === 422) {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
