@@ -1,12 +1,3 @@
 .adminComplaint {
-  margin-top: 2.5rem;
-}
-
-.mainTitle {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.mainTitle h2 {
-  font-weight: 600;
+  margin-top: 1rem;
 }

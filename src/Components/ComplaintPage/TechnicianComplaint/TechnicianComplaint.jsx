@@ -14,12 +14,9 @@ const TechnicianComplaint = () => {
 
   return (
     <Fragment>
-      <div className="container-fluid">
+      <div className="container-fluid p-0">
         <div className={`${classes.techniciancom} row`}>
           <div className="col-8">
-            <div className={`${classes.mainTitle}`}>
-              <h2>Concern</h2>
-            </div>
             <TechnicianComplaintNavigation viewLayout={checkLayout} />
             {openLayout === 'AllDepartmentComplaint' && <DepartmentComplaint />}
             {openLayout === 'AllStaffOwnComplaint' && <OwnTechComplaint />}

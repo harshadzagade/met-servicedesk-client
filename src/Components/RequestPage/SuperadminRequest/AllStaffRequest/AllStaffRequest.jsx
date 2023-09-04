@@ -83,16 +83,10 @@ const AllStaffRequest = () => {
         <main>
             <div className="container-fluid">
                 <div className={`${classes.staffrequestform} row`}>
-                    <div className="col-8">
-                        <div className={`${classes.mainTitle}`}>
-                            <h2 className="tik-type-title">Request</h2>
-                        </div>
-                        <div className={classes.search}>
+                    <div className="col-8 col-md-8 p-0">
+                        <div>
                             <div className={classes.searchfiltering}>
                                 <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-                            </div>
-                            <div className={classes.datapage} >
-                                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                             </div>
                         </div>
                         <div className={`${classes.requests} `}>
@@ -139,6 +133,9 @@ const AllStaffRequest = () => {
                                         <h2>{errorMessage}</h2>
                                     </div>
                             }
+                                <div className={classes.datapage} >
+                                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+                            </div>
                             <SweetPagination
                                 currentPageData={setCurrentPageData}
                                 dataPerPage={numberOfPages}

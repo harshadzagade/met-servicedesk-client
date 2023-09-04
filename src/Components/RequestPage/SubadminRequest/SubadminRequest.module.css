@@ -1,34 +1,4 @@
 /* START REQUESTS Section */
 .adminRequest {
-  margin-top: 2.5rem;
-}
-
-.mainTitle {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.mainTitle h2 {
-  font-weight: 600;
-}
-
-
-main .tikReqbtn {
-  display: flex;
-  gap: 0.5rem;
-  transition: all 0.2s ease-in-out;
-  -webkit-appearance: none;
-  border-radius: 1rem;
-  font-family: inherit;
-  appearance: none;
-  background: none;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 10px;
-  border: 2px solid var(--color-primary);
-  color: var(--color-dark);
-}
-
-main .btnName {
-  margin-top: 0.2rem;
+  margin-top: 1rem;
 }

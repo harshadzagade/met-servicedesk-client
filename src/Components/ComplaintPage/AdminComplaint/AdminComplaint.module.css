@@ -1,12 +1,13 @@
 .adminComplaint {
-  margin-top: 2.5rem;
+  margin-top: 1rem;
 }
 
-.mainTitle {
+
+.filter {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  background: var(--color-background);
 }
 
-.mainTitle h2 {
-  font-weight: 600;
-}

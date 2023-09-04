@@ -4,7 +4,6 @@ import AdminContext from '../../Context/AdminContext/AdminContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment/moment';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import getItemWithExpiry from '../../../Utils/expiryFunction';
 
@@ -15,10 +14,6 @@ const DashBoard = () => {
   const [totalsDate, setTotalsDate] = useState({ totalRequestsDate: null, totalComplaintsDate: null, totalTicketsDate: null });
   const adminCtx = useContext(AdminContext);
   const [refresh, setRefresh] = useState(false);
-
-  const requestsPercentage = (pendingTickets.pendingRequests * 100) / pendingTickets.totalRequests;
-  const complaintsPercentage = (pendingTickets.pendingComplaints * 100) / pendingTickets.totalComplaints;
-  const ticketsPercentage = (pendingTickets.totalPendingTickets * 100) / pendingTickets.totalTickets;
 
   const getLastDate = (lastDate) => {
     const now = moment();
@@ -217,22 +212,8 @@ const DashBoard = () => {
             <div className={classes.progress}>
               <h1>{pendingTickets.pendingRequests}</h1>
             </div>
-            <div className={classes.circle} style={{ width: 70, height: 70 }}>
-              <CircularProgressbar
-                value={Math.round(requestsPercentage)}
-                text={`${Math.round(requestsPercentage)}%`}
-                background
-                backgroundPadding={6}
-                styles={buildStyles({
-                  backgroundColor: "#3e98c7",
-                  textColor: "#fff",
-                  pathColor: "#fff",
-                  trailColor: "transparent"
-                })}
-              />
-            </div>
           </div>
-          <p>{!totalsDate.totalRequestsDate ? 'No Requests initiated' : 'Last update ' + getLastDate(totalsDate.totalRequestsDate)}</p>
+          <p className={classes.dates}>{!totalsDate.totalRequestsDate ? 'No Requests initiated' : 'Last update ' + getLastDate(totalsDate.totalRequestsDate)}</p>
         </div>
       </div>
       <div className="col-12 col-md-6 col-lg-4">
@@ -244,22 +225,10 @@ const DashBoard = () => {
             <div className={classes.progress}>
               <h1>{pendingTickets.pendingComplaints}</h1>
             </div>
-            <div className={classes.circle} style={{ width: 70, height: 70 }}>
-              <CircularProgressbar
-                value={Math.round(complaintsPercentage)}
-                text={`${Math.round(complaintsPercentage)}%`}
-                background
-                backgroundPadding={6}
-                styles={buildStyles({
-                  backgroundColor: "#3e98c7",
-                  textColor: "#fff",
-                  pathColor: "#fff",
-                  trailColor: "transparent"
-                })}
-              />
-            </div>
           </div>
-          <p>{!totalsDate.totalComplaintsDate ? 'No Concerns initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
+          <div >
+            <p className={classes.dates}>{!totalsDate.totalComplaintsDate ? 'No Concerns initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
+          </div>
         </div>
       </div>
       <div className="col-12 col-md-6 col-lg-4">
@@ -271,22 +240,8 @@ const DashBoard = () => {
             <div className={classes.progress}>
               <h1>{pendingTickets.totalPendingTickets}</h1>
             </div>
-            <div className={classes.circle} style={{ width: 70, height: 70 }}>
-              <CircularProgressbar
-                value={Math.round(ticketsPercentage)}
-                text={`${Math.round(ticketsPercentage)}%`}
-                background
-                backgroundPadding={6}
-                styles={buildStyles({
-                  backgroundColor: "#3e98c7",
-                  textColor: "#fff",
-                  pathColor: "#fff",
-                  trailColor: "transparent"
-                })}
-              />
-            </div>
           </div>
-          <p>{!totalsDate.totalTicketsDate ? 'No Tickets initiated' : 'Last update ' + getLastDate(totalsDate.totalTicketsDate)}</p>
+          <p className={classes.dates}>{!totalsDate.totalTicketsDate ? 'No Tickets initiated' : 'Last update ' + getLastDate(totalsDate.totalTicketsDate)}</p>
         </div>
       </div>
     </div>

@@ -2,10 +2,11 @@ import React, { useState, useEffect, Fragment } from 'react';
 import classes from './SubadminReport.module.css';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const SubadminReport = () => {
+    const location = useLocation();
     const id = getItemWithExpiry('id');
     const navigate = useNavigate();
     const [reportList, setReportList] = useState([]);
@@ -13,7 +14,7 @@ const SubadminReport = () => {
     const [departmentStaff, setDepartmentStaff] = useState([]);
     const [searchType, setSearchType] = useState('Subject');
     const [searchText, setSearchText] = useState('');
-    const [selectedStaff, setSelectedStaff] = useState(null);
+    const [selectedStaff, setSelectedStaff] = useState(location.state? location.state.staff : null);
     const [refresh, setRefresh] = useState(false);
     const [isNormalSearch, setIsNormalSearch] = useState(true);
     const [ticketType, setTicketType] = useState('allTicketTypes');
@@ -56,8 +57,12 @@ const SubadminReport = () => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await axios.get(`/api/report/reportcategories/categories/${subadminDetails.department}`);
-            setCategories(categories.data.categories);
+            try {
+                const categories = await axios.get(`/api/report/reportcategories/categories/${subadminDetails.department}`);
+                setCategories(categories.data.categories);
+            } catch (error) {
+                console.log(error.message);
+            }
         };
         getCategories();
     }, [openCategoryList, subadminDetails]);
@@ -245,7 +250,7 @@ const SubadminReport = () => {
         ]
 
     const handleRowClick = row => {
-        navigate(`/reportdetails/${row.id}`);
+        navigate(`/reportdetails/${row.id}`, { state: { department: subadminDetails.department[0], staff: selectedStaff } });
     };
 
     const convertDate = (stringDate) => {
@@ -281,7 +286,6 @@ const SubadminReport = () => {
             <div className={`${classes.basicSelection}`}>
                 <div className={classes.h2}>
                     <div className='d-flex'>
-                        <h2>Report</h2>
                         <a href={`data:text/csv;charset=utf-8,${escape(csvFile)}`} download="report_data.csv" className={`${classes.generate}  d-sm-inline-block btn btn-sm  shadow-sm mb-2 ml-3`}>
                             <i className="fas fa-download fa-sm "></i>
                             Download Report
@@ -290,8 +294,8 @@ const SubadminReport = () => {
                 </div>
                 <div className={`${classes.staffSelection}`}>
                     <div>Engineer:&nbsp;</div>
-                    <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>
-                        <option value='' hidden>Select engineer</option>
+                    <select value={selectedStaff} className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>
+                        <option value='' hidden>Select </option>
                         {
                             departmentStaff.map((staff, key) => (
                                 <option key={key} value={staff.id}>{staff.firstname + ' ' + staff.lastname}</option>
@@ -314,7 +318,7 @@ const SubadminReport = () => {
                                 <input type="date" className={classes.dateStyle} onChange={handleToDateChange} />
                             </div>
                         </div>
-                        {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                        {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={` search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                         {
                             openTicketTypeList &&
                             <select value={ticketType} className={`${classes.optionSearchBox}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>

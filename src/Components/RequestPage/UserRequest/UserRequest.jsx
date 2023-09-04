@@ -81,22 +81,14 @@ const UserRequest = () => {
       <div className="container-fluid">
         <div className={`${classes.userreq} row`}>
           <div className="col-8">
-            <div className={classes.buttonsSection}>
-              <div className={`${classes.filterButtons}`}>
-                <h2 className="tik-type-title">Request</h2>
+            <div className={classes.search}>
+              <div className={classes.searchfiltering}>
+                <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
               </div>
               <button className={`${classes.tikReqBtn}`} onClick={() => navigate("/newrequest")}>
                 <span className="material-icons-sharp btn-icon">add</span>
                 <span className={`${classes.btnName}`}> New Ticket</span>
               </button>
-            </div>
-            <div className={classes.search}>
-              <div className={classes.searchfiltering}>
-                <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-              </div>
-              <div className={classes.datapage}>
-                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-              </div>
             </div>
             <div className={`${classes.requests} `}>
               {
@@ -131,6 +123,9 @@ const UserRequest = () => {
                     <h2>{errorMessage}</h2>
                   </div>
               }
+              <div className={classes.datapage}>
+                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+              </div>
               <SweetPagination
                 currentPageData={setCurrentPageData}
                 dataPerPage={numberOfPages}

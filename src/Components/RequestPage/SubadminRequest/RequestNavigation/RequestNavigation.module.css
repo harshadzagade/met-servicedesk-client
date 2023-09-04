@@ -60,7 +60,6 @@ main .tikReqbtn {
   height: 3.5rem;
   margin-top: 0.6rem;
 }
-
-main .btnName {
-  margin-top: 0.2rem;
+ .btnName {
+  margin-top: 0.3rem;
 }

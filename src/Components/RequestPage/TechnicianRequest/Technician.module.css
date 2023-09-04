@@ -1,13 +1,3 @@
 .technicianreq {
-  margin-top: 2.5rem;
-}
-
-.mainTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.mainTitle h2 {
-  font-weight: 600;
+  margin-top: 1rem;
 }

@@ -4,7 +4,7 @@ import classes from './DataPerPage.module.css';
 const DataPerPage = (props) => {
     return (
         <label className={`${classes.dropdown}`}>
-            Show Rows
+           
             <div className={`${classes.ddButton}`}>
                 {props.numberOfPages}
             </div>

@@ -122,7 +122,6 @@ const Department = () => {
             {openUpdate && <EditCategories onConfirm={handleUpdateCancel} departmentId={departmentId} />}
             {openCreateDepartment && <CreateDepartment onConfirm={handleCreateCancel} />}
             <div className={classes.allCategory}>
-                <h2 className={classes.title}>Department List</h2>
                 <button className={`${classes.tikReqbtn}`} onClick={() => setOpenCreateDepartment(true)}>
                     <span className="material-icons-sharp btn-icon">
                         add

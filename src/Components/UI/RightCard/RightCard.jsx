@@ -14,7 +14,6 @@ const RightCard = () => {
 
   return (
     <Fragment>
-      <h2 className="tik-type-title">Dashboard</h2>
       <div className={classes.compdetails}>
         <div className={classes.details}>
           <CardNavigate viewLayout={checkLayout} />

@@ -5,10 +5,10 @@ import IncomingRequest from './IncomingRequest/IncomingRequest';
 import OwnRequest from './OwnRequest/OwnRequest';
 import OutgoingDepartmentRequest from './OutgoingDepartmentRequest/OutgoingDepartmentRequest';
 import Rightside from '../../Righside/Rightside';
-import InformationBtn from '../../UI/InformationBtn/InformationBtn';
 
 const AdminRequest = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingRequest');
+  
 
   const checkLayout = (value,) => {
     setOpenLayout(value);
@@ -16,13 +16,9 @@ const AdminRequest = () => {
 
   return (
     <Fragment>
-      <div className="container-fluid">
-        <div className={`${classes.adminRequest} row`}>
+      <div className="container-fluid p-0">
+        <div className={`${classes.adminRequest} row `}>
           <div className="col-8">
-            <div className={`${classes.mainTitle}`}>
-              <h2 className="tik-type-title">Request</h2>
-              <InformationBtn />
-            </div>
             <RequestNavigation viewLayout={checkLayout} />
             {openLayout === 'AllStaffIncomingRequest' && <IncomingRequest />}
             {openLayout === 'AllStaffOutGoingRequest' && <OutgoingDepartmentRequest />}

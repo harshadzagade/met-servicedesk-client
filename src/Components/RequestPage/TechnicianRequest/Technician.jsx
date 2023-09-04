@@ -15,12 +15,9 @@ const Technician = () => {
 
   return (
     <Fragment>
-      <div className="container-fluid">
+      <div className="container-fluid p-0">
         <div className={`${classes.technicianreq} row`}>
           <div className="col-8">
-            <div className={`${classes.mainTitle}`}>
-              <h2 className="tik-type-title">Request</h2>
-            </div>
             <RequestNavigation viewLayout={checkLayout} />
             {openLayout === 'AssignedRequest' && <TechnicianAssignRequest />}
             {openLayout === 'OwnRequest' && <TechnicianOwnRequest />}

@@ -8,6 +8,13 @@ main .filterButtons {
   margin-right: auto;
 }
 
+main .filter {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  background: var(--color-background);
+}
 .button {
   transition: all 0.2s ease-in-out;
   -webkit-appearance: none;
@@ -24,26 +31,12 @@ main .filterButtons {
   border: none;
   color: var(--color-dark);
 }
-
 .button:hover,
 .button.active {
   opacity: 1;
 }
 
-.datapage {
-  margin-left: 7rem;
-}
-
-main .filter {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  margin-top: 1.5rem;
-  background: var(--color-background);
-}
-
-
-main .tikReqbtn {
+.tikReqbtn {
   display: flex;
   gap: 0.5rem;
   transition: all 0.2s ease-in-out;
@@ -60,7 +53,6 @@ main .tikReqbtn {
   height: 3.5rem;
   margin-top: 0.6rem;
 }
-
-main .btnName {
-  margin-top: 0.2rem;
+.btnName {
+  margin-top: 0.3rem;
 }

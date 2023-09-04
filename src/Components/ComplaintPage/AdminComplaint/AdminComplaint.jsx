@@ -5,10 +5,10 @@ import OutgoingComplaint from '../AdminComplaint/OutgoingComplaint/OutgoingCompl
 import OwnComplaint from '../AdminComplaint/OwnComplaint/OwnComplaint';
 import ComplaintNavigation from './ComplaintNavigation/ComplaintNavigation';
 import Rightside from '../../Righside/Rightside';
-import InformationBtn from '../../UI/InformationBtn/InformationBtn';
 
 const AdminComplaint = () => {
   const [openLayout, setOpenLayout] = useState('AllStaffIncomingComplaint');
+  
 
   const checkLayout = (value) => {
     setOpenLayout(value);
@@ -16,13 +16,9 @@ const AdminComplaint = () => {
 
   return (
     <Fragment>
-      <div className="container-fluid">
+      <div className="container-fluid p-0">
         <div className={`${classes.adminComplaint} row`}>
           <div className="col-8">
-            <div className={`${classes.mainTitle}`}>
-              <h2 className="tik-type-title">Concern</h2>
-              <InformationBtn />
-            </div>
             <ComplaintNavigation viewLayout={checkLayout} />
             {openLayout === 'AllStaffIncomingComplaint' && <IncomingComplaint />}
             {openLayout === 'AllStaffOutGoingComplaint' && <OutgoingComplaint />}

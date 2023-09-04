@@ -46,7 +46,7 @@ const AllStaffExt = () => {
                 sortable: true,
             },
             {
-                name: "PhoneNo",
+                name: "Mobile No.",
                 selector: (row) => row.phoneNumber,
                 sortable: true,
             }
@@ -107,7 +107,6 @@ const AllStaffExt = () => {
     return (
         <Fragment>
             <div className={classes.allstaff}>
-                <h2 className={classes.title}>Contact List</h2>
                 <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
             </div>
             <DataTable

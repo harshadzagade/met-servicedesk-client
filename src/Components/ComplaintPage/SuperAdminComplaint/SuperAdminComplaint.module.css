@@ -1,3 +1,6 @@
+.superadmincomplaint {
+  margin-top: 1rem;
+}
 /* search filtes */
 .searchInput {
   background: white;
@@ -10,60 +13,15 @@
   margin-top: 1rem;
 }
 
-.optionSearchBox {
-  background: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  border: 1px solid black;
-  height: 3rem;
-  margin-top: 1rem;
-}
-
-.searchButton {
-  display: inline-block;
-  margin-left: 0.5rem;
-  border: 1px solid gray;
-  border-radius: 4px;
-  padding: 10px 10px 10px 10px;
-  background-color: var(--color-primary);
-  cursor: pointer;
-  white-space: nowrap;
-  color: white;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-}
-
-.search {
-  display: flex;
-}
-
 .searchfiltering {
   display: flex;
   margin-right: auto;
+  margin-bottom: 0.5rem;
 }
 
-.datapage {
-  margin-top: 0.5rem;
-}
 
 /* superadmin complaint */
-.superadmincomplaint {
-  margin-top: 2.5rem;
-}
 
-.mainTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.mainTitle h2 {
-  font-weight: 600;
-  color: var(--text-primary);
-}
 
 .tikReqBtn {
   display: flex;
@@ -88,11 +46,6 @@
 
 
 /* START REQUESTS Section */
-.mainTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
 
 .tikReqBtn {
   display: flex;
@@ -225,6 +178,7 @@
 .errorMsg h2{
   color: #646f72;
 }
+
 
 @media (min-width: 320px) and (max-width: 767px) {
   .tikOther {

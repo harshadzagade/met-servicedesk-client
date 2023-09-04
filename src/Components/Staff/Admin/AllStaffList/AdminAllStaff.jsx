@@ -47,7 +47,7 @@ const AdminAllStaff = () => {
             sortable: true,
         },
         {
-            name: "PhoneNo",
+            name: "Mobile No.",
             selector: (row) => row.phoneNumber,
             sortable: true,
         },

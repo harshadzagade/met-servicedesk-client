@@ -89,14 +89,9 @@ const OutgoingComplaint = () => {
 
   return (
     <main>
-      <div className={classes.search}>
         <div className={classes.searchfiltering}>
           <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
         </div>
-        <div className={classes.datapage}>
-          <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-        </div>
-      </div>
       <div className={`${classes.complaint} `}>
         {
           (allComplaintList.length !== 0) ?
@@ -140,6 +135,9 @@ const OutgoingComplaint = () => {
               <h2>{errorMessage}</h2>
             </div>
         }
+        <div className={classes.datapage}>
+          <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+        </div>
         <Sweetpagination
           currentPageData={setCurrentPageData}
           dataPerPage={numberOfPages}

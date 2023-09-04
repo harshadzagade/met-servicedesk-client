@@ -242,7 +242,6 @@ const TechnicianReport = () => {
             <Fragment>
                 <div className={classes.h2}>
                     <div className='d-flex'>
-                        <h2>Report</h2>
                         <a href={`data:text/csv;charset=utf-8,${escape(csvFile)}`} download="report_data.csv" className={`${classes.generate} d-none d-sm-inline-block btn btn-sm  shadow-sm mb-2 ml-3`}>
                             <i className="fas fa-download fa-sm "></i>
                             Download Report
@@ -260,7 +259,7 @@ const TechnicianReport = () => {
                             <input type="date" className={classes.dateStyle} onChange={handleToDateChange} />
                         </div>
                     </div>
-                    {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                    {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={` search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
                     {
                         openTicketTypeList &&
                         <select value={ticketType} className={`${classes.searchInput}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>

@@ -85,9 +85,6 @@ const SuperAdminComplaint = () => {
             <div className="container-fluid">
                 <div className={`${classes.superadmincomplaint} row`}>
                     <div className="col-12 col-md-8 p-0">
-                        <div className={`${classes.mainTitle}`}>
-                            <h2>Concern</h2>
-                        </div>
                         <div className={classes.search}>
                             <div className={classes.searchfiltering}>
                                 <input
@@ -96,9 +93,6 @@ const SuperAdminComplaint = () => {
                                     placeholder={`Search here`}
                                     onChange={(e) => setSearchText(e.target.value)}
                                 />
-                            </div>
-                            <div className={`${classes.datapage}`}>
-                                <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                             </div>
                         </div>
 
@@ -143,7 +137,13 @@ const SuperAdminComplaint = () => {
                                         <h2>{errorMessage}</h2>
                                     </div>
                             }
+                            <div>
+                                <div className={`${classes.datapages}`}>
+                                    <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+                                </div>
                             <SweetPagination currentPageData={setCurrentPageData} dataPerPage={numberOfPages} getData={allComplaintList} navigation={true} />
+                                
+                            </div>
 
                         </div>
                     </div>

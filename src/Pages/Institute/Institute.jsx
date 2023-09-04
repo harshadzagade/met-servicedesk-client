@@ -111,7 +111,6 @@ const Institute = () => {
             {openCreateInstitute && <CreateInstitute onConfirm={handleCreateCancel} />}
             {openEditInstitute && <EditInstitute onConfirm={handleEditCancel} instituteId={instituteId} instituteName={instituteName} />}
             <div className={classes.allCategory}>
-                <h2 className={classes.title}>Institute</h2>
                 <button className={`${classes.tikReqbtn}`} onClick={() => setOpenCreateInstitute(true)}>
                     <span className="material-icons-sharp btn-icon">
                         add
@@ -124,7 +123,7 @@ const Institute = () => {
                 data={filterInstitutes}
                 pagination
                 fixedHeader
-                fixedHeaderScrollHeight='56vh'
+                fixedHeaderScrollHeight='auto'
                 selectableRows
                 selectableRowsHighlight
                 highlightOnHover

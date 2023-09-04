@@ -4,14 +4,6 @@
   margin-top: 2.5rem;
 }
 
-.title {
-  display: flex;
-  margin-right: auto;
-  margin-top: 0.3rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
 .searchInput {
   background: white;
   padding: 10px;
@@ -22,9 +14,6 @@
 }
 @media screen and (max-width: 991px) {
 
-  .title{
-    font-size: medium !important;
-  }
 
   .searchInput {
     background: white;

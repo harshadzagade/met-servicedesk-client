@@ -38,7 +38,7 @@ const AllStaff = () => {
             sortable: true,
         },
         {
-            name: "Phone Number",
+            name: "Mobile No.",
             selector: (row) => row.phoneNumber,
             sortable: true,
         },

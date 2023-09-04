@@ -2,18 +2,19 @@ import React, { useState, useEffect, Fragment } from 'react';
 import classes from './SuperadminReport.module.css';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SuperadminReport = () => {
+    const location = useLocation();
     const [reportList, setReportList] = useState([]);
     const navigate = useNavigate();
     const [allReportList, setAllReportList] = useState([]);
     const [staffDepartments, setStaffDepartments] = useState([]);
-    const [selectedDepartment, setSelectedDepartment] = useState('');
+    const [selectedDepartment, setSelectedDepartment] = useState(location.state? location.state.department : null);
     const [departmentStaff, setDepartmentStaff] = useState([]);
     const [searchType, setSearchType] = useState('Subject');
     const [searchText, setSearchText] = useState('');
-    const [selectedStaff, setSelectedStaff] = useState(null);
+    const [selectedStaff, setSelectedStaff] = useState(location.state? location.state.staff : null);
     const [refresh, setRefresh] = useState(false);
     const [isNormalSearch, setIsNormalSearch] = useState(true);
     const [ticketType, setTicketType] = useState('allTicketTypes');
@@ -143,18 +144,6 @@ const SuperadminReport = () => {
         }
     }, [category, openCategoryList, sortedData]);
 
-    /* useEffect(() => {
-        const getReportByDepartment = async () => {
-            try {
-                const report = await axios.get(`/api/report/departmentreport/${selectedDepartment}`);
-                setAllReportList(report.data.report);
-            } catch (error) {
-                console.log(error.message);
-            }
-        };
-        getReportByDepartment();
-    }, [selectedDepartment]); */
-
     useEffect(() => {
         const getRequestByPriority = async () => {
             try {
@@ -270,22 +259,26 @@ const SuperadminReport = () => {
         ]
 
     const handleRowClick = row => {
-        navigate(`/reportdetails/${row.id}`);
+        navigate(`/reportdetails/${row.id}`, { state: { department: selectedDepartment, staff: selectedStaff } });
     };
 
     useEffect(() => {
-        if (departmentStaff.length === 0) {
+        if (selectedStaff === null) {
             setReportList([]);
             setAllReportList([]);
         }
-    }, [departmentStaff, selectedDepartment]);
+    }, [selectedDepartment, selectedStaff]);
+
+    const handleDepartmentSelect = (e) => {
+        setSelectedDepartment(e.target.value);
+        setSelectedStaff(null);
+    };
 
     return (
         <div>
             <div className={`${classes.basicSelection}`}>
                 <div className={classes.h2}>
                     <div className='d-flex'>
-                        <h2>Report</h2>
                         <a href={`data:text/csv;charset=utf-8,${escape(csvFile)}`} download="report_data.csv" className={`${classes.generate} d-none d-sm-inline-block btn btn-sm  shadow-sm mb-2 ml-3`}>
                             <i className="fas fa-download fa-sm "></i>
                             Download Report
@@ -294,8 +287,8 @@ const SuperadminReport = () => {
                 </div>
                 <div className={`${classes.departmentSelection}`}>
                     <div>Department:&nbsp;</div>
-                    <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedDepartment(e.target.value)}>
-                        <option value='' hidden>Select department</option>
+                    <select value={selectedDepartment} className={`${classes.dropdownSelect}`} onChange={handleDepartmentSelect}>
+                        <option value='' hidden>Select</option>
                         {
                             staffDepartments.map((department, key) => (
                                 <option key={key} value={department}>{department}</option>
@@ -307,8 +300,8 @@ const SuperadminReport = () => {
                     departmentStaff.length !== 0 &&
                     <div className={`${classes.staffSelection}`}>
                         <div>Engineer:&nbsp;</div>
-                        <select className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>
-                            <option value='' hidden>Select engineer</option>
+                        <select value={selectedStaff} className={`${classes.dropdownSelect}`} onChange={(e) => setSelectedStaff(e.target.value)}>
+                            <option value='' hidden>Select</option>
                             {
                                 departmentStaff.map((staff, key) => (
                                     <option key={key} value={staff.id}>{staff.firstname + ' ' + staff.lastname}</option>
@@ -332,7 +325,7 @@ const SuperadminReport = () => {
                                 <input type="date" className={classes.dateStyle} onChange={handleToDateChange} />
                             </div>
                         </div>
-                        {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Please search ${searchType}`} onChange={(e) => setSearchText(e.target.value)} />}
+                        {isNormalSearch && <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />}
                         {
                             openTicketTypeList &&
                             <select value={ticketType} className={`${classes.searchInput}`} name="ticket" required onChange={(e) => setTicketType(e.target.value)}>
