@@ -6,6 +6,7 @@ import { iswitch } from 'iswitch';
 import SweetPagination from 'sweetpagination';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import openSocket from 'socket.io-client';
 
 const IncomingComplaint = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const IncomingComplaint = () => {
   const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/complaint/complaints/incoming/${adminCtx.department}`);
@@ -34,6 +36,12 @@ const IncomingComplaint = () => {
     };
     if (adminCtx.department) {
       getList();
+      socket.on('complaints', () => {
+        getList();
+      });
+      socket.on('complaintStatus', () => {
+        getList();
+      });
     } else {
       setErrorMessage('Please select department')
     }
@@ -129,9 +137,9 @@ const IncomingComplaint = () => {
               <h2>{errorMessage}</h2>
             </div>
         }
-         <div className={classes.datapage}>
+        <div className={classes.datapage}>
           <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-        </div>  
+        </div>
         <SweetPagination
           currentPageData={setCurrentPageData}
           dataPerPage={numberOfPages}

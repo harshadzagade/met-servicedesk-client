@@ -6,6 +6,7 @@ import { iswitch } from 'iswitch';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const IncomingComplaint = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const IncomingComplaint = () => {
   }, [id]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/complaint/complaints/incoming/${subadminDetails.department}`);
@@ -46,6 +48,12 @@ const IncomingComplaint = () => {
       }
     };
     getList();
+    socket.on('complaints', () => {
+      getList();
+    });
+    socket.on('complaintStatus', () => {
+      getList();
+    });
   }, [subadminDetails.department]);
 
   useEffect(() => {
@@ -89,9 +97,9 @@ const IncomingComplaint = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.complaint} `}>
         {
           (allComplaintList.length !== 0) ?

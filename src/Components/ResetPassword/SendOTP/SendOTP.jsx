@@ -84,7 +84,7 @@ const SendOTP = (props) => {
                             ) : (
                                 <p>Didn't recieve code?</p>
                             )}
-                            <button className={classes.timmerBtn} onClick={handleResendOTP}>Resend OTP</button>
+                            {(seconds === 0 && minutes === 0) && <button className={classes.timmerBtn} onClick={handleResendOTP}>Resend OTP</button>}
                         </div>
                         <button className={classes.button} type='submit'>Submit</button>
                     </form>

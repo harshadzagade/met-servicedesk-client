@@ -6,6 +6,7 @@ import axios from 'axios';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const DepartmentRequest = () => {
     const id = getItemWithExpiry('id');
@@ -34,6 +35,7 @@ const DepartmentRequest = () => {
     }, [id]);
 
     useEffect(() => {
+        const socket = openSocket('');
         const getList = async () => {
             try {
                 const list = await axios.get(`/api/request/requestsbydepartment/${department}`);
@@ -47,6 +49,12 @@ const DepartmentRequest = () => {
             }
         };
         getList();
+        socket.on('requests', () => {
+            getList();
+        });
+        socket.on('requestStatus', () => {
+            getList();
+        });
     }, [department]);
 
     useEffect(() => {
@@ -90,9 +98,9 @@ const DepartmentRequest = () => {
 
     return (
         <main>
-                <div className={classes.searchfiltering}>
-                    <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-                </div>
+            <div className={classes.searchfiltering}>
+                <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+            </div>
             <div className={`${classes.requests} `}>
                 {
                     allRequestList.length !== 0 ?

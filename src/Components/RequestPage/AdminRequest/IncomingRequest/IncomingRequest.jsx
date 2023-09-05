@@ -6,6 +6,7 @@ import SweetPagination from 'sweetpagination';
 import { iswitch } from 'iswitch';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
+import openSocket from 'socket.io-client';
 
 const IncomingRequest = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const IncomingRequest = () => {
   };
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/staff/admin/requests/incoming/${adminCtx.department}`);
@@ -39,6 +41,12 @@ const IncomingRequest = () => {
     };
     if (adminCtx.department) {
       getList();
+      socket.on('requests', () => {
+          getList();
+      });
+      socket.on('requestStatus', () => {
+          getList();
+      });
     } else {
       setErrorMessage('Please select department')
     }

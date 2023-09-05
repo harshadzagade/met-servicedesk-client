@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const OwnRequest = () => {
   const id = getItemWithExpiry('id');
@@ -22,6 +23,7 @@ const OwnRequest = () => {
   const sortedData = React.useMemo(() => { return [...requestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [requestList]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/request/ownrequests/${id}`);
@@ -36,6 +38,12 @@ const OwnRequest = () => {
     };
     if (adminCtx.department) {
       getList();
+      socket.on('requests', () => {
+          getList();
+      });
+      socket.on('requestStatus', () => {
+          getList();
+      });
     } else {
       setErrorMessage('Please select department')
     }

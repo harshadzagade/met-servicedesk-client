@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const OutgoingComplaint = () => {
   const navigate = useNavigate();
@@ -42,7 +43,8 @@ const OutgoingComplaint = () => {
   }, [id, adminCtx.department]);
 
   useEffect(() => {
-    const getStaff = async () => {
+    const socket = openSocket('');
+    const getList = async () => {
       try {
         if (searchText) {
           const complaint = await axios.get(`/api/staff/admin/complaints/outgoingcomplaintsearch/${adminCtx.department}/${searchText}`);
@@ -57,7 +59,13 @@ const OutgoingComplaint = () => {
         console.log(error.message);
       }
     };
-    getStaff();
+    getList();
+    socket.on('complaints', () => {
+      getList();
+    });
+    socket.on('complaintStatus', () => {
+      getList();
+    });
   }, [searchText, adminCtx.department, sortedData]);
 
   const getCreatedComplaintDate = (createdAt) => {
@@ -82,9 +90,9 @@ const OutgoingComplaint = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.complaint} `}>
         {
           (allComplaintList.length !== 0) ?

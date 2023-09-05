@@ -6,6 +6,7 @@ import { iswitch } from 'iswitch';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const OwnComplaint = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const OwnComplaint = () => {
   const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
@@ -33,6 +35,12 @@ const OwnComplaint = () => {
       }
     };
     getList();
+    socket.on('complaints', () => {
+      getList();
+    });
+    socket.on('complaintStatus', () => {
+      getList();
+    });
   }, [id]);
 
   const getCreatedComplaintDate = (createdAt) => {
@@ -76,9 +84,9 @@ const OwnComplaint = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.complaint} `}>
         {
           (allComplaintList.length !== 0) ?

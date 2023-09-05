@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import classes from "./Complaint.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import SweetPagination from "sweetpagination";
 import DataPerPage from "../../UI/DataPerPage/DataPerPage";
 import Rightside from "../../Righside/Rightside";
 import getItemWithExpiry from "../../../Utils/expiryFunction";
-import { Fragment } from "react";
+import openSocket from 'socket.io-client';
 
 const Complaint = () => {
   const id = getItemWithExpiry('id');
@@ -21,6 +21,7 @@ const Complaint = () => {
   const sortedData = React.useMemo(() => { return [...complaintList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [complaintList]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
@@ -34,6 +35,12 @@ const Complaint = () => {
       }
     };
     getList();
+    socket.on('complaints', () => {
+      getList();
+    });
+    socket.on('complaintStatus', () => {
+      getList();
+    });
   }, [id]);
 
   useEffect(() => {

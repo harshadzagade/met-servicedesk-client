@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import classes from './SuperAdminComplaint.module.css';
 import { useNavigate } from 'react-router-dom';
 import { iswitch } from 'iswitch';
@@ -7,7 +7,6 @@ import axios from 'axios';
 import DataPerPage from '../../UI/DataPerPage/DataPerPage';
 import Rightside from '../../Righside/Rightside';
 import openSocket from 'socket.io-client';
-import { Fragment } from 'react';
 
 const SuperAdminComplaint = () => {
     const navigate = useNavigate();
@@ -36,7 +35,9 @@ const SuperAdminComplaint = () => {
         };
         getList();
         socket.on('complaints', () => {
-            console.log('hola');
+            getList();
+        });
+        socket.on('complaintStatus', () => {
             getList();
         });
     }, []);
@@ -141,8 +142,8 @@ const SuperAdminComplaint = () => {
                                 <div className={`${classes.datapages}`}>
                                     <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                                 </div>
-                            <SweetPagination currentPageData={setCurrentPageData} dataPerPage={numberOfPages} getData={allComplaintList} navigation={true} />
-                                
+                                <SweetPagination currentPageData={setCurrentPageData} dataPerPage={numberOfPages} getData={allComplaintList} navigation={true} />
+
                             </div>
 
                         </div>

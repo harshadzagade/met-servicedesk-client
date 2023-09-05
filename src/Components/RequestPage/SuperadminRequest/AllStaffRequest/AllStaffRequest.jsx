@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import classes from './AllStaffRequest.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,7 +7,6 @@ import { iswitch } from 'iswitch';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import Rightside from '../../../Righside/Rightside';
 import openSocket from 'socket.io-client';
-import { Fragment } from 'react';
 
 const AllStaffRequest = () => {
     const navigate = useNavigate();
@@ -36,6 +35,9 @@ const AllStaffRequest = () => {
         };
         getList();
         socket.on('requests', () => {
+            getList();
+        });
+        socket.on('requestStatus', () => {
             getList();
         });
     }, []);
@@ -133,7 +135,7 @@ const AllStaffRequest = () => {
                                         <h2>{errorMessage}</h2>
                                     </div>
                             }
-                                <div className={classes.datapage} >
+                            <div className={classes.datapage} >
                                 <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                             </div>
                             <SweetPagination

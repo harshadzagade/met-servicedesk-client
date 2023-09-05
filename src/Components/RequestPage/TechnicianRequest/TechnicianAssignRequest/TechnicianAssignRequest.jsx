@@ -6,6 +6,7 @@ import axios from 'axios';
 import SweetPagination from 'sweetpagination';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const TechnicianAssignRequest = () => {
   const id = getItemWithExpiry('id');
@@ -20,6 +21,7 @@ const TechnicianAssignRequest = () => {
   const sortedData = React.useMemo(() => { return [...requestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [requestList]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/staff/technician/getassignedrequests/${id}`);
@@ -33,6 +35,12 @@ const TechnicianAssignRequest = () => {
       }
     };
     getList();
+    socket.on('requests', () => {
+      getList();
+    });
+    socket.on('requestStatus', () => {
+      getList();
+    });
   }, [id]);
 
   useEffect(() => {
@@ -76,9 +84,9 @@ const TechnicianAssignRequest = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.requests} `}>
         {
           allRequestList.length !== 0 ?

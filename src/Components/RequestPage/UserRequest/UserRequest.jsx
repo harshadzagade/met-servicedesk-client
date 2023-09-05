@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import classes from ".//UserRequest.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import SweetPagination from "sweetpagination";
 import DataPerPage from "../../UI/DataPerPage/DataPerPage";
 import Rightside from "../../Righside/Rightside";
 import getItemWithExpiry from "../../../Utils/expiryFunction";
-import { Fragment } from "react";
+import openSocket from 'socket.io-client';
 
 const UserRequest = () => {
   const id = getItemWithExpiry('id');
@@ -21,6 +21,7 @@ const UserRequest = () => {
   const sortedData = React.useMemo(() => { return [...requestList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [requestList]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/request/ownrequests/${id}`);
@@ -34,6 +35,12 @@ const UserRequest = () => {
       }
     };
     getList();
+    socket.on('requests', () => {
+      getList();
+    });
+    socket.on('requestStatus', () => {
+      getList();
+    });
   }, [id]);
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import SweetPagination from 'sweetpagination';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const OwnComplaint = () => {
   const navigate = useNavigate();
@@ -50,7 +51,8 @@ const OwnComplaint = () => {
   };
 
   useEffect(() => {
-    const getStaff = async () => {
+    const socket = openSocket('');
+    const getList = async () => {
       try {
         if (searchText) {
           const complaint = await axios.get(`/api/complaint/owncomplaintsearch/${id}/${searchText}`);
@@ -65,7 +67,13 @@ const OwnComplaint = () => {
         console.log(error.message);
       }
     };
-    getStaff();
+    getList();
+    socket.on('complaints', () => {
+      getList();
+    });
+    socket.on('complaintStatus', () => {
+      getList();
+    });
   }, [searchText, id, sortedData]);
 
   const formatAMPM = (date) => {
@@ -82,9 +90,9 @@ const OwnComplaint = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.complaint} `}>
         {
           (allComplaintList.length !== 0) ?

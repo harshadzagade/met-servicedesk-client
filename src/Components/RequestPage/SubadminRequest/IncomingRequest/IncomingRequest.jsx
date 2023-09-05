@@ -7,6 +7,7 @@ import { iswitch } from 'iswitch';
 import SubadminContext from '../../../Context/SubadminContext/SubadminContext';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const IncomingRequest = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const IncomingRequest = () => {
   };
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/staff/admin/requests/incoming/${subadminDetails.department}`);
@@ -53,6 +55,12 @@ const IncomingRequest = () => {
       }
     };
     getList();
+    socket.on('requests', () => {
+      getList();
+    });
+    socket.on('requestStatus', () => {
+      getList();
+    });
   }, [subadminDetails.department]);
 
   useEffect(() => {
@@ -96,9 +104,9 @@ const IncomingRequest = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.requests} `}>
         {
           allRequestList.length !== 0 ?

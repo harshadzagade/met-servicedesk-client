@@ -6,6 +6,7 @@ import classes from './OutgoingComplaint.module.css'
 import { useNavigate } from 'react-router-dom';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const OutgoingComplaint = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const OutgoingComplaint = () => {
   }, [id]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
@@ -46,6 +48,12 @@ const OutgoingComplaint = () => {
       }
     };
     getList();
+    socket.on('complaints', () => {
+      getList();
+    });
+    socket.on('complaintStatus', () => {
+      getList();
+    });
   }, [id, subadminDetails.department]);
 
   useEffect(() => {
@@ -89,9 +97,9 @@ const OutgoingComplaint = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.complaint} `}>
         {
           (allComplaintList.length !== 0) ?

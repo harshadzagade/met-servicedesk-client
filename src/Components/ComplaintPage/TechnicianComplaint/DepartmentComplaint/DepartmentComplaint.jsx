@@ -6,6 +6,7 @@ import { iswitch } from 'iswitch';
 import axios from 'axios';
 import DataPerPage from '../../../UI/DataPerPage/DataPerPage';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const DepartmentComplaint = () => {
   const id = getItemWithExpiry('id');
@@ -34,6 +35,7 @@ const DepartmentComplaint = () => {
   }, [id]);
 
   useEffect(() => {
+    const socket = openSocket('');
     const getList = async () => {
       try {
         const list = await axios.get(`/api/complaint/complaints/incoming/${department}`);
@@ -47,6 +49,12 @@ const DepartmentComplaint = () => {
       }
     };
     getList();
+    socket.on('complaints', () => {
+      getList();
+    });
+    socket.on('complaintStatus', () => {
+      getList();
+    });
   }, [department, numberOfPages]);
 
   useEffect(() => {
@@ -90,9 +98,9 @@ const DepartmentComplaint = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.requests} `}>
         {
           (allComplaintList.length !== 0) ?
