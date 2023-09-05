@@ -127,9 +127,9 @@ const TechnicianAssignRequest = () => {
               <h2>{errorMessage}</h2>
             </div>
         }
-        <div className={classes.datapage}>
+        {requestList.length > 10 && <div className={classes.datapage}>
           <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-        </div>
+        </div>}
         <SweetPagination
           currentPageData={setCurrentPageData}
           dataPerPage={numberOfPages}

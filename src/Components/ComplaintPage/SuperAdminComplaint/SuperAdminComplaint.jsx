@@ -138,14 +138,10 @@ const SuperAdminComplaint = () => {
                                         <h2>{errorMessage}</h2>
                                     </div>
                             }
-                            <div>
-                                <div className={`${classes.datapages}`}>
+                               {complaintList.length > 10 && <div className={`${classes.datapages}`}>
                                     <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-                                </div>
+                                </div>}
                                 <SweetPagination currentPageData={setCurrentPageData} dataPerPage={numberOfPages} getData={allComplaintList} navigation={true} />
-
-                            </div>
-
                         </div>
                     </div>
                     <div className="col-12 col-md-4 mt-4 mt-md-0">

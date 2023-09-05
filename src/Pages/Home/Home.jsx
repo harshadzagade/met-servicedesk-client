@@ -13,7 +13,6 @@ const Home = () => {
     const navigate = useNavigate();
     const location = useLocation() || null;
     const id = getItemWithExpiry('id');
-
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isSubadmin, setIsSubadmin] = useState(false);

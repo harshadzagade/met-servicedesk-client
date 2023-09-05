@@ -33,6 +33,7 @@ import SubadminApproval from '../Components/RequestPage/SubadminRequest/RequestD
 import NewPassword from '../Components/ResetPassword/NewPasword/NewPassword';
 import Feedback from '../Pages/Feedback/Feedback';
 import AdminDetails from '../Components/ComplaintPage/AdminComplaint/AdminDetails/AdminDetails';
+import Policies from '../Pages/Policies/Policies';
 
 const Routing = () => {
   return (
@@ -71,6 +72,7 @@ const Routing = () => {
           <Route exact path='/adminstaffdetails/:staffId' element={<SingleStaffDetails />} />
           <Route exact path='/subadminstaffdetails/:staffId' element={<SubadminSingleStaffDetails />} />
           <Route path='/feedback' element={<Feedback/>}/>
+          <Route exact path='/policies' element={<Policies />} />
         </Routes>
       </Sidebar>
     </Router>

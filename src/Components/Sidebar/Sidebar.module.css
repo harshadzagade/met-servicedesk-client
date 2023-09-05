@@ -1,13 +1,3 @@
-/* .wrapper {
-  display: grid;
-  width: 100%;
-  margin: 0 auto;
-  gap: 1rem;
-  grid-template-columns: 15% auto;
-} */
-/* .wrapper{
-  height: 86vh;
-} */
 
 .nav {
   position: -webkit-sticky;
@@ -17,20 +7,18 @@
 }
 
 .mainScreen {
-  height: 86vh;
+  height: 92vh;
   overflow: scroll;
   overflow-y: auto;
   overflow-x: auto;
 }
 
 .sidemenu {
-  height: 86vh;
+  height: 92vh;
   padding-top: 1rem;
   padding-bottom: auto;
   border-right: 0.5px solid #dbdbdb;
 }
-
-
 
 .sidemenu h3 {
   margin-top: 0.5rem;

@@ -40,7 +40,7 @@ const DepartmentComplaint = () => {
       try {
         const list = await axios.get(`/api/complaint/complaints/incoming/${department}`);
         if (list.data.complaints.length === 0) {
-          setErrorMessage('No requests available')
+          setErrorMessage('No concern available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
@@ -144,9 +144,9 @@ const DepartmentComplaint = () => {
               <h2>{errorMessage}</h2>
             </div>
         }
-        <div className={classes.datapage}>
+        {complaintList.length > 10 && <div className={classes.datapage}>
           <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
-        </div>
+        </div>}
         <Sweetpagination
           currentPageData={setCurrentPageData}
           dataPerPage={numberOfPages}
