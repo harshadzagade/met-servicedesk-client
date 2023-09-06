@@ -3,14 +3,18 @@ import classes from './AdminDeptDrop.module.css'
 import axios from 'axios';
 import AdminContext from '../../Context/AdminContext/AdminContext';
 import getItemWithExpiry from '../../../Utils/expiryFunction';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDeptDrop = (props) => {
+  const navigate = useNavigate();
   const adminCtx = useContext(AdminContext);
   const id = getItemWithExpiry('id');
   const [departments, setDepartments] = useState([]);
 
   const handleDepartmentClick = (department) => {
     adminCtx.setDepartment(department);
+    navigate('/');
+    sessionStorage.setItem('tab', 'home');
   };
 
   useEffect(() => {
