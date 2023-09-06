@@ -101,7 +101,7 @@ const AdminReport = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbycategory/${category}`);
+                    const report = await axios.get(`/api/report/reportbycategory/${category}/${selectedStaff}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
@@ -111,7 +111,7 @@ const AdminReport = () => {
         if (openCategoryList) {
             getReportByCategory();
         }
-    }, [category, openCategoryList, sortedData]);
+    }, [category, openCategoryList, sortedData, selectedStaff]);
 
     useEffect(() => {
         const getRequestByPriority = async () => {
@@ -119,7 +119,7 @@ const AdminReport = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbypriority/${priority}`);
+                    const report = await axios.get(`/api/report/reportbypriority/${priority}${selectedStaff}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
@@ -129,7 +129,7 @@ const AdminReport = () => {
         if (openPriorityList) {
             getRequestByPriority();
         }
-    }, [priority, openPriorityList, sortedData]);
+    }, [priority, openPriorityList, sortedData, selectedStaff]);
 
     /* useEffect(() => {
         const getReportByDepartment = async () => {
