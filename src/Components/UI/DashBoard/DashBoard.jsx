@@ -6,6 +6,7 @@ import axios from 'axios';
 import moment from 'moment/moment';
 import 'react-circular-progressbar/dist/styles.css';
 import getItemWithExpiry from '../../../Utils/expiryFunction';
+import openSocket from 'socket.io-client';
 
 const DashBoard = () => {
   const id = getItemWithExpiry('id');
@@ -49,6 +50,7 @@ const DashBoard = () => {
   };
 
   useEffect(() => {
+    const socket = openSocket('');
     setRefresh(false);
     if (!id) {
       navigate('/login')
@@ -199,6 +201,18 @@ const DashBoard = () => {
       }
     }
     checkAuth();
+    socket.on('requests', () => {
+      checkAuth();
+    });
+    socket.on('requestStatus', () => {
+      checkAuth();
+    });
+    socket.on('complaints', () => {
+      checkAuth();
+    });
+    socket.on('complaintStatus', () => {
+      checkAuth();
+    });
   }, [id, navigate, refresh, adminCtx.department]);
 
   return (

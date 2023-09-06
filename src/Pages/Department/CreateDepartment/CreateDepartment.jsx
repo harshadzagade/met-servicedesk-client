@@ -107,7 +107,7 @@ const CreateDepartment = (props) => {
                 <div className={`${classes.createForm}`}>
                   <input
                     value={input}
-                    placeholder="Enter a department"
+                    placeholder="Enter a category"
                     className={classes.createstaffInput}
                     onKeyDown={onKeyDown}
                     onKeyUp={onKeyUp}
