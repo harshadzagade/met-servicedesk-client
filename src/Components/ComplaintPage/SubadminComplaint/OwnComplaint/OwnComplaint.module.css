@@ -112,6 +112,10 @@
 
 main .tikTitle {
   font-size: medium;
+  width: 35rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .date {

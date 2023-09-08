@@ -158,6 +158,7 @@
     border: none;
     font-size: 1em;
     align-items: center;
-
-
+    word-wrap: break-word;
+    overflow: hidden; /* Add this line to hide overflow */
+    width: 100%;
 }

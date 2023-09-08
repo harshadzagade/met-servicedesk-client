@@ -149,10 +149,13 @@
 
 .complaintDetailsp {
   background: white;
-  padding: 10px;
-  border: none;
-  font-size: 1em;
-  margin-right: 2rem;
+    padding: 10px;
+    border: none;
+    font-size: 1em;
+    align-items: center;
+    word-wrap: break-word;
+    overflow: hidden; /* Add this line to hide overflow */
+    width: 100%;
 }
 .printBtn {
   border-radius: 5px;

@@ -83,9 +83,9 @@ const SuperAdminComplaint = () => {
 
     return (
         <main >
-            <div className="container-fluid">
+            <div className="container-fluid p-0">
                 <div className={`${classes.superadmincomplaint} row`}>
-                    <div className="col-12 col-md-8 p-0">
+                    <div className="col-12 col-md-8 ">
                         <div className={classes.search}>
                             <div className={classes.searchfiltering}>
                                 <input

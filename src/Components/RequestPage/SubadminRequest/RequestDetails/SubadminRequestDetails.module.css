@@ -153,7 +153,10 @@
   padding: 10px;
   border: none;
   font-size: 1em;
-  margin-right: 2rem;
+  align-items: center;
+  word-wrap: break-word;
+  overflow: hidden; 
+  width: 100%;
 }
 .printBtn {
   border-radius: 5px;

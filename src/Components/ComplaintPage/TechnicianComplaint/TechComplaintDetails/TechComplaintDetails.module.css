@@ -176,20 +176,6 @@
     color: white;
 }
 
-
-.complaintDetailsp {
-    background: white;
-    padding: 10px;
-    border: none;
-    font-size: 1em;
-    align-items: center;
-
-
-}
-
-
-
-
 .id-details p {
     background: white;
     padding: 10px;
@@ -219,6 +205,9 @@
     border: none;
     font-size: 1em;
     align-items: center;
+    word-wrap: break-word;
+    overflow: hidden;
+    width: 100%;
 }
 
 .alreadyAssignedText,

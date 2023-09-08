@@ -58,7 +58,7 @@ const AdminDetails = () => {
                 const technicians = await axios.get(`/api/staff/admin/admindepartmenttechnicians/${loginId}/${adminCtx.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
-                navigate('/request');
+                navigate('/concern');
                 console.log(error.message);
             }
         };
@@ -120,7 +120,7 @@ const AdminDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`/api/complaint/downloadfile/${complaintData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;

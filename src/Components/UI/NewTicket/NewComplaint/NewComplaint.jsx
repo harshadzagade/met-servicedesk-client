@@ -194,7 +194,7 @@ const NewCompaint = () => {
                             </div>
                             <div className={classes.subject}>
                                 <span>Subject</span>
-                                <input type="text" className={classes.subInput} placeholder="Enter Subject" ref={subjectRef} required />
+                                <input type="text" cols="40" rows="5" className={classes.subInput} placeholder="Enter Subject" ref={subjectRef} required />
                             </div>
                             <div className={classes.description}>
                                 <span>Description</span>

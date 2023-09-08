@@ -146,8 +146,9 @@
     border: none;
     font-size: 1em;
     align-items: center;
-
-
+    word-wrap: break-word;
+    overflow: hidden;
+    width: 100%;
 }
 
 .tikPri {
