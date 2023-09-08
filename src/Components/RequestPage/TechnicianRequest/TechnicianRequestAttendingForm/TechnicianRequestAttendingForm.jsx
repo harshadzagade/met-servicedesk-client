@@ -134,7 +134,7 @@ const TechnicianRequestAttendingForm = () => {
                                     <div className={classes.deptTik}>
                                         <span>Change Status</span>
                                         <select value={status} className={classes.deptSelect} name="role" required onChange={(e) => setStatus(e.target.value)} >
-                                            <option key="0" value="" hidden>----- Select Categories -----</option>
+                                            <option key="0" value="" hidden>----- Select Status -----</option>
                                             <option key="1" value="attending" hidden={status === 'attending'}>Attending</option>
                                             <option key="2" value="closed">Closed</option>
                                             <option key="3" value="forwarded">Forwarded</option>
@@ -143,7 +143,7 @@ const TechnicianRequestAttendingForm = () => {
                                     {
                                         isForwarded &&
                                         <div className={classes.deptTik}>
-                                            <span> Forwarded </span>
+                                            <span>Forwarded</span>
                                             <select className={classes.deptSelect} name="role" required onChange={handleTechnicianChange}>
                                                 <option key='0' value='' hidden defaultValue=''>Assign to engineer</option>
                                                 {

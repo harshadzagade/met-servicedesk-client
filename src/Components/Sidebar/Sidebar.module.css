@@ -7,14 +7,26 @@
 }
 
 .mainScreen {
-  height: 92vh;
+  height: 86vh;
   overflow: scroll;
   overflow-y: auto;
   overflow-x: auto;
 }
+.mainScreen::-webkit-scrollbar {
+  width: 10px;
+} 
+.mainScreen::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary); 
+  border-radius: 5px; 
+}
+
+.mainScreen::-webkit-scrollbar-track {
+  background-color: var(--subbutton-color); 
+  border-radius: 5px;
+}
 
 .sidemenu {
-  height: 92vh;
+  height: 86vh;
   padding-top: 1rem;
   padding-bottom: auto;
   border-right: 0.5px solid #dbdbdb;
@@ -22,6 +34,26 @@
 
 .sidemenu h3 {
   margin-top: 0.5rem;
+}
+
+.sidescroll{
+  overflow: scroll;
+  height: 76vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.sidescroll::-webkit-scrollbar {
+  width: 2px;
+}
+  .sidescroll::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary); 
+  border-radius: 5px; 
+}
+
+
+.sidescroll::-webkit-scrollbar-track {
+  background-color: var(--subbutton-color); 
+  border-radius: 5px;
 }
 
 /* sidemenu */

@@ -104,7 +104,7 @@ const SingleStaff = () => {
                 <p >{staff.contactExtension}</p>
               </div>
               <div className={classes.detailsBtns}>
-                <button className={classes.updateBtn} onClick={() => setOpenUpdate(true)}>Update</button>
+                <button className={classes.updateBtn} onClick={() => setOpenUpdate(true)}>Edit</button>
                 <button className={classes.deleteBtn} onClick={handleDeleteClick}>Delete</button>
               </div>
             </div>

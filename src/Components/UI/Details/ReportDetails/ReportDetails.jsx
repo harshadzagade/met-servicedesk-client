@@ -129,21 +129,21 @@ const ReportDetails = () => {
                                     </div>
                                 }
                                 {
-                                    (reportData.assign || reportData.forwardComment || (reportData.status === 'forwarded' || reportData.status === 'closed')) &&
+                                    (reportData.assignId || reportData.forwardComment || (reportData.status === 'forwarded' || reportData.status === 'closed')) &&
                                     <hr />
                                 }
                                 {
-                                    reportData.assign &&
+                                    reportData.assignId &&
                                     <div className={classes.techName}>
                                         <label>Assigned To:</label>
-                                        <p >{reportData.assignedName}</p>
+                                        <p className={classes.complaintDetailsp}>{reportData.assignedName}</p>
                                     </div>
                                 }
                                 {
                                     reportData.status === 'forwarded' &&
                                     <div className={classes.techName}>
                                         <label>Forward Comment:</label>
-                                        <p >{reportData.forwardComment}</p>
+                                        <p className={classes.complaintDetailsp}>{reportData.forwardComment}</p>
                                     </div>
                                 }
 
@@ -151,7 +151,7 @@ const ReportDetails = () => {
                                     (reportData.status === 'forwarded' || reportData.status === 'closed') &&
                                     <div className={classes.techName}>
                                         <label>Problem Description:</label>
-                                        <p >{reportData.problemDescription}</p>
+                                        <p className={classes.complaintDetailsp}>{reportData.problemDescription}</p>
                                     </div>
                                 }
 
@@ -159,7 +159,7 @@ const ReportDetails = () => {
                                     (reportData.status === 'forwarded' || reportData.status === 'closed') &&
                                     <div className={classes.techName}>
                                         <label>Action Taken:</label>
-                                        <p >{reportData.actionTaken}</p>
+                                        <p className={classes.complaintDetailsp}>{reportData.actionTaken}</p>
                                     </div>
                                 }
                                 <hr />

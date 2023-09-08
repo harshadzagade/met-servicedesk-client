@@ -80,7 +80,7 @@ const TechnicianReport = () => {
                 if ((openCategoryList && category.length === 0) || (openCategoryList && category === 'allCategories')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbycategory/${category}`);
+                    const report = await axios.get(`/api/report/reportbycategory/${category}/${id}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
@@ -90,7 +90,7 @@ const TechnicianReport = () => {
         if (openCategoryList) {
             getReportByCategory();
         }
-    }, [category, openCategoryList, sortedData]);
+    }, [category, openCategoryList, sortedData, id]);
 
     useEffect(() => {
         const getRequestByPriority = async () => {
@@ -98,7 +98,7 @@ const TechnicianReport = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbypriority/${priority}`);
+                    const report = await axios.get(`/api/report/reportbypriority/${priority}/${id}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {
@@ -108,7 +108,7 @@ const TechnicianReport = () => {
         if (openPriorityList) {
             getRequestByPriority();
         }
-    }, [priority, openPriorityList, sortedData]);
+    }, [priority, openPriorityList, sortedData, id]);
 
     useEffect(() => {
         let arr = [];

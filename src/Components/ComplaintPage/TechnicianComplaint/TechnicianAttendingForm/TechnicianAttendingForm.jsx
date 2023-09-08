@@ -116,7 +116,7 @@ const TechnicianAttendingForm = () => {
                                 <div className={classes.assignStatus}>
                                     <span>Change Status:</span>
                                     <select className={classes.deptSelect} name="role" required onChange={(e) => setStatus(e.target.value)} >
-                                        <option key="0" value="" hidden>----- Select Categories -----</option>
+                                        <option key="0" value="" hidden>----- Select Status -----</option>
                                         <option key="2" value="closed">Closed</option>
                                         <option key="3" value="forwarded">Forwarded</option>
                                     </select>

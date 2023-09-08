@@ -8,6 +8,19 @@
     overflow: auto;
     max-height: 90vh;
 }
+.detail::-webkit-scrollbar {
+    width: 5px;
+  }
+  .detail::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary); 
+    border-radius: 5px; 
+  }
+  
+  
+  .detail::-webkit-scrollbar-track {
+    background-color: var(--subbutton-color); 
+    border-radius: 5px;
+  }
 
 
 .myform label {
