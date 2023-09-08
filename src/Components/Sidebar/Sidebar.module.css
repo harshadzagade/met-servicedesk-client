@@ -16,12 +16,12 @@
   width: 10px;
 } 
 .mainScreen::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary); 
+  background-color: rgb(145, 145, 145); 
   border-radius: 5px; 
 }
 
 .mainScreen::-webkit-scrollbar-track {
-  background-color: var(--subbutton-color); 
+  background-color: white; 
   border-radius: 5px;
 }
 
@@ -44,18 +44,7 @@
 }
 .sidescroll::-webkit-scrollbar {
   width: 2px;
-}
-  .sidescroll::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary); 
-  border-radius: 5px; 
-}
-
-
-.sidescroll::-webkit-scrollbar-track {
-  background-color: var(--subbutton-color); 
-  border-radius: 5px;
-}
-
+} 
 /* sidemenu */
 
 
