@@ -93,7 +93,7 @@ const TechnicianOwnRequest = () => {
             <Fragment>
               {
                 currentPageData.map((request) => (
-                  <div key={request.id} className={classes.tikInfo} onClick={() => navigate(`/engineerrequestdetails/${request.id}`)}>
+                  <div key={request.id} className={classes.tikInfo} onClick={() => navigate(`/requestdetails/${request.id}`)}>
                     <div className={`${classes.tikHead}`}>
 
                       <h3 className={`${classes.tikTitle}`}>
