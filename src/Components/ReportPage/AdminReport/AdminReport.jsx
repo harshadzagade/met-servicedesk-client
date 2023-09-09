@@ -119,7 +119,7 @@ const AdminReport = () => {
                 if ((openPriorityList && priority.length === 0) || (openPriorityList && priority === 'allPriorities')) {
                     setAllReportList(sortedData);
                 } else {
-                    const report = await axios.get(`/api/report/reportbypriority/${priority}${selectedStaff}`);
+                    const report = await axios.get(`/api/report/reportbypriority/${priority}/${selectedStaff}`);
                     setAllReportList(report.data.report);
                 }
             } catch (error) {

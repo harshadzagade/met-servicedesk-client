@@ -97,6 +97,9 @@ const SubadminActivities = () => {
         } else if (activity.data.type === 'request') {
             navigate(`/adminrequestdetails/${activity.data.id}`)
             sessionStorage.setItem('tab', 'request');
+        } else if (activity.data.type === 'concern') {
+            navigate(`/adminconcerndetails/${activity.data.id}`)
+            sessionStorage.setItem('tab', 'complaint');
         }
     };
 
@@ -106,7 +109,6 @@ const SubadminActivities = () => {
                 <div className={classes.upper}>
                     <h2 className={classes.title}>Sub-Admin Activity List</h2>
                     <input type="text" className={classes.search} placeholder='Search here' onChange={(e) => setSearch(e.target.value)} />
-                    <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                 </div>
                 {
                     allSubadminActivities !== null ?
@@ -123,6 +125,7 @@ const SubadminActivities = () => {
                                     </div>
                                 ))
                             }
+                             <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
                             <Sweetpagination
                                 currentPageData={setCurrentPageData}
                                 dataPerPage={numberOfPages}

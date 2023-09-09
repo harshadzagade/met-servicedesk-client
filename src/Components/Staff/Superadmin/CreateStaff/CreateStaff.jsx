@@ -93,7 +93,7 @@ const CreateStaff = () => {
                     <div className={`${classes.createStaffform}`}>
                     {showLoading && (
                                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                                    <h1>Changing approval status</h1>
+                                    <h1>Creating employee account</h1>
                                     <div className='d-flex justify-content-center'>
                                         <Bars
                                             height="80"

@@ -41,7 +41,7 @@
 }
 
 .updateBtn {
-    background-color: var(--subbutton-color);
+    background-color:var(--color-primary);
     border: none;
     color: white;
     padding: 10px 30px 10px 30px;
@@ -56,7 +56,7 @@
 }
 
 .deleteBtn {
-    background-color: var(--color-primary);
+    background-color: var(--subbutton-color) ;
     padding: 10px 30px 10px 30px;
     color: white;
     text-align: center;

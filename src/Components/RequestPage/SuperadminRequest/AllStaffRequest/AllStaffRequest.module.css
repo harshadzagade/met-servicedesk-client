@@ -101,7 +101,6 @@ main .tikStatus {
 }
 
 main .tikPri {
-  border: 1px solid;
   border-radius: var(--border-radius-2);
   padding: 0 2%;
   cursor: pointer;

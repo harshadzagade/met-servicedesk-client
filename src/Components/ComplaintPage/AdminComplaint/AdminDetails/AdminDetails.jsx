@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 import AdminContext from '../../../Context/AdminContext/AdminContext';
 import Swal from 'sweetalert2';
+import { Bars } from 'react-loader-spinner';
 
 const AdminDetails = () => {
     const navigate = useNavigate();
@@ -24,11 +25,13 @@ const AdminDetails = () => {
     const [technicians, setTechnicians] = useState([]);
     const [technicianId, setTechnicianId] = useState(null);
     const [refresh, setRefresh] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
     ticketCtx.onClickHandler('complaint', staffId, complaintData.id);
 
     const handleAssignComplaint = async (e) => {
         e.preventDefault();
         setRefresh(true);
+        setShowLoading(true);
         try {
             if (technicianId) {
                 await axios.put(`/api/staff/admin/assigncomplaint/${id}`, { assignId: technicianId });
@@ -48,8 +51,10 @@ const AdminDetails = () => {
             } else {
                 console.log(error.message);
             }
+        } finally {
+            setShowLoading(false);
+            setRefresh(false);
         }
-        setRefresh(false);
     };
 
     useEffect(() => {
@@ -168,8 +173,24 @@ const AdminDetails = () => {
                                 {(complaintData.status === 'closed' && complaintData.staffId.toString() === loginId.toString()) && <button className={`${classes.feedbackBtn}`} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                             </div>
                             <div className={`${classes.detail}`}>
-                                <div>
-                                    <form className={classes.myform}>
+                                <Fragment>
+                                    {showLoading && (
+                                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                                            <h1>Assigning Concern</h1>
+                                            <div className='d-flex justify-content-center'>
+                                                <Bars
+                                                    height="80"
+                                                    width="80"
+                                                    color="#CE1212"
+                                                    ariaLabel="bars-loading"
+                                                    wrapperStyle={{}}
+                                                    wrapperClass=""
+                                                    visible={true}
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+                                    {!showLoading && <form className={classes.myform}>
                                         <span id='printContent'>
                                             <div className={classes.idDetails}>
                                                 <label>Concern Id:</label>
@@ -276,8 +297,8 @@ const AdminDetails = () => {
                                                 }
                                             </select>
                                         </div>}
-                                    </form>
-                                </div>
+                                    </form>}
+                                </Fragment>
                             </div>
                         </div>
                         <div className='col-4'>
