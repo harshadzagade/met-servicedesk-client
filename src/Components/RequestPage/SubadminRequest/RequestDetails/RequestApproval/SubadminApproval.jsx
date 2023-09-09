@@ -54,15 +54,10 @@ const SubadminApproval = () => {
     useEffect(() => {
         const getTechnicians = async () => {
             try {
-                const technicians = await axios.get(`/api/staff/subadmin/admindepartmenttechnicians/${loginId}/${subadminDetails.department}`);
+                const technicians = await axios.get(`/api/staff/subadmin/subadmindepartmenttechnicians/${loginId}/${subadminDetails.department}`);
                 setTechnicians(technicians.data.technicians);
             } catch (error) {
-                navigate('/request');
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Please select department',
-                    text: 'Please enter valid fields'
-                });
+                console.log(error.message);
             }
         };
         getTechnicians();

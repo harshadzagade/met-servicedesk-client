@@ -8,6 +8,10 @@ const Feedback = () => {
   const navigate = useNavigate();
   const adminCtx = useContext(AdminContext);
   const [feedback, setFeedback] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const sortedData = React.useMemo(() => { return [...feedback].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [feedback]);
 
   useEffect(() => {
     const getFeedback = async () => {
@@ -19,7 +23,26 @@ const Feedback = () => {
       }
     };
     getFeedback();
-  }, [adminCtx.department])
+  }, [adminCtx.department]);
+
+  useEffect(() => {
+    const getStaff = async () => {
+      try {
+        if (searchText) {
+          const searchedfeedback = await axios.get(`/api/feedback/feedbacksearch/${adminCtx.department}/${searchText}`);
+          setFeedback(searchedfeedback.data);
+          if (searchedfeedback.data.length === 0) {
+            setErrorMessage('No such data')
+          }
+        } else {
+          setFeedback(sortedData);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getStaff();
+  }, [searchText, sortedData, adminCtx.department]);
 
   const getActivityDate = (createdAt) => {
     if (createdAt === null) {
@@ -57,27 +80,34 @@ const Feedback = () => {
       <div className={classes.allstaff}>
         <div className={classes.upper}>
           <h2 className={classes.title}>Feedback</h2>
-          <input type="text" className={classes.search} placeholder='Search here' />
+          <input type="text" className={classes.search} placeholder='Search here' onChange={(e) => setSearchText(e.target.value)} />
         </div>
         {
-          feedback.map((feedback) => (
-            <div className={classes.flair} onClick={() => handleFeedbackClick(feedback.ticketId, feedback.ticketType)}>
-              <div className={classes.activity} key={feedback.ticketId}>
-                <div className={classes.detalis}>
-                  <span>{feedback.ticketId}</span>
-                  <span> {(feedback.ticketType === 'request' && 'Request') || (feedback.ticketType === 'complaint' && 'Concern')}</span>
-                  <span>{feedback.feedback}</span>
-                </div>
-                <div className={classes.date}>
-                  <span>{getActivityDate(feedback.createdAt)}</span>
-                </div>
-              </div>
-            </div>
-          ))
+          feedback.length !== 0 ?
+            <Fragment>
+              {
+                sortedData.map((feedback) => (
+                  <div className={classes.flair} onClick={() => handleFeedbackClick(feedback.ticketId, feedback.ticketType)}>
+                    <div className={classes.activity} key={feedback.ticketId}>
+                      <div className={classes.detalis}>
+                        <span>{feedback.ticketId}</span>
+                        <span> {(feedback.ticketType === 'request' && 'Request') || (feedback.ticketType === 'concern' && 'Concern')}</span>
+                        <span>{feedback.feedback}</span>
+                      </div>
+                      <div className={classes.date}>
+                        <span>{getActivityDate(feedback.createdAt)}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </Fragment>
+            :
+            <div>{errorMessage}</div>
         }
       </div>
     </Fragment>
   )
-}
+};
 
-export default Feedback
+export default Feedback;
