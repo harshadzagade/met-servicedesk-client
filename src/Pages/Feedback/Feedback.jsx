@@ -3,13 +3,18 @@ import classes from './Feedback.module.css';
 import AdminContext from '../../Components/Context/AdminContext/AdminContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import SweetPagination from 'sweetpagination';
+import DataPerPage from '../../Components/UI/DataPerPage/DataPerPage';
 
 const Feedback = () => {
   const navigate = useNavigate();
   const adminCtx = useContext(AdminContext);
   const [feedback, setFeedback] = useState([]);
+  const [allFeedback, setAllFeedback] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [numberOfPages, setNumberOfPages] = useState(10);
+  const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
 
   const sortedData = React.useMemo(() => { return [...feedback].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [feedback]);
 
@@ -18,6 +23,7 @@ const Feedback = () => {
       try {
         const feedback = await axios.get(`/api/feedback/allfeedbacks/${adminCtx.department}`);
         setFeedback(feedback.data.feedback);
+        setAllFeedback(feedback.data.feedback);
       } catch (error) {
         console.log(error.message);
       }
@@ -30,12 +36,12 @@ const Feedback = () => {
       try {
         if (searchText) {
           const searchedfeedback = await axios.get(`/api/feedback/feedbacksearch/${adminCtx.department}/${searchText}`);
-          setFeedback(searchedfeedback.data);
+          setAllFeedback(searchedfeedback.data);
           if (searchedfeedback.data.length === 0) {
             setErrorMessage('No such data')
           }
         } else {
-          setFeedback(sortedData);
+          setAllFeedback(sortedData);
         }
       } catch (error) {
         console.log(error.message);
@@ -83,10 +89,10 @@ const Feedback = () => {
           <input type="text" className={classes.search} placeholder='Search here' onChange={(e) => setSearchText(e.target.value)} />
         </div>
         {
-          feedback.length !== 0 ?
+          allFeedback.length > 0 ?
             <Fragment>
               {
-                sortedData.map((feedback) => (
+                currentPageData.map((feedback) => (
                   <div className={classes.flair} onClick={() => handleFeedbackClick(feedback.ticketId, feedback.ticketType)}>
                     <div className={classes.activity} key={feedback.ticketId}>
                       <div className={classes.detalis}>
@@ -101,6 +107,18 @@ const Feedback = () => {
                   </div>
                 ))
               }
+              {
+                allFeedback.length > 10 &&
+                <div className={classes.datapage} >
+                  <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
+                </div>
+              }
+              <SweetPagination
+                currentPageData={setCurrentPageData}
+                dataPerPage={numberOfPages}
+                getData={allFeedback}
+                navigation={true}
+              />
             </Fragment>
             :
             <div>{errorMessage}</div>

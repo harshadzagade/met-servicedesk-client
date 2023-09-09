@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useState, useEffect } from 'react';
 import classes from './SubadminRequestDetails.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import TicketDetailsContext from '../../../Context/TicketDetailsContext/TicketDetailsContext';
 import Rightside from '../../../Righside/Rightside';
 import SubadminContext from '../../../Context/SubadminContext/SubadminContext';
