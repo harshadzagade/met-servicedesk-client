@@ -209,7 +209,6 @@ main .tikMsg p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 0.5rem;
 }
 
 main .tikOther {

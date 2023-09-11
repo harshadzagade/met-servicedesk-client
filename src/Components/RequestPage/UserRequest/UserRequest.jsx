@@ -111,7 +111,7 @@ const UserRequest = () => {
                             </span>
                           </div>
                           <div className={`${classes.tikMsg}`}>
-                            <p><div dangerouslySetInnerHTML={{ __html: request.description }} /></p>
+                            <div dangerouslySetInnerHTML={{ __html: request.description }} />
                           </div>
                           <div className={`${classes.tikOther}`}>
                             <p className={`${classes.tikId}`}>{request.ticketId}</p>

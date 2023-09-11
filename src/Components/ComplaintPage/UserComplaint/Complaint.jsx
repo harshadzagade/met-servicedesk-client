@@ -108,7 +108,7 @@ const Complaint = () => {
                           </span>
                         </div>
                         <div className={`${classes.tikMsg}`}>
-                          <p><div dangerouslySetInnerHTML={{ __html: complaint.description }} /></p>
+                          <div dangerouslySetInnerHTML={{ __html: complaint.description }} />
                         </div>
                         <div className={`${classes.tikOther}`}>
                           <p className={`${classes.tikId}`}>

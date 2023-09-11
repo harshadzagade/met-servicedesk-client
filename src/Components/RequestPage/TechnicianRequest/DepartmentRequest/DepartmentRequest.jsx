@@ -117,9 +117,7 @@ const DepartmentRequest = () => {
                                             </span>
                                         </div>
                                         <div className={`${classes.tikMsg}`}>
-                                            <p>
                                                 <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
-                                            </p>
                                         </div>
                                         <div className={`${classes.tikOther}`}>
                                             <p className={`${classes.tikId}`}>

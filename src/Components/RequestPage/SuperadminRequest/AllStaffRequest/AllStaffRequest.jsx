@@ -108,9 +108,7 @@ const AllStaffRequest = () => {
                                                         </span>
                                                     </div>
                                                     <div className={`${classes.tikMsg}`}>
-                                                        <p>
                                                             <span dangerouslySetInnerHTML={{ __html: request.description }} />
-                                                        </p>
                                                     </div>
                                                     <div className={`${classes.tikOther}`}>
                                                         <p className={`${classes.tikId}`}>

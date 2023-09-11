@@ -112,15 +112,16 @@
     bottom: 100%;
     transition: all 0.4s linear;
 }
-.menumain .submenu {
+ .submenu {
     display: block;
     visibility: hidden;
     position: absolute;
     right: 0;
     box-shadow: none;
     max-height: 0;
-    width: 95px;
+    width: 96px;
     overflow: hidden;
+    
 }
 .menumain .submenu li {
     display: block;

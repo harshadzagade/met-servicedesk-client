@@ -127,7 +127,6 @@ main .tikTitle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 0.5rem;
 }
 
 .tikOther {
