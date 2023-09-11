@@ -69,13 +69,6 @@ const Home = () => {
                             break;
 
                         case 'engineer':
-                            const now = new Date();
-                            const expirationTime = now.getTime() + 8 * 60 * 60 * 1000;
-                            const department = {
-                                value: staff.data.staff.department[0],
-                                expiry: expirationTime
-                            };
-                            localStorage.setItem('department', JSON.stringify(department));
                             setIsSuperAdmin(false);
                             setIsAdmin(false);
                             setIsSubadmin(false);

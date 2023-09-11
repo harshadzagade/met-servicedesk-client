@@ -137,7 +137,6 @@ const TechComplaintDetails = () => {
                             <h2>Concern details</h2>
                             {openFeedback && <FeedbackForm ticketType={'concern'} ticketId={complaintData.ticketId} department={complaintData.department} onConfirm={handleFeedback} />}
                             <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
-                            {(complaintData.status === 'closed' && complaintData.staffId.toString() === ownId.toString()) &&<button className={`${classes.feedbackBtn} `} onClick={() => setOpenFeedback(true)}>Feedback</button>}
                         </div>
                         <div className={`${classes.detail}`}>
                             <div >

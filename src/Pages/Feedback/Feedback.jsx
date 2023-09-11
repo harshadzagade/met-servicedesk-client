@@ -85,7 +85,6 @@ const Feedback = () => {
     <Fragment>
       <div className={classes.allstaff}>
         <div className={classes.upper}>
-          <h2 className={classes.title}>Feedback</h2>
           <input type="text" className={classes.search} placeholder='Search here' onChange={(e) => setSearchText(e.target.value)} />
         </div>
         {

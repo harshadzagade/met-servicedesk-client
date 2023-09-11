@@ -99,7 +99,7 @@ const OwnComplaint = () => {
             <Fragment>
               {
                 currentPageData.map((complaint) => (
-                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/adminconcerndetails/${complaint.id}`)} >
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)} >
                     <div className={`${classes.tikHead}`}>
 
                       <h3 className={`${classes.tikTitle}`}>
