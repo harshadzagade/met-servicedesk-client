@@ -125,7 +125,7 @@ const SubadminActivities = () => {
                                     </div>
                                 ))
                             }
-                             {allSubadminActivities > 10 && <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />}
+                            {allSubadminActivities.length > 10 && <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />}
                             <Sweetpagination
                                 currentPageData={setCurrentPageData}
                                 dataPerPage={numberOfPages}

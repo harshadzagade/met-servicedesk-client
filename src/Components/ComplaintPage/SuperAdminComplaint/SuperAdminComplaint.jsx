@@ -25,7 +25,7 @@ const SuperAdminComplaint = () => {
             try {
                 const list = await axios.get(`/api/complaint/allcomplaints`);
                 if (list.data.complaints.length === 0) {
-                    setErrorMessage('No concern available')
+                    setErrorMessage('No concerns available')
                 }
                 setComplaintList(list.data.complaints);
                 setAllComplaintList(list.data.complaints);

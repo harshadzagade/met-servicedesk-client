@@ -75,7 +75,7 @@ const Feedback = () => {
     if (ticketType === 'request') {
       navigate(`/requestdetails/${id}`);
       sessionStorage.setItem('tab', 'request');
-    } else if (ticketType === 'complaint') {
+    } else if (ticketType === 'concern') {
       sessionStorage.setItem('tab', 'complaint');
       navigate(`/concerndetails/${id}`);
     }

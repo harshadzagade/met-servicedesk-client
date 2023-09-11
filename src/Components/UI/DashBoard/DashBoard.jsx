@@ -233,7 +233,7 @@ const DashBoard = () => {
       <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
           <div className={`${classes.request} `}>
-            <h1>Pending Concern</h1>
+            <h1>Pending Concerns</h1>
           </div>
           <div className={classes.count}>
             <div className={classes.progress}>

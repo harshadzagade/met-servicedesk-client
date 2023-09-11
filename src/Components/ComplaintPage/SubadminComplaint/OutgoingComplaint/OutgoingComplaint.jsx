@@ -39,7 +39,7 @@ const OutgoingComplaint = () => {
       try {
         const list = await axios.get(`/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
         if (list.data.complaints.length === 0) {
-          setErrorMessage('No concern available')
+          setErrorMessage('No concerns available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
