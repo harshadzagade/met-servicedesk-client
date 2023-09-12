@@ -9,22 +9,9 @@ const AllStaffExt = () => {
     const [staffList, setStaffList] = useState([]);
     const [allStaffList, setAllStaffList] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [showPhone, setShowPhone] = useState(false);
 
     const sortedData = React.useMemo(() => { return [...staffList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [staffList]);
-
-    useEffect(() => {
-        if (sortedData.length > 0) {
-            if (Object.hasOwn(sortedData[0], 'phoneNumber')) {
-                setShowPhone(true);
-            } else {
-                setShowPhone(false);
-            }
-        }
-    }, [sortedData]);
-
-    const columns = showPhone ?
-        [
+    const columns = [
             {
                 name: "Name",
                 selector: (row) => row.firstname + ' ' + row.lastname,
@@ -41,40 +28,16 @@ const AllStaffExt = () => {
                 sortable: true,
             },
             {
-                name: "Extension",
+                name: "Extension Number",
                 selector: (row) => row.contactExtension,
                 sortable: true,
             },
             {
-                name: "Mobile No.",
+                name: "Mobile Number",
                 selector: (row) => row.phoneNumber,
                 sortable: true,
             }
         ]
-        :
-        [
-            {
-                name: "Name",
-                selector: (row) => row.firstname + ' ' + row.lastname,
-                sortable: true,
-            },
-            {
-                name: "Department",
-                selector: (row) => row.department,
-                sortable: true,
-            },
-            {
-                name: "E-Mail",
-                selector: (row) => row.email,
-                sortable: true,
-            },
-            {
-                name: "Extension",
-                selector: (row) => row.contactExtension,
-                sortable: true,
-            }
-        ]
-
     useEffect(() => {
         const getStaff = async () => {
             try {
