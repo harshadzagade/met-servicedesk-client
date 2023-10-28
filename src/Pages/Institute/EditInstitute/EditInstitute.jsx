@@ -12,8 +12,8 @@ const EditInstitute = (props) => {
       await axios.put(`/api/institute/editinstitute/${props.instituteId}`, { instituteName: instituteRef.current.value });
       props.onConfirm();
       Swal.fire(
-        'Institute Edited!',
-        'You have edited institute successfully',
+        'Institute Updated!',
+        'You have updated institute successfully',
         'success'
       );
     } catch (error) {
@@ -32,7 +32,7 @@ const EditInstitute = (props) => {
   return (
     <Modal>
       <div>
-        <h1>Edit Institute</h1>
+        <h1>Update Institute</h1>
       </div>
       <div className={classes.detail}>
         <div>
@@ -42,7 +42,7 @@ const EditInstitute = (props) => {
               <input type="text" className={classes.createstaffInput} defaultValue={props.instituteName} placeholder="Enter Institute" ref={instituteRef} required />
             </div>
             <div className={classes.detailsBtns}>
-              <button className={classes.updateBtn} onClick={handleEditSubmit}>Edit</button>
+              <button className={classes.updateBtn} onClick={handleEditSubmit}>Update</button>
               <button className={classes.deleteBtn} onClick={props.onConfirm}>Cancel</button>
             </div>
           </div>

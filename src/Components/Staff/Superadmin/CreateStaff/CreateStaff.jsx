@@ -145,7 +145,7 @@ const CreateStaff = () => {
                                     <div className={classes.institute}>
                                         <span>Institute</span>
                                         <select className={classes.instituteSelect} onChange={(e) => setInstitute(e.target.value)} required>
-                                            <option value="" hidden>----- Select Institute -----</option>
+                                            <option key={'default'} value="" hidden>----- Select Institute -----</option>
                                             {
                                                 institutes.map((institute) => (
                                                     <option key={institute.id} value={institute.institute}>{institute.institute}</option>
@@ -157,7 +157,7 @@ const CreateStaff = () => {
                                     <div className={classes.deptik}>
                                         <span>Department</span>
                                         <select className={classes.instituteSelect} onChange={(e) => setDepartment(e.target.value)} required>
-                                            <option value="" hidden>----- Select Department -----</option>
+                                            <option key={'default'} value="" hidden>----- Select Department -----</option>
                                             {
                                                 departments.map((department) => (
                                                     <option key={department.id} value={department}>{department}</option>
@@ -169,9 +169,9 @@ const CreateStaff = () => {
                                     <div className={classes.category}>
                                         <span>Department Type</span>
                                         <select className={classes.categoryType} onChange={(e) => setDepartmentType(e.target.value)} required>
-                                            <option value='' hidden>----- Select type -----</option>
-                                            <option value='teaching'>teaching</option>
-                                            <option value='non-teaching'>non-teaching</option>
+                                            <option key={'default'} value='' hidden>----- Select type -----</option>
+                                            <option key={'teaching'} value='teaching'>teaching</option>
+                                            <option key={'non-teaching'} value='non-teaching'>non-teaching</option>
                                         </select>
                                     </div>
                                 </div>

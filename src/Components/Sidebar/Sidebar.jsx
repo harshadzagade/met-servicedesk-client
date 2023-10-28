@@ -672,7 +672,7 @@ const Sidebar = ({ children }) => {
                       </svg>
                       <h3>Request</h3>
                       {(ticketCounterCtx.requestStatusCount.pending !== null && ticketCounterCtx.requestStatusCount.pending !== 0) && <div className={classes.counter}>
-                        <h3>{ticketCounterCtx.requestStatusCount.pending}</h3>
+                      <h3>{staffInfo.role === 'engineer' ? ticketCounterCtx.requestStatusCount.assigned : ticketCounterCtx.requestStatusCount.pending}</h3>
                       </div>}
                     </Link>
 

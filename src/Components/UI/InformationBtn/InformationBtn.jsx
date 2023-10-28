@@ -12,7 +12,7 @@ const InformationBtn = () => {
                 <hr />
                 <p>Outgoing: Where request / concern is raised from your department</p>
                 <hr />
-                <p>Own: Where request / concern is raised by you</p>
+                <p>My Request/Concern: Where request / concern is raised by you</p>
             </div>
         </div>
     );
