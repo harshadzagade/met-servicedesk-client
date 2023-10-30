@@ -123,7 +123,7 @@ const UpdateStaffDetails = (props) => {
                 <div >
                     <form className={classes.myform} method="GET" onSubmit={(e) => handleSubmitClick(e, id.staffId, { firstname: updateStaff.firstname, middlename: updateStaff.middlename, lastname: updateStaff.lastname, email: updateStaff.email.toLowerCase(), role: updateStaff.role, institute: institute, department: departmentList, departmentType: departmentType, phoneNumber: updateStaff.phoneNumber, contactExtension: updateStaff.contactExtension, createdAt: staff.createdAt })}>
                         <div className={classes.updateDetails}>
-                            <label className="la">Staff ID:</label>
+                            <label className="la">Employee ID:</label>
                             <p>#{staff.id}</p>
                         </div>
                         <div className={classes.updateDetails}>

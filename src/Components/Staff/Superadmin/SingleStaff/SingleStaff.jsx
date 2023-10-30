@@ -60,7 +60,7 @@ const SingleStaff = () => {
           <div className={classes.staffDetails}>
             <div className={classes.myform}>
               <div className={classes.staff}>
-                <label className={classes.la}>Staff ID:</label>
+                <label className={classes.la}>Employee ID:</label>
                 <p>#{id.staffId}</p>
               </div>
               <div className={classes.staff}>

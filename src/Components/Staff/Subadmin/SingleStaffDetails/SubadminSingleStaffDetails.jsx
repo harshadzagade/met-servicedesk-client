@@ -44,7 +44,7 @@ const SubadminSingleStaffDetails = () => {
           <div className={classes.staffDetails}>
             <div className={classes.myform}>
               <div className={classes.idDetails}>
-                <label>StaffID:</label>
+                <label>Employee ID:</label>
                 <p>#{id.staffId}</p>
               </div>
               <div className={classes.fname}>
