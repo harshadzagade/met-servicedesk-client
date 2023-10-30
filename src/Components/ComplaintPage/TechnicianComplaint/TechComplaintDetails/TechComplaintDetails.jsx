@@ -97,7 +97,7 @@ const TechComplaintDetails = () => {
     const handleDownload = async (e) => {
         e.preventDefault();
         try {
-            const file = await axios.get(`/api/request/downloadfile/${complaintData.id}`, { responseType: 'blob' });
+            const file = await axios.get(`/api/complaint/downloadfile/${complaintData.id}`, { responseType: 'blob' });
             const url = window.URL.createObjectURL(new Blob([file.data]));
             const link = document.createElement('a');
             link.href = url;
