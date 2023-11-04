@@ -18,9 +18,13 @@ const ResetPassword = () => {
 
     const checkLogin = async () => {
         if (getItemWithExpiry('id')) {
-            const staff = await axios.get(`/api/staff/staffdetails/${getItemWithExpiry('id')}`);
-            ctx.onLogin(staff.data.staff.email);
-            navigate('/');
+            try {
+                const staff = await axios.get(`/api/staff/staffdetails/${getItemWithExpiry('id')}`);
+                ctx.onLogin(staff.data.staff.email);
+                navigate('/');
+            } catch (error) {
+                console.log(error.message);
+            }
         }
     };
     checkLogin();

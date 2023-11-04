@@ -46,12 +46,16 @@ const SubadminRequestDetails = () => {
 
     useEffect(() => {
         const getRequestDetails = async () => {
-            const request = await axios.get(`/api/request/getrequestdetails/${requestId}`);
-            setRequestData(request.data.request);
-            if (request.data.request.behalf) {
-                setStaffId(request.data.request.behalfId);
-            } else {
-                setStaffId(request.data.request.staffId);
+            try {
+                const request = await axios.get(`/api/request/getrequestdetails/${requestId}`);
+                setRequestData(request.data.request);
+                if (request.data.request.behalf) {
+                    setStaffId(request.data.request.behalfId);
+                } else {
+                    setStaffId(request.data.request.staffId);
+                }
+            } catch (error) {
+                console.log(error.message);
             }
         };
         getRequestDetails();

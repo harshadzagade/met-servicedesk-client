@@ -10,11 +10,11 @@ const SuperadminReport = () => {
     const navigate = useNavigate();
     const [allReportList, setAllReportList] = useState([]);
     const [staffDepartments, setStaffDepartments] = useState([]);
-    const [selectedDepartment, setSelectedDepartment] = useState(location.state? location.state.department : null);
+    const [selectedDepartment, setSelectedDepartment] = useState(location.state ? location.state.department : null);
     const [departmentStaff, setDepartmentStaff] = useState([]);
     const [searchType, setSearchType] = useState('Subject');
     const [searchText, setSearchText] = useState('');
-    const [selectedStaff, setSelectedStaff] = useState(location.state? location.state.staff : null);
+    const [selectedStaff, setSelectedStaff] = useState(location.state ? location.state.staff : null);
     const [refresh, setRefresh] = useState(false);
     const [isNormalSearch, setIsNormalSearch] = useState(true);
     const [ticketType, setTicketType] = useState('allTicketTypes');
@@ -58,8 +58,12 @@ const SuperadminReport = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const departments = await axios.get(`/api/staff/departments`);
-            setStaffDepartments(departments.data.departments);
+            try {
+                const departments = await axios.get(`/api/staff/departments`);
+                setStaffDepartments(departments.data.departments);
+            } catch (error) {
+                console.log(error.message);
+            }
         };
         getDepartments();
     }, []);

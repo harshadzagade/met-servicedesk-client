@@ -14,8 +14,12 @@ const SingleStaff = () => {
 
   useEffect(() => {
     const getStaff = async () => {
-      const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
-      setStaff(staff.data.staff);
+      try {
+        const staff = await axios.get(`/api/staff/staffdetails/${id.staffId}`);
+        setStaff(staff.data.staff);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
     getStaff();
     setRefresh(false);

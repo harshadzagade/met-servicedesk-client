@@ -32,7 +32,7 @@ const OwnComplaint = () => {
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
       } catch (error) {
-        setErrorMessage(`${error.message}`);
+        console.log(error.message);
       }
     };
     if (adminCtx.department) {

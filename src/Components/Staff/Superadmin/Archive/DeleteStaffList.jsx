@@ -15,8 +15,12 @@ const DeleteStaffList = () => {
 
   useEffect(() => {
     const getList = async () => {
-      const list = await axios.get(`/api/trash/`);
-      setStaffList(list.data.allStaff);
+      try {
+        const list = await axios.get(`/api/trash/`);
+        setStaffList(list.data.allStaff);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
     getList();
     setRefresh(false);
