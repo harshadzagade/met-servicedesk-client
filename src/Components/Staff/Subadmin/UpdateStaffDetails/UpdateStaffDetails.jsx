@@ -9,7 +9,8 @@ import { Bars } from 'react-loader-spinner';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const UpdateStaffDetails = (props) => {
-    const subadminId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const subadminId = idReference ? idReference.value : null;
     const id = useParams();
     const [staff, setStaff] = useState({});
     const [updateRole, setUpdateRole] = useState(staff.role);

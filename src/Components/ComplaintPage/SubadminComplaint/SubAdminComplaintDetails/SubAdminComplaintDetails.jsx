@@ -12,7 +12,8 @@ import { Bars } from 'react-loader-spinner';
 
 const SubAdminComplaintDetails = () => {
     const navigate = useNavigate();
-    const loginId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const loginId = idReference ? idReference.value : null;
     const id = useParams().complaintId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [complaintData, setComplaintData] = useState({});

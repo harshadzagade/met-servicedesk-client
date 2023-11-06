@@ -6,7 +6,8 @@ import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const Navbar = () => {
     const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '', department: '' });
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
 
     useEffect(() => {
         const getStaffInfo = async () => {

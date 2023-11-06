@@ -10,7 +10,8 @@ import getItemWithExpiry from "../../../Utils/expiryFunction";
 import openSocket from 'socket.io-client';
 
 const Complaint = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
@@ -129,7 +130,7 @@ const Complaint = () => {
                     <h2>{errorMessage}</h2>
                   </div>
               }
-              {complaintList.length > 10 &&<div className={classes.datapage}>
+              {complaintList.length > 10 && <div className={classes.datapage}>
                 <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
               </div>}
               <SweetPagination

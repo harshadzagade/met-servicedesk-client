@@ -9,7 +9,8 @@ import getItemWithExpiry from '../../../Utils/expiryFunction';
 import openSocket from 'socket.io-client';
 
 const DashBoard = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
   const [pendingTickets, setPendingTickets] = useState({ pendingRequests: null, totalRequests: null, pendingComplaints: null, totalComplaints: null, totalPendingTickets: null, totalTickets: null });
   const [totalsDate, setTotalsDate] = useState({ totalRequestsDate: null, totalComplaintsDate: null, totalTicketsDate: null });

@@ -9,7 +9,8 @@ import getItemWithExpiry from '../../../../Utils/expiryFunction';
 import openSocket from 'socket.io-client';
 
 const TechnicianAssignRequest = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
   const [numberOfPages, setNumberOfPages] = useState(10);
   const [requestList, setRequestList] = useState([]);

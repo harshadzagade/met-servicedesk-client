@@ -10,7 +10,8 @@ import { Bars } from 'react-loader-spinner';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const NewCompaint = () => {
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const adminCtx = useContext(AdminContext);
     const behalfEmailRef = useRef();
     const subjectRef = useRef();

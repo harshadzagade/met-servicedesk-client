@@ -5,7 +5,8 @@ import classes from './AllStaffExt.module.css';
 import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const AllStaffExt = () => {
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const [staffList, setStaffList] = useState([]);
     const [allStaffList, setAllStaffList] = useState([]);
     const [searchText, setSearchText] = useState('');

@@ -11,7 +11,8 @@ const TechnicianAttendingForm = () => {
     const problemDescriptionRef = useRef();
     const actionTakenRef = useRef();
     const forwardCommentRef = useRef();
-    const loginId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const loginId = idReference ? idReference.value : null;
     const navigate = useNavigate();
     const id = useParams();
     const [technicians, setTechnicians] = useState([]);

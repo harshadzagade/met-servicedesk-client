@@ -8,7 +8,8 @@ import SubadminReport from '../../Components/ReportPage/SubadminReport/SubadminR
 import getItemWithExpiry from '../../Utils/expiryFunction';
 
 const Report = () => {
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const navigate = useNavigate();
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);

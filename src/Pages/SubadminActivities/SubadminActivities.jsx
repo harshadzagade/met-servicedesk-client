@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router';
 import AdminContext from '../../Components/Context/AdminContext/AdminContext';
 
 const SubadminActivities = () => {
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const adminCtx = useContext(AdminContext);
     const navigate = useNavigate();
     const [search, setSearch] = useState('');

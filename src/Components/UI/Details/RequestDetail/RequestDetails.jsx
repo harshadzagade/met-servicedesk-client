@@ -11,7 +11,8 @@ import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const RequestDetails = () => {
     const navigate = useNavigate();
-    const loginId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const loginId = idReference ? idReference.value : null;
     const id = useParams().requestId;
     const ticketCtx = useContext(TicketDetailsContext);
     const [requestData, setRequestData] = useState({});

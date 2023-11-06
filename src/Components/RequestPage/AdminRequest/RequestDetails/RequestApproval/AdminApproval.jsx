@@ -9,7 +9,8 @@ import Swal from 'sweetalert2';
 import { Bars } from 'react-loader-spinner';
 
 const AdminApproval = () => {
-    const loginId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const loginId = idReference ? idReference.value : null;
     const navigate = useNavigate();
     const adminCtx = useContext(AdminContext);
     const id = useParams();

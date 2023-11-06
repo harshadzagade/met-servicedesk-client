@@ -9,8 +9,10 @@ import getItemWithExpiry from '../../../../Utils/expiryFunction';
 import openSocket from 'socket.io-client';
 
 const DepartmentRequest = () => {
-    const id = getItemWithExpiry('id');
-    const department = getItemWithExpiry('department');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
+    const departmentReference = getItemWithExpiry('department');
+    const department = departmentReference ? departmentReference.value : null;
     const navigate = useNavigate();
     const [numberOfPages, setNumberOfPages] = useState(10);
     const [requestList, setRequestList] = useState([]);

@@ -7,7 +7,8 @@ import AuthContext from '../../Components/Context/AuthContext/AuthContext';
 import getItemWithExpiry from '../../Utils/expiryFunction';
 
 const Login = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const emailRef = useRef();
@@ -46,6 +47,7 @@ const Login = () => {
       loginStaff = await axios.post('/api/', staffInfo);
       const now = new Date();
       const expirationTime = now.getTime() + 8 * 60 * 60 * 1000;
+      const emailExpirationTime = now.getTime() + 5 * 60 * 1000;
       const loginId = {
         value: loginStaff.data.staffId,
         expiry: expirationTime
@@ -54,8 +56,13 @@ const Login = () => {
         value: loginStaff.data.token,
         expiry: expirationTime
       };
+      const email = {
+        value: staffInfo.email,
+        expiry: emailExpirationTime
+      };
       localStorage.setItem('token', JSON.stringify(tokenString));
       localStorage.setItem('id', JSON.stringify(loginId));
+      localStorage.setItem('email', JSON.stringify(email));
       authCtx.onLogin(staffInfo.email);
       const Toast = Swal.mixin({
         toast: true,

@@ -9,7 +9,7 @@ const getItemWithExpiry = (key) => {
         localStorage.removeItem(key);
         return null; // Item has expired
     }
-    return item.value;
+    return item;
 };
 
 export default getItemWithExpiry;

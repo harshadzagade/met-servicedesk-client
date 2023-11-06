@@ -13,7 +13,8 @@ import { Bars } from 'react-loader-spinner';
 
 const AdminDetails = () => {
     const navigate = useNavigate();
-    const loginId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const loginId = idReference ? idReference.value : null;
     const adminCtx = useContext(AdminContext);
     const id = useParams().complaintId;
     const ticketCtx = useContext(TicketDetailsContext);

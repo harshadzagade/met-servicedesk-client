@@ -7,7 +7,8 @@ import Swal from 'sweetalert2';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const AllStaff = () => {
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const [staffList, setStaffList] = useState([]);
     const [allStaffList, setAllStaffList] = useState([]);
     const [subadminDetails, setSubadminDetails] = useState({});

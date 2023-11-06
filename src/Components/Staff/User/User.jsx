@@ -5,7 +5,8 @@ import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const User = () => {
     const [userDetails, setUserDetails] = useState({});
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
 
     useEffect(() => {
         const getUserName = async () => {

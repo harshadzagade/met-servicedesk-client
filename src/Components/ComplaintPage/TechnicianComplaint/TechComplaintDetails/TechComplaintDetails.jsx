@@ -15,7 +15,8 @@ const TechComplaintDetails = () => {
     const [complaintData, setComplaintData] = useState({});
     const paramsId = useParams();
     const id = paramsId.complaintId;
-    const ownId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const ownId = idReference ? idReference.value : null;
     const ticketCtx = useContext(TicketDetailsContext);
     const [openFeedback, setOpenFeedback] = useState(false);
     const [staffId, setStaffId] = useState(null);

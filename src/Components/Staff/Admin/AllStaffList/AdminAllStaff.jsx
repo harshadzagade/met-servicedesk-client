@@ -7,7 +7,8 @@ import classes from './AdminAllStaff.module.css';
 import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const AdminAllStaff = () => {
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const [staffList, setStaffList] = useState([]);
     const [allStaffList, setAllStaffList] = useState(staffList);
     const navigate = useNavigate();

@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 const AdminDeptDrop = (props) => {
   const navigate = useNavigate();
   const adminCtx = useContext(AdminContext);
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const [departments, setDepartments] = useState([]);
 
   const handleDepartmentClick = (department) => {

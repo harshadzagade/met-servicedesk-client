@@ -7,7 +7,8 @@ import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const SubadminReport = () => {
     const location = useLocation();
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const navigate = useNavigate();
     const [reportList, setReportList] = useState([]);
     const [allReportList, setAllReportList] = useState([]);

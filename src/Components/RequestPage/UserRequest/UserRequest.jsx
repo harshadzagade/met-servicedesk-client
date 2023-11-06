@@ -10,7 +10,8 @@ import getItemWithExpiry from "../../../Utils/expiryFunction";
 import openSocket from 'socket.io-client';
 
 const UserRequest = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
   const [requestList, setRequestList] = useState([]);
   const [allRequestList, setAllRequestList] = useState([]);

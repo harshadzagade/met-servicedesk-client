@@ -11,7 +11,8 @@ import openSocket from 'socket.io-client';
 
 const IncomingRequest = () => {
   const navigate = useNavigate();
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const subadminCtx = useContext(SubadminContext);
   const [numberOfPages, setNumberOfPages] = useState(10);
   const [errorMessage, setErrorMessage] = useState('');
@@ -123,7 +124,7 @@ const IncomingRequest = () => {
                       </span>
                     </div>
                     <div className={`${classes.tikMsg}`}>
-                        <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
+                      <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
                     </div>
                     <div className={`${classes.tikOther}`}>
                       <p className={`${classes.tikId}`}>

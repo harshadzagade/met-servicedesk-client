@@ -4,13 +4,14 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import AuthContext from '../../Context/AuthContext/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const NewPassword = () => {
-  const ctx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
+  const email = getItemWithExpiry('email');
   const navigate = useNavigate();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
-  const email = ctx.email;
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -22,7 +23,25 @@ const NewPassword = () => {
       });
     } else {
       try {
-        await axios.put(`/api/staff/newuserlogin`, { email: email, password: passwordRef.current.value });
+        const now = new Date().getTime();
+        if (email) {
+          if (email.expiry) {
+            if (now > email.expiry) {
+              authCtx.onLogout();
+              navigate('/login');
+              return;
+            }
+          } else {
+            authCtx.onLogout();
+            navigate('/login');
+            return;
+          }
+        } else {
+          authCtx.onLogout();
+          navigate('/login');
+          return;
+        }
+        await axios.put(`/api/staff/newuserlogin`, { email: email.value, password: passwordRef.current.value });
         Swal.fire({
           position: 'top-end',
           icon: 'success',

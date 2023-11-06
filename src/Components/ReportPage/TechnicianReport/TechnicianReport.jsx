@@ -6,8 +6,10 @@ import DataTable from 'react-data-table-component';
 import getItemWithExpiry from '../../../Utils/expiryFunction';
 
 const TechnicianReport = () => {
-    const id = getItemWithExpiry('id');
-    const department = getItemWithExpiry('department');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
+    const departmentReference = getItemWithExpiry('department');
+    const department = departmentReference ? departmentReference.value : null;
     const [reportList, setReportList] = useState([]);
     const navigate = useNavigate();
     const [allReportList, setAllReportList] = useState([]);

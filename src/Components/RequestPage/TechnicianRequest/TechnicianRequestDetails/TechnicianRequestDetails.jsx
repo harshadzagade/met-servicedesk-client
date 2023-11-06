@@ -86,8 +86,6 @@ const TechnicianRequestDetails = () => {
 
     // Print
     const handlePrint = () => {
-        console.log(handlePrint);
-        console.log('heelo');
         const printContent = document.querySelector('.printcontent');
         if (printContent) {
             const printWindow = window.open('', '', 'width=793.70,height=1122.52');

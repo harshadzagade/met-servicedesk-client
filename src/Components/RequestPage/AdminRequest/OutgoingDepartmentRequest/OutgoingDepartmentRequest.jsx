@@ -10,7 +10,8 @@ import getItemWithExpiry from '../../../../Utils/expiryFunction';
 import openSocket from 'socket.io-client';
 
 const OutgoingDepartmentRequest = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
   const adminCtx = useContext(AdminContext);
   const [requestList, setRequestList] = useState([]);
@@ -39,10 +40,10 @@ const OutgoingDepartmentRequest = () => {
     if (adminCtx.department) {
       getList();
       socket.on('requests', () => {
-          getList();
+        getList();
       });
       socket.on('requestStatus', () => {
-          getList();
+        getList();
       });
     } else {
       setErrorMessage('Please select department')
@@ -95,9 +96,9 @@ const OutgoingDepartmentRequest = () => {
 
   return (
     <main>
-        <div className={classes.searchfiltering}>
-          <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
-        </div>
+      <div className={classes.searchfiltering}>
+        <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
+      </div>
       <div className={`${classes.requests} `}>
         {
           allRequestList.length !== 0 ?
@@ -114,7 +115,7 @@ const OutgoingDepartmentRequest = () => {
                       </span>
                     </div>
                     <div className={`${classes.tikMsg}`}>
-                        <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
+                      <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
                     </div>
                     <div className={`${classes.tikOther}`}>
                       <p className={`${classes.tikId}`}>
@@ -139,7 +140,7 @@ const OutgoingDepartmentRequest = () => {
               <h2>{errorMessage}</h2>
             </div>
         }
-        
+
         {requestList.length > 10 && <div className={classes.datapage}>
           <DataPerPage numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} />
         </div>}

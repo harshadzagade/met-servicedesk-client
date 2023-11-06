@@ -10,7 +10,8 @@ import getItemWithExpiry from '../../../../Utils/expiryFunction';
 
 const SubadminRequestDetails = () => {
     const navigate = useNavigate();
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
     const subadminCtx = useContext(SubadminContext);
     const paramsId = useParams();
     const requestId = paramsId.requestId;

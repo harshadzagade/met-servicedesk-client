@@ -12,8 +12,10 @@ import TicketCounterContext from '../Context/TicketCounterContext/TicketCounterC
 import AdminContext from '../Context/AdminContext/AdminContext';
 
 const Sidebar = ({ children }) => {
-  const id = getItemWithExpiry('id');
-  const department = getItemWithExpiry('department');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
+  const departmentReference = getItemWithExpiry('department');
+  const department = departmentReference ? departmentReference.value : null;
   const ticketCtx = useContext(TicketDetailsContext);
   const [showTabs, setShowTabs] = useState(false);
   const [isHomeActive, setIsHomeActive] = useState(false);
@@ -53,6 +55,19 @@ const Sidebar = ({ children }) => {
         }
       }, 1000);
       return () => clearInterval(interval);
+    }
+  }, [authCtx, navigate]);
+
+  useEffect(() => {
+    const email = getItemWithExpiry('email');
+    const now = new Date().getTime();
+    if (email) {
+      console.log(email.value);
+      if (now > email.expiry) {
+        authCtx.onLogout();
+        navigate('/login');
+        return;
+      }
     }
   }, [authCtx, navigate]);
 
@@ -672,7 +687,7 @@ const Sidebar = ({ children }) => {
                       </svg>
                       <h3>Request</h3>
                       {(ticketCounterCtx.requestStatusCount.pending !== null && ticketCounterCtx.requestStatusCount.pending !== 0) && <div className={classes.counter}>
-                      <h3>{staffInfo.role === 'engineer' ? ticketCounterCtx.requestStatusCount.assigned : ticketCounterCtx.requestStatusCount.pending}</h3>
+                        <h3>{staffInfo.role === 'engineer' ? ticketCounterCtx.requestStatusCount.assigned : ticketCounterCtx.requestStatusCount.pending}</h3>
                       </div>}
                     </Link>
 
@@ -705,7 +720,7 @@ const Sidebar = ({ children }) => {
                     </Link>}
 
                     <Link to='/policies' onClick={handlePoliciesClick} className={`${isPolicies && classes.active}`} >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-ppt-fill" viewBox="0 0 16 16">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-file-earmark-ppt-fill" viewBox="0 0 16 16">
                         <path d="M8.188 10H7V6.5h1.188a1.75 1.75 0 1 1 0 3.5z" />
                         <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3zM7 5.5a1 1 0 0 0-1 1V13a.5.5 0 0 0 1 0v-2h1.188a2.75 2.75 0 0 0 0-5.5H7z" />
                       </svg>

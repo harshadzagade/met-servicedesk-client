@@ -26,7 +26,7 @@ const AuthProvider = props => {
         const checkToken = () => {
             const storageToken = getItemWithExpiry('token');
             if (storageToken) {
-                const token = jwtDecode(storageToken);
+                const token = jwtDecode(storageToken.value);
                 const email = authState.email
                 if (email === token.email) {
                     dispatchAuthAction({ type: "LOGIN", val: true });
@@ -40,6 +40,7 @@ const AuthProvider = props => {
         localStorage.removeItem('id');
         localStorage.removeItem('token');
         localStorage.removeItem('department');
+        localStorage.removeItem('email');
         sessionStorage.removeItem('department');
         sessionStorage.removeItem('approval');
         sessionStorage.removeItem('tab');

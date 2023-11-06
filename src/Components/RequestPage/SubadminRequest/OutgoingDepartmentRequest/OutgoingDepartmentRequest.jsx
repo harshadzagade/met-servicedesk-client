@@ -10,7 +10,8 @@ import getItemWithExpiry from '../../../../Utils/expiryFunction';
 import openSocket from 'socket.io-client';
 
 const OutgoingDepartmentRequest = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
   const subadminCtx = useContext(SubadminContext);
   const [requestList, setRequestList] = useState([]);
@@ -123,7 +124,7 @@ const OutgoingDepartmentRequest = () => {
                       </span>
                     </div>
                     <div className={`${classes.tikMsg}`}>
-                        <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
+                      <div dangerouslySetInnerHTML={{ __html: request.description }}></div>
                     </div>
                     <div className={`${classes.tikOther}`}>
                       <p className={`${classes.tikId}`}>

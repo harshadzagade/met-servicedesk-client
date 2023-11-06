@@ -9,7 +9,8 @@ import { Bars } from 'react-loader-spinner';
 import getItemWithExpiry from '../../../../../Utils/expiryFunction';
 
 const SubadminApproval = () => {
-    const loginId = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const loginId = idReference ? idReference.value : null;
     const navigate = useNavigate();
     const subadminCtx = useContext(SubadminContext);
     const id = useParams();

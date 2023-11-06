@@ -12,7 +12,8 @@ import getItemWithExpiry from '../../Utils/expiryFunction';
 const Complaint = () => {
     const navigate = useNavigate();
     const location = useLocation() || null;
-    const id = getItemWithExpiry('id');
+    const idReference = getItemWithExpiry('id');
+    const id = idReference ? idReference.value : null;
 
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);

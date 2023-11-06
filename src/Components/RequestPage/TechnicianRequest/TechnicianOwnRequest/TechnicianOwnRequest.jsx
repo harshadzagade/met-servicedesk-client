@@ -10,7 +10,8 @@ import openSocket from 'socket.io-client';
 
 const TechnicianOwnRequest = () => {
   const navigate = useNavigate();
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const [currentPageData, setCurrentPageData] = useState(new Array(0).fill());
   const [requestList, setRequestList] = useState([]);
   const [allRequestList, setAllRequestList] = useState([]);

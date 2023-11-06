@@ -11,7 +11,8 @@ import openSocket from 'socket.io-client';
 
 const OwnComplaint = () => {
   const navigate = useNavigate();
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const adminCtx = useContext(AdminContext);
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);

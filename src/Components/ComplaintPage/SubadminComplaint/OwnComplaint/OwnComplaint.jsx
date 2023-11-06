@@ -10,7 +10,8 @@ import openSocket from 'socket.io-client';
 
 const OwnComplaint = () => {
   const navigate = useNavigate();
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState(10);

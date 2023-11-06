@@ -9,9 +9,11 @@ import getItemWithExpiry from '../../../../Utils/expiryFunction';
 import openSocket from 'socket.io-client';
 
 const DepartmentComplaint = () => {
-  const id = getItemWithExpiry('id');
+  const idReference = getItemWithExpiry('id');
+  const id = idReference ? idReference.value : null;
   const navigate = useNavigate();
-  const department = getItemWithExpiry('department');
+  const departmentReference = getItemWithExpiry('department');
+  const department = departmentReference ? departmentReference.value : null;
   const [complaintList, setComplaintList] = useState([]);
   const [allComplaintList, setAllComplaintList] = useState([]);
   const [numberOfPages, setNumberOfPages] = useState(10);
@@ -117,7 +119,7 @@ const DepartmentComplaint = () => {
                       </span>
                     </div>
                     <div className={`${classes.tikMsg}`}>
-                        <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
+                      <div dangerouslySetInnerHTML={{ __html: complaint.description }}></div>
                     </div>
                     <div className={`${classes.tikOther}`}>
                       <p className={`${classes.tikId}`}>
