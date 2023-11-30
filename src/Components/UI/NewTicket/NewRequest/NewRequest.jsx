@@ -14,6 +14,7 @@ const NewRequest = () => {
     const id = idReference ? idReference.value : null;
     const adminCtx = useContext(AdminContext);
     const behalfEmailRef = useRef();
+    const locationRef = useRef();
     const subjectRef = useRef();
     const navigate = useNavigate();
     const [department, setDepartment] = useState('');
@@ -76,7 +77,8 @@ const NewRequest = () => {
     }, [department]);
 
     const handleSubmitClick = async (e) => {
-        e.preventDefault(); if (editorData.length === 0) {
+        e.preventDefault(); 
+        if (editorData.length === 0) {
             Swal.fire({
                 icon: 'error',
                 title: `Please enter description`,
@@ -91,7 +93,7 @@ const NewRequest = () => {
             formData.append('behalf', isToggled);
             formData.append('behalfEmailId', isToggled ? behalfEmailRef.current.value : null);
             formData.append('subject', subjectRef.current.value);
-            formData.append('description', editorData);
+            formData.append('description', editorData + '\n' + locationRef.current.value);
             formData.append('department', department);
             formData.append('staffDepartment', staff.role === 'admin' ? adminCtx.department : staff.department[0]);
             formData.append('priority', priority);
@@ -191,6 +193,10 @@ const NewRequest = () => {
                                         }
                                     </select>
                                 </div>
+                            </div>
+                            <div className={classes.location}>
+                                <span>Location</span>
+                                <input type="text" className={classes.subInput} placeholder="Enter Location" ref={locationRef} required />
                             </div>
                             <div className={classes.subject}>
                                 <span>Subject</span>

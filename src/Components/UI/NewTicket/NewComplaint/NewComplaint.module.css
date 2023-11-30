@@ -137,6 +137,13 @@
 
 }
 
+.location {
+    display: grid;
+    grid-template-columns: 61%;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
 /* end priority and request type */
 
 /* subject */
