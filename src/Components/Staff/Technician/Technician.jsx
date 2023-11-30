@@ -62,12 +62,12 @@ const Technician = () => {
         {
             "name": "Pending",
             "request": requestStatus.pending,
-            'concern': complaintStatus.pending,
+            'complaint': complaintStatus.pending,
         },
         {
             "name": "attending",
             "request": requestStatus.attending,
-            'concern': complaintStatus.attending,
+            'complaint': complaintStatus.attending,
         },
         {
             "name": "assigned",
@@ -80,12 +80,12 @@ const Technician = () => {
         {
             "name": "forwarded",
             "request": requestStatus.forwarded,
-            "concern": complaintStatus.forwarded,
+            "complaint": complaintStatus.forwarded,
         },
         {
             "name": "closed",
             "request": requestStatus.closed,
-            "concern": complaintStatus.closed,
+            "complaint": complaintStatus.closed,
         }
 
     ] */
@@ -109,14 +109,14 @@ const Technician = () => {
                         <Tooltip />
                         <Legend />
                         <Bar dataKey="request" fill="#8884d8" />
-                        <Bar dataKey="concern" fill="#82ca9d" />
+                        <Bar dataKey="complaint" fill="#82ca9d" />
                     </BarChart>
                 </ResponsiveContainer>
             </div> */}
             <div className={classes.statusCard}>
                 <div className='col-5 mt-2'>
                     <div className={classes.compdetails}>
-                        <h2>Concern Status</h2>
+                        <h2>Complaint Status</h2>
                         <ComplaintCard />
                     </div>
                 </div>

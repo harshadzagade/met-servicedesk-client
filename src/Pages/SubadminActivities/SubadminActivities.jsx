@@ -98,8 +98,8 @@ const SubadminActivities = () => {
         } else if (activity.data.type === 'request') {
             navigate(`/adminrequestdetails/${activity.data.id}`)
             sessionStorage.setItem('tab', 'request');
-        } else if (activity.data.type === 'concern') {
-            navigate(`/adminconcerndetails/${activity.data.id}`)
+        } else if (activity.data.type === 'complaint') {
+            navigate(`/admincomplaintdetails/${activity.data.id}`)
             sessionStorage.setItem('tab', 'complaint');
         }
     };

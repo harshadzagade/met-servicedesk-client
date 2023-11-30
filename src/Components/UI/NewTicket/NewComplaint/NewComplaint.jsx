@@ -102,17 +102,17 @@ const NewCompaint = () => {
                 setShowLoading(true);
                 await axios.post('/api/complaint/', formData);
                 Swal.fire(
-                    'Concern Created!',
-                    'You have created concern successfully',
+                    'Complaint Created!',
+                    'You have created complaint successfully',
                     'success'
                 );
-                navigate('/concern', { state: { refreshSuperHome: true } });
+                navigate('/complaint', { state: { refreshSuperHome: true } });
             } catch (error) {
                 if (error.response.status === 422 || error.response.status === 401) {
                     Swal.fire({
                         icon: 'error',
                         title: `${error.response.data.message}`,
-                        text: 'Unable to create concern'
+                        text: 'Unable to create complaint'
                     });
                 } else {
                     console.log(error.message);
@@ -133,7 +133,7 @@ const NewCompaint = () => {
         <Fragment>
             {showLoading && (
                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                    <h1>Registering Concern</h1>
+                    <h1>Registering Complaint</h1>
                     <div className='d-flex justify-content-center'>
                         <Bars
                             height="80"
@@ -148,7 +148,7 @@ const NewCompaint = () => {
                 </div>
             )}
             {!showLoading && <div className={classes.newcomplaint} >
-                <h2>Create new concern</h2>
+                <h2>Create new complaint</h2>
                 <div className={classes.createStaffform}>
                     <div className={classes.formStaff}>
                         <form onSubmit={handleSubmitClick}>
@@ -182,7 +182,7 @@ const NewCompaint = () => {
                                     </select>
                                 </div>
                                 <div className={classes.reqType}>
-                                    <span>Concern Type</span>
+                                    <span>Complaint Type</span>
                                     <select className={classes.rtypeSelect} onChange={(e) => setRequestType(e.target.value)} required>
                                         <option value="" hidden>----- Select Type -----</option>
                                         {
@@ -207,7 +207,7 @@ const NewCompaint = () => {
                                     <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
                                 </div>
                                 <div className={classes.repeat}>
-                                    <span className='mt-4'>Repeated concern:</span>
+                                    <span className='mt-4'>Repeated complaint:</span>
                                     <div className={classes.isRepeat}>
                                         <input type="checkbox" defaultChecked={isRepeated} onClick={() => { setIsRepeated(!isRepeated) }} id="toggle-repeat" />
                                         <label htmlFor="toggle-repeat"></label>

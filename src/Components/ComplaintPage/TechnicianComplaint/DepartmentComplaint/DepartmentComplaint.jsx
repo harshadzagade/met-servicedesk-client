@@ -42,7 +42,7 @@ const DepartmentComplaint = () => {
       try {
         const list = await axios.get(`/api/complaint/complaints/incoming/${department}`);
         if (list.data.complaints.length === 0) {
-          setErrorMessage('No concerns available')
+          setErrorMessage('No complaints available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
@@ -109,7 +109,7 @@ const DepartmentComplaint = () => {
             <Fragment>
               {
                 currentPageData.map((complaint) => (
-                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/engineerconcerndetails/${complaint.id}`)} >
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/engineercomplaintdetails/${complaint.id}`)} >
                     <div className={`${classes.tikHead}`}>
                       <h3 className={`${classes.tikTitle}`}>
                         {complaint.subject}

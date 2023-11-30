@@ -40,7 +40,7 @@ const OutgoingComplaint = () => {
       try {
         const list = await axios.get(`/api/staff/subadmin/complaints/outgoing/${id}/${subadminDetails.department}`);
         if (list.data.complaints.length === 0) {
-          setErrorMessage('No concerns available')
+          setErrorMessage('No complaints available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
@@ -107,7 +107,7 @@ const OutgoingComplaint = () => {
             <Fragment>
               {
                 currentPageData.map((complaint) => (
-                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/subadminconcerndetails/${complaint.id}`)} >
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/subadmincomplaintdetails/${complaint.id}`)} >
                     <div className={`${classes.tikHead}`}>
                       <h3 className={`${classes.tikTitle}`}>
                         {complaint.subject}

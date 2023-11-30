@@ -34,8 +34,8 @@ const SubAdminComplaintDetails = () => {
             if (technicianId) {
                 await axios.put(`/api/staff/subadmin/assigncomplaint/${id}`, { assignId: technicianId, subadminId: loginId });
                 Swal.fire(
-                    'Assigned concern',
-                    'Engineer assigned to a concern successfully',
+                    'Assigned complaint',
+                    'Engineer assigned to a complaint successfully',
                     'success'
                 );
             }
@@ -44,7 +44,7 @@ const SubAdminComplaintDetails = () => {
                 Swal.fire({
                     icon: 'error',
                     title: `${error.response.data.message}`,
-                    text: 'Unable to assign concern'
+                    text: 'Unable to assign complaint'
                 });
             } else {
                 console.log(error.message);
@@ -76,7 +76,7 @@ const SubAdminComplaintDetails = () => {
                     setTechnicians(technicians.data.technicians);
                 }
             } catch (error) {
-                navigate('/concern');
+                navigate('/complaint');
                 console.log(error.message);
             }
         };
@@ -175,17 +175,17 @@ const SubAdminComplaintDetails = () => {
                     <div className={`${classes.complaintdetils} row`}>
                         <div className="col-8">
                             <div className={classes.header}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16" onClick={() => navigate('/concern')}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16" onClick={() => navigate('/complaint')}>
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                                 </svg>
-                                <h2>Concern details</h2>
+                                <h2>Complaint details</h2>
                                 <button onClick={handleGeneratePDF} className={`${classes.printBtn} `}>Print</button>
                             </div>
                             <div className={`${classes.detail}`}>
                                 <Fragment>
                                     {showLoading && (
                                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                                            <h1>Assigning Concern</h1>
+                                            <h1>Assigning Complaint</h1>
                                             <div className='d-flex justify-content-center'>
                                                 <Bars
                                                     height="80"
@@ -202,7 +202,7 @@ const SubAdminComplaintDetails = () => {
                                     {!showLoading && <form className={classes.myform}>
                                         <span id='printContent'>
                                             <div className={classes.idDetails}>
-                                                <label>Concern Id:</label>
+                                                <label>Complaint Id:</label>
                                                 <p className={classes.complaintDetailsp}>{complaintData.ticketId}</p>
                                             </div>
                                             {
@@ -239,7 +239,7 @@ const SubAdminComplaintDetails = () => {
                                             </div>
                                             <div className={classes.reqsta}>
                                                 <div className={classes.ComplaintType}>
-                                                    <label>Concern Type:</label>
+                                                    <label>Complaint Type:</label>
                                                     <p className={classes.complaintDetailsp}>{complaintData.category}</p>
                                                 </div>
                                                 <div className={classes.status}>

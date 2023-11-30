@@ -70,7 +70,7 @@ const TechnicianAttendingForm = () => {
                 'You have changed status successfully',
                 'success'
             );
-            navigate('/concern');
+            navigate('/complaint');
         } catch (error) {
             if (error.response.status === 422 || error.response.status === 401) {
                 Swal.fire({
@@ -94,7 +94,7 @@ const TechnicianAttendingForm = () => {
         <Fragment>
             {showLoading && (
                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                    <h1>Changing concern status</h1>
+                    <h1>Changing complaint status</h1>
                     <div className='d-flex justify-content-center'>
                         <Bars
                             height="80"

@@ -64,7 +64,7 @@ const ReportDetails = () => {
                             <form className={classes.myform}>
                                 <div className={classes.idDetails}>
                                     <label>Ticket Type:</label>
-                                    <p className={classes.complaintDetailsp}>{(reportData.isRequest && 'Request') || (reportData.isComplaint && 'Concern')}</p>
+                                    <p className={classes.complaintDetailsp}>{(reportData.isRequest && 'Request') || (reportData.isComplaint && 'Complaint')}</p>
                                 </div>
                                 <div className={classes.idDetails}>
                                     <label>Ticket ID:</label>

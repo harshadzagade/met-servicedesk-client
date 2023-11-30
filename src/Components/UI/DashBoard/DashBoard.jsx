@@ -234,7 +234,7 @@ const DashBoard = () => {
       <div className="col-12 col-md-6 col-lg-4">
         <div className={`${classes.sales}`}>
           <div className={`${classes.request} `}>
-            <h1>Pending Concerns</h1>
+            <h1>Pending Complaints</h1>
           </div>
           <div className={classes.count}>
             <div className={classes.progress}>
@@ -242,7 +242,7 @@ const DashBoard = () => {
             </div>
           </div>
           <div >
-            <p className={classes.dates}>{!totalsDate.totalComplaintsDate ? 'No Concerns initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
+            <p className={classes.dates}>{!totalsDate.totalComplaintsDate ? 'No Complaints initiated' : 'Last update ' + getLastDate(totalsDate.totalComplaintsDate)}</p>
           </div>
         </div>
       </div>

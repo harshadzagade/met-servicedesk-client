@@ -27,10 +27,10 @@ const User = () => {
             </h1>
             <div className="col-4">
                 <div className={classes.step}>
-                    <h2>Concern Tickets</h2>
+                    <h2>Complaint Tickets</h2>
                     <div>
                         <ol>
-                            <li>1.	&nbsp;Select the "Concern" ticket type.</li>
+                            <li>1.	&nbsp;Select the "Complaint" ticket type.</li>
                             <li>2.	&nbsp;Fill out the ticket form, providing detailed information about the issue you are facing.</li>
                             <li>3. 	&nbsp;Attach any relevant files or screenshots, if applicable. </li>
                             <li>4.	&nbsp;Click "Submit" to send the ticket to the Help Desk.</li>

@@ -28,7 +28,7 @@ const OwnComplaint = () => {
       try {
         const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
         if (list.data.complaints.length === 0) {
-          setErrorMessage('No concerns available')
+          setErrorMessage('No complaints available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
@@ -100,7 +100,7 @@ const OwnComplaint = () => {
             <Fragment>
               {
                 currentPageData.map((complaint) => (
-                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)} >
+                  <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)} >
                     <div className={`${classes.tikHead}`}>
 
                       <h3 className={`${classes.tikTitle}`}>

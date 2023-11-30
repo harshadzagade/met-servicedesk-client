@@ -75,9 +75,9 @@ const Feedback = () => {
     if (ticketType === 'request') {
       navigate(`/requestdetails/${id}`);
       sessionStorage.setItem('tab', 'request');
-    } else if (ticketType === 'concern') {
+    } else if (ticketType === 'complaint') {
       sessionStorage.setItem('tab', 'complaint');
-      navigate(`/concerndetails/${id}`);
+      navigate(`/complaintdetails/${id}`);
     }
   };
 
@@ -96,7 +96,7 @@ const Feedback = () => {
                     <div className={classes.activity} key={feedback.ticketId}>
                       <div className={classes.detalis}>
                         <span>{feedback.ticketId}</span>
-                        <span> {(feedback.ticketType === 'request' && 'Request') || (feedback.ticketType === 'concern' && 'Concern')}</span>
+                        <span> {(feedback.ticketType === 'request' && 'Request') || (feedback.ticketType === 'complaint' && 'Complaint')}</span>
                         <span>{feedback.feedback}</span>
                       </div>
                       <div className={classes.date}>

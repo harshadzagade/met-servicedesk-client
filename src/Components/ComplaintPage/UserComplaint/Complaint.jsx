@@ -27,7 +27,7 @@ const Complaint = () => {
       try {
         const list = await axios.get(`/api/complaint/owncomplaints/${id}`);
         if (list.data.complaints.length === 0) {
-          setErrorMessage('No concerns available')
+          setErrorMessage('No complaints available')
         }
         setComplaintList(list.data.complaints);
         setAllComplaintList(list.data.complaints);
@@ -89,7 +89,7 @@ const Complaint = () => {
               <div className={classes.searchfiltering}>
                 <input type="text" className={`${classes.searchInput}`} placeholder={`Search here`} onChange={(e) => setSearchText(e.target.value)} />
               </div>
-              <button className={`${classes.tikReqBtn}`} onClick={() => navigate("/newconcern")}>
+              <button className={`${classes.tikReqBtn}`} onClick={() => navigate("/newcomplaint")}>
                 <span className="material-icons-sharp btn-icon">add</span>
                 <span className={`${classes.btnName}`}> New Ticket</span>
               </button>
@@ -99,7 +99,7 @@ const Complaint = () => {
                 (allComplaintList.length !== 0) ?
                   <Fragment>
                     {currentPageData.map((complaint) => (
-                      <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/concerndetails/${complaint.id}`)}>
+                      <div key={complaint.id} className={`${classes.tikInfo}`} onClick={() => navigate(`/complaintdetails/${complaint.id}`)}>
                         <div className={`${classes.tikHead}`}>
                           <h3 className={`${classes.tikTitle}`}>
                             {complaint.subject}

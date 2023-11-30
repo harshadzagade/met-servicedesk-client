@@ -228,7 +228,7 @@ const SuperadminReport = () => {
         [
             {
                 name: "Ticket Type",
-                selector: (row) => (row.isRequest && 'Request') || (row.isComplaint && 'Concern'),
+                selector: (row) => (row.isRequest && 'Request') || (row.isComplaint && 'Complaint'),
                 sortable: true,
             },
             {
@@ -336,7 +336,7 @@ const SuperadminReport = () => {
                                 <option value='' hidden>Select Your Ticket Type</option>
                                 <option value='allTicketTypes'>All Ticket Types</option>
                                 <option value='requests'>Requests</option>
-                                <option value='complaints'>Concerns</option>
+                                <option value='complaints'>Complaints</option>
                             </select>
                         }
                         {
