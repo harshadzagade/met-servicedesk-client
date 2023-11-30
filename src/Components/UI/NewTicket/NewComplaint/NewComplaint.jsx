@@ -210,6 +210,7 @@ const NewCompaint = () => {
                                 <div className={classes.attachmentSection}>
                                     <span>Attachment</span>
                                     <input type="file" multiple className={classes.attachInput} placeholder="choose file" onChange={handleFileChange} />
+                                    <span style={{ color: 'red' }}>File size is limited to 5MB</span>
                                 </div>
                                 <div className={classes.repeat}>
                                     <span className='mt-4'>Repeated complaint:</span>
