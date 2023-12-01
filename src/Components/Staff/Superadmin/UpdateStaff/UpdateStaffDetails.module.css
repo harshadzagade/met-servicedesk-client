@@ -114,7 +114,7 @@
 }
 
 .deleteBtn {
-    background-color:var(--subbutton-color) ;
+    background-color:var(--subbutton-color);
     color: white;
     padding: 15px 32px;
     text-align: center;

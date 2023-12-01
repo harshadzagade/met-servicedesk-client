@@ -14,6 +14,7 @@ const AllStaffExt = () => {
     const sortedData = React.useMemo(() => { return [...staffList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) }, [staffList]);
     const columns = [
             {
+                id: 'name',
                 name: "Name",
                 selector: (row) => row.firstname + ' ' + row.lastname,
                 sortable: true,
@@ -81,6 +82,8 @@ const AllStaffExt = () => {
                 fixedHeaderScrollHeight='auto'
                 highlightOnHover
                 subHeader
+                defaultSortFieldId="name"
+                defaultSortAsc={true}
             />
         </Fragment>
     );

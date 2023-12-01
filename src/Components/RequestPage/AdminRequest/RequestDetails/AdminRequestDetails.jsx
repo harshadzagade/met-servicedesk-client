@@ -282,7 +282,7 @@ const AdminRequestDetails = () => {
                                             <p className={classes.complaintDetailsp}>{getCreatedRequestDate(requestData.createdAt)}</p>
                                         </div>
                                         <div>
-                                            {(((requestData.approval1 === null) || (requestData.approval2 === null)) && requestData.status === 'pending') && <button className={classes.complaintAssingBtn} onClick={handleApprovalClick}>Request Approval</button>}
+                                            {(((requestData.approval1 === null) || (requestData.approval2 === null)) && requestData.status === 'pending') && <button className={`${classes.complaintAssingBtn} ${((requestData.staffDepartment !== adminCtx.department) && (requestData.approval1 === null)) ? classes.disabledButton : ''}`} disabled={(requestData.staffDepartment !== adminCtx.department) && (requestData.approval1 === null)} onClick={handleApprovalClick}>Request Approval</button>}
                                         </div>
                                     </form>
                                 </div>

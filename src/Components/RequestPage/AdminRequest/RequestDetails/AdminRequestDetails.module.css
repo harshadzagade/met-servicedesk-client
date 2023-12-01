@@ -137,6 +137,10 @@
   color: white;
 }
 
+.disabledButton {
+  background-color:var(--subbutton-color) !important;
+}
+
 .tikPri {
   border: 1px solid;
   border-radius: var(--border-radius-2);

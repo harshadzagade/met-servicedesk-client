@@ -39,6 +39,7 @@ const AllStaff = () => {
             sortable: true,
         },
         {
+            id: "name",
             name: "Name",
             selector: (row) => row.firstname + ' ' + row.lastname,
             sortable: true,
@@ -114,6 +115,8 @@ const AllStaff = () => {
                 highlightOnHover
                 subHeader
                 onRowClicked={handleRowClick}
+                defaultSortFieldId="name"
+                defaultSortAsc={true}
             />
         </div>
     );
