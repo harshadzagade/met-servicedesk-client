@@ -124,7 +124,7 @@ const OutgoingDepartmentRequest = () => {
                       <p className={`${classes.tikPri} `} style={{ background: iswitch(request.priority, ['high', () => '#E70000'], ['moderate', () => '#FFBF00'], ['low', () => '#165C49']) }}>
                         {request.priority}
                       </p>
-                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => '#FF6000'], ['forwarded', () => '#FF5C89'], ['attending', () => ' #483DF6'], ['assigned', () => '#B954B6'], ['closed', () => '#437C28'], ['disapproved', () => '#FF0000']) }}>
+                      <p className={`${classes.tikStatus}`} style={{ background: iswitch(request.status, ['pending', () => request.approval1 ? '#964B00' : '#FF6000'], ['forwarded', () => '#FF5C89'], ['attending', () => ' #483DF6'], ['assigned', () => '#B954B6'], ['closed', () => '#437C28'], ['disapproved', () => '#FF0000']) }}>
                         {request.status}
                       </p>
                       <p className={`${classes.tikAssigned}`}>
