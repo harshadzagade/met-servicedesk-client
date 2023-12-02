@@ -147,7 +147,7 @@ const AdminApproval = () => {
                                                 <option key='0' value='' hidden defaultValue=''>----- Select Engineer -----</option>
                                                 {
                                                     technicians.map((technician) =>
-                                                        <option key={technician.id} value={technician.id}>{technician.firstname + " " + technician.lastname}</option>
+                                                        <option key={technician.id} value={technician.id}><span>{technician.firstname + " " + technician.lastname}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{technician.busyStatus? 'Busy' : 'Available'}</b></option>
                                                     )
                                                 }
                                             </select>
