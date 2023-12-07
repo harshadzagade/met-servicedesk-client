@@ -76,7 +76,6 @@ const SubAdminComplaintDetails = () => {
                     setTechnicians(technicians.data.technicians);
                 }
             } catch (error) {
-                navigate('/complaint');
                 console.log(error.message);
             }
         };
@@ -84,7 +83,6 @@ const SubAdminComplaintDetails = () => {
     }, [loginId, staff, navigate]);
 
     useEffect(() => {
-        setRefresh(true);
         const getComplaintDetails = async () => {
             try {
                 const complaint = await axios.get(`/api/complaint/getcomplaintdetails/${id}`);
