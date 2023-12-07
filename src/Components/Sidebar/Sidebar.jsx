@@ -164,7 +164,11 @@ const Sidebar = ({ children }) => {
               value: staffInfo.department[0],
               expiry: expirationTime
             };
-            localStorage.setItem('department', JSON.stringify(departmentData));
+            if (localStorage.getItem('id')) {
+              localStorage.setItem('department', JSON.stringify(departmentData));
+            } else {
+              localStorage.removeItem('department');
+            }
           }
           ticketCounterCtx.setStaffDetails(id, department, 'engineer');
           break;
