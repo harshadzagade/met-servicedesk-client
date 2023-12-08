@@ -85,14 +85,14 @@ const TechnicianRequestDetails = () => {
     }, [requestData.behalfId]);
 
     // Print
-    const handlePrint = () => {
+    const handlePrint = (data) => {
         const printContent = document.querySelector('.printcontent');
         if (printContent) {
             const printWindow = window.open('', '', 'width=793.70,height=1122.52');
             printWindow.document.open();
             printWindow.document.write('<link rel="stylesheet" type="text/css" href="AdminRequestDetails.module.css">');
             printWindow.document.write('<html><head><title>MET Helpdesk</title></head>');
-            printWindow.document.write('<div> ' + printContent.innerHTML + '</div>');
+            printWindow.document.write('<div> ' + printContent.innerHTML + data.ticketId + '</div>');
             printWindow.document.write('</body></html>');
 
             printWindow.document.close();
@@ -113,7 +113,7 @@ const TechnicianRequestDetails = () => {
                                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                                 </svg>
                                 <h2>Request details</h2>
-                                <button onClick={handlePrint} className={`${classes.printBtn} `}>Print</button>
+                                <button onClick={() => handlePrint(requestData)} className={`${classes.printBtn} `}>Print</button>
 
                             </div>
                             <div className={`${classes.detail}`}>
@@ -226,10 +226,7 @@ const TechnicianRequestDetails = () => {
                                             <div className={classes.printfooter} id="printfooter">
                                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                                     <div>
-                                                        HOD Signature
-                                                    </div>
-                                                    <div>
-                                                        Trustee Signature
+                                                        Authorised Signature
                                                     </div>
                                                 </div>
                                             </div>

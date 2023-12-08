@@ -258,10 +258,7 @@ const AdminRequestDetails = () => {
                                             <div className={classes.printfooter} id="printfooter">
                                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                                     <div>
-                                                        HOD Signature
-                                                    </div>
-                                                    <div>
-                                                        Trustee Signature
+                                                        Authorised Signature
                                                     </div>
                                                 </div>
                                             </div>
