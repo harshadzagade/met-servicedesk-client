@@ -59,7 +59,7 @@ const SuperadminReport = () => {
     useEffect(() => {
         const getDepartments = async () => {
             try {
-                const departments = await axios.get(`/api/staff/departments`);
+                const departments = await axios.get(`/api/department/departments`);
                 setStaffDepartments(departments.data.departments);
             } catch (error) {
                 console.log(error.message);

@@ -216,10 +216,20 @@ const DashBoard = () => {
     });
   }, [id, navigate, refresh, adminCtx.department]);
 
+  const handlePendingRequest = () => {
+    navigate('/request');
+    sessionStorage.setItem('tab', 'request');
+  };
+
+  const handlePendingComplaint = () => {
+    navigate('/complaint');
+    sessionStorage.setItem('tab', 'complaint');
+  };
+
   return (
     <div className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-3 row-cols-xl-3" >
       <div className="col-12 col-md-6 col-lg-4">
-        <div className={`${classes.sales}`}>
+        <div className={`${classes.sales}`} onClick={handlePendingRequest}>
           <div className={`${classes.request} `}>
             <h1>Pending Requests</h1>
           </div>
@@ -232,7 +242,7 @@ const DashBoard = () => {
         </div>
       </div>
       <div className="col-12 col-md-6 col-lg-4">
-        <div className={`${classes.sales}`}>
+        <div className={`${classes.sales}`} onClick={handlePendingComplaint}>
           <div className={`${classes.request} `}>
             <h1>Pending Complaints</h1>
           </div>
