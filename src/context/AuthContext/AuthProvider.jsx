@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 import AuthContext from './AuthContext';
-import getItemWithExpiry from '../../../Utils/expiryFunction';
+import getItemWithExpiry from '../../utils/expiryFunction';
 
 const defaultAuthState = {
     isLoggedIn: false,
@@ -37,6 +37,7 @@ const AuthProvider = props => {
     }, [authState.email]);
 
     const logoutHandler = () => {
+        console.log('working 2');
         localStorage.removeItem('id');
         localStorage.removeItem('token');
         localStorage.removeItem('department');
