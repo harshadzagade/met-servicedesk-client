@@ -5,6 +5,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --login-background-color: #eeeeee;
+  --bars-background-color: #fbfbfb;
+  --dark-gray-color: #444444;
+  --medium-gray-color: #979797;
+  --light-gray-color: #e8e8e8;
+  --shaded-white-color: #f0f0f0;
+  --darker-component-color: #a30000; /* #700000 */
+  --dark-component-color: #DA251C;
+  --medium-component-color: #d65050;
+  --light-component-color: #f0c5c5;
+  --light-component-hover-color: #ffeaea; /* #fde5e5 */
+  --light-component-selected-color: #ffd7d7;
+  --lighter-component-color: #fff4f4;
+  --dark-button-color: #DA251C;
+  --light-button-color: #d65050;
 }
 
 code {

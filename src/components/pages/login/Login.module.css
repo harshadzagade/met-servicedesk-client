@@ -1,0 +1,290 @@
+.fullScreen {
+    background-color: var(--login-background-color);
+    height: 100vh;
+    width: 100%;
+    user-select: none;
+}
+
+.container {
+    height: 80vh;
+    width: 90%;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 0.7rem;
+    align-items: center;
+}
+
+.divideLayout {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 60% auto;
+}
+
+
+.leftLayout {
+    background-image: url('../../../assets/login-image.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+}
+
+.rightLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginContainer {
+    width: 85%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.metLogo {
+    width: 70%;
+    border-radius: 1rem;
+    box-shadow: #3c40434d 0rem .0625rem .125rem 0rem, #3c404326 0rem .125rem .375rem .125rem;
+}
+
+.userPassword {
+    width: 100%;
+    position: relative;
+}
+
+.userInput {
+    width: 70%;
+    min-height: 2rem;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    box-shadow: #0000001a 0rem 0.063rem 0.188rem 0rem, #0000000f 0rem 0.063rem 0.125rem 0rem;
+}
+
+.userInput:focus {
+    box-shadow: #0000001a 0rem 0.25rem 0.313rem -0.063rem, #0000000f 0rem 0.125rem 0.25rem -0.063rem;
+}
+
+.showPasswordButton {
+    cursor: pointer;
+    position: absolute;
+    top: 0.9rem;
+    right: 18%;
+    z-index: 2;
+    color: var(--dark-gray-color);
+}
+
+.rememberMe {
+    margin-right: 1rem;
+}
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    .rememberMe input[type=checkbox] {
+        --active: #275EFE;
+        --active-inner: #fff;
+        --focus: 0.125rem #275efe4d;
+        --border: #BBC1E1;
+        --border-hover: #275EFE;
+        --background: #fff;
+        --disabled: #F6F8FF;
+        --disabled-inner: #E1E6F9;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        height: 1.313rem;
+        outline: none;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        margin: 0;
+        cursor: pointer;
+        border: 0.063rem solid var(--bc, var(--border));
+        background: var(--b, var(--background));
+        transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    }
+
+    .rememberMe input[type=checkbox]:after {
+        content: "";
+        display: block;
+        left: 0;
+        top: 0;
+        position: absolute;
+        transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+    }
+
+    .rememberMe input[type=checkbox]:checked {
+        --b: var(--active);
+        --bc: var(--active);
+        --d-o: .3s;
+        --d-t: .6s;
+        --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+    }
+
+    .rememberMe input[type=checkbox]:disabled {
+        --b: var(--disabled);
+        cursor: not-allowed;
+        opacity: 0.9;
+    }
+
+    .rememberMe input[type=checkbox]:disabled:checked {
+        --b: var(--disabled-inner);
+        --bc: var(--border);
+    }
+
+    .rememberMe input[type=checkbox]:disabled+label {
+        cursor: not-allowed;
+    }
+
+    .rememberMe input[type=checkbox]:hover:not(:checked):not(:disabled) {
+        --bc: var(--border-hover);
+    }
+
+    .rememberMe input[type=checkbox]:focus {
+        box-shadow: 0 0 0 var(--focus);
+    }
+
+    .rememberMe input[type=checkbox]:not(.switch) {
+        width: 1.313rem;
+    }
+
+    .rememberMe input[type=checkbox]:not(.switch):after {
+        opacity: var(--o, 0);
+    }
+
+    .rememberMe input[type=checkbox]:not(.switch):checked {
+        --o: 1;
+    }
+
+    .rememberMe input[type=checkbox]+label {
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-left: 0.25rem;
+    }
+
+    .rememberMe input[type=checkbox]:not(.switch) {
+        border-radius: 0.438rem;
+    }
+
+    .rememberMe input[type=checkbox]:not(.switch):after {
+        width: 0.313rem;
+        height: 0.563rem;
+        border: 0.125rem solid var(--active-inner);
+        border-top: 0;
+        border-left: 0;
+        left: 0.438rem;
+        top: 0.25rem;
+        transform: rotate(var(--r, 20deg));
+    }
+
+    .rememberMe input[type=checkbox]:not(.switch):checked {
+        --r: 43deg;
+    }
+}
+
+.rememberMe * {
+    box-sizing: inherit;
+}
+
+.rememberMe *:before,
+.rememberMe *:after {
+    box-sizing: inherit;
+}
+
+.forgotPasword {
+    float: right;
+}
+
+.loginButton {
+    align-items: center;
+    appearance: none;
+    border-radius: 0.25rem;
+    border-style: none;
+    box-shadow: #00000033 0 0.188rem 0.063rem -0.125rem, #00000024 0 0.125rem 0.125rem 0, #0000001f 0 0.063rem 0.313rem 0;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: Roboto, sans-serif;
+    font-size: .875rem;
+    font-weight: 600;
+    min-height: 2.25rem;
+    justify-content: center;
+    letter-spacing: .0892857em;
+    line-height: normal;
+    min-width: 4rem;
+    outline: none;
+    overflow: visible;
+    padding: 0 1rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    will-change: transform, opacity;
+    background-color: var(--dark-component-color);
+}
+
+.loginButton:hover {
+    box-shadow: #00000033 0 0.125rem 0.25rem -0.063rem, #00000024 0 0.25rem 0.313rem 0, #0000001f 0 0.063rem 0.625rem 0;
+}
+
+.loginButton:focus {
+    box-shadow: #00000033 0 0.125rem 0.25rem -0.063rem, #00000024 0 0.25rem 0.313rem 0, #0000001f 0 0.063rem 0.625rem 0;
+}
+
+.loginButton:active {
+    box-shadow: #00000033 0 0.313rem 0.313rem -0.188rem, #00000024 0 0.5rem 0.625rem 0.063rem, #0000001f 0 0.188rem 0.875rem 0.125rem;
+    background-color: var(--medium-component-color);
+}
+
+@media screen and (max-width: 860px) {
+    .divideLayout {
+        grid-template-columns: auto;
+    }
+
+    .leftLayout {
+        display: none;
+    }
+
+    .container {
+        height: 60vh;
+    }
+
+    .rememberMe {
+        margin-right: 0rem;
+    }
+
+    .buttonsLogin {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        height: 85vh;
+    }
+
+    .metLogo {
+        border-radius: 0.5rem;
+    }
+
+    .forgotPasword {
+        margin-top: 1rem;
+    }
+}
