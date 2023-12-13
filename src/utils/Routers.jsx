@@ -12,6 +12,7 @@ import Complaint from '../components/pages/complaint/Complaint';
 import Report from '../components/pages/report/Report';
 import Archive from '../components/pages/archive/Archive';
 import ContactList from '../components/pages/contactList/ContactList';
+import Policies from '../components/pages/policies/Policies';
 
 const Routers = () => {
     return (
@@ -29,6 +30,7 @@ const Routers = () => {
                     <Route path='report' element={<Report />} />
                     <Route path='archive' element={<Archive />} />
                     <Route path='contact_list' element={<ContactList />} />
+                    <Route path='policies' element={<Policies />} />
                 </Route>
             </Routes>
         </Router>
