@@ -1,7 +1,8 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import AuthContext from './AuthContext';
 import getItemWithExpiry from '../../utils/expiryFunction';
+import axios from 'axios';
 
 const defaultAuthState = {
     isLoggedIn: false,
@@ -21,6 +22,7 @@ const authReducer = (state, action) => {
 
 const AuthProvider = props => {
     const [authState, dispatchAuthAction] = useReducer(authReducer, defaultAuthState);
+    const [employeeDetails, setEmployeeDetails] = useState(null);
 
     useEffect(() => {
         const checkToken = () => {
@@ -37,7 +39,6 @@ const AuthProvider = props => {
     }, [authState.email]);
 
     const logoutHandler = () => {
-        console.log('working 2');
         localStorage.removeItem('id');
         localStorage.removeItem('token');
         localStorage.removeItem('department');
@@ -54,12 +55,24 @@ const AuthProvider = props => {
         dispatchAuthAction({ type: "EMAIL", val: email });
     };
 
+    const employeeInfoHandler = async (id) => {
+        try {
+            const employeeData = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+            setEmployeeDetails(employeeData.data.staff);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     const authContext = {
         isLoggedIn: authState.isLoggedIn,
         email: authState.email,
         onLogout: logoutHandler,
-        onLogin: loginHandler
+        onLogin: loginHandler,
+        employeeInfo: employeeDetails,
+        setEmployeeInfoId: employeeInfoHandler
     };
+
     return (
         <AuthContext.Provider value={authContext}>{props.children}</AuthContext.Provider>
     );

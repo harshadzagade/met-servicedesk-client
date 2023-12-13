@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classes from './Navbar.module.css';
 import Hamburger from 'hamburger-react'
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../context/AuthContext/AuthContext';
-import axios from 'axios';
 import YesNoAlert from '../../ui/customAlert/yesNoAlert/YesNoAlert';
 import getItemWithExpiry from '../../../utils/expiryFunction';
 
@@ -11,10 +10,11 @@ const Navbar = () => {
     const idReference = getItemWithExpiry('id');
     const id = idReference ? idReference.value : null;
     const authCtx = useContext(AuthContext);
+    authCtx.setEmployeeInfoId(id);
+    const employeeDetails = authCtx.employeeInfo;
     const navigate = useNavigate();
     const [focus, setFocus] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [employeeDetails, setEmployeeDetails] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
 
     const handleCloseAlert = () => {
@@ -30,20 +30,6 @@ const Navbar = () => {
         navigate('/');
         setIsMenuOpen(false);
     };
-
-    useEffect(() => {
-        const getUserDetails = async () => {
-            try {
-                if (id) {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
-                    setEmployeeDetails(staff.data.staff);
-                  }
-            } catch (error) {
-                console.log(error.message);
-            }
-        };
-        getUserDetails();
-    }, [id]);
 
     return (
         <div className={classes.navbar}>

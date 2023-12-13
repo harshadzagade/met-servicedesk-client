@@ -37,7 +37,6 @@ const Layout = () => {
         const email = getItemWithExpiry('email');
         const now = new Date().getTime();
         if (email) {
-          console.log(email.value);
           if (now > email.expiry) {
             authCtx.onLogout();
             navigate('/login');
