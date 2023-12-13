@@ -10,7 +10,9 @@ const Navbar = () => {
     const idReference = getItemWithExpiry('id');
     const id = idReference ? idReference.value : null;
     const authCtx = useContext(AuthContext);
-    authCtx.setEmployeeInfoId(id);
+    if (!authCtx.employeeInfo) {
+        authCtx.setEmployeeInfoId(id);
+    }
     const employeeDetails = authCtx.employeeInfo;
     const navigate = useNavigate();
     const [focus, setFocus] = useState(false);

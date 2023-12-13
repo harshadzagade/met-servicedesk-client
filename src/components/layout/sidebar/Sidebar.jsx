@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './Sidebar.module.css';
 import metLogo from '../../../assets/MET-logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
+import AuthContext from '../../../context/AuthContext/AuthContext';
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const authCtx = useContext(AuthContext);
 
     return (
         <div className={classes.sidebar}>
@@ -20,6 +22,15 @@ const Sidebar = () => {
                         </svg>
                         <h3 className={`${classes.sidebarTabText}`}>Dashboard</h3>
                     </div>
+                    {
+                        authCtx.employeeInfo && authCtx.employeeInfo.role === 'superadmin' &&
+                        <div className={`${classes.sidebarTab} ${location.pathname === '/department' && classes.sidebarTabSelected}`} onClick={() => navigate('/department')}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-grid-1x2-fill" viewBox="0 0 16 16">
+                                <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1V1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-5z" />
+                            </svg>
+                            <h3 className={`${classes.sidebarTabText}`}>Department</h3>
+                        </div>
+                    }
                     <hr className={classes.hrTag} />
                 </div>
                 <div className={classes.bottomContent}>
