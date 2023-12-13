@@ -6,6 +6,7 @@ import Dashboard from '../components/pages/dashboard/Dashboard';
 import Department from '../components/pages/department/Department';
 import Institute from '../components/pages/institute/Institute';
 import CreateEmployee from '../components/pages/createEmployee/CreateEmployee';
+import EmployeeList from '../components/pages/employeeList/EmployeeList';
 
 const Routers = () => {
     return (
@@ -17,6 +18,7 @@ const Routers = () => {
                     <Route path='department' element={<Department />} />
                     <Route path='institute' element={<Institute />} />
                     <Route path='create_employee' element={<CreateEmployee />} />
+                    <Route path='employee_list' element={<EmployeeList />} />
                 </Route>
             </Routes>
         </Router>
