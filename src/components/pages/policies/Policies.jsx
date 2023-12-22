@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import OKAlert from '../../ui/customAlert/okAlert/OKAlert';
 
 const Policies = () => {
@@ -7,7 +7,39 @@ const Policies = () => {
     const [file, setFile] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
+    const [policies, setPolicies] = useState([]);
+    const [refreshList, setRefreshList] = useState(false);
+
     const allowedFileTypes = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
+
+    useEffect(() => {
+        const delay = 1000;
+        const gettingPolicies = async () => {
+            try {
+                const policies = await axios.get('http://localhost:8001/api/policy');
+                setPolicies(policies.data.policies);
+            } catch (error) {
+                if (error.response) {
+                    if (error.response.status === 500) {
+                        console.log('Something went wrong');
+                    } else {
+                        console.log(error.message);
+                    }
+                } else {
+                    console.log(error.message);
+                }
+            } finally {
+                setRefreshList(false);
+            }
+        };
+        const debounce = setTimeout(() => {
+            gettingPolicies();
+        }, delay);
+
+        return () => {
+            clearTimeout(debounce);
+        };
+    }, [refreshList]);
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -34,6 +66,7 @@ const Policies = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+            setRefreshList(true);
             setFile(null);
             policyNameRef.current.value = '';
             const fileInput = document.getElementById('fileInput');
@@ -60,13 +93,24 @@ const Policies = () => {
 
     return (
         <Fragment>
-            {
-                showAlert &&
-                <OKAlert message={alertMessage} onClose={handleCloseAlert} />
-            }
-            <input type='text' placeholder='Policy Name' ref={policyNameRef} />
-            <input type='file' id='fileInput' onChange={handleFileChange} />
-            <button onClick={handleFileUpload}>Upload File</button>
+            <div>
+                {
+                    showAlert &&
+                    <OKAlert message={alertMessage} onClose={handleCloseAlert} />
+                }
+                <input type='text' placeholder='Policy Name' ref={policyNameRef} />
+                <input type='file' id='fileInput' onChange={handleFileChange} />
+                <button onClick={handleFileUpload}>Upload File</button>
+            </div>
+            <div>
+                {
+                    policies.map((policy) => (
+                        <div key={policy.id}>
+                            <a href={`http://localhost:8001/policies/${policy.policyFileReference}`} target='_blank' rel='noopener noreferrer'>{policy.policyName}</a>
+                        </div>
+                    ))
+                }
+            </div>
         </Fragment>
     );
 };
