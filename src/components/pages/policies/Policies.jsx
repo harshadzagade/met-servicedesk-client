@@ -35,6 +35,7 @@ const Policies = () => {
                 },
             });
             setFile(null);
+            policyNameRef.current.value = '';
             const fileInput = document.getElementById('fileInput');
             if (fileInput) {
                 fileInput.value = '';
