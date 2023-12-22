@@ -91,6 +91,15 @@ const Policies = () => {
         setShowAlert(false);
     };
 
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:8001/api/policy/deletepolicy/${id}`);
+            setRefreshList(true);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <Fragment>
             <div>
@@ -107,6 +116,7 @@ const Policies = () => {
                     policies.map((policy) => (
                         <div key={policy.id}>
                             <a href={`http://localhost:8001/policies/${policy.policyFileReference}`} target='_blank' rel='noopener noreferrer'>{policy.policyName}</a>
+                            <button onClick={() => handleDelete(policy.id)}>Delete</button>
                         </div>
                     ))
                 }
