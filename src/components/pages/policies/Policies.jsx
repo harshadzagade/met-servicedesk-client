@@ -5,9 +5,12 @@ import OKAlert from '../../ui/customAlert/okAlert/OKAlert';
 const Policies = () => {
     const policyNameRef = useRef();
     const [file, setFile] = useState(null);
+    const [editPolicyName, setEditPolicyName] = useState('');
+    const [editFile, setEditFile] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
     const [policies, setPolicies] = useState([]);
+    const [editPolicyId, setEditPolicyId] = useState(null);
     const [refreshList, setRefreshList] = useState(false);
 
     const allowedFileTypes = ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
@@ -64,7 +67,7 @@ const Policies = () => {
             await axios.post('http://localhost:8001/api/policy/addpolicy', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                },
+                }
             });
             setRefreshList(true);
             setFile(null);
@@ -100,6 +103,33 @@ const Policies = () => {
         }
     };
 
+    const handleEditFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile && allowedFileTypes.includes(selectedFile.type)) {
+            setEditFile(selectedFile);
+        } else {
+            handleShowAlert('Invalid file type', 'Please select a valid Word document (doc, docx) or PDF file');
+            e.target.value = '';
+        }
+    };
+
+    const handleEditPolicy = async (id) => {
+        try {
+            const formData = new FormData();
+            formData.append('policyName', editPolicyName);
+            formData.append('policyFile', editFile);
+            await axios.put(`http://localhost:8001/api/policy/editpolicy/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            setEditPolicyId(null);
+            setRefreshList(true);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <Fragment>
             <div>
@@ -116,7 +146,17 @@ const Policies = () => {
                     policies.map((policy) => (
                         <div key={policy.id}>
                             <a href={`http://localhost:8001/policies/${policy.policyFileReference}`} target='_blank' rel='noopener noreferrer'>{policy.policyName}</a>
+                            <button onClick={() => setEditPolicyId(policy.id)}>Edit</button>
                             <button onClick={() => handleDelete(policy.id)}>Delete</button>
+                            {
+                                editPolicyId === policy.id &&
+                                <div>
+                                    <input type="text" defaultValue={policy.policyName} onChange={(e) => setEditPolicyName(e.target.value)} />
+                                    <input type="file" id='fileInput' onChange={handleEditFileChange} />
+                                    <button onClick={() => handleEditPolicy(policy.id)}>Update</button>
+                                    <button onClick={() => setEditPolicyId(null)}>Cancel</button>
+                                </div>
+                            }
                         </div>
                     ))
                 }
