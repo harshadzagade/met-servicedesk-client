@@ -1,17 +1,22 @@
 .mainLayout {
-    height: 100vh;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 15% auto;
+    display: flex;
 }
 
+
+
 .rightLayout {
-    display: grid;
-    grid-template-rows: 6% auto;
+    /* flex: 1; */
+    /* Allow the right layout to grow and take the remaining space */
+    display: flex;
+    width: 100%;
+    flex-direction: column;
 }
+
+
 
 @media screen and (max-width: 1024px) {
     .mainLayout {
-        grid-template-columns: auto;
+        flex-direction: column;
+        /* Stack the elements vertically on smaller screens */
     }
 }
