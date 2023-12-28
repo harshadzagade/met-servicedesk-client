@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from './sidebar/Sidebar';
 import classes from './Layout.module.css';
 // import Navbar from './navbar/NavBar';
@@ -55,16 +55,25 @@ const Layout = () => {
     }
   }, [id, navigate]);
 
+  const [toggle, setToggle] = useState(true);
+  const Toggle = () =>{
+    setToggle(!toggle);
+  }
   return (
-    <div className="wrapper">
-        <Sidebar  />
-        <div className="main-panel" >
-          <NavBar />
-          <div className="content">
-            <Outlet/>
-          </div>
-        </div>
-      </div>
+    <div>
+      <Container fluid>
+        <Row>
+          { toggle && <Col md={2} className={`position-fixed ${classes.sidebar}`}>
+            <Sidebar />
+          </Col> }
+          { toggle && <Col md={2} /> }
+          <Col className={classes.content}>
+            <NavBar Toggle={Toggle}/>
+            <Outlet Toggle={Toggle}/>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

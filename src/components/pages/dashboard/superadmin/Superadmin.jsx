@@ -155,7 +155,6 @@ const Superadmin = () => {
                     <Col xs={12} md={8} sm>
                         <div className={classes.table}>
                             <DataTable
-                                title="Departmets"
                                 customStyles={tableHeaderStyle}
                                 columns={columns}
                                 data={filter}

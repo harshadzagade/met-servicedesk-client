@@ -1,22 +1,4 @@
-.mainLayout {
-    display: flex;
-}
-
-
-
-.rightLayout {
-    /* flex: 1; */
-    /* Allow the right layout to grow and take the remaining space */
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-}
-
-
-
-@media screen and (max-width: 1024px) {
-    .mainLayout {
-        flex-direction: column;
-        /* Stack the elements vertically on smaller screens */
-    }
+.sidebar, .content{
+    padding-left: 0;
+    padding-right: 0;
 }

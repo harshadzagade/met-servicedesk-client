@@ -7,7 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "4.6",
     "datatables.net-dt": "^1.13.8",
     "framer-motion": "^10.16.16",
     "hamburger-react": "^2.5.0",
@@ -19,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
+    "reactstrap": "^9.2.1",
     "sweetalert2": "^11.10.1",
     "web-vitals": "^2.1.4"
   },
