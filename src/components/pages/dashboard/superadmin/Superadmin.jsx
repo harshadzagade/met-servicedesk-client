@@ -87,7 +87,7 @@ const Superadmin = () => {
 
     useEffect(() => {
         getData();
-    }, [])
+    })
 
     useEffect(() => {
         const result = data.filter((item) => {
