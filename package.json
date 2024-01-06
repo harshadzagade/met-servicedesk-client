@@ -19,6 +19,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
+    "react-to-print": "^2.14.15",
     "reactstrap": "^9.2.1",
     "sass": "^1.69.6",
     "sweetalert2": "^11.10.1",

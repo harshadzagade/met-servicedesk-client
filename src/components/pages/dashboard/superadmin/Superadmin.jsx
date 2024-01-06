@@ -184,7 +184,7 @@ const Superadmin = () => {
                         </div>
                         <div className={classes.card}>
                             <div className={classes.card_title}>
-                                Daily Ticket Raised
+                                Total Attending Tickets
                             </div>
                             <div className={classes.card_des}>
                                 12
@@ -192,7 +192,7 @@ const Superadmin = () => {
                         </div>
                         <div className={classes.card}>
                             <div className={classes.card_title}>
-                                Daily Ticket Raised
+                                Total Ticket
                             </div>
                             <div className={classes.card_des}>
                                 12
