@@ -148,3 +148,51 @@
         z-index: 1000;
     }
 }
+
+
+
+
+/* Colors */
+.statuspending {
+    background-color: var(--ticketPending);
+}
+
+.statusapproved{
+    background-color: var(--ticketApproved);
+}
+
+.hodapproved{
+    background-color: var(--ticketApproved);
+}
+
+.statusattending{
+    background-color: var(--ticketAttending);
+}
+
+.statusforwarded{
+    background-color: var(--ticketForwarded);
+}
+
+.statusclose{
+    background-color: var(--ticketClose);
+}
+
+.statusdissapproved{
+    background-color: var(--ticketRejected);
+}
+
+.tikid{
+    background-color: var(--ticketId-color);
+}
+
+.priorityHigh{
+    background-color: var(--priorityHigh);
+}
+
+.priorityMedium{
+    background-color: var(--priorityMedium);
+}
+
+.priorityLow{
+    background-color: var(--priorityLow);
+}

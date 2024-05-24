@@ -1,0 +1,14 @@
+.cremp{
+    padding: 25px 20px 20px 20px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.cremp button{
+    background-color: var(--primary-color);
+    border: 0;
+}
+
+h3{
+    padding: 10px 10px 10px 0px
+}

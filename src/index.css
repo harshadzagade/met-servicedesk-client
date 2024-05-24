@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --text-color: #000;
+  --text-secondary: #fff;
+  --primary-color: #E31E24;
+  --background-primary-color: #ff1f1f;
+  --background-secondary-color: #91d7ff;
   --login-background-color: #eeeeee;
   --bars-background-color: #fbfbfb;
   --dark-gray-color: #444444;
@@ -20,6 +25,19 @@ body {
   --lighter-component-color: #fff4f4;
   --dark-button-color: #DA251C;
   --light-button-color: #d65050;
+  
+  --ticketId-color: #5A5A5A;
+  --priorityHigh : #E70000;
+  --priorityMedium : #FFBF00;
+  --priorityLow : #165C49;
+  --ticketClose : #437C28;
+  --ticketPending : #FF6000;
+  --ticketAttending : #483DF6;
+  --ticketApproved : #008000;
+  --ticketAssign : #008080;
+  --ticketForwarded : #FF5C89;
+  --ticketRejected : #E70000;
+  
 }
 
 code {

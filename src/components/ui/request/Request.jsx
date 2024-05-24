@@ -1,12 +1,13 @@
 import React from 'react'
 import Ticket from '../ticket/Ticket'
 
-function Complaint() {
+
+const Request = () => {
   return (
     <div>
-        <Ticket type="Complaint" />
+      <Ticket type="Request" />
     </div>
   )
 }
 
-export default Complaint
+export default Request;

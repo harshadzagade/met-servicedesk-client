@@ -7,8 +7,8 @@ import Department from '../components/pages/department/Department';
 import Institute from '../components/pages/institute/Institute';
 import CreateEmployee from '../components/pages/createEmployee/CreateEmployee';
 import EmployeeList from '../components/pages/employeeList/EmployeeList';
-import Request from '../components/pages/request/Request';
-import Complaint from '../components/pages/complaint/Complaint';
+import Request from '../components/ui/request/Request';
+import Complaint from '../components/ui/complaint/Complaint';
 import Report from '../components/pages/report/Report';
 import Archive from '../components/pages/archive/Archive';
 import ContactList from '../components/pages/contactList/ContactList';
@@ -23,7 +23,7 @@ const Routers = () => {
                     <Route index element={<Dashboard />} />
                     <Route path='department' element={<Department />} />
                     <Route path='institute' element={<Institute />} />
-                    <Route path='create_employee' element={<CreateEmployee />} />
+                    <Route path='createstaff' element={<CreateEmployee />} />
                     <Route path='employee_list' element={<EmployeeList />} />
                     <Route path='complaint' element={<Complaint />} />
                     <Route path='request' element={<Request />} />

@@ -56,17 +56,19 @@ const Layout = () => {
   }, [id, navigate]);
 
   const [toggle, setToggle] = useState(true);
-  const Toggle = () =>{
+  const Toggle = () => {
     setToggle(!toggle);
   }
   return (
     <div>
       <Container fluid>
         <Row>
-          { toggle && <Col md={2} className={`position-fixed ${classes.sidebar}`}>
-            <Sidebar />
-          </Col> }
-          { toggle && <Col md={2} /> }
+          {toggle && <Col md={2} className={`position-fixed ${classes.sidebar}`}>
+
+          </Col>}
+          {toggle && <Col md={2} > 
+          <Sidebar />
+          </Col>}
           <Col className={classes.content}>
             <NavBar Toggle={Toggle}/>
             <Outlet Toggle={Toggle}/>

@@ -1,6 +1,14 @@
-.sidebar a:hover{
-    background-color: rgb(214, 26, 26);
-    color: white;
-    cursor: pointer
+.listgroupitem{
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.listgroupitem:hover{
+    background-color: rgb(214, 26, 26) ;
+    color: var(--text-secondary) ;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
 }
 
