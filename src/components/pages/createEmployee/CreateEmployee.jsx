@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import classes from './CreateEmployee.module.css';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const CreateEmployee = () => {
 
@@ -25,7 +26,7 @@ const CreateEmployee = () => {
             console.log(error);
         }
 
-
+    }
     return (
         <div className='' >
             <Container>
