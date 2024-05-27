@@ -1,3 +1,7 @@
+.layout  .row{
+    height: 100vh;
+}
+
 .sidebar, .content{
     padding-left: 0;
     padding-right: 0;

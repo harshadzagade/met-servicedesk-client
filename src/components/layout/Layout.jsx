@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from './sidebar/Sidebar';
 import classes from './Layout.module.css';
 // import Navbar from './navbar/NavBar';
-import NavBar from './navbar/NavBar';
+import Navbar from './navbar/Navbar';
 import { Outlet, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import getItemWithExpiry from '../../utils/expiryFunction';
@@ -60,9 +60,9 @@ const Layout = () => {
     setToggle(!toggle);
   }
   return (
-    <div>
+    <div className={classes.layout}>
       <Container fluid>
-        <Row>
+        <Row className={classes.row}> 
           {toggle && <Col md={2} className={`position-fixed ${classes.sidebar}`}>
 
           </Col>}
@@ -70,7 +70,7 @@ const Layout = () => {
           <Sidebar />
           </Col>}
           <Col className={classes.content}>
-            <NavBar Toggle={Toggle}/>
+            <Navbar Toggle={Toggle}/>
             <Outlet Toggle={Toggle}/>
           </Col>
         </Row>

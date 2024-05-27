@@ -1,38 +1,30 @@
 import React, { useContext, useState } from 'react';
 import classes from './Navbar.module.css';
-import Hamburger from 'hamburger-react'
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../../context/AuthContext/AuthContext';
-import YesNoAlert from '../../ui/customAlert/yesNoAlert/YesNoAlert';
 import getItemWithExpiry from '../../../utils/expiryFunction';
 import { Button, Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
+import { useEffect } from 'react';
+import axios from 'axios';
+
 
 const NavBar = ({ Toggle }) => {
+    const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '', department: '' });
     const idReference = getItemWithExpiry('id');
     const id = idReference ? idReference.value : null;
-    const authCtx = useContext(AuthContext);
-    if (!authCtx.employeeInfo) {
-        authCtx.setEmployeeInfoId(id);
-    }
-    const employeeDetails = authCtx.employeeInfo;
-    const navigate = useNavigate();
-    const [focus, setFocus] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
 
-    const handleCloseAlert = () => {
-        setShowAlert(false);
-    };
-
-    const handleSubmitAlert = () => {
-        authCtx.onLogout();
-        setShowAlert(false);
-    };
-
-    const handleDashboard = () => {
-        navigate('/');
-        setIsMenuOpen(false);
-    };
+    useEffect(() => {
+        const getStaffInfo = async () => {
+            try {
+                if (id) {
+                    const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                    setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role, department: staff.data.staff.department });
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        getStaffInfo();
+    }, [id]);
 
     return (
         // <div className={classes.navbar}>
@@ -133,17 +125,6 @@ const NavBar = ({ Toggle }) => {
                     </Navbar.Toggle>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="nav mr-auto" navbar>
-                            <Nav.Item>
-                                <Nav.Link
-                                    data-toggle="dropdown"
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                    className="m-0"
-                                >
-                                    <i className="nc-icon nc-palette"></i>
-                                    <span className="d-lg-none ml-1">Dashboard</span>
-                                </Nav.Link>
-                            </Nav.Item>
                             <Dropdown as={Nav.Item}>
                                 <Dropdown.Toggle
                                     as={Nav.Link}
@@ -163,43 +144,10 @@ const NavBar = ({ Toggle }) => {
                                     >
                                         Notification 1
                                     </Dropdown.Item>
-                                    <Dropdown.Item
-                                        href="#pablo"
-                                        onClick={(e) => e.preventDefault()}
-                                    >
-                                        Notification 2
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        href="#pablo"
-                                        onClick={(e) => e.preventDefault()}
-                                    >
-                                        Notification 3
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        href="#pablo"
-                                        onClick={(e) => e.preventDefault()}
-                                    >
-                                        Notification 4
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        href="#pablo"
-                                        onClick={(e) => e.preventDefault()}
-                                    >
-                                        Another notification
-                                    </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav>
                         <Nav className="ml-auto" navbar>
-                            <Nav.Item>
-                                <Nav.Link
-                                    className="m-0"
-                                    href="#pablo"
-                                    onClick={(e) => e.preventDefault()}
-                                >
-                                    <span className="no-icon">Account</span>
-                                </Nav.Link>
-                            </Nav.Item>
                             <Dropdown as={Nav.Item}>
                                 <Dropdown.Toggle
                                     aria-expanded={false}
@@ -210,9 +158,11 @@ const NavBar = ({ Toggle }) => {
                                     variant="default"
                                     className="m-0"
                                 >
-                                    <span className="no-icon">Harshad</span>
+                                    <span className="no-icon">
+                                        {staffInfo.firstname + ' ' + staffInfo.lastname}
+                                    </span>
                                 </Dropdown.Toggle>
-                                <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink">
+                                <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink" className={classes.dropbtnbox}>
                                     <Dropdown.Item
                                         href="#pablo"
                                         onClick={(e) => e.preventDefault()}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ListGroup, ListGroupItem, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Logo from '../../../assets/MET-logo.png';
 import classes from './Sidebar.module.css';
 
 const Sidebar = () => {
@@ -9,7 +10,7 @@ const Sidebar = () => {
             <div>
                 <i className='bi bi-bootstrap-fill me-3 fs-4'></i>
                 <span className='brand-name fs-4'>
-                    MET Logo
+                    <img src={Logo} alt="MET" className={classes.logo} />
                 </span>
                 <hr className='text-dark' />
                 <ListGroup flush className={classes.listgroup}>

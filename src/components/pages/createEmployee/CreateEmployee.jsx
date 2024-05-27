@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import classes from './CreateEmployee.module.css';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 
 const CreateEmployee = () => {
+
+    const firstnameRef = useRef();
+    const middlenameRef = useRef();
+    const lastnameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const phoneRef = useRef();
+    const extnRef = useRef();
+    const navigate = useNavigate();
+
+    const [department, setDepartment] = useState('');
+    const [departments, setDepartments] = useState([]);
+
+    const getDepartments = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/departments');
+            setDepartments(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+
+
     return (
         <div className='' >
             <Container>
