@@ -1,8 +1,14 @@
 import React from 'react';
+import Complaint from '../../../ui/complaint/Complaint';
+
+
 
 const Superadmin = () => {
+
     return (
-        <div>Superadmin</div>
+        <div>
+            <Complaint />
+        </div>
     );
 };
 

@@ -1,8 +1,11 @@
 import React from 'react';
+import Request from '../../../ui/request/Request';
 
 const Superadmin = () => {
     return (
-        <div>Superadmin</div>
+        <div>
+            <Request />
+        </div>
     );
 };
 
