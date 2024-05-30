@@ -66,7 +66,7 @@ const Layout = () => {
           {toggle && <Col md={2} className={`position-fixed ${classes.sidebar}`}>
 
           </Col>}
-          {toggle && <Col md={2} > 
+          {toggle && <Col md={2} className={classes.sidebar}> 
           <Sidebar />
           </Col>}
           <Col className={classes.content}>

@@ -1,89 +1,9 @@
 .navbar {
-    background-color: var(--bars-background-color);
+    background-color: var(--background-secondary-color);
     box-shadow: #0000001f 0rem 0.063rem 0.188rem, #0000003d 0rem 0.063rem 0.125rem;
 }
 
-.leftCorner {
-    z-index: 460;
-}
 
-.menuOptions {
-    display: block;
-    position: absolute;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    background-color: white;
-    top: 6%;
-    width: 10rem;
-    border-radius: 0rem 0rem 0.5rem 0rem;
-    box-shadow: #0000001f 0rem 0.063rem 0.188rem, #0000003d 0rem 0.063rem 0.125rem;
-}
-
-.menuItem {
-    display: flex;
-    cursor: pointer;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    width: auto;
-    padding-left: 1rem;
-}
-
-.menuItem span {
-    margin-left: 0.5rem;
-    width: fit-content;
-}
-
-.menuItem:hover {
-    background-color: var(--light-component-hover-color);
-    font-weight: 500;
-}
-
-.menuItem:active {
-    background-color: var(--dark-component-color);
-    color: white;
-}
-
-.rightCorner {
-    display: flex;
-    float: right;
-    align-items: center;
-    height: 100%;
-    margin-right: 1%;
-}
-
-.userContainer {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.username {
-    font-weight: 300;
-    transition: font-weight 250ms ease-in-out;
-}
-
-.navbarIcon {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.navbarIcon:hover {
-    transition: all .2s ease-in-out;
-    transform: scale(1.1, 1.1);
-    -webkit-transform: scale(1.1, 1.1);
-    -moz-transform: scale(1.1, 1.1);
-}
-
-.profileContainer {
-    background-color: var(--light-component-hover-color);
-    border-radius: 1rem;
-    box-shadow: #06182c66 0rem 0rem 0rem 0.125rem, #06182ca6 0rem 0.25rem 0.375rem -0.063rem, #ffffff14 0rem 0.063rem 0rem inset;
-    position: absolute;
-    top: 7%;
-    right: 0.3rem;
-    z-index: 2;
-}
 
 .closeButtonContainer {
     margin-top: 1rem;
@@ -92,7 +12,7 @@
     border-radius: 2rem;
     border-style: none;
     box-sizing: border-box;
-    color: var(--dark-button-color);
+    color: var(--text-secondary-color);
     cursor: pointer;
     display: flex;
     gap: 0.2rem;

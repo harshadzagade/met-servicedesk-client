@@ -57,7 +57,7 @@ const AuthProvider = props => {
 
     const employeeInfoHandler = async (id) => {
         try {
-            const employeeData = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+            const employeeData = await axios.get(`https://hello.helpdesk.met.edu/api/staff/staffdetails/${id}`);
             setEmployeeDetails(employeeData.data.staff);
         } catch (error) {
             console.log(error.message);

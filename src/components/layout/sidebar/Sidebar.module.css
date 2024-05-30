@@ -1,7 +1,10 @@
-.listgroupitem{
+
+
+.sidebar .listgroupitem{
     border-radius: 0.5rem;
     text-decoration: none;
-    color: var(--text-color);
+    background-color: var(--background-secondary-color);
+    color: var(--text-secondary);
 }
 
 .listgroupitem:hover{

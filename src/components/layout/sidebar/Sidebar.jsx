@@ -6,7 +6,7 @@ import classes from './Sidebar.module.css';
 
 const Sidebar = () => {
     return (
-        <div className={`bg-white ${classes.sidebar} p-3`}>
+        <div className={` ${classes.sidebar} p-3`}>
             <div>
                 <i className='bi bi-bootstrap-fill me-3 fs-4'></i>
                 <span className='brand-name fs-4'>

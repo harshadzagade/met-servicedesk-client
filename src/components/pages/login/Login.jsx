@@ -27,7 +27,7 @@ const Login = () => {
         const checkLogin = async () => {
             try {
                 if (id) {
-                    const staff = await axios.get(`http://localhost:8001/api/staff/staffdetails/${id}`);
+                    const staff = await axios.get(`https://hello.helpdesk.met.edu/api/staff/staffdetails/${id}`);
                     authCtx.onLogin(staff.data.staff.email);
                 }
             } catch (error) {
@@ -47,7 +47,7 @@ const Login = () => {
         }
         let loginStaff;
         try {
-            loginStaff = await axios.post('http://localhost:8001/api/', staffInfo);
+            loginStaff = await axios.post('https://hello.helpdesk.met.edu/api/', staffInfo);
             const now = new Date();
             const expirationTime = now.getTime() + 8 * 60 * 60 * 1000;
             const emailExpirationTime = now.getTime() + 5 * 60 * 1000;
