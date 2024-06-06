@@ -1,11 +1,11 @@
+// src/components/pages/dashboard/superadmin/Superadmin.jsx
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import classes from './superadmin.module.css';
 import { Col, Container, Row } from 'react-bootstrap';
-
+import ShowEmployee from '../../createEmployee/ShowEmployee/ShowEmployee';
 
 const Superadmin = () => {
-
     const columns = [
         {
             id: "department",
@@ -50,51 +50,33 @@ const Superadmin = () => {
     ];
 
     const [data, setData] = useState([]);
-    const [search, setaSearch] = useState('');
+    const [search, setSearch] = useState('');
     const [filter, setFilter] = useState([]);
 
     const getData = async () => {
         try {
-            setData([
-                {
-                    department: "IT",
-                    pending: 12,
-                    attending: 12,
-                    closed: 12,
-                    total_tik: 12
-                },
-                {
-                    department: "ERP",
-                    pending: 12,
-                    attending: 12,
-                    closed: 12,
-                    total_tik: 12
-                },
-                {
-                    department: "HR",
-                    pending: 12,
-                    attending: 12,
-                    closed: 12,
-                    total_tik: 12
-                }
-            ]);
-            setFilter(data);
+            const fetchedData = [
+                { department: "IT", pending: 12, attending: 12, closed: 12, total_tik: 12 },
+                { department: "ERP", pending: 12, attending: 12, closed: 12, total_tik: 12 },
+                { department: "HR", pending: 12, attending: 12, closed: 12, total_tik: 12 }
+            ];
+            setData(fetchedData);
+            setFilter(fetchedData);
         } catch (error) {
             console.log(error);
         }
-
-    }
+    };
 
     useEffect(() => {
         getData();
-    })
+    }, []);
 
     useEffect(() => {
-        const result = data.filter((item) => {
-            return item.department.toLowerCase().match(search.toLocaleLowerCase());
-        });
+        const result = data.filter((item) =>
+            item.department.toLowerCase().includes(search.toLowerCase())
+        );
         setFilter(result);
-    }, [search, data])
+    }, [search, data]);
 
     const tableHeaderStyle = {
         headCells: {
@@ -111,7 +93,7 @@ const Superadmin = () => {
                 outline: '1px solid #FFFFFF',
             },
         },
-    }
+    };
 
     return (
         <div>
@@ -119,32 +101,20 @@ const Superadmin = () => {
                 <Row>
                     <Col xs={12} md={4} sm>
                         <div className={classes.card}>
-                            <div className={classes.card_title}>
-                                Total Pending Request
-                            </div>
-                            <div className={classes.card_des}>
-                                12
-                            </div>
+                            <div className={classes.card_title}>Total Pending Request</div>
+                            <div className={classes.card_des}>12</div>
                         </div>
                     </Col>
                     <Col xs={12} md={4} sm>
                         <div className={classes.card}>
-                            <div className={classes.card_title}>
-                                Total Pending Request
-                            </div>
-                            <div className={classes.card_des}>
-                                12
-                            </div>
+                            <div className={classes.card_title}>Total Pending Request</div>
+                            <div className={classes.card_des}>12</div>
                         </div>
                     </Col>
                     <Col xs={12} md={4} sm>
                         <div className={classes.card}>
-                            <div className={classes.card_title}>
-                                Total Pending Request
-                            </div>
-                            <div className={classes.card_des}>
-                                12
-                            </div>
+                            <div className={classes.card_title}>Total Pending Request</div>
+                            <div className={classes.card_des}>12</div>
                         </div>
                     </Col>
                 </Row>
@@ -167,7 +137,7 @@ const Superadmin = () => {
                                 subHeaderComponent={
                                     <input type="text" className={classes.form_control}
                                         placeholder="Search Here" value={search}
-                                        onChange={(e) => setaSearch(e.target.value)}
+                                        onChange={(e) => setSearch(e.target.value)}
                                     />
                                 }
                             />
@@ -175,29 +145,25 @@ const Superadmin = () => {
                     </Col>
                     <Col xs={12} md={4} sm>
                         <div className={classes.card}>
-                            <div className={classes.card_title}>
-                                Daily Ticket Raised
-                            </div>
-                            <div className={classes.card_des}>
-                                12
-                            </div>
+                            <div className={classes.card_title}>Daily Ticket Raised</div>
+                            <div className={classes.card_des}>12</div>
                         </div>
                         <div className={classes.card}>
-                            <div className={classes.card_title}>
-                                Total Attending Tickets
-                            </div>
-                            <div className={classes.card_des}>
-                                12
-                            </div>
+                            <div className={classes.card_title}>Total Attending Tickets</div>
+                            <div className={classes.card_des}>12</div>
                         </div>
                         <div className={classes.card}>
-                            <div className={classes.card_title}>
-                                Total Ticket
-                            </div>
-                            <div className={classes.card_des}>
-                                12
-                            </div>
+                            <div className={classes.card_title}>Total Ticket</div>
+                            <div className={classes.card_des}>12</div>
                         </div>
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container>
+                <Row>
+                    <Col xs={12} md={12} sm>
+                        <ShowEmployee />
                     </Col>
                 </Row>
             </Container>

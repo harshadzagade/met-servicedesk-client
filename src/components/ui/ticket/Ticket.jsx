@@ -1,121 +1,9 @@
-// Complaint.jsx
 import React, { Fragment, useEffect, useState } from 'react';
+import axios from 'axios';
 import classes from './Ticket.module.css';
 import { ButtonDropdown, Col, Container, DropdownItem, DropdownMenu, DropdownToggle, Input, List, ListInlineItem, Row } from 'reactstrap';
 import TicketDetails from '../cardtickets/TicketDetails';
 import TicketCard from '../cardtickets/TicketCard';
-
-const ComplaintData = [
-    {
-        name: "Harshad Zagade",
-        subject: "Mic Not Working",
-        date: "12/12/2021",
-        department: "IT",
-        tik_id: "#012024",
-        priority: "High",
-        status: "Pending",
-        hodstatus: "Pending",
-        assigned_to: "Harshad"
-    },
-    {
-        name: "Anirudha Mhatre",
-        subject: "Keyboard Not Working",
-        date: "12/12/2021",
-        department: "ERP",
-        tik_id: "#022024",
-        priority: "High",
-        status: "Attending",
-        hodstatus: "Pending",
-        assigned_to: "NA"
-    },
-    {
-        name: "Manoj Bagal",
-        subject: "Monitor Not Working",
-        date: "12/12/2021",
-        department: "ERP",
-        tik_id: "#032024",
-        priority: "High",
-        status: "Pending",
-        hodstatus: "Pending",
-        assigned_to: "NA"
-    },
-    {
-        name: "Akshay Shinde",
-        subject: "Mouse Not Working",
-        date: "12/12/2021",
-        department: "HR",
-        tik_id: "#042024",
-        priority: "High",
-        status: "Pending",
-        hodstatus: "Pending",
-        assigned_to: "NA"
-    },
-    {
-        name: "Jamshed Irani",
-        subject: "Internet Speed Issue",
-        date: "12/12/2021",
-        department: "NETWORK",
-        tik_id: "#052024",
-        priority: "High",
-        status: "Attending",
-        hodstatus: "Pending",
-        assigned_to: "Maya"
-    },
-    {
-        name: "Ankush Bagal",
-        subject: "TV Not Working",
-        date: "12/12/2021",
-        tik_id: "#062024",
-        priority: "High",
-        status: "Close",
-        hodstatus: "Pending",
-        assigned_to: "Alex"
-    }
-];
-
-const RequestData = [
-    {
-        name: "Harshad Zagade",
-        subject: "Mic Not Working",
-        date: "03/05/2024",
-        department: "IT",
-        tik_id: "#012024",
-        priority: "High",
-        status: "Hod Approved",
-        assigned_to: "Harshad"
-    },
-    {
-        name: "Anirudha Mhatre",
-        subject: "Keyboard Not Working",
-        date: "12/12/2021",
-        department: "ERP",
-        tik_id: "#022024",
-        priority: "High",
-        status: "Attending",
-        assigned_to: "NA"
-    },
-    {
-        name: "Manoj Bagal",
-        subject: "Monitor Not Working",
-        date: "12/12/2021",
-        department: "ERP",
-        tik_id: "#032024",
-        priority: "High",
-        status: "Hod Approved",
-        assigned_to: "NA"
-    },
-    {
-        name: "Akshay Shinde",
-        subject: "Mouse Not Working",
-        date: "12/12/2021",
-        department: "HR",
-        tik_id: "#042024",
-        priority: "High",
-        status: "Hod Approved",
-        assigned_to: "NA"
-    }
-]
-
 
 const Ticket = ({type}) => {
     const [data, setData] = useState([]);
@@ -129,14 +17,21 @@ const Ticket = ({type}) => {
     const [countAttending, setCountAttending] = useState(0);
     const [countForwarded, setCountForwarded] = useState(0);
     const [countClose, setCountClose] = useState(0);
+    const [dropdownOpen, setOpen] = useState(false);
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [selectedCardIndex, setSelectedCardIndex] = useState(null);
+    const [countHodApproved, setCountHodApproved] = useState(0);
 
 
     useEffect(() => {
-        const getData = () => {
+        const getData = async () => {
             try {
-                setData(type==='Complaint'?ComplaintData:RequestData);
-                setFilter(type==='Complaint'?ComplaintData:RequestData);
-                updateCounts(type==='Complaint'?ComplaintData:RequestData);
+                const response = await axios.get(type === 'Complaint' ? 'https://hello.helpdesk.met.edu/api/complaint/allcomplaints' : 'https://hello.helpdesk.met.edu/api/request/allrequests');
+                const responseData = type === 'Complaint' ? response.data.complaints : response.data.requests;
+                console.log("Fetched Data: ", response);
+                setData(Array.isArray(responseData) ? responseData : []);
+                setFilter(Array.isArray(responseData) ? responseData : []);
+                updateCounts(Array.isArray(responseData) ? responseData : []);
             } catch (error) {
                 console.log(error);
             }
@@ -149,7 +44,7 @@ const Ticket = ({type}) => {
             const combinedFields = [
                 item.name,
                 item.status,
-                item.institute,
+                item.department,
                 item.subject
             ].join(' ');
 
@@ -158,6 +53,7 @@ const Ticket = ({type}) => {
             const matchesStatus = selectedStatus ? item.status === selectedStatus : true;
             return matchesSearch && matchesDept && matchesStatus;
         });
+        console.log("Filtered Data: ", result);
         setFilter(result);
     }, [data, search, selectedDept, selectedStatus]);
 
@@ -170,30 +66,22 @@ const Ticket = ({type}) => {
         setSelectedStatus(status);
     };
 
-    const [dropdownOpen, setOpen] = useState(false);
-
-    const [selectedCard, setSelectedCard] = useState(null);
-    const [selectedCardIndex, setSelectedCardIndex] = useState(null);
-
     const handleCardClick = (data, index) => {
         setSelectedCard(data);
         setSelectedCardIndex(index);
     };
 
-    // Notificaiton count
     const updateCounts = (filteredData) => {
-        // Calculate counts based on the filtered data
         setCountAll(filteredData.length);
-        setCountPending(filteredData.filter(item => item.status === 'Pending').length);
-        setCountAttending(filteredData.filter(item => item.status === 'Attending').length);
-        setCountForwarded(filteredData.filter(item => item.status === 'Forwarded').length);
-        setCountClose(filteredData.filter(item => item.status === 'Close').length);
-        
+        setCountPending(filteredData.filter(item => item.status === 'pending').length);
+        setCountAttending(filteredData.filter(item => item.status === 'attending').length);
+        setCountForwarded(filteredData.filter(item => item.status === 'forwarded').length);
+        setCountClose(filteredData.filter(item => item.status === 'closed').length);
+        setCountHodApproved(filteredData.filter(item => item.status === 'Hod Approved').length);
     };
 
     return (
         <div>
-            {/* filters */}
             <Container>
                 <Row>
                     <Col xs={12} md={8}>
@@ -202,34 +90,31 @@ const Ticket = ({type}) => {
                                 All
                                 {countAll > 0 && <span className={classes.notification}>{countAll}</span>}
                             </ListInlineItem>
-                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'Pending' ? classes.active : ''}`} onClick={() => handleStatusSelect('Pending')}>
+                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'pending' ? classes.active : ''}`} onClick={() => handleStatusSelect('pending')}>
                                 Pending
                                 {countPending > 0 && <span className={classes.notification}>{countPending}</span>}
                             </ListInlineItem>
-                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'Attending' ? classes.active : ''}`} onClick={() => handleStatusSelect('Attending')}>
+                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'attending' ? classes.active : ''}`} onClick={() => handleStatusSelect('attending')}>
                                 Attending
                                 {countAttending > 0 && <span className={classes.notification}>{countAttending}</span>}
                             </ListInlineItem>
-                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'Forwaded' ? classes.active : ''}`} onClick={() => handleStatusSelect('Forwaded')}>
-                                Forwaded
+                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'forwaded' ? classes.active : ''}`} onClick={() => handleStatusSelect('forwaded')}>
+                                Forwarded
                                 {countForwarded > 0 && <span className={classes.notification}>{countForwarded}</span>}
                             </ListInlineItem>
-                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'Close' ? classes.active : ''}`} onClick={() => handleStatusSelect('Close')}>
+                            <ListInlineItem className={`${classes.filters} ${selectedStatus === 'closed' ? classes.active : ''}`} onClick={() => handleStatusSelect('closed')}>
                                 Close
                                 {countClose > 0 && <span className={classes.notification}>{countClose}</span>}
                             </ListInlineItem>
                         </List>
                     </Col>
                 </Row>
-
             </Container>
-            {/* filters */}
             <Container>
                 <Row>
                     <Col xs={12} md={8}>
                         <div className='d-flex justify-content-between align-items-center  '>
-                            <ButtonDropdown toggle={() => { setOpen(!dropdownOpen) }}
-                                isOpen={dropdownOpen}>
+                            <ButtonDropdown toggle={() => { setOpen(!dropdownOpen) }} isOpen={dropdownOpen}>
                                 <DropdownToggle className={classes.dropdownbtn} caret>
                                     <i className="fa fa-filter"></i>
                                     <span className="ms-2">{dropdownText}</span>
@@ -238,7 +123,7 @@ const Ticket = ({type}) => {
                                     <DropdownItem onClick={() => handleDeptSelect('')}>All</DropdownItem>
                                     <DropdownItem onClick={() => handleDeptSelect('ERP')}>ERP</DropdownItem>
                                     <DropdownItem onClick={() => handleDeptSelect('NETWORK')}>NETWORK</DropdownItem>
-                                    <DropdownItem onClick={() => handleDeptSelect('MAINTENANCE')}>MAINTAINENCE</DropdownItem>
+                                    <DropdownItem onClick={() => handleDeptSelect('MAINTENANCE')}>MAINTENANCE</DropdownItem>
                                 </DropdownMenu>
                             </ButtonDropdown>
                             <div className='d-flex align-items-center justify-content-between '>

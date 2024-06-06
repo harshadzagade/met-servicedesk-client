@@ -6,25 +6,25 @@ const TicketCard = ({ data, onClick }) => {
 
     const getStatusColor = (status) => {
         switch (status) {
-            case 'Pending':
+            case 'pending':
                 return classes.statuspending;
-            case 'Approved':
+            case 'approved':
                 return classes.statusapproved;
             case 'Hod Approved':
                 return classes.hodapproved;
-            case 'Attending':
+            case 'attending':
                 return classes.statusattending;
-            case 'Forwarded':
+            case 'forwarded':
                 return classes.statusforwarded;
-            case 'Close':
+            case 'closed':
                 return classes.statusclose;
-            case 'Dissapproved':
+            case 'dissapproved':
                 return classes.statusdissapproved;
-            case 'High':
+            case 'high':
                 return classes.priorityHigh;
-            case 'Medium':
+            case 'medium':
                 return classes.priorityMedium;
-            case 'Low':
+            case 'low':
                 return classes.priorityLow;
             default:
                 return 'primary';
@@ -49,7 +49,7 @@ const TicketCard = ({ data, onClick }) => {
                 <CardText className=' d-flex flex-wrap justify-content-lg-between '>
                     <div className="btn-wrap">
                         <small className={`${classes.tikid} ${classes.button18} m-2`} role='button'>
-                            {data.tik_id}
+                            {data.ticketId}
                         </small>
                         <small className={`${getStatusColor(data.priority)} ${classes.button18} m-2`} role='button'>
                             {data.priority}

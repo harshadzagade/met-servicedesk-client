@@ -5,12 +5,20 @@ import getItemWithExpiry from '../../../utils/expiryFunction';
 import { Button, Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
 import { useEffect } from 'react';
 import axios from 'axios';
+import AuthContext from '../../../context/AuthContext/AuthContext';
 
 
 const NavBar = ({ Toggle }) => {
+    const authCtx = useContext(AuthContext);
     const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '', department: '' });
     const idReference = getItemWithExpiry('id');
     const id = idReference ? idReference.value : null;
+
+    // useEffect(() => {
+    //     if (id) {
+    //         authCtx.setEmployeeInfoId(id);
+    //     }
+    // }, [id, authCtx]);
 
     useEffect(() => {
         const getStaffInfo = async () => {
@@ -18,6 +26,7 @@ const NavBar = ({ Toggle }) => {
                 if (id) {
                     const staff = await axios.get(`https://hello.helpdesk.met.edu/api/staff/staffdetails/${id}`);
                     setStaffInfo({ firstname: staff.data.staff.firstname, lastname: staff.data.staff.lastname, role: staff.data.staff.role, department: staff.data.staff.department });
+                    authCtx?.setEmployeeInfoId(id);
                 }
             } catch (error) {
                 console.log(error.message);
@@ -60,7 +69,7 @@ const NavBar = ({ Toggle }) => {
                                     data-toggle="dropdown"
                                     id="dropdown-67443507"
                                     variant="default"
-                                    className="m-0"
+                                    className="m-0 text-white"
                                 >
                                     <i className="nc-icon nc-planet"></i>
                                     <span className="notification text-white">Department</span>
@@ -85,7 +94,7 @@ const NavBar = ({ Toggle }) => {
                                     data-toggle="dropdown"
                                     id="navbarDropdownMenuLink"
                                     variant="default"
-                                    className="m-0"
+                                    className="m-0 text-white"
                                 >
                                     <span className="no-icon text-white">
                                         {staffInfo.firstname + ' ' + staffInfo.lastname}

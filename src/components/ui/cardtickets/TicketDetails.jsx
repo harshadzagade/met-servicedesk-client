@@ -4,26 +4,83 @@ import { useReactToPrint } from 'react-to-print';
 import classes from './Ticket.module.css';
 
 
-const PrintDetails = React.forwardRef(({ data }, ref) => (
-    <div ref={ref}>
-        <Card className={` mt-lg-4  ${classes.card} ${classes.detailsoverlay}`}>
-            <CardBody>
-                <CardTitle tag="h5" className='text-left'>
-                    TicketId : {data.tik_id}
-                </CardTitle>
-                <CardText className='text-left'>
-                    Request By : {data.name}
-                </CardText>
-                <CardText className='text-left'>
-                    Subject : {data.subject}
-                </CardText>
-                <CardText className='text-left'>
-                    Description : {data.subject}
-                </CardText>
-            </CardBody>
-        </Card>
-    </div>
-));
+const PrintDetails = React.forwardRef(({ data }, ref) => {
+    const getCreatedDate = (createdAt) => {
+        if (createdAt === null) {
+            return null;
+        }
+        const date = new Date(createdAt);
+        return (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + formatAMPM(date));
+    };
+
+    const formatAMPM = (date) => {
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        let strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+        return strTime;
+    };
+    return (
+
+        <div ref={ref}>
+            <Card className={` mt-lg-4  ${classes.card} ${classes.detailsoverlay}`}>
+                <CardBody>
+                    <CardTitle tag="h5" className='text-left'>
+                        TicketId : {data.ticketId}
+                    </CardTitle>
+                    <CardText className='text-left'>
+                        <b>Request By  :</b> {data.name} | {data.staffDepartment} <br />
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Subject :</b> {data.subject}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Description :</b> {data.subject}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Status :</b> {data.status}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Department :</b> {data.department}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Priority :</b> {data.priority}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Date :</b> {getCreatedDate(data.createdAt)}
+                    </CardText>
+                    <CardText className='text-left'>
+                        Hod Approval : {data.approval1 ? "Yes" : "No"}
+                    </CardText>
+                    <CardText className='text-left'>
+                        Hod Comment : {data.approval1Comment}
+                    </CardText>
+                    <CardText className='text-left'>
+                        Admin Approval : {data.approval2 ? "Yes" : "No"}
+                    </CardText>
+                    <CardText className='text-left'>
+                        Admin Comment : {data.approval2Comment}
+                    </CardText>
+
+                    <CardText className='text-left'>
+                        Assigned To : {data.assignedName}
+                    </CardText>
+
+                    <CardText className='text-left'>
+                        Problem Description : {data.problemDescription}
+                    </CardText>
+                    <CardText className='text-left'>
+                        isRepeated : {data.isRepeated}
+                    </CardText>
+                </CardBody>
+            </Card>
+        </div>
+
+    )});
 const TicketDetails = ({ data, setSelectedCard, setSelectedCardIndex }) => {
     const handleCardClose = () => {
         setSelectedCard(null);
@@ -36,8 +93,6 @@ const TicketDetails = ({ data, setSelectedCard, setSelectedCardIndex }) => {
     });
 
     const printRef = React.useRef();
-
-
 
     return (
         <>

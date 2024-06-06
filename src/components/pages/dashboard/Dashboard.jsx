@@ -1,3 +1,4 @@
+// src/components/pages/dashboard/Dashboard.jsx
 import React, { Fragment, useContext } from 'react';
 import AuthContext from '../../../context/AuthContext/AuthContext';
 import Superadmin from './superadmin/Superadmin';
@@ -7,15 +8,18 @@ import Engineer from './engineer/Engineer';
 import User from './user/User';
 
 const Dashboard = () => {
-    const authCtx = useContext(AuthContext);
-    const role = authCtx.employeeInfo ? authCtx.employeeInfo.role : 'checking...';
+    const { employeeInfo } = useContext(AuthContext);
+    const role = employeeInfo?.role;
+    console.log(role);
+    console.log("hel",employeeInfo);
+
     return (
         <Fragment>
-            { role === 'superadmin' && <Superadmin /> }
-            { role === 'admin' && <Admin /> }
-            { role === 'subadmin' && <Subadmin /> }
-            { role === 'engineer' && <Engineer /> }
-            { role === 'user' && <User /> }
+            {role === 'superadmin' && <Superadmin />}
+            {role === 'admin' && <Admin />}
+            {role === 'subadmin' && <Subadmin />}
+            {role === 'engineer' && <Engineer />}
+            {role === 'user' && <User />}
         </Fragment>
     );
 };

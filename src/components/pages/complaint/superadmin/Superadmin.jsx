@@ -1,5 +1,5 @@
 import React from 'react';
-import Complaint from '../../../ui/complaint/Complaint';
+import Ticket from '../../../ui/ticket/Ticket';
 
 
 
@@ -7,7 +7,7 @@ const Superadmin = () => {
 
     return (
         <div>
-            <Complaint />
+            <Ticket type="Complaint" />
         </div>
     );
 };
