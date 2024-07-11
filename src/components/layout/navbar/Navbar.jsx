@@ -5,20 +5,16 @@ import getItemWithExpiry from '../../../utils/expiryFunction';
 import { Button, Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
 import { useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import AuthContext from '../../../context/AuthContext/AuthContext';
-
+import AdminDeptDrop from '../AdminDeptDrop/AdminDeptDrop'; // Import the AdminDeptDrop component
 
 const NavBar = ({ Toggle }) => {
+    const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
     const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '', department: '' });
     const idReference = getItemWithExpiry('id');
     const id = idReference ? idReference.value : null;
-
-    // useEffect(() => {
-    //     if (id) {
-    //         authCtx.setEmployeeInfoId(id);
-    //     }
-    // }, [id, authCtx]);
 
     useEffect(() => {
         const getStaffInfo = async () => {
@@ -35,6 +31,40 @@ const NavBar = ({ Toggle }) => {
         getStaffInfo();
     }, [id]);
 
+    const handleLogoutClick = (e) => {
+        e.preventDefault()
+        Swal.fire({
+          title: 'Log Out?',
+          text: "You will be signed out from your current login",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, logout!'
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            authCtx.onLogout();
+            navigate('/login');
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+    
+            Toast.fire({
+              icon: 'success',
+              title: 'Logged out successfully'
+            })
+          }
+        });
+      };
+
     return (
         <div>
             <Navbar className={classes.navbar} expand="lg">
@@ -43,7 +73,6 @@ const NavBar = ({ Toggle }) => {
                         <Button
                             variant="dark"
                             className=" d-lg-none btn-fill d-flex justify-content-center align-items-center rounded-circle p-2"
-                        // onClick={mobileSidebarToggle}
                         >
                             <i className="fas fa-ellipsis-v"></i>
                         </Button>
@@ -52,7 +81,7 @@ const NavBar = ({ Toggle }) => {
                             className="mr-2 pe-auto"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-list text-white" viewBox="0 0 16 16">
-                                <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                                <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5.5 0 1 0 0 1H3a.5.5.5 0 1 0 0 1" />
                             </svg>
                         </Navbar.Brand>
                     </div>
@@ -63,27 +92,7 @@ const NavBar = ({ Toggle }) => {
                     </Navbar.Toggle>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="nav mr-auto " navbar>
-                            <Dropdown as={Nav.Item}>
-                                <Dropdown.Toggle
-                                    as={Nav.Link}
-                                    data-toggle="dropdown"
-                                    id="dropdown-67443507"
-                                    variant="default"
-                                    className="m-0 text-white"
-                                >
-                                    <i className="nc-icon nc-planet"></i>
-                                    <span className="notification text-white">Department</span>
-                                    {/* <span className="d-lg-none ml-1">Notification</span> */}
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item
-                                        href="#pablo"
-                                        onClick={(e) => e.preventDefault()}
-                                    >
-                                        Notification 1
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <AdminDeptDrop /> {/* Use AdminDeptDrop component */}
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <Dropdown as={Nav.Item}>
@@ -109,7 +118,7 @@ const NavBar = ({ Toggle }) => {
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         href="#pablo"
-                                        onClick={(e) => e.preventDefault()}
+                                        onClick={(e) => handleLogoutClick(e)}
                                     >
                                         Logout
                                     </Dropdown.Item>

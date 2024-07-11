@@ -10,7 +10,7 @@ const TicketCard = ({ data, onClick }) => {
                 return classes.statuspending;
             case 'approved':
                 return classes.statusapproved;
-            case 'Hod Approved':
+            case 'hod approved':
                 return classes.hodapproved;
             case 'attending':
                 return classes.statusattending;
@@ -31,9 +31,15 @@ const TicketCard = ({ data, onClick }) => {
         }
     }
 
+    if(data.status === 'pending'){
+        console.log(data.approval1, data.approval2);
+        if(data.approval1 === 1 && (data.approval2 === 0 || data.approval2 === null) ){
+            data.status = 'hod approved';
+        }
+    }
+
     return (
         <Card className={`mt-4 ${classes.card} `} onClick={onClick}>
-            {console.log(getStatusColor(data.priority))}
             <CardBody>
                 <div className={` ${classes.card_title_wrap}`}>
                     <CardTitle tag="h5" className='text-left m-2'>
@@ -54,7 +60,7 @@ const TicketCard = ({ data, onClick }) => {
                         <small className={`${getStatusColor(data.priority)} ${classes.button18} m-2`} role='button'>
                             {data.priority}
                         </small>
-                        <small className={`${getStatusColor(data.status)} ${classes.button18} m-2`} role='button'>
+                        <small className={`${getStatusColor(data.status )} ${classes.button18} m-2`} role='button'>
                             {data.status}
                         </small>
                         {/* <small className={`${classes.button18} m-2 ${classes.hod}`} role='button'>
@@ -63,7 +69,7 @@ const TicketCard = ({ data, onClick }) => {
                     </div>
 
                     <CardText className='text-md-right m-2 text-sm-center' >
-                        Assigned to {data.assigned_to}
+                        Assigned to {data.assignedName}
                     </CardText>
                 </CardText>
             </CardBody>

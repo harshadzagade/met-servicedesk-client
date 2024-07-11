@@ -1,5 +1,5 @@
 import React from 'react';
-import Ticket from '../../../ui/ticket/Ticket';
+import Ticket from '../../../ui/ticket/SuperTicket';
 
 
 

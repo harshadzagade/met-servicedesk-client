@@ -1,13 +1,13 @@
-import React from 'react'
-import Ticket from '../ticket/Ticket'
+// import React from 'react'
+// import Ticket from '../ticket/SuperTicket'
 
 
-const Request = () => {
-  return (
-    <div>
-      <Ticket type="Request" />
-    </div>
-  )
-}
+// const Request = () => {
+//   return (
+//     <div>
+//       <Ticket type="Request" />
+//     </div>
+//   )
+// }
 
-export default Request;
+// export default Request;

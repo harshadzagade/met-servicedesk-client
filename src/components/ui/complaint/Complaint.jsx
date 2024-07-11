@@ -1,5 +1,5 @@
 import React from 'react'
-import Ticket from '../ticket/Ticket'
+import Ticket from '../ticket/SuperTicket'
 
 function Complaint() {
   return (

@@ -6,7 +6,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const roles = ['admin', 'subadmin', 'engineer', 'user'];
-const departmentTypes = ['IT', 'HR', 'Finance', 'Marketing']; // Example department types, adjust as needed
+const departmentTypes = ['IT', 'HR', 'Finance', 'Marketing']; 
 
 const ShowEmployee = () => {
     const [employees, setEmployees] = useState([]);
