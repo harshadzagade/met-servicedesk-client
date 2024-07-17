@@ -32,7 +32,6 @@ const TicketCard = ({ data, onClick }) => {
     }
 
     if(data.status === 'pending'){
-        console.log(data.approval1, data.approval2);
         if(data.approval1 === 1 && (data.approval2 === 0 || data.approval2 === null) ){
             data.status = 'hod approved';
         }

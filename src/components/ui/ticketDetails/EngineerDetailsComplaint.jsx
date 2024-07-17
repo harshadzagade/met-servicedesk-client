@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
 import AuthContext from '../../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 import { Bars } from 'react-loader-spinner';
 
-const EngineerDetails = ({ data, updateTicketData }) => {
+const EngineerDetailsComplaint = ({ data, updateTicketData }) => {
     const authCtx = useContext(AuthContext);
     const id = authCtx?.employeeInfo?.id;
     const department = authCtx.employeeInfo?.department;
     const [isAssigning, setIsAssigning] = useState(false);
-    const [isForwarded, setIsForwarded] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [status, setStatus] = useState('');
     const [forwardedEngineer, setForwardedEngineer] = useState('');
@@ -20,18 +19,17 @@ const EngineerDetails = ({ data, updateTicketData }) => {
     const [engineers, setEngineers] = useState([]);
     const [showLoading, setShowLoading] = useState(false);
 
-    useEffect(() => {
-        setIsForwarded(status === 'forwarded');
-    }, [status]);
 
     const handleSelfAssign = async () => {
         setIsAssigning(true);
         try {
             await axios.put(`https://hello.helpdesk.met.edu/api/staff/technician/selfassigncomplaint/${data.id}/${id}`);
-            updateTicketData(prevData => ({ ...prevData, assignedName: `${authCtx.employeeInfo.firstname} ${authCtx.employeeInfo.lastname}` }));
-            setIsAssigning(false);
+            Swal.fire('Success', 'Complaint assigned successfully', 'success');
+            updateTicketData(prevData => ({ ...prevData, assignedName: `${authCtx.employeeInfo.firstname} ${authCtx.employeeInfo.lastname}`, status: 'assigned' }));
         } catch (error) {
+            logError(error);
             Swal.fire('Error', 'Error during self-assignment', 'error');
+        } finally {
             setIsAssigning(false);
         }
     };
@@ -39,9 +37,10 @@ const EngineerDetails = ({ data, updateTicketData }) => {
     const toggleModal = async () => {
         if (!isModalOpen) {
             try {
-                const engineers = await axios.get(`https://hello.helpdesk.met.edu/api/staff/technician/techniciandepartmenttechnicians/${id}/${department}`);
-                setEngineers(engineers.data.technicians);
+                const engineersResponse = await axios.get(`https://hello.helpdesk.met.edu/api/staff/technician/techniciandepartmenttechnicians/${id}/${department}`);
+                setEngineers(engineersResponse.data.technicians);
             } catch (error) {
+                logError(error);
                 Swal.fire('Error', 'Error fetching engineers', 'error');
             }
         }
@@ -59,6 +58,7 @@ const EngineerDetails = ({ data, updateTicketData }) => {
 
         try {
             setShowLoading(true);
+            console.log('Sending request with data:', statusData);  // Debugging log
             await axios.put(`https://hello.helpdesk.met.edu/api/staff/technician/changecomplaintstatus/${data.id}`, statusData);
             Swal.fire('Success', 'You have changed status successfully', 'success');
             updateTicketData(prevData => ({
@@ -70,6 +70,8 @@ const EngineerDetails = ({ data, updateTicketData }) => {
             }));
             setIsModalOpen(false);
         } catch (error) {
+            console.error('Error response:', error.response);  // Debugging log
+            logError(error);
             const errorMsg = error.response && (error.response.status === 422 || error.response.status === 401) ? error.response.data.message : 'Error changing status';
             Swal.fire('Error', errorMsg, 'error');
         } finally {
@@ -81,17 +83,26 @@ const EngineerDetails = ({ data, updateTicketData }) => {
         setForwardedEngineer(e.target.value);
     };
 
+    const logError = (error) => {
+        // Log the error to your backend or a logging service
+        console.error('Logging error:', error); // Debugging log
+        axios.post('/api/logs', { error: error.message, stack: error.stack })
+            .catch(logError => {
+                console.error('Error logging the original error:', logError); // Debugging log
+            });
+    };
+
     return (
         <div>
-            {authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname === data.assignedName && status === 'closed' && (
-                <Button color="primary" onClick={() => {
-                    if (data.assignedName) {
-                        toggleModal();
-                    } else {
-                        handleSelfAssign();
-                    }
-                }} disabled={isAssigning}>
-                    {isAssigning ? 'Assigning...' : (data.assignedName ? 'Change Status' : 'Self Assign')}
+            {authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname === data.assignedName && data.status !== 'closed' && (
+                <Button color="primary" onClick={toggleModal} disabled={isAssigning}>
+                    Change Status
+                </Button>
+            )}
+
+            {data.status === 'pending' && (
+                <Button color="primary" onClick={handleSelfAssign} disabled={isAssigning}>
+                    {isAssigning ? 'Assigning...' : 'Self Assign'}
                 </Button>
             )}
 
@@ -121,6 +132,7 @@ const EngineerDetails = ({ data, updateTicketData }) => {
                         </div>
                     </div>
                 )}
+
                 {!showLoading && (
                     <>
                         <ModalHeader toggle={toggleModal}>Change Status</ModalHeader>
@@ -172,4 +184,4 @@ const EngineerDetails = ({ data, updateTicketData }) => {
     );
 };
 
-export default EngineerDetails;
+export default EngineerDetailsComplaint;

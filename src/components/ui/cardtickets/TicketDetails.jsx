@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
 import classes from './Ticket.module.css';
-import EngineerDetails from '../ticketDetails/EngineerDetails';
-import AdminDetails from '../ticketDetails/AdminDetails';
+import EngineerDetails from '../ticketDetails/EngineerDetailsComplaint';
+import AdminDetailsComplaint from '../ticketDetails/AdminDetailsComplaint';
+import AdminDetailsRequest from '../ticketDetails/AdminDetailsRequest';
 import SubAdminDetails from '../ticketDetails/SubAdminDetails';
 import AuthContext from '../../../context/AuthContext/AuthContext';
 
@@ -16,17 +17,24 @@ const TicketDetails = ({ data, setSelectedCard, setSelectedCardIndex }) => {
     }
 
     const renderRoleSpecificComponent = () => {
+        const ticketType = data.type || 'Request'; // Default to 'Request' if 'data.type' is undefined
         switch (userRole) {
             case 'engineer':
                 return <EngineerDetails data={data} />;
             case 'admin':
-                return <AdminDetails data={data} />;
+                if (ticketType === 'Complaint') {
+                    return <AdminDetailsComplaint data={data} />;
+                }
+                else {
+                    return <AdminDetailsRequest data={data} />;
+                }
             case 'subadmin':
                 return <SubAdminDetails data={data} />;
             default:
                 return null;
         }
     };
+
 
     return (
         <>

@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AuthContext from '../../../context/AuthContext/AuthContext';
-import AdminDeptDrop from '../AdminDeptDrop/AdminDeptDrop'; // Import the AdminDeptDrop component
+import AdminDeptDrop from './AdminDeptDrop';
 
 const NavBar = ({ Toggle }) => {
     const navigate = useNavigate();
@@ -15,6 +15,7 @@ const NavBar = ({ Toggle }) => {
     const [staffInfo, setStaffInfo] = useState({ firstname: '', lastname: '', role: '', department: '' });
     const idReference = getItemWithExpiry('id');
     const id = idReference ? idReference.value : null;
+    const [selectedDepartment, setSelectedDepartment] = useState('Department');
 
     useEffect(() => {
         const getStaffInfo = async () => {
@@ -31,39 +32,43 @@ const NavBar = ({ Toggle }) => {
         getStaffInfo();
     }, [id]);
 
+    const handleDepartmentSelect = (department) => {
+        setSelectedDepartment(department);
+    };
+
     const handleLogoutClick = (e) => {
         e.preventDefault()
         Swal.fire({
-          title: 'Log Out?',
-          text: "You will be signed out from your current login",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, logout!'
+            title: 'Log Out?',
+            text: "You will be signed out from your current login",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, logout!'
         }).then(async (result) => {
-          if (result.isConfirmed) {
-            authCtx.onLogout();
-            navigate('/login');
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-            })
-    
-            Toast.fire({
-              icon: 'success',
-              title: 'Logged out successfully'
-            })
-          }
+            if (result.isConfirmed) {
+                authCtx.onLogout();
+                navigate('/login');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Logged out successfully'
+                })
+            }
         });
-      };
+    };
 
     return (
         <div>
@@ -92,7 +97,7 @@ const NavBar = ({ Toggle }) => {
                     </Navbar.Toggle>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="nav mr-auto " navbar>
-                            <AdminDeptDrop /> {/* Use AdminDeptDrop component */}
+                            <AdminDeptDrop onDepartmentSelect={handleDepartmentSelect} />
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <Dropdown as={Nav.Item}>
@@ -110,12 +115,6 @@ const NavBar = ({ Toggle }) => {
                                     </span>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink" className={classes.dropbtnbox}>
-                                    <Dropdown.Item
-                                        href="#pablo"
-                                        onClick={(e) => e.preventDefault()}
-                                    >
-                                        Profile
-                                    </Dropdown.Item>
                                     <Dropdown.Item
                                         href="#pablo"
                                         onClick={(e) => handleLogoutClick(e)}

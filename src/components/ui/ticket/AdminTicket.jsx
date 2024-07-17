@@ -23,55 +23,52 @@ const AdminTicket = ({ type }) => {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const id = authCtx.employeeInfo.id;
-                const department = authCtx.employeeInfo.department;
-                console.log(id, department);
-                let response;
+    const getData = async () => {
+        try {
+            const id = authCtx.employeeInfo.id;
+            const department = adminCtx.department;
+            let response;
 
-                if (type === 'Complaint') {
-                    switch (selectedFilter) {
-                        case 'incoming':
-                            response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/complaints/incoming/${department}`);
-                            console.log(response);
-                            break;
-                        case 'outgoing':
-                            response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/complaints/outgoing/${id}/${department}`);
-                            break;
-                        case 'myRequest':
-                            response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/owncomplaints/${id}`);
-                            break;
-                        default:
-                            break;
-                    }
-                } else {
-                    switch (selectedFilter) {
-                        case 'incoming':
-                            response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/incoming/${department}`);
-                            console.log(response);
-                            break;
-                        case 'outgoing':
-                            response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/outgoing/${id}/${department}`);
-                            console.log(response);
-                            break;
-                        case 'myRequest':
-                            response = await axios.get(`https://hello.helpdesk.met.edu/api/request/ownrequests/${id}`);
-                            break;
-                        default:
-                            break;
-                    }
+            if (type === 'Complaint') {
+                switch (selectedFilter) {
+                    case 'incoming':
+                        response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/complaints/incoming/${department}`);
+                        break;
+                    case 'outgoing':
+                        response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/complaints/outgoing/${id}/${department}`);
+                        break;
+                    case 'myRequest':
+                        response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/owncomplaints/${id}`);
+                        break;
+                    default:
+                        break;
                 }
-
-                const responseData = type === 'Complaint' ? response.data.complaints : response.data.requests;
-                setData(Array.isArray(responseData) ? responseData : []);
-                setFilter(Array.isArray(responseData) ? responseData : []);
-            } catch (error) {
-                console.log(error);
+            } else {
+                switch (selectedFilter) {
+                    case 'incoming':
+                        response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/incoming/${department}`);
+                        break;
+                    case 'outgoing':
+                        response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/outgoing/${id}/${department}`);
+                        break;
+                    case 'myRequest':
+                        response = await axios.get(`https://hello.helpdesk.met.edu/api/request/ownrequests/${id}`);
+                        break;
+                    default:
+                        break;
+                }
             }
-        };
-        getData();
-    }, [type, selectedFilter, authCtx.employeeInfo]);
+
+            const responseData = type === 'Complaint' ? response.data.complaints : response.data.requests;
+            const dataWithTypes = responseData.map(item => ({ ...item, type }));
+            setData(Array.isArray(dataWithTypes) ? dataWithTypes : []);
+            setFilter(Array.isArray(dataWithTypes) ? dataWithTypes : []);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    getData();
+}, [type, selectedFilter, authCtx.employeeInfo, adminCtx.department]);
 
     useEffect(() => {
         const result = data.filter((item) => {
