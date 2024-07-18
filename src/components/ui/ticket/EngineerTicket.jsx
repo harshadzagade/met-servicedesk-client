@@ -20,7 +20,6 @@ const EngineerTicket = ({ type, department }) => {
     const [selectedCard, setSelectedCard] = useState(null);
     const [selectedCardIndex, setSelectedCardIndex] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
-    
 
     const fetchData = async () => {
         try {
@@ -32,9 +31,13 @@ const EngineerTicket = ({ type, department }) => {
                 ? `https://hello.helpdesk.met.edu/api/complaint/owncomplaints/${authCtx.employeeInfo.id}`
                 : `https://hello.helpdesk.met.edu/api/request/ownrequests/${authCtx.employeeInfo.id}`);
             
-            setDepartmentData(type === 'Complaint' ? departmentResponse.data.complaints : departmentResponse.data.requests);
-            setOwnData(type === 'Complaint' ? ownResponse.data.complaints : ownResponse.data.requests);
-            setFilteredData(type === 'Complaint' ? departmentResponse.data.complaints : departmentResponse.data.requests);
+            const sortedDepartmentData = (type === 'Complaint' ? departmentResponse.data.complaints : departmentResponse.data.requests)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            const sortedOwnData = (type === 'Complaint' ? ownResponse.data.complaints : ownResponse.data.requests)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            setDepartmentData(sortedDepartmentData);
+            setOwnData(sortedOwnData);
         } catch (error) {
             console.log(error);
         }
@@ -45,41 +48,52 @@ const EngineerTicket = ({ type, department }) => {
     }, [type, department]);
 
     useEffect(() => {
-        const result = departmentData.filter((item) => {
-            const combinedFields = [
-                item.name,
-                item.status,
-                item.department,
-                item.subject,
-                item.assignedName
-            ].join(' ');
+        if (selectedFilter === (type === 'Complaint' ? 'myComplaints' : 'myRequests')) {
+            setFilteredData(ownData.filter((item) => {
+                const combinedFields = [
+                    item.name,
+                    item.status,
+                    item.department,
+                    item.subject,
+                    item.assignedName
+                ].join(' ');
+                return combinedFields.toLowerCase().includes(search.toLowerCase());
+            }));
+        } else {
+            const result = departmentData.filter((item) => {
+                const combinedFields = [
+                    item.name,
+                    item.status,
+                    item.department,
+                    item.subject,
+                    item.assignedName
+                ].join(' ');
 
-            const matchesSearch = combinedFields.toLowerCase().includes(search.toLowerCase());
+                const matchesSearch = combinedFields.toLowerCase().includes(search.toLowerCase());
 
-            let matchesFilter;
-            if (selectedFilter === 'assignToMe') {
-                matchesFilter = item.assignedName === authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname;
-            }
-            else if (selectedFilter === (type === 'Complaint' ? 'myComplaints' : 'myRequests')) {
-                matchesFilter = item.name === authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname;
-            }
-            else if (selectedFilter === 'department') {
-                matchesFilter = authCtx.employeeInfo.department.includes(item.department);
-            }
-            else {
-                matchesFilter = true;
-            }
+                let matchesFilter;
+                if (selectedFilter === 'assignToMe') {
+                    matchesFilter = item.assignedName === authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname;
+                }
+                else if (selectedFilter === 'department') {
+                    matchesFilter = authCtx.employeeInfo.department.includes(item.department);
+                }
+                else {
+                    matchesFilter = true;
+                }
 
-            return matchesSearch && matchesFilter;
-        });
+                return matchesSearch && matchesFilter;
+            });
 
-        if (result.length === 0) {
+            setFilteredData(result);
+        }
+
+        if (filteredData.length === 0) {
             setErrorMessage("No data found");
         } else {
             setErrorMessage("");
         }
-        setFilteredData(result);
-    }, [departmentData, search, selectedFilter, authCtx.employeeInfo, type]);
+    }, [departmentData, ownData, search, selectedFilter, authCtx.employeeInfo, type]);
 
     const handleFilterSelect = (filter) => {
         setSelectedFilter(filter);
@@ -93,15 +107,15 @@ const EngineerTicket = ({ type, department }) => {
     useEffect(() => {
         const updateCounts = () => {
             const assignToMeCount = departmentData.filter(item => item.assignedName === authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname).length;
-            const ownCount = departmentData.filter(item => item.name === authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname).length;
-            const deptCount = departmentData.filter(item => authCtx.employeeInfo.department.includes(item.department)).length;  
+            const ownCount = ownData.length;
+            const deptCount = departmentData.filter(item => authCtx.employeeInfo.department.includes(item.department)).length;
 
             setCountAssignToMe(assignToMeCount);
             setCountOwn(ownCount);
             setCountDept(deptCount);
         };
         updateCounts();
-    }, [authCtx, departmentData]);
+    }, [authCtx, departmentData, ownData]);
 
     return (
         <div>

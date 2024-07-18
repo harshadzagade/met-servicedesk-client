@@ -23,52 +23,57 @@ const AdminTicket = ({ type }) => {
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-    const getData = async () => {
-        try {
-            const id = authCtx.employeeInfo.id;
-            const department = adminCtx.department;
-            let response;
+        const getData = async () => {
+            try {
+                const id = authCtx.employeeInfo.id;
+                const department = adminCtx.department;
+                let response;
 
-            if (type === 'Complaint') {
-                switch (selectedFilter) {
-                    case 'incoming':
-                        response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/complaints/incoming/${department}`);
-                        break;
-                    case 'outgoing':
-                        response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/complaints/outgoing/${id}/${department}`);
-                        break;
-                    case 'myRequest':
-                        response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/owncomplaints/${id}`);
-                        break;
-                    default:
-                        break;
+                if (type === 'Complaint') {
+                    switch (selectedFilter) {
+                        case 'incoming':
+                            response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/complaints/incoming/${department}`);
+                            break;
+                        case 'outgoing':
+                            response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/complaints/outgoing/${id}/${department}`);
+                            break;
+                        case 'myRequest':
+                            response = await axios.get(`https://hello.helpdesk.met.edu/api/complaint/owncomplaints/${id}`);
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    switch (selectedFilter) {
+                        case 'incoming':
+                            response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/incoming/${department}`);
+                            console.log(response.data);
+                            break;
+                        case 'outgoing':
+                            response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/outgoing/${id}/${department}`);
+                            break;
+                        case 'myRequest':
+                            response = await axios.get(`https://hello.helpdesk.met.edu/api/request/ownrequests/${id}`);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            } else {
-                switch (selectedFilter) {
-                    case 'incoming':
-                        response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/incoming/${department}`);
-                        break;
-                    case 'outgoing':
-                        response = await axios.get(`https://hello.helpdesk.met.edu/api/staff/admin/requests/outgoing/${id}/${department}`);
-                        break;
-                    case 'myRequest':
-                        response = await axios.get(`https://hello.helpdesk.met.edu/api/request/ownrequests/${id}`);
-                        break;
-                    default:
-                        break;
-                }
+
+                const responseData = type === 'Complaint' ? response.data.complaints : response.data.requests;
+                const dataWithTypes = responseData.map(item => ({ ...item, type }));
+                
+                // Sort data by date in descending order
+                const sortedData = dataWithTypes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                setData(Array.isArray(sortedData) ? sortedData : []);
+                setFilter(Array.isArray(sortedData) ? sortedData : []);
+            } catch (error) {
+                console.log(error);
             }
-
-            const responseData = type === 'Complaint' ? response.data.complaints : response.data.requests;
-            const dataWithTypes = responseData.map(item => ({ ...item, type }));
-            setData(Array.isArray(dataWithTypes) ? dataWithTypes : []);
-            setFilter(Array.isArray(dataWithTypes) ? dataWithTypes : []);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    getData();
-}, [type, selectedFilter, authCtx.employeeInfo, adminCtx.department]);
+        };
+        getData();
+    }, [type, selectedFilter, authCtx.employeeInfo, adminCtx.department]);
 
     useEffect(() => {
         const result = data.filter((item) => {
@@ -106,7 +111,7 @@ const AdminTicket = ({ type }) => {
             const department = authCtx.employeeInfo.department;
             const incomingCount = data.filter(item => item.department === department).length;
             const outgoingCount = data.filter(item => item.assignedBy === id).length;
-            const myRequestCount = data.filter(item => item.name === authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname).length;  
+            const myRequestCount = data.filter(item => item.name === authCtx.employeeInfo.firstname + ' ' + authCtx.employeeInfo.lastname).length;
 
             setCountIncoming(incomingCount);
             setCountOutgoing(outgoingCount);

@@ -58,7 +58,16 @@ const TicketDetails = ({ data, setSelectedCard, setSelectedCardIndex }) => {
                         <b>Description:</b> {data.description}
                     </CardText>
                     <CardText className='text-left'>
-                        <b>Status:</b> {data.status}
+                        <b>Hod Approval :</b> {data.approval1 ? "Yes" : "No"}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Hod Comment :</b> {data.approval1Comment ? data.approval1Comment : "No Comment"}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Admin Approval :</b> {data.approval2 ? "Yes" : "No"}
+                    </CardText>
+                    <CardText className='text-left'>
+                        <b>Admin Comment :</b> {data.approval2Comment ? data.approval2Comment : "No Comment"}
                     </CardText>
                     <CardText className='text-left'>
                         <b>Department:</b> {data.department}

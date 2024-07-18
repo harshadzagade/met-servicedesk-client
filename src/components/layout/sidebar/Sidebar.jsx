@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, Nav, NavItem, NavLink } from 'reactstrap';
+import { ListGroup, ListGroupItem, } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/MET-logo.png';
 import classes from './Sidebar.module.css';
