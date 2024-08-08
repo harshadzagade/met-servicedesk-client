@@ -27,7 +27,7 @@ const AdminDetailsRequest = ({ data }) => {
             } catch (error) {
                 console.error('Error fetching technicians:', error);
                 navigate('/request');
-            }
+            } 
         };
 
         fetchTechnicians();
@@ -47,22 +47,30 @@ const AdminDetailsRequest = ({ data }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let approvalValue = approval === 'approve' ? 1 : approval === 'disapprove' ? 2 : null;
+        let approvalValue = (approval === 'approve') ? 1 : (approval === 'disapprove' ? 2 : null);
 
-        const requestData = {
+        const requestDataApproval1 = {
             department: adminCtx.department,
             approval: approvalValue,
             approvalComment: approvalCommentRef.current.value,
-            staffId: approvalValue === 2 ? technicianId : undefined,
         };
+
+        const requestDataApproval2 = {
+            department: adminCtx.department,
+            approval: approvalValue,
+            approvalComment: approvalCommentRef.current.value,
+            staffId: technicianId,
+        };
+        
 
         try {
             setShowLoading(true);
-            const endpoint = approvalValue === 1
-                ? `https://hello.helpdesk.met.edu/api/staff/admin/approval1/${data.id}`
-                : `https://hello.helpdesk.met.edu/api/staff/admin/approval2/${data.id}`;
-
-            await axios.put(endpoint, requestData);
+            
+            if(data.approval1 === null) {
+                await axios.put(`https://hello.helpdesk.met.edu/api/staff/admin/approval1/${data.id}`, requestDataApproval1);
+            } else if(data.approval2 === null) {
+                await axios.put(`https://hello.helpdesk.met.edu/api/staff/admin/approval2/${data.id}`, requestDataApproval2);
+            }
 
             Swal.fire({
                 icon: 'success',
@@ -80,6 +88,7 @@ const AdminDetailsRequest = ({ data }) => {
             console.error('Approval error:', error);
         } finally {
             setShowLoading(false);
+            setIsModalOpen(false);
         }
     };
 

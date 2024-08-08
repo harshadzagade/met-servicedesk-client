@@ -125,6 +125,7 @@ const CreateTicket = ({ type }) => {
     } else {
       const cleanedDescription = cleanHtml(description);
       const formData = new FormData();
+      console.log(selectedFiles);
       selectedFiles.forEach((file) => {
         formData.append('file', file);
       });

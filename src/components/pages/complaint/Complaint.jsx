@@ -5,6 +5,7 @@ import User from './user/User';
 import SuperTicket from '../../ui/ticket/SuperTicket';
 import AdminTicket from '../../ui/ticket/AdminTicket';
 import EngineerTicket from '../../ui/ticket/EngineerTicket';
+import UserTicket from '../../ui/ticket/UserTicket';
 
 const Complaint = () => {
     const authCtx = useContext(AuthContext);
@@ -17,7 +18,7 @@ const Complaint = () => {
             { role === 'admin' && <AdminTicket type="Complaint" department={department} /> }
             { role === 'subadmin' && <Subadmin /> }
             { role === 'engineer' && <EngineerTicket type="Complaint" department={department} /> }
-            { role === 'user' && <User /> }
+            { role === 'user' && <UserTicket type="Complaint" department={department} /> }
         </Fragment>
     );
 };

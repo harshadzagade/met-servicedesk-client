@@ -2,189 +2,25 @@ import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { ButtonDropdown, Col, Container, DropdownItem, DropdownMenu, DropdownToggle, Input, Row } from 'reactstrap';
 import classes from '.././report/superadmin/report.module.css';
+import axios from 'axios';
 
-const Data = [
-    {
-        name: 'John Doe',
-        dept: 'IT',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-    {
-        name: 'Jane Doe',
-        dept: 'HR',
-        email: 'pDqjK@example.com',
-        extn:"364",
-    },
-
-]
 
 const ContactList = () => {
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState([]);
-    const [staffDropdownOpen, setStaffDropdownOpen] = useState(false);
-    const [staffData, setStaffData] = useState([]);
 
     useEffect(() => {
-        const fetchData = () => {
+        const fetchData = async () => {
             try {
-                setData(Data)
-                setFilter(Data)
+                const response = await axios.get('http://localhost:8001/api/staff/contacts/');
+                console.log(response.data.contacts);
+                setData(response.data.contacts);
+                setFilter(response.data.contacts);
             } catch (error) {
                 console.log(error);
             }
-        }
+        };
         fetchData();
     }, []);
 
@@ -199,25 +35,36 @@ const ContactList = () => {
             return combinedFields.includes(search.toLowerCase());
         });
         setFilter(result);
-    }, [data, search]);
+    }, [search, data]);
 
     const columns = [
         {
-            name: 'Name',
-            selector: 'name',
+            id: 'name',
+            name: "Name",
+            selector: (row) => row.firstname + ' ' + row.lastname,
+            sortable: true,
         },
         {
-            name: 'Department',
-            selector: 'dept',
+            name: "Department",
+            selector: (row) => row.department[0],
+            sortable: true,
         },
         {
-            name: 'E-mail',
-            selector: 'email',
+            name: "E-Mail",
+            selector: (row) => row.email,
+            sortable: true,
         },
         {
-            name: 'Extension Number',
-            selector: 'extn',
+            name: "Extension Number",
+            selector: (row) => row.contactExtension,
+            sortable: true,
         },
+        {
+            name: "Mobile Number",
+            selector: (row) => row.phoneNumber,
+            sortable: true,
+        }
+
     ];
 
     return (
@@ -226,7 +73,7 @@ const ContactList = () => {
                 <Row>
                     <Col xs={12} md={12} sm>
                         <div className={classes.table}>
-                            
+
                             <DataTable
                                 title="Contact List"
                                 columns={columns}

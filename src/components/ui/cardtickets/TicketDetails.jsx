@@ -4,8 +4,9 @@ import classes from './Ticket.module.css';
 import EngineerDetails from '../ticketDetails/EngineerDetailsComplaint';
 import AdminDetailsComplaint from '../ticketDetails/AdminDetailsComplaint';
 import AdminDetailsRequest from '../ticketDetails/AdminDetailsRequest';
-import SubAdminDetails from '../ticketDetails/SubAdminDetails';
+import SubAdminDetails from '../ticketDetails/SubAdminDetailsComplaint';
 import AuthContext from '../../../context/AuthContext/AuthContext';
+import axios from 'axios';
 
 const TicketDetails = ({ data, setSelectedCard, setSelectedCardIndex }) => {
     const authCtx = React.useContext(AuthContext);
@@ -15,6 +16,23 @@ const TicketDetails = ({ data, setSelectedCard, setSelectedCardIndex }) => {
         setSelectedCard(null);
         setSelectedCardIndex(null);
     }
+
+    const handleDownload = async (e) => {
+        e.preventDefault();
+        try {
+            const file = await axios.get(`https://hello.helpdesk.met.edu/api/request/downloadfile/${data.id}`, { responseType: 'blob' });
+            const url = window.URL.createObjectURL(new Blob([file.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `${data.id}.zip`);
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(url);
+            link.remove();
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     const renderRoleSpecificComponent = () => {
         const ticketType = data.type || 'Request'; // Default to 'Request' if 'data.type' is undefined
@@ -87,6 +105,16 @@ const TicketDetails = ({ data, setSelectedCard, setSelectedCardIndex }) => {
                     <CardText className='text-left'>
                         <b>Action Taken:</b> {data.actionTaken ? data.actionTaken : "No Action"}
                     </CardText>
+                    {data.attachment ? (
+                        <CardText className='text-left'>
+                            <b>Attachment: </b> 
+                            <button className='btn btn-danger h-10 w-30' onClick={handleDownload}>Download</button>
+                        </CardText>
+                    ) : (
+                        <CardText className='text-left'>
+                            <b>Attachment:</b> No Attachment
+                        </CardText>
+                    )}
                 </CardBody>
             </Card>
             {renderRoleSpecificComponent()}
