@@ -13,7 +13,7 @@ const ContactList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/api/staff/contacts/');
+                const response = await axios.get('https://hello.helpdesk.met.edu/api/staff/contacts/');
                 console.log(response.data.contacts);
                 setData(response.data.contacts);
                 setFilter(response.data.contacts);

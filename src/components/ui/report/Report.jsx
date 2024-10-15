@@ -34,7 +34,7 @@ const Report = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/report/departmentreport/${department}`);
+                const response = await axios.get(`https://hello.helpdesk.met.edu/api/report/departmentreport/${department}`);
                 setData(response.data.report);
                 setFilter(response.data.report);
             } catch (error) {
@@ -47,7 +47,7 @@ const Report = () => {
     useEffect(() => {
         const fetchInstitutes = async () => {
             try {
-                const response = await axios.get('http://localhost:8001/api/institute/');
+                const response = await axios.get('https://hello.helpdesk.met.edu/api/institute/');
                 const instituteOptions = response.data.instituteData.map(institute => ({
                     value: institute.id,
                     label: institute.institute,

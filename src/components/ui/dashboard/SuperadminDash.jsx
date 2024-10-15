@@ -23,7 +23,7 @@ const SuperadminDash = (type) => {
         const getData = async () => {
             try {
                 // const response = await axios.get(type === 'Complaint' ? 'https://hello.helpdesk.met.edu/api/complaint/allcomplaints' : 'https://hello.helpdesk.met.edu/api/request/allrequests');
-                const response = await axios.get(`http://localhost:8001/api/dashboard/superadmin/${department}/${id}`);
+                const response = await axios.get(`https://hello.helpdesk.met.edu/api/dashboard/superadmin/${department}/${id}`);
                 const responseData = type === 'Complaint' ? response.data.complaints : response.data.requests;
                 console.log("Fetched Data: ", response);
                 setData(Array.isArray(responseData) ? responseData : []);

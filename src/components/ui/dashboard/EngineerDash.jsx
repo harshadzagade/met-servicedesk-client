@@ -28,7 +28,7 @@ function EngineerDash() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/dashboard/engineer/${department}/`);
+                const response = await axios.get(`https://hello.helpdesk.met.edu/api/dashboard/engineer/${department}/`);
                 const responseData = response.data;
 
                 setData(responseData);
