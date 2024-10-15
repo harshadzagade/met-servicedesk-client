@@ -1,7 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import AuthContext from '../../../context/AuthContext/AuthContext';
 import Subadmin from './subadmin/Subadmin';
-import User from './user/User';
 import SuperTicket from '../../ui/ticket/SuperTicket';
 import AdminTicket from '../../ui/ticket/AdminTicket';
 import EngineerTicket from '../../ui/ticket/EngineerTicket';

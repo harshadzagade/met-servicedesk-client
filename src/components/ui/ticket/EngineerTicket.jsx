@@ -7,7 +7,7 @@ import TicketCard from '../cardtickets/TicketCard';
 import AuthContext from '../../../context/AuthContext/AuthContext';
 import CreateTicket from './CreateTicket';
 
-const EngineerTicket = ({ type, department }) => {
+const EngineerTicket = ({ type, department, status }) => {    
     const authCtx = useContext(AuthContext);
     const [departmentData, setDepartmentData] = useState([]);
     const [ownData, setOwnData] = useState([]);
@@ -48,6 +48,8 @@ const EngineerTicket = ({ type, department }) => {
     }, [type, department]);
 
     useEffect(() => {
+ 
+        
         if (selectedFilter === (type === 'Complaint' ? 'myComplaints' : 'myRequests')) {
             setFilteredData(ownData.filter((item) => {
                 const combinedFields = [

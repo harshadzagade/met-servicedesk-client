@@ -4,12 +4,15 @@ import classes from './Ticket.module.css';
 import { ButtonDropdown, Col, Container, DropdownItem, DropdownMenu, DropdownToggle, Input, List, ListInlineItem, Row } from 'reactstrap';
 import TicketDetails from '../cardtickets/TicketDetails';
 import TicketCard from '../cardtickets/TicketCard';
+import { useLocation } from 'react-router-dom';
 
 const SuperTicket = ({type}) => {
+    const location = useLocation();
+    const initialStatus = location.state?.filter || '';
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
     const [selectedDept, setSelectedDept] = useState('');
-    const [selectedStatus, setSelectedStatus] = useState('');
+    const [selectedStatus, setSelectedStatus] = useState(initialStatus);
     const [filter, setFilter] = useState([]);
     const [dropdownText, setDropdownText] = useState('Dept');
     const [countAll, setCountAll] = useState(0);
